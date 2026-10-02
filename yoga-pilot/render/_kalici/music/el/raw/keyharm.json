@@ -1,0 +1,22 @@
+{
+ "el-v-aday.keyA.wav": {
+  "from": "el-v-aday.wav",
+  "semitones": 1,
+  "resample_up_down": [
+   84,
+   89
+  ],
+  "cents_error": 0.099,
+  "duration_s": 169.89
+ },
+ "el-derin-b.keyD.wav": {
+  "from": "el-derin-b.wav",
+  "semitones": -1,
+  "resample_up_down": [
+   89,
+   84
+  ],
+  "cents_error": -0.099,
+  "duration_s": 254.29
+ }
+}

@@ -1,0 +1,116 @@
+[
+ {
+  "name": "vd1",
+  "family": "varis-derinlesme",
+  "kind": "vd",
+  "seed": 202609291,
+  "startBar": 46,
+  "endBar": 120,
+  "preBars": 2,
+  "transpose": 13,
+  "tailSec": 0
+ },
+ {
+  "name": "vd2",
+  "family": "varis-derinlesme",
+  "kind": "vd",
+  "seed": 202609292,
+  "startBar": 118,
+  "endBar": 192,
+  "preBars": 2,
+  "transpose": 13,
+  "tailSec": 0
+ },
+ {
+  "name": "vd3",
+  "family": "varis-derinlesme",
+  "kind": "vd",
+  "seed": 202609293,
+  "startBar": 190,
+  "endBar": 264,
+  "preBars": 2,
+  "transpose": 13,
+  "tailSec": 0
+ },
+ {
+  "name": "varis_x",
+  "family": "varis-aday",
+  "kind": "vd",
+  "seed": 202609294,
+  "startBar": 24,
+  "endBar": 72,
+  "preBars": 2,
+  "transpose": 13,
+  "tailSec": 0
+ },
+ {
+  "name": "derin1",
+  "family": "derin",
+  "kind": "derin",
+  "seed": 202609295,
+  "startBar": 46,
+  "endBar": 96,
+  "preBars": 2,
+  "transpose": 13,
+  "tailSec": 0
+ },
+ {
+  "name": "derin2",
+  "family": "derin",
+  "kind": "derin",
+  "seed": 202609296,
+  "startBar": 94,
+  "endBar": 144,
+  "preBars": 2,
+  "transpose": 13,
+  "tailSec": 0
+ },
+ {
+  "name": "derin3",
+  "family": "derin",
+  "kind": "derin",
+  "seed": 202609297,
+  "startBar": 142,
+  "endBar": 192,
+  "preBars": 2,
+  "transpose": 13,
+  "tailSec": 0
+ },
+ {
+  "name": "kapanis",
+  "family": "kapanis",
+  "kind": "vd",
+  "seed": 202609298,
+  "startBar": 28,
+  "endBar": 75,
+  "preBars": 2,
+  "transpose": 13,
+  "tailSec": 6,
+  "finalBar": 72,
+  "finalPadSec": 7
+ },
+ {
+  "name": "imge",
+  "family": "imge",
+  "kind": "imge",
+  "seed": 202609299,
+  "startBar": 24,
+  "endBar": 69,
+  "preBars": 0,
+  "transpose": 13,
+  "tailSec": 6,
+  "eventEndBar": 67
+ },
+ {
+  "name": "imge_alt_p25",
+  "family": "imge",
+  "kind": "imge",
+  "seed": 202609299,
+  "startBar": 24,
+  "endBar": 69,
+  "preBars": 0,
+  "transpose": 25,
+  "tailSec": 6,
+  "eventEndBar": 67
+ }
+]

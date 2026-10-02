@@ -1,0 +1,37 @@
+{
+ "node_id": "qdQQHK9SPlxGyRjsvMVa",
+ "session_ids": [
+  "l2vmC7ZjXkAbyKFrzqT8",
+  "y55E62XGvktXoPIkYqrX",
+  "etHjh9IXbLND43qCoOmw"
+ ],
+ "requested_at": "2026-09-30T07:01:53.454Z",
+ "tts": "Her sessizliğin sonunda bir çan çalacak. Çanı duyunca ışık noktaya dönüyor.",
+ "request": "initial",
+ "generations": [
+  {
+   "session_id": "l2vmC7ZjXkAbyKFrzqT8",
+   "generation_id": "fy3ommfVQ3kioEhGIdFo",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/l2vmC7ZjXkAbyKFrzqT8/fy3ommfVQ3kioEhGIdFo/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070157Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=532b9ea828bc79961b8e7084f0d0d49a1aed5726836712833fd8d916ac5ce4e1efb3b436632fe582cc2915c0e9c690f9b4760732b6a952a675e94d0e2cfb4dab14250ca191d799aa87ca0ac13034997d07cd04a1689b908a0422d34c3be49f8f05e2847b47d007b996fb1e2d2bbc2252bd6ccc443e89aec11873a426a9524e420fccf386e565cb3e7d8b3edc54d992dce3ecd78eb658171213f58d638dce90ed01436e9baa0604c8dd1ca0171ad87833edf7afec528457160c4cf6e88ef30aa800f3de46919a9f818e3bf1083196d7b63908be1600ee0d959836db63af97b214e531e8d6007ae8e6a288a1021f9b33c335cfbe4d12f6406fc0743de7da2f27c4",
+   "duration_secs": 6.32,
+   "prompt": "Her sessizliğin sonunda bir çan çalacak. Çanı duyunca ışık noktaya dönüyor.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "y55E62XGvktXoPIkYqrX",
+   "generation_id": "XaKvbP9b2MheVpilBMJ0",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/y55E62XGvktXoPIkYqrX/XaKvbP9b2MheVpilBMJ0/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070157Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d4148fb36fbf7dc5a1b6f941ca2c63e2a0808df28413936dab48b98214a4dcc6093a78f9daaf67c23e73de9c3c41c1d046e83efbabec69d1849393ebb01ac5551e4d52140d38b3436c0c3117a4449cf5857c5332498428a24c4b873331e290ed40ee8451c6dc0396b32ac0b95dc4c82bc183a39abcea67ec7102ad88b18a22b30e98a36029bb1823077029c2fd98bf75f84a600ce8ab945f31902aac7e761c9d342752093c2a18c57eac0fb035d339e2be09d8e7e3f5ba8bd0dce218c2be00c6c626e142dfe54920b9cd3d762eac4872af5af37ebe98923f4e431e63cb366029f4b13c79452afc8f41d6dec208b109b8efa216d20f42c5deb98b2aee567dd09d",
+   "duration_secs": 6.08,
+   "prompt": "Her sessizliğin sonunda bir çan çalacak. Çanı duyunca ışık noktaya dönüyor.",
+   "kind": "audio"
+  },
+  {
+   "session_id": "etHjh9IXbLND43qCoOmw",
+   "generation_id": "UBWhI8uhRdODGkGu1NBG",
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/etHjh9IXbLND43qCoOmw/UBWhI8uhRdODGkGu1NBG/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T070339Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=13fcdb2ba7e72c41f8afae665e1454225721b0876044f8f1b4e6919914ae8de417efeb3c0cd3d5d7f8c433c4bf347001b7ad1cc0c4223e5f7d828d5bf7622b990ea45f28e289ce3306789d7160c20f07d5a1a73e2bab80773257245dea301d5ede255f33b307edd868b15b82028cc7c9783526ab9546b2795e750e5dac020deb4b220c5bd6b9b3d7e1a54721b0cfe8f09306094f35b91bba589e3c5ff472dc9e75fd716ee8a84d4bd2038addcf9ac6f539e291333d85adab3bdc28eb004b50a04efbf63911eb9196f59871c3d63cda6d9b32c1bf2cd4a3ad941f26560f9a8e77c0593cbbbe85634e90bebde9bfa6796e9c7674498b144d06a5077937e80e6bba",
+   "duration_secs": 6.32,
+   "prompt": "Her sessizliğin sonunda bir çan çalacak. Çanı duyunca ışık noktaya dönüyor.",
+   "kind": "audio"
+  }
+ ]
+}

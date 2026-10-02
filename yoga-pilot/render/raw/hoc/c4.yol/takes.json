@@ -1,0 +1,73 @@
+{
+ "unit": "c4.yol",
+ "idx": 44,
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "wPhQfIv0rC6MCS49H3EB",
+ "session_ids": [
+  "uMD2Fx9E5pVFykj1sELm",
+  "dlsz3bu4AogOU6ex2aJr",
+  "l1FkGQHKWEZdGav2d1iI"
+ ],
+ "requested_at": "2026-09-29T21:51:43Z",
+ "downloaded_at": "2026-09-29T21:52:07.833126+00:00",
+ "tts": "Yol önünde açılıyor. Kendi hızında yürüyorsun.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/c4.yol/t1.mp3",
+   "session_id": "uMD2Fx9E5pVFykj1sELm",
+   "generation_id": "D4of9LeB9ogyEx2SOKnu",
+   "api_duration_secs": 3.44,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/uMD2Fx9E5pVFykj1sELm/D4of9LeB9ogyEx2SOKnu/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T215146Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=2c3f620ed1bd4acdc5025505c4ebc5f8448452f2b990a4a5cbddf5f4b02446c2ac472d799cc93fd3e57e244e4298c43be4e8668427ecf77114285ef5ca2f53b81f1c6839bb0f1795f12adec321d5c1ce7d4eb861d9d2fa31cc8ab9568a30d7f0115e98157034ef930e9990f1abb27c4a863c6b8ce0e684d289eead5ba632c2aeee61e943d4ffe5f43f3137decebfcab98ca35ad34aa21c0e5b403f5584184fefc42924fdf76da0f236f04c688b834f0fe52dee351aa7971b6bf3f8c77feb09d9947a2e0e08a90710c075a0f9a9ae953e108ed7f58dd57d398a9e6ab8bc0718166804172b861a762549762cd05870a0554f4ff8cca7d386c947d3b37dd1ce5e7f",
+   "node_id": "wPhQfIv0rC6MCS49H3EB",
+   "ok": true,
+   "duration_secs": 3.44,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 72886,
+   "attempts": 1
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/c4.yol/t2.mp3",
+   "session_id": "dlsz3bu4AogOU6ex2aJr",
+   "generation_id": "Hv8MZ1mRfD7ARHRuspcd",
+   "api_duration_secs": 3.6,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/dlsz3bu4AogOU6ex2aJr/Hv8MZ1mRfD7ARHRuspcd/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T215146Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=9b3fea4a4dce05c56bf8ee4ef296c98012ad531f810d653202a7e5c4cfad3f50c86f03544858e7e22991810947e4ec4796f90ac41803bbd2406322598215802b91b4ad370e7778bd33ff5952756d4de943d2ee39bc1f038cb1ba8ab1716cdb4e789acf4028ae570c1fa5fe11dd0cd22f2c46cd0f8fa41249c324a6265491370baaaecbd7208e7a53dff229f7a5d14b680b17350a152cdba211bd45e43fb01600e8320feaa43b563039bab58af6e4f54fde711c0e6803a75811d1f944d0a6c6d2c583e8760de6dc8a90ee30e61577a761fa7d8ff4f847eb46978cf4614c83456f5342227a28cc7fa266dce6fb1fc681838567f8072f6afb398e455b2d4b690eca",
+   "node_id": "wPhQfIv0rC6MCS49H3EB",
+   "ok": true,
+   "duration_secs": 3.6,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 75394,
+   "attempts": 1
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/c4.yol/t3.mp3",
+   "session_id": "l1FkGQHKWEZdGav2d1iI",
+   "generation_id": "Wxg2m5jkMSsJZWE3vrqH",
+   "api_duration_secs": 3.52,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/l1FkGQHKWEZdGav2d1iI/Wxg2m5jkMSsJZWE3vrqH/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T215146Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=af39324dcf243b541b529030765ef455c170277910d7042bd3ad0ce89d346183d1010a7075c5786e15d504bc1d72a19e2a3beec85f6eced39bab646927eb1fdf99d579666009356d2b6242794a488b857e6a4a8b84fd03f4ecab465be89569ed04c67cb2b666968503164ac3a5ae60c188856a5be89117bff96ed1cc05ef38d6744116e53f5a83fbd870550a8e3dcd82ddc5184db4db09f6719a20384e1331fa72a3be9c830b2e8816624494f5fb936b95a70acb11d2d729ccd94b9107ed92a33548abbbc199b3d91e1cd54fbda4b197ad74372055d959e4af738ba9c2aa3620b2969e519a9f944b33060edb14adb84a3e9f0806495441b0ccbeb5d983885c62",
+   "node_id": "wPhQfIv0rC6MCS49H3EB",
+   "ok": true,
+   "duration_secs": 3.52,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 74140,
+   "attempts": 1
+  }
+ ],
+ "all_ok": true,
+ "n_takes_ok": 3,
+ "failed_generations": [],
+ "who": "hoc-2",
+ "retake": false,
+ "server_prompt_echo": "Yol önünde açılıyor. Kendi hızında yürüyorsun.",
+ "server_prompt_equals_tts": true
+}

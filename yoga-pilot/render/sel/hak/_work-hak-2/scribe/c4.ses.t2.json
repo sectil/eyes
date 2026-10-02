@@ -1,0 +1,17 @@
+{
+ "unit": "c4.ses",
+ "take": "t2",
+ "asset_id": "fWqkDm8iLmjOQIDJ0LuC",
+ "asset_size_bytes": 57422,
+ "ref_node": "8hTAVy0xvp7JYeX0rWBd",
+ "stt_node": "0SD4ehYd6TJPO9IOUFHh",
+ "session_id": "YY7IYDW2miV4CKwZPxnn",
+ "generation_id": "DxFNytX7eHQAR3py8LUQ",
+ "actual_credits": 13.64,
+ "actual_cents": 0.248,
+ "spoken_duration_secs": 2.32,
+ "scribe_text": "Uzaktan gelip giden yaprak hışırtısı",
+ "tts": "Uzaktan gelip giden yaprak hışırtısı.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 5\n}"
+}

@@ -1,0 +1,8344 @@
+{
+ "schema": "nefona.yoga.lesson/1 (PLAN §B.2 + ekler)",
+ "sozlesmeNotu": "PLAN §B.2 alanları aynen: id, priority, playOrder, kind, clips[id, text, voice{female,male}{file,sec}, required, gapAfter{min,pref,max}, cue{breath,visual,music}], silenceWindows[afterClip,min,max,announce], minSec, prefSec{5,10,15,20,30}, maxSec. Ekler: tier (required/optional/extension), syllables, words, sentences (kodla sayıldı), phase, fillRank, fillGroup, requires, minTarget, window, carrier{id,index}, tags; blok türleri bridge (placement before/after) ve utility (extras); priority 0 = sabit (kapak ya da köprü); entryRank (P2..P5 blok girişi). minSec/prefSec/maxSec tahmindir (5,6 hece/sn + yüksek duraklama); üretimden sonra voice.*.sec ile yeniden hesaplanır.",
+ "id": "ders2-derin-dinlenme",
+ "version": "pilot-1 (2026-09-28)",
+ "title": "Derin Dinlenme (Yoga Nidra)",
+ "tagline": "Uyanık kalarak derin bir dinlenme.",
+ "daypart": "day",
+ "posture": "lying",
+ "defaultMinutes": 15,
+ "minutes": {
+  "min": 5,
+  "max": 30,
+  "step": 1
+ },
+ "leadIn": {
+  "min": 3.0,
+  "pref": 4.0,
+  "max": 6.0
+ },
+ "limits": {
+  "silenceWindowMaxSec": 90,
+  "clipMaxSecAt6_6": 15,
+  "lastSecondsNoNewImage": 60
+ },
+ "planner": {
+  "capThresholdSec": 720,
+  "kural": "Kapaklar: hedef <= 720 sn kısa, değilse uzun; kapak sessizlikleri sıkıştırılmaz. Taban: bütün P1 bloklar zorunlu klipleriyle (en kısa halleri sığmalı). Artımlar entryRank/fillRank sırasıyla, sessizlikler pref iken sığıyorsa eklenir; içerik max sessizlikte bile yetmiyorsa en kısa haliyle sığan artım yine eklenir; ilk sığmayanda durulur. Sessizlik min→pref→max oranla esner. Kalan süre max toplamını aşarsa içerik hatası (sessizlik sınırı aşılmaz).",
+  "entryRanks": {
+   "C4": 300,
+   "C3": 500,
+   "C5": 700
+  },
+  "p1DropOrder": [
+   "C2",
+   "N2",
+   "N1"
+  ]
+ },
+ "timingModel": {
+  "articulationSyllPerSec": [
+   5.2,
+   5.6,
+   6.6
+  ],
+  "pauseProfilesSec": {
+   "lo": {
+    "sent": 0.17,
+    "comma": 0.05,
+    "semi": 0.12,
+    "ell": 0.32
+   },
+   "hi": {
+    "sent": 0.87,
+    "comma": 0.38,
+    "semi": 0.6,
+    "ell": 1.53
+   }
+  },
+  "pauseScaleAtRate": {
+   "5.2": 1.25,
+   "5.6": 1.0,
+   "6.6": 1.0
+  },
+  "edgeSec": 0.31,
+  "edgeMicroSec": 0.15,
+  "note": "VARSAYIM; 2026-09-28 ölçümleriyle kalibre (hiz/*.mp3). Gerçek klip süreleri gelince voice.*.sec kullanılır."
+ },
+ "music": {
+  "bpmFeel": 50,
+  "key": "Mi♭ majör pad + alçak yaylılar + seyrek uzak piyano (VARSAYIM)",
+  "phases": [
+   "varis",
+   "derin",
+   "kapanis"
+  ],
+  "duckDefault": true,
+  "swellOnlyInAnnouncedWindowsMinSec": 20,
+  "nature": "uzak, sürekli ve yumuşak su/rüzgâr dokusu (kıyı ve ormana birlikte uyar; VARSAYIM)"
+ },
+ "visual": {
+  "form": "ufuk çizgisi",
+  "phases": [
+   "varis",
+   "derinlesme",
+   "derin",
+   "kapanis(şafak)"
+  ]
+ },
+ "carriers": [
+  {
+   "id": "car.sag1",
+   "text": "Sağ elin başparmağı… işaret parmağı… orta parmak… yüzük parmağı… serçe parmak…",
+   "items": [
+    "c1.s01",
+    "c1.s02",
+    "c1.s03",
+    "c1.s04",
+    "c1.s05"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 26,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.sag1.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.sag1.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.sag2",
+   "text": "Avuç içi… elin sırtı… bilek… ön kol… dirsek…",
+   "items": [
+    "c1.s06",
+    "c1.s07",
+    "c1.s08",
+    "c1.s09",
+    "c1.s10"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 14,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.sag2.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.sag2.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.sag3",
+   "text": "Üst kol… omuz… belin sağ yanı… kalça…",
+   "items": [
+    "c1.s11",
+    "c1.s12",
+    "c1.s13",
+    "c1.s14"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 11,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.sag3.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.sag3.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.sag4",
+   "text": "Uyluk… diz… baldır… ayak bileği… topuk… ayak tabanı…",
+   "items": [
+    "c1.s15",
+    "c1.s16",
+    "c1.s17",
+    "c1.s18",
+    "c1.s19",
+    "c1.s20"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 17,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.sag4.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.sag4.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.sag5",
+   "text": "Ayağın üstü… ayak başparmağı… ikinci parmak… üçüncü parmak… dördüncü parmak… beşinci parmak.",
+   "items": [
+    "c1.s21",
+    "c1.s22",
+    "c1.s23",
+    "c1.s24",
+    "c1.s25",
+    "c1.s26"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 31,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.sag5.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.sag5.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.sol1",
+   "text": "Sol elin başparmağı… işaret parmağı… orta parmak… yüzük parmağı… serçe parmak…",
+   "items": [
+    "c1.l01",
+    "c1.l02",
+    "c1.l03",
+    "c1.l04",
+    "c1.l05"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 26,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.sol1.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.sol1.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.sol2",
+   "text": "Avuç içi… elin sırtı… bilek… ön kol… dirsek…",
+   "items": [
+    "c1.l06",
+    "c1.l07",
+    "c1.l08",
+    "c1.l09",
+    "c1.l10"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 14,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.sol2.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.sol2.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.sol3",
+   "text": "Üst kol… omuz… belin sol yanı… kalça…",
+   "items": [
+    "c1.l11",
+    "c1.l12",
+    "c1.l13",
+    "c1.l14"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 11,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.sol3.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.sol3.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.sol4",
+   "text": "Uyluk… diz… baldır… ayak bileği… topuk… ayak tabanı…",
+   "items": [
+    "c1.l15",
+    "c1.l16",
+    "c1.l17",
+    "c1.l18",
+    "c1.l19",
+    "c1.l20"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 17,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.sol4.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.sol4.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.sol5",
+   "text": "Ayağın üstü… ayak başparmağı… ikinci parmak… üçüncü parmak… dördüncü parmak… beşinci parmak.",
+   "items": [
+    "c1.l21",
+    "c1.l22",
+    "c1.l23",
+    "c1.l24",
+    "c1.l25",
+    "c1.l26"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 31,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.sol5.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.sol5.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.sirt",
+   "text": "Sağ kürek kemiği… sol kürek kemiği… bel boşluğu… omurga, boydan boya… bütün sırt.",
+   "items": [
+    "c1.b01",
+    "c1.b02",
+    "c1.b03",
+    "c1.b04",
+    "c1.b05"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 26,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.sirt.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.sirt.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.on1",
+   "text": "Başın tepesi… alın… sağ şakak… sol şakak… sağ kaş… sol kaş…",
+   "items": [
+    "c1.f01",
+    "c1.f02",
+    "c1.f03",
+    "c1.f04",
+    "c1.f05",
+    "c1.f06"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 17,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.on1.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.on1.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.on2",
+   "text": "Göz kapakları… gözlerin çevresi… sağ kulak… sol kulak… sağ yanak… sol yanak… burnun ucu…",
+   "items": [
+    "c1.f07",
+    "c1.f08",
+    "c1.f09",
+    "c1.f10",
+    "c1.f11",
+    "c1.f12",
+    "c1.f13"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 27,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.on2.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.on2.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.on3",
+   "text": "Üst dudak… alt dudak… çene… boyun… sağ köprücük kemiği… sol köprücük kemiği… göğüs… karın.",
+   "items": [
+    "c1.f14",
+    "c1.f15",
+    "c1.f16",
+    "c1.f17",
+    "c1.f18",
+    "c1.f19",
+    "c1.f20",
+    "c1.f21"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 28,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.on3.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.on3.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.butun",
+   "text": "Bütün sağ bacak… bütün sol bacak… iki bacak birlikte… bütün sağ kol… bütün sol kol… iki kol birlikte… bütün beden birlikte… bütün beden… bütün beden.",
+   "items": [
+    "c1.w01",
+    "c1.w02",
+    "c1.w03",
+    "c1.w04",
+    "c1.w05",
+    "c1.w06",
+    "c1.w07",
+    "c1.w08",
+    "c1.w09"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "Son üç öğe bilinçli tekrar: aynı sözcük, giderek yumuşayan söyleyiş.",
+   "syllables": 46,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.butun.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.butun.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.temas",
+   "text": "Topuklar… baldırlar… kalçalar… kürek kemikleri… başın arkası.",
+   "items": [
+    "c1.x02",
+    "c1.x03",
+    "c1.x04",
+    "c1.x05",
+    "c1.x06"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 20,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.temas.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.temas.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.sayi",
+   "text": "On… dokuz… sekiz… yedi… altı… beş… dört… üç… iki… bir.",
+   "items": [
+    "c2.n10",
+    "c2.n09",
+    "c2.n08",
+    "c2.n07",
+    "c2.n06",
+    "c2.n05",
+    "c2.n04",
+    "c2.n03",
+    "c2.n02",
+    "c2.n01"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "CRITIQUE #12: sayılar tek başına üretilmez; bu taşıyıcı cümle tek istekte üretilip kesilir. Kısa sürüm \"beş\"ten başlar; uzun sürüm önek olarak altı..on ekler.",
+   "syllables": 15,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.sayi.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.sayi.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.agir",
+   "text": "Kollar ağır… bacaklar ağır… bütün beden ağır.",
+   "items": [
+    "c3.a1",
+    "c3.a2",
+    "c3.a3"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "Bilinçli koşut yapı; üç öğe aynı ezgiyle.",
+   "syllables": 15,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.agir.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.agir.wav",
+     "sec": null
+    }
+   }
+  },
+  {
+   "id": "car.hafif",
+   "text": "Kollar hafif… bacaklar hafif… bütün beden hafif.",
+   "items": [
+    "c3.h1",
+    "c3.h2",
+    "c3.h3"
+   ],
+   "cut": "üç nokta duraklarından; öğe sayısı tutmazsa insan kararı",
+   "note": "",
+   "syllables": 15,
+   "voice": {
+    "female": {
+     "file": "yoga-uretim/ders2/female/car.hafif.wav",
+     "sec": null
+    },
+    "male": {
+     "file": "yoga-uretim/ders2/male/car.hafif.wav",
+     "sec": null
+    }
+   }
+  }
+ ],
+ "blocks": [
+  {
+   "id": "A.kisa",
+   "kind": "arrival",
+   "variant": "short",
+   "maxTarget": 720,
+   "priority": 0,
+   "playOrder": 0,
+   "title": "Varış (kısa, <= 12 dk)",
+   "clips": [
+    {
+     "id": "a.hosgeldin",
+     "text": "Hoş geldin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 3.0,
+      "max": 4.0
+     },
+     "phase": "Varış",
+     "cue": {
+      "visual": "phase:varis",
+      "music": "phase:varis"
+     },
+     "tags": {
+      "texture": "varis"
+     },
+     "syllables": 3,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.hosgeldin.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.hosgeldin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.acilis",
+     "text": "Bu dakikalarda yapacak hiçbir işin yok; yalnızca dinlenmek var.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "uniqueOpening": true
+     },
+     "syllables": 21,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.acilis.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.acilis.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.izin",
+     "text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da durabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "safety": "opening"
+     },
+     "syllables": 26,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.izin.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.izin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.durus",
+     "text": "Sırtüstü ya da sana en rahat gelen biçimde uzanabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 8.0,
+      "max": 12.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "action": "uzanmak"
+     },
+     "syllables": 21,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.durus.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.durus.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.gozler",
+     "text": "Gözlerin kapalı da olabilir, açık da; açıksa bakışın bir noktada dinlenebilir.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 9.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "eyes": "baskı yok"
+     },
+     "syllables": 29,
+     "words": 11,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.gozler.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.gozler.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 48.4,
+   "maxSec": 62.4,
+   "prefSec": {
+    "5": 48.4,
+    "10": 48.4,
+    "15": 0.0,
+    "20": 0.0,
+    "30": 0.0
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  },
+  {
+   "id": "A.uzun",
+   "kind": "arrival",
+   "variant": "long",
+   "minTarget": 721,
+   "priority": 0,
+   "playOrder": 0,
+   "title": "Varış (uzun, > 12 dk)",
+   "clips": [
+    {
+     "id": "a.hosgeldin",
+     "text": "Hoş geldin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 3.0,
+      "max": 4.0
+     },
+     "phase": "Varış",
+     "cue": {
+      "visual": "phase:varis",
+      "music": "phase:varis"
+     },
+     "tags": {
+      "texture": "varis"
+     },
+     "syllables": 3,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.hosgeldin.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.hosgeldin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.acilis",
+     "text": "Bu dakikalarda yapacak hiçbir işin yok; yalnızca dinlenmek var.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "uniqueOpening": true
+     },
+     "syllables": 21,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.acilis.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.acilis.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.izin",
+     "text": "İstediğin an gözlerini açabilir, kıpırdayabilir ya da durabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "safety": "opening"
+     },
+     "syllables": 26,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.izin.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.izin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.ortu",
+     "text": "Üşümemek için üstüne ince bir örtü alabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 8.0,
+      "max": 14.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "action": "örtü almak"
+     },
+     "syllables": 19,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.ortu.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.ortu.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.durus",
+     "text": "Sırtüstü ya da sana en rahat gelen biçimde uzanabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 8.0,
+      "max": 12.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "action": "uzanmak"
+     },
+     "syllables": 21,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.durus.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.durus.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.yastik",
+     "text": "Dizlerinin altına bir yastık iyi gelebilir.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 7.0,
+      "max": 12.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "action": "yastık"
+     },
+     "syllables": 16,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.yastik.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.yastik.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.gozler",
+     "text": "Gözlerin kapalı da olabilir, açık da; açıksa bakışın bir noktada dinlenebilir.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 9.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "eyes": "baskı yok"
+     },
+     "syllables": 29,
+     "words": 11,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.gozler.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.gozler.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.agirlik",
+     "text": "Bedeninin ağırlığını altındaki zemine bırakabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 7.0,
+      "max": 12.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis"
+     },
+     "syllables": 22,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.agirlik.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.agirlik.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "a.karar",
+     "text": "Ne kadar gevşeyeceğine sen karar verirsin. Gevşemek bugün kolay gelmeyebilir; bu da olur.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 7.0,
+      "max": 11.0
+     },
+     "phase": "Varış",
+     "cue": {},
+     "tags": {
+      "texture": "varis",
+      "safety": "control"
+     },
+     "syllables": 31,
+     "words": 13,
+     "sentences": 2,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/a.karar.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/a.karar.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 95.8,
+   "maxSec": 129.8,
+   "prefSec": {
+    "5": 0.0,
+    "10": 0.0,
+    "15": 103.6,
+    "20": 100.4,
+    "30": 112.2
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  },
+  {
+   "id": "N1",
+   "kind": "core",
+   "priority": 1,
+   "playOrder": 1,
+   "title": "Niyet (sankalpa), başta",
+   "clips": [
+    {
+     "id": "n1.sec",
+     "text": "İstersen kendine kısa bir niyet seçebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "visual": "phase:derinlesme"
+     },
+     "tags": {
+      "texture": "niyet"
+     },
+     "syllables": 16,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/n1.sec.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/n1.sec.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "n1.sankalpa",
+     "text": "Yogada buna sankalpa denir: bugün sana iyi gelecek, basit bir cümle.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 6.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "niyet",
+      "explain": true
+     },
+     "fillRank": 630,
+     "syllables": 24,
+     "words": 11,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/n1.sankalpa.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/n1.sankalpa.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "n1.ornek",
+     "text": "Bulamazsan şunu kullanabilirsin: \"Dinlenmeye izin veriyorum.\"",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 5.0,
+      "max": 7.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "niyet",
+      "tts": "tırnak içi hafif vurgulu; iki noktadan sonra doğal durak"
+     },
+     "syllables": 22,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/n1.ornek.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/n1.ornek.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "n1.soyle",
+     "text": "Niyetini içinden üç kez söyleyebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 10.0,
+      "pref": 13.0,
+      "max": 18.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "niyet",
+      "action": "niyeti üç kez içinden söylemek"
+     },
+     "syllables": 15,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/n1.soyle.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/n1.soyle.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "n1.birak",
+     "text": "Niyetin seninle; şimdilik onu bir kenara bırakabilirsin.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "niyet",
+      "repeatOk": [
+       "niyet"
+      ]
+     },
+     "fillRank": 140,
+     "syllables": 21,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/n1.birak.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/n1.birak.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 28.0,
+   "maxSec": 70.2,
+   "prefSec": {
+    "5": 31.3,
+    "10": 44.8,
+    "15": 48.7,
+    "20": 57.3,
+    "30": 62.5
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  },
+  {
+   "id": "C1",
+   "kind": "core",
+   "priority": 1,
+   "playOrder": 2,
+   "title": "Beden dolaşımı (sağ → sol → arka → ön → bütün)",
+   "clips": [
+    {
+     "id": "c1.cerceve",
+     "text": "Adını andığım yerleri fark edebilirsin; rahatsız eden bir yer olursa atlayabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 3.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {
+      "music": "phase:derin"
+     },
+     "tags": {
+      "texture": "dolasim-uzuv",
+      "safety": "skip"
+     },
+     "syllables": 31,
+     "words": 11,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.cerceve.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.cerceve.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.tekrar",
+     "text": "Bir şey yapman gerekmiyor; her adı içinden tekrarlaman yeterli.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 3.0,
+      "max": 4.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 130,
+     "syllables": 21,
+     "words": 9,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.tekrar.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.tekrar.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s01",
+     "text": "Sağ elin başparmağı…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "carrier": {
+      "id": "car.sag1",
+      "index": 0
+     },
+     "syllables": 7,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s01.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s01.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s02",
+     "text": "işaret parmağı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 110,
+     "fillGroup": "parmak",
+     "carrier": {
+      "id": "car.sag1",
+      "index": 1
+     },
+     "syllables": 6,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s02.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s02.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s03",
+     "text": "orta parmak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 110,
+     "fillGroup": "parmak",
+     "carrier": {
+      "id": "car.sag1",
+      "index": 2
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s03.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s03.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s04",
+     "text": "yüzük parmağı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 110,
+     "fillGroup": "parmak",
+     "carrier": {
+      "id": "car.sag1",
+      "index": 3
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s04.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s04.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s05",
+     "text": "serçe parmak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 110,
+     "fillGroup": "parmak",
+     "carrier": {
+      "id": "car.sag1",
+      "index": 4
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s05.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s05.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s06",
+     "text": "avuç içi…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 320,
+     "fillGroup": "el",
+     "carrier": {
+      "id": "car.sag2",
+      "index": 0
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s06.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s06.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s07",
+     "text": "elin sırtı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 320,
+     "fillGroup": "el",
+     "carrier": {
+      "id": "car.sag2",
+      "index": 1
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s07.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s07.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s08",
+     "text": "bilek…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 320,
+     "fillGroup": "el",
+     "carrier": {
+      "id": "car.sag2",
+      "index": 2
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s08.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s08.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s09",
+     "text": "ön kol…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 320,
+     "fillGroup": "el",
+     "carrier": {
+      "id": "car.sag2",
+      "index": 3
+     },
+     "syllables": 2,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s09.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s09.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s10",
+     "text": "dirsek…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 320,
+     "fillGroup": "el",
+     "carrier": {
+      "id": "car.sag2",
+      "index": 4
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s10.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s10.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s11",
+     "text": "üst kol…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 430,
+     "fillGroup": "kol",
+     "carrier": {
+      "id": "car.sag3",
+      "index": 0
+     },
+     "syllables": 2,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s11.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s11.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s12",
+     "text": "omuz…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "carrier": {
+      "id": "car.sag3",
+      "index": 1
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s12.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s12.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s13",
+     "text": "belin sağ yanı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 430,
+     "fillGroup": "kol",
+     "carrier": {
+      "id": "car.sag3",
+      "index": 2
+     },
+     "syllables": 5,
+     "words": 3,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s13.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s13.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s14",
+     "text": "kalça…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 430,
+     "fillGroup": "kol",
+     "carrier": {
+      "id": "car.sag3",
+      "index": 3
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s14.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s14.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s15",
+     "text": "uyluk…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 210,
+     "fillGroup": "bacak",
+     "carrier": {
+      "id": "car.sag4",
+      "index": 0
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s15.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s15.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s16",
+     "text": "diz…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "carrier": {
+      "id": "car.sag4",
+      "index": 1
+     },
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s16.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s16.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s17",
+     "text": "baldır…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 210,
+     "fillGroup": "bacak",
+     "carrier": {
+      "id": "car.sag4",
+      "index": 2
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s17.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s17.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s18",
+     "text": "ayak bileği…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 210,
+     "fillGroup": "bacak",
+     "carrier": {
+      "id": "car.sag4",
+      "index": 3
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s18.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s18.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s19",
+     "text": "topuk…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 210,
+     "fillGroup": "bacak",
+     "carrier": {
+      "id": "car.sag4",
+      "index": 4
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s19.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s19.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s20",
+     "text": "ayak tabanı…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 3.0,
+      "max": 4.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "carrier": {
+      "id": "car.sag4",
+      "index": 5
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s20.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s20.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s21",
+     "text": "ayağın üstü…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 520,
+     "fillGroup": "ayak",
+     "carrier": {
+      "id": "car.sag5",
+      "index": 0
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s21.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s21.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s22",
+     "text": "ayak başparmağı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 520,
+     "fillGroup": "ayak",
+     "carrier": {
+      "id": "car.sag5",
+      "index": 1
+     },
+     "syllables": 6,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s22.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s22.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s23",
+     "text": "ikinci parmak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 520,
+     "fillGroup": "ayak",
+     "carrier": {
+      "id": "car.sag5",
+      "index": 2
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s23.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s23.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s24",
+     "text": "üçüncü parmak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 520,
+     "fillGroup": "ayak",
+     "carrier": {
+      "id": "car.sag5",
+      "index": 3
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s24.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s24.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s25",
+     "text": "dördüncü parmak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 520,
+     "fillGroup": "ayak",
+     "carrier": {
+      "id": "car.sag5",
+      "index": 4
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s25.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s25.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.s26",
+     "text": "beşinci parmak.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 3.0,
+      "max": 4.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sag",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 520,
+     "fillGroup": "ayak",
+     "carrier": {
+      "id": "car.sag5",
+      "index": 5
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.s26.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.s26.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l01",
+     "text": "Sol elin başparmağı…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "carrier": {
+      "id": "car.sol1",
+      "index": 0
+     },
+     "syllables": 7,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l01.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l01.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l02",
+     "text": "işaret parmağı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 110,
+     "fillGroup": "parmak",
+     "carrier": {
+      "id": "car.sol1",
+      "index": 1
+     },
+     "syllables": 6,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l02.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l02.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l03",
+     "text": "orta parmak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 110,
+     "fillGroup": "parmak",
+     "carrier": {
+      "id": "car.sol1",
+      "index": 2
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l03.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l03.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l04",
+     "text": "yüzük parmağı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 110,
+     "fillGroup": "parmak",
+     "carrier": {
+      "id": "car.sol1",
+      "index": 3
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l04.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l04.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l05",
+     "text": "serçe parmak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 110,
+     "fillGroup": "parmak",
+     "carrier": {
+      "id": "car.sol1",
+      "index": 4
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l05.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l05.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l06",
+     "text": "avuç içi…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 320,
+     "fillGroup": "el",
+     "carrier": {
+      "id": "car.sol2",
+      "index": 0
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l06.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l06.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l07",
+     "text": "elin sırtı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 320,
+     "fillGroup": "el",
+     "carrier": {
+      "id": "car.sol2",
+      "index": 1
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l07.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l07.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l08",
+     "text": "bilek…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 320,
+     "fillGroup": "el",
+     "carrier": {
+      "id": "car.sol2",
+      "index": 2
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l08.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l08.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l09",
+     "text": "ön kol…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 320,
+     "fillGroup": "el",
+     "carrier": {
+      "id": "car.sol2",
+      "index": 3
+     },
+     "syllables": 2,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l09.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l09.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l10",
+     "text": "dirsek…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 320,
+     "fillGroup": "el",
+     "carrier": {
+      "id": "car.sol2",
+      "index": 4
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l10.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l10.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l11",
+     "text": "üst kol…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 430,
+     "fillGroup": "kol",
+     "carrier": {
+      "id": "car.sol3",
+      "index": 0
+     },
+     "syllables": 2,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l11.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l11.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l12",
+     "text": "omuz…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "carrier": {
+      "id": "car.sol3",
+      "index": 1
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l12.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l12.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l13",
+     "text": "belin sol yanı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 430,
+     "fillGroup": "kol",
+     "carrier": {
+      "id": "car.sol3",
+      "index": 2
+     },
+     "syllables": 5,
+     "words": 3,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l13.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l13.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l14",
+     "text": "kalça…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 430,
+     "fillGroup": "kol",
+     "carrier": {
+      "id": "car.sol3",
+      "index": 3
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l14.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l14.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l15",
+     "text": "uyluk…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 210,
+     "fillGroup": "bacak",
+     "carrier": {
+      "id": "car.sol4",
+      "index": 0
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l15.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l15.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l16",
+     "text": "diz…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "carrier": {
+      "id": "car.sol4",
+      "index": 1
+     },
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l16.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l16.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l17",
+     "text": "baldır…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 210,
+     "fillGroup": "bacak",
+     "carrier": {
+      "id": "car.sol4",
+      "index": 2
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l17.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l17.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l18",
+     "text": "ayak bileği…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 210,
+     "fillGroup": "bacak",
+     "carrier": {
+      "id": "car.sol4",
+      "index": 3
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l18.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l18.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l19",
+     "text": "topuk…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 210,
+     "fillGroup": "bacak",
+     "carrier": {
+      "id": "car.sol4",
+      "index": 4
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l19.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l19.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l20",
+     "text": "ayak tabanı…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 3.0,
+      "max": 4.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "carrier": {
+      "id": "car.sol4",
+      "index": 5
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l20.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l20.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l21",
+     "text": "ayağın üstü…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 520,
+     "fillGroup": "ayak",
+     "carrier": {
+      "id": "car.sol5",
+      "index": 0
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l21.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l21.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l22",
+     "text": "ayak başparmağı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 520,
+     "fillGroup": "ayak",
+     "carrier": {
+      "id": "car.sol5",
+      "index": 1
+     },
+     "syllables": 6,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l22.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l22.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l23",
+     "text": "ikinci parmak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 520,
+     "fillGroup": "ayak",
+     "carrier": {
+      "id": "car.sol5",
+      "index": 2
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l23.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l23.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l24",
+     "text": "üçüncü parmak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 520,
+     "fillGroup": "ayak",
+     "carrier": {
+      "id": "car.sol5",
+      "index": 3
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l24.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l24.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l25",
+     "text": "dördüncü parmak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 520,
+     "fillGroup": "ayak",
+     "carrier": {
+      "id": "car.sol5",
+      "index": 4
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l25.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l25.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.l26",
+     "text": "beşinci parmak.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 3.0,
+      "max": 4.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sol",
+      "texture": "dolasim-uzuv"
+     },
+     "fillRank": 520,
+     "fillGroup": "ayak",
+     "carrier": {
+      "id": "car.sol5",
+      "index": 5
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.l26.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.l26.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.b01",
+     "text": "Sağ kürek kemiği…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sirt",
+      "texture": "dolasim-govde"
+     },
+     "carrier": {
+      "id": "car.sirt",
+      "index": 0
+     },
+     "syllables": 6,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.b01.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.b01.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.b02",
+     "text": "sol kürek kemiği…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sirt",
+      "texture": "dolasim-govde"
+     },
+     "carrier": {
+      "id": "car.sirt",
+      "index": 1
+     },
+     "syllables": 6,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.b02.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.b02.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.b03",
+     "text": "bel boşluğu…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sirt",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 450,
+     "fillGroup": "sirt",
+     "carrier": {
+      "id": "car.sirt",
+      "index": 2
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.b03.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.b03.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.b04",
+     "text": "omurga, boydan boya…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 3.0,
+      "max": 4.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sirt",
+      "texture": "dolasim-govde"
+     },
+     "carrier": {
+      "id": "car.sirt",
+      "index": 3
+     },
+     "syllables": 7,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.b04.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.b04.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.b05",
+     "text": "bütün sırt.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 3.0,
+      "max": 4.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "sirt",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 450,
+     "fillGroup": "sirt",
+     "carrier": {
+      "id": "car.sirt",
+      "index": 4
+     },
+     "syllables": 3,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.b05.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.b05.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f01",
+     "text": "başın tepesi…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 410,
+     "fillGroup": "yuz1",
+     "carrier": {
+      "id": "car.on1",
+      "index": 0
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f01.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f01.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f02",
+     "text": "alın…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "carrier": {
+      "id": "car.on1",
+      "index": 1
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f02.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f02.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f03",
+     "text": "sağ şakak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 410,
+     "fillGroup": "yuz1",
+     "carrier": {
+      "id": "car.on1",
+      "index": 2
+     },
+     "syllables": 3,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f03.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f03.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f04",
+     "text": "sol şakak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 410,
+     "fillGroup": "yuz1",
+     "carrier": {
+      "id": "car.on1",
+      "index": 3
+     },
+     "syllables": 3,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f04.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f04.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f05",
+     "text": "sağ kaş…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 410,
+     "fillGroup": "yuz1",
+     "carrier": {
+      "id": "car.on1",
+      "index": 4
+     },
+     "syllables": 2,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f05.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f05.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f06",
+     "text": "sol kaş…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 410,
+     "fillGroup": "yuz1",
+     "carrier": {
+      "id": "car.on1",
+      "index": 5
+     },
+     "syllables": 2,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f06.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f06.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f07",
+     "text": "göz kapakları…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "carrier": {
+      "id": "car.on2",
+      "index": 0
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f07.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f07.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f08",
+     "text": "gözlerin çevresi…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 550,
+     "fillGroup": "yuz2",
+     "carrier": {
+      "id": "car.on2",
+      "index": 1
+     },
+     "syllables": 6,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f08.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f08.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f09",
+     "text": "sağ kulak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 550,
+     "fillGroup": "yuz2",
+     "carrier": {
+      "id": "car.on2",
+      "index": 2
+     },
+     "syllables": 3,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f09.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f09.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f10",
+     "text": "sol kulak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 550,
+     "fillGroup": "yuz2",
+     "carrier": {
+      "id": "car.on2",
+      "index": 3
+     },
+     "syllables": 3,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f10.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f10.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f11",
+     "text": "sağ yanak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 550,
+     "fillGroup": "yuz2",
+     "carrier": {
+      "id": "car.on2",
+      "index": 4
+     },
+     "syllables": 3,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f11.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f11.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f12",
+     "text": "sol yanak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 550,
+     "fillGroup": "yuz2",
+     "carrier": {
+      "id": "car.on2",
+      "index": 5
+     },
+     "syllables": 3,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f12.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f12.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f13",
+     "text": "burnun ucu…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 550,
+     "fillGroup": "yuz2",
+     "carrier": {
+      "id": "car.on2",
+      "index": 6
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f13.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f13.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f14",
+     "text": "üst dudak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 590,
+     "fillGroup": "yuz3",
+     "carrier": {
+      "id": "car.on3",
+      "index": 0
+     },
+     "syllables": 3,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f14.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f14.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f15",
+     "text": "alt dudak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 590,
+     "fillGroup": "yuz3",
+     "carrier": {
+      "id": "car.on3",
+      "index": 1
+     },
+     "syllables": 3,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f15.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f15.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f16",
+     "text": "çene…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "carrier": {
+      "id": "car.on3",
+      "index": 2
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f16.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f16.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f17",
+     "text": "boyun…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 590,
+     "fillGroup": "yuz3",
+     "carrier": {
+      "id": "car.on3",
+      "index": 3
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f17.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f17.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f18",
+     "text": "sağ köprücük kemiği…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 590,
+     "fillGroup": "yuz3",
+     "carrier": {
+      "id": "car.on3",
+      "index": 4
+     },
+     "syllables": 7,
+     "words": 3,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f18.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f18.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f19",
+     "text": "sol köprücük kemiği…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.0,
+      "pref": 1.5,
+      "max": 2.8
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 590,
+     "fillGroup": "yuz3",
+     "carrier": {
+      "id": "car.on3",
+      "index": 5
+     },
+     "syllables": 7,
+     "words": 3,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f19.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f19.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f20",
+     "text": "göğüs…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 3.0,
+      "max": 4.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "carrier": {
+      "id": "car.on3",
+      "index": 6
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f20.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f20.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.f21",
+     "text": "karın.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 3.0,
+      "max": 4.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "on",
+      "texture": "dolasim-govde"
+     },
+     "fillRank": 590,
+     "fillGroup": "yuz3",
+     "carrier": {
+      "id": "car.on3",
+      "index": 7
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.f21.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.f21.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.w01",
+     "text": "Bütün sağ bacak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.5,
+      "pref": 2.2,
+      "max": 3.2
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "butun",
+      "texture": "dolasim-butun"
+     },
+     "fillRank": 610,
+     "fillGroup": "butun",
+     "carrier": {
+      "id": "car.butun",
+      "index": 0
+     },
+     "syllables": 5,
+     "words": 3,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.w01.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.w01.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.w02",
+     "text": "bütün sol bacak…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.5,
+      "pref": 2.2,
+      "max": 3.2
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "butun",
+      "texture": "dolasim-butun"
+     },
+     "fillRank": 610,
+     "fillGroup": "butun",
+     "carrier": {
+      "id": "car.butun",
+      "index": 1
+     },
+     "syllables": 5,
+     "words": 3,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.w02.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.w02.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.w03",
+     "text": "iki bacak birlikte…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.5,
+      "pref": 2.2,
+      "max": 3.2
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "butun",
+      "texture": "dolasim-butun"
+     },
+     "fillRank": 610,
+     "fillGroup": "butun",
+     "carrier": {
+      "id": "car.butun",
+      "index": 2
+     },
+     "syllables": 7,
+     "words": 3,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.w03.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.w03.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.w04",
+     "text": "bütün sağ kol…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.5,
+      "pref": 2.2,
+      "max": 3.2
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "butun",
+      "texture": "dolasim-butun"
+     },
+     "fillRank": 610,
+     "fillGroup": "butun",
+     "carrier": {
+      "id": "car.butun",
+      "index": 3
+     },
+     "syllables": 4,
+     "words": 3,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.w04.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.w04.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.w05",
+     "text": "bütün sol kol…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.5,
+      "pref": 2.2,
+      "max": 3.2
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "butun",
+      "texture": "dolasim-butun"
+     },
+     "fillRank": 610,
+     "fillGroup": "butun",
+     "carrier": {
+      "id": "car.butun",
+      "index": 4
+     },
+     "syllables": 4,
+     "words": 3,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.w05.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.w05.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.w06",
+     "text": "iki kol birlikte…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 1.5,
+      "pref": 2.2,
+      "max": 3.2
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "butun",
+      "texture": "dolasim-butun"
+     },
+     "fillRank": 610,
+     "fillGroup": "butun",
+     "carrier": {
+      "id": "car.butun",
+      "index": 5
+     },
+     "syllables": 6,
+     "words": 3,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.w06.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.w06.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.w07",
+     "text": "bütün beden birlikte…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 3.0,
+      "max": 4.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "butun",
+      "texture": "dolasim-butun"
+     },
+     "carrier": {
+      "id": "car.butun",
+      "index": 6
+     },
+     "syllables": 7,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.w07.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.w07.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.w08",
+     "text": "bütün beden…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 3.5,
+      "max": 5.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "butun",
+      "texture": "dolasim-butun"
+     },
+     "fillRank": 610,
+     "fillGroup": "butun",
+     "carrier": {
+      "id": "car.butun",
+      "index": 7
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.w08.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.w08.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.w09",
+     "text": "bütün beden.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 3.5,
+      "max": 5.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "butun",
+      "texture": "dolasim-butun"
+     },
+     "fillRank": 610,
+     "fillGroup": "butun",
+     "carrier": {
+      "id": "car.butun",
+      "index": 8
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.w09.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.w09.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.x01",
+     "text": "Bedeninin yere değdiği noktaları da hissedebilirsin.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 6.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "temas",
+      "texture": "temas"
+     },
+     "fillRank": 1030,
+     "fillGroup": "temas",
+     "syllables": 20,
+     "words": 6,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.x01.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.x01.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.x02",
+     "text": "Topuklar…",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 1.8,
+      "pref": 2.5,
+      "max": 3.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "temas",
+      "texture": "temas"
+     },
+     "fillRank": 1030,
+     "fillGroup": "temas",
+     "carrier": {
+      "id": "car.temas",
+      "index": 0
+     },
+     "syllables": 3,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.x02.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.x02.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.x03",
+     "text": "baldırlar…",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 1.8,
+      "pref": 2.5,
+      "max": 3.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "temas",
+      "texture": "temas"
+     },
+     "fillRank": 1030,
+     "fillGroup": "temas",
+     "carrier": {
+      "id": "car.temas",
+      "index": 1
+     },
+     "syllables": 3,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.x03.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.x03.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.x04",
+     "text": "kalçalar…",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 1.8,
+      "pref": 2.5,
+      "max": 3.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "temas",
+      "texture": "temas"
+     },
+     "fillRank": 1030,
+     "fillGroup": "temas",
+     "carrier": {
+      "id": "car.temas",
+      "index": 2
+     },
+     "syllables": 3,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.x04.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.x04.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.x05",
+     "text": "kürek kemikleri…",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 1.8,
+      "pref": 2.5,
+      "max": 3.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "temas",
+      "texture": "temas"
+     },
+     "fillRank": 1030,
+     "fillGroup": "temas",
+     "carrier": {
+      "id": "car.temas",
+      "index": 3
+     },
+     "syllables": 6,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.x05.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.x05.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.x06",
+     "text": "başın arkası.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 1.8,
+      "pref": 2.5,
+      "max": 3.5
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "temas",
+      "texture": "temas"
+     },
+     "fillRank": 1030,
+     "fillGroup": "temas",
+     "carrier": {
+      "id": "car.temas",
+      "index": 4
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.x06.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.x06.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.x07",
+     "text": "Her biri, altındaki zemine yaslanıyor.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 6.0,
+      "max": 9.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "section": "temas",
+      "texture": "temas"
+     },
+     "fillRank": 1030,
+     "fillGroup": "temas",
+     "syllables": 14,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.x07.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.x07.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c1.k1",
+     "text": "Bedenin dinleniyor; sen uyanıksın ve farkındasın.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derinleşme",
+     "cue": {},
+     "tags": {
+      "key": 1,
+      "texture": "anahtar"
+     },
+     "syllables": 17,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c1.k1.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c1.k1.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 53.6,
+   "maxSec": 417.1,
+   "prefSec": {
+    "5": 59.1,
+    "10": 109.5,
+    "15": 180.9,
+    "20": 270.7,
+    "30": 350.8
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  },
+  {
+   "id": "C2",
+   "kind": "core",
+   "priority": 1,
+   "playOrder": 3,
+   "title": "Nefes farkındalığı ve geri sayma",
+   "clips": [
+    {
+     "id": "c2.dikkat",
+     "text": "Şimdi nefesi olduğu gibi, değiştirmeden izleyebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.5,
+      "pref": 9.0,
+      "max": 13.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "phase:derin"
+     },
+     "tags": {
+      "texture": "nefes"
+     },
+     "syllables": 21,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.dikkat.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.dikkat.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.yer",
+     "text": "Onu en belirgin hissettiğin yeri bulabilirsin: burun, göğüs ya da karın.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 12.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "nefes"
+     },
+     "fillRank": 570,
+     "syllables": 25,
+     "words": 11,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.yer.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.yer.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.akis",
+     "text": "Nefes kendiliğinden geliyor, kendiliğinden gidiyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 11.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "nefes",
+      "repeatOk": [
+       "kendi",
+       "nefes"
+      ]
+     },
+     "fillRank": 120,
+     "syllables": 18,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.akis.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.akis.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.durak",
+     "text": "Verişin sonunda küçük bir duraklama var; onu da fark edebilirsin.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 12.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "nefes"
+     },
+     "fillRank": 620,
+     "syllables": 23,
+     "words": 10,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.durak.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.durak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.sayac",
+     "text": "Geriye doğru sayacağım; sayılar nefesine eşlik edebilir.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 3.0,
+      "max": 4.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "geri-sayma",
+      "repeatOk": [
+       "nefes"
+      ]
+     },
+     "syllables": 22,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.sayac.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.sayac.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.n10",
+     "text": "on…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 5.5,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "pulse",
+      "breath": {
+       "count": 10
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "carrier": {
+      "id": "car.sayi",
+      "index": 0
+     },
+     "fillRank": 370,
+     "requires": [
+      "c2.n09"
+     ],
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.n10.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.n10.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.n09",
+     "text": "dokuz…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 5.5,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "pulse",
+      "breath": {
+       "count": 9
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "carrier": {
+      "id": "car.sayi",
+      "index": 1
+     },
+     "fillRank": 360,
+     "requires": [
+      "c2.n08"
+     ],
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.n09.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.n09.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.n08",
+     "text": "sekiz…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 5.5,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "pulse",
+      "breath": {
+       "count": 8
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "carrier": {
+      "id": "car.sayi",
+      "index": 2
+     },
+     "fillRank": 350,
+     "requires": [
+      "c2.n07"
+     ],
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.n08.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.n08.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.n07",
+     "text": "yedi…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 5.5,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "pulse",
+      "breath": {
+       "count": 7
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "carrier": {
+      "id": "car.sayi",
+      "index": 3
+     },
+     "fillRank": 230,
+     "requires": [
+      "c2.n06"
+     ],
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.n07.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.n07.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.n06",
+     "text": "altı…",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 5.5,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "pulse",
+      "breath": {
+       "count": 6
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "carrier": {
+      "id": "car.sayi",
+      "index": 4
+     },
+     "fillRank": 220,
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.n06.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.n06.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.n05",
+     "text": "beş…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 5.5,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "pulse",
+      "breath": {
+       "count": 5
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "carrier": {
+      "id": "car.sayi",
+      "index": 5
+     },
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.n05.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.n05.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.n04",
+     "text": "dört…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 5.5,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "pulse",
+      "breath": {
+       "count": 4
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "carrier": {
+      "id": "car.sayi",
+      "index": 6
+     },
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.n04.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.n04.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.n03",
+     "text": "üç…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 5.5,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "pulse",
+      "breath": {
+       "count": 3
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "carrier": {
+      "id": "car.sayi",
+      "index": 7
+     },
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.n03.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.n03.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.n02",
+     "text": "iki…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 5.5,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "pulse",
+      "breath": {
+       "count": 2
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "carrier": {
+      "id": "car.sayi",
+      "index": 8
+     },
+     "syllables": 2,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.n02.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.n02.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.n01",
+     "text": "bir.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 5.0,
+      "max": 7.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "pulse",
+      "breath": {
+       "count": 1
+      }
+     },
+     "tags": {
+      "texture": "geri-sayma",
+      "micro": "number"
+     },
+     "carrier": {
+      "id": "car.sayi",
+      "index": 9
+     },
+     "syllables": 1,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.n01.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.n01.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.x.kendin",
+     "text": "İstersen bir turu da içinden sayabilirsin: kendi hızında, ondan bire. Sesim bu sırada susacak, sonra geri gelecek.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 40.0,
+      "pref": 60.0,
+      "max": 90.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "window",
+      "music": "swell"
+     },
+     "tags": {
+      "texture": "sessiz-sayma",
+      "announce": true,
+      "repeatOk": [
+       "sesim"
+      ]
+     },
+     "window": {
+      "min": 40.0,
+      "pref": 60.0,
+      "max": 90.0
+     },
+     "fillRank": 1010,
+     "fillGroup": "x.saymak",
+     "syllables": 40,
+     "words": 17,
+     "sentences": 2,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.x.kendin.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.x.kendin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.x.donus",
+     "text": "Sesim yeniden seninle; sayının nerede kaldığı önemli değil.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 5.0,
+      "max": 7.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "nefes",
+      "welcome": true,
+      "repeatOk": [
+       "sayın",
+       "sayıl",
+       "sesim"
+      ]
+     },
+     "fillRank": 1010,
+     "fillGroup": "x.saymak",
+     "requires": [
+      "c2.x.kendin"
+     ],
+     "syllables": 22,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.x.donus.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.x.donus.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.birak",
+     "text": "Sayıları bırakabilirsin; kaçırdıysan bu da olur.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 9.0,
+      "max": 13.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "nefes",
+      "normalize": true,
+      "repeatOk": [
+       "sayın",
+       "sayıl"
+      ]
+     },
+     "syllables": 18,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.birak.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.birak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c2.geri",
+     "text": "Fark ettiğin an, zaten geri döndün.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "nefes",
+      "normalize": true
+     },
+     "fillRank": 330,
+     "syllables": 11,
+     "words": 6,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c2.geri.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c2.geri.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [
+    {
+     "afterClip": "c2.x.kendin",
+     "min": 40.0,
+     "pref": 60.0,
+     "max": 90.0,
+     "announce": "c2.x.kendin",
+     "welcome": "c2.x.donus"
+    }
+   ],
+   "minSec": 45.2,
+   "maxSec": 316.4,
+   "prefSec": {
+    "5": 52.7,
+    "10": 87.8,
+    "15": 130.2,
+    "20": 162.1,
+    "30": 274.3
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  },
+  {
+   "id": "BR.K2",
+   "kind": "bridge",
+   "placement": {
+    "after": "C2"
+   },
+   "priority": 0,
+   "playOrder": 0,
+   "title": "Köprü: anahtar cümle (2. geçiş), nefes bloğunun hemen ardından",
+   "clips": [
+    {
+     "id": "br.k2",
+     "text": "Beden dinleniyor; sen uyanıksın.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 8.0,
+      "max": 12.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "key": 2,
+      "texture": "anahtar"
+     },
+     "syllables": 11,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/br.k2.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/br.k2.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 7.9,
+   "maxSec": 14.9,
+   "prefSec": {
+    "5": 9.1,
+    "10": 10.6,
+    "15": 11.8,
+    "20": 11.4,
+    "30": 12.8
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  },
+  {
+   "id": "C3",
+   "kind": "core",
+   "priority": 3,
+   "playOrder": 4,
+   "entryRank": 500,
+   "title": "Zıtlık çiftleri (ağır/hafif, sıcak/serin)",
+   "clips": [
+    {
+     "id": "c3.agir",
+     "text": "Bir ağırlık hissi belirebilir; istemezsen onu bırakabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 6.0,
+      "max": 8.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-agir",
+      "safety": "exit",
+      "repeatOk": [
+       "ağırl"
+      ]
+     },
+     "syllables": 23,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.agir.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.agir.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.a1",
+     "text": "Kollar ağır…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 3.5,
+      "max": 5.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-agir",
+      "repeatOk": [
+       "bütün",
+       "beden"
+      ]
+     },
+     "carrier": {
+      "id": "car.agir",
+      "index": 0
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.a1.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.a1.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.a2",
+     "text": "bacaklar ağır…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 3.5,
+      "max": 5.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-agir",
+      "repeatOk": [
+       "bütün",
+       "beden"
+      ]
+     },
+     "carrier": {
+      "id": "car.agir",
+      "index": 1
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.a2.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.a2.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.a3",
+     "text": "bütün beden ağır.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 9.0,
+      "max": 13.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-agir",
+      "repeatOk": [
+       "bütün",
+       "beden"
+      ]
+     },
+     "carrier": {
+      "id": "car.agir",
+      "index": 2
+     },
+     "syllables": 6,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.a3.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.a3.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.zemin",
+     "text": "Zemin bu ağırlığı tümüyle taşıyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-agir",
+      "repeatOk": [
+       "ağırl"
+      ]
+     },
+     "fillRank": 510,
+     "syllables": 13,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.zemin.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.zemin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.hafif",
+     "text": "Şimdi bunun tersini hissedebilirsin: hafiflik.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 6.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-agir"
+     },
+     "syllables": 16,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.hafif.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.hafif.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.h1",
+     "text": "Kollar hafif…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 3.5,
+      "max": 5.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-agir",
+      "repeatOk": [
+       "bütün",
+       "beden"
+      ]
+     },
+     "carrier": {
+      "id": "car.hafif",
+      "index": 0
+     },
+     "syllables": 4,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.h1.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.h1.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.h2",
+     "text": "bacaklar hafif…",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 3.5,
+      "max": 5.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-agir",
+      "repeatOk": [
+       "bütün",
+       "beden"
+      ]
+     },
+     "carrier": {
+      "id": "car.hafif",
+      "index": 1
+     },
+     "syllables": 5,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.h2.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.h2.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.h3",
+     "text": "bütün beden hafif.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 9.0,
+      "max": 13.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-agir",
+      "repeatOk": [
+       "bütün",
+       "beden"
+      ]
+     },
+     "carrier": {
+      "id": "car.hafif",
+      "index": 2
+     },
+     "syllables": 6,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.h3.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.h3.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.nefeskadar",
+     "text": "Neredeyse ağırlıksız; nefes kadar hafif.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-agir",
+      "repeatOk": [
+       "hafif"
+      ]
+     },
+     "fillRank": 540,
+     "syllables": 14,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.nefeskadar.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.nefeskadar.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.x.ikisi1",
+     "text": "Ağırlık da hafiflik de aynı anda burada olabilir.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 12.0,
+      "max": 18.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-agir",
+      "repeatOk": [
+       "ağırl",
+       "hafif"
+      ]
+     },
+     "fillRank": 1040,
+     "syllables": 19,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.x.ikisi1.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.x.ikisi1.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.sicak",
+     "text": "Sonra sıcaklık: bedeninde ılık bir his yayılabilir.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 9.0,
+      "max": 13.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-sicak"
+     },
+     "syllables": 18,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.sicak.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.sicak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.fincan",
+     "text": "Avuçlarında sıcak bir fincan tutar gibi.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-sicak",
+      "evocation": true,
+      "repeatOk": [
+       "sıcak"
+      ]
+     },
+     "fillRank": 560,
+     "syllables": 14,
+     "words": 6,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.fincan.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.fincan.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.serin",
+     "text": "Sonra serinlik: teninde ferah bir his dolaşabilir.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 9.0,
+      "max": 13.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-sicak",
+      "repeatOk": [
+       "sonra"
+      ]
+     },
+     "syllables": 17,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.serin.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.serin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.pencere",
+     "text": "Açık bir pencereden içeri dolan hava gibi.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-sicak",
+      "evocation": true
+     },
+     "fillRank": 580,
+     "syllables": 16,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.pencere.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.pencere.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.x.ikisi2",
+     "text": "Sıcaklık ve serinlik, yan yana da durabilir.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 12.0,
+      "max": 18.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-sicak"
+     },
+     "fillRank": 1070,
+     "syllables": 15,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.x.ikisi2.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.x.ikisi2.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c3.birak",
+     "text": "Bu hisleri bırakabilirsin; beden kendi hâline dönüyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 12.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "zitlik-sicak"
+     },
+     "syllables": 20,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c3.birak.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c3.birak.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 75.6,
+   "maxSec": 244.7,
+   "prefSec": {
+    "5": 0.0,
+    "10": 0.0,
+    "15": 0.0,
+    "20": 158.4,
+    "30": 212.7
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  },
+  {
+   "id": "BR.orta",
+   "kind": "bridge",
+   "placement": {
+    "before": "C4"
+   },
+   "priority": 0,
+   "playOrder": 0,
+   "title": "Köprü: ortada çıkış kapısı (>= 20 dk), imgelemeden hemen önce",
+   "clips": [
+    {
+     "id": "br.orta",
+     "text": "Hatırlatayım: istediğin an gözlerini açabilir ya da durabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "kapi",
+      "safety": "mid"
+     },
+     "minTarget": 1200,
+     "syllables": 25,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/br.orta.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/br.orta.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 0,
+   "maxSec": 19.4,
+   "prefSec": {
+    "5": 0.0,
+    "10": 0.0,
+    "15": 0.0,
+    "20": 15.9,
+    "30": 17.3
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  },
+  {
+   "id": "C4",
+   "kind": "core",
+   "priority": 2,
+   "playOrder": 5,
+   "entryRank": 300,
+   "title": "İmgeleme: kıyı ya da orman (tek imge yayı) + sessiz pencere",
+   "clips": [
+    {
+     "id": "c4.yer",
+     "text": "Zihninde bir kıyı ya da bir orman belirebilir; hangisi sana iyi geliyorsa.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "image:on"
+     },
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "giriş",
+      "safety": "choice"
+     },
+     "syllables": 27,
+     "words": 12,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.yer.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.yer.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.gelmezse",
+     "text": "Bir görüntü gelmezse de olur; nefesinde kalabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "safety": "alternative"
+     },
+     "syllables": 19,
+     "words": 7,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.gelmezse.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.gelmezse.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.patika",
+     "text": "Ayaklarının altında yumuşak bir patika var.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "yola çıkış"
+     },
+     "syllables": 16,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.patika.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.patika.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.inis",
+     "text": "Seni ağır ağır aşağıya indiriyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "iniş"
+     },
+     "syllables": 14,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.inis.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.inis.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.adim",
+     "text": "Her adımda bedenin biraz daha dinleniyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "arc": "iniş"
+     },
+     "fillRank": 420,
+     "syllables": 15,
+     "words": 6,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.adim.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.adim.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.iz",
+     "text": "Kumda ya da toprakta hafif izler bırakıyorsun.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "iniş"
+     },
+     "fillRank": 530,
+     "syllables": 16,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.iz.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.iz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.ses",
+     "text": "Uzaktan gelip giden bir ses: dalgalar ya da rüzgârdaki yapraklar.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 11.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "varış",
+      "sense": "ses"
+     },
+     "syllables": 21,
+     "words": 10,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.ses.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.ses.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.kus",
+     "text": "Daha uzakta bir kuş ötüyor.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "varış",
+      "sense": "ses",
+      "repeatOk": [
+       "uzakt"
+      ]
+     },
+     "fillRank": 1060,
+     "syllables": 10,
+     "words": 5,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.kus.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.kus.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.koku",
+     "text": "Havada tuz ya da ıslak toprak kokusu var.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 11.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "varış",
+      "sense": "koku"
+     },
+     "fillRank": 310,
+     "syllables": 14,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.koku.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.koku.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.gunes",
+     "text": "Güneş tenini ılık ılık ısıtıyor.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 11.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "varış",
+      "sense": "sıcaklık"
+     },
+     "syllables": 13,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.gunes.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.gunes.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.ruzgar",
+     "text": "Hafif bir rüzgâr yüzüne dokunup geçiyor.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "varış",
+      "sense": "dokunma"
+     },
+     "fillRank": 1080,
+     "syllables": 14,
+     "words": 6,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.ruzgar.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.ruzgar.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.yerles",
+     "text": "Sana iyi gelen bir yer bulup oturabilir ya da uzanabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 12.0,
+      "max": 18.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "dinlenme"
+     },
+     "syllables": 23,
+     "words": 10,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.yerles.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.yerles.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.tas1",
+     "text": "Yanında güneşte ısınmış, düz bir taş var.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "dinlenme",
+      "sense": "dokunma"
+     },
+     "fillRank": 1020,
+     "fillGroup": "x.tas",
+     "syllables": 13,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.tas1.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.tas1.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.tas2",
+     "text": "Elini üstüne koyabilirsin; taş ılık ve pürüzsüz.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 11.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "dinlenme",
+      "sense": "dokunma",
+      "repeatOk": [
+       "taş"
+      ]
+     },
+     "fillRank": 1020,
+     "fillGroup": "x.tas",
+     "requires": [
+      "c4.tas1"
+     ],
+     "syllables": 18,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.tas2.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.tas2.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.isik",
+     "text": "Işık, suyun ya da yaprakların üzerinde oynuyor.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 11.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "image": "new",
+      "arc": "dinlenme",
+      "sense": "görme"
+     },
+     "fillRank": 1050,
+     "syllables": 17,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.isik.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.isik.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.acele",
+     "text": "Hiçbir şeyin acelesi yok.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 11.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge",
+      "arc": "dinlenme"
+     },
+     "fillRank": 340,
+     "syllables": 9,
+     "words": 4,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.acele.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.acele.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.pencere",
+     "text": "Birkaç nefes burada dinlenebilirsin; sesim bir süre susacak, sonra geri gelecek.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 20.0,
+      "pref": 45.0,
+      "max": 90.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "window",
+      "music": "swell"
+     },
+     "tags": {
+      "texture": "imge",
+      "announce": true,
+      "arc": "dinlenme"
+     },
+     "window": {
+      "min": 20.0,
+      "pref": 45.0,
+      "max": 90.0
+     },
+     "syllables": 28,
+     "words": 11,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.pencere.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.pencere.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.donus1",
+     "text": "Yeniden seninleyim.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 6.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge-donus",
+      "welcome": true
+     },
+     "syllables": 7,
+     "words": 2,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.donus1.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.donus1.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.don",
+     "text": "Zamanı geldiğinde aynı patikadan, kendi hızında geri dönebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 12.0,
+      "max": 16.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge-donus",
+      "image": "return",
+      "arc": "dönüş"
+     },
+     "syllables": 25,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.don.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.don.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.geride",
+     "text": "Sesler ve ışık yavaş yavaş geride kalıyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 9.0,
+      "max": 13.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "imge-donus",
+      "image": "return",
+      "arc": "dönüş"
+     },
+     "fillRank": 440,
+     "syllables": 15,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.geride.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.geride.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c4.solma",
+     "text": "Görüntü soluyor; altındaki zemini yeniden hissedebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 14.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "image:off"
+     },
+     "tags": {
+      "texture": "imge-donus",
+      "image": "return",
+      "arc": "kapanış"
+     },
+     "syllables": 22,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c4.solma.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c4.solma.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [
+    {
+     "afterClip": "c4.pencere",
+     "min": 20.0,
+     "pref": 45.0,
+     "max": 90.0,
+     "announce": "c4.pencere",
+     "welcome": "c4.donus1"
+    }
+   ],
+   "minSec": 135.6,
+   "maxSec": 460.2,
+   "prefSec": {
+    "5": 0.0,
+    "10": 185.6,
+    "15": 267.0,
+    "20": 270.5,
+    "30": 389.4
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  },
+  {
+   "id": "C5",
+   "kind": "core",
+   "priority": 5,
+   "playOrder": 6,
+   "entryRank": 700,
+   "requiresBlocks": [
+    "C4"
+   ],
+   "title": "Tanıklık: sessiz farkındalık",
+   "clips": [
+    {
+     "id": "c5.basla",
+     "text": "Hiçbir şeyi değiştirmeden, olup biteni izleyebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 10.0,
+      "max": 15.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "taniklik"
+     },
+     "syllables": 20,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c5.basla.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c5.basla.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c5.sesler",
+     "text": "Uzaktaki sesler, yakındaki sesler ve aradaki sessizlik.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 12.0,
+      "max": 18.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "taniklik",
+      "repeatOk": [
+       "sesle"
+      ]
+     },
+     "fillRank": 710,
+     "syllables": 20,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c5.sesler.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c5.sesler.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c5.dusunce",
+     "text": "Düşünceler de gelip gidiyor; dalgalar ya da yapraklar gibi.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 12.0,
+      "max": 18.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "taniklik",
+      "callback": "c4.ses"
+     },
+     "syllables": 20,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c5.dusunce.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c5.dusunce.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c5.x.hepsi",
+     "text": "Nefes, sesler ve beden; hepsi kendi kendine oluyor.",
+     "tier": "extension",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 13.0,
+      "max": 20.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "taniklik",
+      "repeatOk": [
+       "kendi"
+      ]
+     },
+     "fillRank": 1090,
+     "syllables": 17,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c5.x.hepsi.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c5.x.hepsi.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c5.sen",
+     "text": "Sen, bütün bunları fark edensin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 12.0,
+      "max": 18.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "taniklik"
+     },
+     "syllables": 10,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c5.sen.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c5.sen.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c5.pencere",
+     "text": "Bir süre sessizce izlemeye devam edebilirsin; sesim sonra geri gelecek.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 30.0,
+      "pref": 60.0,
+      "max": 90.0
+     },
+     "phase": "Derin",
+     "cue": {
+      "visual": "window",
+      "music": "swell"
+     },
+     "tags": {
+      "texture": "taniklik",
+      "announce": true
+     },
+     "window": {
+      "min": 30.0,
+      "pref": 60.0,
+      "max": 90.0
+     },
+     "syllables": 26,
+     "words": 10,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c5.pencere.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c5.pencere.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c5.donus",
+     "text": "Buradayım.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.0,
+      "pref": 4.0,
+      "max": 6.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "taniklik",
+      "welcome": true
+     },
+     "syllables": 4,
+     "words": 1,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c5.donus.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c5.donus.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "c5.genis",
+     "text": "Dikkatin geniş ve sakin; hiçbir yere gitmesi gerekmiyor.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 8.0,
+      "pref": 12.0,
+      "max": 18.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "taniklik"
+     },
+     "fillRank": 720,
+     "syllables": 19,
+     "words": 8,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/c5.genis.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/c5.genis.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [
+    {
+     "afterClip": "c5.pencere",
+     "min": 30.0,
+     "pref": 60.0,
+     "max": 90.0,
+     "announce": "c5.pencere",
+     "welcome": "c5.donus"
+    }
+   ],
+   "minSec": 73.8,
+   "maxSec": 233.7,
+   "prefSec": {
+    "5": 0.0,
+    "10": 0.0,
+    "15": 0.0,
+    "20": 0.0,
+    "30": 198.6
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  },
+  {
+   "id": "N2",
+   "kind": "core",
+   "priority": 1,
+   "playOrder": 7,
+   "title": "Niyet, sonda",
+   "clips": [
+    {
+     "id": "n2.hatirla",
+     "text": "Başta seçtiğin niyeti hatırlayıp içinden üç kez söyleyebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 9.0,
+      "pref": 14.0,
+      "max": 20.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "niyet-son",
+      "action": "niyeti üç kez içinden söylemek"
+     },
+     "syllables": 23,
+     "words": 8,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/n2.hatirla.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/n2.hatirla.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "n2.dilek",
+     "text": "Niyetin, günün geri kalanında da seninle olabilir.",
+     "tier": "optional",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "texture": "niyet-son",
+      "repeatOk": [
+       "niyet"
+      ]
+     },
+     "fillRank": 240,
+     "syllables": 19,
+     "words": 7,
+     "sentences": 1,
+     "required": false,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/n2.dilek.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/n2.dilek.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 13.4,
+   "maxSec": 38.5,
+   "prefSec": {
+    "5": 15.5,
+    "10": 28.9,
+    "15": 31.6,
+    "20": 30.7,
+    "30": 33.9
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  },
+  {
+   "id": "K.kisa",
+   "kind": "closing",
+   "variant": "short",
+   "maxTarget": 720,
+   "priority": 0,
+   "playOrder": 99,
+   "title": "Kapanış (kısa, <= 12 dk)",
+   "clips": [
+    {
+     "id": "k.anahtar3",
+     "text": "Dinleniyorsun… ve uyanıksın.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 3.5,
+      "max": 6.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "key": 3,
+      "texture": "anahtar",
+      "tts": "üç nokta: TTS içinde doğal durak (Neslihan ~0,3 sn, Hakan ~1,5 sn)"
+     },
+     "syllables": 10,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.anahtar3.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.anahtar3.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.donus",
+     "text": "Artık dönme zamanı.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 4.0
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "phase:kapanis",
+      "visual": "dawn"
+     },
+     "tags": {
+      "texture": "kapanis"
+     },
+     "syllables": 7,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.donus.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.donus.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.nefes",
+     "text": "Nefesin biraz derinleşebilir.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 9.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "nefes",
+      "texture": "kapanis"
+     },
+     "syllables": 11,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.nefes.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.nefes.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.parmak",
+     "text": "El ve ayak parmaklarını oynatabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 7.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "parmak",
+      "texture": "kapanis"
+     },
+     "syllables": 15,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.parmak.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.parmak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.gerin",
+     "text": "Canın nasıl isterse gerinebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "gerin",
+      "texture": "kapanis"
+     },
+     "syllables": 13,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.gerin.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.gerin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.goz",
+     "text": "Gözlerini ışığa alışa alışa açabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 7.0
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "chord"
+     },
+     "tags": {
+      "step": "goz",
+      "texture": "kapanis",
+      "eyes": "ışığa yavaş alışma"
+     },
+     "syllables": 18,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.goz.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.goz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.oda.kisa",
+     "text": "Odada birkaç şeye bakabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.5,
+      "pref": 4.5,
+      "max": 7.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "oda",
+      "texture": "kapanis"
+     },
+     "syllables": 12,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.oda.kisa.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.oda.kisa.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.yan",
+     "text": "Önce bir yanına dön.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "yan",
+      "texture": "kapanis",
+      "mood": "safety",
+      "repeatOk": [
+       "yanın"
+      ]
+     },
+     "syllables": 7,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.yan.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.yan.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.otur",
+     "text": "Ellerinden destek alarak yavaşça doğrulup otur.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 9.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "otur",
+      "texture": "kapanis",
+      "mood": "safety"
+     },
+     "syllables": 17,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.otur.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.otur.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.bekle",
+     "text": "Birkaç nefes böyle kal; başın dönerse biraz daha bekle.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.5,
+      "pref": 4.5,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "bekle",
+      "texture": "kapanis",
+      "mood": "safety"
+     },
+     "syllables": 18,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.bekle.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.bekle.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.son",
+     "text": "Buradasın; uyanık ve dinlenmiş.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 4.0
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "fade:2s",
+      "visual": "end"
+     },
+     "tags": {
+      "step": "son",
+      "texture": "kapanis"
+     },
+     "syllables": 11,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.son.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.son.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 80.5,
+   "maxSec": 108.0,
+   "prefSec": {
+    "5": 80.5,
+    "10": 80.5,
+    "15": 0.0,
+    "20": 0.0,
+    "30": 0.0
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  },
+  {
+   "id": "K.uzun",
+   "kind": "closing",
+   "variant": "long",
+   "minTarget": 721,
+   "priority": 0,
+   "playOrder": 99,
+   "title": "Kapanış (uzun, > 12 dk)",
+   "clips": [
+    {
+     "id": "k.anahtar3",
+     "text": "Dinleniyorsun… ve uyanıksın.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 3.5,
+      "pref": 3.5,
+      "max": 6.0
+     },
+     "phase": "Derin",
+     "cue": {},
+     "tags": {
+      "key": 3,
+      "texture": "anahtar",
+      "tts": "üç nokta: TTS içinde doğal durak (Neslihan ~0,3 sn, Hakan ~1,5 sn)"
+     },
+     "syllables": 10,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.anahtar3.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.anahtar3.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.donus",
+     "text": "Artık dönme zamanı.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 4.0
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "phase:kapanis",
+      "visual": "dawn"
+     },
+     "tags": {
+      "texture": "kapanis"
+     },
+     "syllables": 7,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.donus.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.donus.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.nefes",
+     "text": "Nefesin biraz derinleşebilir.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 9.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "nefes",
+      "texture": "kapanis"
+     },
+     "syllables": 11,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.nefes.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.nefes.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.sesler",
+     "text": "Odanın seslerini, dışarıdan gelenleri de duyabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "sesler",
+      "texture": "kapanis"
+     },
+     "syllables": 21,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.sesler.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.sesler.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.parmak",
+     "text": "El ve ayak parmaklarını oynatabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 7.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "parmak",
+      "texture": "kapanis"
+     },
+     "syllables": 15,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.parmak.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.parmak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.gerin",
+     "text": "Canın nasıl isterse gerinebilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "gerin",
+      "texture": "kapanis"
+     },
+     "syllables": 13,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.gerin.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.gerin.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.goz",
+     "text": "Gözlerini ışığa alışa alışa açabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 7.0
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "chord"
+     },
+     "tags": {
+      "step": "goz",
+      "texture": "kapanis",
+      "eyes": "ışığa yavaş alışma"
+     },
+     "syllables": 18,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.goz.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.goz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.oda.uzun",
+     "text": "Odada birkaç şeye bakabilirsin: bir renk, bir biçim, bir doku.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.5,
+      "pref": 5.5,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "oda",
+      "texture": "kapanis"
+     },
+     "syllables": 20,
+     "words": 10,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.oda.uzun.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.oda.uzun.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.zaman",
+     "text": "Günün hangi saatinde, nerede olduğunu hatırlayabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.5,
+      "pref": 4.5,
+      "max": 7.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "oda",
+      "texture": "kapanis"
+     },
+     "syllables": 22,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.zaman.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.zaman.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.yan",
+     "text": "Önce bir yanına dön.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "yan",
+      "texture": "kapanis",
+      "mood": "safety",
+      "repeatOk": [
+       "yanın"
+      ]
+     },
+     "syllables": 7,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.yan.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.yan.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.yandakal",
+     "text": "Bir iki nefes o yanında kalabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 7.0,
+      "pref": 7.0,
+      "max": 10.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "yan",
+      "texture": "kapanis"
+     },
+     "syllables": 14,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.yandakal.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.yandakal.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.otur",
+     "text": "Ellerinden destek alarak yavaşça doğrulup otur.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 9.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "otur",
+      "texture": "kapanis",
+      "mood": "safety"
+     },
+     "syllables": 17,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.otur.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.otur.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.bekle",
+     "text": "Birkaç nefes böyle kal; başın dönerse biraz daha bekle.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.5,
+      "pref": 4.5,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "bekle",
+      "texture": "kapanis",
+      "mood": "safety"
+     },
+     "syllables": 18,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.bekle.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.bekle.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.son",
+     "text": "Buradasın; uyanık ve dinlenmiş.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 4.0
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "fade:2s",
+      "visual": "end"
+     },
+     "tags": {
+      "step": "son",
+      "texture": "kapanis"
+     },
+     "syllables": 11,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.son.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.son.m4a",
+       "sec": null
+      }
+     }
+    }
+   ],
+   "silenceWindows": [],
+   "minSec": 113.6,
+   "maxSec": 148.6,
+   "prefSec": {
+    "5": 0.0,
+    "10": 0.0,
+    "15": 121.7,
+    "20": 118.3,
+    "30": 130.5
+   },
+   "estimateBasis": "5,6 hece/sn + yüksek duraklama profili (VARSAYIM); üretimden sonra gerçek sec ile"
+  }
+ ],
+ "extras": {
+  "quickClosing": {
+   "id": "K.hizli",
+   "kind": "utility",
+   "title": "\"Kapanışa geç\" için hızlı kapanış",
+   "cue": {
+    "music": "phase:kapanis",
+    "visual": "dawn"
+   },
+   "clips": [
+    {
+     "id": "k.nefes",
+     "text": "Nefesin biraz derinleşebilir.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 9.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "nefes",
+      "texture": "kapanis"
+     },
+     "syllables": 11,
+     "words": 3,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.nefes.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.nefes.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.parmak",
+     "text": "El ve ayak parmaklarını oynatabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 7.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "parmak",
+      "texture": "kapanis"
+     },
+     "syllables": 15,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.parmak.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.parmak.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.goz",
+     "text": "Gözlerini ışığa alışa alışa açabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 7.0
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "chord"
+     },
+     "tags": {
+      "step": "goz",
+      "texture": "kapanis",
+      "eyes": "ışığa yavaş alışma"
+     },
+     "syllables": 18,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.goz.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.goz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.yan",
+     "text": "Önce bir yanına dön.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 5.0,
+      "pref": 5.0,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "yan",
+      "texture": "kapanis",
+      "mood": "safety",
+      "repeatOk": [
+       "yanın"
+      ]
+     },
+     "syllables": 7,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.yan.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.yan.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.otur",
+     "text": "Ellerinden destek alarak yavaşça doğrulup otur.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 9.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "otur",
+      "texture": "kapanis",
+      "mood": "safety"
+     },
+     "syllables": 17,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.otur.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.otur.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.bekle",
+     "text": "Birkaç nefes böyle kal; başın dönerse biraz daha bekle.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.5,
+      "pref": 4.5,
+      "max": 8.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "step": "bekle",
+      "texture": "kapanis",
+      "mood": "safety"
+     },
+     "syllables": 18,
+     "words": 9,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.bekle.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.bekle.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "k.son",
+     "text": "Buradasın; uyanık ve dinlenmiş.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.5,
+      "pref": 2.5,
+      "max": 4.0
+     },
+     "phase": "Kapanış",
+     "cue": {
+      "music": "fade:2s",
+      "visual": "end"
+     },
+     "tags": {
+      "step": "son",
+      "texture": "kapanis"
+     },
+     "syllables": 11,
+     "words": 4,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/k.son.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/k.son.m4a",
+       "sec": null
+      }
+     }
+    }
+   ]
+  },
+  "stopReturn": {
+   "id": "D.durdur",
+   "kind": "utility",
+   "title": "Durdur (X) sonrası isteğe bağlı 20 sn sesli dönüş",
+   "clips": [
+    {
+     "id": "d.goz",
+     "text": "Gözlerini aç, etrafına bak, acele etme.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 4.0,
+      "pref": 4.0,
+      "max": 5.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "mood": "safety",
+      "step": "goz",
+      "screen": "Durdurma ekranı metniyle aynı"
+     },
+     "syllables": 15,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/d.goz.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/d.goz.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "d.kalk",
+     "text": "Uzanıyorsan önce yana dön, sonra otur.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 6.0,
+      "pref": 6.0,
+      "max": 7.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "mood": "safety",
+      "step": "yan",
+      "screen": "Durdurma ekranı metniyle aynı"
+     },
+     "syllables": 14,
+     "words": 6,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/d.kalk.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/d.kalk.m4a",
+       "sec": null
+      }
+     }
+    },
+    {
+     "id": "d.bekle",
+     "text": "Birkaç nefes bekle; sonra kalkabilirsin.",
+     "tier": "required",
+     "gapAfter": {
+      "min": 2.0,
+      "pref": 2.0,
+      "max": 2.0
+     },
+     "phase": "Kapanış",
+     "cue": {},
+     "tags": {
+      "mood": "safety",
+      "step": "bekle"
+     },
+     "syllables": 13,
+     "words": 5,
+     "sentences": 1,
+     "required": true,
+     "voice": {
+      "female": {
+       "file": "public/yoga/ders2/female/d.bekle.m4a",
+       "sec": null
+      },
+      "male": {
+       "file": "public/yoga/ders2/male/d.bekle.m4a",
+       "sec": null
+      }
+     }
+    }
+   ]
+  }
+ }
+}

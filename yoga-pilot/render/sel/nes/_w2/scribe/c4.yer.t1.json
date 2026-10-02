@@ -1,0 +1,16 @@
+{
+ "unit": "c4.yer",
+ "take": "t1",
+ "ref_node": "T4Oor0RZg7nxc6OJQQYQ",
+ "asset_id": "lG8yaKUbk4A3NkXnNMdj",
+ "stt_node": "bvybdiK4RXr0g0inHlQg",
+ "session_id": "IcGLTVaoQ9cEc5JLssgd",
+ "generation_id": "B4B64g2UjPAFylVYpSWG",
+ "actual_credits": 18.04,
+ "actual_cents": 0.328,
+ "spoken_duration_secs": 3.08,
+ "scribe_text": "Zihninde sana iyi gelen bir orman belirebilir",
+ "tts": "Zihninde sana iyi gelen bir orman belirebilir.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 7\n}"
+}

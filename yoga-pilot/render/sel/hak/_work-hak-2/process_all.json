@@ -1,0 +1,4424 @@
+{
+ "choice": {
+  "c2.akis": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.akis/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "c2.sayac": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.sayac/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "car.sayi": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/car.sayi/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "c2.birak": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.birak/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "c2.kal": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.kal/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "br.k2": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/br.k2/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "br.orta": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/br.orta/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "c4.yer": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.yer/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "c4.gelmezse": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.gelmezse/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "c4.patika": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.patika/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "c4.yol": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.yol/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "c4.ses": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.ses/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "c4.gunes": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.gunes/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "c4.don": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.don/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "c4.solma": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.solma/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "n2.hatirla": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/n2.hatirla/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "n2.dilek": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/n2.dilek/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "k.anahtar3": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.anahtar3/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "k.donus": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.donus/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "k.nefes": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.nefes/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "k.sesler": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.sesler/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "k.hareket": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.hareket/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "k.goz": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.goz/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "k.oda.ayrinti": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.oda.ayrinti/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "k.zaman": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.zaman/t1.mp3",
+   "take": "t1",
+   "set": "original"
+  },
+  "k.yandakal": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.yandakal/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "k.otur": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.otur/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "k.bekle": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.bekle/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "k.kalk": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.kalk/t3.mp3",
+   "take": "t3",
+   "set": "original"
+  },
+  "k.son": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.son/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "c2.durak": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.durak/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "a.x.kipir": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/a.x.kipir/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "c2.x.ritim": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.x.ritim/t2.mp3",
+   "take": "t2",
+   "set": "original"
+  },
+  "k.yan": {
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.yan/t1.mp3",
+   "take": "t1",
+   "set": "original",
+   "note": "best of 5 valid takes (3 original + 2 valid re-takes) by joint audio.py rank; Scribe mismatch in all -> flag kulak"
+  }
+ },
+ "ref_clips": {
+  "Derin": "c2.kal",
+  "Kapanış": "k.sesler",
+  "Varış": "a.x.kipir"
+ },
+ "units": {
+  "c2.kal": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.kal/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "c2.kal": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.04,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.09,
+       "applied_gain_db": 3.11
+      }
+     ],
+     "trim_in_sec": [
+      0.04,
+      2.905
+     ],
+     "lead_pad_ms": 20.3,
+     "tail_pad_ms": 114.6,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.31,
+      "band_peak_over_thr_db": -6.52,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.175,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.56,
+     "limiter_max_db": 1.02,
+     "limiter_sec": 0.061,
+     "limiter_sec_over_1db": 0.001,
+     "rms_db": -18.25,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.kal/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.kal/c2.kal.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.kal"
+   ]
+  },
+  "k.sesler": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.sesler/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "process": {
+    "k.sesler": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.52,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.55,
+       "applied_gain_db": 2.6
+      }
+     ],
+     "trim_in_sec": [
+      0.031,
+      3.199
+     ],
+     "lead_pad_ms": 28.5,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.77,
+      "band_peak_over_thr_db": -1.09,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.477,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.53,
+     "limiter_max_db": 1.63,
+     "limiter_sec": 0.071,
+     "limiter_sec_over_1db": 0.018,
+     "rms_db": -18.23,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.sesler/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.sesler/k.sesler.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.sesler"
+   ]
+  },
+  "a.x.kipir": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/a.x.kipir/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "process": {
+    "a.x.kipir": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.84,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.38,
+       "applied_gain_db": 3.65
+      },
+      {
+       "trim_thr_in_dbfs": -53.65,
+       "applied_gain_db": 3.65
+      }
+     ],
+     "trim_in_sec": [
+      0.055,
+      3.633
+     ],
+     "lead_pad_ms": 5.1,
+     "tail_pad_ms": 42.6,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.1,
+      "band_peak_over_thr_db": -2.88,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.888,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.58,
+     "limiter_max_db": 2.83,
+     "limiter_sec": 0.157,
+     "limiter_sec_over_1db": 0.089,
+     "rms_db": -17.71,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/a.x.kipir/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/a.x.kipir/a.x.kipir.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "a.x.kipir"
+   ]
+  },
+  "c2.akis": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.akis/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.akis/t2.mp3",
+    "n": 2,
+    "thr_db": -53.38,
+    "pauses": [
+     [
+      1.876,
+      2.235
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.876,
+      2.235
+     ]
+    ],
+    "shortest_chosen_gap": 0.359,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     2.0458
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.akis/s1.wav",
+      "start": 0.0,
+      "end": 2.0458,
+      "dur": 2.046,
+      "speech_sec": 1.841,
+      "syll": 10,
+      "rate": 5.43
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.akis/s2.wav",
+      "start": 2.0458,
+      "end": 3.68,
+      "dur": 1.634,
+      "speech_sec": 1.307,
+      "syll": 8,
+      "rate": 6.12
+     }
+    ],
+    "boundary_misalign": 0.035,
+    "cut_suspect": false
+   },
+   "process": {
+    "c2.akis#1": {
+     "exit": 0,
+     "micro": false,
+     "text": "Nefes kendiliğinden geliyor.",
+     "syll": 10,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.046,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.42,
+       "applied_gain_db": 2.52
+      }
+     ],
+     "trim_in_sec": [
+      0.042,
+      1.877
+     ],
+     "lead_pad_ms": 18.2,
+     "tail_pad_ms": 80.8,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.12,
+      "band_peak_over_thr_db": -5.52,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.145,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.59,
+     "limiter_max_db": 1.61,
+     "limiter_sec": 0.048,
+     "limiter_sec_over_1db": 0.013,
+     "rms_db": -17.72,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.akis/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.akis/c2.akis#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.akis#2": {
+     "exit": 0,
+     "micro": false,
+     "text": "Kendiliğinden gidiyor.",
+     "syll": 8,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 1.634,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -55.05,
+       "applied_gain_db": 7.15
+      },
+      {
+       "trim_thr_in_dbfs": -57.15,
+       "applied_gain_db": 7.12
+      }
+     ],
+     "trim_in_sec": [
+      0.182,
+      1.498
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 114.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -16.28,
+      "band_peak_over_thr_db": -12.91,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.626,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.56,
+     "limiter_max_db": 7.51,
+     "limiter_sec": 0.163,
+     "limiter_sec_over_1db": 0.124,
+     "rms_db": -17.26,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 7.5 dB kıstı (0.12 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.akis/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.akis/c2.akis#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.akis#1",
+    "c2.akis#2"
+   ]
+  },
+  "c2.sayac": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.sayac/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.sayac/t2.mp3",
+    "n": 2,
+    "thr_db": -52.67,
+    "pauses": [
+     [
+      1.252,
+      1.836
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.252,
+      1.836
+     ]
+    ],
+    "shortest_chosen_gap": 0.584,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     1.5433
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.sayac/s1.wav",
+      "start": 0.0,
+      "end": 1.5433,
+      "dur": 1.543,
+      "speech_sec": 1.242,
+      "syll": 9,
+      "rate": 7.25
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.sayac/s2.wav",
+      "start": 1.5433,
+      "end": 4.16,
+      "dur": 2.617,
+      "speech_sec": 2.205,
+      "syll": 13,
+      "rate": 5.9
+     }
+    ],
+    "boundary_misalign": 0.056,
+    "cut_suspect": false
+   },
+   "process": {
+    "c2.sayac#1": {
+     "exit": 0,
+     "micro": false,
+     "text": "Geriye doğru sayacağım.",
+     "syll": 9,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 1.543,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -51.09,
+       "applied_gain_db": 1.4
+      },
+      {
+       "trim_thr_in_dbfs": -51.4,
+       "applied_gain_db": 1.4
+      }
+     ],
+     "trim_in_sec": [
+      0.019,
+      1.255
+     ],
+     "lead_pad_ms": 41.0,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.19,
+      "band_peak_over_thr_db": -9.76,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.546,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.6,
+     "limiter_max_db": 1.53,
+     "limiter_sec": 0.035,
+     "limiter_sec_over_1db": 0.011,
+     "rms_db": -17.86,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.sayac/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.sayac/c2.sayac#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.sayac#2": {
+     "exit": 0,
+     "micro": false,
+     "text": "Nefes sayılara uymak zorunda değil.",
+     "syll": 13,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.617,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.79,
+       "applied_gain_db": 4.18
+      },
+      {
+       "trim_thr_in_dbfs": -54.18,
+       "applied_gain_db": 4.17
+      }
+     ],
+     "trim_in_sec": [
+      0.289,
+      2.464
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 97.6,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.37,
+      "band_peak_over_thr_db": -4.2,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.486,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.57,
+     "limiter_max_db": 4.07,
+     "limiter_sec": 0.172,
+     "limiter_sec_over_1db": 0.118,
+     "rms_db": -17.78,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 4.1 dB kıstı (0.12 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.sayac/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.sayac/c2.sayac#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.sayac#1",
+    "c2.sayac#2"
+   ]
+  },
+  "car.sayi": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/car.sayi/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/car.sayi/t1.mp3",
+    "n": 11,
+    "thr_db": -54.57,
+    "pauses": [
+     [
+      0.594,
+      1.137
+     ],
+     [
+      1.447,
+      2.005
+     ],
+     [
+      2.589,
+      3.003
+     ],
+     [
+      3.692,
+      4.176
+     ],
+     [
+      4.6,
+      5.138
+     ],
+     [
+      5.632,
+      6.201
+     ],
+     [
+      6.685,
+      7.189
+     ],
+     [
+      7.658,
+      8.171
+     ],
+     [
+      8.63,
+      9.094
+     ],
+     [
+      9.538,
+      10.012
+     ]
+    ],
+    "breaths": [],
+    "needed": 11,
+    "found": 11,
+    "gaps_available": 10,
+    "chosen_gaps": [
+     [
+      0.594,
+      1.137
+     ],
+     [
+      1.447,
+      2.005
+     ],
+     [
+      2.589,
+      3.003
+     ],
+     [
+      3.692,
+      4.176
+     ],
+     [
+      4.6,
+      5.138
+     ],
+     [
+      5.632,
+      6.201
+     ],
+     [
+      6.685,
+      7.189
+     ],
+     [
+      7.658,
+      8.171
+     ],
+     [
+      8.63,
+      9.094
+     ],
+     [
+      9.538,
+      10.012
+     ]
+    ],
+    "shortest_chosen_gap": 0.414,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     0.8722,
+     1.7258,
+     2.8058,
+     3.9258,
+     4.8754,
+     5.9122,
+     6.9291,
+     7.9192,
+     8.8648,
+     9.7658
+    ],
+    "pieces": [
+     {
+      "name": "_pre",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/_pre.wav",
+      "start": 0.0,
+      "end": 0.8722,
+      "dur": 0.872,
+      "speech_sec": 0.594,
+      "syll": 4,
+      "rate": 6.74
+     },
+     {
+      "name": "c2.n10",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n10.wav",
+      "start": 0.8722,
+      "end": 1.7258,
+      "dur": 0.854,
+      "speech_sec": 0.314,
+      "syll": 1,
+      "rate": 3.18
+     },
+     {
+      "name": "c2.n09",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n09.wav",
+      "start": 1.7258,
+      "end": 2.8058,
+      "dur": 1.08,
+      "speech_sec": 0.594,
+      "syll": 2,
+      "rate": 3.37
+     },
+     {
+      "name": "c2.n08",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n08.wav",
+      "start": 2.8058,
+      "end": 3.9258,
+      "dur": 1.12,
+      "speech_sec": 0.693,
+      "syll": 2,
+      "rate": 2.88
+     },
+     {
+      "name": "c2.n07",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n07.wav",
+      "start": 3.9258,
+      "end": 4.8754,
+      "dur": 0.95,
+      "speech_sec": 0.439,
+      "syll": 2,
+      "rate": 4.56
+     },
+     {
+      "name": "c2.n06",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n06.wav",
+      "start": 4.8754,
+      "end": 5.9122,
+      "dur": 1.037,
+      "speech_sec": 0.504,
+      "syll": 2,
+      "rate": 3.97
+     },
+     {
+      "name": "c2.n05",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n05.wav",
+      "start": 5.9122,
+      "end": 6.9291,
+      "dur": 1.017,
+      "speech_sec": 0.499,
+      "syll": 1,
+      "rate": 2.0
+     },
+     {
+      "name": "c2.n04",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n04.wav",
+      "start": 6.9291,
+      "end": 7.9192,
+      "dur": 0.99,
+      "speech_sec": 0.479,
+      "syll": 1,
+      "rate": 2.09
+     },
+     {
+      "name": "c2.n03",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n03.wav",
+      "start": 7.9192,
+      "end": 8.8648,
+      "dur": 0.946,
+      "speech_sec": 0.474,
+      "syll": 1,
+      "rate": 2.11
+     },
+     {
+      "name": "c2.n02",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n02.wav",
+      "start": 8.8648,
+      "end": 9.7658,
+      "dur": 0.901,
+      "speech_sec": 0.454,
+      "syll": 2,
+      "rate": 4.41
+     },
+     {
+      "name": "c2.n01",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n01.wav",
+      "start": 9.7658,
+      "end": 10.56,
+      "dur": 0.794,
+      "speech_sec": 0.374,
+      "syll": 1,
+      "rate": 2.67
+     }
+    ],
+    "boundary_misalign": 0.066,
+    "cut_suspect": false
+   },
+   "process": {
+    "c2.n10": {
+     "exit": 0,
+     "micro": true,
+     "text": "on…",
+     "syll": 1,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 0.854,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -49.7,
+       "applied_gain_db": -0.3
+      }
+     ],
+     "trim_in_sec": [
+      0.268,
+      0.573
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -10.95,
+      "band_peak_over_thr_db": -29.87,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -18.25,
+     "out_duration": 0.614,
+     "target": -17.25,
+     "level": -17.25,
+     "true_peak_dbtp": -2.08,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.25,
+     "lufs": -21.92,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n10.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sayi/c2.n10.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n09": {
+     "exit": 0,
+     "micro": false,
+     "text": "dokuz…",
+     "syll": 2,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 1.08,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -57.52,
+       "applied_gain_db": 8.02
+      },
+      {
+       "trim_thr_in_dbfs": -58.02,
+       "applied_gain_db": 8.02
+      }
+     ],
+     "trim_in_sec": [
+      0.275,
+      0.869
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 39.3,
+     "deess": {
+      "applied": false,
+      "threshold_db": -19.77,
+      "band_peak_over_thr_db": -22.55,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -18.25,
+     "out_duration": 0.905,
+     "target": -18.25,
+     "level": -18.25,
+     "true_peak_dbtp": -1.59,
+     "limiter_max_db": 2.02,
+     "limiter_sec": 0.047,
+     "limiter_sec_over_1db": 0.019,
+     "rms_db": -18.25,
+     "lufs": -20.03,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n09.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sayi/c2.n09.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n08": {
+     "exit": 0,
+     "micro": false,
+     "text": "sekiz…",
+     "syll": 2,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 1.12,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -55.52,
+       "applied_gain_db": 5.55
+      }
+     ],
+     "trim_in_sec": [
+      0.196,
+      0.89
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 19.5,
+     "deess": {
+      "applied": false,
+      "threshold_db": -17.7,
+      "band_peak_over_thr_db": -3.84,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.004,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.56,
+     "limiter_max_db": 3.51,
+     "limiter_sec": 0.095,
+     "limiter_sec_over_1db": 0.051,
+     "rms_db": -19.21,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 3.5 dB kıstı (0.05 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n08.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sayi/c2.n08.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n07": {
+     "exit": 0,
+     "micro": false,
+     "text": "yedi…",
+     "syll": 2,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 0.95,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.37,
+       "applied_gain_db": 3.49
+      }
+     ],
+     "trim_in_sec": [
+      0.25,
+      0.675
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.74,
+      "band_peak_over_thr_db": -18.2,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -18.25,
+     "out_duration": 0.735,
+     "target": -18.25,
+     "level": -18.25,
+     "true_peak_dbtp": -3.4,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -18.25,
+     "lufs": -19.55,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n07.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sayi/c2.n07.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n06": {
+     "exit": 0,
+     "micro": false,
+     "text": "altı…",
+     "syll": 2,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 1.037,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.94,
+       "applied_gain_db": 3.65
+      },
+      {
+       "trim_thr_in_dbfs": -53.65,
+       "applied_gain_db": 3.65
+      }
+     ],
+     "trim_in_sec": [
+      0.259,
+      0.756
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.29,
+      "band_peak_over_thr_db": -2.17,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -18.25,
+     "out_duration": 0.807,
+     "target": -18.25,
+     "level": -18.25,
+     "true_peak_dbtp": -1.58,
+     "limiter_max_db": 2.11,
+     "limiter_sec": 0.045,
+     "limiter_sec_over_1db": 0.028,
+     "rms_db": -18.25,
+     "lufs": -19.69,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n06.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sayi/c2.n06.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n05": {
+     "exit": 0,
+     "micro": true,
+     "text": "beş…",
+     "syll": 1,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 1.017,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.92,
+       "applied_gain_db": 6.02
+      },
+      {
+       "trim_thr_in_dbfs": -56.02,
+       "applied_gain_db": 6.18
+      }
+     ],
+     "trim_in_sec": [
+      0.283,
+      0.778
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 10.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -16.26,
+      "band_peak_over_thr_db": -12.91,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -18.25,
+     "out_duration": 0.805,
+     "target": -17.25,
+     "level": -17.25,
+     "true_peak_dbtp": -1.55,
+     "limiter_max_db": 3.9,
+     "limiter_sec": 0.063,
+     "limiter_sec_over_1db": 0.041,
+     "rms_db": -17.25,
+     "lufs": -17.91,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 3.9 dB kıstı (0.04 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n05.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sayi/c2.n05.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n04": {
+     "exit": 0,
+     "micro": true,
+     "text": "dört…",
+     "syll": 1,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 0.99,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.24,
+       "applied_gain_db": 4.88
+      },
+      {
+       "trim_thr_in_dbfs": -54.88,
+       "applied_gain_db": 4.55
+      },
+      {
+       "trim_thr_in_dbfs": -54.55,
+       "applied_gain_db": 4.55
+      }
+     ],
+     "trim_in_sec": [
+      0.258,
+      0.731
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.76,
+      "band_peak_over_thr_db": -27.11,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -18.25,
+     "out_duration": 0.783,
+     "target": -17.25,
+     "level": -17.25,
+     "true_peak_dbtp": -1.57,
+     "limiter_max_db": 3.49,
+     "limiter_sec": 0.063,
+     "limiter_sec_over_1db": 0.037,
+     "rms_db": -17.25,
+     "lufs": -20.23,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 3.5 dB kıstı (0.04 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n04.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sayi/c2.n04.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n03": {
+     "exit": 0,
+     "micro": true,
+     "text": "üç…",
+     "syll": 1,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 0.946,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -57.52,
+       "applied_gain_db": 7.63
+      }
+     ],
+     "trim_in_sec": [
+      0.244,
+      0.721
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 25.4,
+     "deess": {
+      "applied": false,
+      "threshold_db": -18.88,
+      "band_peak_over_thr_db": -1.93,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -18.25,
+     "out_duration": 0.787,
+     "target": -17.25,
+     "level": -17.25,
+     "true_peak_dbtp": -2.79,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.25,
+     "lufs": -18.78,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n03.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sayi/c2.n03.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n02": {
+     "exit": 0,
+     "micro": false,
+     "text": "iki…",
+     "syll": 2,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 0.901,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.43,
+       "applied_gain_db": 2.43
+      }
+     ],
+     "trim_in_sec": [
+      0.227,
+      0.673
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 21.6,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.68,
+      "band_peak_over_thr_db": -5.21,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -18.25,
+     "out_duration": 0.756,
+     "target": -18.25,
+     "level": -18.25,
+     "true_peak_dbtp": -2.68,
+     "limiter_max_db": -0.0,
+     "limiter_sec": 0.0,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -18.25,
+     "lufs": -17.57,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n02.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sayi/c2.n02.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.n01": {
+     "exit": 0,
+     "micro": true,
+     "text": "bir.",
+     "syll": 1,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 0.794,
+     "trim_thr_source": "rms-hedef",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.82,
+       "applied_gain_db": 6.59
+      },
+      {
+       "trim_thr_in_dbfs": -56.59,
+       "applied_gain_db": 6.45
+      }
+     ],
+     "trim_in_sec": [
+      0.234,
+      0.642
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 97.8,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.92,
+      "band_peak_over_thr_db": -25.9,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "rms",
+     "ref_rms_db": -18.25,
+     "out_duration": 0.718,
+     "target": -17.25,
+     "level": -17.25,
+     "true_peak_dbtp": -1.53,
+     "limiter_max_db": 5.41,
+     "limiter_sec": 0.065,
+     "limiter_sec_over_1db": 0.053,
+     "rms_db": -17.25,
+     "lufs": -17.84,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 5.4 dB kıstı (0.05 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/car.sayi/c2.n01.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/car.sayi/c2.n01.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.n10",
+    "c2.n09",
+    "c2.n08",
+    "c2.n07",
+    "c2.n06",
+    "c2.n05",
+    "c2.n04",
+    "c2.n03",
+    "c2.n02",
+    "c2.n01"
+   ]
+  },
+  "c2.birak": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.birak/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.birak/t1.mp3",
+    "n": 2,
+    "thr_db": -52.51,
+    "pauses": [
+     [
+      1.402,
+      1.791
+     ],
+     [
+      4.19,
+      4.395
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 3,
+    "gaps_available": 2,
+    "chosen_gaps": [
+     [
+      1.402,
+      1.791
+     ]
+    ],
+    "shortest_chosen_gap": 0.389,
+    "longest_unchosen_gap": 0.205,
+    "margin_ratio": 1.902,
+    "ok": true,
+    "cuts": [
+     1.6058
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.birak/s1.wav",
+      "start": 0.0,
+      "end": 1.6058,
+      "dur": 1.606,
+      "speech_sec": 1.397,
+      "syll": 10,
+      "rate": 7.16
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.birak/s2.wav",
+      "start": 1.6058,
+      "end": 5.12,
+      "dur": 3.514,
+      "speech_sec": 2.998,
+      "syll": 17,
+      "rate": 5.67
+     }
+    ],
+    "boundary_misalign": 0.061,
+    "cut_suspect": false
+   },
+   "process": {
+    "c2.birak#1": {
+     "exit": 0,
+     "micro": false,
+     "text": "Sayıları bırakabilirsin.",
+     "syll": 10,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 1.606,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -51.27,
+       "applied_gain_db": 1.17
+      }
+     ],
+     "trim_in_sec": [
+      0.014,
+      1.336
+     ],
+     "lead_pad_ms": 46.3,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -13.22,
+      "band_peak_over_thr_db": -5.17,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.633,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.53,
+     "limiter_max_db": 1.02,
+     "limiter_sec": 0.043,
+     "limiter_sec_over_1db": 0.001,
+     "rms_db": -18.13,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.birak/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.birak/c2.birak#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.birak#2": {
+     "exit": 0,
+     "micro": false,
+     "text": "Zihnin arada başka yerlere kaydıysa o da olur.",
+     "syll": 17,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.514,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.32,
+       "applied_gain_db": 3.75
+      },
+      {
+       "trim_thr_in_dbfs": -53.75,
+       "applied_gain_db": 3.75
+      }
+     ],
+     "trim_in_sec": [
+      0.185,
+      3.382
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 118.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.19,
+      "band_peak_over_thr_db": -5.62,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.508,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.59,
+     "limiter_max_db": 4.34,
+     "limiter_sec": 0.411,
+     "limiter_sec_over_1db": 0.228,
+     "rms_db": -18.03,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 4.3 dB kıstı (0.23 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.birak/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.birak/c2.birak#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.birak#1",
+    "c2.birak#2"
+   ]
+  },
+  "br.k2": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/br.k2/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "br.k2": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.12,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.91,
+       "applied_gain_db": 4.22
+      },
+      {
+       "trim_thr_in_dbfs": -54.22,
+       "applied_gain_db": 4.22
+      }
+     ],
+     "trim_in_sec": [
+      0.026,
+      2.921
+     ],
+     "lead_pad_ms": 33.7,
+     "tail_pad_ms": 51.1,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.08,
+      "band_peak_over_thr_db": -3.54,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.205,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.58,
+     "limiter_max_db": 3.01,
+     "limiter_sec": 0.153,
+     "limiter_sec_over_1db": 0.076,
+     "rms_db": -17.12,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 3.0 dB kıstı (0.08 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/br.k2/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/br.k2/br.k2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "br.k2"
+   ]
+  },
+  "br.orta": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/br.orta/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/br.orta/t1.mp3",
+    "n": 3,
+    "thr_db": -53.16,
+    "pauses": [
+     [
+      1.836,
+      2.055
+     ],
+     [
+      2.819,
+      2.973
+     ],
+     [
+      4.744,
+      5.368
+     ],
+     [
+      7.538,
+      7.997
+     ]
+    ],
+    "breaths": [],
+    "needed": 3,
+    "found": 5,
+    "gaps_available": 4,
+    "chosen_gaps": [
+     [
+      4.744,
+      5.368
+     ],
+     [
+      7.538,
+      7.997
+     ]
+    ],
+    "shortest_chosen_gap": 0.459,
+    "longest_unchosen_gap": 0.22,
+    "margin_ratio": 2.091,
+    "ok": true,
+    "cuts": [
+     5.0621,
+     7.7658
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/br.orta/s1.wav",
+      "start": 0.0,
+      "end": 5.0621,
+      "dur": 5.062,
+      "speech_sec": 4.345,
+      "syll": 27,
+      "rate": 6.21
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/br.orta/s2.wav",
+      "start": 5.0621,
+      "end": 7.7658,
+      "dur": 2.704,
+      "speech_sec": 2.18,
+      "syll": 11,
+      "rate": 5.05
+     },
+     {
+      "name": "s3",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/br.orta/s3.wav",
+      "start": 7.7658,
+      "end": 9.76,
+      "dur": 1.994,
+      "speech_sec": 1.606,
+      "syll": 8,
+      "rate": 4.98
+     }
+    ],
+    "boundary_misalign": 0.037,
+    "cut_suspect": false
+   },
+   "process": {
+    "br.orta#1": {
+     "exit": 0,
+     "micro": false,
+     "text": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde.",
+     "syll": 27,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 5.062,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.93,
+       "applied_gain_db": 3.54
+      },
+      {
+       "trim_thr_in_dbfs": -53.54,
+       "applied_gain_db": 3.55
+      }
+     ],
+     "trim_in_sec": [
+      0.035,
+      4.747
+     ],
+     "lead_pad_ms": 25.2,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.82,
+      "band_peak_over_thr_db": -1.77,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 5.022,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.57,
+     "limiter_max_db": 3.79,
+     "limiter_sec": 0.234,
+     "limiter_sec_over_1db": 0.13,
+     "rms_db": -17.6,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 3.8 dB kıstı (0.13 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/br.orta/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/br.orta/br.orta#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "br.orta#2": {
+     "exit": 0,
+     "micro": false,
+     "text": "Gözlerin açıksa bakışın serbest.",
+     "syll": 11,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.704,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.44,
+       "applied_gain_db": 2.33
+      }
+     ],
+     "trim_in_sec": [
+      0.302,
+      2.475
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 21.7,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.03,
+      "band_peak_over_thr_db": -1.9,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.484,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.57,
+     "limiter_max_db": 0.84,
+     "limiter_sec": 0.031,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -18.73,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/br.orta/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/br.orta/br.orta#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "br.orta#3": {
+     "exit": 0,
+     "micro": false,
+     "text": "Zemin seni hep taşıyor.",
+     "syll": 8,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 1.994,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -56.28,
+       "applied_gain_db": 7.37
+      },
+      {
+       "trim_thr_in_dbfs": -57.37,
+       "applied_gain_db": 7.36
+      }
+     ],
+     "trim_in_sec": [
+      0.226,
+      1.834
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 89.5,
+     "deess": {
+      "applied": true,
+      "threshold_db": -19.03,
+      "band_peak_over_thr_db": 1.68,
+      "max_reduction_db": 1.26,
+      "time_reduced_sec": 0.026
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.917,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.59,
+     "limiter_max_db": 4.9,
+     "limiter_sec": 0.205,
+     "limiter_sec_over_1db": 0.137,
+     "rms_db": -18.95,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 4.9 dB kıstı (0.14 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/br.orta/s3.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/br.orta/br.orta#3.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "br.orta#1",
+    "br.orta#2",
+    "br.orta#3"
+   ]
+  },
+  "c4.yer": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.yer/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "process": {
+    "c4.yer": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.2,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.56,
+       "applied_gain_db": 2.62
+      }
+     ],
+     "trim_in_sec": [
+      0.042,
+      3.046
+     ],
+     "lead_pad_ms": 18.1,
+     "tail_pad_ms": 96.3,
+     "deess": {
+      "applied": true,
+      "threshold_db": -14.45,
+      "band_peak_over_thr_db": 0.38,
+      "max_reduction_db": 0.29,
+      "time_reduced_sec": 0.013
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.314,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.52,
+     "limiter_max_db": 1.53,
+     "limiter_sec": 0.062,
+     "limiter_sec_over_1db": 0.014,
+     "rms_db": -17.9,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.yer/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c4.yer/c4.yer.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.yer"
+   ]
+  },
+  "c4.gelmezse": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.gelmezse/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "c4.gelmezse": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.76,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.75,
+       "applied_gain_db": 2.84
+      }
+     ],
+     "trim_in_sec": [
+      0.056,
+      3.608
+     ],
+     "lead_pad_ms": 3.9,
+     "tail_pad_ms": 98.4,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.61,
+      "band_peak_over_thr_db": -4.1,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.862,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.6,
+     "limiter_max_db": 1.81,
+     "limiter_sec": 0.069,
+     "limiter_sec_over_1db": 0.017,
+     "rms_db": -17.84,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.gelmezse/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c4.gelmezse/c4.gelmezse.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.gelmezse"
+   ]
+  },
+  "c4.patika": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.patika/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "c4.patika": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.28,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.24,
+       "applied_gain_db": 4.23
+      }
+     ],
+     "trim_in_sec": [
+      0.021,
+      3.073
+     ],
+     "lead_pad_ms": 38.9,
+     "tail_pad_ms": 43.3,
+     "deess": {
+      "applied": true,
+      "threshold_db": -15.94,
+      "band_peak_over_thr_db": 0.49,
+      "max_reduction_db": 0.37,
+      "time_reduced_sec": 0.013
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.362,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.53,
+     "limiter_max_db": 1.23,
+     "limiter_sec": 0.033,
+     "limiter_sec_over_1db": 0.007,
+     "rms_db": -17.76,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.patika/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c4.patika/c4.patika.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.patika"
+   ]
+  },
+  "c4.yol": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.yol/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.yol/t1.mp3",
+    "n": 2,
+    "thr_db": -53.54,
+    "pauses": [
+     [
+      1.377,
+      1.761
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.377,
+      1.761
+     ]
+    ],
+    "shortest_chosen_gap": 0.384,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     1.5739
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c4.yol/s1.wav",
+      "start": 0.0,
+      "end": 1.5739,
+      "dur": 1.574,
+      "speech_sec": 1.362,
+      "syll": 8,
+      "rate": 5.87
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c4.yol/s2.wav",
+      "start": 1.5739,
+      "end": 3.28,
+      "dur": 1.706,
+      "speech_sec": 1.357,
+      "syll": 9,
+      "rate": 6.63
+     }
+    ],
+    "boundary_misalign": 0.027,
+    "cut_suspect": false
+   },
+   "process": {
+    "c4.yol#1": {
+     "exit": 0,
+     "micro": false,
+     "text": "Yol önünde açılıyor.",
+     "syll": 8,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 1.574,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.22,
+       "applied_gain_db": 2.15
+      }
+     ],
+     "trim_in_sec": [
+      0.023,
+      1.374
+     ],
+     "lead_pad_ms": 36.8,
+     "tail_pad_ms": 49.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.2,
+      "band_peak_over_thr_db": -8.26,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.661,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.53,
+     "limiter_max_db": 1.03,
+     "limiter_sec": 0.042,
+     "limiter_sec_over_1db": 0.004,
+     "rms_db": -18.18,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c4.yol/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c4.yol/c4.yol#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c4.yol#2": {
+     "exit": 0,
+     "micro": false,
+     "text": "Kendi hızında yürüyorsun.",
+     "syll": 9,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 1.706,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.73,
+       "applied_gain_db": 5.68
+      },
+      {
+       "trim_thr_in_dbfs": -55.68,
+       "applied_gain_db": 5.68
+      }
+     ],
+     "trim_in_sec": [
+      0.186,
+      1.549
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 93.1,
+     "deess": {
+      "applied": false,
+      "threshold_db": -16.31,
+      "band_peak_over_thr_db": -4.75,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.674,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.55,
+     "limiter_max_db": 4.75,
+     "limiter_sec": 0.144,
+     "limiter_sec_over_1db": 0.101,
+     "rms_db": -17.51,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 4.7 dB kıstı (0.10 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c4.yol/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c4.yol/c4.yol#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.yol#1",
+    "c4.yol#2"
+   ]
+  },
+  "c4.ses": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.ses/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "process": {
+    "c4.ses": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.48,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.88,
+       "applied_gain_db": 4.88
+      }
+     ],
+     "trim_in_sec": [
+      0.048,
+      2.343
+     ],
+     "lead_pad_ms": 12.3,
+     "tail_pad_ms": 112.6,
+     "deess": {
+      "applied": false,
+      "threshold_db": -16.04,
+      "band_peak_over_thr_db": -6.94,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.605,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.57,
+     "limiter_max_db": 1.05,
+     "limiter_sec": 0.043,
+     "limiter_sec_over_1db": 0.002,
+     "rms_db": -17.18,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.ses/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c4.ses/c4.ses.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.ses"
+   ]
+  },
+  "c4.gunes": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.gunes/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.gunes/t2.mp3",
+    "n": 2,
+    "thr_db": -54.64,
+    "pauses": [
+     [
+      2.28,
+      2.903
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      2.28,
+      2.903
+     ]
+    ],
+    "shortest_chosen_gap": 0.624,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     2.5935
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c4.gunes/s1.wav",
+      "start": 0.0,
+      "end": 2.5935,
+      "dur": 2.594,
+      "speech_sec": 2.255,
+      "syll": 12,
+      "rate": 5.32
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c4.gunes/s2.wav",
+      "start": 2.5935,
+      "end": 5.44,
+      "dur": 2.846,
+      "speech_sec": 2.4,
+      "syll": 13,
+      "rate": 5.42
+     }
+    ],
+    "boundary_misalign": 0.003,
+    "cut_suspect": false
+   },
+   "process": {
+    "c4.gunes#1": {
+     "exit": 0,
+     "micro": false,
+     "text": "Açık, aydınlık bir yere varıyorsun.",
+     "syll": 12,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.594,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.51,
+       "applied_gain_db": 3.78
+      },
+      {
+       "trim_thr_in_dbfs": -53.78,
+       "applied_gain_db": 3.78
+      }
+     ],
+     "trim_in_sec": [
+      0.034,
+      2.283
+     ],
+     "lead_pad_ms": 25.7,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.49,
+      "band_peak_over_thr_db": -3.08,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.558,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.6,
+     "limiter_max_db": 2.55,
+     "limiter_sec": 0.054,
+     "limiter_sec_over_1db": 0.031,
+     "rms_db": -16.86,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c4.gunes/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c4.gunes/c4.gunes#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c4.gunes#2": {
+     "exit": 0,
+     "micro": false,
+     "text": "Güneş tenini tatlı tatlı ısıtıyor.",
+     "syll": 13,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.846,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -56.06,
+       "applied_gain_db": 6.13
+      }
+     ],
+     "trim_in_sec": [
+      0.306,
+      2.704
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 107.4,
+     "deess": {
+      "applied": true,
+      "threshold_db": -17.66,
+      "band_peak_over_thr_db": 0.46,
+      "max_reduction_db": 0.35,
+      "time_reduced_sec": 0.013
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.708,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.58,
+     "limiter_max_db": 1.89,
+     "limiter_sec": 0.134,
+     "limiter_sec_over_1db": 0.043,
+     "rms_db": -17.78,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c4.gunes/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c4.gunes/c4.gunes#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.gunes#1",
+    "c4.gunes#2"
+   ]
+  },
+  "c4.don": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.don/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "c4.don": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.28,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.7,
+       "applied_gain_db": 3.97
+      },
+      {
+       "trim_thr_in_dbfs": -53.97,
+       "applied_gain_db": 3.97
+      }
+     ],
+     "trim_in_sec": [
+      0.019,
+      3.042
+     ],
+     "lead_pad_ms": 40.9,
+     "tail_pad_ms": 11.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.21,
+      "band_peak_over_thr_db": -6.13,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.333,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.58,
+     "limiter_max_db": 3.04,
+     "limiter_sec": 0.198,
+     "limiter_sec_over_1db": 0.104,
+     "rms_db": -17.52,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 3.0 dB kıstı (0.10 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.don/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c4.don/c4.don.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.don"
+   ]
+  },
+  "c4.solma": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.solma/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c4.solma/t3.mp3",
+    "n": 2,
+    "thr_db": -53.27,
+    "pauses": [
+     [
+      1.861,
+      2.375
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      1.861,
+      2.375
+     ]
+    ],
+    "shortest_chosen_gap": 0.514,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     2.1258
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c4.solma/s1.wav",
+      "start": 0.0,
+      "end": 2.1258,
+      "dur": 2.126,
+      "speech_sec": 1.816,
+      "syll": 10,
+      "rate": 5.51
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c4.solma/s2.wav",
+      "start": 2.1258,
+      "end": 5.28,
+      "dur": 3.154,
+      "speech_sec": 2.694,
+      "syll": 17,
+      "rate": 6.31
+     }
+    ],
+    "boundary_misalign": 0.023,
+    "cut_suspect": false
+   },
+   "process": {
+    "c4.solma#1": {
+     "exit": 0,
+     "micro": false,
+     "text": "Görüntü usulca siliniyor.",
+     "syll": 10,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.126,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.76,
+       "applied_gain_db": 5.13
+      },
+      {
+       "trim_thr_in_dbfs": -55.13,
+       "applied_gain_db": 5.13
+      }
+     ],
+     "trim_in_sec": [
+      0.05,
+      1.869
+     ],
+     "lead_pad_ms": 9.6,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": true,
+      "threshold_db": -16.53,
+      "band_peak_over_thr_db": 0.13,
+      "max_reduction_db": 0.1,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.129,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.6,
+     "limiter_max_db": 2.51,
+     "limiter_sec": 0.059,
+     "limiter_sec_over_1db": 0.04,
+     "rms_db": -17.73,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c4.solma/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c4.solma/c4.solma#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c4.solma#2": {
+     "exit": 0,
+     "micro": false,
+     "text": "Seni taşıyan zemini yeniden hissedebilirsin.",
+     "syll": 17,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.154,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.85,
+       "applied_gain_db": 2.81
+      }
+     ],
+     "trim_in_sec": [
+      0.246,
+      2.937
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 33.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.12,
+      "band_peak_over_thr_db": -2.42,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.002,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.59,
+     "limiter_max_db": 1.91,
+     "limiter_sec": 0.093,
+     "limiter_sec_over_1db": 0.028,
+     "rms_db": -18.49,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c4.solma/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c4.solma/c4.solma#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c4.solma#1",
+    "c4.solma#2"
+   ]
+  },
+  "n2.hatirla": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/n2.hatirla/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/n2.hatirla/t1.mp3",
+    "n": 2,
+    "thr_db": -53.67,
+    "pauses": [
+     [
+      3.637,
+      4.23
+     ],
+     [
+      5.308,
+      5.862
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 3,
+    "gaps_available": 2,
+    "chosen_gaps": [
+     [
+      3.637,
+      4.23
+     ]
+    ],
+    "shortest_chosen_gap": 0.594,
+    "longest_unchosen_gap": 0.554,
+    "margin_ratio": 1.072,
+    "ok": true,
+    "cuts": [
+     3.9258
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/n2.hatirla/s1.wav",
+      "start": 0.0,
+      "end": 3.9258,
+      "dur": 3.926,
+      "speech_sec": 3.627,
+      "syll": 19,
+      "rate": 5.24
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/n2.hatirla/s2.wav",
+      "start": 3.9258,
+      "end": 8.24,
+      "dur": 4.314,
+      "speech_sec": 3.218,
+      "syll": 19,
+      "rate": 5.9
+     }
+    ],
+    "boundary_misalign": 0.03,
+    "cut_suspect": false
+   },
+   "process": {
+    "n2.hatirla#1": {
+     "exit": 0,
+     "micro": false,
+     "text": "Başta seçtiğin niyeti içinden üç kez söylemek yeterli.",
+     "syll": 19,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.926,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.14,
+       "applied_gain_db": 3.62
+      },
+      {
+       "trim_thr_in_dbfs": -53.62,
+       "applied_gain_db": 3.62
+      }
+     ],
+     "trim_in_sec": [
+      0.019,
+      3.639
+     ],
+     "lead_pad_ms": 40.5,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.67,
+      "band_peak_over_thr_db": -1.36,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.929,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.54,
+     "limiter_max_db": 3.75,
+     "limiter_sec": 0.332,
+     "limiter_sec_over_1db": 0.177,
+     "rms_db": -18.44,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 3.8 dB kıstı (0.18 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/n2.hatirla/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/n2.hatirla/n2.hatirla#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "n2.hatirla#2": {
+     "exit": 0,
+     "micro": false,
+     "text": "Ya da yine şunu: \"Kendime dinlenmeye izin veriyorum.\"",
+     "syll": 19,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 4.314,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.49,
+       "applied_gain_db": 4.92
+      },
+      {
+       "trim_thr_in_dbfs": -54.92,
+       "applied_gain_db": 5.06
+      }
+     ],
+     "trim_in_sec": [
+      0.301,
+      4.067
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 3.2,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.89,
+      "band_peak_over_thr_db": -3.36,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 4.076,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.59,
+     "limiter_max_db": 4.6,
+     "limiter_sec": 0.232,
+     "limiter_sec_over_1db": 0.16,
+     "rms_db": -17.51,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 4.6 dB kıstı (0.16 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/n2.hatirla/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/n2.hatirla/n2.hatirla#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "n2.hatirla#1",
+    "n2.hatirla#2"
+   ]
+  },
+  "n2.dilek": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/n2.dilek/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "n2.dilek": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.2,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.67,
+       "applied_gain_db": 4.39
+      },
+      {
+       "trim_thr_in_dbfs": -54.39,
+       "applied_gain_db": 4.39
+      }
+     ],
+     "trim_in_sec": [
+      0.052,
+      3.075
+     ],
+     "lead_pad_ms": 8.0,
+     "tail_pad_ms": 125.1,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.39,
+      "band_peak_over_thr_db": -1.37,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.333,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.53,
+     "limiter_max_db": 4.1,
+     "limiter_sec": 0.235,
+     "limiter_sec_over_1db": 0.151,
+     "rms_db": -17.64,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 4.1 dB kıstı (0.15 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/n2.dilek/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/n2.dilek/n2.dilek.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "n2.dilek"
+   ]
+  },
+  "k.anahtar3": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.anahtar3/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "k.anahtar3": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 1.68,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.57,
+       "applied_gain_db": 3.75
+      }
+     ],
+     "trim_in_sec": [
+      0.082,
+      1.435
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 4.8,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.18,
+      "band_peak_over_thr_db": -14.43,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.663,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.58,
+     "limiter_max_db": 2.15,
+     "limiter_sec": 0.096,
+     "limiter_sec_over_1db": 0.034,
+     "rms_db": -17.79,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.anahtar3/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.anahtar3/k.anahtar3.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.anahtar3"
+   ]
+  },
+  "k.donus": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.donus/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "process": {
+    "k.donus": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 1.6,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.79,
+       "applied_gain_db": 4.21
+      },
+      {
+       "trim_thr_in_dbfs": -54.21,
+       "applied_gain_db": 4.21
+      }
+     ],
+     "trim_in_sec": [
+      0.048,
+      1.421
+     ],
+     "lead_pad_ms": 11.9,
+     "tail_pad_ms": 71.4,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.14,
+      "band_peak_over_thr_db": -4.79,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 1.683,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.54,
+     "limiter_max_db": 2.9,
+     "limiter_sec": 0.161,
+     "limiter_sec_over_1db": 0.084,
+     "rms_db": -17.45,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.donus/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.donus/k.donus.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.donus"
+   ]
+  },
+  "k.nefes": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.nefes/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "process": {
+    "k.nefes": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.24,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.94,
+       "applied_gain_db": 4.28
+      },
+      {
+       "trim_thr_in_dbfs": -54.28,
+       "applied_gain_db": 4.28
+      }
+     ],
+     "trim_in_sec": [
+      0.03,
+      2.122
+     ],
+     "lead_pad_ms": 29.8,
+     "tail_pad_ms": 132.5,
+     "deess": {
+      "applied": false,
+      "threshold_db": -16.06,
+      "band_peak_over_thr_db": -1.89,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.402,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.59,
+     "limiter_max_db": 2.17,
+     "limiter_sec": 0.106,
+     "limiter_sec_over_1db": 0.042,
+     "rms_db": -17.98,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.nefes/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.nefes/k.nefes.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.nefes"
+   ]
+  },
+  "k.hareket": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.hareket/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.hareket/t2.mp3",
+    "n": 2,
+    "thr_db": -53.46,
+    "pauses": [
+     [
+      3.622,
+      4.26
+     ],
+     [
+      5.507,
+      5.692
+     ],
+     [
+      6.959,
+      7.164
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 4,
+    "gaps_available": 3,
+    "chosen_gaps": [
+     [
+      3.622,
+      4.26
+     ]
+    ],
+    "shortest_chosen_gap": 0.639,
+    "longest_unchosen_gap": 0.205,
+    "margin_ratio": 3.122,
+    "ok": true,
+    "cuts": [
+     3.9393
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/k.hareket/s1.wav",
+      "start": 0.0,
+      "end": 3.9393,
+      "dur": 3.939,
+      "speech_sec": 3.612,
+      "syll": 22,
+      "rate": 6.09
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/k.hareket/s2.wav",
+      "start": 3.9393,
+      "end": 8.16,
+      "dur": 4.221,
+      "speech_sec": 3.322,
+      "syll": 19,
+      "rate": 5.72
+     }
+    ],
+    "boundary_misalign": 0.014,
+    "cut_suspect": false
+   },
+   "process": {
+    "k.hareket#1": {
+     "exit": 0,
+     "micro": false,
+     "text": "El ve ayak parmaklarını oynatıp zorlamadan gerinebilirsin.",
+     "syll": 22,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.939,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.06,
+       "applied_gain_db": 4.38
+      },
+      {
+       "trim_thr_in_dbfs": -54.38,
+       "applied_gain_db": 4.38
+      }
+     ],
+     "trim_in_sec": [
+      0.017,
+      3.626
+     ],
+     "lead_pad_ms": 43.4,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.94,
+      "band_peak_over_thr_db": -7.75,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.919,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.58,
+     "limiter_max_db": 3.28,
+     "limiter_sec": 0.2,
+     "limiter_sec_over_1db": 0.086,
+     "rms_db": -16.78,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 3.3 dB kıstı (0.09 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/k.hareket/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.hareket/k.hareket#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "k.hareket#2": {
+     "exit": 0,
+     "micro": false,
+     "text": "Bir yerin ağrırsa ya da başın dönerse hareketi bırak.",
+     "syll": 19,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 4.221,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.26,
+       "applied_gain_db": 3.09
+      }
+     ],
+     "trim_in_sec": [
+      0.318,
+      4.02
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 49.9,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.97,
+      "band_peak_over_thr_db": -1.88,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 4.012,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.6,
+     "limiter_max_db": 0.39,
+     "limiter_sec": 0.009,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.88,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/k.hareket/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.hareket/k.hareket#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.hareket#1",
+    "k.hareket#2"
+   ]
+  },
+  "k.goz": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.goz/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "process": {
+    "k.goz": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 5.04,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.87,
+       "applied_gain_db": 3.03
+      }
+     ],
+     "trim_in_sec": [
+      0.041,
+      4.832
+     ],
+     "lead_pad_ms": 19.2,
+     "tail_pad_ms": 42.1,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.93,
+      "band_peak_over_thr_db": -3.53,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 5.101,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.59,
+     "limiter_max_db": 0.47,
+     "limiter_sec": 0.015,
+     "limiter_sec_over_1db": 0.0,
+     "rms_db": -17.91,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.goz/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.goz/k.goz.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.goz"
+   ]
+  },
+  "k.oda.ayrinti": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.oda.ayrinti/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "process": {
+    "k.oda.ayrinti": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.04,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.82,
+       "applied_gain_db": 4.38
+      },
+      {
+       "trim_thr_in_dbfs": -54.38,
+       "applied_gain_db": 4.38
+      }
+     ],
+     "trim_in_sec": [
+      0.032,
+      2.848
+     ],
+     "lead_pad_ms": 28.4,
+     "tail_pad_ms": 57.6,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.15,
+      "band_peak_over_thr_db": -7.37,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.126,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.58,
+     "limiter_max_db": 2.29,
+     "limiter_sec": 0.094,
+     "limiter_sec_over_1db": 0.053,
+     "rms_db": -17.01,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.oda.ayrinti/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.oda.ayrinti/k.oda.ayrinti.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.oda.ayrinti"
+   ]
+  },
+  "k.zaman": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.zaman/t1.mp3",
+    "take": "t1",
+    "set": "original"
+   },
+   "process": {
+    "k.zaman": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.6,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -52.97,
+       "applied_gain_db": 3.0
+      }
+     ],
+     "trim_in_sec": [
+      0.02,
+      3.392
+     ],
+     "lead_pad_ms": 40.2,
+     "tail_pad_ms": 42.3,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.01,
+      "band_peak_over_thr_db": -0.94,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.683,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.55,
+     "limiter_max_db": 1.2,
+     "limiter_sec": 0.051,
+     "limiter_sec_over_1db": 0.007,
+     "rms_db": -18.08,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.zaman/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.zaman/k.zaman.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.zaman"
+   ]
+  },
+  "k.yandakal": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.yandakal/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "process": {
+    "k.yandakal": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.56,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.0,
+       "applied_gain_db": 3.83
+      },
+      {
+       "trim_thr_in_dbfs": -53.83,
+       "applied_gain_db": 3.83
+      }
+     ],
+     "trim_in_sec": [
+      0.039,
+      2.413
+     ],
+     "lead_pad_ms": 20.7,
+     "tail_pad_ms": 103.4,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.92,
+      "band_peak_over_thr_db": -5.69,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.684,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.58,
+     "limiter_max_db": 4.0,
+     "limiter_sec": 0.229,
+     "limiter_sec_over_1db": 0.171,
+     "rms_db": -17.89,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 4.0 dB kıstı (0.17 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.yandakal/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.yandakal/k.yandakal.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.yandakal"
+   ]
+  },
+  "k.otur": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.otur/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "process": {
+    "k.otur": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.44,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.95,
+       "applied_gain_db": 4.54
+      },
+      {
+       "trim_thr_in_dbfs": -54.54,
+       "applied_gain_db": 4.54
+      }
+     ],
+     "trim_in_sec": [
+      0.049,
+      3.279
+     ],
+     "lead_pad_ms": 10.9,
+     "tail_pad_ms": 89.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.53,
+      "band_peak_over_thr_db": -3.05,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.54,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.54,
+     "limiter_max_db": 4.13,
+     "limiter_sec": 0.312,
+     "limiter_sec_over_1db": 0.155,
+     "rms_db": -17.46,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 4.1 dB kıstı (0.16 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.otur/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.otur/k.otur.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.otur"
+   ]
+  },
+  "k.bekle": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.bekle/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "k.bekle": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.88,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.79,
+       "applied_gain_db": 4.21
+      },
+      {
+       "trim_thr_in_dbfs": -54.21,
+       "applied_gain_db": 4.21
+      }
+     ],
+     "trim_in_sec": [
+      0.026,
+      2.631
+     ],
+     "lead_pad_ms": 33.9,
+     "tail_pad_ms": 0.7,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.6,
+      "band_peak_over_thr_db": -1.98,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.915,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.58,
+     "limiter_max_db": 4.09,
+     "limiter_sec": 0.152,
+     "limiter_sec_over_1db": 0.083,
+     "rms_db": -17.9,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 4.1 dB kıstı (0.08 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.bekle/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.bekle/k.bekle.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.bekle"
+   ]
+  },
+  "k.kalk": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.kalk/t3.mp3",
+    "take": "t3",
+    "set": "original"
+   },
+   "process": {
+    "k.kalk": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 5.68,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.45,
+       "applied_gain_db": 3.59
+      }
+     ],
+     "trim_in_sec": [
+      0.03,
+      5.504
+     ],
+     "lead_pad_ms": 29.6,
+     "tail_pad_ms": 74.4,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.03,
+      "band_peak_over_thr_db": -4.73,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 5.784,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.59,
+     "limiter_max_db": 1.85,
+     "limiter_sec": 0.255,
+     "limiter_sec_over_1db": 0.069,
+     "rms_db": -17.59,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.kalk/t3.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.kalk/k.kalk.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.kalk"
+   ]
+  },
+  "k.son": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.son/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "process": {
+    "k.son": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.32,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.03,
+       "applied_gain_db": 4.14
+      }
+     ],
+     "trim_in_sec": [
+      0.046,
+      2.078
+     ],
+     "lead_pad_ms": 14.2,
+     "tail_pad_ms": 8.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -14.71,
+      "band_peak_over_thr_db": -3.25,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.342,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.59,
+     "limiter_max_db": 1.82,
+     "limiter_sec": 0.079,
+     "limiter_sec_over_1db": 0.021,
+     "rms_db": -16.76,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.son/t2.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.son/k.son.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.son"
+   ]
+  },
+  "c2.durak": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.durak/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.durak/t2.mp3",
+    "n": 2,
+    "thr_db": -53.52,
+    "pauses": [
+     [
+      3.143,
+      3.682
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 2,
+    "gaps_available": 1,
+    "chosen_gaps": [
+     [
+      3.143,
+      3.682
+     ]
+    ],
+    "shortest_chosen_gap": 0.539,
+    "longest_unchosen_gap": null,
+    "margin_ratio": null,
+    "ok": true,
+    "cuts": [
+     3.4177
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.durak/s1.wav",
+      "start": 0.0,
+      "end": 3.4177,
+      "dur": 3.418,
+      "speech_sec": 3.098,
+      "syll": 18,
+      "rate": 5.81
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.durak/s2.wav",
+      "start": 3.4177,
+      "end": 5.76,
+      "dur": 2.342,
+      "speech_sec": 1.956,
+      "syll": 11,
+      "rate": 5.62
+     }
+    ],
+    "boundary_misalign": 0.0,
+    "cut_suspect": false
+   },
+   "process": {
+    "c2.durak#1": {
+     "exit": 0,
+     "micro": false,
+     "text": "Nefes verdikten sonra kısa bir duraklama olabilir.",
+     "syll": 18,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.418,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.5,
+       "applied_gain_db": 4.1
+      },
+      {
+       "trim_thr_in_dbfs": -54.1,
+       "applied_gain_db": 4.1
+      }
+     ],
+     "trim_in_sec": [
+      0.053,
+      3.147
+     ],
+     "lead_pad_ms": 7.5,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": true,
+      "threshold_db": -15.22,
+      "band_peak_over_thr_db": 0.29,
+      "max_reduction_db": 0.22,
+      "time_reduced_sec": 0.011
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.404,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.53,
+     "limiter_max_db": 3.34,
+     "limiter_sec": 0.32,
+     "limiter_sec_over_1db": 0.175,
+     "rms_db": -17.76,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 3.3 dB kıstı (0.17 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.durak/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.durak/c2.durak#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.durak#2": {
+     "exit": 0,
+     "micro": false,
+     "text": "Yeni nefes kendiliğinden gelir.",
+     "syll": 11,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.342,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.02,
+       "applied_gain_db": 4.79
+      },
+      {
+       "trim_thr_in_dbfs": -54.79,
+       "applied_gain_db": 4.79
+      }
+     ],
+     "trim_in_sec": [
+      0.26,
+      2.215
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 122.2,
+     "deess": {
+      "applied": false,
+      "threshold_db": -16.42,
+      "band_peak_over_thr_db": -4.8,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.265,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.56,
+     "limiter_max_db": 3.79,
+     "limiter_sec": 0.251,
+     "limiter_sec_over_1db": 0.135,
+     "rms_db": -18.46,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 3.8 dB kıstı (0.14 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.durak/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.durak/c2.durak#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.durak#1",
+    "c2.durak#2"
+   ]
+  },
+  "c2.x.ritim": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.x.ritim/t2.mp3",
+    "take": "t2",
+    "set": "original"
+   },
+   "cut": {
+    "exit": 0,
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/c2.x.ritim/t2.mp3",
+    "n": 2,
+    "thr_db": -53.85,
+    "pauses": [
+     [
+      2.02,
+      2.494
+     ],
+     [
+      3.567,
+      3.846
+     ]
+    ],
+    "breaths": [],
+    "needed": 2,
+    "found": 3,
+    "gaps_available": 2,
+    "chosen_gaps": [
+     [
+      2.02,
+      2.494
+     ]
+    ],
+    "shortest_chosen_gap": 0.474,
+    "longest_unchosen_gap": 0.279,
+    "margin_ratio": 1.696,
+    "ok": true,
+    "cuts": [
+     2.2645
+    ],
+    "pieces": [
+     {
+      "name": "s1",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.x.ritim/s1.wav",
+      "start": 0.0,
+      "end": 2.2645,
+      "dur": 2.265,
+      "speech_sec": 1.921,
+      "syll": 10,
+      "rate": 5.21
+     },
+     {
+      "name": "s2",
+      "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.x.ritim/s2.wav",
+      "start": 2.2645,
+      "end": 5.52,
+      "dur": 3.255,
+      "speech_sec": 2.634,
+      "syll": 16,
+      "rate": 6.07
+     }
+    ],
+    "boundary_misalign": 0.029,
+    "cut_suspect": false
+   },
+   "process": {
+    "c2.x.ritim#1": {
+     "exit": 0,
+     "micro": false,
+     "text": "Nefes kendi ritminde sürüyor.",
+     "syll": 10,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.265,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.42,
+       "applied_gain_db": 4.0
+      },
+      {
+       "trim_thr_in_dbfs": -54.0,
+       "applied_gain_db": 4.0
+      }
+     ],
+     "trim_in_sec": [
+      0.042,
+      1.96
+     ],
+     "lead_pad_ms": 18.3,
+     "tail_pad_ms": 0.0,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.55,
+      "band_peak_over_thr_db": -4.96,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 2.228,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.57,
+     "limiter_max_db": 3.38,
+     "limiter_sec": 0.152,
+     "limiter_sec_over_1db": 0.077,
+     "rms_db": -18.01,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "flag": "kulak: gerçek tepe sınırlayıcısı 3.4 dB kıstı (0.08 sn > 1 dB)",
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.x.ritim/s1.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.x.ritim/c2.x.ritim#1.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    },
+    "c2.x.ritim#2": {
+     "exit": 0,
+     "micro": false,
+     "text": "Giren hava serin, çıkan hava ılık olabilir.",
+     "syll": 16,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 3.255,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -54.21,
+       "applied_gain_db": 4.4
+      }
+     ],
+     "trim_in_sec": [
+      0.23,
+      3.135
+     ],
+     "lead_pad_ms": 0.0,
+     "tail_pad_ms": 129.2,
+     "deess": {
+      "applied": false,
+      "threshold_db": -15.7,
+      "band_peak_over_thr_db": -1.39,
+      "max_reduction_db": 0.0,
+      "time_reduced_sec": 0.0
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.214,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.59,
+     "limiter_max_db": 2.2,
+     "limiter_sec": 0.093,
+     "limiter_sec_over_1db": 0.032,
+     "rms_db": -17.46,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/_work-hak-2/cuts/c2.x.ritim/s2.wav",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/c2.x.ritim/c2.x.ritim#2.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "c2.x.ritim#1",
+    "c2.x.ritim#2"
+   ]
+  },
+  "k.yan": {
+   "source": {
+    "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.yan/t1.mp3",
+    "take": "t1",
+    "set": "original",
+    "note": "best of 5 valid takes (3 original + 2 valid re-takes) by joint audio.py rank; Scribe mismatch in all -> flag kulak"
+   },
+   "process": {
+    "k.yan": {
+     "exit": 0,
+     "sex": "m",
+     "hpf_hz": 70.0,
+     "in_duration": 2.96,
+     "trim_thr_source": "lufs",
+     "trim_passes": [
+      {
+       "trim_thr_in_dbfs": -53.91,
+       "applied_gain_db": 4.17
+      },
+      {
+       "trim_thr_in_dbfs": -54.17,
+       "applied_gain_db": 4.01
+      }
+     ],
+     "trim_in_sec": [
+      0.024,
+      2.73
+     ],
+     "lead_pad_ms": 36.2,
+     "tail_pad_ms": 20.1,
+     "deess": {
+      "applied": true,
+      "threshold_db": -15.21,
+      "band_peak_over_thr_db": 0.25,
+      "max_reduction_db": 0.19,
+      "time_reduced_sec": 0.01
+     },
+     "level_mode": "lufs",
+     "out_duration": 3.016,
+     "target": -18.0,
+     "level": -18.0,
+     "true_peak_dbtp": -1.59,
+     "limiter_max_db": 2.64,
+     "limiter_sec": 0.138,
+     "limiter_sec_over_1db": 0.036,
+     "rms_db": -17.35,
+     "lufs": -18.0,
+     "checks": {
+      "level_in_tolerance": true,
+      "true_peak_ok": true,
+      "no_clipping": true
+     },
+     "pass": true,
+     "in": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hak/k.yan/t1.mp3",
+     "out": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/sel/hak/k.yan/k.yan.wav",
+     "out_format": {
+      "sr": 44100,
+      "channels": 1,
+      "subtype": "FLOAT"
+     }
+    }
+   },
+   "pieces": [
+    "k.yan"
+   ]
+  }
+ },
+ "ref_rms_db": {
+  "Derin": -18.25,
+  "Kapanış": -18.23,
+  "Varış": -17.71
+ }
+}

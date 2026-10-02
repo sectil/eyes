@@ -1,0 +1,16 @@
+{
+ "unit": "k.oda.ayrinti",
+ "take": "t3",
+ "ref_node": "n2271Olho2fm1r8oXr9s",
+ "asset_id": "eWp1R1cZdYxMl8xzCkiS",
+ "stt_node": "R1PMMEaLNrwyRehuMASm",
+ "session_id": "jeWShh2fzprd73Yuv9yn",
+ "generation_id": "taYhyAUv45SlpmvVMPLP",
+ "actual_credits": 16.72,
+ "actual_cents": 0.304,
+ "spoken_duration_secs": 2.84,
+ "scribe_text": "Bir renk, bir biçim, bir doku",
+ "tts": "Bir renk, bir biçim, bir doku.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 6\n}"
+}

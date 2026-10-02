@@ -1,0 +1,135 @@
+NOTES (verified via get_article_metadata)
+YN SR/MA:
+- 42043659 Singh 2026 Sleep Breath doi 10.1007/s11325-026-03685-0 : YN sleep MA; PSQI 2 RCT n=181 SMD -1.04 p=0.50 ns; obs 2 n=45 SMD -1.82; ISI 2 RCT n=99 SMD -1.00 p=0.06; GRADE very low; India concentrated.
+- 41327816 Ghai 2025 Ann NY Acad Sci doi 10.1111/nyas.70149 PMC12917937: 73 studies n=5201; stress g -0.80 active / -1.70 no comp; anxiety -1.35/-1.43; depression -0.69/-0.92; low quality, inflated.
+- 41187098 Ghai 2025 Complement Med Res doi 10.1159/000549416 PMC12707917: pain 12 studies n=1176; passive g -2.05; active g -0.31 ns; NO dose-response single vs multiple sessions / meta-regression.
+- 41144325 Dutta 2025 J Integr Complement Med doi 10.1177/27683605251390728: 6 RCT n=244 sleep; moderate-high RoB; comparators CBT-I, PMR, music.
+- 40840566 Ghai 2025 CTIM doi 10.1016/j.ctim.2025.103231: CV 28 studies; SBP g -1.65, DBP -1.01, HR -0.73, LF/HF -0.35 vs active; limitations.
+- 38484438 Ahuja 2024 J Ayurveda Integr Med doi 10.1016/j.jaim.2023.100882: HTN 5 RCT+3 nonRCT n=482; SBP WMD 12.03, DBP 6.32; high RoB.
+[run2] re-verified the 6 above via metadata OK.
+iRest:
+- 30354905 Wahbeh & Nelson 2018 Int J Yoga Therap doi 10.17761/2019-00036: pilot RCT n=30 older adults 55-90 depression sx; 2-day retreat iRest vs vacation; then 20 min/day home practice 6 wk (guided iRest vs music). feasible; sleep impairment improved vs control at 6wk; trends depression, pain.
+- 30664388 Wahbeh & Fry 2019 doi 10.17761/2019-00029: 6/12 mo FU n=25; no group diffs except negative mood & perceived stress better in VACATION group; practice not predictor.
+- 29642130 Livingston 2018 Holist Nurs Pract doi 10.1097/HNP.0000000000000266: pre/post n=15 HCW 8-wk iRest; FFMQ up p=.001; ESS ns but ESS improvement correlated with weeks attended rs=-0.705 p=.003; pain ns.
+- 37489597 Musto 2023 J Nurs Scholarsh doi 10.1111/jnu.12927: integrative review 29 studies (12 RCT) heterogeneity in session length/frequency.
+- 39862599 Barber 2025 Complement Ther Clin Pract doi 10.1016/j.ctcp.2025.101955: qualitative, 6-wk iRest for Pain; "I am not pain, I have pain".
+YN brief/dose:
+- 40373021 Moszeik, Rohleder, Renner 2025 Stress Health doi 10.1002/smi.70049 PMC12080877: RCT online pre-recorded audio; EG1 11-min YN n=101, EG2 30-min YN n=80, AC 10-min music n=74, WC n=107; ideally daily 2 months. 11-min vs WC d=0.08-0.16; short form reduced depression vs AC d=0.13; long form more acting with awareness vs short d=0.10; long form exceeded EG1 vs AC & WC incl flatter CAR; regular practice -> lower total cortisol, steeper slopes. SMALL effects.
+- 42402245 Gomathy 2026 Epilepsy Behav doi 10.1016/j.yebeh.2026.111180: open-label pilot RCT n=50 FDS; audio-guided YN + psychoeducation vs sham YN; primary ns p=0.88 (NULL).
+- 41349728 Baruah 2025 CTIM doi 10.1016/j.ctim.2025.103313: RCT n=40 cancer; 25-min 2x/day 5d/wk 1 month; distress p=.001 etc vs control (usual).
+- 41067763 Kumari 2025 BMJ Open protocol doi 10.1136/bmjopen-2025-103725: 12-min pre-recorded YN 3x/wk 4 wk vs sleep education, n=160 medical students (protocol, no results).
+- 39974253 Ahuja 2025 Cureus doi 10.7759/cureus.77717: single-arm n=32 HTN; single 16-min YN session: SBP -7, DBP -6 mmHg, HRV up (no control).
+- 38595893 Nuzhath 2024 Cureus doi 10.7759/cureus.55871: RCT n=70 cervical cancer; 30 min YN+pranayama 2x/day 5d/wk 6 wk vs SOC; HADS improved.
+- 37327384 Gunjiganvi 2023 Int J Yoga Therap doi 10.17761/2023-D-22-00011: open-label RCT n=79 COVID HCW; YouTube 30 min/day, 2-wk duty; YN (n=39) vs relaxation-to-music (n=40). YN: PHQ9 5.17->3.03 p=.002; GAD7 4.93->2.33 p<.001; ISI 6.10->3.03 p<.001; music group ns. (within-group p's reported)
+- 36731199 Sharpe 2023 J Psychosom Res doi 10.1016/j.jpsychores.2023.111169 PMC9973252: n=22 self-reported insomnia; 30-min audio YN in sleep lab vs lying quietly; NO between-group diff in alpha EEG, HRV, sleep onset latency; resp rate -1.4 bpm during, -2.1 after vs +0.2/+0.4 (p=.03). feasible, 5% dropout.
+- 34727178 Zaccaro/Riehl 2021 Int J Yoga Therap doi 10.17761/2021-D-20-00014: n=6 retreat 12 sessions of 2h nidra; no sleep hallmarks (K-complex, spindles); altered state, body image alterations, reduced volitional control.
+- 37714572 Kavi 2023 Prog Brain Res doi 10.1016/bs.pbr.2022.12.012: theoretical, "conscious entry into sleep"; validating sleep studies yet to be done.
+- 36351185 Verma 2022 Adv Mind Body Med (no DOI in record): RCT n=24 acute insomnia; yoga 60 min/day incl YN once/wk 30 days.
+YN structure/mechanism:
+- 39690521 Luu 2024 Int J Yoga Therap doi 10.17761/2024-D-24-00021: trauma-informed YN, 10 key components: (1) safe(r) comfortable env (2) autonomy/boundaries/consent (3) skillful mindful awareness (4) appropriate length & preparation (5) adequate settling & externalization (6) sleep permission (7) self-chosen intention (8) flexible rotation of consciousness & breath awareness (9) embodied pairs of opposites (10) conscientious visualizations. Adverse: flashbacks, emotional distress, extended dissociation reported.
+- 40868573 di Fronso 2025 Healthcare doi 10.3390/healthcare13161957 PMC12386071: opinion on Sankalpa stage; YN = sequence breathing, guided body awareness, visualization, cognitive restructuring; more research needed.
+- 35496325 Pandi-Perumal 2022 Sleep Vigil doi 10.1007/s41782-022-00202-7 PMC9033521: narrative review; systematized by Swami Satyananda Saraswati 1960s; guided imagery + Shavasana; awareness retained; benefits for mild not severe dep/anx.
+- 11958969 Kjaer 2002 Brain Res Cogn Brain Res doi 10.1016/s0926-6410(01)00106-9: 11C-raclopride PET; ventral striatum binding -7.9% during YN = ~65% increase endogenous dopamine; correlated with EEG theta; decreased desire for action, heightened sensory imagery; depth of relaxation & gratification did not differ between attention (listening to speech) and meditation. (n not in abstract -> doğrulanmadı)
+- 9950067 Lou 1999 Hum Brain Mapp doi 10.1002/(SICI)1097-0193(1999)7:2<98::AID-HBM3>3.0.CO;2-M: 15O-H2O PET n=9 highly experienced yoga teachers; YN: posterior sensory/association (imagery) cortex; rest: executive network.
+- 35903117 Datta 2022 Front Neurol doi 10.3389/fneur.2022.910794 PMC9315270: n=30; 5 supervised sessions then self; PSG after 2 wk: awake scored throughout (n=26), local delta increase central; sleep diary improved (no control).
+- 30732840 Parker 2019 Prog Brain Res doi 10.1016/bs.pbr.2018.10.016: review conscious non-REM sleep.
+- No study found testing individual Satyananda stages/ordering (search: sankalpa/rotation of consciousness/stages) -> only opinion/review.
+BODY SCAN:
+- 42237303 Yaemrattanakul 2026 BMC Psychol doi 10.1186/s40359-026-04923-6: assessor-blind RCT n=56 (54 analysed) healthcare students; audio 10 min/day 5d/wk 4 wk sitting meditation vs body scan; both changed WM & mindfulness over time; no between-group diffs; stress slight.
+- 41743305 Gibbs 2026 Int J Yoga doi 10.4103/ijoy.ijoy_2_25 PMC12931642: quasi-exp n=23 chronic pain; single 45-min YN (n=12) vs body scan (n=11); both reduced pain intensity & pain anxiety (p<.01); YN greater well-being immediately (p=.01).
+- 40908588 Schwerdtfeger 2025 Appl Psychol Health Well Being doi 10.1111/aphw.70073 PMC12411690: 2 preregistered RCTs; 2-wk daily auditory body scan; S1 n=85 vs guided imagery (active) -> time effects both (no superiority); S2 n=90 vs passive -> IAcc HTT p=.050, confidence, MAIA-2 p=.003. guided imagery comparable.
+- 41139603 Kim 2025 Clin Psychopharmacol Neurosci doi 10.9758/cpn.25.1277: fNIRS n=40 novices; body scan vs resting with nature sounds; greater DLPFC-mPFC connectivity in NATURE SOUNDS rest than body scan.
+- 41727805 Becattini 2026 Neurosci Conscious doi 10.1093/nc/niag001: theory; body scan attenuates somatosensory signals -> dissolution of bodily boundaries.
+- 40653877 Halbedl 2025 J Psychosom Obstet Gynaecol doi 10.1080/0167482X.2025.2531057: feasibility RCT n=33 vulvodynia; audio MBBS 5x/wk + physio; 88% did >10 scans.
+- 42688312 He 2026 Sichuan (Chinese) doi 10.12182/20260760503: RCT n=80 BMS 2-wk body scan add-on; VAS, ISI, GAD7, PHQ9 better.
+- 35538557 Gan, Zhang, Chen 2022 Appl Psychol Health Well Being doi 10.1111/aphw.12366: SR/MA 14 RCTs body scan alone; only small effect on mindfulness vs passive g=0.268 (95%CI 0.032-0.504); low quality, high heterogeneity; "sole body scan not effective enough to improve health-related outcomes". Attrition low in long-term.
+- 37325754 Aras 2023 Front Psychol doi 10.3389/fpsyg.2023.1196066: crossover RCT n=9 female pro basketball; 10-min video body scan vs 10-min nature documentary after exertion; no additional benefit HRV/cognition (both returned to baseline).
+- 37984598 Ahmadyar 2023 Appetite doi 10.1016/j.appet.2023.107131: n=137; 10-min body scan vs 10-min visualisation; increased state mindfulness; no effect on intake.
+- 35502855 Glim 2022 Perception doi 10.1177/03010066221098104: body scan before auditory stimuli enhanced ASMR tingles (short report; n not in abstract).
+- 39052996 Iliakis 2024 JMIR Form Res doi 10.2196/55408: single-case MS body scan before bedtime.
+- 40158178 Göz Tebrizcik 2025 BMC Complement Med Ther doi 10.1186/s12906-025-04842-w: survey n=157 ADHD; preferences 1-2 body scan/week.
+- 23129105 Ussher 2014 J Behav Med doi 10.1007/s10865-012-9466-5: RCT n=55 chronic pain; 10-min audio body scan (n=27) vs natural-history reading (n=28), 2x in 24h; clinic: pain-related distress p=.005, social interference p=.036 better; normal environment: NO diffs.
+- 17107296 Ditto 2006 Ann Behav Med doi 10.1207/s15324796abm3203_9: S1 n=32 random to body scan / PMR / waitlist, 2 lab sessions 4 wk apart; S2 n=30 within-subj body scan vs audiobook novel; RSA increased more during body scan than other relaxing activities; PEP decreased; HR no effect.
+- 22889642 Mirams 2013 Conscious Cogn doi 10.1016/j.concog.2012.07.009: n=62; brief body scan training vs recorded story; reduced tactile misperception.
+- 27684609 Dambrun 2016 Conscious Cogn doi 10.1016/j.concog.2016.09.013: n=53 RCT; body scan reduced perceived body boundary salience -> more happiness, less anxiety vs control (mediation).
+- 28955213 Fischer 2017 Front Hum Neurosci doi 10.3389/fnhum.2017.00452: 20-min audiotaped body scan daily 8 wk; S1 n=25 vs audiobook n=24: IAc improved T1->T3 only BS; S2 n=18 vs inactive n=18: IAc and confidence improved.
+- 32863982 Colgan 2016 Mindfulness doi 10.1007/s12671-015-0453-0: RCT n=102 veterans PTSD; body scan n=27 / mindful breathing n=25 / slow breathing n=25 / sitting quietly n=25; mindfulness groups decreased PTSD & depression; SB and SQ did not.
+- 35162166 D'Antoni 2022 IJERPH doi 10.3390/ijerph19031142: within-subj n=40; single 40-min body scan reduced SUD vs book reading (less than EMDR/BSP).
+PMR:
+- 42625730 Li 2026 Front Public Health doi 10.3389/fpubh.2026.1906525 PMC13489916: SR/MA 14 RCT n=957; sleep quality g=-1.24 (95%CI -1.71 to -0.77) I2=85.5%; <55y g=-1.40 sig; >=55y g=-1.17 ns (CI -2.67-0.32); META-REGRESSION: number of PMR sessions NOT associated (p=0.2106).
+- 41633054 Donato 2026 J Psychosom Res doi 10.1016/j.jpsychores.2026.112563: 31 RCT n=2277; sleep SMD -1.74 (CI -2.14 to -1.34) I2 92.1%; PSQI MD -3.79; anxiety SMD -1.11; QoL 1.32; effective across all durations (weeks).
+- 38281450 Wang 2024 Int J Nurs Stud doi 10.1016/j.ijnurstu.2024.104694: 12 RCT n=1047 cancer; fatigue SMD -1.06, anxiety -1.09, depression -1.43, sleep MD -1.41; QoL ns; certainty low/very low.
+- 36332326 Tan 2022 Complement Ther Clin Pract doi 10.1016/j.ctcp.2022.101676: 12 RCT n=1147 cancer; anxiety SMD -1.32, pain -1.02, QoL 1.65; fatigue ns; moderate-very low.
+- 37026959 Seid 2023 Medicine doi 10.1097/MD.0000000000033464: 4 studies n=227 COVID; sleep SMD -0.23 ns p=.13; anxiety -1.35.
+- 40572743 Maritescu 2025 Medicina doi 10.3390/medicina61061055: SR 32 studies COPD/CF/COVID; mostly short-term, moderate-high RoB.
+- 34306146 Toussaint 2021 eCAM doi 10.1155/2021/5924040 PMC8272667: RCT n=60 undergrads; 4 arms; single 20-min RECORDED AUDIO PMR / deep breathing / guided imagery / control; all 3 increased psych relaxation vs control; PMR & GI immediate linear trend physiological relaxation (EDA, HR); DEEP BREATHING immediate increase in physiological arousal then return to baseline.
+- 22843353 Vancampfort 2013 Clin Rehabil doi 10.1177/0269215512455531: 3 RCT n=146 schizophrenia; PMR acutely reduces state anxiety, distress; no adverse events; dose-response could not be determined.
+- 29506956 Kapogiannis 2018 Explore doi 10.1016/j.explore.2017.10.008: PMR+GI combo 7 trials chemo (mostly breast); benefits mood, nausea.
+- 32346796 Tian 2020 Support Care Cancer doi 10.1007/s00520-020-05481-2: 6 RCT n=288 PMR CINV.
+- 27890023 Pelekasis 2017 Palliat Support Care doi 10.1017/S1478951516000870: 5 studies extremely low quality.
+BREATHING:
+- 41886931 Eide, Hernes, Grønli 2026 Sleep Med Rev doi 10.1016/j.smrv.2026.102284: SR 9 studies n=457; slow breathing <=10 br/min before bedtime; self-reported sleep duration & quality improve (n=7 studies); objective (actigraphy 2, PSG 3) inconclusive; 3 objective studies 1-day protocol; 5 self-report studies 28-30 days; HRV both para & sympathetic.
+- 39511914 Rhoads 2024 Health Psychol Rev doi 10.1080/17437199.2024.2420974: MA 36 studies yoga on PSS; effect 0.48 (95%CI 0.29-0.66); heterogeneity; stress severity significant moderator; breathwork, relaxation, MORE HOURS practiced NOT significant moderators.
+- 39593619 Chaiduang 2024 J Bodyw Mov Ther doi 10.1016/j.jbmt.2024.03.043: SR 8 RCT+3 CT hypertension; deep slow, manipulated nostril, cycle breathing, prolonged expiration; low-moderate evidence SBP/DBP; moderate MAP & HRV.
+- 36624160 Fincham 2023 Sci Rep doi 10.1038/s41598-022-27247-y PMC9828383: MA 12 RCT n=785 stress g=-0.35 (95%CI -0.55,-0.14) I2 42%; anxiety k=20 g=-0.32; depression k=18 g=-0.40; mostly moderate RoB; "caution, hype vs evidence".
+- 35623448 Laborde 2022 Neurosci Biobehav Rev doi 10.1016/j.neubiorev.2022.104711: SR/MA 223 studies (172 DURING, 16 IMMEDIATELY AFTER ONE SESSION, 49 after multi-session); vmHRV increases in all three.
+- 36917418 Lalanza 2023 Appl Psychophysiol Biofeedback doi 10.1007/s10484-023-09582-6: SR 143 HRVB studies; 3 protocols; "Preset-pace RF" n=51 usually 6 breaths/min; ~2/3 did not report enough info (duration, I/E ratio, position).
+- 37285017 Goheen 2023 Neurosci Bull doi 10.1007/s12264-023-01070-5: SR respiration modulates brain; different protocols -> different effects.
+- 36630953 Balban 2023 Cell Rep Med doi 10.1016/j.xcrm.2022.100895 PMC9873947: remote RCT NCT05304000; daily 5-min for 1 month: cyclic sighing (prolonged exhale) / box breathing / cyclic hyperventilation w retention vs 5-min mindfulness meditation; breathwork esp cyclic sighing -> greater mood improvement (p<0.05) & resp rate reduction (p<0.05) vs meditation. (n not in abstract -> doğrulanmadı)
+- 25156003 Van Diest 2014 Appl Psychophysiol Biofeedback doi 10.1007/s10484-014-9253-x: n=30; 6 vs 12 br/min x i/e 0.42 vs 2.33; LOW i/e (longer exhale) -> more relaxation, stress reduction, mindfulness, positive energy; slower rate only -> positive energy; low i/e more HF-HRV only at slow pattern.
+- 30245619 Zaccaro 2018 Front Hum Neurosci doi 10.3389/fnhum.2018.00353 PMC6137615: SR 15 articles slow breathing <10/min healthy; HRV, RSA up; EEG alpha up theta down; comfort, relaxation, alertness up; anxiety, anger down.
+GUIDED IMAGERY / SLEEP ONSET:
+- 11863237 Harvey & Payne 2002 Behav Res Ther doi 10.1016/s0005-7967(01)00012-2: n=41 insomnia; imagery distraction vs general distraction vs no instruction on one night; imagery -> shorter SOL, less pre-sleep cognitive activity vs no instruction; general distraction not worse. (controlled clinical trial)
+MUSIC:
+- 36000763 Jespersen 2022 Cochrane doi 10.1002/14651858.CD010459.pub3 PMC9400393: 13 RCT n=1007; prerecorded music daily 25-60 min, 3 days-3 months; PSQI MD -2.79 (-3.86 to -1.72; 10 studies 708) moderate certainty; ISI ns; SOL low certainty; objective measures no improvement; no adverse events; high performance bias.
+ALTERNATE NOSTRIL:
+- 38179185 Garg 2023 Int J Cardiol Cardiovasc Risk Prev doi 10.1016/j.ijcrp.2023.200232 PMC10765252: MA 15 RCT (2017-2022) breathing exercises incl bhramari, ANB, deep, slow; SBP -7.06 (-10.20,-3.92), DBP -3.43, HR -2.41; "not deprived of bias".
+- 39959506 Pai 2024 Int J Yoga doi 10.4103/ijoy.ijoy_115_24 PMC11823561: RCT n=132 normotensive; single session Chandra anulom vilom / Surya AV / ANB / control; SBP DBP decreased CAV & ANB vs SAV; MAP lower ANB vs control.
+- 29343931 Naik 2018 Int J Yoga doi 10.4103/ijoy.IJOY_41_16 PMC5769199: RCT n=100 young males; modified alternate nostril slow breathing 30 min/day 5x/wk 12 wk supervised; PSS, HR, SBP, DBP decreased; control no change.
+- 38899139 Singh/Telles 2024 Int J Yoga doi 10.4103/ijoy.ijoy_248_23 PMC11185434: crossover n=47 males; 33-min sessions; O2 consumption ↑ ~10% during RNIYB, LNIYB, ANYB (not BAW, QR); DBP decreased after all 5 sessions. -> nostril breathing is not "less metabolic"; breath awareness & quiet rest didn't raise VO2.
+- 33461386 Rung 2021 J Holist Nurs doi 10.1177/0898010120983659: SR RCT 2013-2019 ANB reduces stress; mostly Asian Indian males.
+- 37290219 Ismail 2023 Geriatr Nurs doi 10.1016/j.gerinurse.2023.05.012: RCT n=60 elderly HTN+POAG; 30 min 2x/day ANBE 4 wk vs waitlist; HADS etc improved.
+BHRAMARI:
+- 38204770 Trivedi 2023 Int J Yoga doi 10.4103/ijoy.ijoy_113_23 PMC10775838: randomized within-subject crossover n=118 (convenience); simple bhramari at 8/10/12/14 s breath lengths; max HRV at 12-14 s (vs ~10 s in HRVB literature). => ~4-5 breaths/min when humming.
+- 42521250 Malhotra 2026 Int J Yoga Therap doi 10.17761/2026-D-25-00058: uncontrolled pilot n=20; single 5-min bhramari; RMSSD 29.95->45.83, pNN50 up, LF up, LF:HF 0.8->11.03; EEG delta/theta down, beta/gamma up ("cortical alertness"). small uncontrolled.
+- 42186649 Devipriya 2026 Cureus doi 10.7759/cureus.107617: single-group n=60; 10-min bhramari 15 cycles 4-s inhale / 6-s humming exhale; reaction time improved (no control).
+- 41743292 Poojary 2025 Int J Yoga doi 10.4103/ijoy.ijoy_253_24: RCT n=68 T2DM xerostomia; 20-min modified bhramari vs slow breathing; salivary NO & HRV better.
+- 37788160 Yadav 2024 J Asthma doi 10.1080/02770903.2023.2267113: open-label RCT n=110 children asthma; bhramari+Om 12 wk online.
+GUIDED IMAGERY:
+- 41094273 Bozkurt-Duman 2025 Support Care Cancer doi 10.1007/s00520-025-10016-8: MA 9 RCT n=837 cancer; GI (alone or +PMR); anxiety SMD -1.30 (-1.98,-0.63); depression -1.11; QoL 1.11; NO standardized session duration/frequency.
+- 42759488 Talhaoğlu 2026 Explore doi 10.1016/j.explore.2026.103528: MA 8 studies ICU; well-being SMD 0.557 (0.174-0.940) I2 67%.
+- 42652381 Şen & Gözen 2026 IJERPH doi 10.3390/ijerph23081066: SR 29 studies (27 RCT) n=1939 women; GI reduced anxiety, stress, depression, pain, fatigue.
+- 39845426 Anamagh 2024 Surg Pract Sci doi 10.1016/j.sipas.2024.100255: SR 9 studies perioperative anxiety; variation in content/duration/frequency; high satisfaction.
+- 38350116 Correa-Morales 2024 J Palliat Med doi 10.1089/jpm.2023.0445: SR 14 RCT; effective in 10/14; RoB: 4 high, 9 some concerns, 1 low.
+- 34511805 Sinha 2021 Indian J Palliat Care doi 10.25259/IJPC_136_21: MA 5 RCT PMR+GI breast cancer; stress & anxiety effective.
+BRIEF/DOSE general:
+- 29939051 Schumer, Lindsay, Creswell 2018 J Consult Clin Psychol doi 10.1037/ccp0000324 PMC6441958: MA 65 RCT n=5489; brief mindfulness (single-session up to 2 wk); negative affectivity g=0.21; community g=.41 vs students .14; AFTER publication bias correction g=0.04.
+- 42184377 Strauch 2026 JMIR doi 10.2196/78212: VR stress MA 39 studies n=4024; stress -0.55; multiple sessions significant predictor (R2=15%); guided meditation 9 studies; nature exposure 21. (relevant: nature visuals; multisession > single)
+RESTORATIVE / YIN:
+- 35861215 Deng 2022 Integr Cancer Ther doi 10.1177/15347354221089221 PMC9403449: pilot RCT n=35 sedentary breast/ovarian survivors; restorative vs vigorous yoga 60 min 3x/wk 12 wk supervised + 12 wk home; restorative: overall cognition d=0.3/0.5, fluid d=0.3/0.6; wk24 restorative > vigorous on fluid cognition.
+- 39368335 Arana-Chicas 2024 J Geriatr Oncol doi 10.1016/j.jgo.2024.102076: secondary analysis phase 3 RCT (YOCAS, NCT00397930) n=177; gentle Hatha + Restorative 2-3x/wk 4 wk; CRF & QoL improved within-group in both <=59 and 60+; 92.8%/88.5% reported sleep quality helped.
+- 41281133 Giridharan 2025 Cureus doi 10.7759/cureus.95017: SR 6 RCT n=320 gyn cancer; meditative yoga (YN, pranayama) depression narrative SMD -0.56 moderate GRADE; restorative yoga higher adherence than vigorous; no AEs.
+- 41968659 Arslan & Ardic 2026 J Adolesc doi 10.1002/jad.70155: cluster RCT n=120 adolescents; 4 wk weekly 50-min CBSM + Yin yoga vs one-time education; large effects (partial eta2 0.65-0.75); minimal control.
+- 35734420 Groessl 2022 Glob Adv Health Med doi 10.1177/2164957X221094596: feasibility RCT n=49 military hatha vs restorative; >90% enjoyed.
+- NOTE: No RCT found of AUDIO-ONLY restorative/yin yoga delivery (search limited) -> doğrulanmadı/yok.
+AUDIO/APP SLEEP:
+- 40498669 Lew 2025 JMIR Form Res doi 10.2196/66131 PMC12175875: pilot RCT n=80 undergrads; Calm sleep section 20 min/day 5 d/wk 30 d (+30 min/wk other) vs no app; anxiety, stress, PSQI improved; only 54% met minimum prescribed time.
+- 39945273 Daniel 2025 Stress Health doi 10.1002/smi.70017: RCT n=606 workers; 10-day app mindfulness vs passive & active (mind-wandering) controls; sleep benefits immediately after, wore off ~3 months; depression improved, anxiety not.
+- 35420589 Gao 2022 Psychosom Med doi 10.1097/PSY.0000000000001083 PMC9167766: RCT n=80 worry-related sleep disturbance; app MT + TAU vs TAU; WRSD -27% vs -6% at 2 mo (p=.001); no difference in Fitbit TST/efficiency.
+- 36169994 Espel-Huynh 2022 JMIR mHealth doi 10.2196/40500: secondary RCT n=1029 retail employees Calm vs waitlist 8 wk; greater insomnia reduction (Calm-affiliated authors).
+- 41799771 Bai 2026 Int J Med Sci doi 10.7150/ijms.126415: exploratory RCT n=16 caregivers VR vs audio-guided mindfulness 6 wk; both improved; no between-group diff.
+EXTRA:
+- 34825538 Datta 2021 Natl Med J India doi 10.25259/NMJI_63_19: RCT n=41 chronic insomnia 2012-16; CBT-I n=20 vs YN n=21; both improved subjective TST, SE, WASO; PSG (volunteers only) YN improved N2%, N3%; salivary cortisol reduced after YN p=.041; "after supervised practice sessions".
+- 24882909 Cordi, Schlarb, Rasch 2014 Sleep doi 10.5665/sleep.3778 PMC4015388: within-subject placebo-controlled crossover n=70 healthy young females; auditory hypnotic suggestion text "sleep deeper" vs control tape before 90-min nap; SWS +81%, wake -67%; effect only in highly suggestible, NOT low suggestible. (tape duration not in abstract -> doğrulanmadı)
+- 16199412 Bernardi 2006 Heart doi 10.1136/hrt.2005.064600 PMC1860846: n=24 (12 musicians, 12 controls); 6 music styles 2-min & 4-min + random 2-min pause; faster tempo -> arousal (ventilation, BP, HR up); PAUSE reduced HR, BP, minute ventilation EVEN BELOW BASELINE; slow/meditative music relaxing, particularly evident during pause.
+- 33753555 Buxton 2021 PNAS doi 10.1073/pnas.2013097118 PMC8040792: SR 36 pubs, MA 18: natural sounds decreased stress & annoyance (-0.60, 95%CI -0.97,-0.23); improved health & positive affect (1.63, 0.09-3.16); water & wind, animal sounds.
+- 32820538 Farias 2020 Acta Psychiatr Scand doi 10.1111/acps.13225: SR 83 studies n=6703; MAE prevalence 8.3% (3.7% experimental, 33.2% observational); anxiety 33%, depression 27%, cognitive anomalies 25%; can occur without prior MH history.
+- 6341426 Heide & Borkovec 1983 J Consult Clin Psychol doi 10.1037//0022-006x.51.2.171: "Relaxation-induced anxiety: paradoxical anxiety enhancement due to relaxation training" -- ABSTRACT NOT AVAILABLE in PubMed; only title verified. Details (n, %) doğrulanmadı.
+- 11751348 Bernardi 2001 BMJ doi 10.1136/bmj.323.7327.1446 PMC61046: n=23; rosary (Ave Maria) & yoga mantra recited ~6/min -> synchronous increases cardiovascular rhythms; BRS 9.5 -> 11.5 ms/mmHg p<.05.
+- 32423912 Brinsley 2021 Br J Sports Med doi 10.1136/bjsports-2019-101242: MA 13 RCT n=632 (19 in review n=1080) physically active yoga mental disorders; SMD 0.41; higher frequency of sessions/week associated with greater depressive reduction beta=-0.44 p<.01.
+NSDR (10-min):
+- 42383502 Boukhris 2026 Appl Psychol Health Well Being doi 10.1111/aphw.70180 PMC13321136: RCT n=102 active young adults; 10-min guided NSDR (slow breathing + sequential body awareness) n=51 vs control n=51; reduced sleepiness, fatigue, stress (small eta2 .03-.05), better mental performance capacity, recovery; RT improved only immediately; HR greater relative reduction; physical ns.
+- 42783005 Boukhris 2026 Clocks Sleep doi 10.3390/clockssleep8030052: RCT n=60; 25-min nap vs 10-min NSDR vs control; NSDR NO significant effects; nap better readiness/fatigue at 40 min. (MIXED)
+iRest more:
+- 27760887 Gutman 2017 OTJR doi 10.1177/1539449216673045: RCT n=29; 7-day sleep hygiene then 14 days: Dreampad pillow (n=10) / iRest meditation (n=9) / sleep hygiene (n=10); iRest greater time asleep vs pillow (d=1.87) and hygiene (d=1.80); no diffs in sleep quality, SOL, next-day fatigue. (R. Miller iRest founder co-author)
+- 25858651 Pence 2014 Int J Yoga Therap (no DOI in record): pilot n=15 enrolled, 10 completed; 90-min sessions 2x/wk 10 wk women sexual trauma VA; PCL d=0.66, PTCI d=0.52, BSI dep d=0.64; 5 dropped (transportation).

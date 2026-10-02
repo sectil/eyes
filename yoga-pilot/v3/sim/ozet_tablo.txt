@@ -1,0 +1,30 @@
+| 1 | Haftalık E testi | — | — | 1 / 1 | 8 / 8 | — |
+| 2 | Okuma | — | — | 1 / 1 | 10 / 10 | — |
+| 3 | — | Nefesin Ritmi · 3 dk | Nefesin Ritmi · 3 dk | 2 / 2 | 11 / 8 | — |
+| 4 | — | Tek Nokta · 3 dk | Tek Nokta · 3 dk | 2 / 2 | 13 / 10 | — |
+| 5 | — | Zor Anlar İçin · 3 dk | Zor Anlar İçin · 3 dk | 3 / 3 | 15 / 12 | — |
+| 6 | — | Sabah Niyeti · 3 dk | Sağlam Yer · 3 dk | 3 / 3 | 16 / 13 | — |
+| 7 | — | Sağlam Yer · 3 dk | Kendini Tanımak · 3 dk | 3 / 4 | 16 / 14 | — |
+| 8 | Haftalık E testi | — | — | 3 / 4 | 19 / 20 | — |
+| 9 | Okuma | Kendini Tanımak · 3 dk | Gelecekteki Sen · 3 dk | 3 / 5 | 20 / 19 | — |
+| 10 | — | Derin Dinlenme · 5 dk | Derin Dinlenme · 5 dk | 3 / 5 | 20 / 17 | — |
+| 11 | — | Gelecekteki Sen · 3 dk | Nefesin Ritmi · 3 dk | 3 / 5 | 17 / 16 | — |
+| 12 | — | Nefesin Ritmi · 3 dk | Tek Nokta · 3 dk | 3 / 5 | 18 / 17 | — |
+| 13 | — | Tek Nokta · 3 dk | Zor Anlar İçin · 3 dk | 3 / 5 | 17 / 16 | — |
+| 14 | — | Zor Anlar İçin · 3 dk | Sağlam Yer · 3 dk | 3 / 5 | 18 / 17 | — |
+| 15 | Haftalık E testi | — | — | 3 / 5 | 19 / 19 | — |
+| 16 | Okuma | Sabah Niyeti · 3 dk | Kendini Tanımak · 3 dk | 3 / 5 | 19 / 20 | Tek Bakışta |
+| 17 | — | Sağlam Yer · 3 dk | Gelecekteki Sen · 3 dk | 3 / 5 | 17 / 16 | — |
+| 18 | — | Kendine Şefkat · 5 dk | Kendine Şefkat · 5 dk | 3 / 5 | 20 / 17 | — |
+| 19 | — | Kendini Tanımak · 3 dk | Nefesin Ritmi · 3 dk | 3 / 5 | 17 / 16 | — |
+| 20 | — | Gelecekteki Sen · 3 dk | Tek Nokta · 3 dk | 3 / 5 | 18 / 17 | — |
+| 21 | — | Nefesin Ritmi · 3 dk | Zor Anlar İçin · 3 dk | 3 / 5 | 17 / 16 | — |
+| 22 | Haftalık E testi | — | — | 3 / 5 | 20 / 20 | — |
+| 23 | Okuma | Tek Nokta · 3 dk | Sağlam Yer · 3 dk | 3 / 5 | 20 / 19 | — |
+| 24 | — | Zor Anlar İçin · 3 dk | Kendini Tanımak · 3 dk | 3 / 5 | 18 / 17 | — |
+| 25 | — | Sabah Niyeti · 3 dk | Gelecekteki Sen · 3 dk | 3 / 5 | 17 / 16 | — |
+| 26 | — | Derin Dinlenme · 5 dk | Derin Dinlenme · 5 dk | 3 / 5 | 20 / 17 | — |
+| 27 | — | Sağlam Yer · 3 dk | Nefesin Ritmi · 3 dk | 3 / 5 | 17 / 16 | — |
+| 28 | — | Kendini Tanımak · 3 dk | Tek Nokta · 3 dk | 3 / 5 | 18 / 17 | — |
+| 29 | Haftalık E testi | — | — | 3 / 5 | 19 / 19 | — |
+| 30 | Okuma | Gelecekteki Sen · 3 dk | Zor Anlar İçin · 3 dk | 3 / 5 | 19 / 20 | Fark Ettin mi? |

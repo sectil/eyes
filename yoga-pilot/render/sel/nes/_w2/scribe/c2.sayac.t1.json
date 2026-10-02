@@ -1,0 +1,16 @@
+{
+ "unit": "c2.sayac",
+ "take": "t1",
+ "ref_node": "PWTRGIRvnfcDuhBi2png",
+ "asset_id": "PJQkB3jNDBBS4YqXEaz9",
+ "stt_node": "WO2Ns1S5dlb1EOtqeoiY",
+ "session_id": "1lpastgvjk5PgVw7A0mm",
+ "generation_id": "LSP5wVwBONqAwcqKwbm9",
+ "actual_credits": 21.56,
+ "actual_cents": 0.392,
+ "spoken_duration_secs": 3.76,
+ "scribe_text": "Geriye doğru sayacağım. Nefes sayılara uymak zorunda değil",
+ "tts": "Geriye doğru sayacağım. Nefes sayılara uymak zorunda değil.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 8\n}"
+}

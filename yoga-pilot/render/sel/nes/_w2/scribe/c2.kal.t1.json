@@ -1,0 +1,16 @@
+{
+ "unit": "c2.kal",
+ "take": "t1",
+ "ref_node": "T6iebtDJ1XYIFz76pDto",
+ "asset_id": "a65ONn5hgAykXePwYq2U",
+ "stt_node": "lK0VRFpMwmXHpdYI8DKS",
+ "session_id": "KCHcAVVA9HzZ7ZHfJugu",
+ "generation_id": "L2KgrIndabcGd7kcnSof",
+ "actual_credits": 16.72,
+ "actual_cents": 0.304,
+ "spoken_duration_secs": 2.88,
+ "scribe_text": "Bir süre hiçbir şey yapmadan dinlenmek var",
+ "tts": "Bir süre hiçbir şey yapmadan dinlenmek var.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 7\n}"
+}

@@ -1,0 +1,436 @@
+Nefona Yoga · Ders 3 "Uykuya Geçiş" · timing_d3.py çıktısı (B adımı, Parti 1; B-parti1-metin-1 (2026-09-30; ses yok, inceleme bekliyor))
+Planlayıcı: pilot timing.py (plan, check_plan; birebir kopya, değiştirilmedi). Ders dosyası: ders3.lesson.json.
+SES YOK: bütün süreler hece modelinden tahmindir (VARSAYIM). Köşeler:
+  hoc     4.68 hece/sn, hi duraklama, süre × 1.000  — Nefona Hoca önizleme eklemleme hızı 4,68 hece/sn (render/sel/hoc) + yüksek (Hakan v2) duraklama profili. VARSAYIM; en yavaş köşe
+  hoc-lo  4.68 hece/sn, lo duraklama, süre × 1.000  — aynı hız, düşük duraklama profili. VARSAYIM; Ders 2'nin ölçülmüş hoc kliplerine en yakın model (Ders 1 raporu: ölçülen/model 0,990)
+  nes     5.60 hece/sn, hi duraklama, süre × 1.109  — Neslihan'ın Ders 2'de ölçülmüş süreleri: ölçülen/model(5,6 yüksek) = 1,109 (110 ortak klip; v3/calc/measure.py). VARSAYIM: Ders 3 metnine aynı oranla taşındı
+Dakikalar: 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 (yayında 5 · 15; 3 dk yok, PLAN.v3 §A.3).
+
+== Sarmalayıcı yamaları (pilot sabitleri, yalnız bu çalıştırmada) ==
+  YAMA ROTATION_ORDER = ['ayak', 'bacak', 'govde', 'kol', 'bas', 'butun']: Ders 3'ün yavaş beden dolaşımı ayaklardan başa gider (PLAN.v2 §A.2.2 satır 3: "ayaklardan bele · belden başa"); her bölgede sağ soldan önce; her sürümde bütün bölgeler
+  YAMA CLOSING_STEPS = [izin, son]: gecede kapanış ritüeli uyku iznidir (PLAN.v2 §E.6 #12, §B.6); dışa dönüş adımları yok
+  YAMA QUICK_BOUNDS = (25.0, 75.0): "Uykuya geç" uyku iznine atlar (PLAN.v2 §B.5, PLAN.v3 §D.3); gündüz hızlı kapanışının 60–110 sn'si burada geçersiz; aralık VARSAYIM
+  YAMA RATES += 4,68 ve MCP_RATES = (4.68, 5.6): köşe hızları metin denetimine ve 5 dk en uzun boşluk denetimine (L3-03) girer
+  YAMA PRODUCTION = (4,68, hi): üretim sesi Nefona Hoca (sahip, madde 8); P-S1 Derin iç hız denetimi bu köşede
+  YAMA FORBIDDEN − "uykuya dal": pilot listesi bunu "gündüz dersi: uyku izni yok" diye yasaklar; uyku dersinin izin cümlesi (güvenlik §11.B-15, PLAN.v2 Ders 3 kartı) bunu taşır. Yerine D3-izin: bu söz yalnız k.izin'de. "uyuyabilir", "uyursan", "uyku gel" ve E12 listesi ("uyuyacak", "derin uyku" …) yerinde
+  YAMA BLOCK_MIN_AMEND = {}: pilotun 5 dk istisnası (C2 >= 30, N2 >= 15) Ders 2'nin bloklarınadır; Ders 3'te her çekirdek blok her sürede >= 55 sn (PLAN.v2 §B.3 adım 8)
+  YAMA NUMBER_PERIOD = (7, 9): geri saymada sayıdan sayıya 8 sn (VARSAYIM; Ders 2'de 6); uyku dersinde yavaş, uzun verişe yakın döngü (≈ 7,5 nefes/dk; Eide 2026: <= 10 nefes/dk)
+  YAMA key_want: anahtar cümle C1'in sonunda, geri sayma (C4) varsa onun sonunda ve uyku izninin başında; C4'süz sürümde iki geçiş (5 dk'da en az bir: PLAN.v2 §C.4), giderek kısa
+  YAMA ui_texts: sahne seçici yok (seçim ders içinde sözle); sürüm kartı cümleleri ve ertesi sabah sorusu da yasak listeyle denetlenir
+  YAMA check_plan görünümü: sayma bloğu "C4" → "C4say" adıyla verilir; pilotun C4 denetimleri Ders 2'nin imgesine (c4.patika, c4.don, br.orta) bağlıdır. Ders 3'ün imge denetimleri D3-imge satırlarında (C3)
+
+== Metin denetimi (pilot lint_text: yasak ve E12 listesi, İngilizce, Sanskritçe, cümle ve sözcük sayısı, emir kipi, alt klipler, "Uykuya geç" dizisi ve Durdur dönüşü) ==
+  bilgi: en yavaş klip (duraklamalar dahil): 3.65 hece/sn (c4.k2 @4.7 hi)
+  bilgi: Derin cümle iç hızı 4.7 lo: medyan 4.68, en yüksek 4.68 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 4.68, en yüksek 4.68 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın altında, etkin hızda medyan tavanın altında
+  bilgi: Derin cümle iç hızı 4.7 hi: medyan 4.68, en yüksek 4.68 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 4.68, en yüksek 4.68 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın altında, etkin hızda medyan tavanın altında
+  bilgi: Derin cümle iç hızı 5.2 lo: medyan 5.20, en yüksek 5.20 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 5.20, en yüksek 5.20 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın üstünde, etkin hızda medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 5.2 hi: medyan 5.20, en yüksek 5.20 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 5.20, en yüksek 5.20 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın üstünde, etkin hızda medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 5.6 lo: medyan 5.60, en yüksek 5.60 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 5.60, en yüksek 5.60 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın üstünde, etkin hızda medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 5.6 hi: medyan 5.60, en yüksek 5.60 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 5.60, en yüksek 5.60 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın üstünde, etkin hızda medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 6.6 lo: medyan 6.60, en yüksek 6.60 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 6.60, en yüksek 6.60 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın üstünde, etkin hızda medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 6.6 hi: medyan 6.60, en yüksek 6.60 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 6.60, en yüksek 6.60 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın üstünde, etkin hızda medyan tavanın üstünde
+  bilgi: Kapanışa geç [temel (Derin evreden)]: k.anahtar3 → k.izin → k.uyanik → k.son
+  iki nokta üst üste içeren birim: yok
+  mikro-klip dışında üç nokta: yok
+  metin denetimi: GEÇTİ
+
+== Köşe hoc (4.68 hece/sn, hi, × 1.000) ==
+  kolonlar: sonuç | dk | bloklar | klip | hece | konuşma %% | sessizlik kipi f | en uzun boşluk | en yoğun 60 sn (hece, pay) | ort. hece/dk | durak
+  GEÇTİ  5 dk | A+C1+C2+C3+K |  27 |  445 | 36.5% | min→pref 0.38 | 16.8 | 130, 0.53 |  89 | c1.zorlanirsan
+  GEÇTİ  6 dk | A+C1+C2+C3+K |  29 |  471 | 32.2% | pref→max 0.00 | 18.0 | 119, 0.49 |  78 | c1.zorlanirsan
+  GEÇTİ  7 dk | A+C1+C2+C3+K |  34 |  544 | 31.8% | pref→max 0.04 | 18.1 | 129, 0.52 |  78 | c3.damla
+  GEÇTİ  8 dk | A+C1+C2+C3+K |  39 |  616 | 31.5% | pref→max 0.03 | 18.1 | 124, 0.50 |  77 | c1.yer
+  GEÇTİ  9 dk | A+C1+C2+C3+K |  43 |  679 | 30.7% | pref→max 0.12 | 18.2 | 123, 0.50 |  75 | C4
+  GEÇTİ 10 dk | A+C1+C2+C4+C3+K |  51 |  738 | 30.2% | min→pref 0.94 | 17.9 | 128, 0.51 |  74 | c4.uymaz
+  GEÇTİ 11 dk | A+C1+C2+C4+C3+K |  55 |  797 | 29.5% | pref→max 0.06 | 18.1 | 123, 0.50 |  72 | c2.omurga
+  GEÇTİ 12 dk | A+C1+C2+C4+C3+K |  60 |  872 | 29.6% | pref→max 0.03 | 18.1 | 124, 0.50 |  73 | c2.cene
+  GEÇTİ 13 dk | A+C1+C2+C4+C3+K |  65 |  947 | 29.7% | pref→max 0.03 | 18.1 | 124, 0.50 |  73 | sayi10
+  GEÇTİ 14 dk | A+C1+C2+C4+C3+K |  71 |  975 | 28.4% | pref→max 0.07 | 18.1 | 123, 0.50 |  70 | -
+  GEÇTİ 15 dk | A+C1+C2+C4+C3+K |  71 |  975 | 26.5% | pref→max 0.37 | 18.7 | 120, 0.49 |  65 | -
+  boş pay (5 dk, min sessizliklerle): 19.4 sn (taban 15; yalnız üretim köşelerinde bağlayıcı)
+
+== Köşe hoc-lo (4.68 hece/sn, lo, × 1.000) ==
+  kolonlar: sonuç | dk | bloklar | klip | hece | konuşma %% | sessizlik kipi f | en uzun boşluk | en yoğun 60 sn (hece, pay) | ort. hece/dk | durak
+  GEÇTİ  5 dk | A+C1+C2+C3+K |  27 |  445 | 35.0% | min→pref 0.47 | 16.9 | 133, 0.51 |  89 | c1.zorlanirsan
+  GEÇTİ  6 dk | A+C1+C2+C3+K |  29 |  471 | 30.9% | pref→max 0.05 | 18.1 | 119, 0.46 |  78 | c1.zorlanirsan
+  GEÇTİ  7 dk | A+C1+C2+C3+K |  35 |  555 | 31.2% | pref→max 0.00 | 18.0 | 137, 0.53 |  79 | c3.agirlik
+  GEÇTİ  8 dk | A+C1+C2+C3+K |  39 |  616 | 30.3% | pref→max 0.08 | 18.2 | 124, 0.48 |  77 | c1.yer
+  GEÇTİ  9 dk | A+C1+C2+C3+K |  43 |  679 | 29.7% | pref→max 0.16 | 18.3 | 123, 0.47 |  75 | C4
+  GEÇTİ 10 dk | A+C1+C2+C4+C3+K |  51 |  738 | 29.2% | pref→max 0.00 | 18.0 | 130, 0.50 |  74 | c4.uymaz
+  GEÇTİ 11 dk | A+C1+C2+C4+C3+K |  56 |  811 | 29.1% | pref→max 0.02 | 18.0 | 128, 0.49 |  74 | c2.yuz
+  GEÇTİ 12 dk | A+C1+C2+C4+C3+K |  61 |  884 | 29.1% | pref→max 0.01 | 18.0 | 129, 0.50 |  74 | c2.boyun
+  GEÇTİ 13 dk | A+C1+C2+C4+C3+K |  65 |  947 | 28.8% | pref→max 0.07 | 18.1 | 125, 0.48 |  73 | sayi10
+  GEÇTİ 14 dk | A+C1+C2+C4+C3+K |  71 |  975 | 27.5% | pref→max 0.11 | 18.2 | 123, 0.47 |  70 | -
+  GEÇTİ 15 dk | A+C1+C2+C4+C3+K |  71 |  975 | 25.7% | pref→max 0.40 | 18.8 | 122, 0.47 |  65 | -
+  boş pay (5 dk, min sessizliklerle): 24.0 sn (taban 15; yalnız üretim köşelerinde bağlayıcı)
+
+== Köşe nes (5.60 hece/sn, hi, × 1.109) ==
+  kolonlar: sonuç | dk | bloklar | klip | hece | konuşma %% | sessizlik kipi f | en uzun boşluk | en yoğun 60 sn (hece, pay) | ort. hece/dk | durak
+  GEÇTİ  5 dk | A+C1+C2+C3+K |  27 |  445 | 34.7% | min→pref 0.49 | 17.0 | 132, 0.51 |  89 | c1.zorlanirsan
+  GEÇTİ  6 dk | A+C1+C2+C3+K |  29 |  471 | 30.6% | pref→max 0.06 | 18.1 | 119, 0.46 |  79 | c1.zorlanirsan
+  GEÇTİ  7 dk | A+C1+C2+C3+K |  35 |  555 | 30.9% | pref→max 0.01 | 18.0 | 137, 0.53 |  79 | c3.agirlik
+  GEÇTİ  8 dk | A+C1+C2+C3+K |  39 |  616 | 29.9% | pref→max 0.09 | 18.2 | 127, 0.48 |  77 | c1.yer
+  GEÇTİ  9 dk | A+C1+C2+C3+K |  43 |  679 | 29.1% | pref→max 0.18 | 18.4 | 123, 0.48 |  75 | C4
+  GEÇTİ 10 dk | A+C1+C2+C4+C3+K |  51 |  738 | 28.7% | pref→max 0.02 | 18.0 | 130, 0.49 |  74 | c4.uymaz
+  GEÇTİ 11 dk | A+C1+C2+C4+C3+K |  56 |  811 | 28.5% | pref→max 0.05 | 18.1 | 130, 0.49 |  74 | c2.yuz
+  GEÇTİ 12 dk | A+C1+C2+C4+C3+K |  61 |  884 | 28.5% | pref→max 0.04 | 18.1 | 131, 0.49 |  74 | c2.boyun
+  GEÇTİ 13 dk | A+C1+C2+C4+C3+K |  65 |  947 | 28.2% | pref→max 0.09 | 18.2 | 127, 0.48 |  73 | sayi10
+  GEÇTİ 14 dk | A+C1+C2+C4+C3+K |  71 |  975 | 27.0% | pref→max 0.13 | 18.3 | 124, 0.48 |  70 | -
+  GEÇTİ 15 dk | A+C1+C2+C4+C3+K |  71 |  975 | 25.2% | pref→max 0.42 | 18.8 | 122, 0.47 |  65 | -
+  boş pay (5 dk, min sessizliklerle): 24.8 sn (taban 15; yalnız üretim köşelerinde bağlayıcı)
+
+== Blok süreleri (sn; giriş müziği Varış'a dahil) ve çapalar (PLAN.v2 §B.4; sure.md §4) ==
+   5 dk  çapa: A 0:45.0 · C1 1:00.0 · C2 1:10.0 · C3 1:25.0 · K 0:40.0
+         hoc: A 0:48.6 · C1 0:57.9 · C2 1:08.6 · C3 1:22.4 · K 0:42.5
+         hoc-lo: A 0:47.7 · C1 0:58.2 · C2 1:09.8 · C3 1:22.2 · K 0:42.2
+         nes: A 0:48.2 · C1 0:58.0 · C2 1:08.4 · C3 1:22.6 · K 0:42.8
+  15 dk  çapa: A 1:15.0 · C1 1:45.0 · C2 3:30.0 · C4 2:30.0 · C3 5:00.0 · K 1:00.0
+         hoc: A 1:30.3 · C1 2:04.4 · C2 3:22.3 · C4 2:25.2 · C3 4:32.3 · K 1:05.5
+         hoc-lo: A 1:29.5 · C1 2:04.6 · C2 3:22.9 · C4 2:25.4 · C3 4:32.6 · K 1:05.0
+         nes: A 1:29.8 · C1 2:04.5 · C2 3:21.9 · C4 2:25.4 · C3 4:32.8 · K 1:05.7
+
+== Blokların ve isteğe bağlı kliplerin girdiği dakika (en küçük dakika) ==
+  hoc: a.karar 7, c1.zorlanirsan 7, c2.gelmezse 7, c3.su 7, c3.toprak 7, a.ortu 8, a.isler 8, c3.damla 8, c3.agirlik 8, c3.yastik 8, c1.yer 9, c2.topuk 9, c2.omuz 9, c3.sicaklik 9, C4 10, c2.uyluk 11, c2.el 11, c4.uymaz 11, c3.ses2 11, c1.dudak 12, c2.omurga 12, c2.yuz 12, c3.kal 12, k.nefes 12, c2.boyun 13, c2.cene 13, c2.sicak 13, c3.parmak 13, c3.uzak 13, c4.n10 14, c4.n09 14, c4.n08 14, c4.n07 14, c4.n06 14, c3.cam 14
+  hoc-lo: a.karar 7, c1.zorlanirsan 7, c2.gelmezse 7, c3.su 7, c3.damla 7, c3.toprak 7, a.ortu 8, a.isler 8, c3.agirlik 8, c3.yastik 8, c1.yer 9, c2.topuk 9, c2.omuz 9, c3.sicaklik 9, C4 10, c2.uyluk 11, c2.omurga 11, c2.el 11, c4.uymaz 11, c3.ses2 11, c1.dudak 12, c2.yuz 12, c2.cene 12, c3.kal 12, k.nefes 12, c2.boyun 13, c2.sicak 13, c3.parmak 13, c3.uzak 13, c4.n10 14, c4.n09 14, c4.n08 14, c4.n07 14, c4.n06 14, c3.cam 14
+  nes: a.karar 7, c1.zorlanirsan 7, c2.gelmezse 7, c3.su 7, c3.damla 7, c3.toprak 7, a.ortu 8, a.isler 8, c3.agirlik 8, c3.yastik 8, c1.yer 9, c2.topuk 9, c2.omuz 9, c3.sicaklik 9, C4 10, c2.uyluk 11, c2.omurga 11, c2.el 11, c4.uymaz 11, c3.ses2 11, c1.dudak 12, c2.yuz 12, c2.cene 12, c3.kal 12, k.nefes 12, c2.boyun 13, c2.sicak 13, c3.parmak 13, c3.uzak 13, c4.n10 14, c4.n09 14, c4.n08 14, c4.n07 14, c4.n06 14, c3.cam 14
+
+== "-(y)abil-" yoğunluğu (cümle klipleri; herhangi bir 60 sn'de en çok 3) ==
+  hoc  5 dk: toplam 5, en yoğun 60 sn 3
+  hoc 15 dk: toplam 11, en yoğun 60 sn 3
+  hoc-lo  5 dk: toplam 5, en yoğun 60 sn 3
+  hoc-lo 15 dk: toplam 11, en yoğun 60 sn 3
+  nes  5 dk: toplam 5, en yoğun 60 sn 3
+  nes 15 dk: toplam 11, en yoğun 60 sn 3
+
+== Evre başına ortalama cümle uzunluğu (hece/cümle; H12: Derin < Derinleşme < Varış), hoc köşesi ==
+   5 dk: Varış 20.6, Derinleşme 15.3, Derin 13.4
+  15 dk: Varış 19.4, Derinleşme 15.1, Derin 13.6
+
+== Tekrar uyarıları (pilot repetition_warnings; bilgi) ==
+  yok
+== Klip içi kök tekrarı (pilot within_clip_warnings; bilgi) ==
+  yok
+
+== Sarsıntı taraması (bilgi; pilot Z2-04 kalıbı): bütün klip süreleri × 0,90 / 0,95 / 1,05 / 1,10, 5..15 dk ==
+  hoc     ×0.90 GEÇTİ | ×0.95 GEÇTİ | ×1.05 GEÇTİ | ×1.10 GEÇTİ
+  hoc-lo  ×0.90 GEÇTİ | ×0.95 GEÇTİ | ×1.05 GEÇTİ | ×1.10 GEÇTİ
+  nes     ×0.90 GEÇTİ | ×0.95 GEÇTİ | ×1.05 GEÇTİ | ×1.10 GEÇTİ
+
+== Plan · hoc · 5 dk (toplam 300.0 sn; konuşma 109.6 sn; kip min→pref f=0.38; giriş 3.4 sn) ==
+    başlangıç blok klip          konuşma   sonra  metin
+     0:03.4  A   a.acilis        5.2 sn  +  3.4  Günün sesleri geride kalıyor; yatağına yerleşiyorsun.
+     0:11.9  A   a.durus         4.5 sn  +  5.4  Sırtüstü ya da yan, hangisi rahatsa öyle yatıyorsun.
+     0:21.9  A   a.gozler        3.9 sn  +  3.4  Gözlerini kapatmak ya da açık tutmak sana kalmış.
+     0:29.2  A   a.izin          6.9 sn  +  3.8  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.
+     0:39.8  A   a.kolay         5.0 sn  +  3.8  Uyumaya çalışman gerekmiyor; uzanıp dinlenmek yeter.
+     0:48.6  C1  c1.fark         3.7 sn  +  8.8  Önce nefesini olduğu gibi fark ediyorsun.
+     1:01.1  C1  c1.veris        4.2 sn  + 10.8  Alışı zorlamadan verişi biraz uzatmak yeterli.
+     1:16.0  C1  c1.birkac       3.5 sn  + 16.8  Birkaç nefes boyunca bu ritmi sürdürüyorsun.
+     1:36.3  C1  c1.k1           3.5 sn  +  6.8  Bugün bitti; artık dinlenebilirsin.
+     1:46.5  C2  c2.cerceve      7.2 sn  +  3.4  Ayaklarından başına doğru bedeninde dolaşacağız. Rahatsız eden bir yer olursa atla.
+     1:58.0  C2  c2.ayak         4.4 sn  +  5.8  Önce ayaklarının ağırlığını yatağa veriyorsun.
+     2:08.1  C2  c2.bacak        2.9 sn  +  5.8  Bacakların da yatağa yaslanıyor.
+     2:16.8  C2  c2.bel          3.5 sn  +  5.8  Belin ve sırtın bütün ağırlığıyla yatakta.
+     2:26.1  C2  c2.kol          3.9 sn  +  5.8  Kollarının ağırlığını da yatağa veriyorsun.
+     2:35.8  C2  c2.bas          3.1 sn  +  5.8  Başının ağırlığını yastık taşıyor.
+     2:44.6  C2  c2.butun        3.7 sn  +  6.8  Baştan ayağa bütün bedenin yatağın üstünde.
+     2:55.1  C3  c3.sahne        3.3 sn  +  5.8  Zihninde yağmurlu bir akşam belirebilir.
+     3:04.2  C3  c3.gelmezse     5.0 sn  +  8.8  Görüntü belirmese de, gözlerin açık kalsa da sorun değil.
+     3:17.9  C3  c3.yer          5.3 sn  +  5.8  Belki sıcak bir odadasın. Belki üstü örtülü bir verandadasın.
+     3:30.4  C3  c3.yagmur       2.9 sn  +  8.8  Yağmur çatıya usul usul vuruyor.
+     3:42.1  C3  c3.ortu         3.3 sn  +  5.8  Üstünde kalın, yumuşak bir örtü var.
+     3:51.1  C3  c3.lamba        4.1 sn  +  8.8  Köşede bir lamba sarı, sıcak bir ışık veriyor.
+     4:04.0  C3  c3.kisilir      4.8 sn  +  8.8  Lambanın ışığı kısılıyor; loş bir aydınlık kalıyor. [5 dk kısa biçimi]
+     4:17.5  K   k.anahtar3      1.2 sn  +  6.8  Bugün bitti.
+     4:25.4  K   k.izin          5.0 sn  + 10.8  Uykuya dalarsan bu da güzel; sesim yavaşça kısılacak.
+     4:41.1  K   k.uyanik        4.5 sn  +  7.8  Uyanık kalırsan da olur; uzanıp dinlenmek yeter.
+     4:53.5  K   k.son           1.2 sn  +  5.4  Gece senin.
+
+== Plan · hoc · 15 dk (toplam 900.0 sn; konuşma 238.4 sn; kip pref→max f=0.37; giriş 4.7 sn) ==
+    başlangıç blok klip          konuşma   sonra  metin
+     0:04.7  A   a.acilis        5.2 sn  +  5.1  Günün sesleri geride kalıyor; yatağına yerleşiyorsun.
+     0:15.0  A   a.durus         4.5 sn  +  7.1  Sırtüstü ya da yan, hangisi rahatsa öyle yatıyorsun.
+     0:26.6  A   a.ortu          4.6 sn  +  8.1  Üşüyorsan örtünü omuzlarına kadar çekmen iyi olur.
+     0:39.3  A   a.gozler        3.9 sn  +  4.7  Gözlerini kapatmak ya da açık tutmak sana kalmış.
+     0:48.0  A   a.izin          6.9 sn  +  5.7  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.
+     1:00.6  A   a.kolay         5.0 sn  +  6.1  Uyumaya çalışman gerekmiyor; uzanıp dinlenmek yeter.
+     1:11.7  A   a.karar         4.2 sn  +  5.1  Ne kadar gevşeyeceğine her an sen karar veriyorsun.
+     1:20.9  A   a.isler         3.3 sn  +  6.1  Yarına kalan işler sabaha kadar bekler.
+     1:30.3  C1  c1.fark         3.7 sn  + 11.5  Önce nefesini olduğu gibi fark ediyorsun.
+     1:45.5  C1  c1.yer          4.4 sn  + 11.5  Nefes en çok nerede belirginse dikkatin orada kalsın.
+     2:01.4  C1  c1.veris        4.2 sn  + 13.5  Alışı zorlamadan verişi biraz uzatmak yeterli.
+     2:19.0  C1  c1.zorlanirsan   2.9 sn  +  6.1  Nefes zor gelirse kendi ritmine dön.
+     2:27.9  C1  c1.gun          4.1 sn  + 11.5  Her veriş, günü biraz daha geride bırakıyor.
+     2:43.5  C1  c1.dudak        4.6 sn  + 11.5  Veriş burundan ya da hafif aralık dudaklardan çıkabilir.
+     2:59.6  C1  c1.birkac       3.5 sn  + 18.7  Birkaç nefes boyunca bu ritmi sürdürüyorsun.
+     3:21.8  C1  c1.k1           3.5 sn  +  9.5  Bugün bitti; artık dinlenebilirsin.
+     3:34.7  C2  c2.cerceve      7.2 sn  +  4.7  Ayaklarından başına doğru bedeninde dolaşacağız. Rahatsız eden bir yer olursa atla.
+     3:47.8  C2  c2.ayak         4.4 sn  +  8.1  Önce ayaklarının ağırlığını yatağa veriyorsun.
+     4:00.3  C2  c2.topuk        4.2 sn  +  8.1  Topuklarının yatağa değdiği yeri fark ediyorsun.
+     4:12.5  C2  c2.bacak        2.9 sn  +  8.1  Bacakların da yatağa yaslanıyor.
+     4:23.5  C2  c2.uyluk        3.1 sn  +  8.1  Uylukların ağır ve sıcak olabilir.
+     4:34.7  C2  c2.bel          3.5 sn  +  8.1  Belin ve sırtın bütün ağırlığıyla yatakta.
+     4:46.3  C2  c2.omurga       3.3 sn  +  9.1  Omurgan boydan boya yatağa uzanıyor.
+     4:58.7  C2  c2.el           2.9 sn  +  8.1  Ellerin olduğu yerde dinleniyor.
+     5:09.7  C2  c2.kol          3.9 sn  +  8.1  Kollarının ağırlığını da yatağa veriyorsun.
+     5:21.7  C2  c2.omuz         3.1 sn  +  8.1  Omuzların yatağa doğru inebilir.
+     5:32.9  C2  c2.boyun        2.2 sn  +  8.1  Ensen yastığa yaslanıyor.
+     5:43.2  C2  c2.yuz          3.7 sn  +  8.1  Alnın gevşek, gözlerinin çevresi yumuşak.
+     5:55.0  C2  c2.cene         3.3 sn  +  8.1  Çenen serbest, dişlerin hafif aralık.
+     6:06.4  C2  c2.bas          3.1 sn  +  8.1  Başının ağırlığını yastık taşıyor.
+     6:17.6  C2  c2.sicak        4.6 sn  +  9.1  Ellerinde ve ayaklarında hafif bir sıcaklık olabilir.
+     6:31.2  C2  c2.gelmezse     4.5 sn  +  8.1  Ağırlık her yerde aynı olmayabilir; bu da olur.
+     6:43.9  C2  c2.butun        3.7 sn  +  9.5  Baştan ayağa bütün bedenin yatağın üstünde.
+     6:57.1  C4  c4.giris        5.5 sn  +  6.7  Ondan bire geri sayacağım. Her sayıda nefesini bırakıyorsun.
+     7:11.4  C4  c4.uymaz        4.8 sn  + 11.1  Nefesin sayılara uymasa ya da sayıyı kaçırsan da olur.
+     7:27.3  C4  c4.n10          0.4 sn  +  7.8  on…
+     7:35.4  C4  c4.n09          0.6 sn  +  7.6  dokuz…
+     7:43.6  C4  c4.n08          0.6 sn  +  7.6  sekiz…
+     7:51.7  C4  c4.n07          0.6 sn  +  7.6  yedi…
+     7:59.9  C4  c4.n06          0.6 sn  +  7.6  altı…
+     8:08.0  C4  c4.n05          0.4 sn  +  7.8  beş…
+     8:16.2  C4  c4.n04          0.4 sn  +  7.8  dört…
+     8:24.3  C4  c4.n03          0.4 sn  +  7.8  üç…
+     8:32.4  C4  c4.n02          0.6 sn  +  7.6  iki…
+     8:40.6  C4  c4.n01          0.4 sn  +  9.1  bir.
+     8:50.1  C4  c4.bitti        4.9 sn  +  9.1  Sayılar burada bitiyor. Kaçını duyduğun önemli değil.
+     9:06.1  C4  c4.k2           3.0 sn  + 13.1  Bugün bitti; dinlenebilirsin.
+     9:22.2  C3  c3.sahne        3.3 sn  +  8.1  Zihninde yağmurlu bir akşam belirebilir.
+     9:33.6  C3  c3.gelmezse     5.0 sn  + 11.5  Görüntü belirmese de, gözlerin açık kalsa da sorun değil.
+     9:50.1  C3  c3.yer          5.3 sn  +  8.1  Belki sıcak bir odadasın. Belki üstü örtülü bir verandadasın.
+    10:05.5  C3  c3.su           3.3 sn  + 11.5  Yağmur istemezsen sessiz bir akşam da olur.
+    10:20.3  C3  c3.yagmur       2.9 sn  + 11.5  Yağmur çatıya usul usul vuruyor.
+    10:34.6  C3  c3.damla        2.7 sn  +  8.1  Oluktan tek tük damlalar düşüyor.
+    10:45.4  C3  c3.toprak       2.9 sn  + 13.5  Havada ıslak toprağın kokusu var.
+    11:01.7  C3  c3.cam          4.4 sn  +  8.1  Yakındaki camda yağmur izleri ağır ağır süzülüyor.
+    11:14.2  C3  c3.ortu         3.3 sn  +  8.1  Üstünde kalın, yumuşak bir örtü var.
+    11:25.6  C3  c3.agirlik      3.9 sn  + 13.5  Örtü, üstünde tatlı bir ağırlıkla duruyor.
+    11:42.9  C3  c3.sicaklik     3.1 sn  +  9.1  Altında kendi sıcaklığın birikiyor.
+    11:55.1  C3  c3.parmak       3.5 sn  +  9.1  Parmak uçların örtünün dokusunu buluyor.
+    12:07.7  C3  c3.yastik       2.9 sn  + 13.5  Yastığın kumaşı serin ve yumuşak.
+    12:24.0  C3  c3.lamba        4.1 sn  + 11.5  Köşede bir lamba sarı, sıcak bir ışık veriyor.
+    12:39.6  C3  c3.ses2         3.1 sn  +  8.1  Yağmurun sesi hiç değişmeden sürüyor.
+    12:50.8  C3  c3.uzak         4.7 sn  + 13.5  Yukarıda yağmurun, yakında kendi nefesinin sesi var.
+    13:09.0  C3  c3.kisilir      3.3 sn  + 10.5  Lambanın ışığı yavaş yavaş kısılıyor.
+    13:22.8  C3  c3.aydinlik     3.7 sn  + 14.5  Çevrende loş, yumuşak bir aydınlık kalıyor.
+    13:40.9  C3  c3.kal          3.5 sn  + 10.1  Yağmuru dinlemekten başka yapacak bir şey yok.
+    13:54.5  K   k.anahtar3      1.2 sn  +  8.7  Bugün bitti.
+    14:04.4  K   k.nefes         2.9 sn  + 12.1  Nefes kendi ritminde gelip gidiyor.
+    14:19.4  K   k.izin          5.0 sn  + 13.1  Uykuya dalarsan bu da güzel; sesim yavaşça kısılacak.
+    14:37.5  K   k.uyanik        4.5 sn  + 10.1  Uyanık kalırsan da olur; uzanıp dinlenmek yeter.
+    14:52.1  K   k.son           1.2 sn  +  6.7  Gece senin.
+
+== Plan · hoc-lo · 5 dk (toplam 300.0 sn; konuşma 105.0 sn; kip min→pref f=0.47; giriş 3.5 sn) ==
+    başlangıç blok klip          konuşma   sonra  metin
+     0:03.5  A   a.acilis        4.7 sn  +  3.5  Günün sesleri geride kalıyor; yatağına yerleşiyorsun.
+     0:11.6  A   a.durus         4.2 sn  +  5.5  Sırtüstü ya da yan, hangisi rahatsa öyle yatıyorsun.
+     0:21.3  A   a.gozler        3.9 sn  +  3.5  Gözlerini kapatmak ya da açık tutmak sana kalmış.
+     0:28.7  A   a.izin          6.6 sn  +  3.9  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.
+     0:39.2  A   a.kolay         4.5 sn  +  3.9  Uyumaya çalışman gerekmiyor; uzanıp dinlenmek yeter.
+     0:47.7  C1  c1.fark         3.7 sn  +  8.9  Önce nefesini olduğu gibi fark ediyorsun.
+     1:00.3  C1  c1.veris        4.2 sn  + 10.9  Alışı zorlamadan verişi biraz uzatmak yeterli.
+     1:15.4  C1  c1.birkac       3.5 sn  + 16.9  Birkaç nefes boyunca bu ritmi sürdürüyorsun.
+     1:35.9  C1  c1.k1           3.0 sn  +  6.9  Bugün bitti; artık dinlenebilirsin.
+     1:45.8  C2  c2.cerceve      7.2 sn  +  3.5  Ayaklarından başına doğru bedeninde dolaşacağız. Rahatsız eden bir yer olursa atla.
+     1:57.4  C2  c2.ayak         4.4 sn  +  5.9  Önce ayaklarının ağırlığını yatağa veriyorsun.
+     2:07.8  C2  c2.bacak        2.9 sn  +  5.9  Bacakların da yatağa yaslanıyor.
+     2:16.6  C2  c2.bel          3.5 sn  +  5.9  Belin ve sırtın bütün ağırlığıyla yatakta.
+     2:26.0  C2  c2.kol          3.9 sn  +  5.9  Kollarının ağırlığını da yatağa veriyorsun.
+     2:35.9  C2  c2.bas          3.1 sn  +  5.9  Başının ağırlığını yastık taşıyor.
+     2:45.0  C2  c2.butun        3.7 sn  +  6.9  Baştan ayağa bütün bedenin yatağın üstünde.
+     2:55.6  C3  c3.sahne        3.3 sn  +  5.9  Zihninde yağmurlu bir akşam belirebilir.
+     3:04.9  C3  c3.gelmezse     4.6 sn  +  8.9  Görüntü belirmese de, gözlerin açık kalsa da sorun değil.
+     3:18.4  C3  c3.yer          5.3 sn  +  5.9  Belki sıcak bir odadasın. Belki üstü örtülü bir verandadasın.
+     3:31.2  C3  c3.yagmur       2.9 sn  +  8.9  Yağmur çatıya usul usul vuruyor.
+     3:43.0  C3  c3.ortu         2.9 sn  +  5.9  Üstünde kalın, yumuşak bir örtü var.
+     3:51.9  C3  c3.lamba        3.8 sn  +  8.9  Köşede bir lamba sarı, sıcak bir ışık veriyor.
+     4:04.6  C3  c3.kisilir      4.3 sn  +  8.9  Lambanın ışığı kısılıyor; loş bir aydınlık kalıyor. [5 dk kısa biçimi]
+     4:17.8  K   k.anahtar3      1.2 sn  +  6.9  Bugün bitti.
+     4:25.9  K   k.izin          4.5 sn  + 10.9  Uykuya dalarsan bu da güzel; sesim yavaşça kısılacak.
+     4:41.4  K   k.uyanik        4.1 sn  +  7.9  Uyanık kalırsan da olur; uzanıp dinlenmek yeter.
+     4:53.4  K   k.son           1.2 sn  +  5.5  Gece senin.
+
+== Plan · hoc-lo · 15 dk (toplam 900.0 sn; konuşma 231.4 sn; kip pref→max f=0.40; giriş 4.8 sn) ==
+    başlangıç blok klip          konuşma   sonra  metin
+     0:04.8  A   a.acilis        4.7 sn  +  5.2  Günün sesleri geride kalıyor; yatağına yerleşiyorsun.
+     0:14.7  A   a.durus         4.2 sn  +  7.2  Sırtüstü ya da yan, hangisi rahatsa öyle yatıyorsun.
+     0:26.1  A   a.ortu          4.6 sn  +  8.2  Üşüyorsan örtünü omuzlarına kadar çekmen iyi olur.
+     0:38.9  A   a.gozler        3.9 sn  +  4.8  Gözlerini kapatmak ya da açık tutmak sana kalmış.
+     0:47.6  A   a.izin          6.6 sn  +  5.8  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.
+     0:60.0  A   a.kolay         4.5 sn  +  6.2  Uyumaya çalışman gerekmiyor; uzanıp dinlenmek yeter.
+     1:10.7  A   a.karar         4.2 sn  +  5.2  Ne kadar gevşeyeceğine her an sen karar veriyorsun.
+     1:20.0  A   a.isler         3.3 sn  +  6.2  Yarına kalan işler sabaha kadar bekler.
+     1:29.5  C1  c1.fark         3.7 sn  + 11.6  Önce nefesini olduğu gibi fark ediyorsun.
+     1:44.9  C1  c1.yer          4.4 sn  + 11.6  Nefes en çok nerede belirginse dikkatin orada kalsın.
+     2:00.8  C1  c1.veris        4.2 sn  + 13.6  Alışı zorlamadan verişi biraz uzatmak yeterli.
+     2:18.6  C1  c1.zorlanirsan   2.9 sn  +  6.2  Nefes zor gelirse kendi ritmine dön.
+     2:27.7  C1  c1.gun          3.8 sn  + 11.6  Her veriş, günü biraz daha geride bırakıyor.
+     2:43.0  C1  c1.dudak        4.6 sn  + 11.6  Veriş burundan ya da hafif aralık dudaklardan çıkabilir.
+     2:59.2  C1  c1.birkac       3.5 sn  + 18.8  Birkaç nefes boyunca bu ritmi sürdürüyorsun.
+     3:21.5  C1  c1.k1           3.0 sn  +  9.6  Bugün bitti; artık dinlenebilirsin.
+     3:34.1  C2  c2.cerceve      7.2 sn  +  4.8  Ayaklarından başına doğru bedeninde dolaşacağız. Rahatsız eden bir yer olursa atla.
+     3:47.3  C2  c2.ayak         4.4 sn  +  8.2  Önce ayaklarının ağırlığını yatağa veriyorsun.
+     3:59.9  C2  c2.topuk        4.2 sn  +  8.2  Topuklarının yatağa değdiği yeri fark ediyorsun.
+     4:12.2  C2  c2.bacak        2.9 sn  +  8.2  Bacakların da yatağa yaslanıyor.
+     4:23.3  C2  c2.uyluk        3.1 sn  +  8.2  Uylukların ağır ve sıcak olabilir.
+     4:34.6  C2  c2.bel          3.5 sn  +  8.2  Belin ve sırtın bütün ağırlığıyla yatakta.
+     4:46.3  C2  c2.omurga       3.3 sn  +  9.2  Omurgan boydan boya yatağa uzanıyor.
+     4:58.8  C2  c2.el           2.9 sn  +  8.2  Ellerin olduğu yerde dinleniyor.
+     5:09.9  C2  c2.kol          3.9 sn  +  8.2  Kollarının ağırlığını da yatağa veriyorsun.
+     5:22.0  C2  c2.omuz         3.1 sn  +  8.2  Omuzların yatağa doğru inebilir.
+     5:33.3  C2  c2.boyun        2.2 sn  +  8.2  Ensen yastığa yaslanıyor.
+     5:43.7  C2  c2.yuz          3.4 sn  +  8.2  Alnın gevşek, gözlerinin çevresi yumuşak.
+     5:55.3  C2  c2.cene         2.9 sn  +  8.2  Çenen serbest, dişlerin hafif aralık.
+     6:06.4  C2  c2.bas          3.1 sn  +  8.2  Başının ağırlığını yastık taşıyor.
+     6:17.7  C2  c2.sicak        4.6 sn  +  9.2  Ellerinde ve ayaklarında hafif bir sıcaklık olabilir.
+     6:31.5  C2  c2.gelmezse     4.1 sn  +  8.2  Ağırlık her yerde aynı olmayabilir; bu da olur.
+     6:43.7  C2  c2.butun        3.7 sn  +  9.6  Baştan ayağa bütün bedenin yatağın üstünde.
+     6:57.1  C4  c4.giris        5.5 sn  +  6.8  Ondan bire geri sayacağım. Her sayıda nefesini bırakıyorsun.
+     7:11.5  C4  c4.uymaz        4.8 sn  + 11.2  Nefesin sayılara uymasa ya da sayıyı kaçırsan da olur.
+     7:27.5  C4  c4.n10          0.4 sn  +  7.8  on…
+     7:35.6  C4  c4.n09          0.6 sn  +  7.6  dokuz…
+     7:43.8  C4  c4.n08          0.6 sn  +  7.6  sekiz…
+     7:52.0  C4  c4.n07          0.6 sn  +  7.6  yedi…
+     8:00.1  C4  c4.n06          0.6 sn  +  7.6  altı…
+     8:08.3  C4  c4.n05          0.4 sn  +  7.8  beş…
+     8:16.4  C4  c4.n04          0.4 sn  +  7.8  dört…
+     8:24.6  C4  c4.n03          0.4 sn  +  7.8  üç…
+     8:32.8  C4  c4.n02          0.6 sn  +  7.6  iki…
+     8:40.9  C4  c4.n01          0.4 sn  +  9.2  bir.
+     8:50.5  C4  c4.bitti        4.9 sn  +  9.2  Sayılar burada bitiyor. Kaçını duyduğun önemli değil.
+     9:06.7  C4  c4.k2           2.6 sn  + 13.2  Bugün bitti; dinlenebilirsin.
+     9:22.4  C3  c3.sahne        3.3 sn  +  8.2  Zihninde yağmurlu bir akşam belirebilir.
+     9:33.9  C3  c3.gelmezse     4.6 sn  + 11.6  Görüntü belirmese de, gözlerin açık kalsa da sorun değil.
+     9:50.2  C3  c3.yer          5.3 sn  +  8.2  Belki sıcak bir odadasın. Belki üstü örtülü bir verandadasın.
+    10:05.8  C3  c3.su           3.3 sn  + 11.6  Yağmur istemezsen sessiz bir akşam da olur.
+    10:20.7  C3  c3.yagmur       2.9 sn  + 11.6  Yağmur çatıya usul usul vuruyor.
+    10:35.1  C3  c3.damla        2.7 sn  +  8.2  Oluktan tek tük damlalar düşüyor.
+    10:46.0  C3  c3.toprak       2.9 sn  + 13.6  Havada ıslak toprağın kokusu var.
+    11:02.5  C3  c3.cam          4.4 sn  +  8.2  Yakındaki camda yağmur izleri ağır ağır süzülüyor.
+    11:15.0  C3  c3.ortu         2.9 sn  +  8.2  Üstünde kalın, yumuşak bir örtü var.
+    11:26.2  C3  c3.agirlik      3.6 sn  + 13.6  Örtü, üstünde tatlı bir ağırlıkla duruyor.
+    11:43.3  C3  c3.sicaklik     3.1 sn  +  9.2  Altında kendi sıcaklığın birikiyor.
+    11:55.6  C3  c3.parmak       3.5 sn  +  9.2  Parmak uçların örtünün dokusunu buluyor.
+    12:08.3  C3  c3.yastik       2.9 sn  + 13.6  Yastığın kumaşı serin ve yumuşak.
+    12:24.8  C3  c3.lamba        3.8 sn  + 11.6  Köşede bir lamba sarı, sıcak bir ışık veriyor.
+    12:40.2  C3  c3.ses2         3.1 sn  +  8.2  Yağmurun sesi hiç değişmeden sürüyor.
+    12:51.5  C3  c3.uzak         4.4 sn  + 13.6  Yukarıda yağmurun, yakında kendi nefesinin sesi var.
+    13:09.5  C3  c3.kisilir      3.3 sn  + 10.6  Lambanın ışığı yavaş yavaş kısılıyor.
+    13:23.4  C3  c3.aydinlik     3.4 sn  + 14.6  Çevrende loş, yumuşak bir aydınlık kalıyor.
+    13:41.3  C3  c3.kal          3.5 sn  + 10.2  Yağmuru dinlemekten başka yapacak bir şey yok.
+    13:55.0  K   k.anahtar3      1.2 sn  +  8.8  Bugün bitti.
+    14:05.0  K   k.nefes         2.9 sn  + 12.2  Nefes kendi ritminde gelip gidiyor.
+    14:20.1  K   k.izin          4.5 sn  + 13.2  Uykuya dalarsan bu da güzel; sesim yavaşça kısılacak.
+    14:37.8  K   k.uyanik        4.1 sn  + 10.2  Uyanık kalırsan da olur; uzanıp dinlenmek yeter.
+    14:52.0  K   k.son           1.2 sn  +  6.8  Gece senin.
+
+== Plan · nes · 5 dk (toplam 300.0 sn; konuşma 104.2 sn; kip min→pref f=0.49; giriş 3.5 sn) ==
+    başlangıç blok klip          konuşma   sonra  metin
+     0:03.5  A   a.acilis        5.0 sn  +  3.5  Günün sesleri geride kalıyor; yatağına yerleşiyorsun.
+     0:11.9  A   a.durus         4.3 sn  +  5.5  Sırtüstü ya da yan, hangisi rahatsa öyle yatıyorsun.
+     0:21.8  A   a.gozler        3.7 sn  +  3.5  Gözlerini kapatmak ya da açık tutmak sana kalmış.
+     0:29.0  A   a.izin          6.5 sn  +  4.0  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.
+     0:39.4  A   a.kolay         4.8 sn  +  4.0  Uyumaya çalışman gerekmiyor; uzanıp dinlenmek yeter.
+     0:48.2  C1  c1.fark         3.5 sn  +  9.0  Önce nefesini olduğu gibi fark ediyorsun.
+     1:00.7  C1  c1.veris        3.9 sn  + 11.0  Alışı zorlamadan verişi biraz uzatmak yeterli.
+     1:15.6  C1  c1.birkac       3.3 sn  + 17.0  Birkaç nefes boyunca bu ritmi sürdürüyorsun.
+     1:35.9  C1  c1.k1           3.4 sn  +  7.0  Bugün bitti; artık dinlenebilirsin.
+     1:46.2  C2  c2.cerceve      6.8 sn  +  3.5  Ayaklarından başına doğru bedeninde dolaşacağız. Rahatsız eden bir yer olursa atla.
+     1:57.4  C2  c2.ayak         4.1 sn  +  6.0  Önce ayaklarının ağırlığını yatağa veriyorsun.
+     2:07.5  C2  c2.bacak        2.7 sn  +  6.0  Bacakların da yatağa yaslanıyor.
+     2:16.2  C2  c2.bel          3.3 sn  +  6.0  Belin ve sırtın bütün ağırlığıyla yatakta.
+     2:25.5  C2  c2.kol          3.7 sn  +  6.0  Kollarının ağırlığını da yatağa veriyorsun.
+     2:35.2  C2  c2.bas          2.9 sn  +  6.0  Başının ağırlığını yastık taşıyor.
+     2:44.1  C2  c2.butun        3.5 sn  +  7.0  Baştan ayağa bütün bedenin yatağın üstünde.
+     2:54.6  C3  c3.sahne        3.1 sn  +  6.0  Zihninde yağmurlu bir akşam belirebilir.
+     3:03.7  C3  c3.gelmezse     4.7 sn  +  9.0  Görüntü belirmese de, gözlerin açık kalsa da sorun değil.
+     3:17.4  C3  c3.yer          5.0 sn  +  6.0  Belki sıcak bir odadasın. Belki üstü örtülü bir verandadasın.
+     3:29.9  C3  c3.yagmur       2.7 sn  +  9.0  Yağmur çatıya usul usul vuruyor.
+     3:41.6  C3  c3.ortu         3.1 sn  +  6.0  Üstünde kalın, yumuşak bir örtü var.
+     3:50.7  C3  c3.lamba        3.9 sn  +  9.0  Köşede bir lamba sarı, sıcak bir ışık veriyor.
+     4:03.6  C3  c3.kisilir      4.6 sn  +  9.0  Lambanın ışığı kısılıyor; loş bir aydınlık kalıyor. [5 dk kısa biçimi]
+     4:17.2  K   k.anahtar3      1.1 sn  +  7.0  Bugün bitti.
+     4:25.3  K   k.izin          4.8 sn  + 11.0  Uykuya dalarsan bu da güzel; sesim yavaşça kısılacak.
+     4:41.0  K   k.uyanik        4.4 sn  +  8.0  Uyanık kalırsan da olur; uzanıp dinlenmek yeter.
+     4:53.4  K   k.son           1.1 sn  +  5.5  Gece senin.
+
+== Plan · nes · 15 dk (toplam 900.0 sn; konuşma 226.4 sn; kip pref→max f=0.42; giriş 4.8 sn) ==
+    başlangıç blok klip          konuşma   sonra  metin
+     0:04.8  A   a.acilis        5.0 sn  +  5.3  Günün sesleri geride kalıyor; yatağına yerleşiyorsun.
+     0:15.1  A   a.durus         4.3 sn  +  7.3  Sırtüstü ya da yan, hangisi rahatsa öyle yatıyorsun.
+     0:26.7  A   a.ortu          4.3 sn  +  8.3  Üşüyorsan örtünü omuzlarına kadar çekmen iyi olur.
+     0:39.3  A   a.gozler        3.7 sn  +  4.8  Gözlerini kapatmak ya da açık tutmak sana kalmış.
+     0:47.8  A   a.izin          6.5 sn  +  5.8  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.
+     1:00.2  A   a.kolay         4.8 sn  +  6.3  Uyumaya çalışman gerekmiyor; uzanıp dinlenmek yeter.
+     1:11.2  A   a.karar         3.9 sn  +  5.3  Ne kadar gevşeyeceğine her an sen karar veriyorsun.
+     1:20.4  A   a.isler         3.1 sn  +  6.3  Yarına kalan işler sabaha kadar bekler.
+     1:29.8  C1  c1.fark         3.5 sn  + 11.7  Önce nefesini olduğu gibi fark ediyorsun.
+     1:45.0  C1  c1.yer          4.1 sn  + 11.7  Nefes en çok nerede belirginse dikkatin orada kalsın.
+     2:00.8  C1  c1.veris        3.9 sn  + 13.7  Alışı zorlamadan verişi biraz uzatmak yeterli.
+     2:18.4  C1  c1.zorlanirsan   2.7 sn  +  6.3  Nefes zor gelirse kendi ritmine dön.
+     2:27.4  C1  c1.gun          3.9 sn  + 11.7  Her veriş, günü biraz daha geride bırakıyor.
+     2:43.0  C1  c1.dudak        4.3 sn  + 11.7  Veriş burundan ya da hafif aralık dudaklardan çıkabilir.
+     2:59.0  C1  c1.birkac       3.3 sn  + 18.8  Birkaç nefes boyunca bu ritmi sürdürüyorsun.
+     3:21.2  C1  c1.k1           3.4 sn  +  9.7  Bugün bitti; artık dinlenebilirsin.
+     3:34.3  C2  c2.cerceve      6.8 sn  +  4.8  Ayaklarından başına doğru bedeninde dolaşacağız. Rahatsız eden bir yer olursa atla.
+     3:47.1  C2  c2.ayak         4.1 sn  +  8.3  Önce ayaklarının ağırlığını yatağa veriyorsun.
+     3:59.5  C2  c2.topuk        3.9 sn  +  8.3  Topuklarının yatağa değdiği yeri fark ediyorsun.
+     4:11.6  C2  c2.bacak        2.7 sn  +  8.3  Bacakların da yatağa yaslanıyor.
+     4:22.6  C2  c2.uyluk        2.9 sn  +  8.3  Uylukların ağır ve sıcak olabilir.
+     4:33.8  C2  c2.bel          3.3 sn  +  8.3  Belin ve sırtın bütün ağırlığıyla yatakta.
+     4:45.4  C2  c2.omurga       3.1 sn  +  9.3  Omurgan boydan boya yatağa uzanıyor.
+     4:57.8  C2  c2.el           2.7 sn  +  8.3  Ellerin olduğu yerde dinleniyor.
+     5:08.8  C2  c2.kol          3.7 sn  +  8.3  Kollarının ağırlığını da yatağa veriyorsun.
+     5:20.8  C2  c2.omuz         2.9 sn  +  8.3  Omuzların yatağa doğru inebilir.
+     5:32.0  C2  c2.boyun        2.1 sn  +  8.3  Ensen yastığa yaslanıyor.
+     5:42.4  C2  c2.yuz          3.5 sn  +  8.3  Alnın gevşek, gözlerinin çevresi yumuşak.
+     5:54.2  C2  c2.cene         3.1 sn  +  8.3  Çenen serbest, dişlerin hafif aralık.
+     6:05.6  C2  c2.bas          2.9 sn  +  8.3  Başının ağırlığını yastık taşıyor.
+     6:16.8  C2  c2.sicak        4.3 sn  +  9.3  Ellerinde ve ayaklarında hafif bir sıcaklık olabilir.
+     6:30.3  C2  c2.gelmezse     4.4 sn  +  8.3  Ağırlık her yerde aynı olmayabilir; bu da olur.
+     6:43.0  C2  c2.butun        3.5 sn  +  9.7  Baştan ayağa bütün bedenin yatağın üstünde.
+     6:56.2  C4  c4.giris        5.2 sn  +  6.8  Ondan bire geri sayacağım. Her sayıda nefesini bırakıyorsun.
+     7:10.4  C4  c4.uymaz        4.5 sn  + 11.3  Nefesin sayılara uymasa ya da sayıyı kaçırsan da olur.
+     7:26.2  C4  c4.n10          0.4 sn  +  7.8  on…
+     7:34.3  C4  c4.n09          0.6 sn  +  7.6  dokuz…
+     7:42.5  C4  c4.n08          0.6 sn  +  7.6  sekiz…
+     7:50.7  C4  c4.n07          0.6 sn  +  7.6  yedi…
+     7:58.8  C4  c4.n06          0.6 sn  +  7.6  altı…
+     8:07.0  C4  c4.n05          0.4 sn  +  7.8  beş…
+     8:15.2  C4  c4.n04          0.4 sn  +  7.8  dört…
+     8:23.3  C4  c4.n03          0.4 sn  +  7.8  üç…
+     8:31.5  C4  c4.n02          0.6 sn  +  7.6  iki…
+     8:39.7  C4  c4.n01          0.4 sn  +  9.3  bir.
+     8:49.3  C4  c4.bitti        4.6 sn  +  9.3  Sayılar burada bitiyor. Kaçını duyduğun önemli değil.
+     9:05.3  C4  c4.k2           3.0 sn  + 13.3  Bugün bitti; dinlenebilirsin.
+     9:21.6  C3  c3.sahne        3.1 sn  +  8.3  Zihninde yağmurlu bir akşam belirebilir.
+     9:33.0  C3  c3.gelmezse     4.7 sn  + 11.7  Görüntü belirmese de, gözlerin açık kalsa da sorun değil.
+     9:49.4  C3  c3.yer          5.0 sn  +  8.3  Belki sıcak bir odadasın. Belki üstü örtülü bir verandadasın.
+    10:04.8  C3  c3.su           3.1 sn  + 11.7  Yağmur istemezsen sessiz bir akşam da olur.
+    10:19.6  C3  c3.yagmur       2.7 sn  + 11.7  Yağmur çatıya usul usul vuruyor.
+    10:34.0  C3  c3.damla        2.5 sn  +  8.3  Oluktan tek tük damlalar düşüyor.
+    10:44.8  C3  c3.toprak       2.7 sn  + 13.7  Havada ıslak toprağın kokusu var.
+    11:01.3  C3  c3.cam          4.1 sn  +  8.3  Yakındaki camda yağmur izleri ağır ağır süzülüyor.
+    11:13.6  C3  c3.ortu         3.1 sn  +  8.3  Üstünde kalın, yumuşak bir örtü var.
+    11:25.1  C3  c3.agirlik      3.7 sn  + 13.7  Örtü, üstünde tatlı bir ağırlıkla duruyor.
+    11:42.5  C3  c3.sicaklik     2.9 sn  +  9.3  Altında kendi sıcaklığın birikiyor.
+    11:54.7  C3  c3.parmak       3.3 sn  +  9.3  Parmak uçların örtünün dokusunu buluyor.
+    12:07.3  C3  c3.yastik       2.7 sn  + 13.7  Yastığın kumaşı serin ve yumuşak.
+    12:23.7  C3  c3.lamba        3.9 sn  + 11.7  Köşede bir lamba sarı, sıcak bir ışık veriyor.
+    12:39.3  C3  c3.ses2         2.9 sn  +  8.3  Yağmurun sesi hiç değişmeden sürüyor.
+    12:50.5  C3  c3.uzak         4.5 sn  + 13.7  Yukarıda yağmurun, yakında kendi nefesinin sesi var.
+    13:08.7  C3  c3.kisilir      3.1 sn  + 10.7  Lambanın ışığı yavaş yavaş kısılıyor.
+    13:22.5  C3  c3.aydinlik     3.5 sn  + 14.7  Çevrende loş, yumuşak bir aydınlık kalıyor.
+    13:40.8  C3  c3.kal          3.3 sn  + 10.3  Yağmuru dinlemekten başka yapacak bir şey yok.
+    13:54.3  K   k.anahtar3      1.1 sn  +  8.8  Bugün bitti.
+    14:04.3  K   k.nefes         2.7 sn  + 12.3  Nefes kendi ritminde gelip gidiyor.
+    14:19.3  K   k.izin          4.8 sn  + 13.3  Uykuya dalarsan bu da güzel; sesim yavaşça kısılacak.
+    14:37.4  K   k.uyanik        4.4 sn  + 10.3  Uyanık kalırsan da olur; uzanıp dinlenmek yeter.
+    14:52.0  K   k.son           1.1 sn  +  6.8  Gece senin.
+
+== ÖZET ==
+  hoc     11/11 dakika GEÇTİ; yayın süreleri: 5 dk GEÇTİ, 15 dk GEÇTİ
+  hoc-lo  11/11 dakika GEÇTİ; yayın süreleri: 5 dk GEÇTİ, 15 dk GEÇTİ
+  nes     11/11 dakika GEÇTİ; yayın süreleri: 5 dk GEÇTİ, 15 dk GEÇTİ
+  metin denetimi: GEÇTİ
+  Kapsam: zamanlama ve metin kuralları; dinleme, söyleyiş ve insan/yedek inceleme onayı değildir.

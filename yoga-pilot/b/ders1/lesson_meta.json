@@ -1,0 +1,214 @@
+{
+ "head": {
+  "schema": "nefona.yoga.lesson/1 (PLAN §B.2 + ekler)",
+  "sozlesmeNotu": "Pilot ders2.lesson.json ile aynı şema (PLAN.v2 §B.2 + pilot 2.–4. tur ekleri: tier, syllables, words, sentences, phase, fillRank, fillGroup, requires, minTarget, carrier{id,index}, onsetPeriod + gapFloor + gapFromPeriod, subclips + sentenceGap + ttsUnit, short{belowSec,text,gapAfter}). Farklar: (1) v3 tek ses kararı: voice anahtarı female/male yerine 'hoc' (Nefona Hoca, voice_id Sr5w7dIZaRDglJ2cLaJm; sahip 2026-09-30, madde 8). (2) Nefes kilidi: tags.breathLock taşıyan her klibin onsetPeriod'u min=pref=max'tır; sessizlik = periyot − gerçek süre (en az gapFloor). Böylece 'Al…' ile bir sonraki 'Al…' arası tam döngü süresidir (C1 ve C2 10,000 sn, C3 13,000 sn) ve bordun ile halka buna kilitlenir. (3) Taşıyıcı öğeleri 'Al…', 'ver…', sayılar: mikro-klip, taşıyıcı cümlede üretilip üç nokta duraklarından kesilir (PLAN.v2 §B.2 mikro-klipler). (4) 16–30 dk blokları (C4, C5, BR.orta) blocks'ta değil, skeleton30'dadır (metinsiz; PLAN.v3 §A.4). (5) firstEverIntro: kişinin ilk yoga dersinde çalan ayrı giriş dosyası (PLAN.v3 §D.3), plana girmez. minSec/prefSec/maxSec tahmindir (Nefona Hoca köşesi: 4,68 hece/sn, yüksek duraklama; VARSAYIM); üretimden sonra voice.hoc.sec ile yeniden hesaplanır.",
+  "id": "ders1-nefesin-ritmi",
+  "version": "B-parti1-taslak-2 (2026-09-30; karar 2 yedeği iki model incelemesi işlendi, b/INCELEME.md; sahibin kulağı bekliyor)",
+  "title": "Nefesin Ritmi",
+  "tagline": "Nefesini yavaşlatmayı ve verişini uzatmayı adım adım öğreniyorsun.",
+  "daypart": "day",
+  "posture": "seated",
+  "defaultMinutes": 5,
+  "minutes": {"min": 3, "max": 15, "step": 1, "presets": [3, 5, 15], "stage3Max": 30,
+              "note": "PLAN.v3 §A.1: ilk yayında 3 · 5 · 15; 30 dk ve kaydırıcı ikinci aşamada (Kapı 9–11)"},
+  "openingNotice": "Bu dersi yalnızca araç ya da makine kullanmadığın ve suda olmadığın bir sırada dinle.",
+  "openingScreen": [
+   "İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.",
+   "Bu dersi yalnızca araç ya da makine kullanmadığın ve suda olmadığın bir sırada dinle.",
+   "Başın dönerse ya da ellerin karıncalanırsa normal nefesine dön."
+  ],
+  "preparationCard": [
+   "Sırtını dik tutabileceğin bir sandalye ya da minder",
+   "15 dakikalık sürümde vızıltılı nefes var; sesinin kimseyi rahatsız etmeyeceği bir yer seçmek iyi olur"
+  ],
+  "preparationToggles": [
+   {"id": "speechClarity", "label": "Konuşmayı daha net duymak istiyorum", "default": false,
+    "remember": "kullanıcı başına",
+    "effect": "voicePhaseGainDb.clarityMode + music.clarityMode + qa.speechOverBedDbMinClarity",
+    "preselect": "profilde yaş bilgisi 60 ve üstüyse önceden işaretli (pilot L3-10; profil alanı doğrulanmadı, VARSAYIM)"}
+  ],
+  "soundCheck": {
+   "when": "ilk Yoga oturumu, \"Başla\"dan önce (kütüphane sırasında Ders 1 ilk derstir, PLAN.v2 §A.3); ayarlardan yeniden açılabilir",
+   "clips": ["c1.s1.01", "c1.s1.02", "c1.s1.05", "c1.s1.10"],
+   "screenText": "Al… iki… ver… altı…",
+   "level": "Derinleşme evre düzeyi (−1,5 dB) ve kısık bordun yatağı (≈ −34,5 LUFS)",
+   "question": "Sözcükleri rahatça seçebildin mi?",
+   "options": ["Evet", "Hayır"],
+   "onNo": "speechClarity açılır ve kullanıcı başına hatırlanır",
+   "durationSec": 10,
+   "note": "VARSAYIM; pilotun kalıbı (ders2 soundCheck); sahibin kör dinlemesinde (karar 2 yedeği) sınanır"
+  },
+  "eveningHint": {"afterLocalHour": 20, "text": "Uyumadan önce dinliyorsan Uykuya Geçiş daha uygun olabilir.",
+                  "note": "UI satırı, seste yok; metin PLAN.v3 §2.0 satır 7 (modul.md); saat eşiği VARSAYIM"},
+  "leadIn": {"min": 3.0, "pref": 4.0, "max": 5.0},
+  "limits": {"silenceWindowMaxSec": 90, "clipMaxSec": 15,
+             "clipMaxNote": "Z3-07: birimin konuşması (cümle arası sessizlikler hariç) her hızda <= 15 sn",
+             "lastSecondsNoNewImage": 60, "sentenceGapMinDerinSec": 1.0,
+             "silenceMaxSecUpTo15": 20,
+             "silenceNote": "<= 15 dk'da duyurulu pencere yok; hiçbir sessizlik 20 sn'yi aşmaz (PLAN.v2 §B.2 boşluk sınıfları; PLAN.v3 §A.2 kural 3). Pencereler (C5) 30 dk iskeletinde"},
+  "sentenceGapByPhase": {"Varış": {"min": 0.6, "pref": 0.8, "max": 1.0}, "Derinleşme": {"min": 0.8, "pref": 1.0, "max": 1.3},
+                         "Derin": {"min": 1.2, "pref": 1.8, "max": 2.5}, "Kapanış": {"min": 0.8, "pref": 1.0, "max": 1.2}},
+  "breathCycles": {
+   "C1": {"periodSec": 10.0, "in": 4.0, "out": 6.0, "hold": 0, "droneLoopSec": 10.0, "droneLoopSamples44k1": 441000,
+          "cues": "'Al…' döngü başında (4 sn), 'ver…' verişin başında (6 sn); kısa veriş cümlesi 'ver…'den 1,2 sn sonra başlar ve sonraki 'Al…'dan en az 0,6 sn önce biter"},
+   "C2": {"periodSec": 10.0, "in": 2.5, "topUp": 1.5, "out": 6.0, "hold": 0, "droneLoopSec": 10.0,
+          "cues": "'Al…' (2,5 sn) → 'biraz daha…' (1,5 sn) → 'ver…' (6 sn); süre bölüşümü VARSAYIM (Balban 2023'te süre verilmiyor)"},
+   "C3": {"periodSec": 13.0, "in": 4.0, "out": 9.0, "hold": 0, "droneLoopSec": 13.0, "droneLoopSamples44k1": 573000,
+          "cues": "ilk turda 'Al…' ve 'vızıltıyla ver…', ikinci turda yalnız 'Al…'"},
+   "note": "PLAN.v2 Ders 1 kartı (C1 10,000 sn, C3 13,000 sn; Trivedi 2023 12–14 sn). Bordun uygulamanın kendi hattıdır (render.mjs); nefes serisinin ilk 'Al…'sıyla evreye oturtulur, seri dışındaki cümlelerde döngü sürer ama nefes ipucu yoktur"
+  },
+  "planner": {
+   "kural": "Pilot planlayıcısı (timing.py) aynen: T4 tek Varış ve tek Kapanış; P1 bloklar zorunlu klipleriyle; artımlar entryRank/fillRank sırasıyla, sessizlikler pref iken sığıyorsa; ilk sığmayanda durulur (önek kuralı ⇒ plan(T) ⊆ plan(T+1)); Kapanış sessizlikleri sıkıştırılmaz (min = pref). Ders 1 ekleri: (1) breathLock klipleri periyotla yerleşir, esnemez; (2) short (belowSec 240) ve minTarget (240) yalnız 3 dk'yı kurar; (3) 3 dk ⊆ 5 dk ve 5 → 15 her dakika bir sonrakinin alt kümesidir; (4) 16–30 dk artımlarının sırası 500 ve üstündedir (skeleton30), bu yüzden <= 15 dk planları ikinci aşamada değişmez.",
+   "stretchCapBeforeIncrement": 0.5,
+   "entryRanks": {"C2": 295, "C3": 400},
+   "p1DropOrder": [],
+   "rankFloorStage3": 500,
+   "variants": "Ders 1'de dönüşümlü seçenek (alternates) yok (VARSAYIM; pilot P-N5 kalıbı ikinci aşamada eklenebilir)"
+  },
+  "timingModel": {
+   "model": "pilot timing.py: alt klip süresi = hece / eklemleme hızı + TTS-içi duraklamalar + uç payı (0,31; mikro 0,15) × DUR_SCALE",
+   "corners": {
+    "hoc": {"rate": 4.68, "profile": "hi", "durScale": 1.0,
+            "basis": "Nefona Hoca önizleme eklemleme hızı 4,68 hece/sn (render/sel/hoc; orkestratör verisi) + yüksek (Hakan v2) duraklama profili. VARSAYIM. Denetim: aynı model Ders 2'nin ölçülmüş hoc kliplerinden %3,6 uzun (ölçülen/model 0,965; 110 ortak klip) → muhafazakâr"},
+    "hoc-lo": {"rate": 4.68, "profile": "lo", "durScale": 1.0,
+               "basis": "aynı hız, düşük duraklama profili. VARSAYIM. Ders 2'nin ölçülmüş hoc kliplerine en yakın model (ölçülen/model 0,990, 110 ortak klip)"},
+    "nes": {"rate": 5.6, "profile": "hi", "durScale": 1.109,
+            "basis": "Neslihan'ın Ders 2'de ölçülmüş süreleri: ölçülen/model(5,6 yüksek) = 1,109 (110 ortak klip; v3/calc/measure.py). VARSAYIM: Ders 1 metnine aynı oranla taşındı"}
+   },
+   "slackFloors": {"3": 10.0, "5": 15.0,
+                   "note": "min sessizliklerle boş pay; 5 dk tabanı pilot T6 (15 sn), 3 dk tabanı sure.md §8 önerisi (10 sn); ikisi de VARSAYIM"},
+   "contingency3min": {"when": "ses ölçülünce hoc köşesinde 3 dk boş payı < 10 sn çıkarsa (bugün 10,1 sn; süreler × 1,05 olunca 7,2)",
+                       "do": "c1.d3 döngüsüne (Al… · ver… · \"Sayıyı kaçırırsan yeniden başlamak yeter.\") minTarget 240: 3 dk'da çıkar, 4 dk ve üstünde değişmez; c1.d2'nin \"Altı uzun gelirse beş de olur.\" izni 3 dk'da kalır",
+                       "verified": "düzeltme turunda planlayıcıyla denendi (hoc köşesi): boş pay × 1,00 10,1 (planlayıcı yerine c1.d1'i koyar), × 1,05 17,2, × 1,10 14,3 sn; 3, 4 ve 5 dk check_plan GEÇTİ",
+                       "note": "usta hoca önerisi (c1.d2 yerine c1.d1) boş payı değiştirmiyor: döngüler nefes kilidinde, döngü başına konuşma + sessizlik 10 sn sabit (denendi: 10,09 → 10,09). Kısaltma ancak bir döngü çıkınca gelir; güvenlik önceliğiyle çıkan döngü c1.d2 değil c1.d3 (INCELEME.md UH18a)"},
+   "note": "Ölçülmüş Ders 1 süresi yok; bütün süreler tahmindir. Ses üretilince voice.hoc.sec ile yeniden kurulur ve check_plan yeniden koşar."
+  },
+  "voiceProduction": {
+   "path": "yalnız MCP (creative_generate_speech); hız, kararlılık, seed, previous_text ve telaffuz sözlüğü yok",
+   "voice": "Nefona Hoca (voice_id Sr5w7dIZaRDglJ2cLaJm; sahip 2026-09-30, madde 8, VARSAYIM seçimi)",
+   "model": "eleven_v4 (pilot SPEC §2)",
+   "takes": "birim ya da taşıyıcı başına 3 çekim (generations_count); Scribe birebir eşleşen, kesimi tutan ve taşıyıcı ekleminde F0 sıçraması <= 2 yarım ton olan çekim seçilir (SPEC §4, v3.1–v3.3)",
+   "microCuts": "sayılı taşıyıcıda öğeler arası duraklama kısa olabilir; kesim ölçüyle denetlenir ve kulak listesine girer (SPEC §4.3 c). 'Al…' ve 'ver…' ipuçları 8 öğelik taşıyıcılarda; aynı ipucunun iki kez çalmaması için her döngünün kendi öğesi var",
+   "status": "bu adımda hiçbir ses üretilmedi; ElevenLabs bağlantısı bu oturumda yok"
+  },
+  "voicePhaseGainDb": {"Varış": 0.0, "Derinleşme": -1.5, "Derin": -3.0, "Kapanış": 0.0,
+                       "kapanisGecisi": "k.donus'tan önceki >= 4 sn'lik sessizlikte rampa, o anki evre düzeyinden 0 dB'e (basamak yok; pilot S3-02)",
+                       "clarityMode": {"Varış": 0.0, "Derinleşme": -0.5, "Derin": -1.0, "Kapanış": 0.0, "note": "pilot L2-10 (VARSAYIM)"}},
+  "music": {
+   "source": "müzik A = ElevenLabs Music (sahip 2026-09-30, madde 8) Varış ve Kapanış pad'i için; nefes bloklarının bordunu uygulamanın kendi hattı basar (PLAN.v2 §D.3: tempo ve döngü tam olmalı)",
+   "theme": "Re: tanpura benzeri bordun (Re + La, açık beşli; melodisiz) nefes bloklarında; Varış ve Kapanış'ta aynı tonda yumuşak pad (~60 BPM hissi istemde, ölçülür). 3, 5 ve 15 dk'da aynı tema (PLAN.v2 §A.1; PLAN.v3 §A.2 kural 11)",
+   "key": "Re (VARSAYIM; estetik karar)",
+   "bpmFeel": null,
+   "pulseNote": "ritimsiz pad; bordun döngüsü nefes döngüsüne eşit (C1/C2 10,000 sn, C3 13,000 sn) ve alışta hafif açılıp verişte kapanır (VARSAYIM; belirgin motif yok)",
+   "phases": ["varis (pad)", "cekirdek (bordun; C1–C3)", "kapanis (pad)"],
+   "textureLayers": {"bordun:10": "c1.izle: pad → bordun, >= 8 sn çapraz geçiş, konuşmanın altında",
+                     "bordun:13": "c3.ad: aynı ton, döngü 13 sn",
+                     "bordun-kısık": "c3.sessizlik: bordun Derin düzeyine iner",
+                     "pad:kapanis": "k.donus: bordun çekilir, pad girer; dönüş tınısı 2 sn önce",
+                     "rule": "3 dk'da iki doku geçişi (Varış → çekirdek, çekirdek → Kapanış; PLAN.v3 §A.2 kural 11); çapraz geçiş >= 8 sn; 20 sn'den kısa boşlukta doku değişimi yalnız bu iki sınırda"},
+   "duckDefault": true,
+   "duckedBedLufs": {"Varış": -33.0, "Derinleşme": -34.5, "Derin": -36.0, "Kapanış": -33.0},
+   "windowBedAboveDuckDb": 6.0,
+   "windows": "<= 15 dk'da yok",
+   "returnTone": "k.donus'tan 2 sn önce yumuşak dönüş tınısı (pilot P-S10; VARSAYIM)",
+   "endFadeSec": 5,
+   "nature": {"default": "kapalı", "note": "PLAN.v2 §A.2.1: doğa kapalı; 'Doğa' seçilirse ikinci aşamada motor en uygun türü çalar"},
+   "clarityMode": {"bedExtraDuckDb": -6.0, "note": "pilot L2-10 (VARSAYIM)"}
+  },
+  "visual": {
+   "form": "genişleyen halka",
+   "palette": {"dark": "#8CCB9E", "light": "#397E4C", "note": "PLAN.v2 §E.2 (adaçayı yeşili)"},
+   "phases": ["varis", "derinlesme", "derin", "kapanis(şafak)"],
+   "breathLock": "halka yalnız söylenen nefes ipuçlarına kilitlenir: 'Al…' ile cue.breath.in sn'de büyür, 'ver…' ile out sn'de küçülür; cue.breath.silent olan cümlede count döngü boyunca sessizce sürer; ipucu yoksa halka nefes almaz, yalnız >= 20 sn periyotlu ışık kayması (PLAN.v2 §E.2)",
+   "pulse": {"respectFlashSafe": true, "whenFlashSafeFalse": "ölçeklenme yok, yalnız çok yavaş opaklık"},
+   "dawn": {"startRule": "max(k.donus.start, end - 90)", "spanSec": [60, 90], "spanSecBelow240": [45, 90],
+            "minRampSec": 60, "minRampSecBelow240": 45, "dawnMaxLuminance": "bağıl %15 (PLAN.v2 §E.2 tavanı; VARSAYIM)",
+            "note": "3 dk'da şafak 45 sn (PLAN.v3 karar 4d)"}
+  },
+  "qa": {
+   "speechOverBedDbMin": 15.0, "speechOverBedDbMinClarity": 21.0,
+   "speechOverBedNote": "her konuşma parçası, 1 sn'den kısalar dahil (SPEC v3.4)",
+   "microClipLevel": "SPEC v3.3: >= 0,4 sn parça −18 LUFS kapılı; tek heceli mikro parçada ek ofset 0 dB",
+   "carrierJoinF0StepSemitones": 2.0,
+   "breathLockToleranceSec": 0.02,
+   "breathLockNote": "karışımda 'Al…' başlangıçları arası periyot ±20 ms (bordun ve halka buna kilitli; VARSAYIM)",
+   "derinClipRateCeil": 5.0,
+   "sentenceGapNote": "Derin evrede hiçbir cümle sınırında 1,0 sn'den kısa sessizlik yok (pilot L3-02)",
+   "piecePosition": "SPEC v3.5–v3.6: her parça ±50 ms içinde, 4 kHz altı ilinti >= 0,95, kayma <= 1 ms"
+  },
+  "evidenceLine": "Neye dayanıyor: yavaş nefesle ilgili 223 çalışmayı birleştiren bir incelemede kalp atışı değişkenliği seans sırasında ve hemen sonrasında arttı; kısa alış ve uzun verişle yapılan nefes, uzun alış ve kısa verişe göre daha çok gevşeme bildirimiyle ilişkiliydi. Bu ders bir sonuç vaadi taşımaz.",
+  "evidenceByVersion": {
+   "3": "Üç dakikalık sürümün etkisini doğrudan sınayan bir çalışma bulamadık. Bir çalışmada meditasyon uygulamasını kullananların çoğu günde beş dakikanın altında kaldı; bu sürüm o gerçek kullanım için var.",
+   "5": null, "15": null,
+   "note": "PLAN.v3 §A.2 kural 12: 3 dk kartında etki cümlesi yok; yalnız Radin 2025'in kullanım bulgusu ve bu cümle"
+  },
+  "sourcesCard": {
+   "rows": [
+    {"pmid": "35623448", "cite": "Laborde 2022 · yavaş nefes ve kalp atışı değişkenliği (223 çalışma)", "detail": "Laborde 2022 (SD/MA, 223 çalışma; seans sırasında, tek seanstan hemen sonra ve çok seanslı programdan sonra vagal aracılı KAD arttı; tempo özette verilmiyor)", "doi": "10.1016/j.neubiorev.2022.104711", "file": "sakin"},
+    {"pmid": "25156003", "cite": "Van Diest 2014 · kısa alış, uzun veriş", "detail": "Van Diest 2014 (n=30; alış/veriş oranı 0,42 ile 2,33 karşılaştırıldı; kısa alış/uzun veriş daha çok gevşeme bildirimiyle ilişkili; yüksek frekanslı KAD artışı yalnız yavaş + uzun verişte)", "doi": "10.1007/s10484-014-9253-x", "file": "sakin"},
+    {"pmid": "11751348", "cite": "Bernardi 2001 · dakikada altı soluk ritmi", "detail": "Bernardi 2001 (n=23; dakikada 6 kez okunan ritmik dualar ve mantralarda kardiyovasküler ritimler eşzamanlı güçlendi)", "doi": "10.1136/bmj.323.7327.1446", "file": "sakin"},
+    {"pmid": "36630953", "cite": "Balban 2023 · günde 5 dakika iç çekiş", "detail": "Balban 2023 (uzaktan RKÇ, n=108, 1 ay, günde 5 dk; döngüsel iç çekmede olumlu duygulanımda ve uyku sırasındaki solunum hızında meditasyondan fazla değişim; olumsuz duygulanım ve durumluk kaygıda gruplar arası fark yok; keşif amaçlı; tam metin)", "doi": "10.1016/j.xcrm.2022.100895", "file": "sakin, benlik"},
+    {"pmid": "38204770", "cite": "Trivedi 2023 · vızıltılı nefeste döngü uzunluğu", "detail": "Trivedi 2023 (kişi-içi çapraz, n=118; 8–14 sn döngüler; en yüksek KAD 12–14 sn döngüde)", "doi": "10.4103/ijoy.ijoy_113_23", "file": "sakin"},
+    {"pmid": "34306146", "cite": "Toussaint 2021 · \"derin nefes\" talimatı ve uyarılma", "detail": "Toussaint 2021 (RKÇ, n=60; derin nefes grubunda fizyolojik uyarılma önce arttı, sonra başlangıca döndü) → ders önce doğal nefesle başlar, 'derin nefes al' demez", "doi": "10.1155/2021/5924040", "file": "sakin, güvenlik"},
+    {"pmid": "37813123", "cite": "Rana 2023 · hızlı soluma ve nöbet (neden hızlı nefes yok)", "detail": "Rana 2023 (derleme; hiperventilasyon jeneralize epilepside hastaların %50'sine kadarında klinik nöbet tetikleyebilir) → derste hızlı ya da zorlu nefes yok", "doi": "10.1055/s-0043-1774808", "file": "güvenlik"},
+    {"pmid": "39690521", "cite": "Luu 2024 · hazırlık, yerleşme ve dışa dönüş", "detail": "Luu 2024 (travma-duyarlı YN'nin 10 bileşeni; uygun uzunluk ve hazırlık, yeterli yerleşme ve dışa dönüş; kavramsal)", "doi": "10.17761/2024-D-24-00021", "file": "sakin, güvenlik"},
+    {"pmid": "28300508", "cite": "Howard 2017 · dönüşün önemi", "detail": "Howard 2017 (klinik yorum ve 3 vaka; uyandırma başarısızlığı istenmeyen etkilerde önemli)", "doi": "10.1080/00029157.2016.1203281", "file": "güvenlik"},
+    {"pmid": "24146758", "cite": "Cramer 2013 · yoganın yan etkileri", "detail": "Cramer 2013 (vaka raporları; zorlu nefes en sık anılanlardan) → her harekette 'ağrı ya da baş dönmesi olursa bırak'", "doi": "10.1371/journal.pone.0075515", "file": "güvenlik"},
+    {"pmid": "39808431", "cite": "Radin 2025 · gerçek kullanım kısa (3 dk kartı)", "detail": "Radin 2025 (RKÇ, n=1458; tam metin: meditasyona özgü kullanım ortalama 3,36 dk/gün, kullanıcıların %69,7'si günde 5 dk'nın altında)", "doi": "10.1001/jamanetworkopen.2024.54435", "file": "benlik"}
+   ],
+   "note": "cite kartta gösterilir; detail yalnız ders1.script.md için. Hepsi *.dogrulanmis.md dosyalarından",
+   "footer": "Kaynak: PubMed (National Library of Medicine). DOI'ler https://doi.org/ önekiyle açılır."
+  },
+  "progress": {"domain": "calm", "effectKey": "nefes-ritmi", "measure": "gerginlik", "question": "Şu an ne kadar gerginsin?",
+               "scale": [1, 10], "better": "down", "when": "önce ve sonra; ikisi de atlanabilir",
+               "note": "önce → sonra bir 'nasıl hissettin' gidişatıdır, etki kanıtı değildir (güvenlik §11.F); PLAN.v2 Ders 1 kartı"},
+  "afterCheck": {"question": "Ders sırasında zorlandın mı?", "options": ["Hayır", "Biraz", "Çok"], "skippable": true,
+                 "onCok": "Bu olabiliyor; zorlandığında durmak her zaman doğru bir seçim. Bir dahaki sefere daha kısa ya da gözleri açık bir sürüm deneyebilirsin. Sık tekrarlarsa ya da geçmezse bir uzmanla konuşmak iyi olur. Acil durumda 112.",
+                 "storage": "veri telefonda kalır; puan olarak gösterilmez (pilot ders2 ile aynı)"},
+  "panelChecks": [
+   "D1-01: sayılı döngüde 1 sn arayla gelen 'iki… üç…' öğeleri Derinleşme düzeyinde (−1,5 dB) net ve doğal mı; kesilmiş mikro parçalar kopuk duyuluyor mu?",
+   "D1-02: 'Al…' ve 'ver…' ipuçları makine gibi mi duyuluyor? Her döngünün kendi çekimi var; yine de tekdüzeyse kulak listesine",
+   "D1-03: veriş cümleleri ('Altı uzun gelirse beş de olur.' vb.) verişin içinde bitiyor mu; sonraki 'Al…'dan önce en az 0,6 sn boşluk kalıyor mu (karışımda ölçülür)",
+   "D1-04: bordun döngüsü (10,000 / 13,000 sn), halka ve 'Al…' başlangıçları cihazda aynı anda mı (kilitli ekran dahil)",
+   "D1-05: 'Sıradaki nefes sende; ben susuyorum.' ve ardından gelen ≈ 11 sn'lik sessiz döngü doğal mı, dinleyici ritmi sürdürebiliyor mu",
+   "D1-06: 'bramari' söyleyişi (Türkçe yazım, PLAN.v2 §C.7) ve 'vızıltıyla ver…' vurgusu",
+   "D1-07: vurgu ve eşyazımlılar insan kulağıyla: 'Yüzün' (surat), 'Al…' (fiil), 'dört… beş… altı…' sayılar"
+  ]
+ },
+ "quickClosing": {
+  "id": "K.hizli", "kind": "utility", "title": "\"Kapanışa geç\" (oturarak ders: aynı dosyanın Kapanış'ına atlama)",
+  "mode": "sameFileClosing",
+  "cue": {"music": "phase:kapanis; returnTone:-2s", "visual": "dawn", "voiceGain": "rampa: o anki evre düzeyinden 0 dB'e 4 sn"},
+  "leadInSec": 4.0, "voiceGainRampSec": 4.0,
+  "prefixByActiveBlock": {}, "releaseClip": {}, "windowReturn": {},
+  "rule": "PLAN.v3 §D.3: o anki cümle biter; aynı dosyada Kapanış'ın başına, dönüş tınısından önceki sessizliğe 2 sn'lik geçişle atlanır; kapanış kısalmaz. Ders 1'de imge ya da zor blok yok, bu yüzden bırakma ön klibi yok; k.nefes ('Nefesin kendi ritmini buluyor.') nefes kalıbını bırakır. Oturarak derste hızlı kapanış = dosyanın kendi Kapanış'ı (sure.md §3.2 kural 10: ≈ 45–55 sn en kısa sürümde). Aşağıdaki klipler denetim içindir: en kısa Kapanış'ın zorunlu klipleri."
+ },
+ "stopReturn": {"id": "D.durdur", "kind": "utility", "title": "Durdur (X) sonrası isteğe bağlı 20–30 sn sesli dönüş (her derste aynı metin; pilot ders2'den aynen)"},
+ "firstEverIntro": {"id": "I.ilk", "kind": "utility", "title": "Kişinin ilk yoga dersinde önce çalan kısa giriş dosyası (PLAN.v3 §D.3)",
+                    "rule": "dersin giriş müziği + tek cümle, sonra dersin başına 2 sn'lik geçiş; ≈ 7 sn (VARSAYIM); planın dışında"},
+ "skeleton30": {
+  "status": "İKİNCİ AŞAMA (Kapı 9–11): 16–30 dk metni yazılmadı. Bu bölüm iskelettir; usta hoca (ya da karar 2 yedeği) onayına gider. Ayrıntı: iskelet30.md",
+  "playOrder": ["A", "C1", "C2", "BR.orta", "C4", "C3", "C5", "K"],
+  "blocks": [
+   {"id": "BR.orta", "kind": "bridge", "placement": {"before": "C4"}, "requiresMinSec": 1200, "entry": "C4 ile birlikte",
+    "content": "ortadaki çıkış kapısı: ortak açılış cümlesinin 'istediğin an … senin elinde' biçimi + gözler açıksa bakış serbest + dayanak (sandalye ya da zemin); ≥ 20 dk her sürümde (PLAN.v2 §C.5, güvenlik §11.B-3; pilot check_plan '>= 20 dk ortada hatırlatma')"},
+   {"id": "C4", "kind": "core", "priority": 4, "playOrder": 3, "entryRank": 520,
+    "title": "Nadi şodana (burun deliği değiştirme), tutmasız",
+    "content": "'Burnun tıkalıysa atla' ile açılır; önce 3–4 sesli sayımlı tur (sağ baş parmak sağ burun deliğini, yüzük parmağı sol burun deliğini kapatır; parmaklar göze değmez), sonra sessiz turlar; döngü 10,000 sn (4 al / 6 ver, tek burun deliğinden); tutma yok (güvenlik §11.C isteğe bağlı satırı)",
+    "anchorsSec": {"20": 240, "30": 360}},
+   {"id": "C5", "kind": "core", "priority": 5, "playOrder": 5, "entryRank": 700,
+    "title": "Sessiz nefes tanıklığı: duyurulu pencereler (≤ 90 sn)",
+    "content": "iki pencere: önce duyuru ('Birkaç nefes sessizlik… sonra sesim geri gelecek.' kalıbı, bir kapı taşır), sonra karşılama; ikinci pencerede pad çekilir, yalnız bordun kalır (PLAN.v2 Ders 1 kartı); imge yayının son adımı: sesin ardından kalan sessizlik",
+    "anchorsSec": {"30": 300}}
+  ],
+  "anchorsSec": {"5": {"A": 45, "C1": 180, "K": 75}, "10": {"A": 60, "C1": 270, "C2": 180, "K": 90},
+                 "15": {"A": 75, "C1": 270, "C2": 180, "C3": 270, "K": 105},
+                 "20": {"A": 90, "C1": 300, "C2": 180, "C4": 240, "C3": 270, "K": 120},
+                 "30": {"A": 90, "C1": 360, "C2": 210, "C4": 360, "C3": 330, "C5": 300, "K": 150},
+                 "source": "PLAN.v2 §B.4 Ders 1 çapaları (VARSAYIM); <= 15 dk'nın planlanan süreleri timing.txt'te"},
+  "keySentence": {"1": "c1.anahtar1 · C1 sonu", "2": "c2.anahtar2 · C2 sonu", "3": "c3.anahtar3 · C3 sonu (30 dk'da C5'ten önce)"},
+  "imageArc": ["kendi nefesinin sesi (C1 c1.ses, C2 veriş sesi)", "vızıltının dudaklarda, yüzde, göğüste titreşimi (C3)", "sesin ardından kalan sessizlik (C3 sonu; 30 dk'da C5 pencereleri)"],
+  "rankFloor": 500,
+  "fillOrderStage3": "(1) BR.orta + C4 (entryRank 520, 16–19. dk), (2) C1/C2/C3'ün 16–30 genişletmeleri (fillRank 500–690), (3) C5 (entryRank 700, ≈ 25. dk), (4) Varış ve Kapanış'ın uzun biçimleri (30 dk çapası A 1:30, K 2:30) — sıra ikinci aşamada ölçülmüş sürelerle kesinleşir"
+ }
+}

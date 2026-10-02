@@ -1,0 +1,73 @@
+{
+ "unit": "c2.sayac",
+ "idx": 35,
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "A6OdXdsjTRTGds3lgG6M",
+ "session_ids": [
+  "LxdOhEJkip4ZAwFf6dNh",
+  "o5m0Bgfew6m3DE8NRKxW",
+  "DOzAemGrqSu1hcG21jsh"
+ ],
+ "requested_at": "2026-09-29T21:47:17Z",
+ "downloaded_at": "2026-09-29T21:48:35.165752+00:00",
+ "tts": "Geriye doğru sayacağım. Nefes sayılara uymak zorunda değil.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/c2.sayac/t1.mp3",
+   "session_id": "LxdOhEJkip4ZAwFf6dNh",
+   "generation_id": "Aocq9OrWps9mUd6CvyWp",
+   "api_duration_secs": 4.0,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/LxdOhEJkip4ZAwFf6dNh/Aocq9OrWps9mUd6CvyWp/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T214720Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=9916787d2de9f61f224931548c4a407e5b4e17c42e518c6c4b302be35613868c1b159add6f7903af5653ae4c3bf184ac7e5ca72178a0be71cb0d17df088d8b2b14874170e3ceb01eb54d2c417e9c1e98f6f0ffc8ac95436ac7078e33530869e11b9acee7d26f26d920935c74341392a2b9e81b8fe9a23fd6a80b543f8f26828f172c22f7ec9451337e0fd513e783053dd1d5cfae8db87574be905da384ba3def06b3558bef6a5e36910e85062da540ef6d3c458ae3a8f6378dbdc8c25e7ca3636828f7625680b98721ba8ab1bfb40bfa19c2b16624d18d5bab3877ab081a07474693584681eecd863383192d1f0ed89a91cf8c18aaf65a1a518104cb16efdd1f",
+   "node_id": "A6OdXdsjTRTGds3lgG6M",
+   "ok": true,
+   "duration_secs": 4.0,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 82081,
+   "attempts": 1
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/c2.sayac/t2.mp3",
+   "session_id": "o5m0Bgfew6m3DE8NRKxW",
+   "generation_id": "IpOyHzWdow2xd1qGHRth",
+   "api_duration_secs": 4.08,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/o5m0Bgfew6m3DE8NRKxW/IpOyHzWdow2xd1qGHRth/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T214720Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=9feae91fcf54a93b42b6ebfb69d3c2df563c753d2b8641e384f5def999a12be212b5dc29f137bf5f1e30e50d794577e1f51b71630c57cf441fb505dc158fd43562377fff40a9a1a0e572574e12b148a3b7f5f7121029a1cea15d9f83179fd8305e0cf674fedd9a8867d84c43e514eaae9ce6f8179c26cc6a0f35e3eba8b02f674fed38c83817d54c6eee055ef63b706faab3e49b3056db991764cf2dcb14974be5739a0c25fe8f7fba980ded5acb176a5aff30c603d6bf38dfcaa63f87ebf00d14866440b35766ade1c8779c5a0db26d2c002f27cc809d1735f23e22c49b33032cc45847a16dbce0018e3ab90dcc2afb29138349a1494afce01b178647253b31",
+   "node_id": "A6OdXdsjTRTGds3lgG6M",
+   "ok": true,
+   "duration_secs": 4.08,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 83335,
+   "attempts": 1
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/c2.sayac/t3.mp3",
+   "session_id": "DOzAemGrqSu1hcG21jsh",
+   "generation_id": "IHsITnpf2ldzmVrSTXZE",
+   "api_duration_secs": 4.08,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/DOzAemGrqSu1hcG21jsh/IHsITnpf2ldzmVrSTXZE/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T214720Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6c01d123eec34370278dda2a4ffeec8f4b4bf39765cd4e54b0365f45d4e055028a780e3143e32f8eb631ea0f17206f56a468a07343cdeedc1d4aa00c522b9f13df88ae418a9672e45828f69065d890cce7fa0fd51c3a719fe02f98c2d719287e1feab0341c629d6d884c8746e898a03f7a576af15e57b2f59063435f5f7d190e475751080022a42142950839fd73939ee9bb55e51ad6be076ea6584a37b563bc6ab6f2f2933b0b38e74fbf505b149c6de1866dce179a4f51a25d9b939ea880984eed061d91284d8b20e316ab4cae4a126f4689f0ac0adcdd748b0155f3e1c5ef69107eaf861fdfa9c875562f7bb8386233d7b3bbead65611a4815cb6bfac1839",
+   "node_id": "A6OdXdsjTRTGds3lgG6M",
+   "ok": true,
+   "duration_secs": 4.08,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 83335,
+   "attempts": 1
+  }
+ ],
+ "all_ok": true,
+ "n_takes_ok": 3,
+ "failed_generations": [],
+ "who": "hoc-2",
+ "retake": false,
+ "server_prompt_echo": "Geriye doğru sayacağım. Nefes sayılara uymak zorunda değil.",
+ "server_prompt_equals_tts": true
+}

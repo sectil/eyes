@@ -1,0 +1,15 @@
+{
+ "unit": "car.butun",
+ "take": "t2",
+ "asset_id": "07Joympx6pv4dutyGX3D",
+ "source_node_id": "SGXQprtmYP7fsK2JjD49",
+ "stt_node_id": "407KMYEbsHSio65fidAZ",
+ "session_id": "21llT3Cx2YbSSqeFhtul",
+ "generation_id": "0xMxIBz0nEpNpZ4CLVJ0",
+ "actual_credits": 82.28,
+ "actual_cents": 1.496,
+ "scribe_text": "Bütün sağ bacak. Bütün sol bacak. Her iki bacak. Bütün sağ kol. Bütün sol kol. Her iki kol. Baştan ayağa bütün beden. Bütün beden. Bütün beden",
+ "spoken_duration_secs": "14.7",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 26\n}"
+}

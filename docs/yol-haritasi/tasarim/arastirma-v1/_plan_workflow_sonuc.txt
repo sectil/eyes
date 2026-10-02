@@ -1,0 +1,817 @@
+{
+  "summary": "Sonsuz yol üst akıl planı: 5 araştırma notunu ve onaylı yoga planını tek plana birleştir; iki mercekle karşı incele (en çok 2 tur)",
+  "agentCount": 7,
+  "logs": [],
+  "result": {
+    "draft": "Plan yazıldı: /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/SONSUZ_YOL.PLAN.v1.md (1.090 satır; §1 103 satır). Depoda hiçbir dosya değişmedi; git komutu ve ücretli çağrı yapılmadı.\n\n1. Belge onaylı yoga planının hiçbir kararını değiştirmiyor. Yoga durağı, R7b kuralı ve `today.js`'e eklenecek beş ek olduğu gibi kalıyor. Nefes ilk yayında 5 dakika; (c) adımı gelince yolda en çok 3 dakika oluyor ve \"2 dk daha\" düğmesiyle 5'e tamamlanıyor. Meditasyon yolda ayrı bir durak olmuyor.\n2. Üç benzetimi yeniden çalıştırdım, sonuçlar notlardakiyle aynı çıktı. Yolun ortalaması 30 günde 15,3 dakika, 90 günde 15,7 dakika. Hiçbir gün 20 dakikayı aşmıyor ve yoga hiçbir durağı düşürmüyor.\n3. Yanlış \"geriliyor\" oranı bugünkü kuralla %27,2, yeni kuralla %6,9. Ay evresi hesabında USNO tablosuna göre en büyük sapma 1,9 dakika.\n4. Merdivenler: nefes 1 → 2 → 3 dakika; göz egzersizleri kırpma → sağ–sol → üçü birlikte → yukarı–aşağı → uzağa bakış → yakın–uzak → daire. Sahibin 4·2·4·4 kalıbı 43. günden sonra, haftada en çok bir gün ve güvenlik koşullarıyla geliyor.\n5. İlk gün yol 8 dakika sürüyor. 9. günde bugünkü tam yola ulaşılıyor. Sonrasında yolu çeşitleme, döndürme ve 90. günden sonra haftalık odak sürdürüyor.\n6. Beş not arasında 22 çelişki buldum ve her birinde bir seçim yaptım (§2.1). Notlardaki 45 açık sorunun 35'ini ben karara bağladım; kalan 10'u sahibe sorulan 6 kararda toplandı.\n7. Sahibin kararları: (1) planın onayı ve sıra, (2) Gelişim'in yeni ölçü kuralı, (3) çizilmiş beş yüzlü ölçek, (4) hava için yaklaşık konum ya da şehir, (5) ilk 5 saniye (logonun kalkması, sıfırların ve kırık serinin gizlenmesi, Yeniliklerin ertelenmesi), (6) Nef'e giden paket ve rıza sürüm 2.\n8. Ekran süresi: Apple bu veriyi uygulamalara sayı olarak vermiyor. Bu yüzden akşamki soru kalkıyor, yerine uygulama içindeki göz çalışması süresi adıyla gösteriliyor.\n9. \"Günün nasıl geçti\" tek dokunuşla 10 saniyede bitiyor. PubMed bilgisi canlı aramayla değil, önceden doğrulanmış bir kart kütüphanesinden geliyor. Bu kütüphaneye yalnız PMID ve DOI'si doğrulanan kartlar giriyor.\n10. Hava WeatherKit'in Swift çerçevesinden geliyor. Konum yalnız kişi isteyince alınıyor, yaklaşık ve 2 ondalığa yuvarlanmış oluyor. Ay evresi telefonda hesaplanıyor. Nef hava verisi üretmiyor.\n11. Yağmur bildirimi varsayılan olarak kapalı, günde en çok bir tane geliyor ve 7700–7701 kimliklerini kullanıyor. Alarmın 7600–7607 aralığıyla çakışma bu sayede önlendi.\n12. Apple'ın atıf kuralı yüzünden Ana sayfa başlığına hava, App Review'dan yazılı cevap gelene kadar konmuyor. O zamana kadar başlıkta yalnız ay görünüyor.\n13. Kod aşamaları yoga yayınından sonra başlıyor: Y1 merdivenler, Y2 Gelişim, Y3 ilk 5 saniye, Y4 \"Günün nasıl geçti\" ve ay, Y5 hava, Y6 Nef dönemleri. Toplam ≈ 34–39 iş günü, onaylar dahil ≈ 8–11 hafta (VARSAYIM).\n14. Maliyet: WeatherKit üyelikle ayda 500.000 çağrıya kadar ücretsiz. Nef kişi başına ayda ≈ 35 istek atıyor; modelin fiyatı bilinmediği için tutarı hesaplanamadı. Bu plan yeni ses üretmediği için ElevenLabs maliyeti yok.\n15. Gizlilik tarafında şunlar değişiyor: yeni konum izni, `weather` rızası, gizlilik sayfası ve App Store etiketi, kamera izin metni. Bunların hepsi aynı sürümde çıkıyor.\n16. Notlardaki üç yanlışı düzelttim. Akşam kartının saati 18.00 (`lib/profileQuestions.js:174`); 19.00 alarm kartının saati. Okuma manifestinin doğru satırı `modules/reading/manifest.js:12`. Cordi 2014'ün içeriği doğrulanamadığı için ay kartından çıkarıldı.\n17. `merdiven.md`'nin 90. günden sonra nefesi yolda 5 dakikaya çıkaran önerisi onaylı yoga planıyla çelişiyordu; yolda 3 dakikada tuttum.\n18. Mevcut test takımı değişmeden geçmek zorunda. Yalnız üç test beklentisi bilerek değişiyor: `lib/dataHub.test.js:97`, `modules/coachStats.test.js` ve `lib/profileQuestions.test.js:45-51`.\n19. Mevcut sistemin bozulmadığı, ilerleme kapalıyken 20.000 rastgele durumda sıfır fark çıkması şartıyla sınanacak.\n20. Hiçbir şey cihazda denenmedi. Varsayılan sayılar §3.J'de, belgelerde düzeltilecek yerler §2.4'te listeli.",
+    "rounds": [
+      [
+        {
+          "lens": "sahip-ve-kod",
+          "findings": [
+            {
+              "severity": "BLOCKER",
+              "section": "§1 Kişi ne görür (7. gün), §3.A.9 gün gün tablosu, §2.3 Onaylı yoga planıyla uyum",
+              "problem": "Plan, onaylı yoga planındaki psikolog yedeğini uygulamıyor. Sahip inceleyici adı vermedi. Karar 2 ve karar 5.3 gereği yedek kural geçerlidir: Zor Anlar İçin yoldan çıkar, Kendine Şefkat yolda yalnız 17.00'den sonra aday olur. Plan ise 10.00'da açan kişiye yolda iki dersi de veriyor.",
+              "evidence": "yoga-pilot/SAHIP_ISTEKLERI.md madde 7: \"(2) inceleyici adı verilmedi → bütün rollerde yedek (… psikolog yerine karar 5.3 yedek kuralı …)\" ve \"(5) … Ders 4 ve 7 yolda psikolog yedeğiyle\". PLAN.v3.md:154-156: \"Kendine Şefkat yolda yalnız 17.00'den sonra aday olur … Zor Anlar İçin de yoldan çıkar\". Planın §A.9 tablosu 10.00'da açan kişiye 5, 14 ve 24. günlerde Zor Anlar İçin'i, 18. günde Kendine Şefkat 5 dk'yı veriyor (satır 381, 387, 390, 393). sim_merdiven.mjs:73 iki dersi de sıraya koyuyor; `node sim_merdiven.mjs karar 10 30` 5. günde \"Yoga (Zor Anlar İçin)\", 18. günde \"Yoga (Kendine Şefkat) 5\" veriyor. Plan \"psikolog\" sözcüğünü hiç geçirmiyor (grep sonucu boş). §1'deki \"beş yoga dersi\" sayımına da Zor Anlar İçin giriyor.",
+              "fix": "sim_merdiven.mjs'e yedek kuralı ekle: Ders 4 kısa günlerde aday olmasın; Ders 7 yalnız 17.00'den sonra aday olsun, daha erken açılan tam ders gününde Derin Dinlenme gelsin. Benzetimi 10.00 ve 19.00'da, 30 ve 90 günle yeniden koş. §1, §A.9 ve §2.3'teki yoga günlerini, ders adlarını ve sayıları (24/76, tam ders dağılımı) yeni sonuçla yaz. §2.3'e \"psikolog adı verilene kadar karar 5.3'ün yedek kuralı geçerlidir\" maddesini ekle."
+            },
+            {
+              "severity": "BLOCKER",
+              "section": "§1 İsteklerin nasıl karşılandığı (5 saniye kuralı), §2.2 bes-saniye K8, §3.F",
+              "problem": "Sahibin \"ilk önce\" dediği isteğin çekirdeği karşılanmıyor. Sahip, uygulamaya ya da siteye ilk kez giren birinin 5 saniyede nasıl şaşırtılacağını soruyor. Plan yalnız eski kullanıcının günün ilk açılışını ele alıyor. Yeni kullanıcı için \"şimdi değişmez\" diyor, konuyu kendisi kapatıyor ve siteyi hiç anmıyor. Sahibin onayını bekleyen site konsepti de sahibe götürülmüyor.",
+              "evidence": "tasarim/SAHIP_ISTEKLERI.md:15-17 (\"app giren siteye giren 5 saniye kuralı … ilk önce 5 saniyede insanları nasıl şaşırtırız onu bulalım\") ve :44 (\"ilk 4 saniyede etkilemek gerekiyor\"). YAPILACAKLAR.md:76: \"5 saniye, site: en yüksek puan 'Bu cümleyi okurken kaç kez göz kırptın?' (şaşırtma 8,3/10) — sahibin onayına\". Plan §2.2 satır 202: \"K8 (giriş ekranı metni) | Şimdi değişmez\". §F.1: \"vay\" anı ilk dokunuştan ≈ 30 saniye sonra geliyor. bes-saniye.md §3.3: \"Site sayfası ayrı iştir.\" Planda \"site\" sözcüğü yalnız gizlilik sayfası yolunda geçiyor.",
+              "fix": "§F'ye \"İlk kez açan kişi ve site\" alt bölümü ekle. Bugünkü 0–5 saniyeyi (açılış ekranı, IntroFilm, iki \"Başla\") ve önerilen değişikliği (bes-saniye K1/K2) yaz. Site için \"Bu cümleyi okurken kaç kez göz kırptın?\" konseptini ve kapsamını yaz. Bunları tek bir sahip kararına topla ve net öneri ver (ör. K1 evet, site konsepti evet, K2 G1 ölçülene kadar hayır). §1 tablosundaki satırı buna göre düzelt."
+            },
+            {
+              "severity": "BLOCKER",
+              "section": "§1 İsteklerin nasıl karşılandığı (Gelişim satırı), karar 2, §3.B.2 ve §3.B.3 tablosu",
+              "problem": "Karar 2'nin ana gerekçesi olan \"%27'den %7'ye\" karşılaştırması farklı sürelerle yapılmış. Bugünkü kural 26 haftada ve her ölçümden sonra bakılarak ölçülmüş, v2 ise yalnız ilk 13 haftada. Aynı 26 haftada v2'nin yanlış \"geriliyor\" oranı %12,8, dört metrikli alanda %35,5. Bugünkü kurala yalnız haftalık bakış ve iki hafta sürme koşulu eklendiğinde oran %11,2'ye iniyor. Kazancın çoğu yeni kuraldan değil, bakış sıklığından geliyor.",
+              "evidence": "sim.mjs: N=78 (\"26 hafta x 3\") ve her ölçümde status; run(1,0,true) çıktısı anyWorse %11,2, run(4,0,true) çıktısı %28,9. sim2.mjs: falseWorseBeforeWk13 yalnız i<39 (13 hafta); değişim yokken 14–26. haftalarda flagAfterWk13 %9,1. İnceleyicinin sim2 kuralıyla 26 hafta koşusu (rev_sim2_26.mjs): k=1 %12,8, k=4 %35,5. Plan §1: \"bugünkü kuralda … %27'si … yeni kuralda %7\"; §B.3 tablosu da iki farklı ufku yan yana koyuyor. \"Gerçek düşüşü yakalama %51,8\" sayısına değişim yokken de görülen %9,1'lik işaret dahil.",
+              "fix": "Bütün kuralları aynı ufukta (26 hafta), aynı bakış sıklığıyla ve tek/dört metrikle yeniden benzet. Tabloya \"bugünkü kural + haftalık bakış + iki hafta sürme\" satırını da ekle. Yakalama oranını değişim yokken görülen işaret oranından ayrı yaz. §1 ve karar 2'nin gerekçesini doğru sayılarla yeniden yaz. v2'yi hâlâ öneriyorsan asıl gerekçeyi (günlük toplama, 28 günlük pencere, öğrenme etkisi) öne çıkar; gerekirse c ya da persist değerini gözden geçir."
+            },
+            {
+              "severity": "BLOCKER",
+              "section": "§1 Maliyet",
+              "problem": "WeatherKit maliyetindeki bir olgu yanlış. 10.000 kişide istek başına 1 çağrıyla aylık 900 bin çağrı eder. Bu, üyeliğe dahil 500 bin çağrıyı aşar ve \"ücret yok\" olamaz; doğrusu 49,99 USD'lik 1 milyonluk basamaktır. Hesabın dayandığı \"kişi başına günde 3 istek\" varsayımı da §1'de yazmıyor. Plan kişi başına günde 8 isteğe izin veriyor.",
+              "evidence": "hava-ay.md:86-87: \"1 M çağrı 49,99 $, 2 M 99,99 $, 5 M 249,99 $\"; :459 \"kişi başına günde ortalama 3 istek\"; :466 \"10.000 | 900 k | 2,7 M | 0 ya da 249,99 $\". Plan satır 91: \"10.000 kişide ya ücret yoktur ya da ayda 249,99 USD\". §E.7 satır 760: \"kişi başına günde en çok 8 istek\".",
+              "fix": "10.000 kişi satırını \"ayda 49,99 USD (istek = 1 çağrı) ya da 249,99 USD (istek = 3 çağrı)\" diye düzelt. \"Günde ortalama 3 istek\" varsayımını VARSAYIM olarak §1'e yaz. Sınır olan 8 istekte en kötü durumun maliyetini de bir satırla ver."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.B.3, §3.G.3 Y2, veri merkezi ilkesi",
+              "problem": "Plan, yeni ölçü kuralını yalnız Gelişim'e bağlıyor. `metricTrend` ile 5. gün raporu \"aynen\" kalıyor. \"Doktoruma göster\" raporu ve dışa aktarma aynı kayıtlar için eski kuralın \"iyileşiyor / geriliyor\" hükmünü yazmaya devam eder. Aynı veri Gelişim'de \"doğrulanmış bir değişim yok\", raporda \"geriliyor\" der. Bu, \"Gelişim, Nef ve raporlar aynı kaydı okur\" ilkesini ve tek hesap sözünü (§C.1) bozar. Yöntemi anlatan metin de eski kuralı anlatmaya devam eder.",
+              "evidence": "lib/exportData.js:117 `metrics: metricCards(...)` ve :139 `STATUS_TEXT = { better: 'iyileşiyor', worse: 'geriliyor', noise: 'doğal oynama' … }`, :266 tabloya yazıyor. lib/progress.js:154 metricCards → metricTrend; :191 ve :217 rapor modeli. components/ProgressOverview.jsx:463 yöntem metni: \"en az 6 ölçümde ilk yarı ile son yarı … 'iyileşiyor' ya da 'geriliyor' denir\". Plan §G.3 Y2: \"`metricTrend` ve 5. gün raporu aynen\"; exportData.js ve :463 değişen dosyalar arasında yok.",
+              "fix": "Y2'de v2 durumunu tek yerde hesapla (ör. metricCards'a status v2) ve exportData, FirstReport, ProgressOverview ile Nef'i buna bağla. STATUS_TEXT'i §B.5'in yeni metinleriyle aynı yap. ProgressOverview.jsx:463'teki yöntem metnini güncelle. Bu dosyaları §G.3 Y2'ye ve \"aynı veri Gelişim'de ve raporda aynı hükmü verir\" testini §G.6'ya ekle."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.D.5 Veri merkezi (`day-check` kaydı)",
+              "problem": "\"Günün nasıl geçti\" kaydı `sessions`'a yazılıyor ve `countsTowardGoal: false` taşıyor. Ama Ana sayfanın hafta hedefi ve \"gün seninle\" sayısı bu alana bakmıyor. Tek bir ruh hali dokunuşu, o günü haftalık hedefte çalışılmış gün sayar. Yoganın giriş sayacı (\"kayıt bırakılan iki ayrı gün\") ve okuma testinin ilk gün hesabı da bu kaydı sayar. Bu, mevcut sistemin ve onaylı yoga kuralının anlamını sessizce değiştirir.",
+              "evidence": "lib/stats.js:204 `isExerciseSession = (s) => s?.type !== 'game' && s?.type !== 'who5'` (day-check dışarıda kalmıyor). screens/Home.jsx:150-151 `weekProgress(activeDays([...tests, ...exercise]))` ve :172 `totalDays = activeDays([...tests, ...sessions])`. PLAN.v3 §B.5: yoga sayaçları `ctx.sessions` ve `ctx.tests`'ten \"bugünden önce kaydı olan ayrı gün sayısı\"nı türetiyor. lib/today.js:140 readingStatus `[...tests, ...sessions]`'ın ilk gününü kullanıyor.",
+              "fix": "Hangi sayıların `day-check`'i sayacağını tek tek karara bağla. Öneri: isExerciseSession `day-check`'i dışlasın (who5 gibi); yoga sayacı, pathDay ve readingStatus onu saymasın; \"gün seninle\" sayabilir. Bunu §D.5'e yaz ve §G.4/§G.6'ya test ekle (tek ruh hali dokunuşu hafta hedefini ve yoganın giriş gününü değiştirmez)."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.E.6 Yağmur bildirimi, §3.G.3 Y5",
+              "problem": "Planda yağmur bildirimini `lib/rainNotify.js` hesaplıyor, 7700–7701 kimlikleri de `notifyApply.js`'in OWN_RANGES aralığına ekleniyor. Uygulayıcı her yeniden planlamada kendi aralığında olup gelen planda bulunmayan her bekleyen bildirimi iptal ediyor. Yağmur bildirimi aynı plana (App.jsx'teki planNotifications → applyPlan) konmazsa, bir sonraki planlamada sessizce silinir. `cancelOwn` da onu siler. Plan bu bağı yazmıyor; App.jsx ve notifyPlan.js de değişen dosyalar arasında yok.",
+              "evidence": "lib/notifyApply.js:14-20 OWN_RANGES/isOwnId; :90-97 `if (!isOwnId(id)) continue … else cancel.push({ id })`; App.jsx:478-513 tek plan → `applyPlan(plan)`. Plan §E.6: \"`notifyApply.js:15` `OWN_RANGES`'e `[7700, 7701]` eklenir\"; §G.3 Y5'te `lib/rainNotify.js` ayrı dosya, notifyPlan.js ve App.jsx:478-513 yok.",
+              "fix": "Tek yol seç ve yaz. Öneri: rainNotify.js yalnız bildirim nesnesini üretsin, App.jsx'teki plan kurulumu onu `plan.notifications`'a eklesin. Deney ve sessiz gün mantığı (notifyPlan.js) bu kimliklere dokunmasın. §G.3'e App.jsx:478-513'ü ekle. Teste \"bildirim planı yeniden kurulunca 7700 iptal edilmez; yağmur tercihi kapanınca iptal edilir\" maddesini ekle."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.A.8 madde 6 (ara kilidi), §3.G.6 Eşdeğerlik",
+              "problem": "Ara kilidi kuralı Home.jsx'te değişiyor. Eşdeğerlik düzeneği ise yalnız `buildPath`'i sınıyor; bu değişiklik ilerleme kapalıyken de mevcut kullanıcıyı etkileyebilir. \"Eski kullanıcıda kilit her gün yine başlar\" iddiası sınanmamış. Kullanılan göz süresi saatlik pencereye bağlı olduğu için, yolu gün içinde ara vererek yapan kişide yeni koşul molayı başlatmayabilir. Aynı sorun, \"Bugünün görevi herkesin yolunda\" değişikliğinde de var: ilerleme yokken bugünkü davranış korunmazsa eşdeğerlik kapısı 0 farkı veremez.",
+              "evidence": "screens/Home.jsx:165-170: bugün `st.used >= PATH.restMinUsed * 60000` ise mola başlıyor. Plan §A.8-6: \"Y1'de yol molası ancak 'kullanılan göz süresi + 2. bölümün göz dakikası > göz bütçesi' ise başlar … Eski kullanıcıda … kilit her gün yine başlar\". §G.6 yalnız \"Durak listesi, bölümler, süreler … mola ve kilit işaretleri\"ni `buildPath` çıktısında karşılaştırıyor. modules/notice/manifest.js:31 `if (!sessions.some(isNotice)) return null`.",
+              "fix": "Yeni ara kilidi kuralını yalnız `ctx.progression` varken ve yolun 1. bölümündeki göz süresi bütçenin altındayken uygula; ilerleme yokken Home.jsx:165-170 aynen kalsın. startStop kararını saf bir işleve taşıyıp eşdeğerlik düzeneğine ekle. Bugünün görevi değişikliğini de `unlocked()` ve ilerleme bağlamına bağla. İkisini §G.6'ya yaz."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 Gizlilik değişiklikleri, §3.E.2 (izin metni)",
+              "problem": "İzin penceresindeki cümle ile plandaki davranış çelişiyor. Metin \"Konumun kaydedilmez\" diyor, plan ise telefonda son yuvarlanmış konumun tutulduğunu yazıyor. Bu, \"ekrandaki cümle gerçek davranışla aynı\" kuralına ve App Review 5.1.1'in amaç metni doğruluğuna aykırı. \"İzin kapanınca silinir\" de ancak uygulama yeniden açılınca gerçekleşebilir, çünkü uygulama kapalıyken kod çalışmıyor.",
+              "evidence": "Plan satır 98-99: \"Telefonda yalnız son yuvarlanmış konum tutulur ve izin kapanınca silinir.\" §E.2 satır 679-680 izin metni: \"Konumun kaydedilmez; hava bilgisi için yalnız yuvarlanmış koordinat Apple'a gider.\" lib/notifyPlan.js:2-3: \"Uygulama kapalıyken kod çalışmaz\".",
+              "fix": "Ya koordinatı hiç saklama (önbellekte yalnız hava sonucu ve il adı kalsın), ya da metni davranışa uydur: \"Konumun sunucumuza gitmez; yalnız son yaklaşık konum telefonunda tutulur. Hava için yuvarlanmış koordinat Apple'a gider.\" Silme kuralını \"izni kapattığını uygulama ilk açılışta görür ve siler\" diye yaz."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 Gizlilik değişiklikleri, §3.C.5, §3.G.3 Y6, Kalite kapıları: Gizlilik",
+              "problem": "Nef paketi v2 değişiyor: görme sayıları ve okuma hızı çıkıyor, ruh hali durumu giriyor. Ama sitedeki gizlilik tablosu ve App Store etiketi Y6'nın değişen dosyaları arasında yok. Ekran sorusu kalktığı için eski `screenHours` cevabı da süresiz olarak Nef'e gitmeye devam eder. Rıza metnindeki \"ekran süresi\" satırı da eskir.",
+              "evidence": "site/gizlilik.html:59: \"görme ortancası, başlangıçtan farkı ve uyarı düzeyi; okuma hızı\"; :60: \"Uyku puanı, ekran süresi, gece telefona bakma …\". lib/coach.js:24 `screenHours: p.screenHours`; lib/coachCore.js:79. Plan §G.3 Y6: yalnız coach.js, coachCore.js, api/coach.js, CoachCard, consent.js. Y5 satırı site/gizlilik.html:76'yı listeliyor, :59-60'ı listelemiyor.",
+              "fix": "Y6'ya site/gizlilik.html:59-60'ı, site/pages/gizlilik.html'in karşılık gelen satırlarını ve App Store etiketinde ruh hali ile Nef satırını ekle. `screenHours`'un paket v2'de ne olacağını karara bağla. Öneri: paketten çıksın ya da cevabın tarihiyle gitsin. coachLife rıza metnini de buna göre güncelle."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 Senden istenen kararlar (karar 1), §3.I",
+              "problem": "Plan, onaylı uygulama sırasını değiştiriyor ama bunu karar olarak söylemiyor. YAPILACAKLAR'daki sıra (a)→(g)'dir. Plan (f) Nef'i Y6 olarak (d) sessiz ölçümün ve (e) uyku ile yürüyüşün önüne alıyor. Böylece sahibin açıkça istediği uyku kalitesi, yürüme ve dikkat modülleri kabaca 2027'nin ilk çeyreğinin de sonrasına kalıyor. Tasarımın özündeki \"14. günde tam set\" 57. güne, \"hafif gün ≈ 7 dk\" da ilk sürümün dışına sessizce çıkıyor.",
+              "evidence": "YAPILACAKLAR.md:77-79: \"Uygulama sırası (her biri ayrı onay …): (a) …, (c) ilerleme motoru …, (d) sessiz ölçüm tercihi, (e) uyku (Sağlık) ve yürüyüş, (f) Nef haftalık/aylık, (g) …\". YAPILACAKLAR.md:67-70 \"hafif gün ≈ 7 dk\", \"daire → 14. günde tam set\". Plan §A.6 V4 \"Dvar 56+ haftada bir tam set günü\"; §2.1 satır 20 hafif gün \"İlk sürümde yok\"; karar 1 yalnız \"S0 → Y1 → Y6 sırası onaylansın\". tasarim/SAHIP_ISTEKLERI.md:9-11 (yürüme, uyku kalitesi, hareket, dikkat).",
+              "fix": "Karar 1'de açıkça yaz: \"Bu sıra, (f)'yi (d) ve (e)'nin önüne alır; uyku ve yürüyüş ≈ 2027'ye kalır.\" Net öneriyi ve öbür seçeneği ver; öbür seçenek (e)'yi Y4'ten sonra almaktır. \"14. günde tam set → 57. gün\" ve \"hafif gün yok\" sapmalarını §1'deki \"Bugünkü kullanıcı ne görür\" bölümünde ya da §2.1'de gerekçesiyle göster."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.B.6 \"Yolun\" bölümü (ekran metni)",
+              "problem": "Ekrana yazılacak \"Bu modül bir şey ölçmez, düzenini sayar.\" cümlesi, sahibin altın kuralıyla sözcük sözcük çelişiyor. Sahibin sözü \"bütün modüller bir şey ölçer\"dir. Cümle ayrıca kendi içinde tutarsız, çünkü düzeni saymak da bir ölçüdür.",
+              "evidence": "tasarim/SAHIP_ISTEKLERI.md:31: \"Altın kural: bütün modüller bir şey ölçer ve bilgi biriktirir\". Plan satır 507-508: \"Ölçüsü olmayan modülün ayrıntısında bir kez 'Bu modül bir şey ölçmez, düzenini sayar.' yazar.\"",
+              "fix": "Cümleyi değiştir, ör. \"Bu modülde düzenini izliyoruz: kaç gün yaptığını ve hangi basamakta olduğunu.\" §1 tablosundaki \"Ölçüsü olmayan modül\" ifadesini de \"etki ölçüsü olmayan modül\" yap. Böylece her modülün bir şey (düzen) ölçtüğü açık kalır."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.F.4 Deneyim yayı",
+              "problem": "Plan kendi içinde çelişiyor. Deneyim yayı nefesin 4. günde 3 dakikaya çıktığını söylüyor. Gün gün tablo ve benzetim ise 3. günü veriyor.",
+              "evidence": "Plan satır 822-823: \"3. gün ilk yoga, 4. gün nefes 3 dk ve yukarı–aşağı\". §A.4: N3 D=2 (3. gün) 3 dk. §A.9 satır 379: \"3 | 'Üçü birlikte' (Isınma), Nefes 3 dk, yoga\". `node sim_merdiven.mjs karar 10 30`: 3. günde \"Nefes 3\".",
+              "fix": "§F.4'ü \"3. gün ilk yoga ve nefes 3 dk, 4. gün yukarı–aşağı\" diye düzelt."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 Gizlilik değişiklikleri, §3.G.3 Y3 (kamera izin metni)",
+              "problem": "Kamera izin metnine (d) aşamasının kısa mesafe ölçümü, Y3'te eklenmek üzere yazılmış. Ama (d) planda Y6'dan sonra geliyor. Var olmayan bir kullanımı anlatan amaç metni App Review 5.1.1'in \"açık ve eksiksiz, doğru\" şartına aykırı düşer ve sahibin \"ekrandaki cümle = gerçek\" kuralını bozar.",
+              "evidence": "Plan satır 105-106: \"Kamera izin metni İlk Bakış'taki sayımı ve (d)'deki kısa mesafe ölçümünü de söyleyecek biçimde güncellenir\"; §G.3 Y3: \"`Info.plist:16` (kamera metni)\"; §I: (d) \"sonra\". ios/App/App/Info.plist:15-16 bugünkü metin.",
+              "fix": "Y3'te metne yalnız İlk Bakış'taki sayımı ekle. Kısa mesafe ölçümü, (d) ile aynı sürümde metne girsin. Bunu §H'deki gizlilik kapısına madde olarak yaz."
+            },
+            {
+              "severity": "NIT",
+              "section": "§3.A.7 Öteki duraklar",
+              "problem": "Cümle yanlış anlaşılıyor: haftalık E testi ile okuma testinin de yolda olmadığını söylüyor gibi. Oysa ikisi de yoldadır (A.9 tablosunda 1., 2., 8., 9. günler).",
+              "evidence": "Plan satır 352: \"Hızlı Bakış, haftalık E testi, okuma testi ve kısa E testinin yolda olmaması aynen kalır.\" lib/today.js:108-146 (weeklyStatus, readingStatus yol durakları); §A.9 satır 377-378.",
+              "fix": "\"Haftalık E testi ve okuma testinin haftalık kuralı, Hızlı Bakış'ın bugünkü kuralı ve kısa E testinin yolda olmaması aynen kalır.\" diye yaz."
+            },
+            {
+              "severity": "NIT",
+              "section": "§3.E.7 Başlık şeridi",
+              "problem": "Ay örneği hem simge hem ad bakımından yanlış. 29 Eylül'de aydınlanma %91; ◐ ise yarım ay (dördün) simgesidir. \"Küçülen ay\" da `hava-ay.md`'nin sekiz evre adından biri değildir; doğrusu \"küçülen şişkin ay\"dır.",
+              "evidence": "moontest.mjs çıktısı: \"29.09.2026 12:00 TR aydınlanma AE % 91.1 … evre açısı 214.5\". hava-ay.md §5.2 evre adları: \"… dolunay, küçülen şişkin ay, son dördün …\". Plan satır 744: \"Salı, 29 Eylül · ◐ küçülen ay\".",
+              "fix": "Örneği \"Salı, 29 Eylül · küçülen şişkin ay\" yap ve simgeyi evreye göre çizilen simgeyle göster. Evre adlarının listesini §E.3'e ekle."
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 Kişi ne görür (90+ gün), §1 tablo (Yeni modüller), §3.E.7",
+              "problem": "Gökyüzü molası yeni bir modül gibi sayılıyor, oysa uygulamada zaten var; yalnız yolda değil. Hava kartına verilen \"Gökyüzü kartı\" adı da var olan \"Gökyüzü molası\"yla karışır.",
+              "evidence": "app/src/modules/gokyuzu/manifest.js:1-12 (\"Gökyüzü molası … günlük yola girmez\", domain calm, effects). Plan satır 66: \"Yeni modüller (yürüyüş, uyku, hareket, dikkat, gökyüzü) … (d) ve (e) aşamalarında gelir\".",
+              "fix": "\"Gökyüzü molası uygulamada var; (e)'de yola girer\" diye yaz. Hava kartı için ayrı bir ad seç, ör. \"Hava ve ay kartı\"."
+            },
+            {
+              "severity": "NIT",
+              "section": "§2.3 Onaylı yoga planıyla uyum",
+              "problem": "Onaylı yoga planının (c) için verdiği sayılar ile bu planın sayıları farklı; plan farkı açıklamıyor. PLAN.v3: 30 günde 22, 90 günde 70 yoga günü; iki okuma gününde yoga yolda yok. Bu plan: 24 ve 76; okuma günlerinde yoga var. Farkın nedeni yeni merdivenlerdir, ama sahip iki onaylı belgede iki ayrı sayı görür.",
+              "evidence": "PLAN.v3.md:452-456 (\"30 günde 22 yoga günü; iki okuma gününde (16 ve 30) … yoga sığmaz\"). Plan satır 211-212 ve §A.9 16. gün \"Sabah Niyeti\".",
+              "fix": "§2.3'e bir cümle ekle: \"PLAN.v3 §B.3'teki (c) sayıları YOL.ilerleme'nin eski merdivenleriyle koşuldu; bu planın merdivenleriyle sayılar 24/76'dır, kural değişmez.\""
+            },
+            {
+              "severity": "NIT",
+              "section": "§3.G.5",
+              "problem": "Uygulamanın test sayısı eskimiş.",
+              "evidence": "Plan satır 904: \"bugün 1401 test\". İnceleyici `npx vitest run` koştu: \"Tests 1417 passed (1417)\", 103 dosya. lib/today.test.js'teki 45 test doğru.",
+              "fix": "\"bugün 1417 test (2026-09-29)\" yaz ya da sayıyı yazmayıp \"bütün takım\" de."
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 (dil)",
+              "problem": "Sahibin okuyacağı özette yüklemsiz ve kod kokan cümleler var.",
+              "evidence": "Satır 100: \"Yeni rıza `weather` (ayrı, işaretsiz).\" Satır 59: \"tutmasız 40, kısa tutmalı 99, beklemeli 629 süre bileşimi\". Satır 63: \"Çizilmiş beş yüz ve altlarında Türkçe etiket (karar 3)\".",
+              "fix": "Örnek: \"Hava için ayrı bir izin sorulur; kutu önceden işaretli gelmez.\" Bileşim sayılarını §A.4'te bırak, §1'de \"yüzlerce güvenli kalıp\" de. Tablo hücresine yüklem ekle: \"… yüz çizilir, altlarına Türkçe etiket yazılır.\""
+            }
+          ]
+        },
+        {
+          "lens": "sayi-ve-dil",
+          "findings": [
+            {
+              "severity": "BLOCKER",
+              "section": "§1 (başlık satırı 12-13, 'İsteklerin nasıl karşılandığı' 1. satır, karar 2) ve §3.B.3",
+              "problem": "Bugünkü ve önerilen ölçü kuralının yanlış alarm oranları farklı sürelerde ölçülmüş, ama §1'de eşit karşılaştırma gibi sunuluyor. %27,2 bugünkü kuralın 26 haftalık sonucudur. %6,9 ise yeni kuralın yalnız ilk 13 haftasına aittir. Sahip karar 2'yi bu yanlış karşılaştırmaya bakarak verecek.",
+              "evidence": "sim.mjs: N=78 (26 hafta), k=1 anyWorse 27.2%. sim2.mjs: falseWorseBeforeWk13 6.9%. İki betiği yeniden koştum. Aynı 26 haftada yeni kural (c=1,5, persist 2, değişim yok) tek metrikte %12,6, dört metrikte %35,4 veriyor (_rev_sim2b.mjs). Aynı 13 haftada bugünkü kural tek metrikte %20,4, dört metrikte %50,8 veriyor (_rev_sim13.mjs). Değişim olmayan durumda sim2 13–26. haftalar arasında da %9,0 yanlış işaret veriyor (flagAfterWk13, drop=0). Bu yüzden '%51,8 yakalama' sayısının yaklaşık 9 puanı zaten yanlış işarettir. §1'de ayrıca 'bir kez' yazıyor; doğrusu 'en az bir kez'.",
+              "fix": "Karşılaştırmayı aynı süreyle verin. §1 için öneri: 'Gerçek bir değişim yokken 26 hafta içinde kişilerin %27'si en az bir kez \"geriliyor\" görüyor; yeni kuralda bu oran %13'e iniyor (dört metrikli alanda %63'ten %35'e).' §3.B.3 tablosunu iki sütunla (13 hafta ve 26 hafta) yeniden kurun. Yakalama sütununa 'değişim yokken aynı dönemde %9 yanlış işaret' notunu ekleyin. Aynı düzeltmeyi gelisim-nef.md §4.2'ye de işleyin."
+            },
+            {
+              "severity": "BLOCKER",
+              "section": "§1 Maliyet",
+              "problem": "10.000 kişilik WeatherKit maliyeti yanlış hesaplanmış. Notun kendi hesabına göre bir istek bir çağrı sayılsa bile ayda 900.000 çağrı yapılır. Bu sayı ücretsiz 500.000 sınırını aşar, yani 10.000 kişide 'ücret yok' seçeneği doğru değil. Ayrıca kişi başına günde 3 istek varsayımı §1'de yazılmamış.",
+              "evidence": "hava-ay.md:87: '1 M çağrı 49,99 $, 2 M 99,99 $, 5 M 249,99 $'. hava-ay.md:460: 'kişi başına günde ortalama 3 istek'. hava-ay.md:466: '10.000 | 900 k | 2,7 M | 0 ya da 249,99 $'. Plan §1: '10.000 kişide ya ücret yoktur ya da ayda 249,99 USD'.",
+              "fix": "'10.000 kişide ayda 49,99 USD (1 milyon çağrı) ya da 249,99 USD (5 milyon çağrı) ödenir.' Hesabın dayandığı iki varsayımı §1'de açıkça yazın: 'kişi başına günde 3 istek (VARSAYIM); bir isteğin kaç çağrı sayıldığı Apple belgesinde yok (VARSAYIM)'. hava-ay.md §10 tablosunu da düzeltin."
+            },
+            {
+              "severity": "BLOCKER",
+              "section": "§3.D.3 (karar 3'ün kanıtı)",
+              "problem": "Thompson 2025'in bulgusu yanlış aktarılmış. Emoji sırasını %95 oranında aynı anlayanlar 294 kişi değil, 20 hastalık pilot çalışmadır. 294 kişilik randomize bölümde yalnız yapı geçerliği (r=0,70) ölçülmüş.",
+              "evidence": "PubMed PMID 39772639 özeti: 'Twenty patients were shown all possible pairs of five emoji… Ninety-five percent of patients selected the same ordering'. Aynı özette 'In a randomized study of 294 patients, Spearman correlations… 0.70 for emotional well-being' yazıyor. Plan: 'emoji sıralı ölçeğin sırası 294 kişinin %95'inde aynı anlaşıldı ve iyi oluşla ilişkisi r = 0,70 oldu'. Aynı hata gunun.md:24 ve :170'te de var.",
+              "fix": "'Emoji sıralı ölçeğin sırasını 20 hastalık pilotta hastaların %95'i aynı anladı; 294 kanser hastasında ölçek duygusal iyi oluş ölçeğiyle r = 0,70 ilişki gösterdi (Thompson 2025; hasta örneklemi, Türkçe doğrulama yok).' gunun.md'yi de düzeltin."
+            },
+            {
+              "severity": "BLOCKER",
+              "section": "§3.E.2 izin metni ve §1 Gizlilik değişiklikleri",
+              "problem": "Ekranda gösterilecek izin metni planın kendi saklama kuralıyla çelişiyor. Metin 'Konumun kaydedilmez' diyor, ama plan telefonda son yuvarlanmış konumun tutulduğunu yazıyor. Bu, gizlilik metninde yanlış bilgi vermek demektir ve 'ekrandaki cümle = söylenen cümle' kuralını çiğner. App Review 5.1.1 açısından da risklidir.",
+              "evidence": "§E.2 izin metni: 'Konumun kaydedilmez; hava bilgisi için yalnız yuvarlanmış koordinat Apple'a gider.' §1: 'Telefonda yalnız son yuvarlanmış konum tutulur ve izin kapanınca silinir.' §E.2 rıza maddesi: 'Ne kadar (telefonda yalnız son konum; izin kapanınca silinir)'. Aynı çelişki hava-ay.md:210-217'de de var.",
+              "fix": "İzin metni için öneri: 'Nefona, bulunduğun yerin hava durumunu ve yağmur olasılığını göstermek için yaklaşık konumunu kullanır. Yalnız yuvarlanmış konumun telefonunda saklanır ve hava bilgisi için Apple'a gider; sunucumuza gitmez.'"
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 Merdivenler satırı ve §3.A.4",
+              "problem": "Nefes kalıbı sayılarının etiketi ve yöntemi yanlış. Plan hesabın '0,5 sn adımlarla' yapıldığını söylüyor, ama 99 ve 629 ancak tutma ve bekleme 1 sn adımla sayılınca çıkıyor. Ayrıca sayılar birikimli: 99 içinde 40 tutmasız kalıp da var, 629 içinde beklemesiz kalıplar da var. Bu yüzden 'kısa tutmalı 99' ve 'beklemeli 629' etiketleri yanlış.",
+              "evidence": "Yeniden saydım (_rev_count.mjs, _rev_count2.mjs). B katmanı (alış 3–6, veriş alış–8, 0,5 sn, 5–7,5/dk) 40 veriyor; bu doğru. C katmanı 0,5 sn tutma adımıyla 165, 1 sn adımla 99 veriyor; 99'un 40'ı tutmasız. D katmanı (4–7,5/dk) 0,5 sn adımla 1.913, 1 sn adımla 629 veriyor; 629'un yalnız 472'sinde bekleme var. Bu klasördeki hiçbir betik 99 ve 629'u üretmiyor, ama merdiven.md:217 'bu klasördeki hesapla bulundu' diyor.",
+              "fix": "§3.A.4'e şu tanımı yazın: 'alış ve veriş 0,5 sn, tutma ve bekleme 1 sn adımla'. §1'deki parantezi şöyle değiştirin: '(tutmasız 40; kısa tutma eklenince toplam 99; bekleme eklenince toplam 629 süre bileşimi)'. Sayımı yapan betiği klasöre koyun."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.F.4 Deneyim yayı",
+              "problem": "Günlere göre anlatımda yanlış bir gün var. Nefes 3 dakikaya 3. gün çıkar, 4. gün değil. Bu anlatım §3.A.4, §3.A.9 ve §1'deki '3. günden sonra 3 dakika' ifadesiyle çelişiyor.",
+              "evidence": "F.4: '3. gün ilk yoga, 4. gün nefes 3 dk ve yukarı–aşağı'. A.9 tablosu: '3 | \"Üçü birlikte\" (Isınma), Nefes 3 dk, yoga'. merdiven.md §6: 3. gün 'Nefes 3'.",
+              "fix": "'3. gün ilk yoga ve 3 dakikalık nefes, 4. gün yukarı–aşağı.'"
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 'Bugünkü kullanıcı ne görür' ve §3.A.10",
+              "problem": "'Çeşitlemeler eski kullanıcıya haftada bir basamak açılır' cümlesi formülle uyuşmuyor. Dvar = min(D, Dstage + 14) formülü, Y1 günü Dvar değerini 14'ten başlatır ve her yapılan günde 1 artırır. Eşikler 21, 28, 42 ve 56 olduğu için basamaklar sırasıyla yaklaşık 7, 14, 28 ve 42 yapılan günde açılır. V2'den V3'e ve V3'ten V4'e geçiş iki hafta sürer. Ayrıca sayılan takvim haftası değil, yapılan gündür.",
+              "evidence": "§3.A.2: 'Dvar(m) = min(D(m), Dstage(m) + 14) // çeşitlemeler eski kullanıcıya haftada bir basamak açılır'. §3.A.6: V1 21, V2 28, V3 42, V4 56.",
+              "fix": "'Eski kullanıcıda ilk çeşitleme, güncellemeden sonra yaklaşık 7 çalışma gününde açılır; sonrakiler 14, 28 ve 42. çalışma günlerinde gelir.' İstenen 'haftada bir' ise eşik yerine Dstage'e dayalı adım kuralı yazın."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 karar 2 ve §3.B.5 metin tablosu",
+              "problem": "'Görevdeki sonucun artıyor' ve 'düşüyor' ifadeleri, değeri düşük olanın daha iyi sayıldığı metriklerde ters anlam verir. Hızlı Bakış'ta eşik ms'dir ve tepki süresi de 'düşük daha iyi' türündendir. Kişi gelişirken ekranda 'sonucun düşüyor' görebilir. 'Alıştıkça artması olağandır' satırı da bu metriklere uymuyor. Ayrıca karar 2'deki 'son 28 güne bakılır' ifadesi yanlış: değişim kuralının başlangıcı ilk günlerden bir kez kurulur ve sonra değişmez; son 28 gün yalnız etkiler ve haritanın penceresi için geçerlidir.",
+              "evidence": "§B.5: 'Görev ve oyun (isabet, eşik, harf, tepki) | … \"görevdeki sonucun artıyor\" / \"görevdeki sonucun düşüyor\"'. §B.6: 'Hızlı Bakış | eşik ms (düşük daha iyi)'. §B.3: 'Başlangıç … bir kez oluşur, sonra değişmez'. Karar 2 ve sürüm notu: 'son 28 güne bakılır' / 'Gelişim artık son 28 güne … bakıyor'.",
+              "fix": "Metni yön bilgisine bağlayın: 'görevdeki sonucun başlangıcından iyi' / 'başlangıcının gerisinde' ya da metrik başına 'daha hızlı / daha yavaş'. Görev kartının notu şöyle olabilir: 'İlk haftalarda sonuçların alıştıkça iyileşmesi olağandır; bu, göreve alıştığını gösterir.' Karar 2 için öneri: 'başlangıç ilk günlerin ortancasıyla bir kez kurulur; son üç ölçüm günü, art arda iki haftalık bakışta başlangıcından belirgin ayrılırsa \"değişim\" sayılır'. Sürüm notunu da buna göre düzeltin."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.E.5 ay kartı metni (ekran)",
+              "problem": "Kart 'binlerce kişiyle yapılan daha büyük çalışmalar fark bulamadı' diyor, ama bu genelleme kanıtla uyuşmuyor. Planın kendi kaynaklarından Chaput 2016 (5.812 çocuk, 12 ülke) dolunayda yaklaşık 5 dakika kısa uyku buldu. Haba-Rubio 2015 de bir alt grupta anlamlıya yakın bir eğilim bildirdi. Ayrıca Benedict 2021 dolunaya yakın geceleri değil, büyüyen ay dönemini inceliyor.",
+              "evidence": "PubMed PMID 27047907 (Chaput 2016, 5812 children): 'sleep duration … ~5 min/night shorter during full moon'. PMID 26498230: genel sonuç 'no evidence', ama alt grupta 'trend toward shorter total sleep time during FM (p = 0.06)'. PMID 34520928 (Benedict): 'Sleep duration was shorter on nights during the waxing period'.",
+              "fix": "Kart metni için öneri: 'Ayın uykuya etkisi tartışmalı. Bazı çalışmalar dolunaya yakın gecelerde uykunun biraz kısaldığını buldu; binlerce kişiyle yapılan bazı büyük çalışmalar ise fark bulmadı ya da yalnız birkaç dakikalık fark buldu.' §E.5'te Benedict 2021'i 'büyüyen ay döneminde' diye niteleyin."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 karar 3 ve §3.D.3 (Cui 2024)",
+              "problem": "Cui 2024 kültürler arası bir karşılaştırma değil. Çalışma yalnız WeChat kullanan Çinli gençlerde gülen yüz emojisinin alaycı okunmasını inceliyor. Plandaki 'kültüre göre ters okunabiliyor' ifadesi kaynağın gösterdiğinden fazlasını söylüyor.",
+              "evidence": "PubMed PMID 39717587: 'Which emoji are markers of sarcasm among Chinese teenagers using the WeChat app?' Özete göre 'the smiling emoji is perceived as more sarcastic and more negative'. Plan: 'sistem emojileri kültüre göre ters okunabiliyor (Cui 2024)'.",
+              "fix": "'Telefonun kendi emojileri bağlama göre farklı okunabiliyor; örneğin Çinli gençler gülen yüzü alaycı ve olumsuz okudu (Cui 2024).' Karar 3'teki gerekçeyi de buna göre yazın."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.D.3 (Wrzus ve Neubauer 2022; Gertler ve Tate 2020; Killgore 1999)",
+              "problem": "İki kaynak yanlış aktarılmış. Wrzus 2022, gündeki 'soru' sayısının değil, gündeki ölçüm (bildirim) sayısının uyumu değiştirmediğini buldu. Soru uzunluğunun yükünü gösteren kaynak Eisele'dir. Gertler ve Killgore da tek maddelik ölçeklerin 'tutarlı' olduğunu değil, geçerli olduğunu gösteriyor; örneklemleri beyin hasarlı yetişkinler ve üniversite öğrencileridir.",
+              "evidence": "PMID 35016567: 'the number of assessments did not predict compliance or dropout rates'. PMID 32126846: 'evidence of construct validity'; tekrar ölçümlerde korelasyonlar 'moderate'. PMID 10710979: '284 college students… significantly discriminated'. Plan: 'tek maddelik ölçekler tutarlıdır…', 'gündeki soru sayısı uyumu değiştirmedi'.",
+              "fix": "'Gündeki ölçüm sayısı uyumu değiştirmedi (Wrzus ve Neubauer 2022…); uzun anket ise yükü ve özensiz cevabı artırdı (Eisele 2020).' 'Tek maddelik ölçekler küçük örneklemlerde (beyin hasarlı yetişkinler, üniversite öğrencileri) geçerli bulundu, ama tanı aracı değildir.'"
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.D.4 kisa-gece kartı (ekran)",
+              "problem": "Kart, kısa uyuyan kişiye laboratuvardaki dikkat bozulmasını, sınırı belirtmeden gösteriyor. Sınır ('tek kısa gece bu deneylerle aynı şey değil') yalnız tabloda duruyor, ekrana çıkmıyor. Kişi bu metni kendi dikkati hakkında bir yargı gibi okuyabilir. Ayrıca çalışmada 6 saat yatakta geçen süredir, uyku süresi değil.",
+              "evidence": "Kart metni: 'Laboratuvarda iki hafta gecede 6 saat uyuyanların dikkat hataları gün gün arttı; kişiler bunu pek fark etmedi.' PMID 12683469: 'restricted to … 6 h … time in bed per night … for 14 days'.",
+              "fix": "'Bir laboratuvar deneyinde iki hafta boyunca gecede 6 saat yatakta kalan 48 yetişkinin dikkat hataları gün gün arttı; kişiler bunu pek fark etmedi. Tek bir kısa gece bu deneyle aynı şey değildir.'"
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 Ne değişir ve Kişi ne görür (Türkçe ve olgu)",
+              "problem": "§1'de olguyla çelişen ve anlatımı bozuk cümleler var. Her kusur aşağıda alıntılanmış ve düzeltilmiş biçimi verilmiştir.",
+              "evidence": "(1) 'kısa başlar, her gün bir adım büyür ve bitmez' cümlesi yanlış, çünkü yol yalnız 2.–9. günlerde büyüyor. (2) '2.–9. günlerde her gün bir yeni adım gelir': sözcük sırası çeviri kokuyor. (3) 'Yoga … 3. günden her gün bir dersin kısa sürümüyle yoldadır': E testi günlerinde yoga yolda yok ve 8 günde bir 5 dk'lık tam ders geliyor. (4) 'Ana sayfa … ay ve hava şeridiyle açılır': §2.1 satır 12'ye göre App Review cevabına kadar başlıkta yalnız ay var. (5) 'kişiye ait tek bir doğru cümleyle': 'doğru' belirsiz, dilbilgisi mi olgu mu anlaşılmıyor. (6) '(her gün açan yeni kullanıcı; benzetimdir, cihazda denenmedi)': 'açan' fiilinin nesnesi, 'benzetimdir' yükleminin öznesi yok. (7) 'döndürmeyle', 'aynı sözleşmeyle eklenir', 'Gelişim hapları', 'güvenli bir zarfın içinde': sahibe gereksiz teknik sözcükler.",
+              "fix": "(1) 'Yol kısa başlar, ilk dokuz gün her gün bir adım büyür ve hiç bitmez.' (2) '2.–9. günlerde her gün yeni bir adım gelir.' (3) 'Yoga, onaylı plandaki gibi 3. günden başlayarak ölçüm günleri dışında her gün yoldadır: çoğu gün bir dersin 3 dakikalık sürümü, yaklaşık 8 günde bir de 5 dakikalık tam ders.' (4) 'Ana sayfa her günün ilk açılışında kişinin kendi verisinden çıkan tek bir cümleyle ve ay şeridiyle açılır; Apple onay verirse şeride hava da eklenir.' (5) Aynı cümlede 'kişinin kendi verisinden çıkan' ifadesini kullanın. (6) '(uygulamayı her gün açan yeni kullanıcı; sayılar benzetimden gelir, cihazda denenmedi)'. (7) 'Daire ile Yukarı–aşağı'nın gün aşırı gelmesiyle', 'aynı kurallarla eklenir', 'Gelişim'deki bazı durum etiketleri', 'güvenli sınırlar içinde'."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 'İsteklerin nasıl karşılandığı' tablosu (Türkçe)",
+              "problem": "Tablo hücrelerinde anlatım bozukluğu, belirsiz özne ve yüklemsiz cümle var.",
+              "evidence": "(1) Hava satırı: 'Ay kartında \"Bilim ne diyor?\" satırı vardır: ayın uykuya etkisi tartışmalıdır, dört kaynakla.' Sondaki 'dört kaynakla' hiçbir öğeye bağlanmıyor. (2) Yağmur satırı: '\"Bugün yağmur bekleniyor.\" Ayrı bir tercihtir…' cümlesinin öznesi alıntı cümle olmuş. Ayrıca 'bildirimi yapılamaz' ifadesi 'bildirim gönderilemez' olmalı. (3) Aralar satırı: 'İki bölüm arasındaki mola yolun arasıdır' totolojiye yakın; '3. günden sonra 3 dakika' ifadesi de 3. günü dışarıda bırakıyor gibi okunuyor. (4) İlk satır: 'kişilerin %27'si bir kez \"geriliyor\" görüyor' olmalı: 'en az bir kez'.",
+              "fix": "(1) 'Ay kartındaki \"Bilim ne diyor?\" satırı, ayın uykuya etkisinin tartışmalı olduğunu dört kaynakla gösterir.' (2) '\"Bugün yağmur bekleniyor\" bildirimi ayrı bir tercihtir, varsayılanı kapalıdır… \"Yağmur başlamak üzere\" bildirimi gönderilemez.' (3) 'Yolun arası, iki bölüm arasındaki moladır: nefes 1. gün 1, 2. gün 2, 3. günden başlayarak 3 dakikadır.' (4) 'en az bir kez'."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 karar 3, 5 ve 6 (Türkçe)",
+              "problem": "Karar metinlerinde yüklemsiz cümle, çift anlamlı sözcük ve eksik nesne var.",
+              "evidence": "Karar 3: 'Öbür seçenekler 1–5 sayı ya da telefonun kendi emojileri;' cümlesinin yüklemi yok. Karar 5(b): 'seri 3 gün ve üstündeyken görünür, altında \"N gün seninle\" yazar'. Buradaki 'altında' hem ekranın altı hem 3 günün altı diye okunabilir. Karar 6: 'rıza vermiş kişiye yeni metin bir kez sorulsun' denmiş, ama metin sorulmaz, onay sorulur.",
+              "fix": "Karar 3: 'Öbür seçenekler 1–5 arası sayılar ya da telefonun kendi emojileridir.' Karar 5(b): 'seri 3 gün ve üstündeyse görünür; 3 günden kısaysa yerine \"N gün seninle\" yazar'. Karar 6: 'daha önce rıza vermiş kişiye yeni rıza metni bir kez gösterilsin ve onayı yeniden alınsın'."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 İş büyüklüğü ve §3.I",
+              "problem": "Takvim cümleleri birbiriyle çelişiyor. §1'de 8–11 hafta 'onay ve dinleme süreleri hariç' deniyor. §I'da aynı 8–11 hafta 'cihaz denemeleri ve sahibin bakışlarıyla' birlikte veriliyor. Ayrıca bu plan ses üretmediği için 'dinleme süresi' bu işte yok. 'Yoga yayını plan onayından ≈ 7–12 hafta sonra' cümlesinde de hangi planın onayının kastedildiği belirsiz.",
+              "evidence": "§1: 'Toplam ≈ 34–39 iş günü; senin onay ve dinleme sürelerin hariç ≈ 8–11 hafta.' §I: 'Toplam kod işi ≈ 34–39 iş günü; cihaz denemeleri ve sahibin bakışlarıyla ≈ 8–11 hafta.' PLAN.v3:91: 'onayından yayına ≈ 7–12 hafta … senin dinleme sürelerin bu süreye dahil değil'.",
+              "fix": "İki yerde aynı cümleyi kullanın: 'Kod ≈ 34–39 iş günü; cihaz denemeleriyle ≈ 8–11 hafta; senin onay sürelerin buna dahil değildir.' Yoga cümlesi: 'Yoga yayını, yoga planının onayından (29 Eylül) ≈ 7–12 hafta sonra bekleniyor (senin dinleme sürelerin hariç).'"
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.F.3 ve §3.C.4 günün cümlesi şablonları (ekran)",
+              "problem": "Ekranda görünecek şablon cümlelerde anlatım bozukluğu ve yüklem eksikliği var.",
+              "evidence": "'Dün Yılan'da 38 ile en iyi sonucunu yaptın.' ('sonuç yapılmaz'). 'Dün yolun tamamdı.' (çeviri kokuyor). 'Bugün 28. gün: iris haritan başlangıçla yan yana.' ve 'İris haritan 3 gün sonra başlangıçla yan yana.' (yüklem yok). 'Nefes 4. basamakta: bugün 3 dakika.' (ikinci parçada yüklem yok). 'Beş gündür yoktun' (C.3'teki 'kaçırdın demez' ilkesine yakın, kınar gibi duruyor).",
+              "fix": "'Dün Yılan'da 38 puanla en iyi sonucuna ulaştın.' 'Dün yolunu tamamladın. Bugün 9 durak var, ≈ 15 dk.' 'Bugün 28. gün: iris haritan başlangıçla yan yana geliyor.' 'İris haritan 3 gün sonra başlangıçla yan yana gelecek.' 'Nefes 4. basamakta: bugün 3 dakika sürecek.' 'Beş gün ara verdin; basamağın aynı, kaldığın yerden devam ediyorsun.'"
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.D.4 gece-ekran kartı (ekran)",
+              "problem": "Kart metni yanlış anlaşılmaya açık. 'ekran süresi daha kısa ve daha geç uykuyla' dizisi 'ekran süresi daha kısa' diye de okunabiliyor. Kaynağa göre kısa ve geç olan uykudur, ekran süresi değil.",
+              "evidence": "Kart: 'Çalışmaların %90'ında ekran süresi daha kısa ve daha geç uykuyla birlikte görüldü'. PMID 25193149: 'screen time is adversely associated with sleep outcomes (primarily shortened duration and delayed timing) in 90% of studies'.",
+              "fix": "'Çalışmaların %90'ında fazla ekran süresi, daha kısa ve daha geç başlayan uykuyla birlikte görüldü; neden-sonuç gösterilmedi. Bu çalışmalar çocuk ve ergenlerde yapıldı.'"
+            },
+            {
+              "severity": "NIT",
+              "section": "§3.F.5 (Keller 2021, Mazeas 2022, Klasnja 2019)",
+              "problem": "Bazı ifadeler kaynaktan güçlü ya da zayıf aktarılmış.",
+              "evidence": "PMID 33405284: 'Repeated plan enactment was a key predictor'; plan 'en güçlü yordayıcıydı' diyor. PMID 34982715: g=0,42 'small to medium', izlemde g=0,15; plan 'etkisi küçük' diyor. PMID 30192907: 'this effect diminished over time'; plan 'söndü' diyor.",
+              "fix": "'planı tekrar tekrar uygulamak önemli bir yordayıcıydı (Keller 2021)'; 'oyunlaştırmanın etkisi küçük–orta ve izlemde küçülüyor (Mazeas 2022)'; 'öneri etkileri zamanla azaldı (Klasnja 2019)'."
+            },
+            {
+              "severity": "NIT",
+              "section": "§3.E.3 ve §3.E.7 (ay)",
+              "problem": "Kontrol değeri ile hesap yöntemi uyuşmuyor ve simge yanıltıcı. %91,1 değeri astronomy-engine'den geliyor; lib/moon.js'in kullanacağı Meeus 48 %91,2 veriyor. Ayrıca %91 aydınlanmış küçülen ay için '◐' (yarım ay) simgesi yanıltıcı.",
+              "evidence": "moontest.mjs çıktısı: '29.09.2026 12:00 TR aydınlanma AE % 91.1 Meeus48 % 91.2'. §E.7: '\"Salı, 29 Eylül · ◐ küçülen ay\"'.",
+              "fix": "Kontrol değerini 'astronomy-engine %91,1, Meeus %91,2 (tolerans ±1 puan)' diye yazın. Şerit örneğinde evreye uygun simgeyi (şişkin ay) kullanın ya da simge seçiminin evreye bağlı olduğunu belirtin."
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 Maliyet ve Gizlilik (TDK yazımı ve söz dizimi)",
+              "problem": "Küçük yazım ve söz dizimi kusurları var.",
+              "evidence": "'KVKK'deki' ifadesinde ek yanlış: kısaltma 'ka' diye okunduğu için 'KVKK'daki' olmalı. 'dahil' TDK'de 'dâhil' yazılıyor. 'Havayı açan 1.000 günlük kullanıcıda' belirsiz. 'Yeni izin: yalnız \"Uygulamayı Kullanırken\" konum, varsayılanı yaklaşık konum; yalnız kişi…' cümlesinde 'yalnız' iki kez geçiyor ve yüklem eksik. 'Yeni rıza `weather` (ayrı, işaretsiz).' yüklemsiz ve jargon.",
+              "fix": "'KVKK'daki'; 'dâhil'; 'havayı açan günlük 1.000 etkin kullanıcıda'; 'Yeni izin yalnız \"Uygulamayı Kullanırken\" konum iznidir ve varsayılanı yaklaşık konumdur; kişi hava kartında \"Konumumu kullan\"a dokunmadıkça istenmez.' 'Yeni ve ayrı bir hava rızası eklenir; kutusu işaretsiz gelir.'"
+            },
+            {
+              "severity": "NIT",
+              "section": "§3.B.6 okuma satırı",
+              "problem": "Okuma değişim eşiği (≥ 0,2 logMAR) kanıttan gelmiyor, ama VARSAYIM diye işaretlenmemiş. Subramanian 2006 yalnız ±0,12 tekrar payını veriyor. §J'deki VARSAYIM listesinde de yalnız 'art arda 2 test' var.",
+              "evidence": "PMID 16909082: '+/- 0.12 logMAR for critical print size'. §B.6: 'başlangıçtan ≥ 0,2 logMAR fark'.",
+              "fix": "'≥ 0,2 logMAR (VARSAYIM; tekrar payı ±0,12'nin üstünde seçildi)' yazın ve §J listesine ekleyin."
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "lens": "sahip-ve-kod",
+          "findings": [
+            {
+              "severity": "BLOCKER",
+              "section": "§1 karar 2, §1 tablo 1. satır",
+              "problem": "Karar 2 sahibe yalnız v2'nin kazançlarını gösteriyor. Asıl bedel yazılmıyor: geçmişin ortasındaki gerçek bir düşüşü bugünkü kural %99,8 yakalıyor, v2 ise %51,9 yakalıyor. Bu kayıp yalnız §3.B.3'te geçiyor. §1'deki \"uzun geçmişte yeni bir düşüşü iki kat sık yakalar\" cümlesi, v2'nin düşüş yakalamada her durumda daha iyi olduğu izlenimini veriyor. Sahip eksik ve yönlendirici bir bilgiyle onay verecek.",
+              "evidence": "`sim_kural_esit.mjs` yeniden koşuldu: \"1 SD düşüşü 14–26. hf yakalama\" sütununda bugünkü kural %99.8, v2 (c=1,5, persist 2) %51.9. Aynı bilgi plan §3.B.3 \"Okuma\" paragrafında var (\"%99'a karşı %52\"). Karar 2'nin gerekçesinde ise yalnız %27→%13, %71→%36 ve %14→%31 yazıyor. \"Dürüst not\" yalnız yanlış işaretin kaynağından söz ediyor.",
+              "fix": "Karar 2'nin gerekçesine ve §1 tablosunun ilk satırına tek bir cümle eklensin: \"Bedeli: 3–6 aylık kullanımda gerçek bir düşüşü bugünkü kural hemen her zaman yakalıyor, v2 yaklaşık yarısında yakalıyor (%99'a karşı %52).\" Önerinin gerekçesi de açıkça yazılsın: uzun kullanımda son haftalardaki değişim önceliklidir."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§G.4, §G.5",
+              "problem": "\"Değişmeden yeşil kalır\" listesi yanlış. \"Bilinçli olarak değişen test beklentileri\" listesi de eksik. Y4 `modules/gunun/` modülünü ekleyince `registry.test.js` modül listesini birebir beklediği için kırılır. Akşam grubunun kalkması `profileQuestions.test.js`'in :45-51'den fazlasını değiştirir. Yay `verdict`'e bağlanınca `dataHub.test.js:96` da kırılabilir. Plan \"başka bir beklenti değişirse iş durur ve sahibe sorulur\" diyor; bu yüzden sahibe gereksiz duruşlar gider ve \"mevcut sistemin bozulmadığının kanıtı\" iddiası tutmaz.",
+              "evidence": "`modules/registry.test.js:8` modül kimliklerini sıralı bir dizi olarak birebir bekliyor. Onaylı yoga planı aynı nedenle bu satıra `yoga` ekliyor (PLAN.v3 §B.5). `lib/profileQuestions.test.js:43-47` 18.30'da 'evening' bekliyor, `:53` ve `:58` ekran sorusunu cevaplatıyor. `lib/dataHub.test.js:96` `{ status: 'better' }` ile 'up' bekliyor; plan §B.5 `verifiedChange`'in `verdict` okumasını istiyor.",
+              "fix": "§G.4'e şunlar eklensin: `registry.test.js:8` (Y4'te `gunun`, (e)'de yeni modüller), `profileQuestions.test.js:43-66` ve `dataHub.test.js:96-100`. Ya da `verifiedChange` için `verdict ?? status` yedeği yazılsın. §G.5'ten `registry.test.js` çıkarılsın ya da \"yalnız modül listesi satırı değişir\" diye kayıt düşülsün."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§B.4 (alan yayı), §D.5",
+              "problem": "Yeni \"karışık\" kuralı yalnız göz uyarısını öne alıyor, WHO-5'i almıyor. Y4'te `day-mood` metriği de İyi oluş alanına giriyor. Bu durumda doğrulanmış bir WHO-5 düşüşü, emoji puanının \"başlangıcından yüksek\" çıkmasıyla birleşince yay boş kalır ve \"karışık\" yazar. Bugün WHO-5 düşüşü yayı her zaman aşağı çeviriyor. Yayımlanmış eşiği olan ve düşük puan metni bulunan bir ölçüm, kendi beyanıyla örtülmüş olur.",
+              "evidence": "`lib/dataHub.js:141-146`: bugün `who5?.status === 'down'` tek başına 'down' veriyor. Plan §B.4: \"Göz uyarısı her şeyin önündedir… Yay ancak… hiçbiri 'better' olmadığında aşağı döner\"; WHO-5 anılmıyor. §D.5: `day-mood` v2 kuralıyla değerlendirilir ve kayıt İyi oluş gününü doldurur.",
+              "fix": "§B.4'e şu kural eklensin: WHO-5 'down' göz uyarısı gibi önceliklidir ve \"karışık\" kuralına girmez. Testi §G.6'ya eklensin: `who5 down` ve `day-mood better` birlikteyken sonuç 'down' olmalı."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§2.1 satır 21, §C.5, §G.2",
+              "problem": "Planın \"yoga dışarıda kalmaz\" iddiası tutmuyor. Özet süzgeci modülleri kayıt defteri sırasıyla (alfabetik glob) ilk 10'da keser. Y1 her modüle `stage` ekler, Y4 `gunun`'u getirir; yolu her gün yapan kişide bir haftada `coach()` üreten modül sayısı 10'u aşar. Bu durumda alfabede sonda duran `yoga` ilk düşen olur. Onaylı yoga planı bu riski açık bırakmıştı (PLAN.v3 §D.5); bu plan riski kapatmış gibi yazıyor.",
+              "evidence": "`lib/coachCore.js:44`: `Object.entries(raw).slice(0, 10)`. `lib/coach.js:67-78`: yalnız nesne döndüren modüller eklenir; sıra `registry.live`'dan gelir (`modules/registry.js:159`: `import.meta.glob`). Bugün 8 modülün `coach()`'u var. Buna yoga, gunun ve (stage için) routine eklenince 11 olur.",
+              "fix": "Sınır için iki seçenekten biri seçilsin. (1) Sınır 4.000 baytlık paket sınırı içinde 16'ya çıkarılsın ve en dolu paket testte ölçülsün. (2) Kesme, son 7 günde en çok kullanılan modüle göre yapılsın ve yoga ile yol durakları önce gelsin. Seçilen yol §G.6'daki Nef paket testine eklensin."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§A.4, §A.10, §1 \"Bugünkü kullanıcı ne görür\"",
+              "problem": "Nefes çeşitlemeleri (Ç-B, Ç-C kısa tutma, Ç-D bekleme) tabloda `D` ile açılıyor, `Dvar` ile değil. Bu durumda aylardır nefes yapan eski kullanıcı, güncellemenin ertesi günü tutmalı ve beklemeli kalıplarla karşılaşır. Bu, planın kendi gerekçesiyle (\"aylardır egzersiz yapan kişi güncellemenin ertesi günü … karşılaşmaz\") ve §1'deki \"ilk çeşitleme 7 çalışma gününden sonra\" sözüyle çelişiyor. Konu güvenlik zarfıyla ilgili olduğu için önemli.",
+              "evidence": "§A.4 tablosunun sütunu `D`'dir: Ç-C 21–41 kısa tutma, Ç-D 42+ bekleme. §A.6 ise V1–V4 için açıkça \"Dvar 21+\" yazıyor. §A.10 yalnız V1–V4'ü sayıyor. §2.2 merdiven 8'de `Dvar` gerekçesi var.",
+              "fix": "§A.4'teki Ç-B, Ç-C ve Ç-D eşikleri `Dvar(breath)`'e bağlansın; §A.10 ve §1 buna göre düzeltilsin. `progression.test.js`'e bir sınama eklensin: eski kullanıcının güncelleme gününde tutmalı kalıp gelmemeli."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§G.6 Eşdeğerlik, §A.2",
+              "problem": "Eşdeğerlik kapısı yalnız ilerleme kapalıyken sınanıyor. Oysa Y1'den sonra `ctx.progression` herkese, eski kullanıcılara da veriliyor. Bu yüzden \"mevcut sistem bozulmaz kuralının teknik güvencesi\" üretimde hiç çalışmayan bir yolu güvenceye alıyor. Uzun geçmişi olan kullanıcıda, ilerleme açıkken yolun yalnız §1'de sayılan farklarla değiştiğini gösteren bir sınama yok. Örneğin ara kilidinin yeni kolu, bölüm 1'in göz payı altında kalan günlerde eski kullanıcıda da tetiklenebilir.",
+              "evidence": "§A.2: \"Verilmezse her manifest bugünkü çıktısını verir; bu, 'mevcut sistem bozulmaz' kuralının teknik güvencesidir\". §G.6 \"İlerleme açık\" bloğu yalnız yeni kullanıcının 1., 2., 4., 8., 9. ve 29. günlerini sınıyor.",
+              "fix": "§G.6'ya üçüncü bir kol eklensin: 20.000 bağlamlık düzenekte uzun geçmişli (D ≥ 60) rastgele kullanıcılar ilerleme açıkken koşulsun. Fark yalnız izinli listede olmalı (nefes 5→3, `dikey`/Daire dönüşümü, Bugünün görevi); öteki her farkta sıfır olmalı. `restDecision` bu bağlamda da sınansın."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§E.6 Yağmur bildirimi, §F.7",
+              "problem": "Yağmur bildirimi, sürmekte olan bildirim deneyinin içine düşüyor. Deneyde sessiz günler zar ile seçiliyor ve \"bildirimden açılış\" ölçülüyor. Yağmur bildirimi sessiz günlerde de gelip uygulamayı açtırırsa deneyin karşılaştırmasını bozar. Plan yalnız kimliklerin çakışmadığını söylüyor, ölçüm karışmasını ele almıyor. Oysa §F.7 \"bildirim deneyi zaten sürüyor ve iki deney aynı kişide ayrışmaz\" diye yeni deneyi reddediyor.",
+              "evidence": "`lib/notifyPlan.js:5-7` ve `:16`: `SILENT_RATE = 0.25`, sessiz günde bildirim yok, günlükte var. `App.jsx:503`: `mergeForPermission(log, plan.log, …)`. Plan §E.6: \"Deney ve sessiz gün mantığı … bu kimliklere dokunmaz\".",
+              "fix": "Yağmur bildiriminden gelen açılış ayrı bir etiketle günlüğe yazılsın ve deneyin sonuç hesabından çıkarılsın. Ya da yağmur bildirimi sessiz günlerde kurulmasın. Seçim §E.6'ya ve `rainNotify.test.js`'e yazılsın."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§H Gizlilik ve Apple kapısı, §I S0",
+              "problem": "Plan iki işi sahibin üstüne yüklüyor ama bunları sahipten istenen kararlar arasında saymıyor. (1) Y5 ve Y6 \"hukukçu soruları cevaplanmadan App Store'a gönderilmez\" kapısına bağlanmış, ancak hukukçunun kim olduğu yazılmıyor ve yedek yok. Uygulamanın bugünkü rıza metinleri de hukukçudan geçmedi. (2) App Review'dan \"yazılı cevap\" istenmesi, sahibin App Store Connect hesabıyla yapılacak bir iş. Onaylı yoga planı ad verilmeyen roller için yedek tanımlamıştı; bu planda yedek yok. Hukukçu bulunamazsa hava ve Nef aşamaları süresiz bekler.",
+              "evidence": "`lib/consent.js:6`: \"NOT: Bu metinler hukukçu onayından geçmedi\". Plan §H: \"Hukukçu soruları … cevaplanmadan Y5 ve Y6 App Store'a gönderilmez\". §1'deki altı kararda hukukçu adı ya da App Review başvurusu yok. PLAN.v3 karar 2'de yedek kuralı var.",
+              "fix": "\"Senden istenen\" bölümüne tek satırlık bir iş eklensin: \"Hukukçu adı (yoksa yedek: …) ve App Review'a şu soruyu App Store Connect'ten sen gönder.\" Hukukçu için bir yedek de tanımlansın; örneğin KVKK m. 9 için standart sözleşme metniyle ilerleme ve bunun sahibe açıkça yazılması."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§D.4 Günün kanıt kartı, §1 tablo",
+              "problem": "Sahip \"günün nasıl geçti bölümünde PubMed bilgilerini de kullanarak o günle ilgili bilgiler\" istedi. Y4'te yayına girecek kartlar ise yalnız `dolunay` (ayda ≈ 5 gece) ve `gece-ekran`. `gece-ekran` yalnız 7. günden sonra açılan \"Ekran çoktu\" etiketiyle ve 22.00'den sonra çıkıyor. Öteki kartlar Y5'e, (e)'ye ya da henüz yapılmamış doğrulamaya bağlı. Akşamların çoğunda kart çıkmayacak. Plan bu sıklığı sahibe söylemiyor, bu yüzden istek karşılanmış gibi görünüyor.",
+              "evidence": "§D.4 tablosu: `yagmurlu-gun` Y5'te; `kisa-gece` (e)'de; `az-hareket` ve `goz-yorgun` \"doğrulanırsa\" koşuluyla; \"tetik yoksa kart çıkmaz\".",
+              "fix": "§D.4'e benzetimle ya da basit bir hesapla \"30 akşamda kaç kart\" sayısı eklensin. Sayı düşükse `az-hareket` ve `goz-yorgun` kaynaklarının doğrulaması S0'da yapılsın. Yol modüllerine bağlı birkaç kart daha eklensin, örneğin nefes ya da uzağa bakış günleri için mevcut `evidence` kayıtlarından. §1'deki satırda sıklık dürüstçe yazılsın."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§E.7, §D.3 \"Günün\" sayfası, karar 4",
+              "problem": "Sahip \"günün nasıl geçiyor ekranında ay durumu, hava durumu, yağmur durumu gözükecek\" dedi. Plana göre hava yalnız \"Günün\" sayfasındaki kartta görünüyor. Bu sayfaya da yalnız Ana sayfadaki tarih satırına dokunarak gidiliyor, yani giriş görünür değil. Konum ve şehir sorusu da yalnız bu kartta soruluyor. Yağmur haberi tercihi de yalnız kartı açmış kişiye soruluyor. Kullanıcıların çoğu havayı hiç görmeyebilir; istek kâğıt üstünde karşılanıyor.",
+              "evidence": "§D.3: \"'Günün' sayfası: Ana sayfa başlığındaki tarih satırına dokununca açılır\". §E.7: \"hiç sorulmadı\" durumu yalnız bu kartta. §E.6: tercih \"hava kartı açık kişiye ilk yağmurlu günde bir kez sorulur\".",
+              "fix": "Tek ve görünür bir giriş eklensin: 7. günden sonraki akşam kartında ya da ay şeridinin yanında bir kez \"Bulunduğun yerin havasını da göstereyim mi?\" teklifi. Bu teklif 5 saniye kuralına uymak için günün ilk dokunuşundan sonra çıksın ve reddedilince bir daha sorulmasın. Tarih satırına dokunulabildiğini gösteren bir işaret de eklensin."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.F.3 tablo ve metin",
+              "problem": "§F.3 karar 5'in alt harflerine yanlış gönderme yapıyor. Sahip onaylayacağı maddeyi yanlış yerde arar. \"Logosuz\" satırı 5a'yı gösteriyor, doğrusu 5d'dir. \"Seri ≥ 3 gün\" satırı 5b'yi gösteriyor, doğrusu 5e'dir. \"Yenilikler ve rıza pencereleri\" satırı 5c'yi gösteriyor, doğrusu 5f'dir.",
+              "evidence": "§1 karar 5: (a) giriş alt yazısı, (b) site, (c) tek ekrana inmesin, (d) logo, (e) seri, (f) Yenilikler/rıza. §F.3 tablosu: \"düz zemin, logosuz (karar 5a)\", \"sıfır satırı yok (karar 5b)\"; metin: \"… sonra açılır (karar 5c)\".",
+              "fix": "§F.3'teki üç gönderme 5d, 5e ve 5f olarak düzeltilsin. Belgenin tamamında \"karar 5\" göndermeleri harf harf yeniden denetlensin."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 karar 5 ve karar 6",
+              "problem": "Sahip \"kararlar az olmalı; teknik seçimleri kendin ver\" dedi. Karar 5'te altı alt madde var ve bunların ikisi karar gerektirmiyor. 5(c) \"şimdilik hayır\" diyor, yani hiçbir şeyi değiştirmiyor. 5(f), yani pencerelerin ilk dokunuştan sonra açılması, onaylı bir tasarımı değiştirmeyen teknik bir sıralama seçimi. Karar 6'nın \"kural cümleleri rızasız da görünsün\" parçası da bugünkü davranışın aynısı: Ana sayfa bugün \"Nef · …\" satırını rızasız gösteriyor.",
+              "evidence": "`screens/Home.jsx:246`: `<span>Nef · {sug.primary.sub}</span>` rızasız görünüyor. Karar 5(c): \"Öneri: … (c) şimdilik hayır\".",
+              "fix": "5(c) karardan çıkarılıp bilgi notuna çevrilsin. 5(f) ve karar 6'nın rızasız cümle parçası plan tarafından kendisi verilsin. Karar 5 dört alt maddeye (a, b, d, e) insin."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§C.5, karar 6",
+              "problem": "Coach v2 rızasına \"Şimdi değil\" diyen eski kullanıcıya ne gideceği tanımlı değil. Mevcut rıza düzeninde eski sürüme verilmiş izin, yeni metne \"Şimdi değil\" denince geri çekilmiyor. Bu kişiye eski paket mi, yeni alanlar (`moodStatus`, `n7`, `stage`) olmadan küçültülmüş paket mi, hiçbir şey mi gideceği yazılmamış. Ruh hali verisinin rızasız gitme riski var.",
+              "evidence": "`lib/consent.js:3-5`: \"Eski sürüme izin vermiş kişinin yeni metne 'Şimdi değil' demesi eski izni geri çekmez (recordDecline): … yalnız yeni amaçlar açılmaz\". Plan §C.5 ve karar 6 yalnız \"onayı yeniden alınsın\" diyor.",
+              "fix": "§C.5'e bir kural eklensin: v2'yi reddeden kişiye v1'in izin verdiği alanların v2'de kalanları gider (çıkarılan alanlar yine gitmez). `moodStatus`, `n7` ve öteki yeni alanlar yalnız v2 rızasıyla gider. Bu durum Nef paket testine eklensin."
+            },
+            {
+              "severity": "NIT",
+              "section": "§D.3, §G.3 Y4",
+              "problem": "Akşam grubu kalkınca Profilim → Sorularım'da ekran, uyku ve gece telefonu satırları \"akşam sorulacak\" yazmaya devam eder. Bu sorular artık akşam sorulmayacağı için ekrandaki cümle yanlış olur. Değişecek dosyalar listesinde bu satırlar yok.",
+              "evidence": "`lib/profileQuestions.js:228-230`: `row('screenHours', 'Ekran saati', 'akşam sorulacak')` ve benzerleri. §G.3 Y4 yalnız `:170`'i sayıyor.",
+              "fix": "§G.3 Y4'e `lib/profileQuestions.js:228-230` eklensin. Ekran satırı kaldırılsın; uyku satırı \"kurulumda\" ya da \"(e) ile sabah\" yazsın; gece telefonu satırı \"isteğe bağlı\" yazsın."
+            },
+            {
+              "severity": "NIT",
+              "section": "§2.3 Sayaçlar, §G.3 Y1",
+              "problem": "Y1, yayındaki ve onaylı yoga modülünün `lib/yoga.js` dosyasını yalnız \"iki tanım teke insin\" diye değiştiriyor. Davranış değişmese de onaylı bir modüle gereksiz risk getiriyor. PLAN.v3 §B.5 \"(c) geldiğinde durak aynı kalır\" diyor.",
+              "evidence": "§2.3: \"yoganın `yogaCounters` işlevi Y1'de ortak `doneDays` ve `gapDays` yardımcılarını çağırır\". §G.3 Y1: `lib/yoga.js (ortak sayaç yardımcısı…)`.",
+              "fix": "Y1'de `lib/yoga.js`'e dokunulmasın. Ortak yardımcı yeni kodda kullanılsın; yoganın buna taşınması ayrı ve isteğe bağlı bir iş olarak ertelensin."
+            },
+            {
+              "severity": "NIT",
+              "section": "§E.2 izin metni, §E.7 sky-log",
+              "problem": "İzin metni \"telefonda yalnız en yakın il adı saklanır\" diyor. Oysa telefonda hava önbelleği ve 90 günlük `sky-log` (günlük yağış ve en yüksek sıcaklık) da saklanıyor. Ayrıca 90 günlük hava geçmişi tutmanın WeatherKit kullanım koşullarına uyup uymadığı notlarda doğrulanmamış. Cümlenin sonundaki \"sunucumuza gitmez\" ifadesinin öznesi de belirsiz.",
+              "evidence": "§E.7: `gozolcum:sky-log` gün başına `{ date, rainy, tMax, moonIllum }`, 90 gün. Notlardaki WeatherKit belgelerinde (`weatherkit*.json`) saklama ya da önbellek koşulu yok.",
+              "fix": "İzin metni şöyle yazılsın: \"Konumunun kendisi saklanmaz; telefonda yalnız en yakın il adı ve hava bilgisi kalır. Konumun sunucumuza gitmez.\" `sky-log` süresi için Apple Developer Program Lisans Sözleşmesi'nin WeatherKit maddesi Y5 kapısında okunsun ve bu §J'ye yazılsın."
+            },
+            {
+              "severity": "NIT",
+              "section": "§2.2 merdiven 6, §A.4",
+              "problem": "Marchant 2025'in aktarımı fazla güçlü. Çalışma, dakikada 6 nefesin yalnız kalp atım değişkenliğini kutu ve 4-7-8 nefesinden fazla artırdığını buldu. Ruh halinde ve kan basıncında hiçbir koşul anlamlı değişiklik yapmadı. 6/dk nefes ayrıca hafif aşırı solumaya yol açtı.",
+              "evidence": "PubMed PMID 39864026 özeti ([DOI](https://doi.org/10.1007/s10484-025-09688-z)): \"6 bpm increased HRV measures more than square or 4-7-8 … None of the breathing conditions resulted in meaningful changes in blood pressure or mood … led to mild over-breathing\". Plan §2.2: \"Marchant 2025 dakikada 6 nefesi kutu ve 4-7-8'den üstün buldu\".",
+              "fix": "Cümle şöyle düzeltilsin: \"Marchant 2025'te dakikada 6 nefes, kalp atım değişkenliğini kutu ve 4-7-8'den fazla artırdı; ruh halinde fark yoktu.\""
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 \"Bugünkü kullanıcı ne görür\", §F.2",
+              "problem": "Eski kullanıcının göreceği iki sonuç sahibe yazılmamış. (1) Yolda nefes 3 dakikaya inince, \"2 dk daha\"ya dokunmayan kişinin 28 günlük nefes programında o gün sayılmaz; program günü 300 saniye ister. (2) Sitede \"Bir günün nasıl geçer\" bölümü ve `nasil-calisir` sayfası bugünkü yolu anlatıyor; Y1 ve Y4'ten sonra bu metinler ve yol görselleri eskir. Plan sitede yalnız ilk ekranın değiştiğini yazıyor.",
+              "evidence": "`lib/breath.js:16` ve `:277-294` (`PROGRAM_DAY_SEC = 300`, gün başına toplam). `site/pages/index.html:93-94` (\"~15 dk · Yol … nefes molası\", `home-path-*.webp`). Plan §F.2: \"öteki bölümler değişmez\".",
+              "fix": "§1'e bir cümle eklensin: \"Yoldaki 3 dakika, 28 günlük nefes programında ancak '2 dk daha' ile gün sayılır.\" §G.3 Y1 ve Y4'e sitenin yol metni ve görsellerinin güncellenmesi eklensin."
+            }
+          ]
+        },
+        {
+          "lens": "sayi-ve-dil",
+          "findings": [
+            {
+              "severity": "BLOCKER",
+              "section": "§3.A.6 (satır 407), §3.J (satır 1172), Kaynaklar tablosu (satır 1215)",
+              "problem": "Singh 2022'ye, özetinde hiç geçmeyen bir iddia yükleniyor: \"göz egzersizlerinde ekran kaynaklı yorgunluk için yüksek kesinlikte kanıt yoktur (Singh 2022)\". Kaynak tablosu da bu kaydı \"göz yorgunluğunda kanıt yok\" diye özetliyor. Kural, bilimsel iddiaların notlarda doğrulanmış PMID ile desteklenmesini istiyor; bu iddia doğrulanmamış.",
+              "evidence": "PubMed 35597519 (DOI 10.1016/j.ophtha.2022.05.009): 45 RKÇ, 4497 kişi. İncelenen tedaviler çok odaklı ve mavi ışık gözlükleri, meyve özü, omega-3 ve karotenoid. Sonuç: \"We did not identify high-certainty evidence supporting the use of any of the therapies analyzed\". Omega-3 için düşük kesinlikte kanıt var. Göz egzersizleri özette geçmiyor. Not da bunu açıkça yazıyor (merdiven.md:482): \"Göz hareketi egzersizleri özette yer almıyor; bu yüzden etkileri için iddia yok.\"",
+              "fix": "§A.6 şöyle yazılsın: \"Ekran kaynaklı göz yorgunluğu için incelenen tedavilerin (gözlük, besin takviyesi) hiçbirinde yüksek kesinlikte kanıt yok; göz hareketi egzersizleri bu derlemede yer almıyor (Singh 2022). Bu yüzden ekrandaki metinler etki söylemez.\" §J'deki \"Göz egzersizlerinde yüksek kesinlikte kanıt yok\" cümlesi \"Göz egzersizlerinin ekran yorgunluğuna etkisini gösteren doğrulanmış bir kayıt notlarda yok\" biçimine getirilsin. Kaynak tablosundaki sütun \"incelenen tedavilerde yüksek kesinlikte kanıt yok (egzersiz kapsam dışı)\" olsun."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 karar 2 ve tablo satırı 1 (satır 63, 147-151)",
+              "problem": "Sahibin onaylayacağı kararın gerekçesinde v2'nin yalnız lehine olan sayılar var. v2'nin bedeli söylenmiyor: kayıt geçmişinin ortasında (13. haftadan sonra) başlayan gerçek bir düşüşü bugünkü kural %99,8 oranında yakalıyor, v2 ise %51,9. Bu bilgi yalnız §3.B.3'te duruyor. Sahip §1'i okuyup karar vereceği için bu sayı §1'de de görünmeli.",
+              "evidence": "sim_kural_esit.mjs'yi yeniden koştum: \"Bugünkü | yakala 99.8 (yokken 10.5)\", \"v2 1.5 p2 w3 | yakala 51.9 (yokken 9.5)\". Bunlar §3.B.3 tablosundaki (satır 540, 542) sayılarla aynı. Karar 2'de yalnız %27→%13, %71→%36 ve %14→%31 yazıyor.",
+              "fix": "Karar 2'nin \"Dürüst not\" cümlesine şu eklensin: \"Bedeli de var: 13. haftadan sonra başlayan 1 SD'lik bir düşüşü bugünkü kural hemen her kişide (%99,8) yakalıyor, yeni kural yaklaşık iki kişiden birinde (%52).\" Tablonun ilk satırına da kısa bir \"bedeli\" cümlesi eklensin."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 tablo satırı 1 (satır 63), karar 2 (satır 146-148), belge başı (satır 13-14)",
+              "problem": "Bu cümlelerde anlatım bozukluğu ve belirsiz çerçeve var. (1) \"gören kişi %27'den %13'e iner\" ve \"sanan kişi %71'den %36'ya iner\": düşen şey kişi değil, oran. (2) \"gerçek bir değişim yokken 26 hafta içinde kişilerin %27'si en az bir kez 'geriliyor' görüyor\" cümlesinde hangi kuralın söz konusu olduğu yazmıyor. Bu kişilerin benzetimdeki yapay kişiler olduğu da söylenmiyor, bu yüzden sayı gerçek kullanıcılar hakkında bir olgu gibi okunuyor. (3) Belge başında \"gören kişi bugünkü kuralda %27,2\" diye aynı kusur tekrarlanıyor.",
+              "evidence": "Satır 63: \"gerçek bir değişim yokken 26 hafta içinde kişilerin %27'si en az bir kez \"geriliyor\" görüyor; yeni kuralda bu oran %13'e iner\". Satır 147-148: \"gören kişi %27'den %13'e iner; alışmayı \"iyileşme\" sanan kişi %71'den %36'ya iner\". Satır 13-14: \"gören kişi bugünkü kuralda %27,2, önerilen kuralda %13,0\".",
+              "fix": "Satır 63: \"Benzetimde, gerçek bir değişim yokken bile bugünkü kuralda kişilerin %27'si 26 hafta içinde en az bir kez 'geriliyor' görüyor; yeni kuralda bu oran %13'e iner.\" Karar 2: \"...en az bir kez 'geriliyor' görenlerin oranı %27'den %13'e, alışmayı 'iyileşme' sananların oranı %71'den %36'ya iner.\" Satır 13: \"...'geriliyor' görenlerin oranı bugünkü kuralda %27,2, önerilen kuralda %13,0'dır.\""
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§2.2 merdiven 6 (satır 214); §3.A.5 (satır 380)",
+              "problem": "Marchant 2025 abartılı aktarılıyor. \"dakikada 6 nefesi kutu ve 4-7-8'den üstün buldu\" cümlesi genel bir üstünlük söylüyor. Çalışma ise yalnız kalp ritmi değişkenliğinde fark buldu; ruh halinde ve tansiyonda fark bulmadı. Cümle, §3.A.4'teki \"kanıt kalıplar arasında büyük fark göstermiyor (Birdee 2023; Marchant 2025)\" cümlesiyle de çelişiyor.",
+              "evidence": "PubMed 39864026 (DOI 10.1007/s10484-025-09688-z): 84 üniversite öğrencisi, tek oturum. \"Breathing at 6 bpm increased HRV measures more than square or 4-7-8 breathing with small to medium effects. None of the breathing conditions resulted in meaningful changes in blood pressure or mood. Unexpectedly, breathing at 6 bpm led to mild over-breathing.\" merdiven.md:477 de böyle aktarıyor.",
+              "fix": "§2.2 şöyle olsun: \"Marchant 2025'te dakikada 6 nefes, kalp ritmi değişkenliğini kutu ve 4-7-8'den daha çok artırdı (küçük–orta etki); ruh halinde hiçbir kalıp fark yaratmadı.\" §A.5'teki \"(6/dk en tutarlı)\" notu da \"(kalp ritmi değişkenliğinde 6/dk)\" olsun."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§2.1 satır 1 (satır 178)",
+              "problem": "You 2021, \"kısa başlangıcı destekliyor\" diye aktarılıyor. Oysa çalışma kısa başlangıcı sınamadı; 5 dakikalık tek bir yavaş nefes seansında algılanan stresin arttığını buldu. Çalışmayı kısa başlangıcın dayanağı saymak bir çıkarımdır.",
+              "evidence": "PubMed 34203020 (DOI 10.3390/ijerph18126630): 61 kişi, 5 dk yavaş nefes. Vagal etkinlik arttı, ancak \"perceived stress intensity and emotional arousal increased after SPB\". Yazarlar bunu nefes darlığına ve alışma gereğine bağlıyor.",
+              "fix": "\"You 2021: ilk 5 dakikalık yavaş nefeste algılanan stres arttı; yazarlar alışma gerektiğini söylüyor. Kısa başlangıç bu bulgudan çıkarılan bir tasarım seçimidir (VARSAYIM).\""
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.E.5 (satır 847-848)",
+              "problem": "\"uykunun birkaç dakika ile 20 dakika arası kısaldığını bildirdi (Cajochen 2013, Casiraghi 2021)\" cümlesindeki aralığın kaynağı yok. Cajochen'de 20 dk var. Casiraghi'nin özetinde ve notunda ise sayı yok. \"Birkaç dakika\" ancak başka bir satırda anılan Chaput'tan geliyor olabilir. Bu da kanıtın vermediği bir sayının iki kaynağa birlikte bağlanması demek.",
+              "evidence": "PubMed 23891110: \"total sleep duration was reduced by 20 min\". PubMed 33571126'nın özeti yalnız \"sleep starts later and is shorter on the nights before the full moon\" diyor ve sayı vermiyor. hava-ay.md:299 da sayı vermiyor.",
+              "fix": "\"Bir laboratuvar çalışması dolunaya yakın gecelerde toplam uykunun 20 dakika kısaldığını buldu (Cajochen 2013); bir saha çalışması dolunaydan önceki gecelerde uykunun daha geç başladığını ve daha kısa sürdüğünü gösterdi (Casiraghi 2021).\""
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 karar 3 (satır 153-154), §3.D.3 (satır 719-720)",
+              "problem": "Cui 2024, telefonun kendi emojileri için kanıt gibi kullanılıyor. Oysa çalışma WeChat'in kendi emoji setini ve alaycı mesaj bağlamını inceledi. Karar 3'teki öbür seçenek iOS'un sistem emojileri; WeChat'in gülen yüzü bunlardan biri değil.",
+              "evidence": "PubMed 39717587 (DOI 10.1016/j.heliyon.2024.e39796): \"Which emoji are markers of sarcasm among Chinese teenagers using the WeChat app?\" Çalışma 597 kişiyle alaycı ifadeler üzerine yapıldı.",
+              "fix": "\"Emojiler bağlama göre farklı okunabiliyor; örneğin WeChat kullanan Çinli gençler uygulamanın gülen yüz emojisini alaycı ve olumsuz okudu (Cui 2024). Telefonun kendi emojileri için doğrudan bir çalışma notlarda yok.\""
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 tablo, merdivenler satırı (satır 65); §2.2 merdiven 6 (satır 214); §3.A.5 (satır 381)",
+              "problem": "Gün numaraları ile D eşikleri karışıyor. Ç-D'nin eşiği D ≥ 42, yani 43. gün. \"43. günden sonra\" yazılınca bu 44. gün diye okunur; §1'in 90+ satırı (\"43. ... günlerde ... açılır\") ve §F.5 (\"43. günden\") ile de çelişir. §A.5'teki \"Tutma: 21. günden önce yok\" 21. günü açık bırakıyor, oysa kısa tutma 22. günde başlıyor (§1 satır 50, §A.9 satır 462). VARSAYIM listesindeki \"(7, 21, 42)\" sayılarının gün değil D olduğu da yazmıyor.",
+              "evidence": "Satır 65: \"Senin 4·2·4·4'ün 43. günden sonra\". Satır 358: \"Ç-D | 42+\". Satır 381: \"21. günden önce yok ... 42. günden sonra veriş sonu bekleme\". Satır 1007: \"43. günden bekleme nefesi\". Benzetimde D = gün − 1 (sim_merdiven.mjs çıktısı: \"22 | D=21\").",
+              "fix": "§1 ve §2.2'de \"43. günden başlayarak\" yazılsın. §A.5 \"Tutma: 22. günden önce yok; 43. günden başlayarak veriş sonu bekleme ≤ 4 sn\" olsun. VARSAYIM listesinde \"nefes katmanlarının D eşikleri 7, 21, 42 (yeni kullanıcıda 8., 22., 43. gün)\" yazılsın."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 \"Bugünkü kullanıcı ne görür\" (satır 76-77); §3.A.4 ve §3.A.10",
+              "problem": "\"Eski kullanıcıda ilk çeşitleme güncellemeden sonraki 7 çalışma gününün ardından açılır\" cümlesi yalnız göz çeşitlemeleri (V1) için doğru. Nefes katmanları (Ç-B 7, Ç-C 21, Ç-D 42) §A.4'te \"D\" sütunuyla verilmiş. D kullanılırsa aylardır nefes yapan kişi güncelleme günü tutmalı ve beklemeli kalıplarla karşılaşır; bu, §1'deki \"43. günden sonra\" güvenlik sözüyle çelişir. Dvar kullanılırsa da güncelleme günü Dvar = 14 olur ve \"Günün ritmi\" hemen açılır. Her iki durumda da §1'deki cümle nefes için yanlış.",
+              "evidence": "Satır 329: \"Dvar(m) = min(D(m), Dstage(m) + 14)\". Satır 356-358'de nefes basamakları D'ye bağlı. merdiven.md:111'de de Dvar yalnız \"varyantlar için\" tanımlı.",
+              "fix": "§A.4'te Ç-B, Ç-C ve Ç-D'nin Dvar ile açıldığı açıkça yazılsın. §1 cümlesi şöyle olsun: \"Eski kullanıcıda nefeste 'Günün ritmi' güncelleme günü açılır; kısa tutma 7, bekleme nefesi 28 çalışma gününden sonra gelir. Göz egzersizlerinde ilk çeşitleme 7, sonrakiler 14, 28 ve 42 çalışma gününden sonra gelir.\" Bu sayıları Dvar = 14 + Dstage formülüyle doğrulayın."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 tablo, merdivenler satırı (satır 65)",
+              "problem": "\"Yüzlerce kombinasyon güvenli sınırlar içinde üretilir: nefes kalıbının süreleri yüzlerce bileşimden seçilir\" cümlesi yalnız 43. günden sonrası için doğru. İlk üç haftada 40, 22.–42. günlerde 99 bileşim var. 629 bileşimin 472'si beklemeli ve bunlar haftada en çok bir gün gelebiliyor.",
+              "evidence": "sayim_nefes.mjs çıktısı: \"B { toplam: 40 }\", \"C { toplam: 99, tutmali: 59 }\", \"D { toplam: 629, tutmali: 390, beklemeli: 472 }\". Bu sayılar §3.A.4 (satır 367-368) ile aynı.",
+              "fix": "\"Nefes kalıbının süreleri güvenli sınırlar içinde üretilir: 8.–21. günlerde 40, 22. günden 99, 43. günden 629 bileşimden seçilir (beklemeli olanlar haftada en çok bir gün).\""
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.F.3 (satır 964, 969, 972)",
+              "problem": "Karar harfleri yanlış gösteriliyor, bu da sahibi yanlış karara yönlendirir. Logosuz açılış ekranı karar 5d'dir ama \"(karar 5a)\" yazıyor. Sıfır satırının kalkması karar 5e'dir ama \"(karar 5b)\" yazıyor. Pencerelerin ilk dokunuştan sonra açılması karar 5f'dir ama \"(karar 5c)\" yazıyor.",
+              "evidence": "Karar 5 (satır 157-164): (a) giriş ekranının alt yazısı, (b) site, (c) tek ekrana inmeme, (d) logo, (e) sıfırlar ve seri, (f) pencereler.",
+              "fix": "Satır 964'teki \"(karar 5a)\" → \"(karar 5d)\"; satır 969'daki \"(karar 5b)\" → \"(karar 5e)\"; satır 972'deki \"(karar 5c)\" → \"(karar 5f)\"."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 karar 1 (satır 138-139)",
+              "problem": "İyelik eki hatası ve tırnak içinde yapılmış bir özet var. \"bağlayıcı iş sıranın 2. maddesi\" yanlış; doğrusu \"iş sırasının\". Ayrıca tırnak içindeki \"merdivenler, Gelişim, Nef gidişat yorumları, günün nasıl geçti, hava ve 5 saniye\" ifadesi kaynaktaki metnin aynısı değil, bir özet. Tırnak ise onu alıntı gibi gösteriyor.",
+              "evidence": "Satır 138: \"bağlayıcı iş sıranın 2. maddesi bu planın kapsamını \"merdivenler, Gelişim, ...\" diye sayıyor\". Kaynak (tasarim/SAHIP_ISTEKLERI.md) şöyle: \"merdivenler, her modülün Gelişim'e bağlanması, Nef gidişat yorumları, \"günün nasıl geçti\" yeniden tasarımı, hava/yağmur/ay/konum ve bildirim, 5 sn kuralı\".",
+              "fix": "\"Gerekçem şu: bağlayıcı iş sırasının 2. maddesi bu planın kapsamını merdivenler, Gelişim bağlantısı, Nef'in gidişat yorumları, 'günün nasıl geçti', hava ve 5 saniye kuralı olarak sayıyor.\""
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 \"Uygulama sırası\" (satır 100-102) ve karar 1 (satır 136-137)",
+              "problem": "\"(d) ve (e), yani uyku kalitesi, yürüme, tepki ve Gökyüzü molasının yola girişi\" açıklaması (d)'yi, yani sessiz ölçümü düşürüyor. Karar 1'de de ertelenenler \"uyku kalitesi, yürüme ve tepki\" diye sayılıyor ve sessiz ölçüm yine yok. Sahip neyin erteleneceğini eksik görüyor.",
+              "evidence": "YAPILACAKLAR.md: \"(d) sessiz ölçüm tercihi, (e) uyku (Sağlık) ve yürüyüş\". Plan §I (satır 1157): \"(d) sessiz ölçüm; (e) uyku, yürüyüş, tepki, gökyüzü molası\".",
+              "fix": "\"Bu yüzden (d) sessiz ölçüm ile (e)'deki uyku kalitesi, yürüyüş, tepki ve Gökyüzü molası 2027'nin ilk çeyreğinden sonraya kalır.\" Karar 1'de de aynı liste kullanılsın."
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 tablo, \"Nef'in gidişat yorumları\" satırı (satır 67)",
+              "problem": "İlk cümle yüklemsiz; sayılan öğelerin kime ya da neye ait olduğu belli değil. \"Her sabah\" da yanlış: günün cümlesi sabahleyin değil, günün ilk açılışında çıkıyor (§C.2).",
+              "evidence": "\"Her sabah telefonda üretilen tek cümle, yeni basamakta ya da ilk doğrulanmış değişimde bir olay satırı, Pazartesi haftalık, 29./57./85. günde aylık değerlendirme.\"",
+              "fix": "\"Nef günün ilk açılışında telefonda üretilen tek bir cümle söyler. Yeni bir basamakta ya da ilk doğrulanmış değişimde bu cümlenin yerine bir olay satırı yazar. Pazartesi haftalık, 29., 57. ve 85. günde aylık değerlendirme verir.\""
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§1 ilk paragraf (satır 40) ve tablo satırı 1 (satır 63)",
+              "problem": "İki cümlede anlam sorunu var. (1) \"Mevcut yolun yapısı, ölçümleri ve oyunları aynı kalır\" cümlesi aynı paragraftaki \"Yol her gün aynı kalmaz\" cümlesiyle çelişiyor. Üstelik yapı gerçekten değişiyor: nefes 3 dk oluyor, yeni `dikey` grubu geliyor, Daire ile Yukarı–aşağı gün aşırı dönüyor. (2) \"düzen de bir ölçüdür, ama ona etki ölçüsü uydurulmaz\" cümlesinde \"ona\" düzeni mi, modülü mü gösteriyor, belli değil.",
+              "evidence": "Satır 30: \"Yol her gün aynı kalmaz\". Satır 40: \"Mevcut yolun yapısı, ölçümleri ve oyunları aynı kalır.\" Satır 74'te ise doğru biçim kullanılmış: \"Yolun bölümleri, ölçümleri ve oyunları aynı kalır.\"",
+              "fix": "(1) \"Mevcut yolun bölümleri, ölçümleri ve oyunları aynı kalır.\" (2) \"Etki ölçüsü olmayan modül (göz egzersizleri, Yılan, Çemberler) düzeniyle izlenir; düzen de bir ölçüdür, ama bu modüllere etki ölçüsü uydurulmaz.\""
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.F.2 site metni (satır 950-951)",
+              "problem": "Ekranda görünecek cümlede nesne eksik: \"Nefona ilk açılışta 20 saniyede sayar\" cümlesinde neyin sayıldığı yazmıyor.",
+              "evidence": "\"Bilmiyorsan şaşırma. Nefona ilk açılışta 20 saniyede sayar; kamera görüntün telefondan çıkmaz.\"",
+              "fix": "\"Bilmiyorsan şaşırma. Nefona ilk açılışta göz kırpmalarını 20 saniyede sayar; kamera görüntün telefondan çıkmaz.\""
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.D.4 `gece-ekran` kartı (satır 751)",
+              "problem": "Ekrandaki ilk cümlede \"Çalışmaların\" sözcüğünün hangi çalışmaları kastettiği belli değil. Kişi bunu ancak üçüncü cümlede öğreniyor ve ilk okumada bulguyu yetişkinlere ait sanabiliyor.",
+              "evidence": "\"Çalışmaların %90'ında fazla ekran süresi, daha kısa ve daha geç başlayan uykuyla birlikte görüldü; neden-sonuç gösterilmedi. Bu çalışmalar çocuk ve ergenlerde yapıldı.\" PubMed 25193149: 67 çalışma, okul çağındaki çocuk ve ergenler, \"adversely associated ... in 90% of studies\", \"causal association not confirmed\".",
+              "fix": "\"Çocuk ve ergenlerle yapılan 67 çalışmanın %90'ında fazla ekran süresi, daha kısa ve daha geç başlayan uykuyla birlikte görüldü. Bu birliktelik neden-sonuç ilişkisi göstermez.\""
+            },
+            {
+              "severity": "SHOULD",
+              "section": "§3.F.4 (satır 993), §3.C.4 (satır 666, 668), §H metin kapısı (satır 1116)",
+              "problem": "Planın koyduğu kurallar kendi örneklerine uymuyor. Günün cümlesi \"tek sayı\" taşımalı, ama 1. öncelikteki örnekte üç sayı (20, 3, 28), 7. öncelikteki örnekte iki sayı (9, 15) var. §H \"70 karakter sınırı\"nı ekrana giren her cümleye uyguluyor. Oysa aynı Nef satırında çıkan C.4 şablonlarından ikisi bu sınırı aşıyor, kanıt kartlarının metinleri de 70 karakterden uzun.",
+              "evidence": "Karakter sayımı: \"Fark Ettin mi?'de sonucun iki haftadır başlangıcının gerisinde; ışık ve saat farklı olabilir.\" 93 karakter; \"Nefes seanslarının sonunda sakinlik puanın başındakinden yüksek (son 28 gün).\" 77 karakter; \"İlk Bakış'ta 20 saniyede 3 kez kırptın. 28. gün yeniden bakacağız.\" 66 karakter ve üç sayı.",
+              "fix": "§H'de 70 karakter sınırının yalnız Nef satırı (günün cümlesi ve olay satırı) için geçerli olduğu yazılsın. §F.4'teki \"tek sayı\" kuralı \"tek iddia\" olarak gevşetilsin ya da örnekler kurala uydurulsun. C.4'teki iki şablon kısaltılsın; örneğin \"Fark Ettin mi?'de sonucun iki haftadır başlangıcının gerisinde.\" (ışık ve saat notu kartın ayrıntısına taşınır)."
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 \"Kişi ne görür\" (satır 49, 52, 54) ve §2.3 (satır 264)",
+              "problem": "Sayılar ve anlatım biraz belirsiz. (1) \"E testi ve okuma günleri 17–18\" doğru değil: 1. gün E testi günüdür ve 8 dk, 2. gün okuma günüdür ve 11 dk. (2) \"90+ gün: Yol ortalaması 15,7 dakikadır\": 15,7 ilk 90 günün ortalaması. 90. günden sonraki haftalık odak benzetilmedi. (3) \"üç tam dersin üçü de\" ve \"on tam dersin onu da\" yapıları yapay.",
+              "evidence": "sim_merdiven.mjs (EYEB=5, karar 10 30) çıktısı: \"1 | ... | 8 dk\", \"2 | ... Okuma 3 ... | 11 dk\". 90 gün: \"ortalama 15.7\"; 10.00'da tam derslerin hepsi Derin Dinlenme.",
+              "fix": "\"(en kısa 8, en uzun 18; 8. günden sonra E testi günleri 17, okuma günleri 18)\"; \"İlk 90 günün yol ortalaması 15,7 dakikadır\"; \"üç tam dersin hepsi Derin Dinlenme'dir\"; \"on tam dersin hepsi Derin Dinlenme'dir\"."
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 ilk paragraf (satır 30)",
+              "problem": "\"ilk dokuz gün her gün bir adım büyür\" diyor, ama 1. gün başlangıçtır ve büyüme 2.–9. günlerde, yani sekiz adımda olur. Hemen sonraki cümle de bunu söylüyor.",
+              "evidence": "Satır 31: \"2.–9. günlerde her gün yeni bir adım gelir\".",
+              "fix": "\"Yol kısa başlar, 2.–9. günlerde her gün bir adım büyür ve hiç bitmez.\""
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 tablo, \"Aralar\" satırı (satır 66)",
+              "problem": "\"molanın kalanı '2 dk daha' düğmesi ya da gözler kapalı dinlenmedir\" cümlesi 1. ve 2. gün için doğru değil. §A.4'e göre \"2 dk daha\" düğmesi 3 dakikalık nefesten sonra çıkıyor; §A.8'e göre de yeni kullanıcı ilk günlerde nefesten sonra boş beklemiyor.",
+              "evidence": "Satır 362: \"yoldaki 3 dakika bitince '2 dk daha' düğmesi çıkar\". Satır 432-433: \"yeni kullanıcı 1 dakikalık nefesten sonra boş beklemez\".",
+              "fix": "\"3. günden başlayarak molanın kalanı '2 dk daha' düğmesi ya da gözler kapalı dinlenmedir; ilk iki gün mola nefesle biter.\""
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 karar 5a (satır 158) ve §3.F.2 (satır 941)",
+              "problem": "Önerilen giriş ekranı cümlesinde \"sana\" eksik; \"20 saniyede\"den sonraki virgül de gereksiz.",
+              "evidence": "\"20 saniyede, fark etmediğin bir şeyi göstereceğiz.\"",
+              "fix": "\"20 saniyede sana fark etmediğin bir şeyi göstereceğiz.\""
+            },
+            {
+              "severity": "NIT",
+              "section": "§3.E.5 kart metni (satır 855)",
+              "problem": "Ekrandaki \"binlerce kişiyle yapılan bazı büyük çalışmalar\" ifadesi, kaynak satırındaki çalışmaların bir kısmı için fazla. Smith 2017'de 1.411 ergen var; üstelik ölçülen şey uyku süresi değil, yatakta geçen süre.",
+              "evidence": "PubMed 27928860: \"1411 Germans age 14-17\", \"time in bed\". PubMed 26498230: 2.125 kişi. PubMed 27047907: 5.812 çocuk.",
+              "fix": "\"...binden fazla kişiyle yapılan bazı büyük çalışmalar ise fark bulmadı ya da yalnız birkaç dakikalık fark buldu.\""
+            },
+            {
+              "severity": "NIT",
+              "section": "§3.D.3 (satır 722), §3.B.6 (satır 626-628), §3.B.2 (satır 509-510), §3.A.5 (satır 379)",
+              "problem": "Bazı aktarımlar fazla kesin ya da bağlamsız. (1) Wrzus 2022 için \"uyumu değiştirmedi\" deniyor; çalışma gözlemsel bir meta-analiz, bu yüzden \"yordamadı\" daha doğru. (2) Michie 2009 için \"etki farkını en çok açıklayan\" deniyor; bulgu, çalışmalar arası farkın %13'ünü açıklamak. \"Hedef ve geri bildirim\" de özetteki \"kontrol teorisinden en az bir teknik\" ifadesinin serbest bir yorumu. (3) Bartels 2010'da 36 sağlıklı, yüksek IQ'lu yetişkin var. (4) Elia 2024'te 9 kişi aç karnına maksimum nefes tutma yaptı.",
+              "evidence": "PubMed 35016567: \"the number of assessments did not predict compliance\". PubMed 19916637: \"explained the greatest amount of among-study heterogeneity (13%)\", \"combined self-monitoring with at least one other technique derived from control theory\". PubMed 20846444: N = 36, IQ 127. PubMed 38314699: nine nondivers, 12-h fast.",
+              "fix": "\"ölçüm sayısı uyumu yordamadı\"; \"kendini izleme, çalışmalar arası farkın en büyük payını (%13) açıklayan teknikti; kontrol teorisinden başka bir teknikle (ör. hedef, geri bildirim) birleşince etki büyüdü (0,42'ye karşı 0,26)\"; \"(Bartels 2010, 36 sağlıklı yetişkin, Cohen d 0,36–1,19)\"; \"Elia 2024: aç karnına 9 kişide, tutmadan önceki hiperventilasyon ...\"."
+            },
+            {
+              "severity": "NIT",
+              "section": "§3.A.9 senaryo tablosu (satır 473)",
+              "problem": "\"(e) sonrası tahmin: + yürüyüş 2 dk\" satırını üreten betik klasörde yok, çünkü `sim_merdiven.mjs`'in MODULES listesinde `walk` bulunmuyor. Yürüyüşün 4. günden başladığı da yazılmamış. Sayılar yeniden üretilebiliyor.",
+              "evidence": "MODULES listesine `walk` ekleyen bir kopyayı (`_rev2_walk.mjs`) koştum: 30 günde \"en uzun 20 ortalama 17.1\", 90 günde \"ortalama 17.6\". merdiven.md:431'de \"(4. günden)\" yazıyor.",
+              "fix": "Satır \"(e) sonrası tahmin: + yürüyüş 2 dk (4. günden; `sim_merdiven.mjs` MODULES'a `walk` eklenerek)\" olsun."
+            },
+            {
+              "severity": "NIT",
+              "section": "§1 maliyet paragrafı (satır 105-106), yağmur satırı (satır 71), giriş (satır 35-37)",
+              "problem": "Küçük anlatım kusurları var. (1) \"bir isteğin 1 mi 3 mü çağrı sayıldığı Apple belgesinde yoktur (VARSAYIM ...)\": burada bir varsayım yok, belgede bulunmayan bir bilgi var. (2) \"Günde en çok bir bildirim sabah gelir\" cümlesi çift anlamlı. (3) \"Psikolog adı verilmediği için\" cümlesinde özne belirsiz. (4) \"Gelişim, raporlar ve Nef aynı hükmü söyler\": \"hüküm söylemek\" doğal değil.",
+              "evidence": "Metnin ilgili cümleleri yukarıda alıntılandı.",
+              "fix": "(1) \"...ve bir isteğin kaç çağrı sayıldığı Apple belgesinde yazmıyor; 1 ve 3 çağrı için ayrı ayrı hesaplandı.\" (2) \"Günde en çok bir bildirim gelir, o da sabah.\" (3) \"Psikoloğun adını henüz vermediğin için...\" (4) \"Gelişim, raporlar ve Nef aynı sonucu gösterir.\""
+            },
+            {
+              "severity": "NIT",
+              "section": "Belgenin tamamı (ör. satır 124, 128, 181, 617)",
+              "problem": "Yazım tutarsız: \"dâhil\" şapkalı yazılmış, ama \"ruh hali\" şapkasız (TDK: \"ruh hâli\"). Notlarda (merdiven.md) \"ruh hâli\" diye geçiyor. Ayrıca ekranda görünecek \"Tek Bakışta'da\" ifadesinde çift bulunma eki var.",
+              "evidence": "Satır 124: \"ruh halinden\"; satır 97: \"dâhil\"; satır 665: \"Tek Bakışta'da sonucun...\".",
+              "fix": "Belgenin tamamında \"ruh hâli\" yazılsın. Ekran metninde \"Tek Bakışta oyununda sonucun iki haftadır başlangıcından iyi.\" ya da \"Tek Bakışta'daki sonucun...\" kullanılsın."
+            }
+          ]
+        }
+      ]
+    ],
+    "fixes": [
+      "Tur 1 düzeltmesi bitti. 42 bulgunun hepsini kaynağından doğruladım: 14 PubMed kaydını yeniden açtım, kod dosyalarının satırlarına baktım ve benzetimleri yeniden koştum. Hepsi özünde doğru çıktı; bir bulgunun önerdiği düzeltme hatalıydı (SD12, aşağıda). Bütün BLOCKER ve SHOULD bulgular ile NIT'lerin tamamı düzeltildi. Depoda hiçbir dosya değişmedi, git ve ücretli çağrı kullanılmadı.\n\nBelgenin sonuna \"İnceleme izi\" eklendi: her bulgu için doğrulamayı ve yapılanı yazan bir satır (SK1–SK20, SD1–SD22).\n\n**BLOCKER bulgular**\n- **SK1, psikolog yedeği:** `sim_merdiven.mjs`'e yedek kural eklendi (`PSIKOLOG=onay` kuralı kaldırır). Benzetim 10.00 ve 19.00'da, 30 ve 90 günle yeniden koşuldu.\n  - Yoga günü sayısı (24 ve 76) ve yol süreleri (15,3 ve 15,7 dk) değişmedi.\n  - Zor Anlar İçin yolda hiç gelmiyor.\n  - 10.00'da açan kişide on tam dersin onu da Derin Dinlenme; 19.00'da açan kişide tam dersler beşer beşer Derin Dinlenme ve Kendine Şefkat.\n  - §1, §2.3 (yeni madde ve 22/70 ile 24/76 farkının açıklaması), §A.9 tablosu ve §G.6 buna göre yazıldı.\n- **SK2, ilk kez açan kişi ve site:** Yeni §3.F.2, uygulamanın ve sitenin bugünkü ilk saniyelerini ve önerilen değişikliği anlatıyor. Karar 5, net öneriyle (a)–(f) altı maddeye genişledi:\n  - (a) Giriş ekranının alt yazısı İlk Bakış'ın vaadini söylesin: evet.\n  - (b) Sitenin ilk ekranı \"Bu cümleyi okurken kaç kez göz kırptın?\" sorusuyla açılsın: evet.\n  - (c) İki \"Başla\" tek ekrana insin: şimdilik hayır, önce ilk dokunuştan sonuca geçen süre ölçülsün.\n  - (d) logo, (e) seri ve (f) pencere maddeleri: evet.\n  - Y3 artık ≈ 4 iş günü, toplam kod ≈ 35–40 iş günü.\n- **SK3 ve SD1, ölçü kuralı karşılaştırması:** Yeni `sim_kural_esit.mjs` bütün kuralları aynı sürede koşuyor. Yanlış \"geriliyor\" oranı 26 haftada bugünkü kuralda %27,2, önerilen kuralda (v2) %13,0.\n  - Bugünkü kurala yalnız haftalık bakış ve iki hafta koşulu eklenince oran %11,5'e iniyor; yani düşüşün çoğu bakış sıklığından geliyor. Belge bunu açıkça yazıyor.\n  - Geçmişin ortasındaki bir düşüşü bugünkü kural daha iyi yakalıyor (%99'a karşı %52).\n  - v2'nin asıl gerekçesi öne alındı: uzun geçmişte yeni bir düşüşü iki kat sık yakalıyor (%31'e karşı %14), göreve alışmayı \"iyileşme\" sanma oranını yarıya indiriyor (%71'den %36'ya) ve aynı günün turlarını tek sayıyor.\n  - Parametreler (c = 1,5, iki hafta) korundu. \"Şimdi\" penceresini 6 güne çıkarma seçeneği VARSAYIM olarak yazıldı.\n- **SK4 ve SD2, WeatherKit maliyeti:** 10.000 kişide ayda 49,99 ya da 249,99 USD. \"Günde 3 istek\" ve \"istek başına çağrı sayısı\" varsayım olarak yazıldı. Günde 8 isteklik en kötü durum da eklendi.\n- **SD3, Thompson 2025:** Aktarım düzeltildi: %95'lik uyum 20 hastalık pilottan, r = 0,70 ise 294 hastalık bölümden geliyor.\n- **SK9 ve SD4, konum izin metni:** Koordinat telefonda da saklanmayacak; önbellekte yalnız hava sonucu ve en yakın il adı kalıyor. İzin metni, rızanın \"Ne kadar\" satırı ve silme kuralı (\"izin kapandıktan sonraki ilk açılışta\") bu davranışa göre yazıldı.\n\n**SHOULD bulgular**\n- **Veri merkezi:**\n  - Değişim hükmü tek yerde hesaplanıyor: `metricCards` her karta `verdict` ekliyor, bugünkü `status` alanı yerinde kalıyor. Gelişim, 5. gün raporu, \"Doktoruma göster\" raporu, dışa aktarma ve Nef bu alanı okuyor.\n  - \"Günün nasıl geçti\" kaydı (`day-check`) hafta hedefine ve seriye girmiyor. Yolun sayaçlarına da girmiyor, çünkü `Home.jsx:162` yola bu kaydı süzülmüş olarak veriyor; `today.js`'e kural eklenmiyor. Bu kayıt yalnız \"N gün seninle\" sayısına giriyor.\n- **Yağmur bildirimi:** `rainNotify.js` yalnız bildirim nesnesini üretiyor, `App.jsx` onu tek plana ekliyor. Yağmur haberi, bildirimlerin ana anahtarı açıkken çalışıyor.\n- **Ara kilidi ve Bugünün görevi:** Yeni kurallar yalnız ilerleme açıkken geçerli. Ara kilidi kararı saf bir işleve (`restDecision`) taşındı; iki karar da eşdeğerlik düzeneğinde 0 farkla sınanıyor.\n- **Nef paketi:** Ekran süresi cevabı ve okuma hızı paketten çıkıyor. Sitedeki gizlilik tablosu, App Store etiketi ve ikinci rıza metni aynı sürümde güncelleniyor.\n- **Uygulama sırası:** Karar 1, onaylı (a)→(g) sırasından sapmayı açıkça söylüyor ve öbür seçeneği veriyor. \"Hafif gün ≈ 7 dk\"nın ilk sürümde olmaması ve \"14. günde tam set\"in 57. güne kayması gerekçeleriyle gösteriliyor.\n- **Metin ve kanıt:**\n  - Ekrandaki \"Bu modül bir şey ölçmez\" cümlesi değişti.\n  - Metinler artık metriğin yönüne bağlı (\"başlangıcından iyi / gerisinde\").\n  - Nefes 3 dakikaya 3. gün çıkıyor; eski kullanıcıda çeşitlemeler 7, 14, 28 ve 42 çalışma gününden sonra açılıyor.\n  - Nefes kalıbı sayıları yeni `sayim_nefes.mjs` ile yeniden üretildi (birikimli: 40, 99, 629).\n  - Ay kartı, Cui, Wrzus, Gertler, Killgore, gece ekranı ve kısa gece metinleri kaynağa göre düzeltildi.\n  - Kamera izin metnine Y3'te yalnız İlk Bakış'taki sayım giriyor; kısa mesafe ölçümü (d) ile aynı sürümde geliyor.\n  - §1'deki, karar metinlerindeki ve şablonlardaki bütün Türkçe kusurları düzeltildi; takvim cümleleri iki yerde aynı.\n\n**Önerisi değiştirilerek uygulanan bulgu:** SD12'nin önerdiği \"6 saat yatakta kalan 48 yetişkin\" ifadesi de yanlış. Van Dongen 2003'te 48 kişi dört gruba bölünmüştü; ekran metnine sayı yazılmadı, açıklama kanıt sütununda duruyor.\n\n**Kaynaktan doğrulanmayan tek sayı:** Test sayısı (1417) inceleyicinin koşusuna dayanıyor; bu turda takım yeniden koşulmadı.\n\nDosyalar /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1 klasöründe:\n- SONSUZ_YOL.PLAN.v1.md (düzeltilmiş plan)\n- _plan_yedek_tur1.md (planın yedeği)\n- sim_merdiven.mjs (yedek kuralı eklendi)\n- _sim_merdiven_yedek_tur1.mjs (betiğin eski hâli)\n- sim_kural_esit.mjs\n- _tur1_varyant.mjs\n- sayim_nefes.mjs",
+      "Tur 2 düzeltmesi bitti. 45 bulgunun hepsi kaynağından doğrulandı: 2 BLOCKER, 29 SHOULD, 14 NIT. Hiçbiri yanlış çıkmadı; biri kısmen doğru çıktı (T2K7). İki bulguda önerilenden farklı bir yol seçtim (T2K8, T2K12); nedenleri aşağıda. Her bulgunun satırı, belgenin sonundaki \"İnceleme izi\"nde \"Tur 2\" başlığı altında T2K1–T2K18 ve T2D1–T2D27 olarak duruyor. Depoda hiçbir dosya değişmedi, git kullanılmadı; yedek önce alındı.\n\n**BLOCKER**\n- **Karar 2'nin bedeli (T2K1, T2D2):** Karar 2'ye ve §1 tablosunun ilk satırına \"Bedeli de var\" cümlesi girdi. Kaydın 13. haftasından sonra başlayan gerçek bir düşüşü 26. haftaya kadar bugünkü kural %99,8 oranında yakalıyor, yeni kural %52. Önerinin gerekçesi de açıkça yazıldı: uzun kullanımda asıl soru son haftalardaki değişimdir.\n- **Singh 2022 (T2D1):** PubMed özeti yeniden okundu; göz egzersizleri bu derlemede hiç geçmiyor ([DOI](https://doi.org/10.1016/j.ophtha.2022.05.009)). §A.6, §J ve kaynak tablosu buna göre yeniden yazıldı.\n\n**SHOULD'lardan öne çıkanlar**\n- **Nefes katmanları (T2K5, T2D9):** Ç-B, Ç-C ve Ç-D artık `Dvar`'a bağlı. Eski kullanıcıda \"Günün ritmi\" güncelleme günü açılır; kısa tutma 7, bekleme nefesi 28 çalışma gününden sonra gelir. `progression.test.js`'e eski kullanıcının güncelleme gününde tutmalı kalıp almadığını sınayan bir test eklendi. §1, §2.2 ve §A.10 bu sayılara uyduruldu.\n- **Yoganın Nef paketinden düşmesi (T2K4):** Modül sınırı 10'dan 16'ya çıkıyor; bugün 8 modülün `coach()`'u var ve yeni modüllerle 11'e çıkıyor. Paket 4.000 bayt sınırında kalıyor; en dolu paket testte ölçülüyor.\n- **Hukukçu ve App Review (T2K8):** §1'e \"Senden istenen iki iş (karar değil)\" bölümü ve bir yedek eklendi. Hukukçunun adı Y4'ün cihaz kapısına kadar gelmezse Y5 konum izni olmadan, yalnız şehir seçimiyle yayına girer; Y6'da ruh hâli alanları pakete girmez. Önerilen \"KVKK standart sözleşme\" yedeğini almadım, çünkü Apple ile böyle bir sözleşmenin yapılabildiği notlarda yok.\n- **Karar 5 (T2K12, T2K11):** Karar 5 dört maddeye indi ve harfler yeniden verildi: (a) giriş ekranı, (b) site, (c) logo, (d) seri. Önerilen \"a, b, d, e\" harflerini korumadım, maddeleri baştan harfledim. Pencerelerin ilk dokunuştan sonra açılması, iki \"Başla\"nın birleşmemesi ve rızasız kural cümleleri \"Bilgi (karar değil)\" paragrafına geçti. §F.3'teki yanlış göndermeler bu yeni harflerle düzeltildi. Karar sayısı altı kaldı; sahibe giden açık soru 11'den 10'a indi.\n- **Günün kanıt kartları (T2K9):** Tabloya üç yol kartı eklendi: `nefes-gunu`, `kirpma-gunu` ve `uzaga-bakis`. Dayanakları Balban 2023, Wolffsohn 2025 ve Talens-Estarelles 2022; üçü de PubMed'de yeniden açıldı. `_tur2_kart_sayim.mjs` hesabına göre yolu her gün yapan kişi 30 akşamın 14–15'inde kart görüyor; yalnız eski iki kartla bu sayı 1–4 olurdu.\n- **Nef rızasını reddeden kişi (T2K13):** Yeni metne \"Şimdi değil\" diyen kişiye yalnız eski metnin izin verdiği alanlardan pakette kalanlar gidiyor. Ayrıca bir açık kapandı: plan `gunun` modülünün ruh hâli alanlarını Y4'te, yani rıza v2'den önce Nef'e gönderiyordu. Artık `coach()` Y4'te boş dönüyor ve bu alanlar yalnız Y6'da, v2 rızasıyla gidiyor.\n- **Öteki SHOULD'lar:**\n  - §G.4 ve §G.5: `registry.test.js:8`, `profileQuestions.test.js:43-55` ve `:75` eklendi; `verifiedChange` artık `verdict ?? status` okuyor.\n  - WHO-5'in \"down\" durumu \"karışık\" kuralından önce geliyor.\n  - Eşdeğerlik sınamasına üçüncü kol eklendi: ilerleme açık, uzun geçmişli eski kullanıcılar.\n  - Hava için görünür bir giriş eklendi: 7. günden sonra tek seferlik teklif ve tarih satırında › işareti.\n  - Dil düzeltmeleri önerilen biçimle yapıldı. 70 karakter sınırı yalnız Nef satırına uygulanıyor; \"tek sayı\" kuralı \"tek iddia\" oldu.\n\n**Kısmen doğru çıkan bulgu (T2K7, yağmur bildirimi ve deney):** Plan bu konuyu yazmıyordu. Ama yağmur zardan bağımsız olduğu için deneyin karşılaştırmasını bir yöne çekmiyor, yalnız biraz gürültü ekliyor. Ayrıca `App.jsx:183` dokunmayı yalnız hatırlatma türleri için kaydediyor. Bu durum §E.6'ya yazıldı ve `rainNotify.test.js`'e bununla ilgili iki sınama eklendi.\n\n**NIT:** 14'ünün hepsi düzeltildi. Bunlar arasında `lib/yoga.js`'e dokunulmaması, izin metnine `sky-log`'un eklenmesi, Sorularım satırları, belge boyunca \"ruh hâli\" yazımı ve `_rev2_walk.mjs` koşusu var (30 günde ortalama 17,1 dk; yeniden üretildi).\n\nPubMed'de bu turda 10 kayıt yeniden açıldı: Singh 2022, Michie 2009, Wrzus 2022, Bartels 2010, Elia 2024, Casiraghi 2021, Smith 2017, Balban 2023 ([DOI](https://doi.org/10.1016/j.xcrm.2022.100895)), Wolffsohn 2025 ([DOI](https://doi.org/10.1016/j.clae.2025.102453)) ve Talens-Estarelles 2022 ([DOI](https://doi.org/10.1016/j.clae.2022.101744)).\n\nDosyalar:\n- Plan: `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/SONSUZ_YOL.PLAN.v1.md` (1.497 satır)\n- Yedek: `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/_plan_yedek_tur2.md`\n- Yeni betik: `/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/_tur2_kart_sayim.mjs`"
+    ],
+    "remaining2": 31
+  },
+  "workflowProgress": [
+    {
+      "type": "workflow_phase",
+      "index": 1,
+      "title": "Yaz"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 2,
+      "title": "İncele"
+    },
+    {
+      "type": "workflow_phase",
+      "index": 3,
+      "title": "Düzelt"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 1,
+      "label": "yaz",
+      "phaseIndex": 1,
+      "phaseTitle": "Yaz",
+      "agentId": "a1470490661d8e116",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790714065657,
+      "queuedAt": 1790714065611,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "rm -f /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352…",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor 8; Türkçe; iPhone). Depo /home/user/eyes (kod app/src). Girdiler (hepsini oku):\n- Beş araştırma notu: /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/merdiven.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/gelisim-nef.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-53…",
+      "promptFramed": true,
+      "lastProgressAt": 1790715352097,
+      "tokens": 472074,
+      "toolCalls": 59,
+      "durationMs": 1286439,
+      "resultPreview": "Plan yazıldı: /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/SONSUZ_YOL.PLAN.v1.md (1.090 satır; §1 103 satır). Depoda hiçbir dosya değişmedi; git komutu ve ücretli çağrı yapılmadı.\n\n1. Belge onaylı yoga planının hiçbir kararını değiştirmiyor. Yoga durağı, R7b kuralı ve `today.js`'e eklenecek beş ek olduğu gibi kalıyor. Nefes ilk yayında 5 dakika; (c) adımı gelince…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 2,
+      "label": "incele:sahip-ve-kod:1",
+      "phaseIndex": 2,
+      "phaseTitle": "İncele",
+      "agentId": "a1dbd090666f3dda4",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790715353908,
+      "queuedAt": 1790715353804,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor 8; Türkçe; iPhone). Depo /home/user/eyes (kod app/src). Girdiler (hepsini oku):\n- Beş araştırma notu: /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/merdiven.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/gelisim-nef.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-53…",
+      "promptFramed": true,
+      "lastProgressAt": 1790715936653,
+      "tokens": 262054,
+      "toolCalls": 47,
+      "durationMs": 582687,
+      "resultPreview": "{\"findings\":[{\"severity\":\"BLOCKER\",\"section\":\"§1 Kişi ne görür (7. gün), §3.A.9 gün gün tablosu, §2.3 Onaylı yoga planıyla uyum\",\"problem\":\"Plan, onaylı yoga planındaki psikolog yedeğini uygulamıyor. Sahip inceleyici adı vermedi. Karar 2 ve karar 5.3 gereği yedek kural geçerlidir: Zor Anlar İçin yoldan çıkar, Kendine Şefkat yolda yalnız 17.00'den sonra aday olur. Plan ise 10.00'da açan kişiye yold…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 3,
+      "label": "incele:sayi-ve-dil:1",
+      "phaseIndex": 2,
+      "phaseTitle": "İncele",
+      "agentId": "a33c5a30c7ac7fc2d",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790715353964,
+      "queuedAt": 1790715353805,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor 8; Türkçe; iPhone). Depo /home/user/eyes (kod app/src). Girdiler (hepsini oku):\n- Beş araştırma notu: /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/merdiven.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/gelisim-nef.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-53…",
+      "promptFramed": true,
+      "lastProgressAt": 1790715856936,
+      "tokens": 267039,
+      "toolCalls": 33,
+      "durationMs": 502148,
+      "resultPreview": "{\"findings\":[{\"severity\":\"BLOCKER\",\"section\":\"§1 (başlık satırı 12-13, 'İsteklerin nasıl karşılandığı' 1. satır, karar 2) ve §3.B.3\",\"problem\":\"Bugünkü ve önerilen ölçü kuralının yanlış alarm oranları farklı sürelerde ölçülmüş, ama §1'de eşit karşılaştırma gibi sunuluyor. %27,2 bugünkü kuralın 26 haftalık sonucudur. %6,9 ise yeni kuralın yalnız ilk 13 haftasına aittir. Sahip karar 2'yi bu yanlış k…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 4,
+      "label": "düzelt:1",
+      "phaseIndex": 3,
+      "phaseTitle": "Düzelt",
+      "agentId": "a2488e3a5ace2370a",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790715938982,
+      "queuedAt": 1790715938925,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290…",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor 8; Türkçe; iPhone). Depo /home/user/eyes (kod app/src). Girdiler (hepsini oku):\n- Beş araştırma notu: /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/merdiven.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/gelisim-nef.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-53…",
+      "promptFramed": true,
+      "lastProgressAt": 1790716923026,
+      "tokens": 344083,
+      "toolCalls": 70,
+      "durationMs": 984043,
+      "resultPreview": "Tur 1 düzeltmesi bitti. 42 bulgunun hepsini kaynağından doğruladım: 14 PubMed kaydını yeniden açtım, kod dosyalarının satırlarına baktım ve benzetimleri yeniden koştum. Hepsi özünde doğru çıktı; bir bulgunun önerdiği düzeltme hatalıydı (SD12, aşağıda). Bütün BLOCKER ve SHOULD bulgular ile NIT'lerin tamamı düzeltildi. Depoda hiçbir dosya değişmedi, git ve ücretli çağrı kullanılmadı.\n\nBelgenin sonun…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 5,
+      "label": "incele:sahip-ve-kod:2",
+      "phaseIndex": 2,
+      "phaseTitle": "İncele",
+      "agentId": "a946f306f67068ba8",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790716926277,
+      "queuedAt": 1790716926192,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor 8; Türkçe; iPhone). Depo /home/user/eyes (kod app/src). Girdiler (hepsini oku):\n- Beş araştırma notu: /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/merdiven.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/gelisim-nef.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-53…",
+      "promptFramed": true,
+      "lastProgressAt": 1790717641254,
+      "tokens": 305474,
+      "toolCalls": 60,
+      "durationMs": 714924,
+      "resultPreview": "{\"findings\":[{\"severity\":\"BLOCKER\",\"section\":\"§1 karar 2, §1 tablo 1. satır\",\"problem\":\"Karar 2 sahibe yalnız v2'nin kazançlarını gösteriyor. Asıl bedel yazılmıyor: geçmişin ortasındaki gerçek bir düşüşü bugünkü kural %99,8 yakalıyor, v2 ise %51,9 yakalıyor. Bu kayıp yalnız §3.B.3'te geçiyor. §1'deki \\\"uzun geçmişte yeni bir düşüşü iki kat sık yakalar\\\" cümlesi, v2'nin düşüş yakalamada her durumda…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 6,
+      "label": "incele:sayi-ve-dil:2",
+      "phaseIndex": 2,
+      "phaseTitle": "İncele",
+      "agentId": "a7f3728fd4e791a6c",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790716926329,
+      "queuedAt": 1790716926193,
+      "attempt": 1,
+      "lastToolName": "StructuredOutput",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor 8; Türkçe; iPhone). Depo /home/user/eyes (kod app/src). Girdiler (hepsini oku):\n- Beş araştırma notu: /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/merdiven.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/gelisim-nef.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-53…",
+      "promptFramed": true,
+      "lastProgressAt": 1790717521472,
+      "tokens": 313811,
+      "toolCalls": 34,
+      "durationMs": 594094,
+      "resultPreview": "{\"findings\":[{\"severity\":\"BLOCKER\",\"section\":\"§3.A.6 (satır 407), §3.J (satır 1172), Kaynaklar tablosu (satır 1215)\",\"problem\":\"Singh 2022'ye, özetinde hiç geçmeyen bir iddia yükleniyor: \\\"göz egzersizlerinde ekran kaynaklı yorgunluk için yüksek kesinlikte kanıt yoktur (Singh 2022)\\\". Kaynak tablosu da bu kaydı \\\"göz yorgunluğunda kanıt yok\\\" diye özetliyor. Kural, bilimsel iddiaların notlarda doğ…"
+    },
+    {
+      "type": "workflow_agent",
+      "index": 7,
+      "label": "düzelt:2",
+      "phaseIndex": 3,
+      "phaseTitle": "Düzelt",
+      "agentId": "ae00837b823a54875",
+      "model": "claude-opus-5-5",
+      "state": "done",
+      "startedAt": 1790717644079,
+      "queuedAt": 1790717644024,
+      "attempt": 1,
+      "lastToolName": "Bash",
+      "lastToolSummary": "cd /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290…",
+      "promptPreview": "Proje: Nefona iOS uygulaması (React 19 + Vite + Capacitor 8; Türkçe; iPhone). Depo /home/user/eyes (kod app/src). Girdiler (hepsini oku):\n- Beş araştırma notu: /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/merdiven.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yol-v1/gelisim-nef.md, /tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-53…",
+      "promptFramed": true,
+      "lastProgressAt": 1790718323630,
+      "tokens": 286501,
+      "toolCalls": 51,
+      "durationMs": 679543,
+      "resultPreview": "Tur 2 düzeltmesi bitti. 45 bulgunun hepsi kaynağından doğrulandı: 2 BLOCKER, 29 SHOULD, 14 NIT. Hiçbiri yanlış çıkmadı; biri kısmen doğru çıktı (T2K7). İki bulguda önerilenden farklı bir yol seçtim (T2K8, T2K12); nedenleri aşağıda. Her bulgunun satırı, belgenin sonundaki \"İnceleme izi\"nde \"Tur 2\" başlığı altında T2K1–T2K18 ve T2D1–T2D27 olarak duruyor. Depoda hiçbir dosya değişmedi, git kullanılma…"
+    }
+  ],
+  "totalTokens": 2251036,
+  "totalToolCalls": 354
+}

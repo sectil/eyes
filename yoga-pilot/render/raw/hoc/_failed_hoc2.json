@@ -1,0 +1,22 @@
+[
+ {
+  "unit": "c2.birak",
+  "idx": 37,
+  "who": "hoc-2",
+  "ts": "2026-09-29T21:48:48.611908+00:00",
+  "flow_id": "zAYOhRc6cOKeStKp4ijv",
+  "node_id": "AOBalgfLJLKP9StEpsxW",
+  "session_id": "jLBY0oN26BDZlQ6TufDA",
+  "generation_id": "9nd2XxBsmAxoqylB6bvJ",
+  "take_slot": 2,
+  "status": "failed",
+  "error_message": "Too many concurrent requests. Your current subscription is associated with a maximum of 5 concurrent requests (running in parallel).",
+  "reported_price": {
+   "credits": 0,
+   "price_cents": 0
+  },
+  "cause": "hoc-2 fired 5 units x 3 takes back-to-back (15 generations); account limit is 5 concurrent generations; hoc-1 was also active",
+  "charged_note": "ledger line counts 3 takes (conservative); NOT re-called per SPEC §2",
+  "takes_available": 2
+ }
+]

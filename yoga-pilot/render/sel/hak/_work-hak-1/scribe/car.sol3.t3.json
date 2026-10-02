@@ -1,0 +1,16 @@
+{
+ "unit": "car.sol3",
+ "take": "t3",
+ "asset_id": "UkMSqKRSQ9Ur81GcvRk3",
+ "source_node_id": "60HlDcJgfqEQJEYwMRaP",
+ "stt_node_id": "oZjCdhmorivvfxCFEDMj",
+ "session_id": "0qo7Td9KVDvM7ulJTcc9",
+ "generation_id": "ox3c4AnGdEQBmKjokGb6",
+ "actual_credits": 27.28,
+ "actual_cents": 0.496,
+ "spoken_duration_secs": 4.54,
+ "scribe_text": "Üst kol, omuz, belin sol yanı, kalça",
+ "tts": "Üst kol… omuz… belin sol yanı… kalça…",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 7\n}"
+}

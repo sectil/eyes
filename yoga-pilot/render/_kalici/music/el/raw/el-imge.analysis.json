@@ -1,0 +1,59 @@
+{
+ "file": "el/el-imge.wav",
+ "src_sr": 44100,
+ "src_channels": 2,
+ "duration_s": 180.0,
+ "lufs_i": -24.14,
+ "true_peak_dbtp": -5.4,
+ "sample_peak_dbfs": -5.41,
+ "clipped_samples": 0,
+ "dc": [
+  -1.4e-05,
+  -1.2e-05
+ ],
+ "lr_corr": 0.187,
+ "lead_silence_ms": 0.0,
+ "tail_silence_ms": 1138.9,
+ "flatness": {
+  "st_lufs_p5": -47.97,
+  "st_lufs_p50": -33.26,
+  "st_lufs_p95": -21.34,
+  "spread_p5_p95_lu": 26.63,
+  "st_std_lu": 8.85,
+  "range_full_lu": 46.02,
+  "max_rise_10s_lu": 25.68,
+  "crescendo_10s_spans": 0,
+  "verdict": "FAIL"
+ },
+ "onsets": {
+  "pulse_clarity": 0.055,
+  "percussive_share": 0.033,
+  "events_per_min": 202.33,
+  "strong_onsets_per_min": 12.67,
+  "flux_mean_db": 0.6629,
+  "flux_median_db": 0.6126,
+  "flux_p99_db": 1.494,
+  "flux_max_db": 10.597,
+  "flux_max_at_s": 127.97
+ },
+ "clicks_hf": {
+  "count": 2,
+  "first": [
+   [
+    0.0,
+    23.5
+   ],
+   [
+    0.0,
+    27.6
+   ]
+  ]
+ },
+ "spectrum": {
+  "centroid_hz": 534.7,
+  "share_lt300": 0.196,
+  "share_500_4k": 0.583,
+  "share_1k5_4k": 0.0006,
+  "share_gt8k": 0.0
+ }
+}

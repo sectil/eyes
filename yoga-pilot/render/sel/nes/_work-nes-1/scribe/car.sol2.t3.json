@@ -1,0 +1,15 @@
+{
+ "unit": "car.sol2",
+ "take": "t3",
+ "asset_id": "5YE3G4NHRYN09RbrmIjP",
+ "source_node_id": "ydcMNkphUvKsFTSUleHq",
+ "stt_node_id": "dkePXnTgey6FlMygK2RQ",
+ "session_id": "S9WDKBZck9aqGHeFTQnh",
+ "generation_id": "B4Ss0wOiD8r4WXqAmRFt",
+ "actual_credits": 32.12,
+ "actual_cents": 0.584,
+ "scribe_text": "Avuç içi, elin sırtı, bilek, ön kol, dirsek",
+ "spoken_duration_secs": "5.56",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 8\n}"
+}

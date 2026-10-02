@@ -1,0 +1,73 @@
+{
+ "unit": "br.orta",
+ "idx": 40,
+ "voice": "hoc",
+ "voice_name": "Nefona Hoca",
+ "voice_id": "Sr5w7dIZaRDglJ2cLaJm",
+ "model_id": "eleven_v4",
+ "flow_id": "zAYOhRc6cOKeStKp4ijv",
+ "node_id": "cvFRYfSwj2hmIztzsSne",
+ "session_ids": [
+  "Tdyzf0vmUKcYtCQQFcop",
+  "4ePw8daBpCetWX1p2RQQ",
+  "BR2HV7l0PSOFGHSm6nlc"
+ ],
+ "requested_at": "2026-09-29T21:49:40Z",
+ "downloaded_at": "2026-09-29T21:50:09.598865+00:00",
+ "tts": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde. Gözlerin açıksa bakışın serbest. Zemin seni hep taşıyor.",
+ "generations_count": 3,
+ "takes": [
+  {
+   "take": 1,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/br.orta/t1.mp3",
+   "session_id": "Tdyzf0vmUKcYtCQQFcop",
+   "generation_id": "vsoZoCvOS0t5AE5HS1Bu",
+   "api_duration_secs": 10.56,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/Tdyzf0vmUKcYtCQQFcop/vsoZoCvOS0t5AE5HS1Bu/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T214945Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=b5deab00ed58b6fa05227c175e98fd24508cb2dd7b6c1822ee887c4c9c94a10028822aaf588c10ccfc770f1a9d0dc63560962f1d2b2db00e451dff35fad81d21e4b60f72add2f52ac76d39a05711945da126d5d5824489dc574288002f3692966faa1e60d66ce7396a77e45d8b0c2c17e70af20ee4edac54f9627e535941c358b359f53b1bffab55a10f9a7dd0bd01eb08d4d3ac1e0603ebfaf4f50dd0210adb164a2c8b2811f986173aa4eade5c7ced71faf2f91f052dc649d2e7acd0fa67c3cdeb4de756db0d07283143f72e83dcf09f72f70af72eeafb925b1b058766e0112b17553f59d2de458ce573869616e7d34be949144b4dee17ac565513a882a145",
+   "node_id": "cvFRYfSwj2hmIztzsSne",
+   "ok": true,
+   "duration_secs": 10.56,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 186989,
+   "attempts": 1
+  },
+  {
+   "take": 2,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/br.orta/t2.mp3",
+   "session_id": "4ePw8daBpCetWX1p2RQQ",
+   "generation_id": "lDtsMzlbHOB057vB5gyZ",
+   "api_duration_secs": 10.48,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/4ePw8daBpCetWX1p2RQQ/lDtsMzlbHOB057vB5gyZ/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T214946Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=d31f793fcee8ae39fe9493926f732ffa8aca4ca5166da87a3053f5cee824df80224699b50c181ce8519fc46737a4d9763a0733b241bc11a3d1c55a79823baa92052f8f0c318de215645c28ea29d179054aa363858904fb74a0e86acae30117c22c61dd513aea1991a398780ff03e4ed7841399c53a4b2d87e3ae1f97870c8d36eff7070b6d8aec38ec26734bfc5214ff720fffa4fe349bd12b2743390d84d68deeee6a8b81ff1a44e4a5f42870e0de275581dec5da6eea1742db5370a27504e67a982e2d8f2a37d14dda5f03da371cbebb38813036606e70c5ad984721f85ab3547fd5cef8397f54cbe19e40cf287a88b45ad8fe2d11084995dd804d64d2ab70",
+   "node_id": "cvFRYfSwj2hmIztzsSne",
+   "ok": true,
+   "duration_secs": 10.48,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 185735,
+   "attempts": 1
+  },
+  {
+   "take": 3,
+   "file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/raw/hoc/br.orta/t3.mp3",
+   "session_id": "BR2HV7l0PSOFGHSm6nlc",
+   "generation_id": "nRTDAWHJxdfveKS1R3bn",
+   "api_duration_secs": 10.48,
+   "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/BR2HV7l0PSOFGHSm6nlc/nRTDAWHJxdfveKS1R3bn/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260929%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260929T214945Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=c35ea760ad048aabebacacff7d0bec18a2dd3fbc91cf7fba6ee63f2ac004f3935eef4fee794433272028a7484f80e2369daacf5f3136ba0c3d1912045f6e1c2d1818394a3736b5efb06b9404176802c3888ef34669275161817ab700ab9bca14cdf9e5ad94f8fceff6654d45ddaaa0aaecce0e194b60f4558c159a82cb96fe7b6768109ae2a9d3499f1d87944b0616e52badba8c45854b6bc13d313115dc9424d123dae5debde9e54dc7274f13ab4b4fb6779a2189edf6c2566a83029c92736877d2d30f882d1bb25be10c84ed782a2495fbe8dcba8cd68f6d5c2496140f3cf56e4a404a9f8aba03a21d74126a9dd9638b8c378488ecb06e3a5764a7aeb01c0d",
+   "node_id": "cvFRYfSwj2hmIztzsSne",
+   "ok": true,
+   "duration_secs": 10.48,
+   "samplerate": 44100,
+   "channels": 1,
+   "bytes": 185735,
+   "attempts": 1
+  }
+ ],
+ "all_ok": true,
+ "n_takes_ok": 3,
+ "failed_generations": [],
+ "who": "hoc-2",
+ "retake": false,
+ "server_prompt_echo": "İstediğin an gözlerini açmak, kıpırdamak ya da dersi bitirmek senin elinde. Gözlerin açıksa bakışın serbest. Zemin seni hep taşıyor.",
+ "server_prompt_equals_tts": true
+}

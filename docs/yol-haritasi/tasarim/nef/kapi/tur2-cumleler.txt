@@ -1,0 +1,112 @@
+
+## F1.T · bildirim başlığı
+F1T-8 | Yağmur yürüyüşüne denk gelebilir
+F1T-9 | Yürüyüş saatinde yağmur bekleniyor
+F1T-10 | Akşam yürüyüşüne yağmur yakın
+
+## F1.A · yürüyüş yağmur aralığının içinde, ilk kez (bildirim)
+F1A-8 | Son günlerde akşamları 19.30'da yürüyorsun. Bugün yağmur 19.00'da bekleniyor; 18.00'de çıkabilirsin.
+F1A-9 | Bu hafta üç kez 19.30'da yürüdün. Yağmur bugün 19.00'da bekleniyor; 18.00 daha kuru görünüyor.
+F1A-10 | Akşamları genelde 19.30'da yürüyorsun. Bugün yağmur 19.00'da bekleniyor; istersen 18.00'de çık.
+
+## F1.B · yürüyüş yağmurdan az önce (bildirim)
+F1B-7 | Bu hafta üç akşam 18.00'de yürüdün. Bugün yağmur 19.00'da bekleniyor; ondan önce dönebilirsin.
+F1B-8 | Akşamları genelde 18.00'de yürüyorsun. Yağmur bugün 19.00'da bekleniyor; kısa bir tur yağmurdan önce biter.
+F1B-9 | Yürüyüş saatin 18.00; yağmur bugün 19.00'da bekleniyor. Yağmurdan önce dönmeye vakit var.
+F1B-10 | Her zamanki 18.00 yürüyüşün yağmurdan önce bitebilir; yağmur 19.00'da bekleniyor.
+
+## F1.C · yürüyüş saatinin tamamında yağmur var (bildirim)
+F1C-7 | Akşam yürüyüşlerin genelde 19.30'da. Bugün yağmur 17.00'den 22.00'ye kadar bekleniyor; yürüyüşü yarına bırakmak da olur.
+F1C-8 | Bu hafta üç akşam 19.30'da yürüdün. Bugün yağmur 22.00'ye kadar bekleniyor; evde kısa bir yürüyüş de olur.
+F1C-9 | 19.30 senin yürüyüş saatin; bugün akşam boyu yağmur bekleniyor. Bu akşam 5 dakikalık nefes pratiği de olur.
+F1C-10 | Son iki haftada çoğunlukla 19.30'da yürüdün. Bugün akşam boyu yağmur bekleniyor; yürüyüş yarına kalabilir.
+F1C-11 | Yürüyüş saatin 19.30; bugün yağmur 22.00'ye kadar bekleniyor. Evde birkaç tur atmak da olur.
+
+## F1.D · son günlerde ikinci kez yağmur (bildirim)
+F1D-7 | Akşam yürüyüşüne bugün de yağmur yakın: 19.00'da bekleniyor. 18.00'de çıkabilirsin.
+F1D-8 | Yürüyüş saatin 19.30; bugün de yağmur 19.00'da bekleniyor. İstersen 18.00'de çık.
+F1D-9 | Bugün de 19.30 yürüyüşüne yağmur yakın: 19.00'da bekleniyor. 18.00 daha kuru görünüyor.
+
+## F1.E · saat kişinin kurduğu hatırlatmadan (bildirim)
+F1E-7 | Yürüyüş hatırlatman 19.30'da. Yağmur bugün 19.00'da bekleniyor; 18.00 daha kuru görünüyor.
+F1E-8 | Yürüyüş için seçtiğin saat 19.30. Bugün yağmur 19.00'da bekleniyor; istersen 18.00'de çık.
+
+## F3.A · sıcaklık notu (Ana sayfa kartı)
+F3A-8 | Hissedilen 31 derece; yanına su almak iyi olur.
+F3A-9 | Hissedilen 31 derece; gölgede yürümek daha rahat olabilir.
+
+## F3.B · yağmursuz gün, yürüyüş saatinde sıcak (Ana sayfa kartı)
+F3B-7 | Akşam yürüyüşlerin genelde 19.30'da; o saatte hissedilen 31 derece bekleniyor. Suyunu yanına al.
+F3B-8 | 19.30 yürüyüşünde hissedilen 31 derece bekleniyor; gölgeli yolu seçebilirsin.
+F3B-9 | Yürüyüş saatin 19.30; o saatte hissedilen 31 derece bekleniyor. Su yanında olsun.
+
+## F2.A · geçen haftanın aynı anı, puan arttı (Ana sayfa kartı)
+F2A-8 | Geçen hafta bu akşam Dalga sesinden sonra sakinlik puanın 4'ten 7'ye çıkmıştı.
+F2A-9 | Geçen hafta bu akşamki Dalga sesinden sonra sakinliğin 4'ten 7'ye yükselmişti.
+F2A-10 | Bir hafta önce bu saatlerde Dalga sesini seçmiştin; sakinliğin 4'ten 7'ye yükselmişti.
+
+## F2.B · geçen haftanın aynı anı, puan azaldı ve azalması iyi (Ana sayfa kartı)
+F2B-7 | Bir hafta önce bu saatlerde Yön yazı egzersizinden sonra rahatsızlığın 7'den 4'e inmişti.
+F2B-8 | Geçen hafta bu akşam Nefesin Ritmi yoga dersinden sonra gerginlik puanın 6'dan 3'e düşmüştü.
+F2B-9 | Bir hafta önce bu saatlerde Nefesin Ritmi yoga dersini seçmiştin; gerginliğin 6'dan 3'e inmişti.
+
+## F2.C · son seanslarda düzenli artış (Ana sayfa kartı)
+F2C-8 | Son 5 Dalga sesi seansında sakinlik puanın ortalama 2 puan arttı.
+F2C-9 | Dalga sesinden sonra sakinliğin son 5 seansta ortalama 4'ten 6'ya çıktı.
+F2C-10 | Son 5 seansta Dalga sesinden sonra sakinliğin ortalama 2 puan yükseldi.
+
+## F2.D · son seanslarda düzenli azalış, azalması iyi (Ana sayfa kartı)
+F2D-7 | Son 4 Yön yazı egzersizi seansında rahatsızlık puanın ortalama 1,5 puan azaldı.
+F2D-8 | Yön yazı egzersizinden sonra rahatsızlığın son 4 seansta ortalama 7'den 5'e indi.
+F2D-9 | Son 4 seansta Nefesin Ritmi yoga dersinden sonra gerginliğin ortalama 1,5 puan düştü.
+
+## F4.A · söyleyecek yeni şey yok, bugünkü yol bitmedi (küçük kart)
+F4A-9 | Bugün yeni bir haberim yok. Yolun hazır.
+F4A-10 | Bugün eklenecek yeni bir şey yok. Yolun seni bekliyor.
+F4A-11 | Bugün senin için yeni bir not yok; yolun hazır.
+F4A-12 | Bugün yalnız yolun var; ne zaman istersen.
+F4A-13 | Bugün kısa bir not: yolun hazır.
+
+## F4.B · söyleyecek yeni şey yok, yol bitti (küçük kart)
+F4B-8 | Bugün yeni bir haberim yok.
+F4B-9 | Bugün senin için yeni bir not yok.
+F4B-10 | Bugün eklenecek yeni bir şey yok; gün senin.
+F4B-11 | Bugün benden yeni bir haber yok; gün senin.
+F4B-12 | Bugün yeni bir şey yok; dinlenmek de olur.
+
+## F4.C · günlerce aradan sonra uygulamaya dönüş (kart, tek cümle)
+F4C-8 | Hoş geldin; kayıtların yerinde.
+F4C-9 | Yeniden hoş geldin; yolun hazır.
+F4C-10 | Hoş geldin; bugün birkaç dakika da yeter.
+
+## metricChange · bir ölçüde ölçüm payını aşan iyileşme (Ana sayfa kartı)
+MC-8 | Hızlı Bakış oyununda algı eşiğin 120 milisaniyeden 80 milisaniyeye indi.
+MC-10 | Tek Bakışta oyununda kavradığın harf sayısı başlangıçta 4'tü, şimdi 6.
+MC-11 | Tek Bakışta oyununda ilerleme var: kavradığın harf sayısı 4'ten 6'ya çıktı.
+MC-12 | İki haftadır Tek Bakışta oyununda kavradığın harf sayısı 6; başlangıçta 4'tü.
+MC-13 | Başlangıcından iyi: Tek Bakışta oyununda kavradığın harf sayısı 4'ten 6'ya çıktı.
+MC-14 | Hızlı Bakış oyununda algı eşiğin başlangıca göre 40 milisaniye indi.
+MC-15 | Tek Bakışta oyununda kavradığın harf sayısı artık 6; başlangıçta 4'tü.
+
+## firstTime.A · bir modülde ilk gün (Ana sayfa kartı)
+FT-7 | Yılan oyunuyla ilk günün tamam.
+FT-8 | Yılan oyununa ilk adımı attın.
+FT-9 | Bugün Yılan oyununu ilk kez açtın.
+FT-10 | İlk Gökyüzü molan geride kaldı.
+
+## firstTime.B · bir modülde ilk ölçüm (Ana sayfa kartı)
+FTB-7 | Tek Bakışta oyununda başlangıcın 4 harf.
+FTB-8 | İlk Tek Bakışta turunda 4 harf kavradın; başlangıcın bu.
+FTB-9 | Hızlı Bakış oyununda başlangıç eşiğin 120 milisaniye.
+FTB-10 | Başlangıç noktan belli: Hızlı Bakış oyununda 120 milisaniye.
+FTB-11 | İlk Gökyüzü molanda dinlenmişlik puanın 3'ten 6'ya çıktı.
+
+## returnAfterGap · bir modüle uzun aradan dönüş (Ana sayfa kartı)
+RG-7 | Tek Bakışta oyununa yeniden hoş geldin; kayıtların yerinde.
+RG-8 | Yılan oyunu seni bekliyordu; kayıtların yerinde.
+
+## pathDone · bugünkü yol bitti, haftanın olgusu (Ana sayfa kartı)
+PD-7 | Bu hafta dördüncü kez yolun sonuna vardın.
+PD-8 | Bu hafta dört gün yolu bitirdin.
+PD-9 | Bugünle birlikte bu hafta yolu dört kez bitirdin.
+PD-10 | Bu hafta yolun sonuna dördüncü kez geldin.

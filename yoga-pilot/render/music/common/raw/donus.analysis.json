@@ -1,0 +1,39 @@
+{
+ "file": "common/donus.wav",
+ "src_sr": 44100,
+ "src_channels": 2,
+ "duration_s": 4.0,
+ "lufs_i": -22.36,
+ "true_peak_dbtp": -6.7,
+ "sample_peak_dbfs": -6.7,
+ "clipped_samples": 0,
+ "dc": [
+  2.2e-05,
+  2.2e-05
+ ],
+ "lr_corr": 1.0,
+ "lead_silence_ms": 0.8,
+ "tail_silence_ms": 1638.0,
+ "onsets": {
+  "pulse_clarity": 0.222,
+  "percussive_share": 0.029,
+  "events_per_min": 180.0,
+  "strong_onsets_per_min": 15.0,
+  "flux_mean_db": 0.3572,
+  "flux_median_db": 0.2181,
+  "flux_p99_db": 1.475,
+  "flux_max_db": 1.888,
+  "flux_max_at_s": 0.27
+ },
+ "clicks_hf": {
+  "count": 0,
+  "first": []
+ },
+ "spectrum": {
+  "centroid_hz": 700.8,
+  "share_lt300": 0.001,
+  "share_500_4k": 0.994,
+  "share_1k5_4k": 0.0002,
+  "share_gt8k": 1e-05
+ }
+}

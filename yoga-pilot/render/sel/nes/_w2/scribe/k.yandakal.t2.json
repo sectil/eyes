@@ -1,0 +1,16 @@
+{
+ "unit": "k.yandakal",
+ "take": "t2",
+ "ref_node": "tuJGkUjyhrkBsnvR7FhJ",
+ "asset_id": "w4UiKqKSbDYcwcr796jM",
+ "stt_node": "73aElrUQO6Dqr4dCxlRk",
+ "session_id": "jxApte1OU0CxBPXgluwT",
+ "generation_id": "eKi8mWjGbms3XQLTZtXB",
+ "actual_credits": 14.52,
+ "actual_cents": 0.264,
+ "spoken_duration_secs": 2.44,
+ "scribe_text": "Bir süre yan yatarak dinlenmek de olur",
+ "tts": "Bir süre yan yatarak dinlenmek de olur.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 7\n}"
+}
