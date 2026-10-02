@@ -70,7 +70,7 @@
           "secenekler": [
             "Şarkıcının kadın mı erkek mi olduğu",
             "Şarkının kaç yıl önce kaydedildiği",
-            "Şarkıda hangi çalgıların kullanıldığı",
+            "Şarkıcının hangi şehirde doğduğu",
             "Şarkının hangi ülkede söylendiği"
           ]
         }
@@ -456,7 +456,7 @@
       "yazar": "Shmakova ve ark.",
       "dergi": "Current Biology",
       "yil": 2021,
-      "metin": "Sürekli donmuş topraklarda bazı canlılar çok uzun süre korunabilir. Daha önce bu tür topraklardan alınan tohum dokusundan bitkiler yetiştirilmiş, nematod denen solucanlar yeniden canlandırılmıştı. Rotiferler, gözle görülemeyecek kadar küçük, çok hücreli hayvanlardır ve çok düşük sıcaklıklara dayanmalarıyla bilinir. Ama donmuş hâlde en fazla 6 ila 10 yıl sonra canlandıkları bildirilmişti. Bir ekip, Sibirya'nın kuzeydoğusundaki donmuş topraktan canlı bir rotifer çıkardı. Toprağın yaşı yaklaşık 24 bin yıl olarak belirlendi. Bu, bir rotiferin donmuş hâlde canlı kaldığı bildirilen en uzun süre oldu. Deneylerde bu eski rotifer, yavaşça soğutulup en az yedi gün donmuş kalmaya dayandı. Laboratuvarda eş olmadan çoğalarak sürekli yeni bireyler üretebildi.",
+      "metin": "Sürekli donmuş topraklarda bazı canlılar çok uzun süre korunabilir. Daha önce bu tür topraklardan alınan tohum dokusundan bitkiler yetiştirilmiş, nematod denen solucanlar yeniden canlandırılmıştı. Bdelloid denen rotiferler, gözle görülemeyecek kadar küçük, çok hücreli hayvanlardır ve çok düşük sıcaklıklara dayanmalarıyla bilinir. Önceki kayıtlarda donmuş hâlde 6 ila 10 yıl sonra canlandıkları bildirilmişti. Bir ekip, Sibirya'nın kuzeydoğusundaki donmuş topraktan canlı bir rotifer çıkardı. Toprağın yaşı yaklaşık 24 bin yıl olarak belirlendi. Bu, bir rotiferin donmuş hâlde canlı kaldığı bildirilen en uzun süre oldu. Deneylerde bu eski rotifer, yavaşça soğutulup en az yedi gün donmuş kalmaya dayandı. Laboratuvarda eş olmadan çoğalarak sürekli yeni bireyler üretebildi.",
       "sorular": [
         {
           "tur": "ana",
@@ -470,7 +470,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Rotiferler nasıl canlılardır?",
+          "soru": "Metne göre bdelloid rotiferler nasıl canlılardır?",
           "secenekler": [
             "Çok küçük, çok hücreli hayvanlar",
             "Tek hücreli bakteriler",
@@ -480,7 +480,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu çalışmadan önce rotiferlerin donmuş hâlde en fazla ne kadar sonra canlandığı biliniyordu?",
+          "soru": "Önceki kayıtlarda bu rotiferlerin donmuş hâlde ne kadar sonra canlandığı bildirilmişti?",
           "secenekler": [
             "6 ila 10 yıl",
             "1 ila 2 ay",
@@ -490,7 +490,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Rotiferin çıkarıldığı toprak nerdeydi?",
+          "soru": "Rotiferin çıkarıldığı toprak neredeydi?",
           "secenekler": [
             "Sibirya'nın kuzeydoğusunda",
             "Bir çölün ortasında",

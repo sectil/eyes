@@ -1,5 +1,20 @@
 # Bilimsel doğrulama kayıtları
 
+## taslak-08
+
+PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Yayın türü: 8 kayıt "Journal Article"; oa072 (25981795) ve oa077 (34102116) "Letter", ama ikisi de özetli ve özgün veri sunan kısa çalışma (1401 kişilik anket ve deney; donmuş topraktan canlı rotifer), yorum değil; kaldı. Yorum, derleme, düzeltme yok. Uzunluk oranı sonrası: doğru seçenek en uzun 16/60 (%27).
+
+- oa071 | tamam (özetteki "healing songs" sağlık çağrışımı yüzünden anılmamış, sayım kapsayıcı değil) | ikinci deney ipucu sorusunda "hangi çalgıların kullanıldığı" seçeneği, özetteki "müzik özellikleri / bağlamsal özellikler" arasında sayılabileceği için "hangi şehirde doğduğu" yapıldı
+- oa072 | tamam | değişiklik yok
+- oa073 | tamam | değişiklik yok
+- oa074 | tamam ("eşek hıyarı" squirting cucumber, Ecballium elaterium'un yerleşik adı; "2000 katından uzağa" özetteki model sonucu) | değişiklik yok
+- oa075 | tamam ("glutamat bir amino asittir ve sinir hücreleri arasında uyarı taşır" özette de var) | değişiklik yok
+- oa076 | tamam ("bir mikrometre milimetrenin binde biridir" genel bilgi) | değişiklik yok
+- oa077 | düzeltildi: özet yalnız bdelloid rotiferlerden söz ettiği için "Rotiferler ... dayanmalarıyla bilinir" genellemesi "Bdelloid denen rotiferler" yapıldı; özetteki "previous reports suggest" kesin üst sınır gibi yazılmıştı, "en fazla 6 ila 10 yıl" → "önceki kayıtlarda 6 ila 10 yıl" | iki soru kökü buna göre yumuşatıldı; "nerdeydi" yazım hatası düzeltildi
+- oa078 | tamam ("en çok incelenen bakterilerden biri" genel bilgi; "dışarıdan itilmez, döndürülmez" force-free/torque-free'nin sadeleştirmesi) | değişiklik yok
+- oa079 | tamam ("bir bombus arısı türü" Bombus terrestris için genel ad) | değişiklik yok
+- oa080 | tamam | değişiklik yok
+
 ## taslak-07
 
 PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor; hepsi "Journal Article" (yorum, derleme, düzeltme yok). Uzunluk oranı sonrası: doğru seçenek en uzun 11/60 (%18).
