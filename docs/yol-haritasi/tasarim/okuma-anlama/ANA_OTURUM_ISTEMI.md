@@ -50,9 +50,13 @@ Uygulama tarafında oku:
 - Aynı anda en çok 2 iş akışı. Ajan süreleri: uygulayıcı 25 dk, inceleyici 15 dk, değerlendirici 3 dk.
 - Gelişim, Nef ve bildirim dosyalarına yalnız aşağıdaki **bağlantı satırları** için dokun; o işin sahibiyle sıraya koy.
 - **Okuma testi (`reading`) ve `reading-cps` dokunulmaz.** Nef'in `readingWpm` sinyali okuma testinde kalır.
-- Görünür her cümle `METINLER.md` §5'ten harfi harfine gelir.
-  - Sahip onaylı olanlar: modül adı "Oku ve Anla" ve beş ekranın son tasarımı.
-  - Nef ve hatırlatma cümleleri taslaktır. Koda girmeden önce sahibe sorulur: taslak → kapı → kendi onayın → sahip.
+- Görünür her cümle `METINLER.md` §5'ten harfi harfine gelir. Sahip onaylı olanlar (2026-10-02):
+  - modül adı
+  - ekran, Nef ve hatırlatma cümleleri
+  - 120 metnin hepsi
+  - beş ekranın son tasarımı
+
+  Yeni ya da değişen her cümle yine taslak → kapı → kendi onayın → sahip yolundan geçer.
 
 ## 2. Aşamalar
 
@@ -62,7 +66,8 @@ Sahipleriyle sıraya konur.
 - `progress.js`: `UNIT_SD_FLOOR['kelime/dk'] = 10`.
 - `sources.js`: `rayner2016`, `kuperman2021`, `miyata2012`, `trauzettel2012`. PMID ve DOI `arastirma/KAYNAKLAR.md`
   §A'dan alınır; `finding` ve `limit` alanları orada.
-- `nef.contract.test.js` APPROVED_NAMES: "Oku ve Anla alıştırması". `nef/bank/tr.js`: sahip onaylı Nef cümleleri.
+- `nef.contract.test.js` APPROVED_NAMES: "Oku ve Anla alıştırması". `nef/bank/tr.js`: `METINLER.md` §5'teki sahip onaylı
+  Nef cümleleri.
 - `remindTexts.js` `TEXTS['remind.okuma-anlama']` ve `NAMES`. Cümleler önce
   `bildirim-hava-yuruyus/metin-B1a-onay.md`'ye sahip onayıyla girer.
 

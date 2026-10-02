@@ -115,3 +115,15 @@ Kararlar:
 ## 10. Sahip kararı (2026-10-02)
 - Sayılmadı ekranının son hâli sahip onaylı: "OK ONAYLIYORUM".
 - Beş ekranın tasarımı tamam; kayıtlar `kapi/`.
+
+## 11. Sahip kararı (2026-10-02, banka bittikten sonra)
+Soru:
+1. Takım 2–12'deki 110 metin onaylı mı? Özellikle sorulanlar: vombat dışkısı metni ve penguen metni.
+2. `METINLER.md` §5'teki ekran, Nef ve hatırlatma cümleleri onaylı mı?
+
+Sahibin cevabı, kelimesi kelimesine: "Onay".
+
+Kararlar:
+- 120 metnin hepsi onaylı; vombat ve penguen metinleri de dahil.
+- §5'teki ekran, Nef ve hatırlatma cümleleri onaylı.
+- Not: Nef ve hatırlatma cümleleri ayrıca bir 5 kişilik metin kapısından geçmedi; sahip doğrudan onayladı.

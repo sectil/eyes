@@ -1,7 +1,7 @@
 # Oku ve Anla · metin, soru ve ekran metinleri kuralları (taslak, 2026-10-02)
 
-Modül adı **Oku ve Anla**: sahip onaylı, 2026-10-02. Bu belgedeki öteki görünür cümleler **taslaktır**.
-Sahip onayı olmadan koda girmez: taslak → 5 kişilik kapı → kendi onayım → sahip.
+Modül adı **Oku ve Anla**: sahip onaylı, 2026-10-02. §5'teki bütün görünür cümleler de sahip onaylı (2026-10-02, "Onay"; `ARA_RAPOR_1.md` §11).
+Yeni ya da değişen cümle sahip onayı olmadan koda girmez: taslak → 5 kişilik kapı → kendi onayım → sahip.
 
 ## 1. Kaynak kuralı
 - Her metin tek bir PubMed kaydına dayanır. PMID ve DOI bu oturumda PubMed aracıyla çekilir; ezberden yazılmaz.
@@ -40,9 +40,9 @@ Sahip onayı olmadan koda girmez: taslak → 5 kişilik kapı → kendi onayım 
 - **120 metin tamam** (2026-10-02): `taslak-01..12.json`.
   - Her takım iki adımdan geçti: önce yazıldı, sonra bağımsız doğrulayıcı özetle karşılaştırdı (`banka/DOGRULAMA.md`).
   - Liste: `banka/METIN_LISTESI.md`.
-  - Takım 2–12 koda girmeden önce sahip onayı bekler.
+  - 120 metnin hepsi sahip onaylı (2026-10-02).
 
-## 5. Görünür metinler (taslak, kapı ve sahip onayı bekliyor)
+## 5. Görünür metinler (sahip onaylı, 2026-10-02)
 
 ### Modül adı
 **Oku ve Anla**: sahip onaylı, 2026-10-02.
