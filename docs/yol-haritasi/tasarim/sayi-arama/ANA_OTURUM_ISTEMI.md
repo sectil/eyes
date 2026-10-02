@@ -18,9 +18,9 @@ Tasarım klasörü: `docs/yol-haritasi/tasarim/sayi-arama/`
    **§4.1b ilk 8 günün sonucu (kıyas yok)**, §5 ekranlar, **§5b kapı sonuçları**, §6 aşamalar, §7 riskler, §8 kararlar.
 2. `METINLER.md`: görünür her cümle buradan. Yalnız **S** (sahip onaylı) olanlar harfi harfine koda girer.
 3. `arastirma/KAYNAKLAR.md`: 14 kaynak, PMID ve DOI PubMed aracıyla doğrulandı.
-4. `kapi/5sn-tur1.md`, `kapi/5sn-tur2.md`: iki turun bulguları ve **7 bağlayıcı madde**.
+4. `kapi/5sn-tur1.md` … `kapi/5sn-tur4.md`: dört turun bulguları; tur 2 sonundaki 7 ve tur 4'teki 6 **bağlayıcı madde**.
 5. Maket (yön ve içerik içindir): `maket/maket.html?s=<ekran>&theme=<light|dark>`; ekranlar intro, play, found,
-   result1, result2. Görüntüler `maket/son/`. intro ve found kapıdan geçti; play, result1, result2 geçmedi.
+   result1, result2. Görüntüler `maket/son/`. intro, found, play ve result2 kapıdan geçti; result1 geçmedi (tur 4 maddeleriyle kodda yeniden kapıya girer).
 6. `SAHIP_ISTEGI.md` ve `sahip-ekran/`: yalnız mantık örneği; hiçbir görsel öğe alınmaz.
 
 Uygulama tarafında oku:

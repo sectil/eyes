@@ -184,7 +184,7 @@ yuvarlaklık Ana sayfa ile aynı aile.
 | intro | 4/5 | 5/5 | geçti (tur 2 hâli: `maket/tur2/intro-*`) |
 | found | 3/5 | 5/5 | geçti (tur 2 hâli) |
 | play | 3/5 | 2/5 | tur 3: **4/5 geçti** (`maket/son/play-*`) |
-| result1 | 0/5 | 0/5 | tur 3: 0/5 kaldı; sahibe soruldu (2026-10-02) |
+| result1 | 0/5 | 0/5 | tur 3: 0/5; tur 4 (sade hâl): 390'da 3/5, 320'de 0/5, kaldı. Bağlayıcı maddeler `kapi/5sn-tur4.md`; kapı kodda |
 | result2 | 3/5 | 3/5 | tur 3: **5/5 geçti** (`maket/son/result2-*`) |
 
 Tur 3 sahip isteğiyle, yeni beş kimlikle yapıldı (`kapi/5sn-tur3.md`).
