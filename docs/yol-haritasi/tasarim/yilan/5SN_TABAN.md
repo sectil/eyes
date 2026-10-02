@@ -30,3 +30,18 @@ Ortak bulgular (en az 3 değerlendiricide):
 Ortak bulgular: giriş ayar formu gibi, 320'de seçenekler düğmenin arkasında kesik; ayar ve kontrolde üstte gereksiz skor
 satırı, yazının arkasında silik yılan/yem izi, kontrol ayardan ayırt edilmiyor; oyunda tahta boş ve renksiz, yılan küçük;
 sonuç temiz ama duygusuz. Güçlü yanlar: parlayan kapı talimatı net (3/5), kapılı düzen anlaşılır, sonuçta tek güçlü düğme.
+
+## Tur 2 · düzeltmelerden sonra (2026-10-02, son tur)
+
+| Ekran | Sonuç |
+|---|---|
+| 1 giriş | 0/5 |
+| 2 ayar | 0/5 |
+| 3 kontrol | 0/5 |
+| 4 oyun | 0/5 |
+| 5 sonuç | 1/5 |
+
+Ortak bulgular: yılan ve yem büyük tahtada küçük kalıyor (5/5); tahtanın üstünde ve altında boşluk; kontroldeki dört simge
+dış kapılarla karışıyor (5/5); ayarda ortadaki ok kapıyı tekrar ediyor; girişte ayar kartları ve 320'de düğmenin
+arkasında kesik içerik (5/5); sonuçta dev "0" moral bozuyor, düğmeler yarışıyor.
+İki tur doldu: aynı yöntemle üçüncü tur açılmadı (IS_AKISI_KURALLARI). Yöntem değişikliği sahibe soruldu.
