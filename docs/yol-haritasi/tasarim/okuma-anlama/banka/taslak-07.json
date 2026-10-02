@@ -14,74 +14,74 @@
   "metinler": [
     {
       "id": "oa061",
-      "baslik": "Suyun üstünde koşmak",
+      "baslik": "Kumun içinde yüzmek",
       "etiket": "surungen",
-      "kaynak": "nirody2018",
-      "pmid": "30528580",
-      "doi": "10.1016/j.cub.2018.10.064",
-      "yazar": "Nirody ve ark.",
-      "dergi": "Current Biology",
-      "yil": 2018,
-      "metin": "Bir kertenkele suyun üstünde koşabilir mi? Geko denen kertenkeleler hızlı koşar, en pürüzsüz yüzeylere tırmanır ve havada yalnız kuyruklarını savurarak dönebilir. Araştırmacılar doğada bu hayvanların su yüzeyinde de hızla ilerlediğini gördü. Bazı iri hayvanlar suda durabilmek için suya sertçe vurur; böcekler gibi küçük canlılar ise suyun yüzey gerilimine dayanır. Bu gekolar boyca bu ikisinin arasında kalır. Ekip, gekoların dört ayağını da kullanarak tırıs gibi koştuğunu buldu. Ayaklarıyla suya vurup hava cepleri açıyor, böylece başlarını ve gövdelerinin önünü sudan kaldırıyorlardı. Suya yüzey gerilimini azaltan bir madde katılınca hızları yarıya indi. Su tutmayan derileri de sürtünmeyi azaltıyor olabilir. Gövdelerini ve kuyruklarını yana kıvırarak ileri itiliyorlardı. Yani gekolar birkaç yolu birden kullanıyor.",
+      "kaynak": "maladen2009",
+      "pmid": "19608917",
+      "doi": "10.1126/science.1172490",
+      "yazar": "Maladen ve ark.",
+      "dergi": "Science",
+      "yil": 2009,
+      "metin": "Bir kertenkele kumun içinde yüzebilir mi? Çölde yaşayan bir kertenkele türü, kuru kumun içinde hareket eder. Kuru kum, hem katı gibi hem de akışkan gibi davranabilen bir maddedir. Bir ekip, kertenkeleyi kumun altında hızlı çekim yapan bir röntgen düzeneğiyle izledi. Kertenkele kumun altına girince bacaklarını artık itmek için kullanmıyordu. Bunun yerine bedeni boyunca ilerleyen bir dalgayla kumun direncini yeniyordu. Bir canlının sudaki yüzme hızı hesaplanabilir, ama kum için böyle bir hesap yolu yoktu. Ekip bu yüzden kumun içinde farklı açılarla ilerletilen küçük bir silindire binen direnci ölçtü. Bu ölçümlerle kertenkelenin hızını tahmin eden bir model kurdu. Modelin tahmini deneylerle uyuştu. Buna göre kertenkele kumda, sürtünmeli bir akışkanın içinde yüzer gibi ilerliyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Gekoların suyun üstünde birkaç yolla koşabilmesini",
-            "Gekoların su altında uzun süre nefes tutmasını",
-            "Gekoların pürüzsüz duvarlara hangi yolla tırmandığını",
-            "Gekoların yumurtalarını suya bırakmasını"
+            "Bir kertenkelenin kumun içinde dalgalanarak yüzmesini",
+            "Kertenkelelerin çölde nasıl su bulduğunu",
+            "Kumun rüzgârla nasıl taşındığını",
+            "Kertenkelelerin güneşte nasıl ısınıp gölgede serinlediğini"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Böcekler gibi küçük canlılar suyun üstünde durmak için neye dayanır?",
+          "soru": "Kuru kum nasıl davranabilen bir maddedir?",
           "secenekler": [
-            "Suyun yüzey gerilimine",
-            "Suya sertçe vurmaya",
-            "Kanatlarını çırpmaya",
-            "Suyun altındaki taşlara basmaya"
+            "Hem katı hem akışkan gibi",
+            "Yalnız sert bir kaya gibi, hiç akmadan",
+            "Yalnız su gibi",
+            "Yalnız gaz gibi"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Gekolar suyun üstünde kaç ayağını kullanarak koştu?",
+          "soru": "Ekip kertenkeleyi kumun altında neyle izledi?",
           "secenekler": [
-            "Dört ayağını da",
-            "Yalnız arka iki ayağını",
-            "Yalnız ön iki ayağını",
-            "Tek ayağını"
+            "Hızlı çekim yapan bir röntgen düzeneğiyle",
+            "Kumun üstüne konan bir mikrofonla",
+            "Kertenkelenin sırtına takılan küçük bir ışıklı aygıtla",
+            "Çıplak gözle, kumu kazarak"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Suya yüzey gerilimini azaltan madde katılınca ne oldu?",
+          "soru": "Kertenkele kumun altında bacaklarını ne yapıyordu?",
           "secenekler": [
-            "Gekoların hızı yarıya indi",
-            "Gekolar eskisinden iki kat daha hızlı koştu",
-            "Gekolar suya dalıp kayboldu",
-            "Hiçbir şey değişmedi"
+            "İtmek için kullanmıyordu",
+            "Kumu kazmak için kullanıyordu",
+            "Hızla öne arkaya çırpıyordu",
+            "Gövdesine sıkıca yapıştırıp kilitliyordu"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Gekolar suya vurarak açtıkları hava cepleriyle ne yapıyordu?",
+          "soru": "Kertenkeleyi kumda ileri iten neydi?",
           "secenekler": [
-            "Başlarını ve gövdelerinin önünü sudan kaldırıyordu",
-            "Su altında soluk alıyordu",
-            "Birbirlerine işaret veriyordu",
-            "Suyu ısıtıyordu"
+            "Bedeni boyunca ilerleyen bir dalga",
+            "Kuyruğunu dik tutması",
+            "Ön bacaklarıyla kumu hızla kazıp önünü açması",
+            "Kumun kendiliğinden akması"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Gekoları ileri iten hareket hangisiydi?",
+          "soru": "Ekip direnci ölçmek için kumda neyi ilerletti?",
           "secenekler": [
-            "Gövde ve kuyruğu yana kıvırmak",
-            "Kuyruğu dik tutmak",
-            "Başı suya sokmak",
-            "Yalnız ön ayaklarını hızla ileri geri çırpmak"
+            "Küçük bir silindiri",
+            "Bir kertenkele maketini",
+            "Bir su damlasını",
+            "Büyük bir taşı"
           ]
         }
       ]
