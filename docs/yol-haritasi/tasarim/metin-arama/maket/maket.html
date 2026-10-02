@@ -223,6 +223,22 @@ h1 { font-family: var(--font-display); font-weight: 700; font-size: 30px; line-h
 .wc b { font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .wc span { font-size: 13.5px; color: var(--ok); font-weight: 700; white-space: nowrap; }
 .wc.miss span { color: var(--ink-3); }
 @media (max-width: 340px) { .words { display: none; } }
+
+/* tur 6 */
+.rekor { flex: none; padding: 20px; border-radius: 26px; background: linear-gradient(135deg, color-mix(in srgb, var(--ok) 18%, var(--surface)), var(--surface)); border: 1.5px solid var(--ok); }
+.rkh { display: flex; gap: 8px; align-items: center; font: 700 24px var(--font-display); color: var(--ok); letter-spacing: -.01em; } .rkh svg { width: 24px; height: 24px; }
+.rkv { display: flex; align-items: baseline; gap: 12px; margin-top: 10px; } .rkv span { font: 700 34px var(--font-display); color: var(--ink-3); text-decoration: line-through; text-decoration-thickness: 2px; }
+.rkv i { font-style: normal; font-size: 30px; color: var(--ok); } .rkv b { font: 700 72px var(--font-display); letter-spacing: -.03em; line-height: 1; } .rkv small { font: 600 24px var(--font-display); color: var(--ink-2); }
+.rks { margin-top: 8px; font-size: 15px; color: var(--ink-2); font-weight: 600; }
+@media (max-width: 340px) {
+  .words { display: grid; } .wgrid { gap: 6px; } .wc { padding: 7px 9px; } .wc b { font-size: 12.5px; } .wc span { font-size: 11.5px; }
+  .words .lt { display: none; } .lc span { display: none; } .lc { padding: 10px 12px; } .learn .lt { display: none; }
+  .rekor { padding: 14px; } .rkh { font-size: 18px; } .rkv b { font-size: 50px; } .rkv span { font-size: 24px; } .rkv i { font-size: 22px; } .rkv small { font-size: 18px; } .rks { font-size: 13px; }
+}
+.wc { flex-direction: column; align-items: flex-start; gap: 2px; } .wc b { overflow: visible; white-space: normal; }
+.wgrid { grid-template-columns: repeat(3, 1fr); } .wc b { font-size: 14px; } .wc span { font-size: 13px; }
+@media (max-width: 340px) { .wc b { font-size: 12px; } .wc span { font-size: 11px; } .wc { padding: 6px 8px; } }
+@media (max-width: 340px) { .lc span { display: block !important; font-size: 11.5px; margin-top: 2px; } .lc { padding: 8px 12px; } .lc b { font-size: 14.5px; } .rekor { padding: 12px 14px; } .rkv { margin-top: 4px; } .rkh { font-size: 17px; } }
 </style>
 </head>
 <body>
@@ -271,10 +287,9 @@ const V = {
   absent: () => `${status}<div class="body">${topBar(4, 3)}<div class="grp"><div class="hero ok"><div class="lbl">${check} Doğru, metinde yok</div><div class="hw">arıya</div><p class="why">Kesik çizgili kelimeler benzer ama aynı değil.</p></div>${paper(X, {}, 'arı').replace('class="paper"', 'class="paper bar top boxed"')}</div><button class="btn">Devam</button></div>`,
   result: () => `${status}<div class="body">
     <div class="top"><div class="x">${close}</div></div>
-    ${VV2 === 'rekor' ? `<div class="newbest">${check} Yeni en iyi turun</div>` : ''}
-    <div class="rhero"><div><div class="rl">Bu turdaki ortalaman</div><div class="big" style="margin-top:4px">3,0<small>sn</small></div></div><div class="rk"><b>5/6</b><span>doğru</span></div></div>
+    ${VV2 === 'rekor' ? `<div class="rekor"><div class="rkh">${check} Yeni en iyi turun</div><div class="rkv"><span>3,4</span><i>→</i><b>3,0</b><small>sn</small></div><div class="rks">Önceki en iyin 3,4 sn idi · 5/6 doğru</div></div>` : `<div class="rhero"><div><div class="rl">Bu turdaki ortalaman</div><div class="big" style="margin-top:4px">3,0<small>sn</small></div></div><div class="rk"><b>5/6</b><span>doğru</span></div></div>`}
     <div class="words"><div class="lt">Kelimelerin</div><div class="wgrid">${[['papağanlarda','1,9 sn'],['kartı','2,8 sn'],['arıya','yok, doğru'],['aleti','3,1 sn'],['kuzgunlarda','süre doldu'],['maymunlara','4,0 sn']].map(([w, t], i) => `<div class="wc ${i === 4 ? 'miss' : ''}"><b>${w}</b><span>${t}</span></div>`).join('')}</div></div>
-    <div class="learn"><div class="lt">Bugün okuduğun</div><div class="lc"><b>Boş kartı seçen arılar</b><span>Howard ve ark. · Science 2018</span></div><div class="lc"><b>17 saate kadar sonrası için alet seçen kuzgunlar</b><span>Kabadayi ve Osvath · Science 2017</span></div></div>
+    <div class="learn"><div class="lt">Bugün okuduğun</div><div class="lc"><b>Boş kartı seçen arılar</b><span>Howard ve ark. · Science 2018</span></div><div class="lc"><b>Saatler sonrası için alet seçen kuzgunlar</b><span>Kabadayi ve Osvath · Science 2017</span></div></div>
     <div class="sp"></div><button class="btn">Tamam</button></div>`,
 }
 

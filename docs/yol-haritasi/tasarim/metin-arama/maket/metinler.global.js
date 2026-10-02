@@ -27,7 +27,7 @@ window.TEXTS = [
   "id": "kuzgun-plan",
   "src": "kabadayi2017",
   "type": "B",
-  "title": "17 saate kadar sonrası için alet seçen kuzgunlar",
+  "title": "Saatler sonrası için alet seçen kuzgunlar",
   "text": "Geleceği planlamak uzun süre insana ve büyük maymunlara özgü sanıldı. Bir deneyde kuzgunlar, ileride kullanacakları bir aleti 17 saate varan süre öncesinden seçebildi; kendilerini de tuttular. Sonuçlar maymunlarınkine benziyor. Araştırmacılara göre bu beceri kuzgunlarda, maymunlardan bağımsız gelişmiş.",
   "targets": [
    {

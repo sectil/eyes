@@ -40,7 +40,9 @@ kendi onayım → sahip. "beyin" ve "tanıma" sözcükleri geçmez. Değişim s�
 ### Sonuç
 | Kimlik | Metin | Not |
 |---|---|---|
-| S0 | Yeni en iyi turun | yalnız bu turun ortalaması önceki en iyiden düşükse; ilk turda yok |
+| S0 | Yeni en iyi turun | yalnız bu turun ortalaması önceki en iyiden düşükse; ilk turda yok. Rekor kartı ekranın en büyük öğesi olur, S1 ve S2 yerine geçer |
+| S0b | {önceki} → {bu} sn | rekor kartında; önceki üstü çizili, `changeText` biçimiyle aynı ok |
+| S0c | Önceki en iyin {önceki} sn idi · {d}/6 doğru | rekor kartının alt satırı |
 | S1 | Bu turdaki ortalaman | büyük sayının üst etiketi |
 | S2 | {x} sn | doğru bulunan kelimelerin ortalama süresi, her kelime en çok 20 sn |
 | S2b | {d}/6 · doğru | sağda; doğru bulunan ve doğru "Yok" sayısı |
@@ -94,7 +96,7 @@ Bal arıları kartlardaki şekilleri karşılaştırıp daha az şekilli olanı 
 
 Hedefler: **papağanlarda** kolay · **kartı** benzer · **arıya** yok
 
-### B2 · 17 saate kadar sonrası için alet seçen kuzgunlar (`kabadayi2017`, B tipi, 37 kelime)
+### B2 · Saatler sonrası için alet seçen kuzgunlar (`kabadayi2017`, B tipi, 37 kelime)
 
 Geleceği planlamak uzun süre insana ve büyük maymunlara özgü sanıldı. Bir deneyde kuzgunlar, ileride kullanacakları bir aleti 17 saate varan süre öncesinden seçebildi; kendilerini de tuttular. Sonuçlar maymunlarınkine benziyor. Araştırmacılara göre bu beceri kuzgunlarda, maymunlardan bağımsız gelişmiş.
 
