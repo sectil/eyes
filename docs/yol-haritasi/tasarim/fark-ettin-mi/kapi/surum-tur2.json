@@ -1,0 +1,40 @@
+{
+ "V1c": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Sana verilen şeyi sayıyorsun\" belirsiz ve tuhaf duruyor, neyin sayıldığı anlaşılmıyor.",
+   "\"Sana verilen şeyi sayıyorsun\" belirsiz; okuyan elime bir eşya verilecek sanır.",
+   "\"Sana verilen şeyi sayıyorsun\" belirsiz; elime bir eşya mı veriliyor diye düşündürüyor.",
+   "\"Sana verilen şeyi sayıyorsun\" belirsiz ve tuhaf; ne verildiği anlaşılmıyor, örnek olmadan okur takılıyor.",
+   "\"Sana verilen şeyi sayıyorsun\" belirsiz; elime bir şey verilmiş gibi okunuyor."
+  ]
+ },
+ "V1d": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Geçerken sayıyor\" nesnesiz kalmış, ne sayıldığı belli değil ve \"sayıyor\" üçüncü şahıs gibi okunuyor.",
+   "\"Sayıyor\" fiilinin nesnesi yok, kişi eki de düşmüş; cümle yarım ve bozuk kalıyor.",
+   "\"Sayıyor\" ne saydığımı söylemiyor, cümle havada kalıyor.",
+   "\"Geçerken sayıyor\" nesnesiz kalmış; neyin sayıldığı söylenmediği için cümle yarım ve robotik duruyor.",
+   "\"Sayıyor\" yarım kalmış, neyi saydığım belli değil."
+  ]
+ },
+ "V3c": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Kişinin rengi gizli\" kulağa garip geliyor, ten rengi gibi yanlış anlaşılabilir.",
+   "\"Kişinin rengi\" tuhaf, ten rengi gibi anlaşılabiliyor.",
+   "\"Kişinin rengi gizli\" tuhaf kaçıyor, yanlış anlaşılmaya da açık.",
+   "\"Kişinin rengi önce gizli\" ten rengi gibi okunabiliyor, ayrıca \"rengi/renkleri\" tutarsızlığı var.",
+   "\"Kişinin rengi gizli\" tuhaf ve yanlış anlaşılabilir duruyor."
+  ]
+ },
+ "V3d": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ }
+}

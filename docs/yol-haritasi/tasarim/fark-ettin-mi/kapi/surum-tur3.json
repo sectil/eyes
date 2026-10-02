@@ -1,0 +1,40 @@
+{
+ "V1e": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "Neyin değiştiğini söylemiyor, öteki somut maddelerin yanında boş kalıyor.",
+   "Ne değiştiği söylenmiyor; bu haliyle boş ve belirsiz kalıyor.",
+   "Neyin yenilendiğini hiç söylemiyor, okuyan elinde bir şey olmadan geçiyor.",
+   "Ne değiştiğini hiç söylemiyor; diğer somut maddelerin yanında boş ve belirsiz kalıyor.",
+   "Boş kalıyor, neyin yenilendiğini hiç söylemiyor."
+  ]
+ },
+ "V1f": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "Sayılacak şey her seferinde değişiyor ama metin hep mavi araba sayılıyormuş gibi anlatıyor.",
+   "Örnek olan mavi arabaları sabit kural gibi sunuyor; sayılacak şey her seferinde değişiyor, metin yanıltıyor."
+  ]
+ },
+ "V1g": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "Kediler bağlamda geçmiyor ve \"sayıyor, sonra buluyorsun\" kulağa aksak geliyor.",
+   "'Sayıyor, sonra buluyorsun' diye kişi eki tutarsız kalıyor; 'kediler' de havada duruyor.",
+   "\"Sayıyor\" ile \"buluyorsun\" kişi olarak uyuşmuyor, ayrıca kediler bağlamda geçmiyor, uydurulmuş.",
+   "Bağlamda olmayan kedileri uyduruyor, 'arabaları ya da kedileri' ifadesi de tuhaf ve uzun duruyor.",
+   "\"Sayıyor\" eksik kalmış gibi okunuyor, kediler de nereden çıktı belli değil."
+  ]
+ },
+ "V1h": {
+  "yes": 3,
+  "n": 5,
+  "why": [
+   "'Yeni' etiketi, 'yenilendi' ve 'yeni' art arda gelince söz tekrarı kulağı tırmalıyor.",
+   "Etiketle birlikte üç kez \"yeni\" geçiyor, sayma kısmı da hiç yok."
+  ]
+ }
+}

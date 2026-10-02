@@ -6,6 +6,15 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Fark Ettin mi? F1–F3: sahne motoru, Ne değişti?, yeni ekranlar. Metin sahip onaylı (2026-10-02; kapı fark-surum*).
+    id: '2026-10-02-2',
+    title: '2 Ekim, ikinci güncelleme',
+    items: [
+      { kind: 'new', text: 'Oynadıkça yeni sahneler açılıyor: Pazar yeri, Park, Akşam ışıkları ve Yağmurlu cadde.' },
+      { kind: 'change', text: '"Gözünden kaçan" sorularında cevabı ele vermeyen buzlu bir çizim var; cevaplayınca sorulan kişiyi gerçek renkleriyle görüyorsun.' },
+    ],
+  },
+  {
     // Nef N1: Ana sayfa kartı an motorundan, günlük model çağrısı kalktı, F1 yağmur notu. Metin sahip onaylı (2026-10-02).
     id: '2026-10-02-1',
     title: '2 Ekim, birinci güncelleme',

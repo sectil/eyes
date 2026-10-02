@@ -1,0 +1,47 @@
+{
+ "V1a": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "\"Saydıktan sonra\" neyi saydığımı söylemiyor, cümle havada kalıyor.",
+   "Ad tırnaksız olduğu için \"Fark Ettin mi? yenilendi\" bozuk okunuyor, \"saydıktan sonra\" da neyin sayıldığını söylemiyor.",
+   "\"Saydıktan sonra\" neyi saydığımı söylemiyor, tırnaksız \"Fark Ettin mi? yenilendi\" de takılarak okunuyor.",
+   "\"Saydıktan sonra\" neyin sayıldığını söylemiyor; tırnaksız başlıkla açılış da hantal duruyor."
+  ]
+ },
+ "V1b": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "\"Yürüyüşten sonra\" gerçek bir yürüyüş gibi okunabiliyor, kafa karıştırıyor.",
+   "Alıştırmanın adı tırnak içinde değil, bu yüzden soru işaretinden sonra küçük harfle gelen \"yenilendi\" yanlış duruyor.",
+   "\"Yürüyüşten sonra\" gerçek bir yürüyüş gibi anlaşılıyor, oyunda ne yapıldığı belli değil."
+  ]
+ },
+ "V2a": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "V3a": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Kişi\" ve \"rengi gizli figür\" kimi, neyi kastediyor anlaşılmıyor, robotik duruyor.",
+   "\"Kişi rengi gizli bir figürle görünüyor\" sözü yapay ve anlaşılmıyor, \"kişi\" kelimesinin kimi kastettiği de belirsiz.",
+   "\"Kişi önce rengi gizli bir figürle görünüyor\" dolambaçlı, kimden söz edildiği anlaşılmıyor.",
+   "\"Kişi\" ve \"rengi gizli bir figürle görünüyor\" kimden söz edildiğini anlatmıyor; okuyunca kafa karışıyor.",
+   "\"Kişi\" kim, \"rengi gizli figür\" ne, okuyunca anlamadım; robot gibi."
+  ]
+ },
+ "V3b": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "\"Kişinin gerçek hâli\" belirsiz, hangi kişiden söz edildiği anlaşılmıyor.",
+   "\"Kişinin gerçek hâli\" hem belirsiz hem tuhaf, hangi kişi olduğu belli değil.",
+   "\"Kişinin gerçek hâli\" belirsiz kalıyor; okuyan bu kişinin kim olduğunu ve neyin açıldığını anlamıyor.",
+   "\"Kişinin gerçek hâli\" kime ait belli değil, kafa karıştırıyor."
+  ]
+ }
+}
