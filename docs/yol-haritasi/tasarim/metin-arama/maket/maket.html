@@ -194,6 +194,21 @@ h1 { font-family: var(--font-display); font-weight: 700; font-size: 30px; line-h
   .paper.mid p { font-size: 19px; line-height: 1.5; } .hero .why { font-size: 14px; } .hero.ok .lbl { font-size: 14px; display: inline-flex; }
   .lc span { font-size: 12px; } .lt { font-size: 13px; } .best { padding: 9px 12px; } .best span { font-size: 14px; } .best i { font-size: 17px; }
 }
+
+/* tur 4 */
+.paper.top { flex: none; justify-content: flex-start; } .paper.top p { font-size: 23px; line-height: 1.55; }
+.took { margin-top: 6px; font-size: 17px; color: var(--ok); font-weight: 600; } .took b { font: 700 34px var(--font-display); letter-spacing: -.02em; margin-right: 4px; }
+.rl { font-size: 15px; font-weight: 700; color: var(--ink-2); }
+.gs { display: block !important; }
+.lc span { font-size: 13px; }
+@media (max-width: 340px) {
+  .hero .lbl { display: block !important; font-size: 12.5px; } .paper.top p { font-size: 18.5px; line-height: 1.5; }
+  .took b { font-size: 26px; } .took { font-size: 15px; margin-top: 2px; } .rl { font-size: 13.5px; } .gs { font-size: 12px; }
+  .hero.ok .lbl { display: inline-flex !important; }
+}
+.grp { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+.paper.top p { font-size: 24px; }
+@media (max-width: 340px) { .grp { gap: 8px; } .paper.top p { font-size: 18.5px; } }
 </style>
 </head>
 <body>
@@ -236,16 +251,15 @@ const V = {
     <div class="sp"></div>
     <p class="small"><a>Neye dayanıyor?</a></p>
     <button class="btn">Başla</button></div>`,
-  search: () => `${status}<div class="body">${topBar(1, 1)}<div class="hero"><div class="lbl">Bu kelimeyi bul</div><div class="hw">kartı</div><div class="hrow"><div class="hl"><i style="width:60%"></i></div><b>12 sn</b></div></div>${paper(X).replace('class="paper"', 'class="paper bar mid"')}<button class="btn ghost">Metinde yok</button></div>`,
-  found: () => `${status}<div class="body">${topBar(2, 1)}<div class="hero ok"><div class="lbl">${check} Buldun</div><div class="hw">kartı</div><div class="hrow"><div class="hl"><i style="width:48%"></i></div><b>2,8 sn</b></div></div>${paper(X, { kartı: 'found' }).replace('class="paper"', 'class="paper bar mid"')}<button class="btn ghost" style="opacity:.35">Metinde yok</button></div>`,
-  absent: () => `${status}<div class="body">${topBar(4, 3)}<div class="hero ok"><div class="lbl">${check} Doğru, metinde yok</div><div class="hw">arıya</div><p class="why">Kesik çizgili kelimeler benzer ama aynı değil.</p></div>${paper(X, {}, 'arı').replace('class="paper"', 'class="paper bar mid boxed"')}<button class="btn">Devam</button></div>`,
+  search: () => `${status}<div class="body">${topBar(1, 1)}<div class="grp"><div class="hero"><div class="lbl">Bu kelimeyi bul</div><div class="hw">kartı</div><div class="hrow"><div class="hl"><i style="width:60%"></i></div><b>12 sn kaldı</b></div></div>${paper(X).replace('class="paper"', 'class="paper bar top"')}</div><button class="btn ghost">Metinde yok</button></div>`,
+  found: () => `${status}<div class="body">${topBar(2, 1)}<div class="grp"><div class="hero ok"><div class="lbl">${check} Buldun</div><div class="hw">kartı</div><div class="took"><b>2,8</b> saniyede</div></div>${paper(X, { kartı: 'found' }).replace('class="paper"', 'class="paper bar top"')}</div><button class="btn ghost" style="opacity:.35">Metinde yok</button></div>`,
+  absent: () => `${status}<div class="body">${topBar(4, 3)}<div class="grp"><div class="hero ok"><div class="lbl">${check} Doğru, metinde yok</div><div class="hw">arıya</div><p class="why">Kesik çizgili kelimeler benzer ama aynı değil.</p></div>${paper(X, {}, 'arı').replace('class="paper"', 'class="paper bar top boxed"')}</div><button class="btn">Devam</button></div>`,
   result: () => `${status}<div class="body">
     <div class="top"><div class="x">${close}</div></div>
-    <div class="rhero"><div><div class="ey">Tur bitti</div><div class="big" style="margin-top:6px">3,0<small>sn</small></div></div><div class="rk"><b>5/6</b><span>doğru</span></div></div>
-    <p class="lead">Bir kelimeyi genelde bu sürede buldun.</p>
-    <div class="best"><span>En hızlı turun</span><i>2,6 sn</i></div>
+    <div class="rhero"><div><div class="rl">Bu turda tipik bulma süren</div><div class="big" style="margin-top:4px">3,0<small>sn</small></div></div><div class="rk"><b>5/6</b><span>doğru</span></div></div>
+    <div class="best"><span>Bugüne kadarki en iyi turun</span><i>2,6 sn</i></div>
     <div class="learn"><div class="lt">Bugün öğrendiğin</div><div class="lc"><b>Boş kartı en az sayan arılar</b><span>Howard ve ark. · Science 2018 · <em>PMID 29880690</em></span></div><div class="lc"><b>17 saat sonrası için alet seçen kuzgunlar</b><span>Kabadayi ve Osvath · Science 2017 · <em>PMID 28706072</em></span></div></div>
-    <div class="gel"><div class="h"><span>Kelime bulma süresi</span><b>Başlangıç · 3/8 gün</b></div><div class="seg">${[0,1,2,3,4,5,6,7].map((i) => `<i class="${i < 3 ? 'on' : ''}"></i>`).join('')}</div></div>
+    <div class="gel"><div class="h"><span>Kelime bulma süresi</span><b>Başlangıç · 3/8 gün</b></div><div class="seg">${[0,1,2,3,4,5,6,7].map((i) => `<i class="${i < 3 ? 'on' : ''}"></i>`).join('')}</div><div class="gs">8 gün oynayınca başlangıç süren belli olur.</div></div>
     <div class="sp"></div><button class="btn">Tamam</button></div>`,
 }
 

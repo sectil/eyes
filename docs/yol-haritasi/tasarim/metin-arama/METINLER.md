@@ -22,12 +22,12 @@ kendi onayım → sahip. "beyin" ve "tanıma" sözcükleri geçmez. Değişim s�
 ### Arama
 | Kimlik | Metin | Not |
 |---|---|---|
-| A1 | Bu kelimeyi bul | aranan kelimenin üstünde, ortada; 320'de gizli |
-| A1b | {s} sn | süre çizgisinin yanında kalan süre; 20'den geri sayar |
+| A1 | Bu kelimeyi bul | aranan kelimenin üstünde, ortada; 320'de de görünür |
+| A1b | {s} sn kaldı | süre çizgisinin yanında; 20'den geri sayar |
 | A2 | Metinde yok | düğme |
 | A3 | {Yazar} ve ark. · {Dergi} {Yıl} · PMID {pmid} | arama sırasında görünmez; A9 geçişinde ve sonuçta S7 altında. İki yazarlıda "{Yazar1} ve {Yazar2}" |
 | A4a | Buldun | bulununca kelimenin üstündeki etiket; kelime ve süre yeşile döner |
-| A4b | {s} sn | bulma süresi, A1b'nin yerinde |
+| A4b | {s} saniyede | bulma süresi, kelimenin altında büyük sayı; süre çizgisi kalkar |
 | A5 | Bu değil | yalnız sesli okuyucu; yanlış dokunuşta kelime kısa sallanır, renk değişmez |
 | A6a | Süre doldu. Kelime buradaydı. | 20 sn dolunca, kelime metindeyse; kelime işaretlenir |
 | A6b | Süre doldu. Bu kelime metinde yoktu. | 20 sn dolunca, kelime yoksa |
@@ -40,13 +40,13 @@ kendi onayım → sahip. "beyin" ve "tanıma" sözcükleri geçmez. Değişim s�
 ### Sonuç
 | Kimlik | Metin | Not |
 |---|---|---|
-| S1 | Tur bitti | üst satır |
+| S1 | Bu turda tipik bulma süren | büyük sayının üst etiketi |
 | S2 | {x} sn | büyük sayı: doğru bulunan kelimelerin ortanca süresi |
 | S2b | {d}/6 · doğru | sağda; doğru bulunan ve doğru "Yok" sayısı |
-| S3 | Bir kelimeyi genelde bu sürede buldun. | ortancanın sade anlatımı |
-| S3b | Süre için en az 3 kelime bulmak gerekiyor; bu tur sayılarla kaydedildi. | 3'ten az bulunduysa S2 ve S3 yerine |
-| S4 | En hızlı turun · {x} sn | en düşük `medianSec`; değişim sözcüğü değildir, Nef'in rekor anıyla aynı veri. İlk turda gösterilmez |
+| S3b | Süre için en az 3 kelime bulmak gerekiyor; bu tur sayılarla kaydedildi. | 3'ten az bulunduysa S1 ve S2 yerine |
+| S4 | Bugüne kadarki en iyi turun · {x} sn | en düşük `medianSec`; değişim sözcüğü değildir, Nef'in rekor anıyla aynı veri. İlk turda gösterilmez |
 | S5 | Kelime bulma süresi | Gelişim kutusunun başlığı, metrik adıyla aynı (GL1) |
+| S6b | 8 gün oynayınca başlangıç süren belli olur. | yalnız başlangıç oluşurken |
 | S6 | Başlangıç · {k}/8 gün · başlangıcından iyi · değişim yok · henüz belli değil | hüküm sözcüğü ve sayı `metricStatusV2` + `changeText` + `verdictWord`'den; modül kendisi kurmaz |
 | S7 | Bugün öğrendiğin | altında iki metnin başlığı ve A3 satırı |
 | S8 | Tamam | düğme |
