@@ -6,6 +6,17 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Oku ve Anla: giriş adımları, ekran cümleleri, 120 metnin Türkçesi ve ana fikir soruları. Sahip yetkisi "sen onayla"
+    // (2026-10-02). Metin kapısı tur 1 (tek değerlendirici, beş okur gibi): A 3/5, B 3/5; tur 2 (beş ayrı okur):
+    // A 5/5, B 4/5; B'ye beşinci okurun "baştan sona" önerisi işlendi (okuma-anlama/kapi/ekran-yenileme-2026-10-02.md)
+    id: '2026-10-02-5',
+    title: '2 Ekim, beşinci güncelleme',
+    items: [
+      { kind: 'change', text: 'Oku ve Anla\'yı açınca ne yapacağın artık adım adım yazıyor: metni oku, "Bitirdim"e bas, dört soruyu cevapla.' },
+      { kind: 'fix', text: 'Oku ve Anla\'daki bilim metinlerinin ve soruların Türkçesi baştan sona elden geçirildi; çeviri kokan, anlamı kaymış cümleler düzeltildi.' },
+    ],
+  },
+  {
     // Yakala Yaz (kelime-hafiza). Metin kapısı tur 1–2 (kelime-hafiza/kapi/kod-y5.md): n4 5/5, s2 4/5; sahip yetkisi
     // "sen onayla" (2026-10-02)
     id: '2026-10-02-4',
