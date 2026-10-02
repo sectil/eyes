@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kelime İzi · maket</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+/* Uygulama belirteçleri: app/src/styles.css ve styles/exercise.css ile aynı değerler */
+:root{
+  --bg:#f3f6f8; --surface:#fff; --surface-2:#e9eef2; --ink:#0b1219; --ink-2:#33414d; --ink-3:#5b6976;
+  --accent:#0b7480; --accent-grad:linear-gradient(90deg,#0b7480,#2458cc); --lens:#f5a623;
+  --ground:#e9eef2; --ground-hi:#ffffff; --glass:rgba(11,18,25,.05); --line:rgba(11,18,25,.09);
+  --teal:#0b8a97; --gold:#b57300; --ok:#13704b; --btn-ink:#fff;
+  --word:#5b6976; --word-dim:rgba(11,18,25,.30); --trail:rgba(11,138,151,.55); --mark-ink:#fff;
+  --mark:linear-gradient(135deg,#0b8a97,#2458cc); --glow:rgba(11,138,151,.35);
+  --display:'Unbounded',system-ui,sans-serif; --body:'Onest',system-ui,sans-serif;
+}
+:root[data-theme=dark]{
+  --bg:#070c12; --surface:#0f171f; --surface-2:#16212b; --ink:#eef3f6; --ink-2:#b9c4cd; --ink-3:#8b98a5;
+  --accent:#19c2d1; --accent-grad:linear-gradient(90deg,#19c2d1,#3e7bfa); --lens:#ffb13b;
+  --ground:#070c12; --ground-hi:#0e1a24; --glass:rgba(255,255,255,.06); --line:rgba(255,255,255,.1);
+  --teal:#19c2d1; --gold:#ffb13b; --ok:#35d39a; --btn-ink:#041017;
+  --word:#8b98a5; --word-dim:rgba(238,243,246,.28); --trail:rgba(25,194,209,.6); --mark-ink:#041017;
+  --mark:linear-gradient(135deg,#19c2d1,#3e7bfa); --glow:rgba(25,194,209,.45);
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:var(--body);color:var(--ink);background:radial-gradient(120% 70% at 50% 40%,var(--ground-hi),var(--ground) 62%);
+  -webkit-font-smoothing:antialiased;overflow:hidden}
+.scr{position:fixed;inset:0;display:flex;flex-direction:column;padding:14px 18px 22px;max-width:520px;margin:0 auto}
+.top{display:flex;align-items:center;gap:12px;flex:none;height:44px}
+.ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--glass);border:1px solid var(--line);color:var(--ink-2);flex:none}
+.ic svg{width:18px;height:18px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;height:56px;border-radius:999px;background:var(--accent-grad);color:var(--btn-ink);
+  font:700 17px/1 var(--body);letter-spacing:.01em;border:0;flex:none;box-shadow:0 10px 28px -10px var(--glow)}
+.mono{font-family:var(--display);font-variant-numeric:tabular-nums}
+.eyebrow{font:600 12px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+/* ---------- Izgara ---------- */
+.grid{position:relative;display:grid;grid-template-columns:repeat(var(--cols),1fr);row-gap:var(--rg);align-content:center}
+.w{position:relative;z-index:2;text-align:center;font:500 var(--fs)/1 var(--body);color:var(--word);padding:9px 0;letter-spacing:.01em}
+
+.w.t1::after,.w.t2::after,.w.t3::after{content:'';position:absolute;left:24%;right:24%;bottom:2px;height:3px;border-radius:2px;background:var(--teal)}
+.w.t1::after{opacity:.75}.w.t2::after{opacity:.45}.w.t3::after{opacity:.2}
+.w{opacity:var(--o,1)}
+.band{position:absolute;left:4px;right:4px;border-radius:14px;background:color-mix(in srgb,var(--teal) 8%,transparent);z-index:0}
+.w.on{color:var(--mark-ink);font-weight:700}
+.w.on::before{content:'';position:absolute;inset:0 6%;border-radius:14px;background:var(--mark);z-index:-1;
+  box-shadow:0 0 0 6px color-mix(in srgb,var(--teal) 14%,transparent),0 8px 26px -6px var(--glow)}
+.w.swap::before{background:var(--gold)!important;box-shadow:0 0 0 7px color-mix(in srgb,var(--gold) 22%,transparent),0 10px 28px -6px color-mix(in srgb,var(--gold) 60%,transparent)!important}
+.w.swap{color:#1a1200}
+svg.trail{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible}
+
+/* ---------- Görev ---------- */
+.hero{position:relative;margin:6px -18px 0;padding:18px 18px 22px;border-radius:0 0 28px 28px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--teal) 10%,transparent),transparent)}
+.hero .grid{--cols:4;--fs:21px;--rg:6px;padding:10px 6px}
+.title{font:700 34px/1.05 var(--display);letter-spacing:-.01em}
+.meta{margin-top:8px;color:var(--ink-3);font:500 15px/1.3 var(--body)}
+.task{margin-top:18px;font:600 19px/1.35 var(--body);color:var(--ink)}
+.task small{display:block;margin-top:6px;font:500 15px/1.4 var(--body);color:var(--ink-2)}
+.ladder{margin-top:18px;display:flex;align-items:stretch;gap:6px}
+.step{flex:1;min-width:0;border-radius:14px;background:var(--surface);border:1px solid var(--line);padding:10px 10px 11px;display:flex;flex-direction:column;gap:4px}
+.step b{font:700 20px/1 var(--display)}
+.step span{font:500 12px/1.2 var(--body);color:var(--ink-3)}
+.arr{flex:none;align-self:center;font:700 20px/1 var(--display);color:var(--ink-3)}
+.step .rise{height:4px;border-radius:2px;background:var(--accent-grad);margin:6px 0 0}
+.unit{flex:none;align-self:flex-end;font:600 12px/1.25 var(--body);color:var(--ink-3);padding-bottom:4px}
+.step i{display:block;height:4px;border-radius:2px;background:var(--accent-grad);margin-bottom:6px}
+.nef{display:flex;gap:10px;align-items:flex-start;margin-top:16px;font:500 14.5px/1.4 var(--body);color:var(--ink-2)}
+.nef .dot{width:26px;height:26px;border-radius:50%;flex:none;background:radial-gradient(circle at 35% 35%,#7fe6ee,var(--teal) 60%,#2458cc)}
+.claim{font:500 12.5px/1.4 var(--body);color:var(--ink-3)}
+
+/* ---------- Oyun ---------- */
+.hud{display:flex;align-items:center;gap:12px;flex:1}.bl{font:600 13px/1 var(--body);color:var(--ink-2);white-space:nowrap}
+.segs{display:flex;gap:6px;flex:1}
+.segs i{flex:1;height:6px;border-radius:3px;background:color-mix(in srgb,var(--ink) 14%,transparent);overflow:hidden;position:relative}
+.segs i.done{background:var(--teal)}
+.segs i.cur::after{content:'';position:absolute;inset:0;width:var(--p);background:var(--teal);border-radius:3px}
+.speed{display:flex;align-items:baseline;gap:6px;margin:14px 2px 0}
+.speed b{font:700 30px/1 var(--display)}
+.speed span{font:500 13px/1 var(--body);color:var(--ink-3)}
+.caps{display:flex;align-items:center;gap:5px;margin-left:12px;font:600 12px/1 var(--body);color:var(--ink-3)}.caps small{font:inherit;margin-right:2px}.caps i{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--ink-3)}.caps i.y{background:var(--gold);border-color:var(--gold)}
+.speed em{margin-left:auto;font:600 13px/1 var(--body);font-style:normal;color:var(--ink-3)}
+.board{flex:1;display:flex;flex-direction:column;justify-content:center;margin:10px -6px 0;border-radius:24px;background:var(--glass);border:1px solid var(--line);padding:8px 4px}
+.hint{flex:none;text-align:center;margin-top:12px;font:500 14px/1.3 var(--body);color:var(--ink-3)}
+.hint b{color:var(--ink);font-weight:600}
+.got{display:inline-block;padding:9px 16px;border-radius:999px;background:var(--gold);color:#1a1200;font:700 15px/1 var(--body)}
+.caught{position:absolute;z-index:3;left:50%;transform:translate(-50%,-50%);font:700 14px/1 var(--body);color:var(--btn-ink);background:var(--gold);
+  padding:8px 12px;border-radius:999px;white-space:nowrap;box-shadow:0 8px 22px -8px rgba(0,0,0,.4)}
+.ripple{position:absolute;z-index:1;border-radius:50%;border:2px solid var(--gold);opacity:.55;transform:translate(-50%,-50%)}
+
+/* ---------- Sonuç ---------- */
+.res-head{margin-top:16px}
+.big{display:flex;align-items:baseline;gap:10px;margin-top:10px}
+.big b{font:700 72px/0.9 var(--display);letter-spacing:-.02em;background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.big span{font:600 17px/1 var(--body);color:var(--ink-2)}
+.chip{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:8px 12px;border-radius:999px;background:color-mix(in srgb,var(--ok) 12%,transparent);color:var(--ok);font:600 14px/1 var(--body)}
+.chip i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.card{margin-top:16px;border-radius:22px;background:var(--surface);border:1px solid var(--line);padding:16px}
+.bars{display:flex;align-items:flex-end;gap:10px;height:var(--bh,190px)}
+.bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end}
+.bar .col{width:100%;border-radius:12px 12px 6px 6px;background:var(--accent-grad);position:relative;display:flex;align-items:flex-start;justify-content:center}
+.bar .col.miss{background:var(--surface-2)}
+.bar .col b{font:700 15px/1 var(--display);color:var(--btn-ink);margin-top:9px}
+.bar .col.miss b{color:var(--ink-2)}
+.dots{display:flex;gap:4px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.dots i.x{background:transparent;border:1.5px solid var(--ink-3)}
+.legend{margin-top:12px;font:500 13px/1.4 var(--body);color:var(--ink-3)}
+.legend b{color:var(--ink-2);font-weight:600}
+.spark{display:block;width:100%;height:var(--sh,96px);margin-top:10px}
+.row{display:flex;justify-content:space-between;align-items:baseline;font:500 13px/1.3 var(--body);color:var(--ink-3)}
+.sparkrow{display:flex;gap:8px;align-items:stretch}.sparkrow .spark{flex:1;min-width:0}
+.labs{display:flex;flex-direction:column;justify-content:space-between;padding:12px 0 10px;font:700 12px/1 var(--display);color:var(--ink-3)}.labs .hi{color:var(--teal)}
+.lab{position:absolute;font:700 12px/1 var(--display);color:var(--ink-3);background:var(--surface);padding:2px 4px}.lab.hi{color:var(--teal)}
+.row b{font:600 14px/1 var(--body);color:var(--ink)}
+
+/* ---------- Ana sayfa ---------- */
+.nefcard{margin-top:14px;border-radius:24px;padding:18px;background:linear-gradient(160deg,color-mix(in srgb,var(--teal) 16%,var(--surface)),var(--surface));border:1px solid var(--line)}
+.nefcard p{font:600 17px/1.4 var(--body);margin-top:12px}
+.mini{margin-top:14px;border-radius:16px;background:var(--glass);padding:10px 4px}
+.mini .grid{--cols:4;--fs:15px;--rg:0px}
+.mini .w{padding:6px 0}
+.mini .w.on::before{border-radius:10px}
+.stop{display:flex;align-items:center;gap:14px;margin-top:14px;border-radius:20px;background:var(--surface);border:1px solid var(--line);padding:14px}
+.stop .gl{width:46px;height:46px;border-radius:14px;background:var(--accent-grad);display:grid;place-items:center;flex:none}
+.stop b{display:block;font:700 16px/1.2 var(--body)}
+.stop .g2{background:color-mix(in srgb,var(--teal) 14%,var(--surface));color:var(--teal)}
+.stop.done b{color:var(--ink-2)}
+.stop .ok{width:28px;height:28px;border-radius:50%;background:var(--ok);color:var(--btn-ink);display:grid;place-items:center}
+.new{font:700 11px/1 var(--body);font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--btn-ink);background:var(--gold);padding:4px 7px;border-radius:999px;margin-left:6px;vertical-align:2px}
+.stop span{font:500 13.5px/1.3 var(--body);color:var(--ink-3)}
+
+@media (max-width:340px){
+  .title{font-size:29px}.task{font-size:17.5px}.step b{font-size:17px}.big b{font-size:60px}.speed b{font-size:26px}
+  .hero .grid{--cols:3}.mini .grid{--cols:3}
+}
+@media (max-height:600px){.bars{--bh:104px}.scr>.btn:last-of-type{margin-top:10px}.big b{font-size:50px}.res-head{margin-top:8px}.card{margin-top:10px;padding:12px}.legend{margin-top:8px;font-size:12px}.chip{margin-top:8px;font-size:12.5px}
+  .board .w{padding:6px 0}.claim{padding-top:6px!important;font-size:11.5px}.btn{height:50px}.hero{padding-top:8px;padding-bottom:12px}.task{margin-top:12px}.ladder{margin-top:12px}.nef{margin-top:10px}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const q = new URLSearchParams(location.search)
+const S = q.get('s') || 'intro'
+document.documentElement.dataset.theme = q.get('theme') === 'dark' ? 'dark' : 'light'
+const narrow = innerWidth < 340
+const short = innerHeight < 600
+const ICON = {
+  breath: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9h11a3 3 0 1 0-3-3M3 15h15a3 3 0 1 1-3 3M3 12h8"/></svg>',
+  blink: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+  check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+}
+const X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+
+// Izgara: okuma düzeni (soldan sağa, sonra alt satır). on = işaretli hücre; iz = önceki 3 hücre.
+function grid(word, cols, rows, on, opts = {}) {
+  cols = cols
+  const cells = []
+  for (let i = 0; i < cols * rows; i++) {
+    const cls = ['w']
+    const k = on - i
+    if (k >= 1 && k <= (opts.trail ?? 3) && Math.floor(i / cols) === Math.floor(on / cols)) cls.push('t' + k)
+    if (i === on) cls.push('on')
+    if (i === on && opts.swap) cls.push('swap')
+    const t = i === on && opts.swap ? opts.swap : word
+    const r0 = Math.floor(on / cols), c0 = on % cols, r = Math.floor(i / cols), c = i % cols
+    const d = Math.hypot((r - r0) * 1.6, c - c0)
+    const o = opts.focus === false || i === on ? 1 : Math.max(0.28, 1 - d * 0.16).toFixed(2)
+    cells.push(`<div class="${cls.join(' ')}" data-i="${i}" style="--o:${o}">${t}</div>`)
+  }
+  return `<div class="grid" data-on="${on}" data-trail="${opts.trail ?? 3}">${cells.join('')}</div>`
+}
+// İz: işaretli hücreye gelen son sıçramaları ince, sönen bir çizgiyle çizer (satır dönüşü dahil).
+function drawTrails() {
+  document.querySelectorAll('.grid').forEach((g) => {
+    const on = +g.dataset.on, n = +g.dataset.trail, svg = g.querySelector('svg.trail')
+    const gr = g.getBoundingClientRect()
+    const c = (i) => { const r = g.querySelector(`[data-i="${i}"]`).getBoundingClientRect(); return [r.left - gr.left + r.width / 2, r.top - gr.top + r.height / 2] }
+    let out = ''
+    for (let k = n; k >= 1; k--) {
+      const a = on - k, b = on - k + 1
+      if (a < 0) continue
+      const [x1, y1] = c(a), [x2, y2] = c(b)
+      const op = (1 - (k - 1) / n).toFixed(2)
+      out += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--trail)" stroke-width="${2 + (n - k)}" stroke-linecap="round" opacity="${op}"/>`
+      out += `<circle cx="${x1}" cy="${y1}" r="${3 + (n - k)}" fill="var(--trail)" opacity="${op}"/>`
+    }
+    svg.innerHTML = out
+  })
+}
+
+const cols = narrow ? 3 : 4
+const first = S === 'intro1'
+const V = {
+  intro1() { return V.intro() },
+  intro() {
+    return `<div class="scr">
+      <div class="top"><div class="ic">${X}</div><div style="flex:1"></div><span class="eyebrow">2 dk · 3 bölüm</span></div>
+      <div class="hero">${grid('Kale', cols, short ? 2 : 5, short ? cols + 1 : cols * 2 + 1, { trail: 3 })}</div>
+      <div class="title" style="margin-top:6px">Kelime İzi</div>
+      <div class="task">İşaretli kelimeyi gözünle izle.<small>Kelime bir an başka bir kelimeye döner. Görünce ekrana dokun.</small></div>
+      <div class="ladder">
+        ${[140, 160, 180].map((v, i) => `<div class="step"><span>${i + 1}. bölüm</span><b class="mono">${v}</b><span>kelime/dk</span><i class="rise" style="width:${40 + i * 30}%"></i></div>`).join('<span class="arr">›</span>')}
+      </div>
+      <div class="nef"><span class="dot"></span><span>${first ? "Bugün 140'tan başlıyorsun. Yakaladıkça hız artar." : "Geçen sefer 160'ı geçtin. Bugün 180'i dene."}</span></div>
+      <div style="flex:1"></div>
+      <div class="btn" style="margin-top:12px">Başla</div>
+      <div class="claim" style="text-align:center;padding-top:10px">${first ? 'Bu bir göz takip alıştırması. Okuma hızını artırdığı gösterilmedi. ' : ''}<u>Neye dayanıyor?</u></div>
+    </div>`
+  },
+  play(opt = {}) {
+    const rows = short ? 9 : 11
+    const on = opt.on ?? cols * 4 + 1
+    return `<div class="scr">
+      <div class="top"><div class="ic">${X}</div><div class="hud"><span class="bl">Bölüm 2/3</span><div class="segs"><i class="done"></i><i class="cur" style="--p:${opt.p ?? '38%'}"></i><i></i></div></div></div>
+      <div class="speed"><b class="mono">160</b><span>kelime/dk</span><em></em><span class="caps"><small>yakalanan</small>${opt.caps ?? '<i class="y"></i><i></i><i></i>'}</span></div>
+      <div class="board" style="position:relative;--cols:${cols};--fs:${narrow ? 22 : 26}px;--rg:${short ? 0 : 6}px">${grid('Kale', cols, rows, on, { swap: opt.swap })}${opt.extra ?? ''}</div>
+      <div class="hint">${opt.hint ?? 'Kelime değişince <b>ekrana dokun</b>'}</div>
+    </div>`
+  },
+  catch() {
+    return V.play({ swap: 'Kare', caps: '<i class="y"></i><i class="y"></i><i></i>', hint: '<span class="got">Yakaladın: Kale → Kare</span>' })
+  },
+  result() {
+    return `<div class="scr">
+      <div class="top"><div class="ic">${X}</div><div style="flex:1"></div></div>
+      <div class="res-head"><span class="eyebrow">Bugün geçtiğin en yüksek hız</span>
+        <div class="big"><b>180</b><span>kelime/dk</span></div>
+        <div class="chip"><i></i>8 günde 140 → 180 · başlangıcından iyi</div></div>
+      <div class="card">
+        <div class="bars">
+          ${[[140, 3, 3], [160, 3, 3], [180, 2, 3]].map(([v, h, n], i) => `<div class="bar"><div class="col" style="height:${Math.round(v / 180 * 100)}%"><b class="mono">${v}</b></div>
+            <div class="dots">${Array.from({ length: n }, (_, k) => `<i class="${k < h ? '' : 'x'}"></i>`).join('')}</div></div>`).join('')}
+        </div>
+        <div class="legend">${short ? '' : "Her nokta bir kelime değişimi; 3'te 2 yakalayınca bölüm geçilir. "}<b>9 değişimden 8'ini</b> yakaladın.</div>
+      </div>
+      <div class="card" style="padding-bottom:12px">
+        <div class="row"><span>Son 7 gün</span><span>kesikli çizgi: başlangıcın</span></div>
+        <div class="sparkrow"><div class="labs"><span class="hi">180</span><span>140</span></div>
+        <svg class="spark" viewBox="0 0 300 64" preserveAspectRatio="none" style="--sh:${short ? 56 : 96}px">
+          <line x1="0" y1="48" x2="300" y2="48" stroke="var(--ink-3)" stroke-dasharray="4 5" stroke-width="1.5" opacity=".8"/>
+          <polyline points="4,48 52,48 100,40 148,48 196,30 244,22 292,10" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+        </div></div>
+      <div style="flex:1"></div>
+      <div class="btn">Bitti</div>
+      <div class="claim" style="text-align:center;padding-top:10px"><u>Neye dayanıyor?</u></div>
+    </div>`
+  },
+  home() {
+    return `<div class="scr">
+      <div class="top"><span class="eyebrow">Bugün · yolun</span></div>
+      <div class="nefcard">
+        <div class="nef" style="margin:0"><span class="dot"></span><span style="font-weight:600;color:var(--ink)">Nef</span></div>
+        <p>Yolunda yeni bir durak var: Kelime İzi. İşaretli kelimeyi gözünle izleyeceksin; her bölümde biraz hızlanır.</p>
+        ${short ? '' : `<div class="mini">${grid('Kale', cols, 2, 2, { trail: 2 })}</div>`}
+        <div class="btn" style="margin-top:14px;height:50px">Dene</div>
+      </div>
+      <div class="stop"><div class="gl"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h4M10 7h4M16 7h4M4 12h4M10 12h4M4 17h4"/><circle cx="18" cy="12" r="2.4" fill="#fff"/></svg></div>
+        <div style="flex:1"><b>Kelime İzi <em class="new">Yeni</em></b><span>2 dk · 3 bölüm</span></div></div>
+      <div class="stop done"><div class="gl g2">${ICON.breath}</div><div style="flex:1"><b>Nefes</b><span>1 dk</span></div><span class="ok">${ICON.check}</span></div>
+      ${short ? '' : `<div class="stop"><div class="gl g2">${ICON.blink}</div><div style="flex:1"><b>Göz kırpma</b><span>1 dk</span></div></div>`}
+    </div>`
+  },
+}
+document.getElementById('app').innerHTML = V[S]()
+document.fonts.ready.then(() => {
+  const cg = document.getElementById('cg')
+  if (cg) {
+    const on = document.querySelector('.board .w.on'), b = document.querySelector('.board').getBoundingClientRect(), r = on.getBoundingClientRect()
+    const x = r.left - b.left + r.width / 2, y = r.top - b.top + r.height / 2
+    cg.outerHTML = `<div class="ripple" style="left:${x}px;top:${y}px;width:120px;height:120px"></div><div class="ripple" style="left:${x}px;top:${y}px;width:84px;height:84px;opacity:.8"></div>
+      <div class="caught" style="left:${x}px;top:${y - 46}px">Yakaladın</div>`
+  }
+})
+</script>
+</body>
+</html>
