@@ -4,7 +4,7 @@
 // → "Ne gördün?" → cevap (klavye tur boyunca açık) → 900 ms geri bildirim. Gösterimi 1 kareden çok sapan deneme ölçüye
 // girmez, merdiveni oynatmaz, yeni çiftle tekrarlanır. Kelime gösterilirken ekran okuyucu kelimeyi okumaz.
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import { X, Mic, Square, Smartphone, Keyboard } from 'lucide-react'
+import { X, Mic, Square, Smartphone, Keyboard, Check } from 'lucide-react'
 import { pickPairs } from '../lib/yakalaYazWords.js'
 import { MS, STEPS, msOf, nextStep, startStepOf, checkAnswer, markTyped, makeRecord, isBadShow, seriesOf, ROUND_TRIALS, DOT_MS, MASK_MS, FEEDBACK_MS, isYakala } from '../lib/yakalaYaz.js'
 import { metricStatusV2 } from '../lib/progress.js'
@@ -112,7 +112,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
   const [listening, setListening] = useState(false)
   const [unheard, setUnheard] = useState(false) // D11
   const [level, setLevel] = useState(0) // 0–1, dinlerken ses çubukları
-  const [heard, setHeard] = useState(false) // sesle iki kelime geldi: "Gerekirse düzelt, sonra Gönder'e bas." 
+  const [heard, setHeard] = useState(false) // sesle iki kelime geldi: "✓ Duydum" ve "Doğruysa Gönder'e bas."
   const listenRef = useRef(null)
   const voice = useRef(false)
   const micReady = Boolean(mic) && !micGone
@@ -348,8 +348,8 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
             <div className="q" role="status">Ne gördün?
               {/* Mikrofonlu hâlde ipucu yeri hep iki satır: dinleme satırı gelip gidince başlık kaymaz, 320'de taşmaz */}
               <small className={micReady ? 'two' : undefined}>
-                {listening ? <LiveRow level={level} /> : null}
-                {listening ? (value.trim() ? 'İkinci kelimeyi söyle.' : 'İki kelimeyi söyle.') : heard ? "Gerekirse düzelt, sonra Gönder'e bas." : unheard ? 'Duyamadım, yazabilirsin.' : micReady ? "Yaz ve Gönder'e bas, ya da mikrofona söyle." : "Yaz ve Gönder'e bas."}
+                {listening ? <LiveRow level={level} /> : heard ? <span className="got"><Check size={16} strokeWidth={2.6} aria-hidden="true" />Duydum</span> : null}
+                {listening ? (value.trim() ? 'İkinci kelimeyi söyle.' : 'İki kelimeyi söyle.') : heard ? "Doğruysa Gönder'e bas." : unheard ? 'Duyamadım, yazabilirsin.' : micReady ? "Yaz ve Gönder'e bas, ya da mikrofona söyle." : "Yaz ve Gönder'e bas."}
               </small>
             </div>
           ) : null}
@@ -375,7 +375,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
             className={`field${showing ? ' quiet' : ''}`}
             value={value}
             onChange={(e) => { setValue(e.target.value); setUnheard(false); setHeard(false) }}
-            placeholder={showing ? '' : listening ? 'Buraya yazılır' : 'İki kelimeyi yaz'}
+            placeholder={showing ? '' : listening ? 'Söylediğin burada' : 'İki kelimeyi yaz'}
             aria-label="İki kelimeyi yaz"
             {...INPUT}
           />

@@ -120,12 +120,13 @@
 
 /* Mikrofon: dinlerken düğme dolu; izin sayfası (maket sesizin) */
 .yy-input { padding: 0 4px; } /* alanın odak halesi kartın hizasını taşmasın (mikrofon kapısı tur 2) */
-.yy-input { position: relative; }
+.yy-input { position: relative; gap: 14px; } /* iki halenin arası dikiş gibi durmasın (kapı) */
 .yy-input .rb { color: var(--accent-g, #11a9b8); border: 2px solid var(--accent-g, #11a9b8); background: var(--surface); box-shadow: 0 0 0 4px rgba(17, 169, 184, 0.14); } /* boşta da dokunulacak düğme belli; alanla aynı hale */
 .yy-input .fieldwrap { position: relative; flex: 1; min-width: 0; display: flex; }
 .yy-input .fieldwrap .field { width: 100%; }
 .yy-stage .q small.two { min-height: 2.7em; line-height: 1.35; display: flex; flex-direction: column; justify-content: center; align-items: center; }
 .yy-stage .q .live { display: flex; justify-content: center; align-items: center; gap: 8px; margin: 0; font: 600 15px var(--font-body); color: #ffd2c4; line-height: 1.2; }
+.yy-stage .q .got { display: flex; justify-content: center; align-items: center; gap: 6px; font: 600 15px var(--font-body); color: #6ff0c0; line-height: 1.2; }
 .yy-stage .q .live .lvl { display: flex; align-items: center; gap: 3px; height: 18px; }
 .yy-stage .q .live .lvl b { width: 4px; border-radius: 2px; background: #ff9a7d; transition: height 0.08s linear; }
 @media (prefers-reduced-motion: reduce) { .yy-stage .q .live .lvl b { transition: none; } }
