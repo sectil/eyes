@@ -1,0 +1,15 @@
+{
+ "unit": "c2.alt",
+ "take": "t3",
+ "asset_id": "NLxD1AWpKBPfqYUChAlx",
+ "source_node_id": "xJVd2SMGZgGqQJ2Neyio",
+ "stt_node_id": "PoA8Y23hsEzclqxZUmnn",
+ "session_id": "NZsBVFKOtqb5ySr0geY6",
+ "generation_id": "WndL9orfbIh1U5AjySC8",
+ "actual_credits": 19.8,
+ "actual_cents": 0.36,
+ "scribe_text": "Dikkatin ellerindeyse avuçlarını hissedebilirsin",
+ "spoken_duration_secs": "3.38",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 4\n}"
+}

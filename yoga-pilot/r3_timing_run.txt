@@ -1,0 +1,9 @@
+  ×1.10: 75/78 vaka geçiyor; kalan denetimler: # sn penceresinde konuşma payı # > # (1: 5.2 5 hi); Derin evrede konuşma payı # > # (1: 5.2 16 hi); H1/B.3-8: C2 bloğu # sn < # (1: 5.2 6 hi); H3: anahtar cümle geçişleri # sn arayla (2: 5.2 5 lo, 5.2 5 hi); T6: # dk # yüksek köşesinde boş pay # sn < # (1: 5.2 5 hi)
+
+== ÖZET ==
+  5.2 hece/sn: 26/26 dakika GEÇTİ (düşük ve yüksek duraklama profilinde)
+  5.6 hece/sn: 26/26 dakika GEÇTİ (düşük ve yüksek duraklama profilinde)
+  6.6 hece/sn: 26/26 dakika GEÇTİ (düşük ve yüksek duraklama profilinde)
+  5 dk 5,2 yüksek köşesinde boş pay: 15.4 sn (T6 tabanı 15)
+  TOPLAM: 78/78 vaka GEÇTİ (ana metin); seçenek takımları GEÇTİ; sahne takımları GEÇTİ; metin denetimi GEÇTİ
+  Kapsam: bu sayı zamanlama ve metin kurallarıdır; dinleme, söyleyiş ve insan onayı değildir (P-S1).

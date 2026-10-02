@@ -1,0 +1,119 @@
+{
+ "_note": "KÖR ANAHTAR: sahibe dinlemeden önce gösterilmez (SPEC §6; PLAN.v3 karar 2)",
+ "created_utc": "2026-09-29T22:56:16.411913+00:00",
+ "rule": "ses numarası = kısa ses adının (nes, hak, hoc) UTF-8 SHA-256 özetinin onaltılık dizge olarak artan sırası (en küçük özet ses1). Sabit sıra ya da rastgele çekiliş değil; herkes yeniden hesaplayabilir.",
+ "sha256_short_names": {
+  "nes": "7accb4417aea998fa57c118399884150b6daa597addcc83a3ec4ff9a1c4f5c1c",
+  "hak": "6a5b32b39ff583bc5f8680afbb07ef596fa6f3abd8a22a59ad7f7e903665888c",
+  "hoc": "7e97ff3e2414ed006c5c80d9f65e287cf72864e9c52e4012513960eaaf0c7eb4"
+ },
+ "order_short": [
+  "hak",
+  "nes",
+  "hoc"
+ ],
+ "check_full_names": {
+  "sha256": {
+   "Neslihan": "d36053174efcbd7ab414b94d18fe624377097d131a0f6940f6ea6bfccb410a34",
+   "Hakan": "31999ad3bd5b7d12ed8632225fd0fbaa2bd7115e92309e55e9ea2c331a5d9a8d",
+   "Nefona Hoca": "d77a7dfbf9bb6e39316ce96c8b6e4caa1ff428d46f06a63c6dad9df2b8bb46fc"
+  },
+  "order": [
+   "Hakan",
+   "Neslihan",
+   "Nefona Hoca"
+  ],
+  "same_order_as_short": true
+ },
+ "map": {
+  "ses1": {
+   "voice": "hak",
+   "voice_name": "Hakan"
+  },
+  "ses2": {
+   "voice": "nes",
+   "voice_name": "Neslihan"
+  },
+  "ses3": {
+   "voice": "hoc",
+   "voice_name": "Nefona Hoca"
+  }
+ },
+ "music": {
+  "A": "el",
+  "B": "dalga",
+  "source": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/_ab_key.json",
+  "note": "A/B müzik eşlemesi üç seste aynı (nes, hak ile aynı müzik düzeni)"
+ },
+ "files": [
+  {
+   "blind": "ders2-15dk-ses1-A.mp3",
+   "voice": "hak",
+   "voice_name": "Hakan",
+   "music_letter": "A",
+   "music_source": "el",
+   "source_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-hak-A.mp3",
+   "bytes": 12811995,
+   "sha256": "e86c1650d6bbf75babce6589813053c38c09e3137ee4040ca38431ff253586ed",
+   "name_strings_in_first_last_4k": []
+  },
+  {
+   "blind": "ders2-15dk-ses1-B.mp3",
+   "voice": "hak",
+   "voice_name": "Hakan",
+   "music_letter": "B",
+   "music_source": "dalga",
+   "source_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-hak-B.mp3",
+   "bytes": 12578857,
+   "sha256": "7ff812531778e86e65655f4ceccdce7c51c00057a5fa71f88c7c4fd80dd4b5b2",
+   "name_strings_in_first_last_4k": []
+  },
+  {
+   "blind": "ders2-15dk-ses2-A.mp3",
+   "voice": "nes",
+   "voice_name": "Neslihan",
+   "music_letter": "A",
+   "music_source": "el",
+   "source_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-nes-A.mp3",
+   "bytes": 12607374,
+   "sha256": "34483891b7bb2eb25ba6d7eb3af0cf3e2ca3d43183a75fa67e195fedb733ebb2",
+   "name_strings_in_first_last_4k": []
+  },
+  {
+   "blind": "ders2-15dk-ses2-B.mp3",
+   "voice": "nes",
+   "voice_name": "Neslihan",
+   "music_letter": "B",
+   "music_source": "dalga",
+   "source_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-nes-B.mp3",
+   "bytes": 12387514,
+   "sha256": "4810ae4aa4d5d0ef15ef1d42a0566a8981dd837cde0ffe0d3d34a6e944f5cb03",
+   "name_strings_in_first_last_4k": []
+  },
+  {
+   "blind": "ders2-15dk-ses3-A.mp3",
+   "voice": "hoc",
+   "voice_name": "Nefona Hoca",
+   "music_letter": "A",
+   "music_source": "el",
+   "source_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-hoc-A.mp3",
+   "bytes": 12680783,
+   "sha256": "726417faa1760e11f81446729c95df4790358aeef75977a36f692ceb91e9a5ea",
+   "name_strings_in_first_last_4k": []
+  },
+  {
+   "blind": "ders2-15dk-ses3-B.mp3",
+   "voice": "hoc",
+   "voice_name": "Nefona Hoca",
+   "music_letter": "B",
+   "music_source": "dalga",
+   "source_file": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/out/ders2-15dk-hoc-B.mp3",
+   "bytes": 12428882,
+   "sha256": "158fa541095f1ef8fc0e7bae07d143dd4729b039bb0dda217dad6005427130ba",
+   "name_strings_in_first_last_4k": []
+  }
+ ],
+ "location_note": "anahtar paket dışında tutulur; sahibe notlar yazıldıktan sonra verilir",
+ "not_copied": "timeline.json dosyaları (içlerinde ses adı var)",
+ "tool": "/tmp/claude-0/-home-user/f143c393-27b3-538e-ba8a-5352290c6308/scratchpad/yoga/render/_hocmix/kor_paket.py"
+}

@@ -1,0 +1,17 @@
+{
+ "unit": "c4.gunes",
+ "take": "t2",
+ "asset_id": "uut8nOiylng7yNrNbJgg",
+ "asset_size_bytes": 105069,
+ "ref_node": "efD0KUUYjgDnsCGKf9gG",
+ "stt_node": "GqqLldpn1okvwqVFMLNi",
+ "session_id": "rz3rDmL6gzhQfPowInPi",
+ "generation_id": "l5T856o0cbCUTVAfK2g5",
+ "actual_credits": 29.92,
+ "actual_cents": 0.544,
+ "spoken_duration_secs": 5.28,
+ "scribe_text": "Açık, aydınlık bir yere varıyorsun. Güneş tenini tatlı tatlı ısıtıyor",
+ "tts": "Açık, aydınlık bir yere varıyorsun. Güneş tenini tatlı tatlı ısıtıyor.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 10\n}"
+}

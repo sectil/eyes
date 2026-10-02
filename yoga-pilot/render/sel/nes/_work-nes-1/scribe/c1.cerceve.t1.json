@@ -1,0 +1,15 @@
+{
+ "unit": "c1.cerceve",
+ "take": "t1",
+ "asset_id": "yvP0uKI0cFu3ol58911F",
+ "source_node_id": "018SrzJM7ntWildJQ02f",
+ "stt_node_id": "LnnWqummIL4PzYDcvrlL",
+ "session_id": "sRk5VeioXu2JyzZq5M5l",
+ "generation_id": "aEGZLPHDa0Pf6u5m1ueg",
+ "actual_credits": 29.92,
+ "actual_cents": 0.544,
+ "scribe_text": "Adını andığım her yeri fark ediyorsun. Rahatsız eden bir bölge olursa atla",
+ "spoken_duration_secs": "5.26",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 12\n}"
+}

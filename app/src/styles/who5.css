@@ -1,0 +1,16 @@
+/* İyi oluş (WHO-5) — Artifact "Nefona Gelişim Haritası" ekran 4–5 */
+.w5 { gap: 14px; }
+.w5-prog { display: flex; gap: 4px; }
+.w5-prog i { flex: 1; height: 4px; border-radius: 2px; background: var(--surface-3); }
+.w5-prog i.on { background: var(--accent-graphic); }
+.w5-q:focus { outline: none; }
+.w5-q { font-family: var(--font-body); font-size: 1.3rem; font-weight: 650; line-height: 1.35; text-wrap: balance; margin: 0; }
+.w5-opts { display: flex; flex-direction: column; gap: 8px; }
+.w5-opt { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 13px 14px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); color: var(--ink); font: 500 1rem var(--font-body); text-align: start; cursor: pointer; }
+.w5-opt:active, .w5-opt.on { border-color: var(--accent); background: var(--accent-soft); }
+.w5-opt .k { font: 600 0.78rem var(--font-mono); color: var(--ink-3); }
+.w5-score { display: flex; flex-direction: column; gap: 10px; }
+.w5-score .p2-pill { align-self: flex-start; }
+.w5-big { display: flex; align-items: baseline; gap: 6px; }
+.w5-big b { font: 700 2.8rem/1 var(--font-display); }
+.w5-big span { font: 500 0.9rem var(--font-mono); color: var(--ink-3); }

@@ -1,0 +1,208 @@
+// Abonelik: RevenueCat (Apple StoreKit sarmalayıcısı) üzerinden.
+// - Yalnızca iOS uygulamasında (Capacitor native) çalışır. Web sürümünde ödeme
+//   altyapısı yok; orada uygulama kilitsiz açılır (test/önizleme amaçlı).
+// - Ürünler App Store Connect'te tanımlanır: aylık + yıllık, 7 gün ücretsiz deneme
+//   (giriş teklifi). RevenueCat'te "premium" entitlement'ı ve "default" offering'i
+//   bu iki ürüne bağlanır. Adım adım: docs/APP_STORE_KURULUM.md
+// - API anahtarı: RevenueCat'in herkese açık iOS anahtarı (appl_…; gizli değil, uygulamaya gömülmek için).
+//   VITE_RC_IOS_KEY ile değiştirilebilir. Gizli anahtar (sk_…) ASLA buraya konmaz; rcApiKey onu reddeder.
+
+import { Capacitor } from '@capacitor/core'
+
+export const ENTITLEMENT = 'premium'
+
+// RevenueCat → Apps → Nefona (App Store, com.sectil.eyelume) → Public API Key
+export const RC_IOS_PUBLIC_KEY = 'appl_TSQtOoLWKaoxBCrlEeEzqpqAWQX'
+
+// Kullanılacak anahtar: derlemede VITE_RC_IOS_KEY verildiyse o, yoksa gömülü herkese açık anahtar.
+// Yalnız appl_ (App Store) ya da test_ (RevenueCat Test Store) kabul; sk_ gizli anahtar hata verir.
+export function rcApiKey(env = import.meta.env) {
+  const k = (env?.VITE_RC_IOS_KEY ?? '').trim() || RC_IOS_PUBLIC_KEY
+  if (/^sk_/i.test(k)) throw new Error('Gizli RevenueCat anahtarı (sk_) uygulamada kullanılamaz')
+  if (!/^(appl|test)_[A-Za-z0-9]+$/.test(k)) throw new Error('RevenueCat iOS anahtarı geçersiz')
+  return k
+}
+
+export const isNative = () => {
+  try {
+    return Capacitor.isNativePlatform()
+  } catch {
+    return false
+  }
+}
+
+// DİKKAT (Bug 15): Capacitor eklentisi bir söz (Promise) ile DÖNDÜRÜLMEZ. Eklenti her özellik adına fonksiyon
+// verir, "then" dahil; söz onu thenable sanıp Purchases.then() çağırır, bu yerelde yok → söz hiç bitmez.
+// Bu yüzden eklenti { P } kutusu içinde taşınır: const { P } = await purchases()
+let purchasesPromise = null
+async function purchases(load = () => import('@revenuecat/purchases-capacitor')) {
+  if (!purchasesPromise) {
+    purchasesPromise = (async () => {
+      const { Purchases } = await load()
+      const apiKey = rcApiKey()
+      await Purchases.configure({ apiKey })
+      return { P: Purchases }
+    })()
+    purchasesPromise.catch(() => {
+      purchasesPromise = null
+    })
+  }
+  return purchasesPromise
+}
+
+// Yalnız test için: RevenueCat modülünü sahte eklentiyle yükle, önbelleği sıfırla
+export function _purchasesForTest(load) {
+  purchasesPromise = null
+  return purchases(load)
+}
+
+export function hasPremium(customerInfo) {
+  return Boolean(customerInfo?.entitlements?.active?.[ENTITLEMENT])
+}
+
+// Yalnızca test derlemesi (TestFlight / Xcode) için: VITE_TEST_UNLOCK=1 ile derlenirse
+// uygulama kilitsiz açılır. App Store'a gönderilecek derlemede bu değişken OLMAMALI.
+export const testUnlock = (env = import.meta.env) => env?.VITE_TEST_UNLOCK === '1'
+
+// Abonelik durumu. Web'de her zaman açık (ödeme yok).
+export async function getAccess() {
+  if (!isNative()) return { premium: true, native: false }
+  if (testUnlock()) return { premium: true, native: true, testUnlock: true }
+  const { P } = await purchases()
+  const { customerInfo } = await P.getCustomerInfo()
+  return { premium: hasPremium(customerInfo), native: true }
+}
+
+// Söz belirli sürede bitmezse hata (Bug 15: ödeme ekranı "Planlar yükleniyor…"da sonsuza kadar kalıyordu)
+export const PLANS_TIMEOUT_MS = 20000
+export function withTimeout(promise, ms, message) {
+  let timer
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(Object.assign(new Error(message), { code: 'TIMEOUT' })), ms)
+  })
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer))
+}
+
+// Profilim Premium kartı: RevenueCat customerInfo → sade üyelik durumu (saf fonksiyon, test edilir).
+// state: 'trial' | 'active' | 'none'; daysLeft: bitişe kalan gün (yukarı yuvarlanır); plan: ürün kimliğinden.
+export const PLAN_NAME = { annual: 'Yıllık', monthly: 'Aylık', weekly: 'Haftalık' }
+export function membershipFrom(customerInfo, now = new Date()) {
+  const e = customerInfo?.entitlements?.active?.[ENTITLEMENT]
+  if (!e) return { state: 'none', manageUrl: customerInfo?.managementURL ?? null }
+  const exp = e.expirationDate ? new Date(e.expirationDate) : null
+  const daysLeft = exp && !Number.isNaN(exp.getTime()) ? Math.max(0, Math.ceil((exp.getTime() - now.getTime()) / 86400000)) : null
+  const id = String(e.productIdentifier ?? '')
+  const plan = /annual|year/i.test(id) ? 'annual' : /month/i.test(id) ? 'monthly' : /week/i.test(id) ? 'weekly' : null
+  return {
+    state: String(e.periodType).toUpperCase() === 'TRIAL' ? 'trial' : 'active',
+    expires: e.expirationDate ?? null,
+    daysLeft,
+    willRenew: Boolean(e.willRenew),
+    plan,
+    manageUrl: customerInfo?.managementURL ?? null,
+  }
+}
+
+// Yalnız iPhone uygulamasında; web'de null (kart gösterilmez)
+export async function getMembership() {
+  if (!isNative()) return null
+  const { P } = await purchases()
+  const { customerInfo } = await P.getCustomerInfo()
+  return membershipFrom(customerInfo)
+}
+
+// Ödeme ekranında gösterilecek planlar. Boş liste yerine açıklayıcı hata atar (ekranda teşhis için görünür).
+export async function getPlans({ timeoutMs = PLANS_TIMEOUT_MS } = {}) {
+  const { P } = await withTimeout(purchases(), timeoutMs, 'RevenueCat başlatılamadı (zaman aşımı)')
+  const offerings = await withTimeout(P.getOfferings(), timeoutMs, 'Planlar App Store/RevenueCat\'ten gelmedi (zaman aşımı)')
+  const plans = plansFromOffering(offerings?.current)
+  if (!plans.length) {
+    throw new Error(
+      offerings?.current
+        ? `"${offerings.current.identifier}" offering'inde yıllık/aylık/haftalık paket yok`
+        : 'RevenueCat\'te current offering yok',
+    )
+  }
+  return plans
+}
+
+// Saf fonksiyon (test edilir): offering → sade plan listesi
+export function plansFromOffering(offering) {
+  if (!offering) return []
+  const out = []
+  const add = (pkg, period) => {
+    if (!pkg) return
+    const p = pkg.product
+    const intro = p.introPrice
+    out.push({
+      id: pkg.identifier,
+      period, // 'annual' | 'monthly' | 'weekly'
+      priceString: p.priceString,
+      pricePerMonthString: p.pricePerMonthString ?? null,
+      price: p.price,
+      freeTrialDays: intro && intro.price === 0 ? trialDays(intro) : 0,
+      pkg,
+    })
+  }
+  add(offering.annual, 'annual')
+  add(offering.monthly, 'monthly')
+  add(offering.weekly, 'weekly') // RevenueCat $rc_weekly (fiyatlar: haftalık 29,99 / aylık 89,99 / yıllık 899,99)
+  // Yıllığın aylık karşılığı aylıktan ne kadar ucuz?
+  const a = out.find((x) => x.period === 'annual')
+  const m = out.find((x) => x.period === 'monthly')
+  if (a && m && m.price > 0) a.savePercent = Math.round((1 - a.price / 12 / m.price) * 100)
+  return out
+}
+
+function trialDays(intro) {
+  const n = intro.periodNumberOfUnits ?? 0
+  switch (intro.periodUnit) {
+    case 'DAY':
+      return n
+    case 'WEEK':
+      return n * 7
+    case 'MONTH':
+      return n * 30
+    default:
+      return n
+  }
+}
+
+export async function purchase(plan) {
+  const { P } = await purchases()
+  try {
+    const { customerInfo } = await P.purchasePackage({ aPackage: plan.pkg })
+    return { ok: hasPremium(customerInfo) }
+  } catch (e) {
+    if (e?.userCancelled) return { ok: false, cancelled: true }
+    return { ok: false, error: e?.message ?? 'Satın alma tamamlanamadı' }
+  }
+}
+
+export async function restore() {
+  const { P } = await purchases()
+  const { customerInfo } = await P.restorePurchases()
+  return hasPremium(customerInfo)
+}
+
+// Abonelik hesaba bağlanır (yeni telefonda da devam): RevenueCat kullanıcı kimliği = Supabase kullanıcı kimliği.
+// Hesapsız kullanımda RevenueCat'in anonim kimliği kalır. Hata abonelik akışını durdurmaz (sessiz).
+export async function linkPurchaser(userId) {
+  if (!isNative() || !userId) return
+  try {
+    const { P } = await purchases()
+    await P.logIn({ appUserID: userId })
+  } catch {
+    // anahtar yok / ağ yok: bir sonraki açılışta yeniden denenir
+  }
+}
+
+export async function unlinkPurchaser() {
+  if (!isNative()) return
+  try {
+    const { P } = await purchases()
+    await P.logOut()
+  } catch {
+    // anonim kullanıcıda logOut hata verir; yok say
+  }
+}

@@ -1,0 +1,16 @@
+{
+ "unit": "car.sol2",
+ "take": "t3",
+ "asset_id": "q43kldVHm8aVwCNouWH3",
+ "source_node_id": "OvCOMSsxQkfFOAW77Tvb",
+ "stt_node_id": "1boKumiMTyaXAITAJ5MU",
+ "session_id": "40mE7rfDp5ZzqSjs2vIH",
+ "generation_id": "i2xDyJBB6PtpI5PcGKNC",
+ "actual_credits": 31.24,
+ "actual_cents": 0.568,
+ "spoken_duration_secs": 5.4,
+ "scribe_text": "Avuç içi, elin sırtı, bilek, ön kol, dirsek",
+ "tts": "Avuç içi… elin sırtı… bilek… ön kol… dirsek…",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 8\n}"
+}

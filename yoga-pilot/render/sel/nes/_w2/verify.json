@@ -1,0 +1,733 @@
+{
+ "pieces": {
+  "c2.akis": {
+   "c2.akis#1": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.285,
+    "lufs": -18.0,
+    "speech_rms_db": -17.21,
+    "true_peak_dbtp": -7.14,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.akis#2": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 1.703,
+    "lufs": -18.0,
+    "speech_rms_db": -17.19,
+    "true_peak_dbtp": -7.74,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c2.sayac": {
+   "c2.sayac#1": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 1.572,
+    "lufs": -18.0,
+    "speech_rms_db": -17.13,
+    "true_peak_dbtp": -6.94,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.sayac#2": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.364,
+    "lufs": -18.0,
+    "speech_rms_db": -17.34,
+    "true_peak_dbtp": -6.83,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "car.sayi": {
+   "c2.n10": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 0.658,
+    "lufs": null,
+    "speech_rms_db": -16.05,
+    "true_peak_dbtp": -6.01,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.n09": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 0.946,
+    "lufs": null,
+    "speech_rms_db": -17.05,
+    "true_peak_dbtp": -3.6,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.n08": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 1.105,
+    "lufs": -18.0,
+    "speech_rms_db": -17.26,
+    "true_peak_dbtp": -2.38,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.n07": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 0.85,
+    "lufs": null,
+    "speech_rms_db": -17.05,
+    "true_peak_dbtp": -6.66,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.n06": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 0.906,
+    "lufs": null,
+    "speech_rms_db": -17.05,
+    "true_peak_dbtp": -2.51,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.n05": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 0.947,
+    "lufs": null,
+    "speech_rms_db": -16.05,
+    "true_peak_dbtp": -1.55,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.n04": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 0.914,
+    "lufs": null,
+    "speech_rms_db": -16.05,
+    "true_peak_dbtp": -3.34,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.n03": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 0.806,
+    "lufs": null,
+    "speech_rms_db": -16.05,
+    "true_peak_dbtp": -3.6,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.n02": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 0.775,
+    "lufs": null,
+    "speech_rms_db": -17.05,
+    "true_peak_dbtp": -6.0,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.n01": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 0.806,
+    "lufs": null,
+    "speech_rms_db": -16.05,
+    "true_peak_dbtp": -3.08,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c2.birak": {
+   "c2.birak#1": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 1.661,
+    "lufs": -18.0,
+    "speech_rms_db": -17.29,
+    "true_peak_dbtp": -6.0,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.birak#2": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.502,
+    "lufs": -18.0,
+    "speech_rms_db": -17.41,
+    "true_peak_dbtp": -4.11,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c2.kal": {
+   "c2.kal": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.24,
+    "lufs": -18.0,
+    "speech_rms_db": -17.05,
+    "true_peak_dbtp": -7.19,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "br.k2": {
+   "br.k2": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.261,
+    "lufs": -18.0,
+    "speech_rms_db": -17.0,
+    "true_peak_dbtp": -4.79,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "br.orta": {
+   "br.orta#1": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 5.265,
+    "lufs": -18.0,
+    "speech_rms_db": -16.82,
+    "true_peak_dbtp": -4.36,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "br.orta#2": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.695,
+    "lufs": -18.0,
+    "speech_rms_db": -16.8,
+    "true_peak_dbtp": -2.73,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "br.orta#3": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.066,
+    "lufs": -18.0,
+    "speech_rms_db": -16.75,
+    "true_peak_dbtp": -4.47,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c4.yer": {
+   "c4.yer": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.461,
+    "lufs": -18.0,
+    "speech_rms_db": -17.09,
+    "true_peak_dbtp": -6.05,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c4.gelmezse": {
+   "c4.gelmezse": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 4.061,
+    "lufs": -18.0,
+    "speech_rms_db": -16.82,
+    "true_peak_dbtp": -5.25,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c4.patika": {
+   "c4.patika": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.344,
+    "lufs": -18.0,
+    "speech_rms_db": -16.9,
+    "true_peak_dbtp": -6.34,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c4.yol": {
+   "c4.yol#1": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 1.734,
+    "lufs": -18.0,
+    "speech_rms_db": -17.4,
+    "true_peak_dbtp": -5.78,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c4.yol#2": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 1.758,
+    "lufs": -18.0,
+    "speech_rms_db": -17.32,
+    "true_peak_dbtp": -5.59,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c4.ses": {
+   "c4.ses": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.732,
+    "lufs": -18.0,
+    "speech_rms_db": -16.62,
+    "true_peak_dbtp": -4.28,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c4.gunes": {
+   "c4.gunes#1": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.658,
+    "lufs": -18.0,
+    "speech_rms_db": -16.45,
+    "true_peak_dbtp": -4.45,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c4.gunes#2": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.934,
+    "lufs": -18.0,
+    "speech_rms_db": -16.18,
+    "true_peak_dbtp": -4.31,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c4.don": {
+   "c4.don": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.485,
+    "lufs": -18.0,
+    "speech_rms_db": -16.69,
+    "true_peak_dbtp": -4.56,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c4.solma": {
+   "c4.solma#1": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.259,
+    "lufs": -18.0,
+    "speech_rms_db": -16.8,
+    "true_peak_dbtp": -5.27,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c4.solma#2": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.164,
+    "lufs": -18.0,
+    "speech_rms_db": -17.48,
+    "true_peak_dbtp": -7.3,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "n2.hatirla": {
+   "n2.hatirla#1": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 4.079,
+    "lufs": -18.0,
+    "speech_rms_db": -16.75,
+    "true_peak_dbtp": -2.78,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "n2.hatirla#2": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 4.266,
+    "lufs": -18.0,
+    "speech_rms_db": -16.7,
+    "true_peak_dbtp": -5.74,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "n2.dilek": {
+   "n2.dilek": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.359,
+    "lufs": -18.0,
+    "speech_rms_db": -17.17,
+    "true_peak_dbtp": -2.96,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.anahtar3": {
+   "k.anahtar3": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 1.755,
+    "lufs": -18.0,
+    "speech_rms_db": -16.17,
+    "true_peak_dbtp": -6.11,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.donus": {
+   "k.donus": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 1.817,
+    "lufs": -18.0,
+    "speech_rms_db": -16.38,
+    "true_peak_dbtp": -2.95,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.nefes": {
+   "k.nefes": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.365,
+    "lufs": -18.0,
+    "speech_rms_db": -16.97,
+    "true_peak_dbtp": -6.41,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.sesler": {
+   "k.sesler": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.683,
+    "lufs": -18.0,
+    "speech_rms_db": -17.06,
+    "true_peak_dbtp": -4.88,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.hareket": {
+   "k.hareket#1": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.916,
+    "lufs": -18.0,
+    "speech_rms_db": -16.97,
+    "true_peak_dbtp": -4.02,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "k.hareket#2": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 4.145,
+    "lufs": -18.0,
+    "speech_rms_db": -16.99,
+    "true_peak_dbtp": -4.95,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.goz": {
+   "k.goz": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 5.288,
+    "lufs": -18.0,
+    "speech_rms_db": -16.94,
+    "true_peak_dbtp": -4.46,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.oda.ayrinti": {
+   "k.oda.ayrinti": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.196,
+    "lufs": -18.0,
+    "speech_rms_db": -15.9,
+    "true_peak_dbtp": -3.82,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.zaman": {
+   "k.zaman": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.745,
+    "lufs": -18.0,
+    "speech_rms_db": -17.18,
+    "true_peak_dbtp": -6.81,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.yan": {
+   "k.yan": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.192,
+    "lufs": -18.0,
+    "speech_rms_db": -16.7,
+    "true_peak_dbtp": -6.64,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.yandakal": {
+   "k.yandakal": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.795,
+    "lufs": -18.0,
+    "speech_rms_db": -17.2,
+    "true_peak_dbtp": -6.35,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.otur": {
+   "k.otur": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.646,
+    "lufs": -18.0,
+    "speech_rms_db": -17.04,
+    "true_peak_dbtp": -5.16,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.bekle": {
+   "k.bekle": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.083,
+    "lufs": -18.0,
+    "speech_rms_db": -16.27,
+    "true_peak_dbtp": -3.85,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.kalk": {
+   "k.kalk": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 5.937,
+    "lufs": -18.0,
+    "speech_rms_db": -16.71,
+    "true_peak_dbtp": -2.52,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "k.son": {
+   "k.son": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.421,
+    "lufs": -18.0,
+    "speech_rms_db": -16.15,
+    "true_peak_dbtp": -5.45,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c2.durak": {
+   "c2.durak#1": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.607,
+    "lufs": -18.0,
+    "speech_rms_db": -17.01,
+    "true_peak_dbtp": -5.04,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.durak#2": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.389,
+    "lufs": -18.0,
+    "speech_rms_db": -17.33,
+    "true_peak_dbtp": -5.81,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "a.x.kipir": {
+   "a.x.kipir": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 4.065,
+    "lufs": -18.0,
+    "speech_rms_db": -16.7,
+    "true_peak_dbtp": -6.48,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  },
+  "c2.x.ritim": {
+   "c2.x.ritim#1": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 2.338,
+    "lufs": -18.0,
+    "speech_rms_db": -17.12,
+    "true_peak_dbtp": -6.62,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   },
+   "c2.x.ritim#2": {
+    "sr": 44100,
+    "ch": 1,
+    "subtype": "FLOAT",
+    "dur": 3.457,
+    "lufs": -18.0,
+    "speech_rms_db": -16.84,
+    "true_peak_dbtp": -3.01,
+    "clicks": 0,
+    "click_times": [],
+    "clipped": false
+   }
+  }
+ },
+ "problems": []
+}

@@ -1,0 +1,464 @@
+Nefona Yoga · Ders 5 "Tek Nokta" · timing_d5.py çıktısı (B adımı, Parti 1; B-parti1-taslak-2 (2026-09-30; karar 2 yedeği iki model incelemesi işlendi, b/INCELEME.md; sahibin kulağı bekliyor))
+Planlayıcı: pilot timing.py (plan, check_plan; birebir kopya, değiştirilmedi). Ders dosyası: ders5.lesson.json.
+SES YOK: bütün süreler hece modelinden tahmindir (VARSAYIM). Köşeler:
+  hoc     4.68 hece/sn, hi duraklama, süre × 1.000  — Nefona Hoca önizleme eklemleme hızı 4,68 hece/sn (render/sel/hoc; orkestratör verisi) + yüksek (Hakan v2) duraklama profili. VARSAYIM. Ders 1'deki denetim: aynı model Ders 2'nin ölçülmüş hoc kliplerinden %3,6 uzun (ölçülen/model 0,965; 110 ortak klip) → muhafazakâr
+  hoc-lo  4.68 hece/sn, lo duraklama, süre × 1.000  — aynı hız, düşük duraklama profili. VARSAYIM. Ders 2'nin ölçülmüş hoc kliplerine en yakın model (ölçülen/model 0,990, 110 ortak klip)
+  nes     5.60 hece/sn, hi duraklama, süre × 1.109  — Neslihan'ın Ders 2'de ölçülmüş süreleri: ölçülen/model(5,6 yüksek) = 1,109 (110 ortak klip; v3/calc/measure.py). VARSAYIM: Ders 5 metnine aynı oranla taşındı
+Dakikalar: 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 (yayında 3 · 5 · 15).
+
+== Sarmalayıcı yamaları (pilot sabitleri, yalnız bu çalıştırmada) ==
+  YAMA ROTATION_ORDER = []: beden dolaşımı Ders 2'ye özgü; Ders 5'te beden dolaşımı yok
+  YAMA CLOSING_STEPS = ['nefes', 'parmak', 'gerin', 'goz', 'oda']: oturarak gündüz kapanışı (güvenlik §11.B-14; PLAN.v3 §A.2 kural 1: yana dönme, oturma, bekleme ve kalkma yok)
+  YAMA QUICK_BOUNDS = (45, 110): oturarak derste hızlı kapanış (sure.md §8 tablo; PLAN.v3 §D.3 aynı dosyanın Kapanış'ına atlama)
+  YAMA RATES += 4,68 ve MCP_RATES = (4.68, 5.6): köşe hızları metin denetimine ve 3/5 dk en uzun boşluk denetimine (L3-03) girer
+  YAMA PRODUCTION = (4,68, hi): üretim sesi Nefona Hoca (sahip, madde 8); P-S1 Derin iç hız denetimi bu köşede
+  YAMA ui_texts: sahne seçici yok (Ders 5'te imge tek ve seçimsiz: el feneri ışığı; su, derinlik, kapalı alan ya da karanlık yok); 3 dk kart cümlesi de yasak listeyle denetlenir
+  YAMA key_want: anahtar cümle C1, C2 ve C3'ün sonunda; 3 ve 5 dk'da bir kez (PLAN.v3 §A.2 kural 5), 15 dk'da üç kez, giderek kısa (PLAN.v2 §A.2.1)
+  YAMA check_plan öncesi: T < 240 için DAWN_SPAN = (45, 90) (karar 4d) ve LONGEST_GAP_5MIN = 12 (3 dk nefes payı, PLAN.v3 §A.2 kural 3); 5 dk'da pilotun 16 sn'si
+  YAMA QUICK_BOUNDS_WINDOW = (45, 120): pencere sessizliğinde basılan "Kapanışa geç" = çan + karşılama + oturarak Kapanış; alt sınır oturarak dersin hızlı kapanışıyla aynı (pilotun 60 sn'si uzanarak kapanışa aittir, sure.md §3.2 kural 10)
+  YAMA check_plan: masked() Ders 5'te etkisiz (nefes kilitli klip yok); L2-08 ve G2-06 mikro-liste denetimleri boş geçer (mikro klip yok)
+
+== Metin denetimi (pilot lint_text: yasak ve E12 listesi, İngilizce, Sanskritçe, cümle ve sözcük sayısı, emir kipi, alt klipler, hızlı kapanış ve Durdur dönüşü) ==
+  bilgi: en yavaş klip (duraklamalar dahil): 2.92 hece/sn (c2.anahtar2 @5.2 hi)
+  bilgi: Derin cümle iç hızı 4.7 lo: medyan 4.68, en yüksek 4.68 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 4.68, en yüksek 4.68 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın altında, etkin hızda medyan tavanın altında
+  bilgi: Derin cümle iç hızı 4.7 hi: medyan 4.68, en yüksek 4.68 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 4.68, en yüksek 4.68 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın altında, etkin hızda medyan tavanın altında
+  bilgi: Derin cümle iç hızı 5.2 lo: medyan 5.20, en yüksek 5.20 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 5.20, en yüksek 5.20 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın üstünde, etkin hızda medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 5.2 hi: medyan 5.20, en yüksek 5.20 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 5.20, en yüksek 5.20 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın üstünde, etkin hızda medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 5.6 lo: medyan 5.60, en yüksek 5.60 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 5.60, en yüksek 5.60 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın üstünde, etkin hızda medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 5.6 hi: medyan 5.60, en yüksek 5.60 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 5.60, en yüksek 5.60 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın üstünde, etkin hızda medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 6.6 lo: medyan 6.60, en yüksek 6.60 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 6.60, en yüksek 6.60 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın üstünde, etkin hızda medyan tavanın üstünde
+  bilgi: Derin cümle iç hızı 6.6 hi: medyan 6.60, en yüksek 6.60 hece/sn; etkin hız (cümle arası sessizlik dahil) medyan 6.60, en yüksek 6.60 → Derin evre iç hız tavanı (<= 5; VARSAYIM, kanıta dayanmaz) iç hızda medyan tavanın üstünde, etkin hızda medyan tavanın üstünde
+  bilgi: Kapanışa geç [temel (Derin evreden)]: k.donus → k.nefes → k.hareket → k.goz → k.son
+  bilgi: Kapanışa geç [pencere c3.w30]: c3.d30 → k.donus → k.nefes → k.hareket → k.goz → k.son
+  bilgi: Kapanışa geç [pencere c3.w45]: c3.d45 → k.donus → k.nefes → k.hareket → k.goz → k.son
+  metin denetimi: GEÇTİ
+  iki nokta üst üste içeren birim: yok
+  mikro-klip dışında üç nokta: yok
+
+== Köşe hoc (4.68 hece/sn, hi, × 1.000) ==
+  kolonlar: sonuç | dk | bloklar | klip | hece | konuşma %% | sessizlik kipi f | en uzun boşluk | en yoğun 60 sn (hece, pay) | ort. hece/dk | durak
+  GEÇTİ  3 dk | A → C1 → K |  14 |  278 | 38.0% | pref→max 0.32 | 16.6 | 126, 0.51 |  93 | c1.nerede
+  GEÇTİ  4 dk | A → C1 → K |  19 |  398 | 40.7% | pref→max 0.09 | 16.4 | 136, 0.55 | 100 | k.oda
+  GEÇTİ  5 dk | A → C1 → K |  22 |  486 | 39.8% | pref→max 0.24 | 16.9 | 127, 0.53 |  97 | c1.aralik2
+  GEÇTİ  6 dk | A → C1 → K |  27 |  600 | 41.2% | pref→max 0.03 | 16.1 | 135, 0.56 | 100 | a.omuz
+  GEÇTİ  7 dk | A → C1 → K |  29 |  639 | 37.4% | pref→max 0.31 | 17.2 | 134, 0.54 |  91 | C2
+  GEÇTİ  8 dk | A → C1 → C2 → K |  35 |  739 | 38.2% | pref→max 0.08 | 18.2 | 135, 0.54 |  92 | c2.onbir
+  GEÇTİ  9 dk | A → C1 → C2 → K |  37 |  784 | 36.1% | pref→max 0.21 | 18.4 | 135, 0.54 |  87 | c2.veris
+  GEÇTİ 10 dk | A → C1 → C2 → K |  42 |  889 | 36.8% | pref→max 0.11 | 18.2 | 135, 0.54 |  89 | c2.seyrek
+  GEÇTİ 11 dk | A → C1 → C2 → K |  43 |  913 | 34.5% | pref→max 0.35 | 18.7 | 134, 0.54 |  83 | C3
+  GEÇTİ 12 dk | A → C1 → C2 → C3 → K |  50 | 1034 | 35.7% | pref→max 0.02 | 30.1 | 139, 0.56 |  86 | c3.parlak
+  GEÇTİ 13 dk | A → C1 → C2 → C3 → K |  54 | 1081 | 34.5% | pref→max 0.08 | 30.5 | 135, 0.54 |  83 | c3.w45
+  GEÇTİ 14 dk | A → C1 → C2 → C3 → K |  56 | 1133 | 33.5% | pref→max 0.03 | 45.2 | 138, 0.56 |  81 | k.avuc
+  GEÇTİ 15 dk | A → C1 → C2 → C3 → K |  61 | 1240 | 34.1% | pref→max 0.05 | 45.3 | 139, 0.56 |  83 | -
+  önek bilgisi: 3 ⊆ 4: evet; 4 ⊆ 5: evet
+  15 dk pref payı (hedef − pref sessizliklerle toplam): 11.0 sn → ikinci aşamanın ilk artımı (rank >= 500) bundan büyük olmalı, yoksa 15 dk planına girer
+  boş pay (min sessizliklerle): 3 dk 19.5 sn (taban 10), 5 dk 43.3 sn (taban 15)
+
+== Köşe hoc-lo (4.68 hece/sn, lo, × 1.000) ==
+  kolonlar: sonuç | dk | bloklar | klip | hece | konuşma %% | sessizlik kipi f | en uzun boşluk | en yoğun 60 sn (hece, pay) | ort. hece/dk | durak
+  GEÇTİ  3 dk | A → C1 → K |  14 |  278 | 36.0% | pref→max 0.47 | 16.9 | 126, 0.48 |  93 | c1.nerede
+  GEÇTİ  4 dk | A → C1 → K |  20 |  418 | 40.3% | pref→max 0.01 | 16.1 | 149, 0.57 | 105 | c1.his
+  GEÇTİ  5 dk | A → C1 → K |  23 |  505 | 39.0% | pref→max 0.06 | 16.2 | 148, 0.56 | 101 | a.dagink
+  GEÇTİ  6 dk | A → C1 → K |  28 |  625 | 40.1% | pref→max 0.01 | 16.0 | 148, 0.56 | 104 | c1.aralik3
+  GEÇTİ  7 dk | A → C1 → K |  29 |  639 | 35.2% | pref→max 0.40 | 17.6 | 135, 0.51 |  91 | C2
+  GEÇTİ  8 dk | A → C1 → C2 → K |  36 |  762 | 36.9% | pref→max 0.02 | 18.0 | 147, 0.56 |  95 | c2.dusunce
+  GEÇTİ  9 dk | A → C1 → C2 → K |  39 |  821 | 35.3% | pref→max 0.07 | 18.1 | 143, 0.54 |  91 | c2.yonetme
+  GEÇTİ 10 dk | A → C1 → C2 → K |  43 |  913 | 35.3% | pref→max 0.06 | 18.1 | 143, 0.55 |  91 | C3
+  GEÇTİ 11 dk | A → C1 → C2 → K |  43 |  913 | 32.1% | pref→max 0.45 | 18.9 | 135, 0.51 |  83 | C3
+  GEÇTİ 12 dk | A → C1 → C2 → C3 → K |  52 | 1063 | 34.5% | pref→max 0.00 | 30.0 | 148, 0.57 |  89 | c3.kisa2
+  GEÇTİ 13 dk | A → C1 → C2 → C3 → K |  54 | 1081 | 32.4% | pref→max 0.16 | 31.0 | 135, 0.51 |  83 | c3.w45
+  GEÇTİ 14 dk | A → C1 → C2 → C3 → K |  56 | 1133 | 31.6% | pref→max 0.11 | 45.8 | 139, 0.53 |  81 | k.avuc
+  GEÇTİ 15 dk | A → C1 → C2 → C3 → K |  61 | 1240 | 32.2% | pref→max 0.12 | 45.9 | 142, 0.54 |  83 | -
+  önek bilgisi: 3 ⊆ 4: evet; 4 ⊆ 5: evet
+  15 dk pref payı (hedef − pref sessizliklerle toplam): 28.1 sn → ikinci aşamanın ilk artımı (rank >= 500) bundan büyük olmalı, yoksa 15 dk planına girer
+  boş pay (min sessizliklerle): 3 dk 23.1 sn (taban 10), 5 dk 31.8 sn (taban 15)
+
+== Köşe nes (5.60 hece/sn, hi, × 1.109) ==
+  kolonlar: sonuç | dk | bloklar | klip | hece | konuşma %% | sessizlik kipi f | en uzun boşluk | en yoğun 60 sn (hece, pay) | ort. hece/dk | durak
+  GEÇTİ  3 dk | A → C1 → K |  14 |  278 | 36.1% | pref→max 0.46 | 16.9 | 126, 0.48 |  93 | c1.nerede
+  GEÇTİ  4 dk | A → C1 → K |  20 |  418 | 40.4% | pref→max 0.01 | 16.0 | 150, 0.58 | 105 | c1.his
+  GEÇTİ  5 dk | A → C1 → K |  23 |  505 | 39.4% | pref→max 0.04 | 16.2 | 146, 0.57 | 101 | a.dagink
+  GEÇTİ  6 dk | A → C1 → K |  27 |  600 | 39.2% | pref→max 0.11 | 16.4 | 135, 0.53 | 100 | a.omuz
+  GEÇTİ  7 dk | A → C1 → K |  29 |  639 | 35.6% | pref→max 0.38 | 17.5 | 135, 0.51 |  91 | C2
+  GEÇTİ  8 dk | A → C1 → C2 → K |  35 |  739 | 36.3% | pref→max 0.15 | 18.3 | 135, 0.52 |  92 | c2.onbir
+  GEÇTİ  9 dk | A → C1 → C2 → K |  39 |  821 | 36.0% | pref→max 0.04 | 18.1 | 144, 0.55 |  91 | c2.yonetme
+  GEÇTİ 10 dk | A → C1 → C2 → K |  43 |  913 | 36.1% | pref→max 0.03 | 18.1 | 145, 0.56 |  91 | C3
+  GEÇTİ 11 dk | A → C1 → C2 → K |  43 |  913 | 32.8% | pref→max 0.42 | 18.8 | 135, 0.51 |  83 | C3
+  GEÇTİ 12 dk | A → C1 → C2 → C3 → K |  51 | 1046 | 34.4% | pref→max 0.03 | 30.2 | 144, 0.56 |  87 | c3.kaydiysa
+  GEÇTİ 13 dk | A → C1 → C2 → C3 → K |  54 | 1081 | 32.8% | pref→max 0.14 | 30.9 | 135, 0.52 |  83 | c3.w45
+  GEÇTİ 14 dk | A → C1 → C2 → C3 → K |  56 | 1133 | 31.9% | pref→max 0.10 | 45.7 | 139, 0.53 |  81 | k.avuc
+  GEÇTİ 15 dk | A → C1 → C2 → C3 → K |  61 | 1240 | 32.4% | pref→max 0.11 | 45.8 | 143, 0.55 |  83 | -
+  önek bilgisi: 3 ⊆ 4: evet; 4 ⊆ 5: evet
+  15 dk pref payı (hedef − pref sessizliklerle toplam): 25.9 sn → ikinci aşamanın ilk artımı (rank >= 500) bundan büyük olmalı, yoksa 15 dk planına girer
+  boş pay (min sessizliklerle): 3 dk 22.9 sn (taban 10), 5 dk 30.5 sn (taban 15)
+
+== Blok süreleri (sn; Giriş Varış'a dahil) ve çapalar (PLAN.v3 §A.2: 3 dk 0:34/1:38/0:48; PLAN.v2 §B.4) ==
+   3 dk  çapa: A 0:34 · C1 1:38 · K 0:48
+         hoc: A 0:37.5 · C1 1:31.6 · K 0:51.0
+         hoc-lo: A 0:37.1 · C1 1:32.4 · K 0:50.5
+         nes: A 0:36.9 · C1 1:32.4 · K 0:50.7
+   5 dk  çapa: A 0:45.0 · C1 3:00.0 · K 1:15.0
+         hoc: A 0:52.7 · C1 2:53.2 · K 1:14.1
+         hoc-lo: A 0:47.8 · C1 3:02.1 · K 1:10.1
+         nes: A 0:48.1 · C1 3:02.5 · K 1:09.4
+  15 dk  çapa: A 1:15.0 · C1 4:00.0 · C2 4:00.0 · C3 4:00.0 · K 1:45.0
+         hoc: A 1:34.9 · C1 3:56.5 · C2 3:20.4 · C3 3:49.5 · K 2:18.7
+         hoc-lo: A 1:34.7 · C1 3:55.7 · C2 3:17.9 · C3 3:53.5 · K 2:18.3
+         nes: A 1:34.7 · C1 3:56.5 · C2 3:20.9 · C3 3:50.9 · K 2:17.1
+
+== Blokların girdiği dakika (en küçük dakika) ==
+  hoc: C1 3 dk, C2 8 dk, C3 12 dk
+  hoc-lo: C1 3 dk, C2 8 dk, C3 12 dk
+  nes: C1 3 dk, C2 8 dk, C3 12 dk
+
+== "-(y)abil-" yoğunluğu (cümle klipleri; herhangi bir 60 sn'de en çok 3; 3 dk Kapanış'ta en çok 1) ==
+  hoc  3 dk: toplam 4, en yoğun 60 sn 3, Kapanış 1
+  hoc  5 dk: toplam 4, en yoğun 60 sn 3, Kapanış 1
+  hoc 15 dk: toplam 5, en yoğun 60 sn 3, Kapanış 2
+  hoc-lo  3 dk: toplam 4, en yoğun 60 sn 3, Kapanış 1
+  hoc-lo  5 dk: toplam 4, en yoğun 60 sn 3, Kapanış 1
+  hoc-lo 15 dk: toplam 5, en yoğun 60 sn 3, Kapanış 2
+  nes  3 dk: toplam 4, en yoğun 60 sn 3, Kapanış 1
+  nes  5 dk: toplam 4, en yoğun 60 sn 3, Kapanış 1
+  nes 15 dk: toplam 5, en yoğun 60 sn 3, Kapanış 2
+
+== Evre başına ortalama cümle uzunluğu (hece/cümle; H12: Derin < Derinleşme < Varış), hoc köşesi ==
+   3 dk: Varış 22.3, Derinleşme 18.5, Kapanış 17.4
+   5 dk: Varış 26.0, Derinleşme 20.6, Kapanış 18.9
+  15 dk: Varış 24.2, Derinleşme 19.9, Derin 10.8, Kapanış 20.5
+
+== Tekrar uyarıları (pilot repetition_warnings; bilgi) ==
+  c3.d18 → c3.w30: yine
+
+== Plan · hoc · 3 dk (toplam 180.0 sn; konuşma 68.4 sn; kip pref→max f=0.32; giriş 4.3 sn) ==
+    başlangıç blok  klip           konuşma   sonra  metin
+     0:04.3  A     a.durus          6.2 sn  +  3.7  Sırtın dik olsun ama gerilmesin. Gözlerini kapatıp kapatmamak sana kalmış. [3 dk kısa biçimi]
+     0:15.0  A     a.izin           6.9 sn  +  3.2  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin. [3 dk kısa biçimi]
+     0:25.1  A     a.acilis         6.3 sn  +  6.2  Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun. [3 dk kısa biçimi]
+     0:37.5  C1    c1.yer           6.0 sn  +  6.0  Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun? [3 dk kısa biçimi]
+     0:49.4  C1    c1.izle          5.2 sn  + 14.8  Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun. [3 dk kısa biçimi]
+     1:09.4  C1    c1.kayma         3.9 sn  +  4.6  Dikkatin birazdan kayacak; bu çok olağan. [3 dk kısa biçimi]
+     1:18.0  C1    c1.donus         5.2 sn  +  6.3  Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.
+     1:29.5  C1    c1.aralik1       3.9 sn  + 16.6  Birkaç soluk boyunca ışığı orada tutuyorsun. [3 dk kısa biçimi]
+     1:50.0  C1    c1.anahtar1      3.0 sn  + 16.0  Fark ettiğin an, zaten geri döndün. [3 dk kısa biçimi]
+     2:09.0  K     k.donus          1.8 sn  +  4.0  Artık dönüş zamanı.
+     2:14.8  K     k.nefes          5.6 sn  +  4.2  Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor. [3 dk kısa biçimi]
+     2:24.6  K     k.hareket        7.5 sn  +  7.2  Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak. [3 dk kısa biçimi]
+     2:39.3  K     k.goz            4.1 sn  +  7.3  Gözlerin kapalıysa, açıp çevrene bakıyorsun. [3 dk kısa biçimi]
+     2:50.7  K     k.son            2.7 sn  +  6.6  El feneri yine senin elinde.
+
+== Plan · hoc · 5 dk (toplam 300.0 sn; konuşma 119.4 sn; kip pref→max f=0.24; giriş 4.2 sn) ==
+    başlangıç blok  klip           konuşma   sonra  metin
+     0:04.2  A     a.durus          5.2 sn  +  4.9  Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli.
+     0:14.4  A     a.gozler         7.3 sn  +  5.9  Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.
+     0:27.6  A     a.izin           6.9 sn  +  4.9  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.
+     0:39.5  A     a.acilis         6.3 sn  +  6.9  Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.
+     0:52.7  C1    c1.yer           6.0 sn  +  6.9  Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?
+     1:05.6  C1    c1.nokta         5.0 sn  +  4.9  Hangisi olursa olsun, ışığın bugün o noktaya düşüyor.
+     1:15.5  C1    c1.izle          5.2 sn  + 16.9  Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.
+     1:37.7  C1    c1.his          11.6 sn  + 11.9  Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.
+     2:02.3  C1    c1.duzeltme      5.6 sn  +  8.9  Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor.
+     2:16.8  C1    c1.kayma         6.0 sn  +  4.9  Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan.
+     2:27.8  C1    c1.donus         5.2 sn  +  5.9  Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.
+     2:39.0  C1    c1.aralik1       3.9 sn  + 16.9  Birkaç soluk boyunca ışığı orada tutuyorsun.
+     2:59.9  C1    c1.nerede        4.5 sn  +  5.9  Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?
+     3:10.3  C1    c1.getir         5.6 sn  + 11.9  Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun.
+     3:27.9  C1    c1.anahtar1      3.0 sn  + 14.9  Fark ettiğin an, zaten geri döndün.
+     3:45.9  K     k.donus          1.8 sn  +  3.9  Artık dönüş zamanı.
+     3:51.5  K     k.nefes          5.6 sn  +  4.5  Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.
+     4:01.6  K     k.sesler         3.7 sn  +  5.5  Odadaki sesler de ışığın içine giriyor.
+     4:10.8  K     k.hareket        7.5 sn  +  7.7  Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.
+     4:26.1  K     k.goz            6.0 sn  +  7.7  Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun.
+     4:39.8  K     k.oda            4.6 sn  +  6.5  Bakışın odada bir renkte ya da bir nesnede bir an duruyor.
+     4:50.9  K     k.son            2.7 sn  +  6.5  El feneri yine senin elinde.
+
+== Plan · hoc · 15 dk (toplam 900.0 sn; konuşma 306.9 sn; kip pref→max f=0.05; giriş 4.0 sn) ==
+    başlangıç blok  klip           konuşma   sonra  metin
+     0:04.0  A     a.durus          5.2 sn  +  4.2  Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli.
+     0:13.4  A     a.gozler         7.3 sn  +  5.2  Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.
+     0:25.9  A     a.izin           6.9 sn  +  4.2  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.
+     0:37.0  A     a.acilis         6.3 sn  +  6.2  Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.
+     0:49.5  A     a.dagink         6.5 sn  +  7.2  Önce ışık geniş ve dağınık; seslere ve düşüncelere aynı anda vuruyor.
+     1:03.1  A     a.omuz           5.7 sn  +  6.2  Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun.
+     1:15.0  A     a.normal         5.0 sn  +  5.2  Dikkatin birçok kez dağılacak; bu da pratiğin bir parçası.
+     1:25.1  A     a.karar          4.6 sn  +  5.2  Işığı ne kadar sıkı tutacağına sen karar veriyorsun.
+     1:34.9  C1    c1.yer           6.0 sn  +  6.2  Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?
+     1:47.1  C1    c1.nokta         5.0 sn  +  4.2  Hangisi olursa olsun, ışığın bugün o noktaya düşüyor.
+     1:56.3  C1    c1.izle          5.2 sn  + 16.2  Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.
+     2:17.7  C1    c1.his          11.6 sn  + 11.2  Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.
+     2:41.5  C1    c1.duzeltme      5.6 sn  +  8.2  Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor.
+     2:55.3  C1    c1.kayma         6.0 sn  +  4.2  Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan.
+     3:05.5  C1    c1.donus         5.2 sn  +  5.2  Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.
+     3:15.9  C1    c1.aralik1       3.9 sn  + 16.2  Birkaç soluk boyunca ışığı orada tutuyorsun.
+     3:36.1  C1    c1.nerede        4.5 sn  +  5.2  Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?
+     3:45.8  C1    c1.getir         5.6 sn  + 11.2  Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun.
+     4:02.6  C1    c1.aralik2       5.0 sn  + 16.2  Işık yine noktada; birkaç nefes daha orada kalıyor.
+     4:23.8  C1    c1.dusunce       6.9 sn  + 10.2  Bir düşünce gelirse onu itmen gerekmiyor; ışığı usulca geri çeviriyorsun.
+     4:40.9  C1    c1.kac           5.6 sn  +  8.2  Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli.
+     4:54.7  C1    c1.aralik3       3.3 sn  + 16.2  Şu an ışığın gideceği başka bir yer yok.
+     5:14.2  C1    c1.anahtar1      3.0 sn  + 14.2  Fark ettiğin an, zaten geri döndün.
+     5:31.4  C2    c2.giris         4.4 sn  +  4.2  Sıradaki bölümde nefeslerini içinden sayıyorsun.
+     5:40.0  C2    c2.nasil         6.4 sn  +  4.2  Alışta bir, verişte iki, sonra üç, dört diye ona kadar gidiyorsun.
+     5:50.5  C2    c2.bas           5.8 sn  +  4.2  On olunca yeniden birden başlıyorsun; sayıyı kaybedersen de öyle.
+     6:00.6  C2    c2.say1          2.9 sn  + 18.1  Sayıyı bir süre sen sürdürüyorsun.
+     6:21.5  C2    c2.hangi         4.5 sn  + 16.2  Hangi sayıda olursan ol, oradan devam ediyorsun.
+     6:42.3  C2    c2.onbir         6.2 sn  + 14.2  On bire, on ikiye vardıysan bu da olur; sayı yine birden başlıyor.
+     7:02.7  C2    c2.dusunce       5.4 sn  + 16.2  Sayıların arasına bir düşünce girerse, bunu fark etmen yeter.
+     7:24.2  C2    c2.yonetme       5.8 sn  + 14.2  Sayı nefesi yönetmiyor; nefes geliyor, sayı onu izliyor.
+     7:44.2  C2    c2.veris         5.6 sn  +  5.2  Bu kez yalnız verişleri sayıyorsun; her verişe bir sayı düşüyor.
+     7:55.0  C2    c2.veris2        3.9 sn  + 18.1  Alış sessiz geçiyor, sayı verişle geliyor.
+     8:17.0  C2    c2.seyrek        6.4 sn  + 16.2  Sayılar seyrekleşiyor; aralarında nefes var, bir de ışığın noktası.
+     8:39.6  C2    c2.anahtar2      2.0 sn  + 10.2  Fark ettin; döndün.
+     8:51.8  C3    c3.ad            3.1 sn  +  5.2  Bundan sonra yalnızca nokta ve nefes var.
+     9:00.1  C3    c3.parlak        2.9 sn  +  6.2  Işık artık küçük ve parlak bir nokta.
+     9:09.2  C3    c3.can           6.2 sn  +  4.2  Her sessizliğin sonunda bir çan çalacak. Çanı duyunca ışık noktaya dönüyor.
+     9:21.4  C3    c3.kisa          2.7 sn  + 15.2  Önce kısa bir sessizlik geliyor.
+     9:39.2  C3    c3.d15           2.2 sn  +  6.2  Işığın hâlâ noktada mı?
+     9:47.6  C3    c3.kaydiysa      4.3 sn  +  6.2  Değilse, bir sonraki nefeste geri getiriyorsun.
+     9:58.2  C3    c3.kisa2         2.7 sn  + 17.1  Kısa bir sessizlik daha geliyor.
+    10:18.0  C3    c3.d18           1.8 sn  +  6.2  Işık yine nefeste.
+    10:26.0  C3    c3.w30           8.6 sn  + 30.3  Şimdi biraz daha uzun bir sessizlik geliyor. Zorlanırsan gözlerini açman yeterli. Çanla yine seslenirim.
+    11:08.6  C3    c3.d30           5.7 sn  +  6.2  Buradayım. Işık kaydıysa, onu usulca noktaya çağırıyorsun.
+    11:22.3  C3    c3.w45           8.0 sn  + 45.3  Bu kez sessizlik biraz daha uzun. Zorlanırsan ellerini hissetmen de olur. Çanla yine seslenirim.
+    12:19.3  C3    c3.d45           4.7 sn  +  6.2  Buradayım. Işığın nerede olduğunu fark etmen yeter.
+    12:32.0  C3    c3.anahtar3      1.2 sn  +  8.2  Yine döndün.
+    12:41.3  K     k.donus          1.8 sn  +  3.6  Artık dönüş zamanı.
+    12:46.7  K     k.nefes          5.6 sn  +  4.1  Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.
+    12:56.4  K     k.sesler         3.7 sn  +  5.1  Odadaki sesler de ışığın içine giriyor.
+    13:05.3  K     k.hareket        7.5 sn  +  7.1  Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.
+    13:19.9  K     k.avuc1          5.8 sn  +  6.1  Gözlerin kapalıysa, avuçlarını birbirine sürtüp ısıtabilirsin.
+    13:31.9  K     k.avuc2          7.7 sn  +  4.1  Avuçların gözlerine değmeyecek; kenarları alnına ve elmacık kemiklerine yaslanacak.
+    13:43.7  K     k.avuc3          4.8 sn  +  6.1  Şimdi onları bastırmadan gözlerinin üstüne getiriyorsun.
+    13:54.6  K     k.avuc4          3.9 sn  + 12.1  Bu sıcaklığı birkaç nefes boyunca hissediyorsun.
+    14:10.6  K     k.avuc5          3.1 sn  +  3.1  Ellerini dizlerine indiriyorsun.
+    14:16.8  K     k.goz            6.0 sn  +  7.1  Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun.
+    14:30.0  K     k.oda            4.6 sn  +  6.1  Bakışın odada bir renkte ya da bir nesnede bir an duruyor.
+    14:40.7  K     k.gun            6.5 sn  +  4.1  Gün içinde dikkatinin dağıldığını fark ettiğinde, tek bir nefese dönmek yeter.
+    14:51.2  K     k.son            2.7 sn  +  6.1  El feneri yine senin elinde.
+
+== Plan · hoc-lo · 3 dk (toplam 180.0 sn; konuşma 64.8 sn; kip pref→max f=0.47; giriş 4.5 sn) ==
+    başlangıç blok  klip           konuşma   sonra  metin
+     0:04.5  A     a.durus          6.2 sn  +  3.7  Sırtın dik olsun ama gerilmesin. Gözlerini kapatıp kapatmamak sana kalmış. [3 dk kısa biçimi]
+     0:15.3  A     a.izin           6.6 sn  +  3.2  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin. [3 dk kısa biçimi]
+     0:25.1  A     a.acilis         5.8 sn  +  6.2  Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun. [3 dk kısa biçimi]
+     0:37.1  C1    c1.yer           5.3 sn  +  6.2  Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun? [3 dk kısa biçimi]
+     0:48.6  C1    c1.izle          5.2 sn  + 15.2  Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun. [3 dk kısa biçimi]
+     1:09.0  C1    c1.kayma         3.4 sn  +  4.9  Dikkatin birazdan kayacak; bu çok olağan. [3 dk kısa biçimi]
+     1:17.4  C1    c1.donus         5.2 sn  +  6.9  Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.
+     1:29.5  C1    c1.aralik1       3.9 sn  + 16.9  Birkaç soluk boyunca ışığı orada tutuyorsun. [3 dk kısa biçimi]
+     1:50.4  C1    c1.anahtar1      2.7 sn  + 16.4  Fark ettiğin an, zaten geri döndün. [3 dk kısa biçimi]
+     2:09.5  K     k.donus          1.8 sn  +  4.2  Artık dönüş zamanı.
+     2:15.5  K     k.nefes          5.1 sn  +  4.2  Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor. [3 dk kısa biçimi]
+     2:24.9  K     k.hareket        7.1 sn  +  7.2  Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak. [3 dk kısa biçimi]
+     2:39.1  K     k.goz            3.8 sn  +  7.5  Gözlerin kapalıysa, açıp çevrene bakıyorsun. [3 dk kısa biçimi]
+     2:50.4  K     k.son            2.7 sn  +  6.9  El feneri yine senin elinde.
+
+== Plan · hoc-lo · 5 dk (toplam 300.0 sn; konuşma 116.9 sn; kip pref→max f=0.06; giriş 4.1 sn) ==
+    başlangıç blok  klip           konuşma   sonra  metin
+     0:04.1  A     a.durus          4.7 sn  +  4.2  Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli.
+     0:13.0  A     a.gozler         6.8 sn  +  5.2  Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.
+     0:25.1  A     a.izin           6.6 sn  +  4.2  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.
+     0:35.8  A     a.acilis         5.8 sn  +  6.2  Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.
+     0:47.8  C1    c1.yer           5.3 sn  +  6.2  Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?
+     0:59.4  C1    c1.nokta         4.6 sn  +  4.2  Hangisi olursa olsun, ışığın bugün o noktaya düşüyor.
+     1:08.3  C1    c1.izle          5.2 sn  + 16.2  Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.
+     1:29.7  C1    c1.his          10.6 sn  + 11.2  Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.
+     1:52.6  C1    c1.duzeltme      5.1 sn  +  8.2  Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor.
+     2:05.9  C1    c1.kayma         5.6 sn  +  4.2  Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan.
+     2:15.7  C1    c1.donus         5.2 sn  +  5.2  Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.
+     2:26.2  C1    c1.aralik1       3.9 sn  + 16.2  Birkaç soluk boyunca ışığı orada tutuyorsun.
+     2:46.3  C1    c1.nerede        4.2 sn  +  5.2  Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?
+     2:55.8  C1    c1.getir         5.3 sn  + 11.2  Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun.
+     3:12.3  C1    c1.aralik2       4.5 sn  + 16.2  Işık yine noktada; birkaç nefes daha orada kalıyor.
+     3:33.0  C1    c1.anahtar1      2.7 sn  + 14.2  Fark ettiğin an, zaten geri döndün.
+     3:49.9  K     k.donus          1.8 sn  +  3.6  Artık dönüş zamanı.
+     3:55.3  K     k.nefes          5.1 sn  +  4.1  Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.
+     4:04.6  K     k.sesler         3.7 sn  +  5.1  Odadaki sesler de ışığın içine giriyor.
+     4:13.4  K     k.hareket        7.1 sn  +  7.2  Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.
+     4:27.7  K     k.goz            5.7 sn  +  7.2  Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun.
+     4:40.5  K     k.oda            4.6 sn  +  6.1  Bakışın odada bir renkte ya da bir nesnede bir an duruyor.
+     4:51.2  K     k.son            2.7 sn  +  6.1  El feneri yine senin elinde.
+
+== Plan · hoc-lo · 15 dk (toplam 900.0 sn; konuşma 289.8 sn; kip pref→max f=0.12; giriş 4.1 sn) ==
+    başlangıç blok  klip           konuşma   sonra  metin
+     0:04.1  A     a.durus          4.7 sn  +  4.5  Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli.
+     0:13.3  A     a.gozler         6.8 sn  +  5.5  Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.
+     0:25.7  A     a.izin           6.6 sn  +  4.5  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.
+     0:36.7  A     a.acilis         5.8 sn  +  6.5  Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.
+     0:49.0  A     a.dagink         6.0 sn  +  7.5  Önce ışık geniş ve dağınık; seslere ve düşüncelere aynı anda vuruyor.
+     1:02.5  A     a.omuz           5.7 sn  +  6.5  Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun.
+     1:14.6  A     a.normal         4.5 sn  +  5.5  Dikkatin birçok kez dağılacak; bu da pratiğin bir parçası.
+     1:24.6  A     a.karar          4.6 sn  +  5.5  Işığı ne kadar sıkı tutacağına sen karar veriyorsun.
+     1:34.7  C1    c1.yer           5.3 sn  +  6.5  Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?
+     1:46.5  C1    c1.nokta         4.6 sn  +  4.5  Hangisi olursa olsun, ışığın bugün o noktaya düşüyor.
+     1:55.6  C1    c1.izle          5.2 sn  + 16.5  Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.
+     2:17.4  C1    c1.his          10.6 sn  + 11.5  Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.
+     2:40.5  C1    c1.duzeltme      5.1 sn  +  8.5  Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor.
+     2:54.1  C1    c1.kayma         5.6 sn  +  4.5  Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan.
+     3:04.2  C1    c1.donus         5.2 sn  +  5.5  Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.
+     3:14.9  C1    c1.aralik1       3.9 sn  + 16.5  Birkaç soluk boyunca ışığı orada tutuyorsun.
+     3:35.3  C1    c1.nerede        4.2 sn  +  5.5  Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?
+     3:45.0  C1    c1.getir         5.3 sn  + 11.5  Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun.
+     4:01.8  C1    c1.aralik2       4.5 sn  + 16.5  Işık yine noktada; birkaç nefes daha orada kalıyor.
+     4:22.8  C1    c1.dusunce       6.4 sn  + 10.5  Bir düşünce gelirse onu itmen gerekmiyor; ışığı usulca geri çeviriyorsun.
+     4:39.7  C1    c1.kac           5.1 sn  +  8.5  Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli.
+     4:53.3  C1    c1.aralik3       3.3 sn  + 16.5  Şu an ışığın gideceği başka bir yer yok.
+     5:13.1  C1    c1.anahtar1      2.7 sn  + 14.5  Fark ettiğin an, zaten geri döndün.
+     5:30.4  C2    c2.giris         4.4 sn  +  4.5  Sıradaki bölümde nefeslerini içinden sayıyorsun.
+     5:39.2  C2    c2.nasil         5.4 sn  +  4.5  Alışta bir, verişte iki, sonra üç, dört diye ona kadar gidiyorsun.
+     5:49.1  C2    c2.bas           5.3 sn  +  4.5  On olunca yeniden birden başlıyorsun; sayıyı kaybedersen de öyle.
+     5:58.9  C2    c2.say1          2.9 sn  + 18.2  Sayıyı bir süre sen sürdürüyorsun.
+     6:20.1  C2    c2.hangi         4.2 sn  + 16.5  Hangi sayıda olursan ol, oradan devam ediyorsun.
+     6:40.8  C2    c2.onbir         5.4 sn  + 14.5  On bire, on ikiye vardıysan bu da olur; sayı yine birden başlıyor.
+     7:00.7  C2    c2.dusunce       5.1 sn  + 16.5  Sayıların arasına bir düşünce girerse, bunu fark etmen yeter.
+     7:22.2  C2    c2.yonetme       5.0 sn  + 14.5  Sayı nefesi yönetmiyor; nefes geliyor, sayı onu izliyor.
+     7:41.7  C2    c2.veris         5.1 sn  +  5.5  Bu kez yalnız verişleri sayıyorsun; her verişe bir sayı düşüyor.
+     7:52.3  C2    c2.veris2        3.6 sn  + 18.2  Alış sessiz geçiyor, sayı verişle geliyor.
+     8:14.1  C2    c2.seyrek        5.6 sn  + 16.5  Sayılar seyrekleşiyor; aralarında nefes var, bir de ışığın noktası.
+     8:36.2  C2    c2.anahtar2      1.5 sn  + 10.5  Fark ettin; döndün.
+     8:48.2  C3    c3.ad            3.1 sn  +  5.5  Bundan sonra yalnızca nokta ve nefes var.
+     8:56.8  C3    c3.parlak        2.9 sn  +  6.5  Işık artık küçük ve parlak bir nokta.
+     9:06.2  C3    c3.can           6.2 sn  +  4.5  Her sessizliğin sonunda bir çan çalacak. Çanı duyunca ışık noktaya dönüyor.
+     9:18.7  C3    c3.kisa          2.7 sn  + 15.5  Önce kısa bir sessizlik geliyor.
+     9:36.9  C3    c3.d15           2.2 sn  +  6.5  Işığın hâlâ noktada mı?
+     9:45.6  C3    c3.kaydiysa      4.0 sn  +  6.5  Değilse, bir sonraki nefeste geri getiriyorsun.
+     9:56.1  C3    c3.kisa2         2.7 sn  + 17.4  Kısa bir sessizlik daha geliyor.
+    10:16.1  C3    c3.d18           1.8 sn  +  6.5  Işık yine nefeste.
+    10:24.5  C3    c3.w30           8.6 sn  + 30.7  Şimdi biraz daha uzun bir sessizlik geliyor. Zorlanırsan gözlerini açman yeterli. Çanla yine seslenirim.
+    11:07.6  C3    c3.d30           5.4 sn  +  6.5  Buradayım. Işık kaydıysa, onu usulca noktaya çağırıyorsun.
+    11:21.3  C3    c3.w45           8.0 sn  + 45.9  Bu kez sessizlik biraz daha uzun. Zorlanırsan ellerini hissetmen de olur. Çanla yine seslenirim.
+    12:19.0  C3    c3.d45           4.7 sn  +  6.5  Buradayım. Işığın nerede olduğunu fark etmen yeter.
+    12:32.0  C3    c3.anahtar3      1.2 sn  +  8.5  Yine döndün.
+    12:41.7  K     k.donus          1.8 sn  +  3.7  Artık dönüş zamanı.
+    12:47.2  K     k.nefes          5.1 sn  +  4.2  Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.
+    12:56.6  K     k.sesler         3.7 sn  +  5.2  Odadaki sesler de ışığın içine giriyor.
+    13:05.6  K     k.hareket        7.1 sn  +  7.4  Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.
+    13:20.0  K     k.avuc1          5.5 sn  +  6.2  Gözlerin kapalıysa, avuçlarını birbirine sürtüp ısıtabilirsin.
+    13:31.7  K     k.avuc2          7.3 sn  +  4.2  Avuçların gözlerine değmeyecek; kenarları alnına ve elmacık kemiklerine yaslanacak.
+    13:43.2  K     k.avuc3          4.8 sn  +  6.2  Şimdi onları bastırmadan gözlerinin üstüne getiriyorsun.
+    13:54.3  K     k.avuc4          3.9 sn  + 12.2  Bu sıcaklığı birkaç nefes boyunca hissediyorsun.
+    14:10.5  K     k.avuc5          3.1 sn  +  3.2  Ellerini dizlerine indiriyorsun.
+    14:16.8  K     k.goz            5.7 sn  +  7.4  Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun.
+    14:29.9  K     k.oda            4.6 sn  +  6.2  Bakışın odada bir renkte ya da bir nesnede bir an duruyor.
+    14:40.7  K     k.gun            6.1 sn  +  4.2  Gün içinde dikkatinin dağıldığını fark ettiğinde, tek bir nefese dönmek yeter.
+    14:51.1  K     k.son            2.7 sn  +  6.2  El feneri yine senin elinde.
+
+== Plan · nes · 3 dk (toplam 180.0 sn; konuşma 65.0 sn; kip pref→max f=0.46; giriş 4.5 sn) ==
+    başlangıç blok  klip           konuşma   sonra  metin
+     0:04.5  A     a.durus          5.8 sn  +  3.7  Sırtın dik olsun ama gerilmesin. Gözlerini kapatıp kapatmamak sana kalmış. [3 dk kısa biçimi]
+     0:14.9  A     a.izin           6.5 sn  +  3.2  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin. [3 dk kısa biçimi]
+     0:24.7  A     a.acilis         6.0 sn  +  6.2  Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun. [3 dk kısa biçimi]
+     0:36.9  C1    c1.yer           5.7 sn  +  6.2  Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun? [3 dk kısa biçimi]
+     0:48.8  C1    c1.izle          4.9 sn  + 15.2  Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun. [3 dk kısa biçimi]
+     1:08.8  C1    c1.kayma         3.8 sn  +  4.9  Dikkatin birazdan kayacak; bu çok olağan. [3 dk kısa biçimi]
+     1:17.5  C1    c1.donus         4.9 sn  +  6.8  Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.
+     1:29.3  C1    c1.aralik1       3.7 sn  + 16.9  Birkaç soluk boyunca ışığı orada tutuyorsun. [3 dk kısa biçimi]
+     1:49.9  C1    c1.anahtar1      2.9 sn  + 16.4  Fark ettiğin an, zaten geri döndün. [3 dk kısa biçimi]
+     2:09.3  K     k.donus          1.7 sn  +  4.2  Artık dönüş zamanı.
+     2:15.2  K     k.nefes          5.4 sn  +  4.2  Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor. [3 dk kısa biçimi]
+     2:24.8  K     k.hareket        7.1 sn  +  7.2  Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak. [3 dk kısa biçimi]
+     2:39.2  K     k.goz            3.9 sn  +  7.5  Gözlerin kapalıysa, açıp çevrene bakıyorsun. [3 dk kısa biçimi]
+     2:50.6  K     k.son            2.5 sn  +  6.9  El feneri yine senin elinde.
+
+== Plan · nes · 5 dk (toplam 300.0 sn; konuşma 118.2 sn; kip pref→max f=0.04; giriş 4.0 sn) ==
+    başlangıç blok  klip           konuşma   sonra  metin
+     0:04.0  A     a.durus          5.0 sn  +  4.2  Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli.
+     0:13.2  A     a.gozler         7.0 sn  +  5.2  Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.
+     0:25.3  A     a.izin           6.5 sn  +  4.2  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.
+     0:36.0  A     a.acilis         6.0 sn  +  6.2  Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.
+     0:48.1  C1    c1.yer           5.7 sn  +  6.2  Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?
+     0:60.0  C1    c1.nokta         4.7 sn  +  4.2  Hangisi olursa olsun, ışığın bugün o noktaya düşüyor.
+     1:08.9  C1    c1.izle          4.9 sn  + 16.2  Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.
+     1:29.9  C1    c1.his          11.1 sn  + 11.2  Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.
+     1:53.2  C1    c1.duzeltme      5.4 sn  +  8.2  Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor.
+     2:06.7  C1    c1.kayma         5.8 sn  +  4.2  Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan.
+     2:16.6  C1    c1.donus         4.9 sn  +  5.2  Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.
+     2:26.7  C1    c1.aralik1       3.7 sn  + 16.2  Birkaç soluk boyunca ışığı orada tutuyorsun.
+     2:46.6  C1    c1.nerede        4.3 sn  +  5.2  Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?
+     2:56.0  C1    c1.getir         5.3 sn  + 11.2  Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun.
+     3:12.5  C1    c1.aralik2       4.8 sn  + 16.2  Işık yine noktada; birkaç nefes daha orada kalıyor.
+     3:33.5  C1    c1.anahtar1      2.9 sn  + 14.2  Fark ettiğin an, zaten geri döndün.
+     3:50.6  K     k.donus          1.7 sn  +  3.6  Artık dönüş zamanı.
+     3:55.9  K     k.nefes          5.4 sn  +  4.1  Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.
+     4:05.3  K     k.sesler         3.5 sn  +  5.1  Odadaki sesler de ışığın içine giriyor.
+     4:13.9  K     k.hareket        7.1 sn  +  7.1  Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.
+     4:28.2  K     k.goz            5.7 sn  +  7.1  Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun.
+     4:41.0  K     k.oda            4.3 sn  +  6.1  Bakışın odada bir renkte ya da bir nesnede bir an duruyor.
+     4:51.4  K     k.son            2.5 sn  +  6.1  El feneri yine senin elinde.
+
+== Plan · nes · 15 dk (toplam 900.0 sn; konuşma 292.0 sn; kip pref→max f=0.11; giriş 4.1 sn) ==
+    başlangıç blok  klip           konuşma   sonra  metin
+     0:04.1  A     a.durus          5.0 sn  +  4.5  Sırtın dik olsun ama gerilmesin; rahatça oturman yeterli.
+     0:13.5  A     a.gozler         7.0 sn  +  5.5  Gözlerini kapatmak ya da açık tutmak sana kalmış; gözlerin açıksa bakışın yere insin.
+     0:26.0  A     a.izin           6.5 sn  +  4.5  İstediğin an gözlerini açabilir, kıpırdayabilir ya da dersi bitirebilirsin.
+     0:36.9  A     a.acilis         6.0 sn  +  6.5  Dikkatin bir el feneri gibi; ışığını şimdi tek bir noktaya topluyorsun.
+     0:49.3  A     a.dagink         6.2 sn  +  7.5  Önce ışık geniş ve dağınık; seslere ve düşüncelere aynı anda vuruyor.
+     1:03.0  A     a.omuz           5.3 sn  +  6.5  Omuzlarını kulaklarından uzaklaştırıp çeneni gevşek bırakıyorsun.
+     1:14.7  A     a.normal         4.8 sn  +  5.5  Dikkatin birçok kez dağılacak; bu da pratiğin bir parçası.
+     1:24.9  A     a.karar          4.3 sn  +  5.5  Işığı ne kadar sıkı tutacağına sen karar veriyorsun.
+     1:34.7  C1    c1.yer           5.7 sn  +  6.5  Nefesi en çok burnunda mı, göğsünde mi, yoksa karnında mı duyuyorsun?
+     1:46.9  C1    c1.nokta         4.7 sn  +  4.5  Hangisi olursa olsun, ışığın bugün o noktaya düşüyor.
+     1:56.1  C1    c1.izle          4.9 sn  + 16.5  Birkaç nefes boyunca yalnızca o noktadaki hareketi izliyorsun.
+     2:17.4  C1    c1.his          11.1 sn  + 11.5  Nokta burnundaysa, alışta serin, verişte ılık bir hava geçiyor. Göğsünde ya da karnındaysa, orası alışla yükselip verişle iniyor.
+     2:41.0  C1    c1.duzeltme      5.4 sn  +  8.5  Nefesini düzeltmeye çalışmıyorsun; o kendi hızında geliyor.
+     2:54.8  C1    c1.kayma         5.8 sn  +  4.5  Birazdan dikkatin bir düşünceye ya da bir sese kayacak; bu çok olağan.
+     3:05.0  C1    c1.donus         4.9 sn  +  5.5  Kaydığını fark ettiğinde ışığı nazikçe nefese getiriyorsun.
+     3:15.4  C1    c1.aralik1       3.7 sn  + 16.5  Birkaç soluk boyunca ışığı orada tutuyorsun.
+     3:35.6  C1    c1.nerede        4.3 sn  +  5.5  Işık hâlâ nefeste mi, yoksa başka bir yere mi kaydı?
+     3:45.4  C1    c1.getir         5.3 sn  + 11.5  Kaydıysa, bir sonraki alışta onu yeniden noktaya getiriyorsun.
+     4:02.1  C1    c1.aralik2       4.8 sn  + 16.5  Işık yine noktada; birkaç nefes daha orada kalıyor.
+     4:23.4  C1    c1.dusunce       6.6 sn  + 10.5  Bir düşünce gelirse onu itmen gerekmiyor; ışığı usulca geri çeviriyorsun.
+     4:40.4  C1    c1.kac           5.4 sn  +  8.5  Dikkatinin kaç kez dağıldığı hiç önemli değil; her dönüş değerli.
+     4:54.2  C1    c1.aralik3       3.1 sn  + 16.5  Şu an ışığın gideceği başka bir yer yok.
+     5:13.8  C1    c1.anahtar1      2.9 sn  + 14.5  Fark ettiğin an, zaten geri döndün.
+     5:31.2  C2    c2.giris         4.1 sn  +  4.5  Sıradaki bölümde nefeslerini içinden sayıyorsun.
+     5:39.7  C2    c2.nasil         6.2 sn  +  4.5  Alışta bir, verişte iki, sonra üç, dört diye ona kadar gidiyorsun.
+     5:50.4  C2    c2.bas           5.6 sn  +  4.5  On olunca yeniden birden başlıyorsun; sayıyı kaybedersen de öyle.
+     6:00.4  C2    c2.say1          2.7 sn  + 18.2  Sayıyı bir süre sen sürdürüyorsun.
+     6:21.3  C2    c2.hangi         4.3 sn  + 16.5  Hangi sayıda olursan ol, oradan devam ediyorsun.
+     6:42.1  C2    c2.onbir         6.0 sn  + 14.5  On bire, on ikiye vardıysan bu da olur; sayı yine birden başlıyor.
+     7:02.6  C2    c2.dusunce       5.1 sn  + 16.5  Sayıların arasına bir düşünce girerse, bunu fark etmen yeter.
+     7:24.1  C2    c2.yonetme       5.6 sn  + 14.5  Sayı nefesi yönetmiyor; nefes geliyor, sayı onu izliyor.
+     7:44.2  C2    c2.veris         5.4 sn  +  5.5  Bu kez yalnız verişleri sayıyorsun; her verişe bir sayı düşüyor.
+     7:55.0  C2    c2.veris2        3.7 sn  + 18.2  Alış sessiz geçiyor, sayı verişle geliyor.
+     8:17.0  C2    c2.seyrek        6.2 sn  + 16.5  Sayılar seyrekleşiyor; aralarında nefes var, bir de ışığın noktası.
+     8:39.6  C2    c2.anahtar2      2.0 sn  + 10.5  Fark ettin; döndün.
+     8:52.1  C3    c3.ad            2.9 sn  +  5.5  Bundan sonra yalnızca nokta ve nefes var.
+     9:00.5  C3    c3.parlak        2.7 sn  +  6.5  Işık artık küçük ve parlak bir nokta.
+     9:09.6  C3    c3.can           5.8 sn  +  4.5  Her sessizliğin sonunda bir çan çalacak. Çanı duyunca ışık noktaya dönüyor.
+     9:21.8  C3    c3.kisa          2.5 sn  + 15.5  Önce kısa bir sessizlik geliyor.
+     9:39.8  C3    c3.d15           2.1 sn  +  6.5  Işığın hâlâ noktada mı?
+     9:48.4  C3    c3.kaydiysa      4.1 sn  +  6.5  Değilse, bir sonraki nefeste geri getiriyorsun.
+     9:59.0  C3    c3.kisa2         2.5 sn  + 17.3  Kısa bir sessizlik daha geliyor.
+    10:18.8  C3    c3.d18           1.7 sn  +  6.5  Işık yine nefeste.
+    10:27.0  C3    c3.w30           8.2 sn  + 30.7  Şimdi biraz daha uzun bir sessizlik geliyor. Zorlanırsan gözlerini açman yeterli. Çanla yine seslenirim.
+    11:09.6  C3    c3.d30           5.5 sn  +  6.5  Buradayım. Işık kaydıysa, onu usulca noktaya çağırıyorsun.
+    11:23.4  C3    c3.w45           7.6 sn  + 45.8  Bu kez sessizlik biraz daha uzun. Zorlanırsan ellerini hissetmen de olur. Çanla yine seslenirim.
+    12:20.6  C3    c3.d45           4.5 sn  +  6.5  Buradayım. Işığın nerede olduğunu fark etmen yeter.
+    12:33.3  C3    c3.anahtar3      1.1 sn  +  8.5  Yine döndün.
+    12:42.9  K     k.donus          1.7 sn  +  3.7  Artık dönüş zamanı.
+    12:48.3  K     k.nefes          5.4 sn  +  4.2  Işığı yeniden genişletiyorsun; nefes kendi hâlinde akıyor.
+    12:57.9  K     k.sesler         3.5 sn  +  5.2  Odadaki sesler de ışığın içine giriyor.
+    13:06.7  K     k.hareket        7.1 sn  +  7.3  Parmaklarını oynatıp zorlamadan gerinebilirsin; ağrı ya da baş dönmesi olursa bırak.
+    13:21.2  K     k.avuc1          5.5 sn  +  6.2  Gözlerin kapalıysa, avuçlarını birbirine sürtüp ısıtabilirsin.
+    13:32.9  K     k.avuc2          7.3 sn  +  4.2  Avuçların gözlerine değmeyecek; kenarları alnına ve elmacık kemiklerine yaslanacak.
+    13:44.5  K     k.avuc3          4.5 sn  +  6.2  Şimdi onları bastırmadan gözlerinin üstüne getiriyorsun.
+    13:55.2  K     k.avuc4          3.7 sn  + 12.2  Bu sıcaklığı birkaç nefes boyunca hissediyorsun.
+    14:11.2  K     k.avuc5          2.9 sn  +  3.2  Ellerini dizlerine indiriyorsun.
+    14:17.3  K     k.goz            5.7 sn  +  7.3  Gözlerin kapalıysa, onları acele etmeden açıp çevrene bakıyorsun.
+    14:30.4  K     k.oda            4.3 sn  +  6.2  Bakışın odada bir renkte ya da bir nesnede bir an duruyor.
+    14:40.9  K     k.gun            6.1 sn  +  4.2  Gün içinde dikkatinin dağıldığını fark ettiğinde, tek bir nefese dönmek yeter.
+    14:51.2  K     k.son            2.5 sn  +  6.2  El feneri yine senin elinde.
+
+== Sarsıntı taraması (bütün klip süreleri × ölçek; hoc köşesi; bilgi) ==
+  × 0.90: 11/13 dakika geçiyor; ilk hatalar: 3 dk: T5: içerik doymadan esneme f=0.61 > 0.6 | 12 dk: 60 sn penceresinde 150 hece > 150
+  × 0.95: 13/13 dakika geçiyor
+  × 1.05: 13/13 dakika geçiyor
+  × 1.10: 12/13 dakika geçiyor; ilk hatalar: 4 dk: şafak 54 sn < 60 (k.donus sonu çok yakın)
+
+== ÖZET ==
+  hoc     13/13 dakika GEÇTİ; yayın süreleri: 3 dk GEÇTİ, 5 dk GEÇTİ, 15 dk GEÇTİ
+  hoc-lo  13/13 dakika GEÇTİ; yayın süreleri: 3 dk GEÇTİ, 5 dk GEÇTİ, 15 dk GEÇTİ
+  nes     13/13 dakika GEÇTİ; yayın süreleri: 3 dk GEÇTİ, 5 dk GEÇTİ, 15 dk GEÇTİ
+  metin denetimi: GEÇTİ
+  Kapsam: zamanlama ve metin kuralları; dinleme, söyleyiş ve insan/yedek inceleme onayı değildir.

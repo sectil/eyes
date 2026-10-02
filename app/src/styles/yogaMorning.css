@@ -1,0 +1,12 @@
+/* Yoga sabah sorusu (components/YogaMorningCard.jsx): kart alarm kartının sınıflarını kullanır (styles/alarm.css);
+   burada yalnız 1–10 ölçeği. 320 px'te iki sıra × beş düğme, yana taşmaz; dokunma hedefi ≥ 44 px. */
+.ym-scale { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.ym-scale button {
+  min-width: 0; min-height: 44px; padding: 0; border-radius: 12px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+  font: inherit; font-weight: 650; font-variant-numeric: tabular-nums;
+}
+.ym-scale button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.ym-ends { margin: -4px 0 0; display: flex; justify-content: space-between; gap: 8px; font-size: 0.82rem; color: var(--ink-3); }
+/* "Atla" ve "Tamam" alarm kartının küçük düğmesini (btn-sm, 40 px) kullanır; bu kartta dokunma hedefi 44 px */
+.ym .al-btns .btn-sm { min-height: 44px; }

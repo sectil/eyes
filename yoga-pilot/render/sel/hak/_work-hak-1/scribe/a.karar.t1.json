@@ -1,0 +1,16 @@
+{
+ "unit": "a.karar",
+ "take": "t1",
+ "asset_id": "lKH7mFVYSuzWAEoDsrZx",
+ "source_node_id": "jBJWpmmRT80QnA80xymY",
+ "stt_node_id": "B6mq9PXQ1Ozwmbf0K1N5",
+ "session_id": "t0dzwH93fqF0jjlQBbKR",
+ "generation_id": "LVCe6qaajV6HCxNz4PuY",
+ "actual_credits": 15.4,
+ "actual_cents": 0.28,
+ "spoken_duration_secs": 2.64,
+ "scribe_text": "Ne kadar gevşeyeceğine sen karar veriyorsun",
+ "tts": "Ne kadar gevşeyeceğine sen karar veriyorsun.",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 6\n}"
+}

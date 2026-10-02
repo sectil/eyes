@@ -1,0 +1,16 @@
+{
+ "unit": "n1.sec",
+ "take": "t3",
+ "asset_id": "z98kwCwvtQPgarSqh1Of",
+ "source_node_id": "Nulup6dHrAljXfsuvMsV",
+ "stt_node_id": "1IREQKdawiG1zLqt0ku0",
+ "session_id": "QBoTnWTb3hDOdUEIgaEf",
+ "generation_id": "LjYOcTAMZpOKT8IyhkE1",
+ "actual_credits": 43.56,
+ "actual_cents": 0.792,
+ "spoken_duration_secs": 7.78,
+ "scribe_text": "Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse önerim şu: Kendime dinlenmeye izin veriyorum",
+ "tts": "Bugün kendine kısa bir niyet seçiyorsun. Aklına bir şey gelmezse önerim şu: \"Kendime dinlenmeye izin veriyorum.\"",
+ "compare_exit": 0,
+ "compare": "{\n \"equal\": true,\n \"words\": 16\n}"
+}

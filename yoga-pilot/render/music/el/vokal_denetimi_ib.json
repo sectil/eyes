@@ -1,0 +1,301 @@
+[
+ {
+  "lesson": "d01",
+  "unit": "d1-varis",
+  "take": "m1",
+  "node_id": "78p6q6KRzB6WI4PIFYko",
+  "session_ids": [
+   "UCBjNF8aGlPiYYf05o3Q"
+  ],
+  "asset_id": "1yX5QPzaFvsWV7KR1Sp3",
+  "result": {
+   "generation_id": "5UZRcXi5FME71XYECJEM",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/1yX5QPzaFvsWV7KR1Sp3/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T075006Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6f9e81c7ab736236f09951437d07b3364e14be8577e22650da05a8bb23b98af82177f1b12b235a7a1e408a3045233675afb001d0063abaac88f5076b61e73a20ec2b6616a8de237911ffe87a800474c523b7fb545af279731d485d4d4b80f8c17781bbd6147726df6a575e8a755d0ec85f316fb431c21ec79a164d1b782202bb379a812a5bb38d31c2113b60257cef09329896a8178557f6dc54297cee7cb53e2aa2516f29461bbe291930d9211fa7aeccdbeb49552e5b7f0f4f5d2c0dbdb98d87ac64298d30cfead510a5335c2f72a7b1e6a938a32a9a557ef1356b3b4df9915bc228b815ed79b90e91076fb9e29448b7c9ceb718004f34ab83616076962713"
+   },
+   "session_id": "5UZRcXi5FME71XYECJEM",
+   "actual_credits": 990
+  }
+ },
+ {
+  "lesson": "d01",
+  "unit": "d1-kapanis",
+  "take": "m1",
+  "node_id": "icsoC8ijcfnKV1Ruwj5m",
+  "session_ids": [
+   "JK24zVRPQfBYy8JuxO1i"
+  ],
+  "asset_id": "L1iKJo9H1y2eldZlpPiE",
+  "result": {
+   "generation_id": "00mvdM44KZgwTCT1BmeC",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/L1iKJo9H1y2eldZlpPiE/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T075005Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=928208995577cf17610f32f7f00bf2c2f2aa24444d61e6fe236c8f24f9846b3336845b5f2ae1912741409ddfaa886ccfc0bb19f2323d7a8b5242fe9df8bb01f1d98d88c7c6ee4ff1443b7bf6da62c849f3df34f9716e57cae550a54dced991cc45e82d61f593ef7c73edd416d7b8a2ec49cfe1d011a298191bf5f8a30095c19d317f3fbd6cb3469e9cd4c2cc7d37f64601ff7aab38daa2f44d0fb5c08a8833b4dff83d75d400f0b8bf0e9db77dff5be9476811a890e24491e264f1d42f7a6f3e4d5208c14b79db2db767d3a1a75c2afd08653aa2485bf8d642e8f2cc39519d1417c1007b77795e987120b42c0779f8276be7a8c74b09b0d1ab7301d60ee769c0"
+   },
+   "session_id": "00mvdM44KZgwTCT1BmeC",
+   "actual_credits": 990
+  }
+ },
+ {
+  "lesson": "d03",
+  "unit": "d3-varis",
+  "take": "m1",
+  "node_id": "r47SihAY93yImRycz1zj",
+  "session_ids": [
+   "7tXP3Y3BUABuya26J4aJ"
+  ],
+  "asset_id": "3J6lPkiIFkoSpZB5pcip",
+  "result": {
+   "generation_id": "y0JWaAPJeEWckMNoVz7q",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/3J6lPkiIFkoSpZB5pcip/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T075007Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=60583553153e2cb56baaa0505e320c44847d2d063750ca35abf9d1f2b93cb549b5f6d1a7f42a29e0eaa45fdadb1e2a22c7348f33cfa48679136a589f245eb5f72bdbf70fae4a1e02177aece6453b99d3f6c8908a30bdfeeeb21a05a6bdf60b1c46cb561c4bb58558ac1eaf323f917cf1312284952a203b4564d4355cc8dd7f0e7b620d360b4fb5fad50632ca5b79270619ba1261511aa75dcdb02f772025abe2f19feab9b0acbd8bc24393282c9f32ad821c2336ae176def169dbf3565b4eb64eebc39ed059a40a2956dd5c5842259f45721beff2eb9fc1d14a100ef1e18d165ba7606efed27179330f65701a1a36637a1bba8f23cc35f2615ea74efdd33da80"
+   },
+   "session_id": "y0JWaAPJeEWckMNoVz7q",
+   "actual_credits": 990
+  }
+ },
+ {
+  "lesson": "d03",
+  "unit": "d3-cekirdek-b",
+  "take": "m1",
+  "node_id": "7IE0BB6D9BpXXyVMdpOC",
+  "session_ids": [
+   "KI8vjKaRGq3sptp4us7V"
+  ],
+  "asset_id": "SsUiBpeQp9Wd9VLCH8E6",
+  "result": {
+   "generation_id": "tiAspmpIOyHFx7hBj9b5",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/SsUiBpeQp9Wd9VLCH8E6/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T075007Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=0614bb69bcbd143e86a2cae3a483867ca36dbabc6b86b6a009991bd51db23dbab2019773ab1fe889dd6f108e471eb52ab26f46021968dea0f9f31be2bef92a42f7d9a19a22c86b72d936f24dec17b2f33aeaab846e46984a5f06453ea52f9bae4aedc037c988baf04368892f4d9e8e9911bf80eb69120976c97650dc5b0c839ccd81ac1caf7fa8fe7fdcb7c5e70c01ea54c7827d74d35fa379a82414d0d615ecaf87b74e79c5620be66bfc23dc750e187ee620b99cde007c975326887c8283f7e3a2df177fc310597c575e5ba7cd5d1fc1a6b4b1f08915fdae62dee0d725a689103ecefbf5e0bf01362f558809e50db6cdd69c5f61424649333958390c96af5b"
+   },
+   "session_id": "tiAspmpIOyHFx7hBj9b5",
+   "actual_credits": 1650
+  }
+ },
+ {
+  "lesson": "d03",
+  "unit": "d3-derin",
+  "take": "m1",
+  "node_id": "4lRAt5z4DjWGUwaKj5ly",
+  "session_ids": [
+   "woFHShK14vonv1rBYEgs"
+  ],
+  "asset_id": "IwErikVyTUhomXj0PyXR",
+  "result": {
+   "generation_id": "Ys1maoJngNbD0j2TTNny",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/IwErikVyTUhomXj0PyXR/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T075007Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=024499fd9bfc7fd3625110ca0b1c17aea4e09d72984213b0c5f5313fec2414972b73546f8be50ec351101b6ab97753b3a360b0c3bf7a069c0ee76a9d36254d43e342f53ebfbcf998124c5d28fec72c0f3f07d5b85ccb416dd77b5b41612e20de6f19c125b99085dbd1c7623f71646d18bc7b9677f57b8de8c22068a71a0f907052b516bd9458bc7e83f3d3d65ecd87dabfe7a98be7215b35901cd05371750864b58f817d6448b03661266e469a931533b99a758f8a59e145553009f8121b2ea78c82b157844be6f41b3ff8d57e347c001dcf0b7752619aae739601466c698bd785b961883842cb051984e4793e12a9984665f3e189af98a9b1421f5aa63a3590"
+   },
+   "session_id": "Ys1maoJngNbD0j2TTNny",
+   "actual_credits": 1650
+  }
+ },
+ {
+  "lesson": "d03",
+  "unit": "d3-cekirdek",
+  "take": "m1",
+  "node_id": "0wtr2fyeJENg27NyBQCd",
+  "session_ids": [
+   "4eJFzh1KiRljM4LOGLwc"
+  ],
+  "asset_id": "OltxiSJNGPHbW2GDqy6O",
+  "result": {
+   "generation_id": "IKEYi8X2c61iYJXzziEK",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/OltxiSJNGPHbW2GDqy6O/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T075007Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=029c1731cb3403a034e440dfd50381bc3cb03026eb2395cd28172e5ce7f0affc42e394d46e5477f65ea8f68d581f3cfffaf98209f750e4db05c0f73810403c7bbd2dcf566fbe597cb7a0b85e3a85654bdde17597339093996b42d8d9a90bf802293f0472b334e6cb563aa98c4d09f8f0b2683552cbdbe5d20abfe2e8b3323b7edf4c097fe7ba2915abf3802eacf5945767ebd81731f0336acb45504ffdbadf3a4ed95ae2525b99f97b4a30002ced576321122f7e659239d5dfef760a8b50381ce28b4d24900fa4237d29fc96ea95ae8be4cbed9d74d5dcdcbafca5024794d0927df378b9d3ea7bb00284e594fc83bd9280744daa2ba51c8651e6d67c3d9d54a0"
+   },
+   "session_id": "IKEYi8X2c61iYJXzziEK",
+   "actual_credits": 1650
+  }
+ },
+ {
+  "lesson": "d03",
+  "unit": "d3-derin-b",
+  "take": "m1",
+  "node_id": "8N4Rb1AXOTgHWDeyvI1H",
+  "session_ids": [
+   "vOKGQ6iM8FJssX3HDma5"
+  ],
+  "asset_id": "mNPKYJQhIUTUK9ubSOmE",
+  "result": {
+   "generation_id": "vDRWy33bj7yuu2Tu4gC5",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/mNPKYJQhIUTUK9ubSOmE/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080311Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=982bd319ed1187b482c2feb7a23954a99cab75338d63eebffcb5d7abb0e0face5ba454cf3f9be91f78f3e19f4fa26b56e851fc7e0401740628711836915197bbef6cde46e3ca0fcdaa2df73d6e8f59cb52ae6f33f540c06f1b4eded61daaa1eb4f9bdcd0c95b59dab58b8c79d7759fcf27fbd108ddce973df24cb9882fe32268255157d7e126f5e99137cd2455a9da0b0e841528e42fac9e4bf2d512524084a4fa32e83c78467fbc8518612e5c80ec3e801687158870a8527fbc93be9577b274c9143db2a74f1ad79aae4c3f1c31123288a0839dc26cbda6bfd12766bd3fc32a474540a87c461764290960ddc06eb3fa575e81c098817bedd98f2dfdf6dde032"
+   },
+   "session_id": "vDRWy33bj7yuu2Tu4gC5",
+   "actual_credits": 1650
+  }
+ },
+ {
+  "lesson": "d03",
+  "unit": "d3-imge",
+  "take": "m1",
+  "node_id": "V9Ev7gmsVmmYFSdrEfhK",
+  "session_ids": [
+   "CDRIKYVfe3p1MzCmwfhs"
+  ],
+  "asset_id": "CmclQdac2t92uj5IUknN",
+  "result": {
+   "generation_id": "rMesKE76XUVbd2zXEPwU",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/CmclQdac2t92uj5IUknN/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T075007Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1c41698b377b229c6190335bacc78b27a24e175bffdd697396f7b39cb5f6725ab1a6aa099281ce7c73aab70fc987206745742e1bcb178a97246ca8f7d53563afc29c1e24f067173b2db4d7d3f1fbf38d7228116cc605498c93b1ab53e43370f58be4dffc6dfc700963572b3042cb16a0ab8c46c46bd7f7db40512b31583ec2739b673cdf2768bbc72b21f89b1ad4e8162af5f5f7fff1cc393a0e58e82ad81170740e49d12f955306fa2b6afddd7bf940fbe79f18ce7f228ee10c35102118d8ffa604abe1a79ff828e2cce290f7881b59df7eba4cb2d1d3adb9f4b722389400ce1869f71ea39e36ac38c3eed4b953d3f21ce0717d9fa8b21e30e1258acbf0efca"
+   },
+   "session_id": "rMesKE76XUVbd2zXEPwU",
+   "actual_credits": 1650
+  }
+ },
+ {
+  "lesson": "d03",
+  "unit": "d3-uyku",
+  "take": "m1",
+  "node_id": "O2dDnBw3xRVYHKasrKPf",
+  "session_ids": [
+   "gSn6t6Ugat6fGpQ7u7Ft"
+  ],
+  "asset_id": "lLYqEFwMikmt8JJdFpaA",
+  "result": {
+   "generation_id": "zyctjCP4gJK7kVoB7bk0",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/lLYqEFwMikmt8JJdFpaA/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T075007Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=3e7e86290614729adf4cdf2f7686caab93b51628e5b68c905cc31f47042ecda9f6429bfbdc94e62b60c273c50d09eb28c36268a9d37b4210c439592f2d0f702468457bc2678e0d20b82186626b76d174be9a2d0fa76beca1b13122b991983df4a05fdae0156724b7bcd088aabd4c22bbeaab537464fc8765c853fa3d3bec810cc4e5920554784fefd4d108e9448f1d2539ccd5dfe944ff720e5aeb609e903a854f28263a4a3841592951cf15ce598e2d942776e2b382f3b7e05f202cc5ded0924bcd9f1e309c6a2f6d754fb64bf23e4e1c6f084601fd2467578a526572651fd279f943106132c15cccbc991c29c2a29e34df48d3e78648aa960696cccd0dd3a2"
+   },
+   "session_id": "zyctjCP4gJK7kVoB7bk0",
+   "actual_credits": 1650
+  }
+ },
+ {
+  "lesson": "d03",
+  "unit": "yagmur-1",
+  "take": "m1",
+  "node_id": "W15A4E2MAQBvrZPrB8If",
+  "session_ids": [
+   "a2xJmRwkjMKovMHSM3sx"
+  ],
+  "asset_id": "z1KYpkMq6vZDzKcGdSPz",
+  "result": {
+   "generation_id": "sA3gAh02s1qNy5eJOxWz",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/z1KYpkMq6vZDzKcGdSPz/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T075007Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=3b34ca88dd739a0b724a27184fd7341ddf35a12b7adc2c1804ae4860801141ad1b4c76619b853df396a991c534a0d1a016632099d32ffe4c0716418e9f862d176019f786b2a5c7b2b527227f95dff26c036ac96262d120e7937f00552582daa4ad46da924ac52ba58ecf03e236016f9df826d2fbe43a4084b010a3b20dc4cbbe330e0c9d03629db0e4d2f9f5142aadc536422445cf94f87b7254db1da653c33d3c4cb7fc71dfe2a3ab6608197c98ed89417c282a5ca04a6a432b75af3192c7f8526596f3b01c10b8698c41e8950ada51276e28b41e28ebd5080bfe7a312a92a3c074c2631703055ee7307667f23581d85ba6bc0ea0a7872cce9104c96141ec7f"
+   },
+   "session_id": "sA3gAh02s1qNy5eJOxWz",
+   "actual_credits": 165
+  }
+ },
+ {
+  "lesson": "d03",
+  "unit": "yagmur-2",
+  "take": "m1",
+  "node_id": "u5LIHLrvToPMFxlXum6u",
+  "session_ids": [
+   "SG84TXlHvDPXnLYzeNuH"
+  ],
+  "asset_id": "ABHI0I7A3zERqfmll1cB",
+  "result": {
+   "generation_id": "VTL5MW96JOhLk3kTUHLB",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/ABHI0I7A3zERqfmll1cB/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080311Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1ecfa984399002cafbff14ae76d71f1b89496d892f331ae28246bacbe19286bd6e07695340666ebd7536d3bd8c8ae9c46090c6f0bf37da296f9793be94940196b88e7ac035494b4ff30e2663b7fa66905fbfe90ce12441a58b2f43be79b68a0c090f77cec0722a2cfe891084e0e920d8a21fb9e4bb367df558e26418afd7befb2584c7526761716db4b4619e945aed604e844a174c657205ce1d163d0b96ac4108a9e92d1b21e2f22b4560a5dc7d960f080c1de21dae5a47755ce09b21f355ea713f8a5580ee310557019fbe7b908df440b4407be6cc681a838f90a57fdfae9f5a7de7455e2acb8ae2f4893d232845945492939ecf59757ff2e8e4dde8f7b8e1"
+   },
+   "session_id": "VTL5MW96JOhLk3kTUHLB",
+   "actual_credits": 165
+  }
+ },
+ {
+  "lesson": "d03",
+  "unit": "yagmur-3",
+  "take": "m1",
+  "node_id": "kXAj9izfiUoN2WkZB7lS",
+  "session_ids": [
+   "BwPAz8ZLsCh77hs5Nbcf"
+  ],
+  "asset_id": "k0d3tlghCvNtjuUnhMi0",
+  "result": {
+   "generation_id": "Rc8wfDnA9l1jjGbSewsf",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/k0d3tlghCvNtjuUnhMi0/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080311Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=8a8ac2aa828317de3458161b96415b01b8ce816d2af038f90418b19921b189c20dbf3fec004d246be91030ec34d871cd7e5c042f95be2308121e0951ad13dfa49adf4feab52add902666b4409b387e7a91d66da840736d1f94388b37a856b06b0fcba849ec32c5688d3f219025f110cea007b29558351292c1b28fe06dbce77dd45a92b91b1623ba48b3c85a1e0260b584b2fa34062287895060ad06de1b75697788d29c0f20ec4db283622fb78d7c7497ea3c1a6a57e123c5d0e282b2e17dd15ee7ff5c51e0a4b6b63d24d5f904f7781b17fa858a5392f7301ad59369682c73a09366b2e31b13df997b2d81f3a1c894cd4d7a0e2195565037518a67e18b4dd3"
+   },
+   "session_id": "Rc8wfDnA9l1jjGbSewsf",
+   "actual_credits": 165
+  }
+ },
+ {
+  "lesson": "d03",
+  "unit": "yagmur-4",
+  "take": "m1",
+  "node_id": "AWIckCph3xhMiN6cEV8P",
+  "session_ids": [
+   "RkOoSjLq1oDvHXL0bNlA"
+  ],
+  "asset_id": "0ND2zadqVbQb8eaxRs76",
+  "result": {
+   "generation_id": "4GaYMXC84u3FGMHV7Ylt",
+   "text": "",
+   "model_id": "eleven_scribe_v1",
+   "language_code": "eng",
+   "language_probability": 0.12450417876243591,
+   "source": {
+    "kind": "audio",
+    "url": "https://storage.googleapis.com/xi-backend/database/workspace/78e1a9661caa4ec69356f3c5c2fbb9c5/content_generation/content_asset/0ND2zadqVbQb8eaxRs76/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20260930%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260930T080311Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=2d51bdade32b49173da6bf9977e73a7ef16719731abebd6bc0b44a2995eb555df661e6d5a68cd202d613a6d64cddc9b510cb5bee582dc76e73350af7f9637faed793fa29685dbc3fff68e12744065b70f70a4e25ec0045bd501806660811430e5e0967a8ce0531d08e1a6cbccc70873b260291a1141b2d4c6ca50761da8b6043452580838229aa8d9a77484063e93c448a912d23915866299665e174022611492bcac2ec92f56338fde93879b081909113b63431f5cc000b28c08535559a950e469d267034eaf51505f21b43d970f51b7132c2001a4052678f05a24680872afc1cd24b7eb5b0cd55b5cb7c1f06ccd0ebcca48cab02f5c6ae6c84ecbc11d57a82"
+   },
+   "session_id": "4GaYMXC84u3FGMHV7Ylt",
+   "actual_credits": 165
+  }
+ }
+]

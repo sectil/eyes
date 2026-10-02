@@ -1,0 +1,16 @@
+{
+ "unit": "c2.x.ritim",
+ "take": "t3",
+ "ref_node": "I6jP1dtgw5GDQEC2T1eX",
+ "asset_id": "8UOb6GeLqUMS3lKJZNpl",
+ "stt_node": "f6LM1uNMYDTt047Et3VZ",
+ "session_id": "sTbDwK2kudHdVkj2vOZr",
+ "generation_id": "5a5vZXtJzt9MnJq0Ge9z",
+ "actual_credits": 31.24,
+ "actual_cents": 0.568,
+ "spoken_duration_secs": 5.44,
+ "scribe_text": "Nefes kendi ritminde sürüyor. Giren hava serin, çıkan hava ılık olabilir",
+ "tts": "Nefes kendi ritminde sürüyor. Giren hava serin, çıkan hava ılık olabilir.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 11\n}"
+}

@@ -1,0 +1,16 @@
+{
+ "unit": "k.zaman",
+ "take": "t2",
+ "ref_node": "dHi4UQQcPW3cPyJ6KSlE",
+ "asset_id": "wJUQCVULnZJciesZLaH4",
+ "stt_node": "Gin17rSgdSccnDxFV2zD",
+ "session_id": "wOddH0Vy60kWqLM2ntwH",
+ "generation_id": "bWgduRTjk0IqyvWCcfEt",
+ "actual_credits": 19.8,
+ "actual_cents": 0.36,
+ "spoken_duration_secs": 3.42,
+ "scribe_text": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun?",
+ "tts": "Günün hangi saatinde ve nerede olduğunu hatırlıyorsun.",
+ "compare_exit": 0,
+ "compare_out": "{\n \"equal\": true,\n \"words\": 7\n}"
+}
