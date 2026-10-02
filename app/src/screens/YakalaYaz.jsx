@@ -358,12 +358,12 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
             {...INPUT}
           />
           {/* Dinlerken alanın içinde, düğmenin hemen yanında (mikrofon kapısı tur 1–2, görev testi tur 1): yerleşime girmez */}
-          {listening ? <span className="live" role="status"><i aria-hidden="true" />Dinliyorum</span> : null}
+          {listening ? <span className={`live${value ? '' : ' left'}`} role="status"><i aria-hidden="true" />Dinliyorum</span> : null}
         </span>
         {/* Alanın yanında yalnız mikrofon; gönderme klavyenin "Gönder"i (5sn-tur2: tek gönderme yolu) */}
         {micReady ? (
-          <button type="button" className={`rb${listening ? ' on' : ''}`} aria-label={listening ? 'Dinlemeyi durdur' : 'Sesle söyle'} aria-pressed={listening} onPointerDown={(e) => e.preventDefault()} onClick={onMicTap}>
-            {listening ? <Square size={18} strokeWidth={0} fill="currentColor" aria-hidden="true" /> : <Mic size={22} strokeWidth={2.2} aria-hidden="true" />}
+          <button type="button" className={`rb${listening ? ' on' : ''}`} aria-label={listening ? undefined : 'Sesle söyle'} aria-pressed={listening} onPointerDown={(e) => e.preventDefault()} onClick={onMicTap}>
+            {listening ? <><Square size={14} strokeWidth={0} fill="currentColor" aria-hidden="true" />Durdur</> : <Mic size={22} strokeWidth={2.2} aria-hidden="true" />}
           </button>
         ) : null}
       </form>

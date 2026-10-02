@@ -126,7 +126,8 @@
 .yy-input .fieldwrap .field { width: 100%; }
 .yy-input .live { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 10px; background: var(--surface-2); font: 600 13px var(--font-body); color: var(--ink-2); pointer-events: none; }
 .yy-input .live i { width: 8px; height: 8px; border-radius: 50%; background: #ff5a4a; box-shadow: 0 0 0 3px rgba(255, 90, 74, 0.2); flex: none; }
-.yy-input .rb.on { background: var(--accent-grad); border: 0; color: var(--accent-ink); box-shadow: 0 0 0 4px rgba(17, 169, 184, 0.22); } /* dinlerken dolu, durdur simgesi */
+.yy-input .rb.on { width: auto; padding: 0 16px; display: flex; gap: 8px; align-items: center; font: 700 16px var(--font-body); background: var(--accent-grad); border: 0; color: var(--accent-ink); box-shadow: 0 0 0 4px rgba(17, 169, 184, 0.22); } /* dinlerken "■ Durdur" (sahip kararı 2026-10-02) */
+.yy-input .live.left { right: auto; left: 12px; } /* alan boşken solda: alan dengesiz durmaz */
 /* İzin sayfası: arka plan koyu ve bulanık (kenarın arkadaki merdiveni kesiyor gibi görünmesin); altta ev çubuğu payı */
 .yy-sheetbg { position: fixed; inset: 0; z-index: 30; background: rgba(4, 8, 12, 0.66); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); display: flex; align-items: flex-end; }
 .yy-sheet { width: 100%; background: var(--surface); color: var(--ink); border-radius: 28px 28px 0 0; padding: 22px 20px max(28px, calc(16px + env(safe-area-inset-bottom))); }

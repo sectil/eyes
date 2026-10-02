@@ -61,3 +61,31 @@ Tekrarlayan bulgular:
 - dinle0'da alan boş ve "Dinliyorum" tek başına sağda duruyor; iki kişi bunu söyledi.
 
 Durum: dinle0 ve dinle1 görev testinde de iki turda geçmedi. Durdu, sahibe soruldu.
+
+## Sahip kararı (2026-10-02)
+"Durdur yazısı ekle". Dinlerken düğme "■ Durdur" yazılı geniş düğme olur. Alan boşken "Dinliyorum" solda durur.
+Ses seviyesi göstergesi eklenmedi.
+
+## Metin kapısı · sürüm notu ve Profil satırı
+Tur 1, beş kişi:
+- n1 0/5, n2 3/5, n3 2/5.
+- s1 0/5, s2 **4/5 geçti**.
+- Profil "Kelimeleri sesle söyle" 3/5. Uygulama kelimeleri sesli okuyacakmış gibi anlaşılıyor.
+
+Tur 2, beş yeni kişi:
+- n4 **5/5 geçti**, n5 2/5 (en iyi: n4 4/5).
+- Profil etiketi: p1 "Sesle cevap" 3/5, p2 "Yazmak yerine sesle söyle" **5/5 geçti**, p3 "Kelimeleri sesle söyleme" 0/5.
+  "Söyleme" olumsuz emir gibi okunuyor.
+
+## Dinleme · sahip kararından sonra · görev testi · beş yeni kişi
+| dinle0 | dinle1 | dinle2 | a | b | c |
+|---|---|---|---|---|---|
+| 1/5 | 0/5 | 3/5 | **5/5** | **5/5**, artık tahmin yok | **5/5** |
+
+Bulgular:
+- Ses alındığını gösteren seviye göstergesi yok; üç kişi söyledi.
+- "Dinliyorum" ilk kelimede soldan sağa atlıyor; iki kişi söyledi.
+- "Dinliyorum" kelimeye yapışık duruyor; iki kişi söyledi.
+- Biri "ms"yi anlamadı.
+
+Durum: sahibe soruldu.

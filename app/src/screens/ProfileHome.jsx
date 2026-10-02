@@ -400,7 +400,7 @@ function YakalaMicPref() {
       <div className="list">
         <button type="button" role="switch" aria-checked={on} className="list-row pref-toggle ph-alarm-sw" onClick={toggle}>
           <Mic size={20} aria-hidden="true" />
-          <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Kelimeleri sesle söyle</span><span className="muted small">Ses telefonunda yazıya çevrilir. Kaydedilmez, hiçbir yere gönderilmez.</span></span>
+          <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Yazmak yerine sesle söyle</span><span className="muted small">Ses telefonunda yazıya çevrilir. Kaydedilmez, hiçbir yere gönderilmez.</span></span>
           <span className="pref-switch" aria-hidden="true"><span className="pref-knob" /></span>
         </button>
       </div>

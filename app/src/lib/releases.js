@@ -6,6 +6,16 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Yakala Yaz (kelime-hafiza). Metin kapısı tur 1–2 (kelime-hafiza/kapi/kod-y5.md): n4 5/5, s2 4/5; sahip yetkisi
+    // "sen onayla" (2026-10-02)
+    id: '2026-10-02-4',
+    title: '2 Ekim, dördüncü güncelleme',
+    items: [
+      { kind: 'new', text: 'Yakala Yaz geldi: iki kelime bir an görünür, aklında tutup yazarsın. Doğru yazdıkça kelimeler daha kısa süre görünür, yanlışta daha uzun.' },
+      { kind: 'new', text: 'Destekleyen telefonlarda kelimeleri sesle de söyleyebilirsin. Ses telefonunda yazıya çevrilir, hiçbir yere gönderilmez.' },
+    ],
+  },
+  {
     // Oku ve Anla sonsuz yolda, okuma testi Pratikler'de. Metin sahip onaylı (2026-10-02; okuma-anlama/kapi/metin-tur1.md
     // S1b 4/5, S2a 5/5). VARSAYIM: sahip "onay" dedi, a/b seçmedi; ilk aday (S2a) kullanıldı.
     id: '2026-10-02-3',
