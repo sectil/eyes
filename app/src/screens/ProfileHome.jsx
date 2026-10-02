@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Camera, Check, ChevronRight, Eye, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints, Volume2, AlarmClock, Moon, LayoutDashboard, Bell, BellOff } from 'lucide-react'
+import { Camera, Check, ChevronRight, Eye, ListChecks, LogOut, Trash2, UserRound, ShieldCheck, Footprints, Volume2, AlarmClock, Moon, LayoutDashboard, Bell, BellOff, Mic } from 'lucide-react'
 import '../styles/info.css'
 import { PageHeader } from '../components/ui.jsx'
 import { emptyIdentity, normalizeIdentity, validBirthDate, ageFromBirthDate, isAdult, initialFor, AVATAR_HUES, AVATAR_PX, NAME_MAX } from '../lib/identity.js'
@@ -8,7 +8,7 @@ import { accountLabel, signedIn } from '../lib/account.js'
 import BirthDateBoxes from '../components/BirthDateBoxes.jsx'
 import CityField from '../components/CityField.jsx'
 import '../styles/account.css'
-import { haptic } from '../lib/native.js'
+import { haptic, speechAvailable, requestSpeechPermission } from '../lib/native.js'
 import { getMembership, PLAN_NAME } from '../lib/subscription.js'
 import { getPrefs, setPrefs, subscribePrefs } from '../lib/prefs.js'
 import { VOICES, VOICE_LABEL, VOICE_LANG, PHRASES, previewVoice } from '../lib/voicePack.js'
@@ -177,6 +177,7 @@ export default function ProfileHome({ identity, profile, account = null, onSave,
       {notify && <NotifyPref notify={notify} />}
 
       <VoicePref />
+      <YakalaMicPref />
 
       <section className="ph-perm" aria-labelledby="ph-perm-h">
         <h2 id="ph-perm-h" className="ph-sec">İzinlerim</h2>
@@ -372,6 +373,37 @@ function AlarmPref({ alarm }) {
         )}
       </div>
       {!show && <p className="muted small ph-alarm-note">Kart kapalıyken alarm yine çalar; yalnız Ana sayfada görünmez.</p>}
+    </section>
+  )
+}
+
+// Yakala Yaz'da sesle cevap (prefs.yakalaMic; METINLER İ4 "Fikrini Profil'den … değiştirebilirsin"). Yalnız telefon
+// Türkçeyi cihaz içinde yazıya çevirebiliyorsa görünür. Açarken iOS izinleri istenir; verilmezse kapalı kalır.
+function YakalaMicPref() {
+  const [ok, setOk] = useState(false)
+  const [pref, setPref] = useState(() => getPrefs().yakalaMic)
+  useEffect(() => {
+    let live = true
+    speechAvailable('tr-TR').then((a) => { if (live) setOk(a?.available === true && a?.onDevice === true) })
+    const off = subscribePrefs((p) => setPref(p.yakalaMic))
+    return () => { live = false; off() }
+  }, [])
+  if (!ok) return null
+  const on = pref === 'on'
+  const toggle = async () => {
+    if (on) { setPrefs({ yakalaMic: 'off' }); return }
+    if (await requestSpeechPermission()) setPrefs({ yakalaMic: 'on' })
+  }
+  return (
+    <section className="ph-alarm" aria-labelledby="ph-yymic-h">
+      <h2 id="ph-yymic-h" className="ph-sec">Yakala Yaz</h2>
+      <div className="list">
+        <button type="button" role="switch" aria-checked={on} className="list-row pref-toggle ph-alarm-sw" onClick={toggle}>
+          <Mic size={20} aria-hidden="true" />
+          <span className="grow stack" style={{ gap: 2 }}><span style={{ fontWeight: 600 }}>Kelimeleri sesle söyle</span><span className="muted small">Ses telefonunda yazıya çevrilir. Kaydedilmez, hiçbir yere gönderilmez.</span></span>
+          <span className="pref-switch" aria-hidden="true"><span className="pref-knob" /></span>
+        </button>
+      </div>
     </section>
   )
 }

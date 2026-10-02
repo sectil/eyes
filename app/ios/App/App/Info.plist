@@ -83,9 +83,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Okuma testinde cümleyi sesli okuduğunu doğrulamak için mikrofon kullanılır. Ses kaydedilmez, saklanmaz.</string>
+	<string>Okuma testinde cümleyi sesli okuduğunu ve Yakala Yaz'da söylediğin iki kelimeyi anlamak için mikrofon kullanılır. Ses kaydedilmez, saklanmaz.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Okuma testinde okuduğun cümlenin ekrandakiyle eşleştiğini kontrol etmek için konuşma tanıma kullanılır.</string>
+	<string>Okuma testinde okuduğun cümleyi ve Yakala Yaz'da söylediğin kelimeleri yazıya çevirmek için kullanılır. Yakala Yaz bunu yalnız telefonun içinde yapar.</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>

@@ -169,11 +169,12 @@ export async function requestSpeechPermission() {
 }
 
 // Dinlemeyi başlatır; onResult({ text, isFinal, segments:[{text,t,d}], error? }).
+// strictOnDevice (Yakala Yaz): cihaz içi çalışamıyorsa eklenti başlamaz ve hata atar (ses telefondan çıkmaz).
 // Döner: durdurma fonksiyonu.
-export async function startSpeech(onResult, { locale = 'tr-TR', onDevice = true } = {}) {
+export async function startSpeech(onResult, { locale = 'tr-TR', onDevice = true, strictOnDevice = false } = {}) {
   const handle = await Speech.addListener('speech', onResult)
   try {
-    await Speech.start({ locale, onDevice })
+    await Speech.start({ locale, onDevice, ...(strictOnDevice ? { strictOnDevice: true } : {}) })
   } catch (e) {
     await handle.remove()
     throw e

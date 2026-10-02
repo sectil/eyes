@@ -8,7 +8,9 @@ import Capacitor
 /// JS adı: "Speech" (src/lib/native.js).
 /// - isAvailable({locale}) → { available, onDevice }
 /// - requestPermission() → { granted }   (mikrofon + konuşma tanıma izni)
-/// - start({locale, onDevice}) / stop()
+/// - start({locale, onDevice, strictOnDevice}) / stop()
+///   strictOnDevice (Yakala Yaz): cihaz içi çalışamıyorsa başlamaz, hata döner; ses hiçbir koşulda telefondan çıkmaz.
+///   onDevice (Okuma testi): cihaz içi varsa onu kullanır, yoksa Apple sunucusuna düşer (davranışı değişmedi).
 /// - "speech" olayı: { text, isFinal, segments: [{ text, t, d }] }  (t, d: saniye, ses başından)
 /// Ses oturumu: kayıtta .playAndRecord (titreşime izinli); bitince AppAudioSession
 /// (FeedbackPlugin.swift) üzerinden Feedback.setAudioMode tercihine döner.
@@ -59,6 +61,11 @@ public class SpeechPlugin: CAPPlugin, CAPBridgedPlugin {
             call.reject("Konuşma tanıma bu dil için kullanılamıyor")
             return
         }
+        let strict = call.getBool("strictOnDevice") ?? false
+        if strict && !recognizer.supportsOnDeviceRecognition {
+            call.reject("Cihaz içi çalışmıyor", "NO_ON_DEVICE")
+            return
+        }
         self.recognizer = recognizer
         do {
             // Çalan yoga dersi kayda girmesin ve kayıt oturumunda hoparlörden çalmasın: ders kesintideki gibi hemen
@@ -75,7 +82,7 @@ public class SpeechPlugin: CAPPlugin, CAPBridgedPlugin {
 
             let req = SFSpeechAudioBufferRecognitionRequest()
             req.shouldReportPartialResults = true
-            if call.getBool("onDevice") ?? false, recognizer.supportsOnDeviceRecognition {
+            if strict || ((call.getBool("onDevice") ?? false) && recognizer.supportsOnDeviceRecognition) {
                 req.requiresOnDeviceRecognition = true
             }
             self.request = req

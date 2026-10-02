@@ -2,7 +2,8 @@
 // Ölçüm verisinden (storage.js) ayrı saklanır; "Tüm verileri sil" bunlara dokunmaz (tema gibi).
 //
 //   getPrefs()          → { sound, haptics, …, voice }  (kopya; ses ve titreşim varsayılan açık)
-//   setPrefs(patch)     → yeni tercihler; yalnızca bilinen anahtarlar: açık/kapalılar boolean, voice 'female' | 'male'
+//   setPrefs(patch)     → yeni tercihler; yalnızca bilinen anahtarlar: açık/kapalılar boolean, voice 'female' | 'male',
+//                         yakalaMic 'ask' | 'on' | 'off'
 //   subscribePrefs(fn)  → abonelikten çıkma fonksiyonu; fn(yeni, önceki) yalnızca gerçek değişiklikte çağrılır
 //
 // localStorage'a her erişim try/catch içinde: gizli sekme, engellenmiş site verisi veya Node testleri
@@ -14,9 +15,11 @@ const KEY = 'gozolcum:prefs'
 // coachLife: profil cevaplarının özeti (uyku, ekran, gece telefonu, stres) de koça gider — ayrı onay (Build 27)
 // voice: seslendirme sesi (lib/voicePack.js); Profilim'de bir kez seçilir, bütün modüller bunu kullanır
 // alarmCard: Ana sayfada alarm kartı (Profil → Alarm "Ana sayfada göster"; kartın ⋯ menüsünden kaldırılır). Alarm yine çalar.
-export const DEFAULT_PREFS = Object.freeze({ sound: true, haptics: true, coach: false, coachHidden: false, coachLife: false, voice: 'female', alarmCard: true })
+// yakalaMic: Yakala Yaz'da sesle cevap (kelime-hafiza PLAN §6): 'ask' ilk dokunuşta izin sayfası, 'on' açık, 'off' kapalı
+// ("Hayır" bir daha sorulmaz; Profil'den açılır)
+export const DEFAULT_PREFS = Object.freeze({ sound: true, haptics: true, coach: false, coachHidden: false, coachLife: false, voice: 'female', alarmCard: true, yakalaMic: 'ask' })
 const KEYS = Object.keys(DEFAULT_PREFS)
-const CHOICES = { voice: ['female', 'male'] }
+const CHOICES = { voice: ['female', 'male'], yakalaMic: ['ask', 'on', 'off'] }
 const valid = (k, v) => (CHOICES[k] ? CHOICES[k].includes(v) : typeof v === 'boolean')
 
 function sanitize(raw) {
