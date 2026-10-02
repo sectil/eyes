@@ -49,8 +49,26 @@ bulguların Nefona'nın kendi Türkçesiyle 50–70 kelimelik anlatımı olacak;
 | andics2016 | Andics A ve ark. Neural mechanisms for lexical processing in dogs. Science 2016;353(6303):1030-1032 | 27576923 | 10.1126/science.aaf3777 | Köpekler kelimenin anlamını ve ses tonunu ayrı işliyor; ödül tepkisi ikisi de övgü olunca çıktı. Metinde "beyin" sözcüğü kullanılmaz |
 | shwartz2020 | Shwartz Y ve ark. Cell types promoting goosebumps. Cell 2020;182(3):578-593 | 32679029 | 10.1016/j.cell.2020.06.031 | Tüyleri diken diken eden kas ve sinir, farede kıl kök hücrelerini de yönetiyor. Fare çalışması; insan için iddia yok |
 
-Elenen: Kohda 2019 (ayna testi, balık) için atıf aramasında yanlış PMID döndü; doğrulanmadan listeye girmez.
-Caro 2019 (zebra çizgileri) birden çok kayıtla eşleşti; doğrulanmadı.
+| kohda2019 | Kohda M ve ark. If a fish can pass the mark test… PLoS Biol 2019;17(2):e3000021 | 30730878 | 10.1371/journal.pbio.3000021 | Temizlikçi balık ayna testinin aşamalarını geçer gibi davrandı; renkli işareti aynada görünce bedenini sürterek silmeye çalıştı. Yorumu tartışmalı: metin "kendini bilir" demez |
+| saito2019 | Saito A ve ark. Domestic cats discriminate their names from other words. Sci Rep 2019;9(1):5394 | 30948740 | 10.1038/s41598-019-40616-4 | Ev kedileri kendi adlarını sıradan sözcüklerden ve evdeki öbür kedilerin adlarından ayırdı; kedi kafedeki kediler öbür kedilerin adlarından ayıramadı |
+| nawroth2018 | Nawroth C ve ark. Goats prefer positive human emotional facial expressions. R Soc Open Sci 2018;5(8):180491 | 30225038 | 10.1098/rsos.180491 | Keçiler önce gülen yüze gitti ve onunla daha uzun ilgilendi; etki gülen yüz sağdayken görüldü |
+| kareklas2013 | Kareklas K ve ark. Water-induced finger wrinkles improve handling of wet objects. Biol Lett 2013;9(2):20120999 | 23302867 | 10.1098/rsbl.2012.0999 | Buruşuk parmaklarla su içindeki nesneler daha hızlı taşındı; kuru nesnelerde fark yoktu |
+| porter2007 | Porter J ve ark. Mechanisms of scent-tracking in humans. Nat Neurosci 2007;10(1):27-9 | 17173046 | 10.1038/nn1819 | İnsanlar koku izi sürebildi ve alıştırmayla iyileşti; burun delikleri yaklaşık 3,5 cm ayrı bölgeden örnek alıyor |
+| hashimoto2016 | Hashimoto T ve ark. Extremotolerant tardigrade genome… Nat Commun 2016;7:12808 | 27649274 | 10.1038/ncomms12808 | Dayanıklı bir su ayısı türünün genomu: hasar yollarının kaybı, onarım gen ailelerinin çoğalması, türe özgü proteinler. İnsan hücresi bulgusu metne alınmadı |
+| king2013 | King SL, Janik VM. Bottlenose dolphins can use learned vocal labels to address each other. PNAS 2013;110(32):13216-21 | 23878217 | 10.1073/pnas.1304459110 | Yabani yunuslar kendi imza ıslıklarının kopyasını duyunca karşılık verdi, başkalarınınkine vermedi |
+| vangiesen2020 | van Giesen L ve ark. Molecular basis of chemotactile sensation in octopus. Cell 2020;183(3):594-604 | 33125889 | 10.1016/j.cell.2020.09.008 | Ahtapot kolları dokunarak tat alan alıcılar taşıyor; suda zor çözünen maddeleri temasla algılıyor; kollar görece bağımsız davranıyor |
+| nath2017 | Nath RD ve ark. The jellyfish Cassiopea exhibits a sleep-like state. Curr Biol 2017;27(19):2984-2990 | 28943083 | 10.1016/j.cub.2017.08.014 | Ters denizanası gece atımlarını seyreltiyor, uyarıya geç tepki veriyor ama çabuk toparlanıyor; gece uyutulmayınca ertesi gün daha durgun |
+| bohm2016 | Böhm J ve ark. The Venus flytrap counts prey-induced action potentials… Curr Biol 2016;26(3):286-95 | 26804557 | 10.1016/j.cub.2015.11.057 | İki uyarıdan sonra kapan kapanıyor, üçten fazlasında sindirim genleri çalışıyor; gen etkinliği uyarı sayısıyla artıyor |
+| johnson1991 | Johnson MH ve ark. Newborns' preferential tracking of face-like stimuli and its subsequent decline. Cognition 1991;40(1-2):1-19 | 1786670 | 10.1016/0010-0277(91)90045-6 | Yaşamın ilk saatindeki bebekler yüze benzeyen çizimi daha uzağa kadar izledi; iki doğumevinde yinelendi; ikinci ayda azaldı |
+| watanabe1995 | Watanabe S ve ark. Pigeons' discrimination of paintings by Monet and Picasso. J Exp Anal Behav 1995;63(2):165-74 | 16812755 | 10.1901/jeab.1995.63-165 | Güvercinler iki ressamı ayırmayı öğrendi, yeni tablolara ve benzer ressamlara genelledi; ters çevrilen Monet tabloları ayırmayı bozdu |
+| newport2016 | Newport C ve ark. Discrimination of human faces by archerfish. Sci Rep 2016;6:27523 | 27272551 | 10.1038/srep27523 | Okçu balıkları 44 insan yüzü arasından öğrendikleri yüzü seçebildi; renk, kafa biçimi ve parlaklık eşitlenince de başardı |
+| smith2016 | Smith AV ve ark. Functionally relevant responses to human facial expressions of emotion in the domestic horse. Biol Lett 2016;12(2):20150907 | 26864784 | 10.1098/rsbl.2015.0907 | Atlar kızgın yüze daha çok sol gözle baktı ve kalp atışları daha hızlı yükseldi |
 
-Hedef havuz: ilk sürüm için en az 24 metin (her tur 2 metin, 12 gün tekrar yok). Kalan 14 aday sahip onaylarsa
-aynı ölçütle aranır.
+Aşama 2'de eklenen 14 kaynak da aynı araçla doğrulandı (2026-10-02). Kohda 2019 için ilk aramada yanlış PMID dönmüştü;
+doğru kayıt PLoS Biol'dan çekildi.
+
+Elenen: Caro 2019 zebra çizgileri, birden çok kayıtla eşleşti. Thaler 2011 körlerde ekoyla yön bulma: bulgu beyin
+görüntülemesine dayanıyor ve hasta grubu, metin için uygun değil. Frank 2024 karıncalarda bacak kesme: korkutucu
+olabilir. Inoue 2007 şempanze sayı belleği: PubMed'de özet yok. Liao 2024 karga sayma: PubMed'de bulunamadı.
+
+Havuz: 24 metin, her tur 2 metin, 12 gün tekrar yok.
