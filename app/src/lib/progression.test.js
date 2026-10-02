@@ -52,12 +52,15 @@ describe('progressionCtx: sayaçlar kayıtlardan, bugünden önceki günlerle', 
     // modül listesi verilmezse bütün kayıtlar sayılır
     expect(progressionCtx({ tests, sessions, now: at(6) }).pathDay).toBe(4)
   })
-  it('yolda olmayan kısa E testi (va-daily) pathDay\'e sayılmaz; kendi sayacı tutulur', () => {
+  it('yolda olmayan kısa E testi (va-daily) ve okuma testi pathDay\'e sayılmaz; kendi sayaçları tutulur', () => {
+    // Sahip kararı 2026-10-02: okuma testi sonsuz yoldan çıktı (today() yok); yoldaki yerini Oku ve Anla aldı
     const tests = [{ type: 'va-daily', eye: 'R', date: iso(1) }, { type: 'va-daily', eye: 'L', date: iso(2) }, { type: 'reading', date: iso(3) }]
+    const sessions = [{ type: 'okuma-anlama', correct: 3, date: iso(4) }]
     const p = progressionCtx({ tests, now: at(5), modules: registry.live })
-    expect(p.pathDay).toBe(1) // yalnız okuma testi
+    expect(p.pathDay).toBe(0)
     expect(p.mod.daily.D).toBe(2)
     expect(p.mod.reading.D).toBe(1)
+    expect(progressionCtx({ tests, sessions, now: at(5), modules: registry.live }).pathDay).toBe(1) // yalnız Oku ve Anla
   })
   it('ölçümde koşu günü (runDay): gece yarısını geçen koşu başladığı güne sayılır', () => {
     const tests = [{ type: 'va-weekly', eye: 'OU', date: new Date(2026, 9, 2, 0, 3).toISOString(), runDay: dayKey(at(1)) }]

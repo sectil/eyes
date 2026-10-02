@@ -43,10 +43,12 @@ describe('TodayPath · "Yeni" rozeti', () => {
     expect(html).not.toContain('aria-label="Göz kırpma, yeni')
     expect(html).toContain('<span class="tag new">Yeni</span>')
   })
+  // Ölçüm durağı: okuma testi 2026-10-02'den beri yolda değil (sahip kararı); 8. gün haftalık E testi yolda
   it('mola ve ölçüm durağında rozet kendi etiketinin yanında ("Mola · Yeni", "Ölçüm · Yeni")', () => {
-    const c = ctx(at(2))
+    const c = ctx(at(8))
     const plan = buildPath(registry.live, c)
-    const html = draw(plan, ['breath', 'reading'])
+    expect(plan.stops.map((s) => s.key)).toEqual(expect.arrayContaining(['breath', 'weekly']))
+    const html = draw(plan, ['breath', 'weekly'])
     expect(html).toMatch(/<span class="tag">Mola<span class="new"> · Yeni<\/span><\/span>/)
     expect(html).toMatch(/<span class="tag">Ölçüm<span class="new"> · Yeni<\/span><\/span>/)
   })

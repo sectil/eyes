@@ -23,6 +23,7 @@ const APPROVED_NAMES = [
   'Hızlı Bakış oyunu', 'Tek Bakışta oyunu', 'Fark Ettin mi? alıştırması', 'fark etme görevi', 'Farkındalık merkezi',
   'göz kırpma egzersizi', 'göz egzersizi', '1 dakikalık mola', 'su kaydı', 'kısa E testi', 'haftalık E testi', 'okuma testi',
   'iyi oluş soruları', 'alarm',
+  'Oku ve Anla alıştırması', // sahip onayı 2026-10-02 (okuma-anlama/METINLER.md §5)
 ]
 // Sahip onaylı ölçüm adları (2026-10-01): Ayna puanından söz eden cümlede Yön'ün adı
 const APPROVED_METRIC_NAMES = { 'yon-ayna': 'Yön alıştırması' }
@@ -67,7 +68,8 @@ function momentsOf(m, type, { strict = true } = {}) {
   return buildMoments(ctx).filter((x) => x.type === type && x.facts?.module === m.id)
 }
 
-const usable = (t, facts) => (t.needs ?? []).every((n) => NEEDS[n]?.(facts) === true) && (!t.only?.metric || t.only.metric === facts.metric)
+const usable = (t, facts) => (t.needs ?? []).every((n) => NEEDS[n]?.(facts) === true) && (!t.only?.metric || t.only.metric === facts.metric) &&
+  (!t.only?.module || t.only.module === facts.module)
 const sentences = (moment) => (cells[moment.cell] ?? []).filter((t) => usable(t, moment.facts)).map((t) => tr.render(t.text, moment.facts, lex)).filter((s) => s != null)
 
 // Yalın addan gövde adayları: ad tamlaması (son ünlü 3. tekil iyelik; "molası" → "mola", "sesi" → "ses") ya da yalın ad

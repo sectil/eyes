@@ -101,12 +101,13 @@ describe('pathYoga: ölçüm günleri', () => {
     const p = pathYoga(c, ALL.publishedMinutes)
     expect(p).toMatchObject({ minutes: 3, full: false })
   })
-  it('okuma günü → 3 dk, sayaç dolmuş olsa da', () => {
-    // 16. gün okuma günü (E testi dün yapıldı); altı kısa yoga günü birikmiş
+  it('eski okuma günü artık ölçüm günü değil: sayaç dolmuşsa tam ders (5 dk)', () => {
+    // 16. gün eski planda okuma günüydü (E testi dün yapıldı); altı kısa yoga günü birikmiş. Sahip kararı 2026-10-02:
+    // okuma testi sonsuz yoldan çıktı, ölçüm günü yalnız haftalık E testi (lib/yoga.js measureDay)
     const short = { 3: [1, 3], 4: [5, 3], 5: [4, 3], 6: [6, 3], 7: [8, 3], 9: [9, 3] }
     const c = ctxAt(16, 10, { yogaDays: short })
     expect(yogaCounters(c.sessions, c.tests, c.now).shortSinceFull).toBe(6)
-    expect(pathYoga(c, ALL.publishedMinutes)).toMatchObject({ minutes: 3, full: false })
+    expect(pathYoga(c, ALL.publishedMinutes)).toMatchObject({ minutes: 5, full: true })
   })
 })
 

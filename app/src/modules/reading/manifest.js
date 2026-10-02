@@ -1,6 +1,5 @@
 // Okuma testi (MNREAD tarzı, sesli okuma doğrulamalı; eski adı "Okuma hızı"). Ana sonuç rahat okuduğun
 // en küçük yazı (kritik yazı boyu). Ayrıntı: lib/reading.js, screens/ReadingTest.jsx.
-import { readingStatus } from '../../lib/today.js'
 import { readingV2, cpsOf } from '../../lib/reading.js'
 import { sameCondition } from '../../lib/trend.js'
 
@@ -40,15 +39,9 @@ export default {
   progress: { domain: 'eye' },
   gates: { eyeBudget: 'test' },
   ask: { before: ['correction'], after: ['nearDifficulty'] }, // gözlük testten önce, yakın zorluk sonuçtan sonra
-  home: { section: 'measure', order: 30 },
-  // Haftada bir, takvim günüyle; haftalık E testiyle aynı güne düşerse bir gün sonra (lib/today.js readingStatus,
-  // karar 2026-09-29). Bugün yapıldıysa tamam görünür.
-  today({ tests, sessions, now }) {
-    const stop = { title: 'Okuma', minutes: 3, slot: 'measure', glyph: 'lines' }
-    const s = readingStatus(tests, now, sessions)
-    if (s.state === 'done') return { ...stop, done: true }
-    return s.state === 'due' ? { ...stop, done: false } : null
-  },
+  // Sahip kararı 2026-10-02: okuma testi sonsuz yoldan çıktı, Pratikler'de isteğe bağlı durur; yoldaki yerini
+  // Oku ve Anla aldı (modules/okuma-anlama). Testin kendisi, ölçüsü ve kayıtları değişmedi.
+  home: { section: 'practice', order: 45 },
   // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
   // VARSAYIM: kanıt Gelişim'in Göz alanı kaynaklarından yakın görme testi (katibeh2022; components/ProgressOverview.jsx
   // SOURCES_OF.eye). Kayıtları tests deposunda: Nef oradan okur (records). Yalnız sayısız ilk kayıt ve uzun ara; görme

@@ -515,6 +515,37 @@ export const SOURCES = {
     limit: 'Uyku günlükle (öznel) ölçüldü.',
     only: 'moon',
   },
+  // Oku ve Anla (okuma-anlama/arastirma/KAYNAKLAR.md §A; künye PubMed'den, 2026-10-02). finding/limit yok: bilim kartı
+  // cümleleri henüz kapıdan ve sahip onayından geçmedi.
+  // VARSAYIM: Rayner 2016 anlatı derlemesi; DESIGNS'ta ayrı tür yok, 'review' seçildi (sahibe soruldu).
+  rayner2016: {
+    authors: ['Rayner K', 'Schotter ER', 'Masson ME', 'Potter MC', 'Treiman R'], year: 2016,
+    title: 'So Much to Read, So Little Time: How Do We Read, and Can Speed Reading Help?',
+    titleTr: 'Okunacak çok şey, az zaman: Nasıl okuruz ve hızlı okuma işe yarar mı?',
+    journal: 'Psychol Sci Public Interest', cite: '17(1):4-34', doi: '10.1177/1529100615623267', pmid: '26769745',
+    design: 'review',
+  },
+  kuperman2021: {
+    authors: ['Kuperman V', 'Kyröläinen AJ', 'Porretta V', 'Brysbaert M', 'Yang S'], year: 2021,
+    title: 'A lingering question addressed: Reading rate and most efficient listening rate are highly similar.',
+    titleTr: 'Uzun süredir sorulan bir soru: Okuma hızı ile en verimli dinleme hızı birbirine çok yakın.',
+    journal: 'J Exp Psychol Hum Percept Perform', cite: '47(8):1103-1112', doi: '10.1037/xhp0000932', pmid: '34516216',
+    design: 'experiment',
+  },
+  miyata2012: {
+    authors: ['Miyata H', 'Minagawa-Kawai Y', 'Watanabe S', 'Sasaki T', 'Ueda K'], year: 2012,
+    title: 'Reading speed, comprehension and eye movements while reading Japanese novels: evidence from untrained readers and cases of speed-reading trainees.',
+    titleTr: 'Japonca roman okurken okuma hızı, anlama ve göz hareketleri: Eğitimsiz okurlar ve hızlı okuma kursiyerleri.',
+    journal: 'PLoS One', cite: '7(5):e36091', doi: '10.1371/journal.pone.0036091', pmid: '22590519',
+    design: 'observational', n: '17 ve 15 kişilik iki çalışma',
+  },
+  trauzettel2012: {
+    authors: ['Trauzettel-Klosinski S', 'Dietz K'], year: 2012,
+    title: 'Standardized assessment of reading performance: the New International Reading Speed Texts IReST.',
+    titleTr: 'Okuma performansının standart ölçümü: Yeni Uluslararası Okuma Hızı Metinleri IReST.',
+    journal: 'Invest Ophthalmol Vis Sci', cite: '53(9):5452-61', doi: '10.1167/iovs.11-8284', pmid: '22661485',
+    design: 'validation', n: '17 dilde 436 kişi',
+  },
 }
 
 // "Ulrich RS" · "Martens JP, Prokopetz M, Tomlinson K" · 4+ yazar → ilk üçü + "ve ark."

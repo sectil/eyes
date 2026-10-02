@@ -158,6 +158,12 @@ Her cümle 5 kişilik kapıda en az 4/5 aldı ve ben de okudum. Örnekler gerçe
 
 Toplam 112 cümle. Ayrıca kart etiketi: "Nef".
 
+## Oku ve Anla · modüle özel (sahip onayı 2026-10-02, "Onay"; okuma-anlama/METINLER.md §5, ARA_RAPOR_1.md §11)
+5 kişilik metin kapısından geçmedi; sahip doğrudan onayladı.
+- İlk okuman tamam. Hızın ancak anladığında sayılır; acele etme.
+- Okuma hızın başlangıcından iyi, anlaman da yerinde.
+- Bir süredir okumadın. Bugün kısa bir bulgu seni bekliyor.
+
 ## Nef kartı düğmeleri (sahip onayı 2026-10-02, "Onaylıyorum"; kapı 5/5)
 - Puan kartı, kartın zaman dilimiyle aynı dilimde: "Bu akşam da Dalga sesi · 8 dk" (dilim + "da/de", modül, süre)
 - Puan kartı, başka dilimde: "Bugün de Dalga sesi · 8 dk"

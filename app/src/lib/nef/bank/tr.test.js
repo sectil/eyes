@@ -152,6 +152,9 @@ const EX = {
   'FTB-2': [{ module: 'tek-bakis', metric: 'tek-bakis-span', start: 4 }, 'Başlangıç sayın belli oldu: Tek Bakışta oyununda 4 harf.'],
   'FTB-4': [{ module: 'gokyuzu', effect: 'gokyuzu-rest', measure: 'dinlenmişlik', better: 'up', before: 3, after: 6 }, "İlk Gökyüzü molandan sonra dinlenmişliğin 3'ten 6'ya çıktı."],
   'FTB-8': [{ module: 'tek-bakis', metric: 'tek-bakis-span', start: 4 }, 'İlk Tek Bakışta turunda 4 harf kavradın; başlangıcın bu.'],
+  'FTB-OA1': [{ module: 'okuma-anlama' }, 'İlk okuman tamam. Hızın ancak anladığında sayılır; acele etme.'],
+  'MC-OA1': [{ module: 'okuma-anlama', metric: 'okuma-anlama-hiz', start: 200, current: 230 }, 'Okuma hızın başlangıcından iyi, anlaman da yerinde.'],
+  'RG-OA1': [{ module: 'okuma-anlama' }, 'Bir süredir okumadın. Bugün kısa bir bulgu seni bekliyor.'],
   'RG-1': [{ module: 'dalga' }, 'Dalga sesi kaldığın yerde duruyor.'],
   'RG-2': [{ module: 'dalga' }, 'Dalga sesine yeniden hoş geldin.'],
   'RG-3': [SNAKE, 'Bir aradan sonra Yılan oyunu; kayıtların olduğu gibi duruyor.'],
@@ -171,9 +174,9 @@ const EX = {
 const all = Object.entries(cells).flatMap(([cell, list]) => list.map((t) => ({ ...t, cell })))
 
 describe('bank/tr.js · onaylı metinle harfi harfine', () => {
-  it('onay dosyası okunuyor: 112 cümle', () => {
-    expect(approved).toHaveLength(112)
-    expect(new Set(approved).size).toBe(112)
+  it('onay dosyası okunuyor: 115 cümle (112 N1 + 3 Oku ve Anla)', () => {
+    expect(approved).toHaveLength(115)
+    expect(new Set(approved).size).toBe(115)
   })
 
   it.each(all.map((t) => [t.id, t]))('%s örnek veriyle onaylı cümleyi verir', (id, t) => {
@@ -192,7 +195,7 @@ describe('bank/tr.js · onaylı metinle harfi harfine', () => {
     const rendered = all.map((t) => render(t.text, EX[t.id][0], lexicon))
     expect(rendered.every((s) => approved.includes(s))).toBe(true)
     expect(new Set(rendered)).toEqual(new Set(approved))
-    expect(all).toHaveLength(112)
+    expect(all).toHaveLength(115)
   })
 
   it('kart etiketi onaylı: "Nef"', () => {

@@ -45,7 +45,8 @@ export const NEEDS = Object.freeze({
   metric: (f) => Boolean(f.metric) && isNum(f.start),
 })
 
-const usable = (t, facts) => (t.needs ?? []).every((n) => NEEDS[n]?.(facts) === true) && (!t.only?.metric || t.only.metric === facts.metric)
+const usable = (t, facts) => (t.needs ?? []).every((n) => NEEDS[n]?.(facts) === true) && (!t.only?.metric || t.only.metric === facts.metric) &&
+  (!t.only?.module || t.only.module === facts.module)
 
 // Uyku ve Yön rahatsızlığı ikinci kez süzülür (an motoru zaten kurmaz; sahip kararı burada da korunur)
 const allowed = (m) => !EXCLUDED_EFFECTS.has(m?.facts?.effect) && !EXCLUDED_METRICS.has(m?.facts?.metric)
