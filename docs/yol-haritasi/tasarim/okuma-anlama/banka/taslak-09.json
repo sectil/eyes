@@ -96,7 +96,7 @@
       "yazar": "Hayashi ve ark.",
       "dergi": "Journal of Experimental Biology",
       "yil": 2024,
-      "metin": "Mercan resiflerindeki balıklar parlak renkleriyle dikkat çeker. Palyaço balıkları da bedenlerindeki beyaz çizgilerle tanınır. Bu balıklar bir deniz şakayığının arasında yaşar ve onu kendi bölgesi gibi korur. Bilinen 28 türün bedeninde sıfır ile üç arasında beyaz çizgi bulunur. Bu çizgilerin türü tanımaya yaradığı düşünülüyordu. Bir ekip, üç çizgili bir türün akvaryumda doğup büyüyen bireylerini inceledi. Bölgelerine başka bir balık girince, kendi türlerine öteki türlerden daha sık saldırdılar. Ekip sonra 120 balığa çizgisiz, bir, iki ve üç çizgili maketler gösterdi. Balıklar en sık üç çizgili makete saldırdı ve ona canlı bir balığa saldırdıkları kadar sık saldırdı. Buna göre bu balıklar, çizgi sayısına bakarak aynı şakayığı kullanabilecek rakipleri seçiyor.",
+      "metin": "Mercan resiflerindeki balıklar parlak renkleriyle dikkat çeker. Palyaço balıkları da bedenlerindeki beyaz çizgilerle tanınır. Bu balıklar bir deniz şakayığının arasında yaşar ve onu kendi bölgesi gibi korur. Bilinen 28 türün bedeninde sıfır ile üç arasında beyaz çizgi bulunur. Bu çizgilerin türü tanımaya yaradığı düşünülüyordu. Bir ekip, üç çizgili bir türün akvaryumda doğup büyüyen bireylerini inceledi. Bölgelerine başka bir balık girince, kendi türlerine öteki türlerden daha sık saldırdılar. Ekip sonra 120 balığa çizgisiz, bir, iki ve üç çizgili maketler gösterdi. Balıklar en sık üç çizgili makete saldırdı ve ona kendi türlerinden canlı bir balığa saldırdıkları kadar sık saldırdı. Buna göre bu balıklar, çizgi sayısına bakarak aynı şakayığı kullanabilecek rakipleri seçiyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -170,7 +170,7 @@
       "yazar": "Gordon ve ark.",
       "dergi": "Nature Communications",
       "yil": 2019,
-      "metin": "Dünyanın her yerinde mercan resifleri insan etkisiyle giderek daha çok zarar görüyor. Sağlıklı bir balık topluluğu, resifin bozulmasına karşı koymaya yardım eder. Ama bozulmuş bir resifin kokusu da sesi de değişir. Bu yüzden yerleşecek yer arayan balıklara sağlıklı bir resif kadar çekici gelmez. Bir ekip bu durumu sesle değiştirmeyi denedi. Altı hafta süren bir deneyde, mercan kırıntılarından oluşan resif öbeklerine sağlıklı bir resifin sesi çalındı. Başka öbeklerin sesine ise dokunulmadı. Ses çalınan öbeklerde balık sayısı ikiye katlandı. Tür sayısı da yüzde 50 daha fazlaydı. Artış, farklı biçimde beslenen bütün büyük balık gruplarında görüldü. Ekibe göre bu yol, resif onarımı ve iyi bir korumayla birlikte kullanılırsa toparlanmayı hızlandırabilir.",
+      "metin": "Dünyanın her yerinde mercan resifleri insan etkisiyle giderek daha çok zarar görüyor. Sağlıklı bir balık topluluğu, resifin bozulmasına karşı koymaya yardım eder. Ama bozulmuş bir resifin kokusu da sesi de değişir. Bu yüzden yerleşecek yer arayan balıklara sağlıklı bir resif kadar çekici gelmez. Bir ekip bu durumu sesle değiştirmeyi denedi. Altı hafta süren bir deneyde, mercan kırıntılarından oluşan resif öbeklerine sağlıklı bir resifin sesi çalındı. Başka öbeklerin sesine ise dokunulmadı. Ses çalınan öbeklerde balık sayısı ötekilerin iki katına çıktı. Tür sayısı da yüzde 50 daha fazlaydı. Artış, farklı biçimde beslenen bütün büyük balık gruplarında görüldü. Ekibe göre bu yol, resif onarımı ve iyi bir korumayla birlikte kullanılırsa toparlanmayı hızlandırabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -214,12 +214,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ses çalınan öbeklerde balık sayısına ne oldu?",
+          "soru": "Ses çalınan öbeklerde balık sayısı ötekilere göre nasıldı?",
           "secenekler": [
-            "İkiye katlandı",
-            "Yarıya indi",
-            "Hiç değişmedi",
-            "On katına çıktı"
+            "İki katıydı",
+            "Yarısı kadardı",
+            "Aynıydı",
+            "On katıydı"
           ]
         },
         {
@@ -466,7 +466,7 @@
       "yazar": "Van Wassenbergh ve ark.",
       "dergi": "Current Biology",
       "yil": 2022,
-      "metin": "Ağaçkakan gagasını ağaca vururken kafasının içi nasıl korunuyor? Uzun süre, kafatasının darbeyi yutan bir yastık gibi çalıştığı düşünüldü. Bu fikir, darbe emen malzemelere ve kask gibi araçlara bile ilham verdi. Ama fikirde bir çelişki vardı. Kafatası darbenin enerjisini yutsaydı, kuşun ağaca vurma gücü de azalırdı. Böyle bir özelliğin doğal seçilimle ortaya çıkması bu yüzden zor görünüyordu. Bir ekip, üç ağaçkakan türünde gagalama sırasında başın ne kadar sert yavaşladığını canlı kuşlarda ölçtü. Ölçümleri modellerle de inceledi. Sonuç yaygın düşüncenin tersiydi. Kafatası darbeyi yutmuyor, gagalamayı güçlendiren sert bir çekiç gibi çalışıyordu. Ekibin hesaplarına göre bu darbeler yine de primatlar için bilinen zarar sınırının altında kalıyor.",
+      "metin": "Ağaçkakan gagasıyla ağaca vurduğunda kafatası ne işe yarıyor? Uzun süre, kafatasının vuruşun enerjisini bir yastık gibi yuttuğu düşünüldü. Bu fikir, enerji emen malzemelerin ve aletlerin tasarımına bile ilham verdi. Ama fikirde bir çelişki vardı. Kafatası vuruşun enerjisini yutsaydı, kuşun ağaca vurma gücü de azalırdı. Böyle bir özelliğin doğal seçilimle ortaya çıkması bu yüzden zor görünüyordu. Bir ekip, üç ağaçkakan türünde başın ağaca çarptığı anda ne kadar hızla yavaşladığını canlı kuşlarda ölçtü. Ölçümleri, kafanın mekaniğini canlandıran modellerle de inceledi. Kafatasının enerjiyi yutmadığı, gagalamayı güçlendiren sert bir çekiç gibi çalıştığı ortaya çıktı. Bulgu, bu ünlü davranışın nasıl evrimleştiğine dair yaygın görüşle çelişiyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -482,7 +482,7 @@
           "tur": "ayrinti",
           "soru": "Uzun süre ağaçkakanın kafatasının nasıl çalıştığı düşünüldü?",
           "secenekler": [
-            "Darbeyi yutan bir yastık gibi",
+            "Vuruşun enerjisini yutan bir yastık gibi",
             "Sesi büyüten bir boru gibi",
             "Isıyı saklayan bir kap gibi",
             "Kendini onaran bir kabuk gibi"
@@ -490,11 +490,11 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Eski fikir hangi araçlara ilham verdi?",
+          "soru": "Eski fikir neye ilham verdi?",
           "secenekler": [
-            "Kask gibi darbe emen araçlara",
-            "Ormanda kullanılan matkap ve testerelere",
-            "Uçak kanatlarına",
+            "Enerji emen malzemelere ve aletlere",
+            "Ormanda kullanılan matkaplara",
+            "Uçak kanatlarının biçimine",
             "Su pompalarına"
           ]
         },
@@ -510,12 +510,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip kaç ağaçkakan türünde ölçüm yaptı?",
+          "soru": "Ekip canlı kuşlarda neyi ölçtü?",
           "secenekler": [
-            "Üç",
-            "Bir",
-            "On iki",
-            "Kırk"
+            "Başın ağaca çarptığı anda ne kadar hızla yavaşladığını",
+            "Gaganın kaç yılda uzadığını",
+            "Kuşun bir günde kaç ağaç gezdiğini",
+            "Ağaç kabuğunun ne kadar kalın olduğunu"
           ]
         },
         {
@@ -523,7 +523,7 @@
           "soru": "Ekibe göre kafatası nasıl çalışıyor?",
           "secenekler": [
             "Gagalamayı güçlendiren sert bir çekiç gibi",
-            "Darbeyi emen yumuşak bir yastık gibi",
+            "Enerjiyi emen yumuşak bir yastık gibi",
             "Titreşimi dağıtan bir yay gibi",
             "Sesi azaltan bir tampon gibi"
           ]
@@ -584,7 +584,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Sert ipin daha iyi malzeme olduğu neden anlaşıldı?",
+          "soru": "Sert ip neden daha iyi bir malzeme gibi görünüyordu?",
           "secenekler": [
             "Kapalı bir yuva için ondan daha az parça gerekti",
             "Kuşlar onu daha kolay taşıdı",
@@ -594,12 +594,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kuşların tercihi kimin tercihine benziyordu?",
+          "soru": "Kuşların tercihi, babalarının ve kardeşlerinin tercihine benziyor muydu?",
           "secenekler": [
-            "Babalarına da kardeşlerine de benzemiyordu",
-            "Yalnız babalarınınkine",
-            "Yalnız kardeşlerininkine",
-            "Hem babalarına hem kardeşlerine"
+            "İkisininkine de benzemiyordu",
+            "Yalnız babalarınınkine benziyordu",
+            "Yalnız kardeşlerininkine benziyordu",
+            "İkisininkine de çok benziyordu"
           ]
         }
       ]
@@ -673,7 +673,7 @@
             "Mavi",
             "Kırmızı",
             "Sarı",
-            "Mor"
+            "Turuncu"
           ]
         }
       ]

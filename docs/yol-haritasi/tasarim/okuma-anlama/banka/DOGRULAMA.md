@@ -1,5 +1,20 @@
 # Bilimsel doğrulama kayıtları
 
+## taslak-09
+
+PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Yayın türü: hepsi "Journal Article" (oa087 ek olarak "Video-Audio Media", özgün çalışma); yorum, derleme, düzeltme yok. Uzunluk oranı sonrası: doğru seçenek en uzun 17/60 (%28).
+
+- oa081 | tamam ("dokunmayla gelen uyarılar" özetteki mechanical stimuli'nin sadeleştirmesi) | değişiklik yok
+- oa082 | düzeltildi: özette saldırı sıklığı "canlı A. ocellaris" ile eşit; "canlı bir balığa" → "kendi türlerinden canlı bir balığa" | değişiklik yok
+- oa083 | düzeltildi: "balık sayısı ikiye katlandı" zamanla artış gibi okunuyordu; özetteki karşılaştırma kontrol öbeklerine göre olduğu için "ötekilerin iki katına çıktı" | balık sayısı sorusu kökü ve seçenekleri karşılaştırmaya göre yeniden yazıldı
+- oa084 | tamam | değişiklik yok
+- oa085 | tamam | değişiklik yok
+- oa086 | tamam (insanla karşılaştırma özetin son cümlesinde var, kaldı) | değişiklik yok
+- oa087 | yeniden yazıldı (§1 korku/sağlık sınırı): darbe, beyni koruma, kask ve "primatlar için zarar sınırının altında" cümlesi çıkarıldı; metin yalnız mekanik bulguya daraltıldı (vuruş enerjisini yutan yastık varsayımı, çelişki, üç türde canlı ölçüm ve model, sert çekiç); son cümle özetteki "yaygın evrim görüşüyle çelişiyor" | ilham ve yastık soruları yeni ifadeye uyduruldu; "kaç tür" sorusu yerine "neyi ölçtü" sorusu; KAYNAKLAR B9 satırı güncellendi
+- oa088 | tamam | "daha iyi malzeme olduğu neden anlaşıldı" kökü metindeki "gibi görünüyordu"ya yumuşatıldı; "kimin tercihine benziyordu" kökü olumsuz cevaplı önyargılı soru olduğu için "benziyor muydu?" yapıldı
+- oa089 | tamam | ışık rengi sorusunda "Mor" seçeneği çıkarıldı (özette tepe 430 nm, mora yakın; kısmen doğru sayılabilir) → "Turuncu"
+- oa090 | tamam | değişiklik yok
+
 ## taslak-08
 
 PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor. Yayın türü: 8 kayıt "Journal Article"; oa072 (25981795) ve oa077 (34102116) "Letter", ama ikisi de özetli ve özgün veri sunan kısa çalışma (1401 kişilik anket ve deney; donmuş topraktan canlı rotifer), yorum değil; kaldı. Yorum, derleme, düzeltme yok. Uzunluk oranı sonrası: doğru seçenek en uzun 16/60 (%27).
