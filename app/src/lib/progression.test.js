@@ -1,7 +1,7 @@
 // İlerleme motoru (SONSUZ_YOL.PLAN.v1 §3.A.2, §3.A.8, §3.A.10, §3.G.6): bugün sayılmaz, yumuşak dönüş, açılma, Dvar;
 // eski kullanıcının güncelleme gününde tutmalı ya da beklemeli kalıp gelmez; ara kilidi ilerleme yokken bugünkü kural.
 import { describe, it, expect } from 'vitest'
-import { progressionCtx, stageOf, unlocked, restDecision, newStopKeys, seedHash, weeklyPick, pathRestMinutes } from './progression.js'
+import { progressionCtx, stageOf, unlocked, restDecision, newStopKeys, seedHash, weeklyPick, pathRestMinutes, updateDay } from './progression.js'
 import { LADDERS } from './ladders.js'
 import { breathOfDay, breathSafety } from './breathMix.js'
 import { registry } from '../modules/registry.js'
@@ -354,5 +354,32 @@ describe('pathRestMinutes: mola bandının ve baloncuğun süresi', () => {
     expect(pathRestMinutes({ locked: false, used: MIN, budgetMs: 5 * MIN, due: null }, day1, { pathDay: 0 })).toBe(1)
     // başka bir mola (bütçe) sürüyor: 5 dk
     expect(pathRestMinutes({ locked: true, reason: 'budget', leftMs: MIN, due: null }, plan(1, 1, 1), { pathDay: 0 })).toBe(5)
+  })
+})
+
+describe('Fark Ettin mi? sahne merdiveni (LADDERS[\'fark-ettin\'], badge: false)', () => {
+  const street = (n, extra = {}) => ({ type: 'street', noticed: 1, asked: 2, scene: 'cadde', stage: 'F1', date: iso(n), ...extra })
+  const stop = { key: 'fark-ettin', id: 'fark-ettin' }
+  it('stageOf: F1 Cadde → F5 Akşam; V1 yağmur 14, V2 tabela 21 (yeni kullanıcıda Dvar = D)', () => {
+    const st = (D) => {
+      const s = []
+      for (let n = 1; n <= D; n++) s.push(street(n))
+      return stageOf(ctxOf([], s, at(D + 1)), 'fark-ettin')
+    }
+    expect([0, 1, 2, 4, 7, 10].map((D) => st(D).id)).toEqual(['F1', 'F1', 'F2', 'F3', 'F4', 'F5'])
+    expect(st(13).variant).toBeNull()
+    expect(st(14).variant).toMatchObject({ id: 'V1', scene: 'yagmur' })
+    expect(st(21).variant).toMatchObject({ id: 'V2', kind: 'tabela' })
+  })
+  it('yol rozeti ve güncelleme günü değişmez: açılma günü (6. gün) yeni; sahne basamağı günleri yeni değil', () => {
+    const s = []
+    for (let n = 1; n <= 30; n++) s.push(routine(n))
+    expect(newStopKeys(ctxOf([], s.slice(0, 5), at(6)), [stop])).toEqual(['fark-ettin'])
+    const withStreet = [...s.slice(0, 12)]
+    for (let n = 6; n <= 12; n++) withStreet.push(street(n))
+    for (const day of [8, 9, 10, 11, 12, 13]) expect(newStopKeys(ctxOf([], withStreet.filter((r) => r.date < iso(day)), at(day)), [stop]), `gün ${day}`).toEqual([])
+    // güncelleme günü yalnız nefes ve göz egzersizine bakar: 20 günlük eski Fark Ettin mi? kaydı onu açmaz
+    const p = progressionCtx({ sessions: Array.from({ length: 20 }, (_, i) => street(i + 1, { scene: undefined, stage: undefined })), now: at(21), modules: registry.live })
+    expect(updateDay(p)).toBe(false)
   })
 })

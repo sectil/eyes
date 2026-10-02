@@ -87,7 +87,26 @@ const routine = {
   ],
 }
 
-export const LADDERS = { breath, routine }
+// Fark Ettin mi? sahne merdiveni (fark-ettin-mi/PLAN.md §2). Basamak sahne açar ve "Ne değişti?" kare sayısını belirler;
+// çeşitleme V1 yağmurlu caddeyi, V2 tabela değişikliğini ekler. Basamağı lib/street.js sceneStage seçer (stageOf ile).
+// badge: false → yol "Yeni" rozeti ve güncelleme günü bu merdivene bakmaz (açılma günü rozeti UNLOCK ile aynen kalır;
+// yeni sahne yol durağının alt satırında görünür: PLAN §4, METINLER Y2). Eşikler VARSAYIM (PLAN §2).
+const farkEttin = {
+  badge: false,
+  steps: [
+    { from: 0, id: 'F1', scenes: ['cadde'], frames: 3 },
+    { from: 2, id: 'F2', scenes: ['cadde'], frames: 4 },
+    { from: 4, id: 'F3', scenes: ['cadde', 'pazar'], frames: 4 },
+    { from: 7, id: 'F4', scenes: ['cadde', 'pazar', 'park'], frames: 4 },
+    { from: 10, id: 'F5', scenes: ['cadde', 'pazar', 'park', 'aksam'], frames: 4 },
+  ],
+  variants: [
+    { from: 14, id: 'V1', scene: 'yagmur' },
+    { from: 21, id: 'V2', kind: 'tabela' },
+  ],
+}
+
+export const LADDERS = { breath, routine, 'fark-ettin': farkEttin }
 
 // Açılma eşikleri: pathDay (yola ait kaydı olan ayrı gün sayısı, bugün sayılmaz) en az bu kadar olmalı (§A.3, §A.7).
 // Her gün açan yeni kullanıcıda Yılan ve Bugünün görevi 2., Fark Ettin mi? 6., Tek Bakışta 8. gün gelir. VARSAYIM.

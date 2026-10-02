@@ -197,8 +197,13 @@ export function unlocked(ctx, id, threshold = unlockOf(ctx?.progression, id)) {
 //    hiçbiri Y1'in stage alanını taşımıyor): yalnız Y1 öncesi yolda olmayan durak ya da grup rozetlidir (lib/ladders.js
 //    UPDATE_NEW: Yukarı–aşağı, nefesin "Günün ritmi", hiç yapılmamışsa Bugünün görevi)
 // stops: buildPath sonucu plan.stops. Dönen: rozetli durak anahtarları.
+// badge: false olan merdiven (Fark Ettin mi? sahneleri) rozete ve güncelleme gününe katılmaz (lib/ladders.js)
+const badgeLadder = (p, id) => {
+  const l = ladderOf(p, id)
+  return l && l.badge !== false ? l : null
+}
 export function updateDay(p) {
-  const ids = Object.keys(LADDERS)
+  const ids = Object.keys(LADDERS).filter((id) => LADDERS[id].badge !== false)
   return ids.some((id) => count(p?.mod?.[id]?.D) >= VAR_LAG) && ids.every((id) => count(p?.mod?.[id]?.Dstage) === 0)
 }
 export function newStopKeys(ctx, stops = []) {
@@ -209,7 +214,7 @@ export function newStopKeys(ctx, stops = []) {
   for (const s of stops ?? []) {
     if (!s || typeof s.key !== 'string') continue
     const m = p.mod?.[s.id]
-    if (ladderOf(p, s.id)) {
+    if (badgeLadder(p, s.id)) {
       const st = stageOf(ctx, s.id)
       if (!st) continue
       const sub = s.key.includes(':') ? s.key.slice(s.key.indexOf(':') + 1) : null
