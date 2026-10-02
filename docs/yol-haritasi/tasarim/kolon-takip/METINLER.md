@@ -16,35 +16,36 @@ Yasaklar (hepsinde): sağlık iddiası yok ("okuma hızını artırır", "gözü
 ## Görev ekranı (G)
 | # | Metin | Durum |
 |---|---|---|
-| G1 | 2 dk · 3 bölüm | T |
+| G1 | 2 dk · 3 bölüm | K (tur 1 ve 2) |
 | G2 | Kelime İzi | S (ad) |
-| G3 | İşaretli kelimeyi gözünle izle. | T |
-| G4 | Kelime bir an başka bir kelimeye döner. Görünce ekrana dokun. | T |
-| G5 | {n}. bölüm / {hız} / kelime/dk (yükselen üç basamak) | T |
-| G6 | Nef: Geçen sefer {hız}'ı geçtin. Bugün {başlangıç}'ta ısın, {hedef}'i dene. | T |
+| G3 | İşaretli kelimeyi gözünle izle. | K (tur 1 ve 2) |
+| G4 | Kelime bir an başka bir kelimeye döner. Görünce ekrana dokun. | K (tur 1 ve 2) |
+| G5 | {n}. bölüm / {hız} / kelime/dk (eşit üç kart, arada ›) | K (birim sahip onaylı) |
+| G6 | Nef: Geçen sefer {hız}'ı geçtin. Bugün {hedef}'i dene. | T (tur 2'de üç sayılı hâli eleştirildi, kısaldı) |
 | G6a | Nef, ilk tur: Bugün {başlangıç}'tan başlıyorsun. Yakaladıkça hız artar. | T |
-| G7 | Başla | T |
-| G8 | Bu bir göz takip alıştırması. Okuma hızını artırdığı gösterilmedi. | T (dipnot, Başla'nın altında) |
+| G7 | Başla | K |
+| G8 | Bu bir göz takip alıştırması. Okuma hızını artırdığı gösterilmedi. | S yeri: yalnız ilk turda Başla'nın altında, sonra "Neye dayanıyor?" sayfasında (sahip, 2026-10-02) |
 | G9 | Neye dayanıyor? | T (bağlantı; kaynak sayfası) |
 
 ## Alıştırma (O)
 | # | Metin | Durum |
 |---|---|---|
 | O1 | {hız} kelime/dk | T |
-| O2 | Bölüm {i} / 3 | T |
+| O2 | Bölüm {i}/3 (ilerleme çubuğunun yanında) | T |
+| O2b | yakalanan ●●○ (hız satırında) | T |
 | O3 | Kelime değişince ekrana dokun | T (ipucu, yalnız ilk 2 tur) |
-| O4 | Yakaladın: {kelime} → {değişen} | T |
+| O4 | Yakaladın: {kelime} → {değişen} | K (tur 2, 5/5) |
 | O5 | Bölüm {i} · {hız} kelime/dk (bölüm arası, 4 sn) | T |
 | O6 | Hız {hız}'e çıktı / Hız {hız}'e indi (bölüm arası alt satır) | T |
 
 ## Sonuç (R)
 | # | Metin | Durum |
 |---|---|---|
-| R1 | Bugün geçtiğin en yüksek hız | T |
+| R1 | Bugün geçtiğin en yüksek hız | S (sahip, 2026-10-02) |
 | R2 | {hız} kelime/dk | T |
 | R3 | Hüküm çipi: `verdictWord` (Gelişim'in dört sözcüğü), önünde "{n} günde {B} → {C}"; başlangıç oluşurken "Başlangıç · {k}/8 gün" | T |
-| R4 | Her nokta bir kelime değişimi; 3'te 2 yakalayınca bölüm geçilir. {9} değişimden {8}'ini yakaladın. | T |
-| R5 | Son 7 tur · kesikli çizgi: başlangıcın | T |
+| R4 | Her nokta bir kelime değişimi; 3'te 2 yakalayınca bölüm geçilir. {9} değişimden {8}'ini yakaladın. (320'de yalnız ikinci cümle) | T |
+| R5 | Son 7 gün · kesikli çizgi: başlangıcın | T (tur 2: "8 gün" ile "7 tur" tutmuyordu) |
 | R6 | Bitti | onaylı (bugünkü) |
 | R7 | Bugün hiçbir bölümü geçemedin. Yarın {hız}'ten başlarız. (hiç geçilmeyen tur) | T |
 

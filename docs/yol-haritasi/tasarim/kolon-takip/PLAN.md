@@ -8,6 +8,11 @@ Okunuşu: (1) "k/d" kelime/dakika. (2) Takibi kelime değişimini yakalamakla do
 aralığında onaylı. (4) Turda tek kelimeden ızgara olabilir. (5) Kamera: sahip kullanılmasını istiyor, kararı bana
 bıraktı; karar §6'da. (6) Modülün adı **Kelime İzi**.
 
+Sahibin 2026-10-02 ikinci cevabı, kelimesi kelimesine: "önerilerin tamam 5 saniye kuralı önemli.. kişiler etikenmeli".
+Onaylanan üç öneri: (a) üçüncü durağan kapı turu yok, kapı cihazdaki hareketli ekranla (§7); (b) iddia cümlesi
+değişmez, yalnız ilk turda görünür, sonra "Neye dayanıyor?" içinde; (c) birim "kelime/dk" kalır, sonuç başlığı
+"Bugün geçtiğin en yüksek hız".
+
 Dayanaklar: `arastirma/KAYNAKLAR.md` (11 kaynak, PMID ve DOI PubMed ile doğrulandı), maket `maket/maket.html`, kapı
 kayıtları `kapi/`, metinler `METINLER.md`.
 
@@ -41,8 +46,9 @@ günlük hayata aktarım için kanıt zayıf (Simons 2016). Ekranda yalnız bu a
 - İşaret okuma düzeninde ilerler: satırda soldan sağa, satır bitince alttaki satırın başına. Izgara bitince yeni
   ızgara aynı kelimeyle baştan. İşaret hücreden hücreye **sıçrar**, kaymaz: okumadaki sakkad ve fiksasyon düzenine
   benzer (Rayner 1998).
-- İz: işaretin geçtiği son üç hücre sönen turkuaz zeminle kalır (opaklık 0,26 / 0,15 / 0,07). Daha geride kalan
-  hücreler soluk yazılır.
+- İz: işaretin geçtiği son üç hücrenin altında sönen turkuaz çizgi (opaklık 0,75 / 0,45 / 0,2), yalnız işaretin
+  satırında; üst satıra ve ileriye çizilmez. Yazılar işarete uzaklıkla söner (odak ışığı: işaret 1, en uzak 0,28).
+  Kapı tur 1: iz hapları ayrı hedef gibi okundu; tur 2: üst satırdaki iz ileride gibi göründü.
 - Ritim bölüm boyunca sabittir: kelime başına süre = 60 000 / hız ms (`lib/firstLook.js` `msPerWord` ile aynı formül;
   yeniden kullanılır). Sabit ritim önceden bakmayı mümkün kılar (Wong 2011; Carpenter 1995). Zamanlama
   `requestAnimationFrame` ve `performance.now()` ile; sapma birikmez, her adımın zamanı başlangıçtan hesaplanır.
@@ -145,17 +151,25 @@ Nef doğrulanmamış farkı söylemez; gerilemeyi söylemez. `coach()` alanları
 rayner1998, rayner2016, trauzettel2012, altpeter2015, rubin1992, carpenter1995, munoz1998, peltsch2011, wong2011,
 rosen2015. `simons2016` sources.js'te varsa yeniden eklenmez (ana oturum denetler).
 
-## 5. Ekranlar (maket: `maket/maket.html?s=…&theme=…`)
+## 5. Ekranlar (son maket: `maket/maket.html?s=…&theme=…`; görüntüler `maket/son/`)
 
-1. **Görev** (`intro`): üstte ızgaranın canlı önizlemesi (iz ile), ad, görev cümlesi, bugünün üç bölüm hızı yükselen
-   basamaklar olarak, Nef satırı, iddia sınırı, "Başla". Kamera seçeneği bu ekranda (§6).
-2. **Alıştırma** (`play`): üstte 3 parçalı ilerleme, büyük hız sayısı ve "Bölüm 2 / 3", ızgara camın içinde, altta
-   ipucu. Işık yanıp sönmez; ekran sabit, yalnız işaret sıçrar.
-3. **Yakaladın** (`catch`): değişen kelimede altın çerçeve ve halka, "Yakaladın", altta "bu bölümde 2 / 3".
-4. **Sonuç** (`result`): bugünün hızı büyük; Gelişim'in hüküm çipi; üç bölüm yükselen sütunlarla ve altlarında
-   yakalanan değişim noktaları; "Her nokta bir kelime değişimi"; son 7 turun çizgisi ve kesikli başlangıç; Bitti.
-5. **Ana sayfa** (`home`): Nef kartı ilk gün (N1) küçük ızgara görseliyle ve yol durağı ("Kelime İzi · 2 dk · bugün
-   140'tan başlar"). Durak görünümü Ana sayfa oturumunun bileşenidir; bu modül yalnız `today()` çıktısına `sub` verir.
+1. **Görev** (`intro`; ilk tur `intro1`): üstte ızgaranın önizlemesi (iz ile), ad, görev cümlesi, üç bölüm kartı
+   eşit boyda, aralarında ›, her kartta "kelime/dk" ve alttan yükselen ince çizgi; Nef satırı; "Başla"; altında
+   "Neye dayanıyor?". İddia sınırı cümlesi **yalnız modülün ilk turunda** Başla'nın altında (sahip onayı 2026-10-02),
+   sonra yalnız "Neye dayanıyor?" sayfasında. Kamera anahtarı bu ekranda (§6).
+2. **Alıştırma** (`play`): üstte "Bölüm 2/3" ve 3 parçalı ilerleme (boş parçalar belirgin); altında büyük hız sayısı
+   ve sağda "yakalanan ●○○"; ızgara camın içinde, odak ışığı ve satır içi iz; altta ipucu (yalnız ilk 2 tur).
+   Yanıp sönme yok; ekran sabit, yalnız işaret sıçrar.
+3. **Yakaladın** (`catch`): değişen kelime altın hap olur (hücre içinde kalır, halka ve rozet kelimelerin üstüne
+   binmez); alt satırda "Yakaladın: Kale → Kare"; üstte yakalanan noktası dolar; hafif titreşim.
+4. **Sonuç** (`result`): "Bugün geçtiğin en yüksek hız" (sahip onayı), sayı büyük; hüküm çipi "{n} günde B → C ·
+   sözcük"; üç bölüm sıfırdan ölçekli sütunlar (gerçek oran; kapı tur 1'de orantısız sütun eleştirildi), altlarında
+   yakalanan noktaları; "Her nokta bir kelime değişimi; 3'te 2 yakalayınca bölüm geçilir." (320'de yalnız sayı
+   satırı); "Son 7 gün" çizgisi, değer etiketleri çizginin solunda ayrı sütunda, kesikli başlangıç; Bitti; altında
+   "Neye dayanıyor?".
+5. **Ana sayfa** (`home`): Nef kartı ilk gün (N1) küçük ızgara görseliyle (320'de görselsiz), "Dene"; yol
+   durakları gerçek ikonlarıyla, Kelime İzi "Yeni" rozetiyle, tamamlanan durakta yeşil tamam işareti. Durak görünümü
+   Ana sayfa oturumunun bileşenidir; bu modül yalnız `today()` çıktısına `sub` verir.
 
 Hareket ve erişilebilirlik: `prefers-reduced-motion`'da halka dalgası yok, iz yine çizilir (iz hareket değil).
 Ekran okuyucuda ızgara tek öğe ("Kelime İzi alıştırması, 160 kelime/dk"); alıştırma görerek yapılır, bunu ekran
@@ -177,9 +191,28 @@ Karar: **isteğe bağlı, varsayılan kapalı, ölçüye girmez.**
 - Kamera ekranları (anahtar ve "Göz izin" paneli) ayrı maket ve ayrı 5 sn kapısıyla gelir; kapıdan geçmezse ilk
   sürüm kamerasız çıkar.
 
-## 7. Bağlayıcı tasarım maddeleri (kapı bulguları; `kapi/`)
+## 7. Bağlayıcı tasarım maddeleri ve kapının yeri (kapı bulguları; `kapi/`)
 
-(Kapı turlarından sonra doldurulur.)
+Durağan maket iki turda: görev ekranı 4/5 ve 4/5, yakalama 1/5 → 5/5 geçti. Alıştırma 1/5 → 2/5, ana sayfa 2/5 →
+3/5, sonuç 4/5 → 0/5 (tur 2'de beşi de yalnız 320 bozulması için; düzeltildi, `maket/son/`). Sahip kararı
+(2026-10-02, "önerilerin tamam 5 saniye kuralı önemli.. kişiler etikenmeli"): üçüncü durağan tur yok; ana oturum
+uygularken aşağıdakilerin hepsini sağlar ve **bütün ekranları cihazdaki hareketli ekranın kaydıyla** 5 sn kapısına
+sokar (390 ve 320, iki tema; 5 yeni kişi, ≥ 4/5). Geçmeyen ekran sahibe gösterilmez.
+
+1. Alıştırma hareketiyle değerlendirilir: kayıt en az 5 sn işaretin sıçramasını ve bir yakalamayı gösterir. Durağan
+   görüntüde "aynı kelime duvarı" eleştirisi iki turda sürdü; hareket ve odak ışığı bu ekranın asıl görünüşüdür.
+2. Odak ışığı ve satır içi iz (§1.1). İz hap değil çizgi; üst satıra ve ileriye çizilmez; 320'de işaretin halesine
+   değmez.
+3. Yakalama: değişen kelime altın hap, hücre içinde; rozet ve halka başka kelimeyi örtmez. "Yakaladın" alt satırda.
+4. Bölüm sayacı ile yakalama sayacı karışmaz: "Bölüm 2/3" ilerleme çubuğunun yanında, "yakalanan ●●○" hız satırında,
+   sözcüğüyle.
+5. Sonuç 320'de: etiketler çizgiye binmez, Bitti karta yapışmaz, açıklama kısa. Sütunlar sıfırdan ölçekli kalır.
+6. Görev ekranında bölüm kartları eşit boy, birim kartın içinde. Nef satırında en çok iki sayı.
+7. Ana sayfada boş ikon kutusu yok; tamam işareti iki temada da okunur (kapı tur 2: koyu temada görünmüyordu,
+   kök neden `.stop span` renginin işareti boyaması; maket düzeltildi).
+8. "kelime/dk" birimi kalır (sahip onayı). Sonuçta ve Nef'te "okuma hızı" sözcüğü geçmez; hüküm çipi yalnız
+   Gelişim'in sözcükleriyle.
+9. Ana oturum da kapıyı en çok iki tur yapar; geçmezse yöntemi değiştirir ya da sahibe sorar.
 
 ## 8. Denetim ve testler (ana oturum)
 - Saf işlevler `lib/kelimeIzi.js`: `msPerWord` (yeniden), `planBlock(seed, wpm, cells)` → değişim yerleri,
