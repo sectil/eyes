@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Oku ve Anla maketi</title>
+<style>
+@font-face { font-family: 'Onest Local'; src: url('node_modules/@fontsource-variable/onest/files/onest-latin-ext-wght-normal.woff2') format('woff2'); font-weight: 100 900; unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Onest Local'; src: url('node_modules/@fontsource-variable/onest/files/onest-latin-wght-normal.woff2') format('woff2'); font-weight: 100 900; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Unbounded Local'; src: url('node_modules/@fontsource-variable/unbounded/files/unbounded-latin-ext-wght-normal.woff2') format('woff2'); font-weight: 200 900; unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Unbounded Local'; src: url('node_modules/@fontsource-variable/unbounded/files/unbounded-latin-wght-normal.woff2') format('woff2'); font-weight: 200 900; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* Uygulamanın tokenları (app/src/styles.css) birebir. */
+:root {
+  --font-display: 'Unbounded Local', system-ui, sans-serif;
+  --font-body: 'Onest Local', system-ui, -apple-system, sans-serif;
+  --bg: #f3f6f8; --surface: #ffffff; --surface-2: #e9eef2; --surface-3: #dde4ea; --border: #e1e7ec;
+  --ink: #0b1219; --ink-2: #33414d; --ink-3: #5b6976;
+  --accent: #0b7480; --accent-ink: #ffffff; --accent-soft: rgba(17,169,184,.12); --iris-1: #11a9b8; --iris-2: #2f6bea;
+  --accent-grad: linear-gradient(90deg, #0b7480, #2458cc); --accent-glow: 0 8px 22px -10px rgba(36,88,204,.55);
+  --lens: #f5a623; --lens-text: #9a5b06; --lens-soft: rgba(245,166,35,.16); --wrong: #d97706; --lens-strong: #7a4502;
+  --ok: #13704b; --ok-bg: rgba(31,169,116,.13); --danger: #b91c1c; --danger-bg: rgba(220,38,38,.1);
+  --shadow: 0 1px 2px rgba(11,18,25,.04), 0 8px 24px rgba(11,18,25,.05);
+  --pupil: #081018; --track: rgba(91,105,118,.16);
+}
+:root[data-theme='dark'] {
+  --bg: #070c12; --surface: #0f171f; --surface-2: #141e28; --surface-3: #1c2834; --border: rgba(255,255,255,.08);
+  --ink: #eef3f6; --ink-2: #b9c4cd; --ink-3: #8b98a5;
+  --accent: #19c2d1; --accent-ink: #041017; --accent-soft: rgba(25,194,209,.14); --iris-1: #19c2d1; --iris-2: #3e7bfa;
+  --accent-grad: linear-gradient(90deg, #19c2d1, #3e7bfa); --accent-glow: 0 8px 24px -8px rgba(25,194,209,.55);
+  --lens: #ffb13b; --lens-text: #ffb13b; --lens-soft: rgba(255,177,59,.14); --wrong: #ffb13b; --lens-strong: #ffc062;
+  --ok: #35d39a; --ok-bg: rgba(53,211,154,.12); --danger: #fca5a5; --danger-bg: rgba(248,113,113,.14);
+  --shadow: none; --pupil: #03070b; --track: rgba(185,196,205,.24);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+.screen { min-height: 100vh; display: flex; flex-direction: column; padding: 47px 0 34px; position: relative; overflow: hidden; }
+.bar { display: flex; align-items: center; justify-content: space-between; padding: 6px 16px 0; height: 50px; }
+.ib { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); display: grid; place-items: center; color: var(--ink-2); }
+.ib svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bar .mid { font-size: 13px; font-weight: 600; color: var(--ink-3); letter-spacing: .02em; }
+.pad { padding: 0 20px; }
+.btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 56px; padding: 14px 18px; font: 650 17px var(--font-body); letter-spacing: -.01em; border: 1px solid transparent; border-radius: 16px; background: var(--accent-grad); background-origin: border-box; color: var(--accent-ink); box-shadow: var(--accent-glow); }
+.btn-secondary { background: var(--surface); color: var(--ink); border-color: var(--border); box-shadow: var(--shadow); }
+.foot { margin-top: auto; padding: 16px 20px 0; }
+
+/* Ortak alt şerit: opak zemin + üstünde solma; içerik altında kalmaz */
+.dock { position: fixed; left: 0; right: 0; bottom: 0; padding: 0 20px 34px; background: var(--bg); }
+.dock.scroll::before { content: ''; position: absolute; left: 0; right: 0; top: -48px; height: 48px; background: linear-gradient(to bottom, transparent, var(--bg)); pointer-events: none; }
+.spacer { height: 150px; flex: none; }
+
+/* Giriş */
+.hero { position: relative; display: grid; place-items: center; margin: 0 0 4px; }
+.hero svg { width: min(74vw, 290px); height: auto; overflow: visible; }
+.hero text { font-family: var(--font-body); font-weight: 600; letter-spacing: .05em; }
+.hero .deco { display: none; }
+h1.t { font-family: var(--font-display); font-weight: 650; font-size: 31px; letter-spacing: -.02em; line-height: 1.08; margin: 4px 0 8px; text-align: center; }
+.lead { font-size: 17px; line-height: 1.42; color: var(--ink-2); text-align: center; margin: 0 auto; max-width: 30ch; text-wrap: balance; padding: 0 20px; }
+.steps { display: flex; justify-content: center; gap: 8px; margin: 16px 20px 0; }
+.steps span { font-size: 13.5px; font-weight: 600; color: var(--ink-2); background: var(--surface); border: 1px solid var(--border); border-radius: 99px; padding: 7px 12px 7px 8px; display: inline-flex; gap: 7px; align-items: center; white-space: nowrap; }
+.steps b { width: 20px; height: 20px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 12px; display: grid; place-items: center; }
+.today { margin: 16px 20px 0; background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 14px 16px; box-shadow: var(--shadow); display: flex; gap: 14px; align-items: center; }
+.today .ic { flex: none; width: 44px; height: 44px; border-radius: 14px; background: var(--accent-soft); display: grid; place-items: center; color: var(--accent); }
+.today .ic svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.today small { display: block; font-size: 12px; font-weight: 650; color: var(--ink-3); letter-spacing: .06em; }
+.today strong { display: block; font-size: 17px; font-weight: 650; margin: 2px 0 1px; }
+.today em { font-style: normal; font-size: 13.5px; color: var(--ink-2); }
+.fair { font-size: 14px; color: var(--ink-3); text-align: center; margin: 0 0 12px; }
+
+/* Metin */
+.kick { font-size: 12.5px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 14px 0 6px; }
+h2.tt { font-family: var(--font-display); font-weight: 600; font-size: 21.5px; line-height: 1.18; letter-spacing: -.015em; margin: 0 0 10px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin: 0 0 16px; font-size: 13.5px; color: var(--ink-3); }
+.meta > span { white-space: nowrap; }
+.meta .tag { display: inline-flex; align-items: center; gap: 6px; font-weight: 650; color: var(--accent); background: var(--accent-soft); padding: 4px 10px 4px 7px; border-radius: 99px; }
+.meta .tag svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.read { font-size: 19px; line-height: 1.62; color: var(--ink); margin: 0; text-wrap: pretty; }
+.endbtn { margin: 26px 0 0; }
+.hint { text-align: center; font-size: 13.5px; color: var(--ink-3); margin: 10px 0 40px; }
+.veil { position: fixed; left: 0; right: 0; bottom: 0; height: 132px; background: linear-gradient(to bottom, transparent, var(--bg) 46%); pointer-events: none; }
+.more { position: fixed; left: 0; right: 0; bottom: 14px; text-align: center; font-size: 13px; font-weight: 500; color: var(--ink-3); display: flex; flex-direction: column; gap: 2px; align-items: center; pointer-events: none; }
+.more svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Soru */
+.dots { display: flex; gap: 6px; }
+.dots i { width: 26px; height: 6px; border-radius: 6px; background: var(--track); }
+.dots i.on { background: var(--accent-grad); }
+.dots i.ok { background: var(--ok); }
+.qn { font-size: 13px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 22px 0 8px; }
+h2.q { font-family: var(--font-display); font-weight: 600; font-size: 25px; line-height: 1.22; letter-spacing: -.015em; margin: 0; }
+.opts { display: flex; flex-direction: column; gap: 10px; }
+.opt { display: flex; gap: 12px; align-items: center; padding: 14px 16px; min-height: 58px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 18px; font-size: 16.5px; font-weight: 550; line-height: 1.3; color: var(--ink); box-shadow: var(--shadow); }
+.opt .r { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--track); display: grid; place-items: center; }
+.opt.right { border-color: var(--ok); background: var(--ok-bg); box-shadow: none; }
+.opt.right .r { background: var(--ok); border-color: var(--ok); }
+.opt.right .r svg { width: 14px; height: 14px; stroke: var(--bg); stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.fb { display: flex; gap: 8px; align-items: center; justify-content: center; margin: 0 0 12px; font-size: 15px; font-weight: 650; color: var(--ok); }
+
+/* Sonuç */
+.ring { position: relative; display: grid; place-items: center; margin: 6px 0 0; }
+.ring svg { width: min(68vw, 256px); height: auto; overflow: visible; }
+.ring .c { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.ring .n { font-family: var(--font-display); font-weight: 650; font-size: 58px; letter-spacing: -.03em; line-height: 1; }
+.ring .u { font-size: 14.5px; font-weight: 600; color: var(--ink-2); margin-top: 6px; }
+.ring .n.off { font-size: 38px; color: var(--ink-3); }
+.ring .off-tag { margin-top: 8px; font-size: 13px; font-weight: 650; color: var(--lens-text); background: var(--lens-soft); padding: 4px 10px; border-radius: 99px; }
+.anl { display: flex; justify-content: center; margin: 12px 20px 0; }
+.anl span { font-size: 15px; font-weight: 650; padding: 7px 14px; border-radius: 99px; }
+.anl span.ok { color: var(--ok); background: var(--ok-bg); }
+.anl span.lo { color: var(--lens-strong); background: var(--lens-soft); }
+.anl { flex-direction: column; align-items: center; gap: 6px; }
+.anl span.spd { padding: 0; display: inline-flex; align-items: baseline; gap: 8px; }
+.anl .spd .num { font-family: var(--font-display); font-weight: 650; font-size: 34px; letter-spacing: -.02em; color: var(--ink-3); text-decoration: line-through; text-decoration-color: var(--wrong); text-decoration-thickness: 3px; }
+.anl .spd .un { padding: 0; font-size: 14px; font-weight: 600; color: var(--ink-3); }
+.verd { margin: 16px 20px 0; display: flex; gap: 12px; align-items: flex-start; }
+.verd .dot { flex: none; width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 50% 50%, var(--pupil) 0 26%, transparent 27%), conic-gradient(from 20deg, var(--iris-1), var(--iris-2), var(--iris-1)); margin-top: 1px; }
+.verd p { margin: 0; font-size: 17px; line-height: 1.4; font-weight: 500; text-wrap: pretty; }
+.verd p .nm { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink-3); letter-spacing: .02em; margin-bottom: 2px; }
+.rows { margin: 16px 20px 0; background: var(--surface); border-radius: 22px; border: 1px solid var(--border); overflow: hidden; box-shadow: var(--shadow); }
+.row { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 13px 16px; border-top: 1px solid var(--border); align-items: center; }
+.row:first-child { border-top: 0; }
+.row .k { font-weight: 600; font-size: 15.5px; }
+.row .v { font-size: 13.5px; color: var(--ink-2); grid-column: 1; }
+.row .go { grid-row: 1 / span 2; grid-column: 2; color: var(--ink-3); }
+.row .go svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pips { grid-row: 1 / span 2; grid-column: 2; display: flex; gap: 4px; }
+.pips i { width: 9px; height: 9px; border-radius: 50%; background: var(--track); }
+.pips i.on { background: var(--accent); }
+.tg { grid-row: 1 / span 2; grid-column: 2; width: 46px; height: 28px; border-radius: 99px; background: rgba(120,134,148,.38); position: relative; }
+.tg::after { content: ''; position: absolute; left: 3px; top: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+
+
+h2.tt, h2.q, .row .v, .row .k, .lead, .verd p, .today strong { text-wrap: pretty; }
+.grow { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+.qwrap { flex: 1; display: flex; flex-direction: column; padding: 0 20px; }
+.qwrap { justify-content: center; }
+.qwrap .opts { padding-top: 20px; }
+.qhead { display: grid; place-items: center; margin: 0 0 22px; }
+.qhead .qr { width: 170px; height: 170px; }
+h2.q { text-align: center; }
+.bar.q { justify-content: flex-start; gap: 14px; }
+.bar.q .dots { flex: 1; } .bar.q .dots i { flex: 1; width: auto; }
+.opt .ot small.okline { display: block; margin-top: 3px; font-size: 13px; font-weight: 700; color: var(--ok); letter-spacing: .01em; }
+.anl { gap: 8px; flex-wrap: wrap; }
+.anl span.off { color: var(--ink-2); background: var(--surface-2); }
+.ring .n.off { font-size: 40px; }
+@media (max-height: 600px) {
+  .ring .u { font-size: 12.5px; }
+  .verd p { font-size: 15px; }
+  h2.q { font-size: 21px; }
+  .qwrap .opts { padding-top: 12px; }
+  .qtop { display: flex; align-items: center; gap: 14px; }
+  .qhead { margin: 0; flex: none; } .qhead .qr { width: 96px; height: 96px; }
+  .qtop h2.q { text-align: left; font-size: 18.5px; }
+  h2.q { font-size: 19.5px; }
+  .qwrap .opts { padding-top: 10px; }
+  .meta { margin-bottom: 12px; font-size: 12.5px; }
+  .screen { padding-top: 14px; }
+  .hero svg { width: 150px; }
+  .hero text { display: none; }
+  .hero .deco { display: inline; }
+  h1.t { font-size: 26px; margin-top: 0; }
+  .lead { font-size: 15.5px; }
+  .steps { margin-top: 12px; gap: 6px; } .steps span { font-size: 12.5px; padding: 5px 10px 5px 6px; }
+  .today { margin-top: 12px; padding: 11px 14px; } .today strong { font-size: 15.5px; } .today .ic { width: 38px; height: 38px; }
+  .fair { font-size: 13px; margin-bottom: 8px; }
+  .dock { padding-bottom: 18px; }
+  .dock.scroll::before { top: -72px; height: 72px; }
+  .spacer { height: 92px !important; }
+  .ring svg { width: 156px; }
+  .ring svg { width: 176px; }
+  .ring .n { font-size: 44px; } .ring .n.off { font-size: 32px; }
+  .verd { margin-top: 12px; } .verd p { font-size: 15.5px; }
+  .rows { margin-top: 12px; } .row { padding: 10px 14px; }
+  h2.q { font-size: 20px; margin-bottom: 12px; } .qn { margin-top: 14px; }
+  .opt { font-size: 14px; padding: 8px 12px; min-height: 44px; gap: 10px; border-radius: 15px; } .opts { gap: 6px; }
+}
+@media (max-width: 340px) {
+  .pad { padding: 0 16px; }
+  .dock { padding-left: 16px; padding-right: 16px; }
+  .read { font-size: 18px; line-height: 1.58; }
+  h2.tt { font-size: 20px; }
+  .btn { min-height: 52px; font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const q = new URLSearchParams(location.search)
+const S = q.get('s') || 'giris'
+document.documentElement.dataset.theme = q.get('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+const X = '<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+const BACK = '<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>'
+const CHK = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+const GO = '<svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>'
+const TEXT = "Afrika'daki bazı gübre böcekleri, buldukları gübreden bir top yapar ve bu topu yuvarlayarak kalabalıktan uzaklaşır. Amaçları topu başka böceklere kaptırmadan, olabildiğince düz bir çizgide ilerlemektir. Gündüz güneşi, gece ayı yön bulmak için kullandıkları zaten biliniyordu. Peki ayın olmadığı karanlık gecelerde ne yapıyorlar? Araştırmacılar böcekleri önce açık ve yıldızlı bir gökyüzü altında izledi. Böcekler toplarını yine düz yollarda yuvarladı. Gökyüzü bulutla kapandığında ise bu beceriyi kaybettiler. Ardından deney bir planetaryuma taşındı. Böcekler tüm yıldızlar gösterildiğinde de, yalnız Samanyolu gösterildiğinde de aynı başarıyla yol aldı. Bu, bir böceğin yıldızlı gökyüzünü pusula gibi kullandığının ilk güçlü kanıtı oldu. Hayvanlar dünyasında Samanyolu'na bakarak yön bulduğu gösterilen ilk canlı olarak kayda geçtiler."
+
+// Kelimelerden iris: her halka iki yay; üst yay saat yönünde, alt yay soldan sağa: yazı hiçbir yerde baş aşağı değil.
+const BOOK = '<svg viewBox="0 0 24 24"><path d="M3 6.5q4.5-2.5 9 0q4.5-2.5 9 0v12q-4.5-2.5-9 0q-4.5-2.5-9 0z"/><path d="M12 6.5v12"/></svg>'
+const BUG = '<svg viewBox="0 0 24 24"><ellipse cx="12" cy="14" rx="5.5" ry="6.5"/><path d="M12 7.5v13M9 6l-2-2.5M15 6l2-2.5M6.5 12H3.5M20.5 12h-3M6.8 16.5l-2.6 1.6M17.2 16.5l2.6 1.6"/></svg>'
+const DOWN = '<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>'
+function iris() {
+  const rings = [
+    [128, 'yıldızlarla yol bulan böcek · kedi adını tanır mı', 'heceleyen yarasa yavruları · atlar yüz okur', 11.5, .95],
+    [106, 'bekleyebilen mürekkep balığı · sözcük tanıyan güvercinler', 'keçiler gülen yüzü seçiyor · yunusun ıslığı', 10.5, .78],
+    [86, 'insan yüzü ayırt eden balık · yaprakla saran orangutan', 'oku · anla · oku · anla · oku · anla', 10.5, .62],
+    [68, 'oku · anla · oku · anla · oku', 'anla · oku · anla · oku · anla', 10.5, .45],
+  ]
+  let defs = '', body = ''
+  rings.forEach(([r, top, bot, fs, op], i) => {
+    const rb = r + fs * 0.72 // alt yayda harfler dışa doğru oturur, halkayla aynı çizgiye gelsin
+    defs += `<path id="t${i}" d="M${150 - r},150 A${r},${r} 0 0,1 ${150 + r},150"/><path id="b${i}" d="M${150 - rb},150 A${rb},${rb} 0 0,0 ${150 + rb},150"/>`
+    const lt = Math.PI * r * 0.94, lb = Math.PI * rb * 0.94
+    const cls = i >= 2 ? ' class="inner"' : ''
+    body += `<text${cls} font-size="${fs}" fill="url(#g)" opacity="${op}" text-anchor="middle"><textPath href="#t${i}" startOffset="50%" textLength="${lt.toFixed(0)}" lengthAdjust="spacing">${top}</textPath></text>`
+    body += `<text${cls} font-size="${fs}" fill="url(#g)" opacity="${op}" text-anchor="middle"><textPath href="#b${i}" startOffset="50%" textLength="${lb.toFixed(0)}" lengthAdjust="spacing">${bot}</textPath></text>`
+  })
+  return `<svg viewBox="0 0 300 300" aria-hidden="true"><defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--iris-1)"/><stop offset="1" stop-color="var(--iris-2)"/></linearGradient>
+    <radialGradient id="gl"><stop offset="0" stop-color="var(--iris-1)" stop-opacity=".22"/><stop offset="1" stop-color="var(--iris-1)" stop-opacity="0"/></radialGradient>${defs}</defs>
+    <circle cx="150" cy="150" r="150" fill="url(#gl)"/>${body}
+    <g class="deco" fill="none" stroke="url(#g)" stroke-linecap="round"><circle cx="150" cy="150" r="124" stroke-width="5" stroke-dasharray="2 13" opacity=".9"/><circle cx="150" cy="150" r="98" stroke-width="4" stroke-dasharray="2 11" opacity=".65"/><circle cx="150" cy="150" r="74" stroke-width="3" stroke-dasharray="2 9" opacity=".45"/></g>
+    <circle cx="150" cy="150" r="50" fill="var(--pupil)"/>
+    <circle cx="150" cy="128" r="9" fill="url(#g)"/>
+    <g transform="translate(150 158)" fill="none" stroke="url(#g)" stroke-width="2.4" stroke-linecap="round"><path d="M-22 -10 q11 -6 22 0 q11 -6 22 0 v22 q-11 -6 -22 0 q-11 -6 -22 0z"/><path d="M0 -10 v22"/></g>
+  </svg>`
+}
+
+function giris() {
+  return `<div class="screen">
+    <div class="bar"><span class="ib">${BACK}</span><span></span><span style="width:40px"></span></div>
+    <div class="grow">
+    <div class="hero">${iris()}</div>
+    <h1 class="t">Oku ve Anla</h1>
+    <p class="lead">Bilimden kısa, şaşırtıcı bir bulgu oku. Sonra dört soru gelir.</p>
+    <div class="steps"><span><b>1</b>Oku</span><span><b>2</b>Bitir</span><span><b>3</b>Dört soru</span></div>
+    <div class="today"><span class="ic">${BOOK}</span><span><small>BUGÜNÜN METNİ</small><strong>Yıldızlarla yol bulan böcek</strong><em>107 kelime</em></span></div>
+    </div>
+    <div class="spacer" style="height:118px"></div>
+    <div class="dock"><p class="fair">Hızın, anladığınla birlikte sayılır.</p><div class="btn">Okumaya başla</div></div>
+  </div>`
+}
+function metin() {
+  return `<div class="screen" style="padding-bottom:0">
+    <div class="bar"><span class="ib">${X}</span><span class="mid">Kendi hızında oku</span><span style="width:40px"></span></div>
+    <div class="pad"><div class="kick">Bugünün metni</div><h2 class="tt">Yıldızlarla yol bulan böcek</h2><div class="meta"><span class="tag">${BUG}Böcekler</span><span>Current Biology, 2013</span></div><p class="read">${TEXT}</p>
+    <div class="endbtn btn">Bitirdim</div><p class="hint">Süre, sen dokununca durur.</p></div>
+    <div class="veil"></div><span class="more">${DOWN}<span>Bitirdim, metnin sonunda</span></span>
+  </div>`
+}
+// Soru halkası: sonuçtaki dört soru halkasının küçüğü. Cevaplanan dolu, şu anki içi boş çerçeve, bekleyen gri.
+function qring(done, cur) {
+  const r = 46, c = 2 * Math.PI * r, gap = 16, seg = c / 4 - gap
+  const arc = (i, stroke, w) => `<circle cx="60" cy="60" r="${r}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${seg.toFixed(1)} ${(c - seg).toFixed(1)}" stroke-dashoffset="${(-(i * c / 4) - gap / 2).toFixed(1)}" transform="rotate(-90 60 60)"/>`
+  let out = ''
+  for (let i = 0; i < 4; i++) {
+    if (i < done) out += arc(i, 'var(--accent)', 10)
+    else if (i === cur) out += arc(i, 'var(--accent)', 10).replace('stroke="var(--accent)"', 'stroke="var(--accent)" stroke-opacity=".42"')
+    else out += arc(i, 'var(--track)', 10)
+  }
+  return `<svg class="qr" viewBox="0 0 120 120" aria-hidden="true"><defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--iris-1)"/><stop offset="1" stop-color="var(--iris-2)"/></linearGradient><filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>${out}
+    <text x="60" y="61" text-anchor="middle" dominant-baseline="central" font-family="var(--font-display)" font-weight="650" fill="var(--ink)"><tspan font-size="32">${cur + 1}</tspan><tspan font-size="20" fill="var(--ink-3)" dx="1">/4</tspan></text></svg>`
+}
+function soru() {
+  const o = ['Gübre böceklerinin karanlık gecelerde yıldızlarla yön bulmasını', 'Gübre böceklerinin yiyeceklerini nasıl sakladığını', 'Planetaryumların nasıl çalıştığını', 'Böceklerin bulutlu havada nasıl dinlendiğini']
+  const order = [1, 0, 3, 2]
+  return `<div class="screen">
+    <div class="bar"><span class="ib">${X}</span><span class="mid"></span><span style="width:40px"></span></div>
+    <div class="qwrap"><div class="qtop"><div class="qhead">${qring(1, 1)}</div><h2 class="q">Metin en çok neyi anlatıyor?</h2></div>
+    <div class="opts">${order.map((i) => i === 0 ? `<div class="opt right"><span class="r">${CHK}</span><span class="ot">${o[i]}<small class="okline">Doğru</small></span></div>` : `<div class="opt"><span class="r"></span><span>${o[i]}</span></div>`).join('')}</div></div>
+    <div class="spacer" style="height:112px"></div>
+    <div class="dock"><div class="btn">Sonraki soru</div></div>
+  </div>`
+}
+// Halka = dört soru. Doğru sayısı kadar parça saat yönünde sırayla dolar; her parçanın ortasında ✓ ya da ✕.
+function ring(k) {
+  const r = 112, c = 2 * Math.PI * r, gap = 30, seg = c / 4 - gap
+  let out = ''
+  for (let i = 0; i < 4; i++) {
+    const on = i < k
+    out += `<circle cx="132" cy="132" r="${r}" fill="none" stroke="${on ? 'url(#g2)' : 'var(--wrong)'}" opacity="1" stroke-width="14" stroke-linecap="round" stroke-dasharray="${seg.toFixed(1)} ${(c - seg).toFixed(1)}" stroke-dashoffset="${(-(i * c / 4) - gap / 2).toFixed(1)}" transform="rotate(-90 132 132)"/>`
+    const a = (-90 + i * 90 + 45) * Math.PI / 180, x = 132 + r * Math.cos(a), y = 132 + r * Math.sin(a)
+    out += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="13" fill="${on ? 'var(--iris-1)' : 'var(--wrong)'}" stroke="var(--bg)" stroke-width="3"/>`
+    out += on ? `<path d="M${(x - 5).toFixed(1)} ${(y + .5).toFixed(1)} l3.5 3.5 l6.5 -7" fill="none" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>`
+              : `<path d="M${(x - 4).toFixed(1)} ${(y - 4).toFixed(1)} l8 8 M${(x + 4).toFixed(1)} ${(y - 4).toFixed(1)} l-8 8" stroke="var(--bg)" stroke-width="2.6" stroke-linecap="round"/>`
+  }
+  return `<svg viewBox="0 0 264 264" aria-hidden="true"><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--iris-1)"/><stop offset="1" stop-color="var(--iris-2)"/></linearGradient></defs>
+    ${out}<circle cx="132" cy="132" r="88" fill="var(--surface)" stroke="var(--border)"/></svg>`
+}
+function sonuc(ok) {
+  return `<div class="screen">
+    <div class="bar"><span class="ib">${X}</span><span class="mid">Yıldızlarla yol bulan böcek</span><span style="width:40px"></span></div>
+    <div class="ring">${ring(ok ? 4 : 2)}<div class="c">${ok ? '<span class="n">212</span><span class="u">kelime / dakika</span>' : '<span class="n">2/4</span><span class="u">doğru</span>'}</div></div>
+    <div class="anl">${ok ? '<span class="ok">4 sorunun 4’ü doğru</span>' : '<span class="spd"><b class="num">348</b><span class="un">kelime / dakika</span></span><span class="lo">Hız sayılmadı</span>'}</div>
+    <div class="verd"><span class="dot"></span><p><span class="nm">Nef</span>${ok ? 'Hızın sayıldı: metni anladın.' : 'Hız, en az 3 doğruyla sayılır. Bir dahakine biraz daha yavaş oku.'}</p></div>
+    <div class="rows">
+      <div class="row"><span class="k">Başlangıç</span><span class="v">${ok ? '5 okumayla belirlenir · 3/5' : 'Bu okuma eklenmedi · 2/5'}</span><span class="pips">${[0, 1, 2, 3, 4].map((i) => `<i class="${i < (ok ? 3 : 2) ? 'on' : ''}"></i>`).join('')}</span></div>
+      <div class="row"><span class="k">Bu metin bir çalışmadan</span><span class="v">Dacke ve ark., 2013</span><span class="go">${GO}</span></div>
+      <div class="row"><span class="k">Bana hatırlat</span><span class="v">Her gün bir okuma</span><span class="tg"></span></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="dock scroll"><div class="btn">Bitti</div></div>
+  </div>`
+}
+const V = { giris, metin, soru, sonuc: () => sonuc(true), sayilmadi: () => sonuc(false) }
+document.getElementById('app').innerHTML = V[S]()
+</script>
+</body>
+</html>

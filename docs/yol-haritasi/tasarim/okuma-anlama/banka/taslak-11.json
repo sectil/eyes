@@ -1,0 +1,756 @@
+{
+  "surum": "taslak-11",
+  "not": "Her soruda doğru seçenek ilk sıradadır; uygulama şıkları her gösterimde karıştırır. 'ana' sorusu her turda sorulur, kalan 3 soru 5 ayrıntı sorusundan seçilir.",
+  "etiketler": {
+    "bocek": "Böcekler",
+    "kus": "Kuşlar",
+    "memeli": "Memeliler",
+    "deniz": "Deniz canlıları",
+    "bitki": "Bitkiler",
+    "insan": "İnsan",
+    "mikro": "Mikroplar",
+    "surungen": "Sürüngenler ve kurbağalar"
+  },
+  "metinler": [
+    {
+      "id": "oa101",
+      "baslik": "Dipte kayan ışık",
+      "etiket": "deniz",
+      "kaynak": "drerup2025",
+      "pmid": "40814832",
+      "doi": "10.1242/jeb.249713",
+      "yazar": "Drerup ve ark.",
+      "dergi": "Journal of Experimental Biology",
+      "yil": 2025,
+      "metin": "Birçok hayvan, çevresinin rengine ve dokusuna benzeyerek gizlenir. Sığ sularda ise dipteki görüntü durmadan değişir, çünkü dipte kayan parlak ışık bantları oluşur. Mürekkep balıklarının derisinde, kabartıp indirebildikleri küçük çıkıntılar vardır. Bir ekip, bu oynak ışığın gizlenmeye yarayan bu çıkıntıları etkileyip etkilemediğini sınadı. Ekip hayvanlara dokusu ve rengi farklı taşlar gösterdi; bunu hem kayan ışıkta hem durgun ışıkta yaptı. Görüntüde açık ve koyu yerler arasındaki fark büyüdükçe hayvanlar çıkıntılarını daha çok kabarttı. Kayan ışık bantları da çıkıntıların kabarmasına yol açtı. Bu tepki, görüş alanında bir taş olsa da olmasa da görüldü. Ekip bunun fark edilmeyi zorlaştıran bir uyum mu, yoksa görmenin bir sınırı mı olduğunu tartışıyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Oynak ışığın mürekkep balığının deri çıkıntılarını etkilemesini",
+            "Mürekkep balıklarının mürekkeplerini nasıl ürettiğini",
+            "Deniz dibindeki taşların zamanla nasıl renk değiştirdiğini",
+            "Mürekkep balıklarının hangi taşların altında uyuduğunu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sığ sularda dipteki görüntü neden durmadan değişir?",
+          "secenekler": [
+            "Dipte kayan parlak ışık bantları oluşur",
+            "Dipteki kum akıntıyla sürekli yer değiştirir",
+            "Balık sürüleri dibe sık sık gölge düşürür",
+            "Dipteki yosunlar gün boyunca durmadan renk değiştirir"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip hayvanlara ne gösterdi?",
+          "secenekler": [
+            "Dokusu ve rengi farklı taşlar",
+            "Farklı büyüklükte balık maketleri",
+            "Renkli ışık saçan ekranlar",
+            "Başka mürekkep balıklarının fotoğrafları"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Görüntüde açık ve koyu yerler arasındaki fark büyüyünce ne oldu?",
+          "secenekler": [
+            "Hayvanlar çıkıntılarını daha çok kabarttı",
+            "Hayvanlar çıkıntılarını tamamen düzleştirdi",
+            "Hayvanlar taşlardan uzaklaşıp kumun altına girdi",
+            "Hayvanların rengi bembeyaz oldu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kayan ışığa karşı çıkıntıların kabarması ne zaman görüldü?",
+          "secenekler": [
+            "Görüş alanında taş olsa da olmasa da",
+            "Yalnız görüş alanında bir taş varken",
+            "Yalnız hayvanlar beslenirken",
+            "Yalnız gece karanlığında"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip bu tepkiyi nasıl tartışıyor?",
+          "secenekler": [
+            "Gizlenme uyumu mu, görmenin sınırı mı diye",
+            "Hayvanların eşlerine işaret mi verdiği diye",
+            "Taşların sıcaklığına mı tepki olduğu diye",
+            "Hayvanların acıkınca mı kabardığı diye"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa102",
+      "baslik": "İki yıl sonra hâlâ",
+      "etiket": "memeli",
+      "kaynak": "dror2024",
+      "pmid": "39226922",
+      "doi": "10.1098/rsbl.2024.0208",
+      "yazar": "Dror ve ark.",
+      "dergi": "Biology Letters",
+      "yil": 2024,
+      "metin": "Küçük çocukların dil öğrenmesinde sözcükleri uzun süre akılda tutmak büyük rol oynar. Köpeklerin çoğu nesnelerin adını öğrenemez; bunu yalnız çok az sayıda, özel yetenekli köpek başarır. Bu köpekler çok ender olduğu için, bu kadar çok adı nasıl öğrendikleri pek bilinmiyor. Bir ekip, beş yetenekli köpeğin öğrendiği adları ne kadar süre hatırladığını sınadı. Köpeklerden, adlarını öğrendikleri 12 nesneyi aradan 2 yıl geçtikten sonra getirmeleri istendi. Köpekler bu nesnelerden üç ile dokuz arasındakinin adını hâlâ hatırlıyordu. Ekibe göre bu sonuç, böyle köpeklerin geniş bir ad dağarcığını nasıl edindiğine ışık tutuyor. Bu köpekler, dili olmayan bir türde adların akılda nasıl kaldığını incelemek için eşsiz bir fırsat sunuyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Yetenekli köpeklerin nesne adlarını uzun süre hatırlamasını",
+            "Köpeklerin sahiplerinin sesini nasıl tanıdığını",
+            "Çocukların köpeklerden nasıl sözcük öğrendiğini",
+            "Köpeklerin oyuncak seçerken rengine baktığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Nesnelerin adını öğrenebilen köpekler için metin ne diyor?",
+          "secenekler": [
+            "Çok ender görülürler",
+            "Her evde bir tane bulunur",
+            "Hepsi aynı cinstendir",
+            "Hepsi çok yaşlıdır"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip kaç köpeği sınadı?",
+          "secenekler": [
+            "Beş",
+            "İki",
+            "On iki",
+            "Yirmi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Köpekler adlarını öğrendikleri kaç nesneyle sınandı?",
+          "secenekler": [
+            "12",
+            "5",
+            "30",
+            "100"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sınav, adlar öğrenildikten ne kadar sonra yapıldı?",
+          "secenekler": [
+            "2 yıl sonra",
+            "2 gün sonra",
+            "2 hafta sonra",
+            "2 ay sonra"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Köpekler kaç nesnenin adını hâlâ hatırlıyordu?",
+          "secenekler": [
+            "Üç ile dokuz arasında",
+            "Yalnız bir tanesinin",
+            "On ile on iki arasında",
+            "Yalnız iki tanesinin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa103",
+      "baslik": "Kanatla söylenen şarkı",
+      "etiket": "kus",
+      "kaynak": "bostwick2009",
+      "pmid": "19906670",
+      "doi": "10.1098/rspb.2009.1576",
+      "yazar": "Bostwick ve ark.",
+      "dergi": "Proceedings of the Royal Society B",
+      "yil": 2009,
+      "metin": "Bir kuş kanatlarıyla şarkı söyleyebilir mi? Küçük bir kuş türünün erkekleri, kur yaparken özel kanat tüyleriyle uzun ve düz bir ses çıkarır. Doğada bu sesin perdesi saniyede yaklaşık 1500 titreşimdir. Bu tüylerin sapları olağandan çok kalındır ve sesin bu sapların titreşmesinden doğduğu düşünülüyordu. Bir ekip, tüylerin titreşimini lazer ışığıyla ölçtü. Aynı ölçümü, özel tüyleri olmayan aynı aileden iki türde de yaptı. Özel tüyler 1500 titreşim dolayında güçlü biçimde tınladı; bu, canlılarda pek görülmeyen keskin bir ayardı. Aynı kanattaki sıradan tüyler tek başına güçlü tınlamadı, ama özel tüylere bağlıyken hepsi birlikte tınladı. Öteki iki türün tüyleri çok daha zayıf tınladı. Bulgular, sesin tüylerin tınlamasından doğduğu fikrine önemli bir destek veriyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir kuşun kanat tüyleriyle çıkardığı sesin nasıl oluştuğunu",
+            "Kuşların göç ederken nasıl yön bulduğunu",
+            "Kuş yavrularının şarkıyı kimden öğrendiğini",
+            "Kuşların tüylerini hangi mevsimde değiştirdiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Erkekler bu sesi neyle çıkarır?",
+          "secenekler": [
+            "Özel kanat tüyleriyle",
+            "Gagalarını dala vurarak",
+            "Ayaklarını yere sürterek",
+            "Boğazlarını şişirerek"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Özel tüylerin sapları nasıldır?",
+          "secenekler": [
+            "Olağandan çok kalın",
+            "Olağandan çok ince",
+            "Kıvrık ve yumuşak",
+            "Çok kısa ve tüysüz"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip tüylerin titreşimini neyle ölçtü?",
+          "secenekler": [
+            "Lazer ışığıyla",
+            "Bir termometreyle",
+            "Bir terazi ile",
+            "Elle dokunarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sıradan tüyler özel tüylere bağlıyken ne oldu?",
+          "secenekler": [
+            "Hepsi birlikte tınladı",
+            "Hiçbiri titremedi",
+            "Özel tüyleri susturdu",
+            "Kanattan koptu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Öteki iki türün tüyleri nasıl tınladı?",
+          "secenekler": [
+            "Çok daha zayıf",
+            "Çok daha güçlü",
+            "Tıpatıp aynı güçte",
+            "Hep birlikte, tek parça gibi"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa104",
+      "baslik": "Yavru kaplumbağanın bakışı",
+      "etiket": "surungen",
+      "kaynak": "versace2020",
+      "pmid": "32929003",
+      "doi": "10.1073/pnas.2011453117",
+      "yazar": "Versace ve ark.",
+      "dergi": "PNAS",
+      "yil": 2020,
+      "metin": "Henüz hiç deneyimi olmayan insan bebekleri, civcivler ve maymun yavruları yüzlere ve yüze benzeyen desenlere yönelir. Böyle bir desen, ters duran bir üçgen gibi dizilmiş üç lekeden oluşur. Bu türlerin hepsinde yavruya anne ya da baba bakar. Bu yüzden yüze yönelmenin yavru bakımıyla mı ilgili, yoksa canlıları fark etmenin genel bir yolu mu olduğu belli değildi. Bir ekip, yalnız yaşayan ve yavrusuna bakılmayan beş kara kaplumbağası türünün yumurtadan yeni çıkmış yavrularını sınadı. Bu yavrular sınanmadan önce hiçbir şey görmemişti. Kaplumbağa yavruları, yüze benzeyen desene öteki dizilişlere göre daha çok yaklaştı. Ekibe göre bu eğilim, sürüngenler ve memeliler ayrı yollara gitmeden önce var olan çok eski bir düzene işaret ediyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Kaplumbağa yavrularının yüze benzeyen desene yönelmesini",
+            "Kaplumbağaların yumurtalarını nereye gömdüğünü",
+            "Civcivlerin annelerini sesinden tanımasını",
+            "Kaplumbağa kabuğundaki desenlerin anlamını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yüze benzeyen desen nelerden oluşur?",
+          "secenekler": [
+            "Ters üçgen gibi dizilmiş üç lekeden",
+            "Yan yana duran iki çizgiden",
+            "İç içe geçmiş dört daireden",
+            "Düz bir sıraya dizilmiş beş noktadan"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sınanan kaplumbağa türlerinde yavrulara kim bakar?",
+          "secenekler": [
+            "Yavrulara bakan olmaz",
+            "Yavrulara anne bakar",
+            "Yavrulara baba bakar",
+            "Yavrulara bütün grup bakar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip kaç kaplumbağa türünü sınadı?",
+          "secenekler": [
+            "Beş",
+            "Bir",
+            "On",
+            "Yirmi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sınanan yavrular daha önce ne görmüştü?",
+          "secenekler": [
+            "Hiçbir şey",
+            "Annelerinin yüzünü",
+            "Başka kaplumbağaları",
+            "İnsan yüzlerini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekibe göre bu eğilim neye işaret ediyor?",
+          "secenekler": [
+            "Çok eski zamanlardan kalan bir düzene",
+            "Kaplumbağaların insanları tanıdığına",
+            "Yavruların annelerini aradığına",
+            "Yalnız bu türlere özgü yeni bir beceriye"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa105",
+      "baslik": "Köşeli bir kuyruk",
+      "etiket": "deniz",
+      "kaynak": "porter2015",
+      "pmid": "26138983",
+      "doi": "10.1126/science.aaa6683",
+      "yazar": "Porter ve ark.",
+      "dergi": "Science",
+      "yil": 2015,
+      "metin": "Çoğu hayvanın kuyruğu silindir gibi yuvarlaktır, ama denizatının kuyruğu köşelidir; kesiti bir kareye benzer. Denizatlarının bedeni baştan sona sert, kemikli bir zırhla kaplıdır. Buna rağmen kuyruklarını esnek bir tutunma aracı gibi kullanırlar. Bir ekip, bu köşeli biçimin işe yarayan bir üstünlüğü olup olmadığını merak etti. Üç boyutlu yazıcıyla iki model yaptılar: biri gerçek kuyruk gibi köşeli, öteki aynı yapının yuvarlak bir benzeriydi. Sonra iki modeli de ezdiler, büktüler ve burdular. Köşeli model, ezildiğinde yuvarlak olandan daha dayanıklı çıktı. Çok bükülüp burulduğunda da eklemlerinin düzenini yuvarlak modelden daha iyi korudu. Ekibe göre köşeli yapı, hem tutunmada hem ezilmeye dayanmada yuvarlak yapıdan daha iyi iş görüyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Denizatı kuyruğunun köşeli biçiminin yararını",
+            "Denizatlarının yavrularını nasıl taşıdığını",
+            "Denizatlarının suda neden dik yüzdüğünü",
+            "Denizatlarının renklerini nasıl değiştirdiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Çoğu hayvanın kuyruğu nasıldır?",
+          "secenekler": [
+            "Silindir gibi yuvarlak",
+            "Kare kesitli",
+            "Üçgen biçimli",
+            "Yassı ve geniş"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Denizatının bedeni neyle kaplıdır?",
+          "secenekler": [
+            "Sert, kemikli bir zırhla",
+            "Kalın bir yağ tabakasıyla",
+            "Yumuşak, uzun tüylerle",
+            "Yapışkan bir sıvıyla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip modelleri nasıl yaptı?",
+          "secenekler": [
+            "Üç boyutlu yazıcıyla",
+            "Kilden elle yontarak",
+            "Gerçek kuyruklardan kalıp alarak",
+            "Tahtadan oyarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ezildiğinde hangi model daha dayanıklı çıktı?",
+          "secenekler": [
+            "Köşeli model",
+            "Yuvarlak model",
+            "İkisi aynı ölçüde dayanıklıydı",
+            "İkisi de hemen kırıldı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Çok bükülüp burulunca köşeli model neyi daha iyi korudu?",
+          "secenekler": [
+            "Eklemlerinin düzenini",
+            "Rengini",
+            "Ağırlığını",
+            "Uzunluğunu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa106",
+      "baslik": "Hortumla emmek",
+      "etiket": "memeli",
+      "kaynak": "schulz2021",
+      "pmid": "34062103",
+      "doi": "10.1098/rsif.2021.0215",
+      "yazar": "Schulz ve ark.",
+      "dergi": "Journal of the Royal Society Interface",
+      "yil": 2021,
+      "metin": "Bir filin hortumu 100 kilogramdan ağırdır, ama filler çoğunlukla hafif bitkilerle beslenir. Bu kadar ağır bir hortum küçük şeyleri nasıl tutar? Bir ekip, Atlanta'daki bir hayvanat bahçesinde yaşayan filleri filme aldı. Filler yiyeceği havayla içine çekerek, yani emerek kavrayabiliyordu. Bu davranışın daha önce yalnız balıklarda olduğu sanılıyordu. Ekibin hesabına göre filin burun deliklerinin büyüklüğü ve akciğer hacmi, insan akciğerine yakın bir basınçla emmeye yetiyor. Ekip, fillerin saniyede 150 metreden hızlı nefes çekebildiğini tahmin ediyor; bu, insan hapşırığının yaklaşık 30 katı hızdır. Bu hız sayesinde filler sebze küplerini ve kolay kırılan cipsleri emerek toplayabildi. Ekip, bulguların robot çalışmalarına da ilham vermesini umuyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Fillerin hortumla emerek yiyecek kavramasını",
+            "Fillerin hortumla nasıl su püskürttüğünü",
+            "Fillerin hangi bitkileri daha çok sevdiğini",
+            "Fillerin hortumla birbirine nasıl seslendiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bir filin hortumu ne kadar ağırdır?",
+          "secenekler": [
+            "100 kilogramdan fazla",
+            "10 kilogramdan az",
+            "Yaklaşık 1 kilogram",
+            "Yaklaşık 50 kilogram"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Filler nerede filme alındı?",
+          "secenekler": [
+            "Bir hayvanat bahçesinde",
+            "Afrika'daki bir milli parkta",
+            "Bir çiftlikte",
+            "Bir ormanda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Emerek yiyecek tutmanın daha önce hangi hayvanlarda olduğu sanılıyordu?",
+          "secenekler": [
+            "Yalnız balıklarda",
+            "Yalnız kuşlarda",
+            "Yalnız böceklerde",
+            "Yalnız maymunlarda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Fillerin nefes çekme hızı neyle karşılaştırıldı?",
+          "secenekler": [
+            "İnsan hapşırığıyla",
+            "Rüzgârın hızıyla",
+            "Bir arabanın hızıyla",
+            "Ses hızıyla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Filler neleri emerek topladı?",
+          "secenekler": [
+            "Sebze küplerini ve kolay kırılan cipsleri",
+            "Bütün elmaları ve karpuzları",
+            "Kuru otları ve uzun dalları",
+            "Pirinç tanelerini ve suyu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa107",
+      "baslik": "Saniyelik uykular",
+      "etiket": "kus",
+      "kaynak": "libourel2023",
+      "pmid": "38033080",
+      "doi": "10.1126/science.adh0771",
+      "yazar": "Libourel ve ark.",
+      "dergi": "Science",
+      "yil": 2023,
+      "metin": "Gözlerin kapanıp birkaç saniyeliğine uykuya dalınmasına mikro uyku denir. Bu kadar kısa uykuların, uykunun yararlarını sağlamaya yetip yetmediği bilinmiyordu. Sürekli tetikte kalması gereken hayvanların bu yola başvurabileceği düşünülüyordu. Bir ekip, Antarktika'da yaşayan yabani çenebantlı penguenlerin uykusunu, kafalarındaki elektrik etkinliğini kaydederek inceledi. Kayıtlar hem denizde hem de kuşlar yuvalarındayken alındı. Yuvadaki kuşlar, yumurtalarını kapmak isteyen bir avcıyla ve öteki penguenlerin saldırganlığıyla sürekli karşı karşıyaydı. Penguenler günde 10 binden fazla kez uyuklayıp uyandı. Her uyku ortalama yalnız 4 saniye sürdü. Bu kısa uykular toplanınca günde 11 saatten fazla uyku birikti. Ekibe göre başarıyla üreyen bu kuşların böyle uyuması, uykunun yararlarının küçük parçalarla da birikebileceğini düşündürüyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Penguenlerin çok kısa uykularla bol uyku biriktirmesini",
+            "Penguenlerin buzun üstünde nasıl ısındığını",
+            "Penguenlerin denizde nasıl yiyecek bulduğunu",
+            "Penguenlerin yuvalarını neyle yaptığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Mikro uyku nedir?",
+          "secenekler": [
+            "Birkaç saniyelik uykuya dalış",
+            "Birkaç saatlik derin uyku",
+            "Kış boyu süren uzun uyku",
+            "Yalnız öğlen yapılan şekerleme"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kayıtlar nerede alındı?",
+          "secenekler": [
+            "Hem denizde hem yuvada",
+            "Yalnız bir hayvanat bahçesinde",
+            "Yalnız buzun altında",
+            "Yalnız bir laboratuvarda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Penguenler günde kaç kez uyuklayıp uyandı?",
+          "secenekler": [
+            "10 binden fazla",
+            "Yaklaşık 10",
+            "Yaklaşık 100",
+            "Yalnızca birkaç yüz kez"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Her uyku ortalama ne kadar sürdü?",
+          "secenekler": [
+            "4 saniye",
+            "4 dakika",
+            "4 saat",
+            "40 dakika"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kısa uykular toplanınca günde ne kadar uyku birikti?",
+          "secenekler": [
+            "11 saatten fazla",
+            "1 saatten az",
+            "Yaklaşık 3 saat",
+            "Yaklaşık 6 saat"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa108",
+      "baslik": "Fırlayan dil",
+      "etiket": "surungen",
+      "kaynak": "zeng2025",
+      "pmid": "40882629",
+      "doi": "10.1016/j.cub.2025.07.085",
+      "yazar": "Zeng ve ark.",
+      "dergi": "Current Biology",
+      "yil": 2025,
+      "metin": "Çok hızlı bir hareket için kasın enerjisinin verimle aktarılması gerekir. Omurgalı, yani sırt kemiği olan hayvanlarda yoğun dokuların ve sınırlı esnekliğin bu gücü kısıtladığı düşünülür. Bir ekip, dilini çok hızlı fırlatan iki hayvan grubunu inceledi: bukalemunları ve akciğeri olmayan bazı semenderleri. İki grup, birbirinden bağımsız olarak aynı çözümü geliştirmiş. Dilin içinde uca doğru incelen sert bir çubuk vardır; kaslar bu çubuğu sıkınca dil kayarak fırlar. Bu düzen sayesinde dil saniyede 2 ile 5,5 metre hızla ileri atılır. Bu hız, boyları birbirinden 30 kat farklı hayvanlarda görüldü. Enerji, 3 ile 30 milisaniye içinde aktarılır; milisaniye saniyenin binde biridir. Ekibe göre bu başarı olağanüstü malzemelerden değil, parçaların düzeninden geliyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bukalemun ve bazı semenderlerin dil fırlatma düzenini",
+            "Bukalemunların renk değiştirme yolunu",
+            "Semenderlerin suyun altında nasıl soluk aldığını",
+            "Bukalemunların gözlerini ayrı ayrı oynatmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip hangi iki grubu inceledi?",
+          "secenekler": [
+            "Bukalemunları ve akciğersiz bazı semenderleri",
+            "Kurbağaları ve kaplumbağaları",
+            "Yılanları ve timsahları",
+            "Gekoları ve iguanaları"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İki grup bu çözümü nasıl edinmiş?",
+          "secenekler": [
+            "Birbirinden bağımsız olarak",
+            "Birbirini izleyip öğrenerek",
+            "İnsanların yetiştirmesiyle",
+            "Aynı yuvada büyüyerek"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Dilin içindeki çubuk nasıldır?",
+          "secenekler": [
+            "Uca doğru incelir",
+            "Her yerde aynı kalınlıktadır",
+            "Uca doğru kalınlaşır",
+            "Halka biçimindedir"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Dil hangi hızla ileri atılır?",
+          "secenekler": [
+            "Saniyede 2 ile 5,5 metre",
+            "Saniyede 20 ile 50 metre",
+            "Saniyede 1 metreden az",
+            "Saniyede 100 metreden fazla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekibe göre bu başarı nereden geliyor?",
+          "secenekler": [
+            "Parçaların düzeninden",
+            "Olağanüstü malzemelerden",
+            "Çok büyük kaslardan",
+            "Dilin yapışkanlığından"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa109",
+      "baslik": "Yüzlerce küçük ayak",
+      "etiket": "deniz",
+      "kaynak": "deridoux2026",
+      "pmid": "41528874",
+      "doi": "10.1073/pnas.2509681123",
+      "yazar": "Deridoux ve ark.",
+      "dergi": "PNAS",
+      "yil": 2026,
+      "metin": "Deniz yıldızları alt yüzlerindeki yüzlerce küçük tüp ayakla sürünür, tırmanır ve yolunu bulur. Bu ayakların birlikte nasıl çalıştığı pek bilinmiyor. Bir ekip, tüp ayakların zemine yapıştığı anları özel bir ışık yöntemiyle anında görüntüledi. Farklı büyüklükte deniz yıldızlarını incelediler. Daha hızlı sürünen deniz yıldızlarında her ayağın zemine yapışık kaldığı süre daha kısaydı. Ekip sonra hayvanların sırtına, ağırlıklarını yüzde 25 ve yüzde 50 artıran küçük sırt çantaları taktı. Yük eklenince ayakların yapışık kalma süresi belirgin biçimde uzadı. Deniz yıldızları baş aşağı dönmüş yürürken de ayaklar zemine değme biçimini değiştirdi. Ekibe göre deniz yıldızları, ayaklarının zemine değişini ayarlayarak yükteki değişikliklere uyum sağlıyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Deniz yıldızlarının yüke göre ayaklarını ayarlamasını",
+            "Deniz yıldızlarının yumurtalarını nereye bıraktığını",
+            "Deniz yıldızlarının hangi kabukluları yediğini",
+            "Deniz yıldızlarının nasıl renk değiştirdiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Deniz yıldızları neyle sürünür?",
+          "secenekler": [
+            "Yüzlerce küçük tüp ayakla",
+            "Beş kolunu kürek gibi çırparak",
+            "Su püskürterek",
+            "Dikenleriyle iterek"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Daha hızlı sürünen deniz yıldızlarında ne görüldü?",
+          "secenekler": [
+            "Ayakların yapışık kaldığı süre daha kısaydı",
+            "Ayakların yapışık kaldığı süre daha uzundu",
+            "Tüp ayaklarının sayısı daha fazlaydı",
+            "Ayakları zemine hiç değmiyordu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sırt çantaları hayvanların ağırlığını ne kadar artırdı?",
+          "secenekler": [
+            "Yüzde 25 ve yüzde 50",
+            "Yüzde 5 ve yüzde 10",
+            "İki ve üç kat",
+            "Yüzde 75 ve yüzde 100"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yük eklenince ne oldu?",
+          "secenekler": [
+            "Ayakların yapışık kalma süresi uzadı",
+            "Deniz yıldızları yürümeyi bıraktı",
+            "Ayakların yapışık kalma süresi kısaldı",
+            "Ayaklar zemine yapışamaz oldu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip deniz yıldızlarını başka hangi durumda inceledi?",
+          "secenekler": [
+            "Baş aşağı yürürken",
+            "Kumun altına gömülürken",
+            "Suyun dışında beklerken",
+            "Su yüzeyinde yüzerken"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa110",
+      "baslik": "Sürüde kim önde?",
+      "etiket": "kus",
+      "kaynak": "nagy2010",
+      "pmid": "20376149",
+      "doi": "10.1038/nature08891",
+      "yazar": "Nagy ve ark.",
+      "dergi": "Nature",
+      "yil": 2010,
+      "metin": "Birlikte uçan kuş sürüleri, göz alıcı hareket desenleri çizer. Bu desenlerin, kuşların yanındakilere verdiği küçük tepkilerden doğduğu düşünülür. Ama doğada uzun yol uçan bir sürünün her bireyini ayrıntılı izlemek çok zordur. Bir ekip, en fazla 10 kuştan oluşan posta güvercini sürülerine hafif konum aygıtları taktı. Ekip, bir kuşun yön değiştirmesini ötekilerin ne kadar gecikmeyle izlediğine baktı. Böylece sürüde belirgin bir sıra düzeni ortaya çıktı: bazı kuşlar öncülük ediyor, ötekiler onları izliyordu. Bir güvercinin sürüdeki ortalama yeri, bu sıradaki yeriyle yakından ilişkiliydi. Kuşlar, daha çok sol gözleriyle gördükleri sürü arkadaşlarına daha hızlı tepki verdi. Ekibe göre sıralı bir düzen, herkesin eşit olduğu düzenden daha verimli olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Güvercin sürülerindeki öncü ve izleyici düzenini",
+            "Güvercinlerin evlerinin yolunu nasıl bulduğunu",
+            "Güvercinlerin uçarken nasıl dinlendiğini",
+            "Güvercinlerin hangi yemleri seçtiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip güvercinlere ne taktı?",
+          "secenekler": [
+            "Hafif konum aygıtları",
+            "Renkli ayak halkaları",
+            "Küçük kameralar",
+            "Ses kaydediciler"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sürüler en fazla kaç kuştan oluşuyordu?",
+          "secenekler": [
+            "10",
+            "3",
+            "50",
+            "100"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip sıra düzenini neye bakarak buldu?",
+          "secenekler": [
+            "Yön değişikliklerinin ne kadar gecikmeyle izlendiğine",
+            "Kuşların ne kadar yem yediğine",
+            "Kuşların ne kadar yüksekte uçtuğuna",
+            "Kuşların kaç yaşında olduğuna"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kuşlar hangi gözle gördükleri arkadaşlarına daha hızlı tepki verdi?",
+          "secenekler": [
+            "Daha çok sol gözle",
+            "Daha çok sağ gözle",
+            "İki gözle de eşit ölçüde",
+            "Gözle değil, yalnız sesle"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bir güvercinin sürüdeki ortalama yeri neyle ilişkiliydi?",
+          "secenekler": [
+            "Sıra düzenindeki yeriyle",
+            "Tüylerinin rengiyle",
+            "Kanatlarının uzunluğuyla ve genişliğiyle",
+            "Yaşıyla"
+          ]
+        }
+      ]
+    }
+  ]
+}
