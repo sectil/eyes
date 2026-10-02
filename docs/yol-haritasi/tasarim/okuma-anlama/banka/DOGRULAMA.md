@@ -1,5 +1,20 @@
 # Bilimsel doğrulama kayıtları
 
+## taslak-07
+
+PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor; hepsi "Journal Article" (yorum, derleme, düzeltme yok). Uzunluk oranı sonrası: doğru seçenek en uzun 11/60 (%18).
+
+- oa061 | tamam | değişiklik yok
+- oa062 | düzeltildi: özette putative urea transporter olduğu için "üre taşıyan bir protein" → "üre taşıdığı düşünülen bir protein" | ilgili soru kökü aynı biçimde yumuşatıldı
+- oa063 | tamam ("insan kulağının duyamayacağı kadar yüksek perdeli" ultrasonik sesin tanımı, genel bilgi) | değişiklik yok
+- oa064 | tamam | değişiklik yok
+- oa065 | tamam ("bu hâlde vücut sıcaklığı düşer" uyuşukluğun tanımı, genel bilgi) | değişiklik yok
+- oa066 | tamam | değişiklik yok
+- oa067 | tamam | değişiklik yok
+- oa068 | tamam | değişiklik yok
+- oa069 | tamam | değişiklik yok
+- oa070 | düzeltildi: "gösterilen tek hayvan Ronan'dır" kesin yargısı özetteki gibi "tek kanıt Ronan'dan gelir" yapıldı | değişiklik yok
+
 ## taslak-06
 
 PubMed `get_article_metadata` ile 10 kayıt çekildi (2026-10-02); PMID, DOI, yazar, dergi ve yıl hepsinde özetle uyuşuyor; hepsi "Journal Article" (yorum, derleme, düzeltme yok). Uzunluk oranı sonrası: doğru seçenek en uzun 13/60 (%22).
