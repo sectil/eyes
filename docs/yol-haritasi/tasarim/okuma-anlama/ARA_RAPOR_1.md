@@ -111,3 +111,7 @@ Kararlar:
 - İki ekran için bir kapı turu daha açılacak.
 - `banka/taslak-01.json`'ın üslubu onaylı. Kalan 110 metin aynı üslup ve kurallarla 10'arlı takımlar hâlinde yazılır.
   Metinler koda girmeden önce yine sahip onayına sunulur.
+
+## 10. Sahip kararı (2026-10-02)
+- Sayılmadı ekranının son hâli sahip onaylı: "OK ONAYLIYORUM".
+- Beş ekranın tasarımı tamam; kayıtlar `kapi/`.

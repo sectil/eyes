@@ -23,3 +23,17 @@ Beş ekranın dördü geçti:
 ## Karar
 Sahibe söz verildi: bu tur da geçmezse ekran sahibe gösterilir, son karar sahibin. Düzeltme yapıldı, ön denetimden
 geçti; ekran sahibe gönderildi.
+
+## Sahip kararı (2026-10-02)
+Düzeltilmiş sayılmadı ekranı sahibe gösterildi: hız büyük, sönük ve üstü çizili; altında "Hız sayılmadı"; "Bu okuma
+eklenmedi · 2/5". Sahibin cevabı, kelimesi kelimesine: "OK ONAYLIYORUM".
+
+**Beş ekran tamam:**
+
+| Ekran | Sonuç |
+|---|---|
+| giris | 5/5 |
+| metin | 4/5 |
+| soru | 5/5 |
+| sonuc | 5/5 |
+| sayilmadi | sahip onayı |
