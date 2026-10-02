@@ -6,7 +6,7 @@
 // Türkçe ek: yalnız lib/nef/bank/tr.grammar.js (suffixFor 'GEÇMİŞ', upperFirst); M3'ün "-da/-de" hâli hedef başına açık
 // tablodur (FOCUS; tr.grammar'da çoğul belirtme ekini çözen işlev yok).
 import { COLORS } from './streetScenes.js'
-import { ITEMS, VENDORS, TASKS } from './street.js'
+import { ITEMS, VENDORS, TASKS, ANSWER_TEXT } from './street.js'
 import { VERDICT_WORD } from './changeText.js'
 import { suffixFor, upperFirst } from './nef/bank/tr.grammar.js'
 
@@ -47,6 +47,17 @@ export const FOCUS = {
   flowerBucket: 'çiçek dolu kovalarda', balloon: 'balonlarda', kite: 'uçurtmalarda', runner: 'koşanlarda',
   ball: 'toplarda', stroller: 'bebek arabalarında', pigeon: 'güvercinlerde',
 }
+// R5 {Hedefler}: hedeflerin çoğul adı (METINLER "R5 sayım satırı" listesi)
+const TARGETS_PLURAL = {
+  blueCar: 'Mavi arabalar', taxi: 'Sarı taksiler', cat: 'Kediler', bike: 'Bisikletler', redCar: 'Kırmızı arabalar',
+  dog: 'Köpekler', hat: 'Şapkalı kişiler', glasses: 'Gözlüklü kişiler', litShop: 'Işıklı vitrinler',
+  redUmbrella: 'Kırmızı şemsiyeler', yellowCoat: 'Sarı yağmurluk giyenler', watermelon: 'Karpuzlar',
+  hatVendor: 'Şapkalı satıcılar', redCrate: 'Kırmızı kasalar', basket: 'Sepetler', flowerBucket: 'Çiçek dolu kovalar',
+  balloon: 'Balonlar', kite: 'Uçurtmalar', runner: 'Koşanlar', ball: 'Toplar', stroller: 'Bebek arabaları',
+  pigeon: 'Güvercinler',
+}
+// Hareket eden hedefler: "geçti"; ötekiler "vardı"
+const MOVING = ['blueCar', 'taxi', 'redCar', 'bike', 'stroller']
 // "Gözünden kaçan": {kim} ve ayrıntı sorusu (şablon kimliğiyle; lib/street.js TEMPLATES)
 const WHO = {
   laugh: 'kahkaha atan bir kadın', blonde: 'sarışın bir kadın', child: 'çocuklu bir kadın', hat: 'şapkalı bir adam',
@@ -82,11 +93,12 @@ export const TEXTS = {
   M1: s('Fark Ettin mi? · 2 dk · {sahne}'),
   M2: s('Görevin / {görev}'),
   M3: s('Gözün {hedef} olsun. Sonunda birkaç sorum var.'),
-  M4: s('01 Caddeden geç · 40 sn / 02 Ne değişti? · 4 sahne / 03 Gözünden kaçan · 2 soru'),
-  M5: { status: OK, text: 'Bu bir fark etme alıştırması. Gerçek hayatta daha çok fark ettirdiği gösterilmedi.' },
+  M4: s('01 Caddeden geç · 40 sn / 02 Ne değişti? · {k} sahne / 03 Gözünden kaçan · 2 soru'), // {k}: basamağın kare sayısı (F1'de 3; ana oturum kararı)
+  M5: s('Bu bir fark etme alıştırması. Günlük hayatta daha çok fark etmeni sağladığına dair henüz kanıt yok.'), // sahip onayı 2026-10-02
   M6: { status: OK, text: 'Yürümeye başla' },
   // Ne değişti?
   D1: s('Ne değişti? · {i} / {n}'),
+  B1: s('İyi bak, birazdan bir şey değişecek.'), // ezberleme anı (ilk 3 sn) başlığı (METINLER: Ezberleme başlığı)
   D2: s('Bir şey değişti. Nerede?'),
   D3: s('Değişen yere dokun.'),
   D4: s('Bu sahnede {N} nesne var'),
@@ -112,15 +124,35 @@ export const TEXTS = {
   G4: s('{soru} / Görmediysen de tahmin et.'),
   G5: s('{sahne} · {dk} dk önce'),
   'Ş1': s('Görmediğini düşünsen de doğru bildin. Araştırmalarda bu tür tahminler şanstan daha sık tutuyor.'),
+  // METINLER "Gözünden kaçan başlıkları ve ekran okuyucu etiketleri" (durum S, sahip onayı 2026-10-02). Ö4 kullanılmaz
+  // (sayı sonrası karolar aria-hidden; anlamı R5 cümlesi taşır).
+  'Ö1': s('Gözünden kaçmamış.'), // "Gördüm" + doğru cevap başlığı
+  'Ö2': s('Doğrusu buydu.'), // yanlış seçenek başlığı
+  'Ö3': s('İlk sahne 3 saniye görünür'), // ekran okuyucu: ezberleme süre çizgisi
+  'Ö5.found': s('{i}. sahne: değişikliği buldun, sahnede {N} nesne vardı'), // ekran okuyucu: sonuçtaki sahne karesi
+  'Ö5.miss': s('{i}. sahne: değişikliği bulamadın, sahnede {N} nesne vardı'),
+  'Ö6': s('Kapat'), // ekran okuyucu: bilim kartını kapatan düğme
   ...map('who', WHO),
   ...map('ask', ASK),
   // Sonuç
   R1: s('Bugünkü turun'),
+  // S0: sonucun en büyük yazısı (k bulunan sahne, n sahne); k'nin eki açık tablo
+  'S0.1': s("{n} sahnenin 1'inde buldun"),
+  'S0.2': s("{n} sahnenin 2'sinde buldun"),
+  'S0.3': s("{n} sahnenin 3'ünde buldun"),
+  'S0.all': s('{n} sahnenin hepsinde buldun'),
+  'S0.none': s('Bu turda değişiklikler gözünden kaçtı'),
   R2: s('{N} nesne / Değişikliği {N} nesnenin olduğu kalabalık bir sahnede buldun.'),
   R3: s(VERDICT_WORD.unclear), // ayrı çip metni yok: Gelişim'in onaylı sözü (lib/changeText.js)
   R4: s('Başlangıç: {B} nesne · Bugün: {N} nesne'),
   'R5.tags': s('TAM / YAKIN / KAÇTI / GÖRDÜN / TAHMİN'),
   R5: s('{görev}: {n} geçti, sen de {n} dedin'),
+  // R5 sayım satırı (METINLER "R5 sayım satırı"): hareket eden hedefte "geçti", ötekilerde "vardı"
+  'R5.move.same': s('{Hedefler}: {n} geçti, sen de {n} dedin'),
+  'R5.move.diff': s('{Hedefler}: {n} geçti, sen {m} dedin'),
+  'R5.stay.same': s('{Hedefler}: {n} vardı, sen de {n} dedin'),
+  'R5.stay.diff': s('{Hedefler}: {n} vardı, sen {m} dedin'),
+  ...map('targets', TARGETS_PLURAL),
   R6: { status: OK, text: 'Bitti' },
   // Yol durağı
   Y1: s('Caddeden geç, değişeni bul · 2 dk'),
@@ -132,6 +164,17 @@ export const TEXTS = {
   ...map('place', { cadde: 'Caddede', aksam: 'Caddede', yagmur: 'Caddede', pazar: 'Pazar yerinde', park: 'Parkta' }),
   // Sayma görevleri ve odak
   'task.label': { status: OK, text: 'Görevin' },
+  // bugünkü ekranda olan düğme, etiket ve geri bildirimler (aynen)
+  'ui.exit': { status: OK, text: 'Çık' },
+  'ui.next': { status: OK, text: 'Devam' },
+  'ui.task': { status: OK, text: 'Görev' },
+  'ui.progress': { status: OK, text: 'İlerleme' },
+  'count.exact': { status: OK, text: 'Tam doğru.' },
+  'count.near': { status: OK, text: 'Çok yakın.' },
+  'count.passed': { status: OK, text: '{n} tane geçti.' },
+  'fact.head': { status: OK, text: 'Doğru mu, efsane mi?' },
+  'fact.fact': { status: OK, text: ANSWER_TEXT.fact },
+  'fact.myth': { status: OK, text: ANSWER_TEXT.myth },
   ...Object.fromEntries(TASKS.flatMap((t) => [[`task.${t.id}`, { status: OK, text: t.text }], [`count.${t.id}`, { status: OK, text: t.q }]])),
   ...Object.fromEntries(Object.entries(TASK_TEXT).flatMap(([id, [task, q]]) => [[`task.${id}`, s(task)], [`count.${id}`, s(q)]])),
   ...map('focus', FOCUS),
@@ -206,4 +249,32 @@ export function changeSentence(c) {
   if (person) return c.kind === 'gelir' ? say('change.belirdi', { yer: person[0], ad }) : say('change.yokOldu', { iyelik: person[1] })
   if (ANIMALS.includes(c.obj)) return c.kind === 'gelir' ? say('change.geldi', { hayvan: ad }) : say('change.gitti', { Hayvan: up(ad) })
   return c.kind === 'gelir' ? say('change.gelir', { ad }) : say('change.gider', { Ad: up(ad) })
+}
+
+// Bilim kartı (lib/street.js FACTS; metinleri bugünkü ekranda, aynen): başlık, iddia, cevap, gövde, kaynak satırı
+export const factLines = (f) => (f ? { head: say('fact.head'), claim: f.claim, answer: say(`fact.${f.answer}`), body: f.body, cite: `${f.ref} · doi ${f.doi}` } : null)
+// Sonuçtaki sayım satırı (R5): "{Hedefler}: {n} geçti|vardı, sen de {n} dedin" ya da "…, sen {m} dedin"
+export function countRow(taskId, n, answer) {
+  const Hedefler = say(`targets.${taskId}`)
+  if (!Hedefler || !Number.isFinite(n) || !Number.isFinite(answer)) return null
+  return say(`R5.${MOVING.includes(taskId) ? 'move' : 'stay'}.${answer === n ? 'same' : 'diff'}`, { Hedefler, n, m: answer })
+}
+// Bölünmez boşluk (yalnız yerleşim; harfler aynı): sayı ile ardından gelen sözcük ve son iki sözcük ayrılmaz
+export const glue = (t) => {
+  if (typeof t !== 'string') return t
+  const s = t.replace(/(\d) (?=\p{L})/gu, '$1 ')
+  const i = s.lastIndexOf(' ')
+  return i > 0 ? `${s.slice(0, i)} ${s.slice(i + 1)}` : s
+}
+// Onaylı cümleyi ilk ". "dan ikiye böler (yerleşim için; harfler aynı): "Burasıydı." · "Sıradaki sahnede …"
+export const splitFirst = (t) => {
+  const i = typeof t === 'string' ? t.indexOf('. ') : -1
+  return i < 0 ? [t, null] : [t.slice(0, i + 1), t.slice(i + 2)]
+}
+// Sonucun en büyük yazısı: k bulunan sahne, n sahne (S0)
+export function resultHead(k, n) {
+  if (!(n > 0)) return null
+  if (k <= 0) return say('S0.none')
+  if (k >= n) return say('S0.all', { n })
+  return say(`S0.${k}`, { n })
 }

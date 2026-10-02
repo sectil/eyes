@@ -16,7 +16,8 @@ export const SHOP_H = 150 // dükkân katı
 export const SIGN = { top: Y.side - SHOP_H + 4, h: 26 } // tabela: 426..452
 export const ROWS = [606, 618, 628] // kaldırımda ayak çizgileri (arka → ön); kişi tepesi ≥ 606 − 148 = 458 > tabela altı
 export const PERSON_TOP = 148 // kişinin (şapka, şemsiye, balon dahil) ayaktan en yüksek noktası
-export const LANES = { far: Y.road + 50, near: Y.road + 116 } // araba tabanları (uzak şerit sola, yakın şerit sağa akar)
+export const BIKE_LANE = { street: Y.roadEnd - 4, park: Y.side + 82 } // sürülen bisikletin tabanı: yolun ön kenarı ya da park yolu
+export const LANES = { far: Y.road + 62, near: Y.road + 124 } // araba tabanları (uzak şerit sola, yakın şerit sağa akar); uzak şeritteki arabanın tepesi kaldırımın ön sırasının altında
 export const SKY_MAX = 0.2 // gök payı üst sınırı
 
 // Renkler: 8 basit ad (erişilebilirlik; seçeneklerde yuvarlak + ad). Soru seçeneklerindeki yuvarlakla aynı ton çizilir.
@@ -153,18 +154,27 @@ export const SIZE = {
   person: [46, 136], child: [26, 80], cat: [46, 52], dog: [66, 50], bike: [76, 56], scooter: [50, 58], pot: [30, 42],
   bin: [30, 48], aboard: [40, 58], ball: [24, 24], suitcase: [32, 52], stroller: [52, 58], pigeon: [28, 22],
   crate: [46, 32], basket: [40, 30], bucket: [32, 44], cone: [24, 36], bench: [90, 40], hydrant: [22, 40], chair: [30, 50],
-  watermelon: [38, 28], vendor: [150, 150],
+  watermelon: [38, 28], vendor: [150, 150], rider: [78, 118],
 }
 export function itemBox(it) {
   if (it.type === 'person') {
     const s = it.s || 1
     const top = (it.umbrella || it.balloon ? PERSON_TOP : it.hat || it.helmet ? 134 : 126) * s
-    const w = (it.umbrella ? 72 : it.child || it.dog ? 96 : 46) * s
-    const left = it.child || it.dog ? (it.dir === -1 ? -w + 23 * s : -23 * s) : -w / 2
+    const w = (it.umbrella ? 72 : it.child || it.dog || it.stroller ? 96 : 46) * s
+    const left = it.child || it.dog || it.stroller ? (it.dir === -1 ? -w + 23 * s : -23 * s) : -w / 2
     return { x: it.x + left, y: it.y - top, w, h: top }
   }
   const [w, h] = SIZE[it.type] ?? [40, 40]
   return { x: it.x - w / 2, y: it.y - h, w, h }
+}
+// Kişinin değişen parçasının kutusu (vurgu halkası parçayı sarar): yerel koordinat, yöne göre aynalanır
+const PART = { hat: [-17, -134, 34, 15], bag: [-26, -70, 18, 16], glasses: [-2, -119, 16, 16], scarf: [-11, -106, 22, 24], umbrella: [-26, -166, 70, 42], balloon: [6, -145, 18, 22], phone: [8, -106, 10, 15] }
+export function partBox(q, attr) {
+  const s = q.s || 1
+  const b = attr === 'top' ? (q.dress ? [-21, -106, 42, 56] : [-13, -106, 26, 50]) : PART[attr]
+  if (!b) return itemBox(q)
+  const [x, y, w, h] = b.map((v) => v * s)
+  return { x: q.x + ((q.dir || 1) === -1 ? -(x + w) : x), y: q.y + y, w, h }
 }
 export const signBox = (b) => ({ x: b.x + 12, y: SIGN.top, w: b.w - 24, h: SIGN.h })
 // Ağaç: gövde aralıkta (±5), taç tabela sırasının üstünde (y ≤ 402)
@@ -189,6 +199,7 @@ function defs(p, mode) {
     `<linearGradient id="${id('aw')}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></linearGradient>` +
     `<linearGradient id="${id('sun')}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${p.sun[0]}" stop-opacity="${p.sun[1]}"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>`
 }
+export const sceneDefs = (mode = 'day') => defs(PAL[mode] ?? PAL.day, mode)
 const MOTION_CSS = '<style>' +
   '.fe-lb,.fe-lf,.fe-ab,.fe-af{transform-box:fill-box;transform-origin:50% 0}' +
   '.fe-go .fe-lf{animation:fe-step .45s ease-in-out infinite alternate}.fe-go .fe-lb{animation:fe-step .45s ease-in-out infinite alternate-reverse}' +
@@ -248,7 +259,8 @@ function goods(shop, x, base, w) {
   }
   return o
 }
-export function building(b, p, r, m, minY = 0) {
+// sign: { hide } levha ve yazısı çizilmez (kırpımda yarım kalıyor); { blank } levha boş, vitrin malı yok (cam figür: konu yerin kendisi)
+export function building(b, p, r, m, minY = 0, sign = {}) {
   const top = Y.side - b.h
   const { x, w } = b
   const body = p.facades[b.body % p.facades.length]
@@ -274,8 +286,8 @@ export function building(b, p, r, m, minY = 0) {
   }
   const gy = Y.side - SHOP_H
   o += `<rect x="${x}" y="${gy}" width="${w}" height="${SHOP_H}" fill="${body}"/><rect x="${x}" y="${gy}" width="${w}" height="${SHOP_H}" fill="#000" opacity=".06"/>`
-  o += `<rect x="${x + 12}" y="${SIGN.top}" width="${w - 24}" height="${SIGN.h}" rx="4" fill="${p.sign}"/>`
-  o += `<text x="${x + w / 2}" y="${SIGN.top + 18}" text-anchor="middle" font-family="Onest, system-ui, sans-serif" font-weight="800" font-size="14" letter-spacing="1.6" fill="${p.signInk}">${b.shop}</text>`
+  if (!sign.hide) o += `<rect x="${x + 12}" y="${SIGN.top}" width="${w - 24}" height="${SIGN.h}" rx="4" fill="${p.sign}"/>`
+  if (!sign.hide && !sign.blank) o += `<text x="${x + w / 2}" y="${SIGN.top + 18}" text-anchor="middle" font-family="Onest, system-ui, sans-serif" font-weight="800" font-size="14" letter-spacing="1.6" fill="${p.signInk}">${b.shop}</text>`
   const aw = col(b.aw)
   const ay = SIGN.top + SIGN.h + 4
   o += `<path d="M${x + 6} ${ay}L${x + w - 6} ${ay}L${x + w + 2} ${ay + 24}L${x - 2} ${ay + 24}Z" fill="${aw}"/>`
@@ -289,7 +301,7 @@ export function building(b, p, r, m, minY = 0) {
   o += `<rect x="${x + 16}" y="${ay + 40}" width="${vw - 8}" height="${Y.side - ay - 52}" fill="${lit ? '#F7D58A' : `url(#fe-${m}-glass)`}" opacity=".95"/>`
   if (lit) o += `<rect x="${x + 16}" y="${ay + 40}" width="${vw - 8}" height="${Y.side - ay - 52}" fill="#FFF3C8" opacity=".35"/><path d="M${x + 12} ${Y.side}L${x + 12 + vw} ${Y.side}L${x + 30 + vw} ${Y.side + 50}L${x - 6} ${Y.side + 50}Z" fill="#FFD27A" opacity=".16"/>`
   else o += `<path d="M${x + 22} ${Y.side - 12}L${x + 60} ${ay + 40}L${x + 74} ${ay + 40}L${x + 36} ${Y.side - 12}Z" fill="#fff" opacity=".2"/>`
-  o += goods(b.shop, x + 16, Y.side - 12, vw - 8)
+  if (!sign.blank) o += goods(b.shop, x + 16, Y.side - 12, vw - 8)
   o += `<rect x="${x + w - 52}" y="${ay + 34}" width="40" height="${Y.side - ay - 34}" rx="3" fill="${p.frame}"/><rect x="${x + w - 48}" y="${ay + 38}" width="32" height="${Y.side - ay - 38}" fill="${col(b.door)}"/><rect x="${x + w - 44}" y="${ay + 44}" width="24" height="34" fill="url(#fe-${m}-glass)" opacity=".6"/><circle cx="${x + w - 22}" cy="${Y.side - 40}" r="2.2" fill="#E7C46A"/>`
   return o + '</g>'
 }
@@ -337,14 +349,16 @@ function backRow(list, p, r, m, topRow) {
   return o
 }
 // Tezgâh iki parça: arka (direkler, tente, ad levhası) ve ön (tezgâh, kasalar); satıcı ikisinin arasında çizilir
-function stallBack(st) {
+export const stallSignBox = (st) => ({ x: st.x + st.w / 2 - 40, y: 380, w: 80, h: 22 })
+function stallBack(st, sign = {}) {
   const { x, w } = st
   const ac = col(st.aw)
   let o = `<g><rect x="${x + 6}" y="372" width="6" height="${Y.side + 30 - 372}" fill="#5B5149"/><rect x="${x + w - 12}" y="372" width="6" height="${Y.side + 30 - 372}" fill="#5B5149"/>`
   o += `<path d="M${x - 10} 424L${x + w + 10} 424L${x + w - 6} 372L${x + 6} 372Z" fill="${ac}"/>`
   for (let s = 0; s < 5; s++) o += `<path d="M${x + 28 + s * 44} 372L${x + 50 + s * 44} 372L${x + 38 + s * 48} 424L${x + 14 + s * 48} 424Z" fill="#fff" opacity=".4"/>`
   for (let sc = x - 10; sc < x + w + 10; sc += 16) o += `<circle cx="${sc + 8}" cy="424" r="8" fill="${ac}"/>`
-  return o + `<rect x="${x + w / 2 - 40}" y="380" width="80" height="22" rx="4" fill="#FFF8E8"/><text x="${x + w / 2}" y="396" text-anchor="middle" font-family="Onest, system-ui, sans-serif" font-weight="800" font-size="12" fill="#2A2E33">${st.sign}</text></g>`
+  if (sign.hide) return o + '</g>'
+  return o + `<rect x="${x + w / 2 - 40}" y="380" width="80" height="22" rx="4" fill="#FFF8E8"/>${sign.blank ? '' : `<text x="${x + w / 2}" y="396" text-anchor="middle" font-family="Onest, system-ui, sans-serif" font-weight="800" font-size="12" fill="#2A2E33">${st.sign}</text>`}</g>`
 }
 function stallFront(st) {
   const { x, w } = st
@@ -418,7 +432,10 @@ export function person(q, p = PAL.day, o = {}) {
   if (q.helmet) g += `<path d="M${k(-14)} ${k(-118)}Q${k(-14)} ${k(-134)} ${k(0)} ${k(-134)}Q${k(14)} ${k(-134)} ${k(14)} ${k(-118)}Z" fill="${col(q.helmet)}"/><rect x="${k(-17)}" y="${k(-120)}" width="${k(34)}" height="${k(4)}" rx="${k(2)}" fill="${col(q.helmet)}"/>`
   let extra = ''
   if (q.child) extra += person({ x: 24 * s, y: 0, s: 0.58 * s, top: 'sari', skin, hair: 'kahve', dir: 1 }, p, { inner: true }) + (CHILD_ITEM[q.child]?.(24 * s, 0) ?? '')
-  if (q.dog) extra += `<path d="M${k(9)} ${k(-58)}Q${k(30)} ${k(-30)} ${k(46)} ${k(-34)}" stroke="#2A2E33" stroke-width="${k(1.2)}" fill="none"/>` + dogShape(k(58), 0, ANIMAL[q.dog] ?? col(q.dog), s * 0.9)
+  // köpek: tasma elden (6, −57) köpeğin boynundaki tasmaya (72, −31) gider (kuyruğa değil; tasarım tur 2)
+  if (q.dog) extra += dogShape(k(58), 0, ANIMAL[q.dog] ?? col(q.dog), s * 0.9) + `<rect x="${k(68.8)}" y="${k(-37.8)}" width="${k(4.5)}" height="${k(12.6)}" rx="${k(2)}" fill="#2A2E33"/><path d="M${k(6)} ${k(-57)}Q${k(40)} ${k(-38)} ${k(72)} ${k(-31)}" stroke="#2A2E33" stroke-width="${k(1.6)}" fill="none" stroke-linecap="round"/>`
+  // bebek arabasını önünde iterek yürür (tutamak ele gelir)
+  if (q.stroller) extra += `<g transform="translate(${k(46)} 0) scale(${-s} ${s})">${P.stroller({ color: q.stroller })}</g><path d="M${k(9)} ${k(-58)}L${k(16)} ${k(-50)}" stroke="#24292F" stroke-width="${k(3)}" stroke-linecap="round"/>`
   if (q.kite) extra += `<path d="M${k(9)} ${k(-90)}L${k(70)} ${k(-300)}" stroke="#555" stroke-width="1"/><path d="M${k(70)} ${k(-330)}L${k(88)} ${k(-300)}L${k(70)} ${k(-276)}L${k(52)} ${k(-300)}Z" fill="${col(q.kite)}"/><path d="M${k(70)} ${k(-276)}q${k(-8)} ${k(16)} ${k(4)} ${k(30)}" stroke="${col(q.kite)}" stroke-width="2" fill="none"/>`
   const body = `<g transform="translate(${f(q.x)} ${f(q.y)}) scale(${dir} 1)">${g}${extra}</g>`
   if (o.inner) return `<g transform="translate(${f(q.x)} ${f(q.y)}) scale(${dir} 1)">${g}</g>`
@@ -438,12 +455,13 @@ function dogShape(x, y, c, s = 1) {
 const P = {
   cat: (it) => {
     const c = ANIMAL[it.color] ?? col(it.color)
-    return `<ellipse cx="0" cy="1" rx="18" ry="3.5" fill="#000" opacity=".14"/><path d="M-12 0Q-16 -26 0 -28Q12 -26 10 0Z" fill="${c}"/><circle cx="2" cy="-34" r="10" fill="${c}"/><path d="M-6 -40L-6 -50L0 -43ZM4 -43L10 -50L11 -39Z" fill="${c}"/><path d="M-11 -2Q-30 -4 -26 -22" stroke="${c}" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="5" cy="-35" r="1.5" fill="#1d1d1f"/>`
+    const edge = it.color === 'siyah' ? ' stroke="#C9CED3" stroke-opacity=".75" stroke-width="1.4"' : ''
+    return `<g${edge}><ellipse cx="0" cy="1" rx="18" ry="3.5" fill="#000" opacity=".14"/><path d="M-12 0Q-16 -26 0 -28Q12 -26 10 0Z" fill="${c}"/><circle cx="2" cy="-34" r="10" fill="${c}"/><path d="M-6 -40L-6 -50L0 -43ZM4 -43L10 -50L11 -39Z" fill="${c}"/><path d="M-11 -2Q-30 -4 -26 -22" stroke="${c}" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="5" cy="-35" r="1.5" fill="${it.color === 'siyah' ? '#E8EBEE' : '#1d1d1f'}"/></g>`
   },
-  dog: (it) => dogShape(0, 0, ANIMAL[it.color] ?? col(it.color)),
+  dog: (it) => (it.color === 'siyah' ? `<g stroke="#C9CED3" stroke-opacity=".75" stroke-width="1.4">${dogShape(0, 0, ANIMAL.siyah)}</g>` : dogShape(0, 0, ANIMAL[it.color] ?? col(it.color))),
   bike: (it) => {
     const c = col(it.color)
-    return `<ellipse cx="0" cy="2" rx="34" ry="4" fill="#000" opacity=".12"/><circle cx="-22" cy="-16" r="16" fill="none" stroke="#24292F" stroke-width="3.5"/><circle cx="22" cy="-16" r="16" fill="none" stroke="#24292F" stroke-width="3.5"/><path d="M-22 -16L-4 -40L16 -40L22 -16M-4 -40L0 -16L16 -40M-22 -16L0 -16" stroke="${c}" stroke-width="4.5" fill="none" stroke-linejoin="round"/><path d="M16 -40L18 -50L26 -50" stroke="#24292F" stroke-width="3" fill="none"/><rect x="-12" y="-47" width="16" height="5" rx="2.5" fill="#24292F"/>`
+    return `<ellipse cx="0" cy="2" rx="34" ry="4" fill="#000" opacity=".12"/><circle cx="-22" cy="-16" r="16" fill="none" stroke="#24292F" stroke-width="4"/><circle cx="22" cy="-16" r="16" fill="none" stroke="#24292F" stroke-width="4"/><circle cx="-22" cy="-16" r="13" fill="none" stroke="#C9CED3" stroke-width="1.4"/><circle cx="22" cy="-16" r="13" fill="none" stroke="#C9CED3" stroke-width="1.4"/><circle cx="-22" cy="-16" r="2.5" fill="#C9CED3"/><circle cx="22" cy="-16" r="2.5" fill="#C9CED3"/><path d="M-22 -16L-4 -40L16 -40L22 -16M-4 -40L0 -16L16 -40M-22 -16L0 -16" stroke="${c}" stroke-width="4.5" fill="none" stroke-linejoin="round"/><path d="M16 -40L18 -50L26 -50" stroke="#24292F" stroke-width="3" fill="none"/><rect x="-12" y="-47" width="16" height="5" rx="2.5" fill="#24292F"/>`
   },
   scooter: (it) => `<ellipse cx="0" cy="2" rx="24" ry="3" fill="#000" opacity=".12"/><circle cx="-16" cy="-6" r="6" fill="#24292F"/><circle cx="16" cy="-6" r="6" fill="#24292F"/><rect x="-18" y="-12" width="30" height="5" rx="2" fill="${col(it.color)}"/><path d="M14 -10L18 -54" stroke="${col(it.color)}" stroke-width="4" stroke-linecap="round"/><path d="M10 -54L26 -54" stroke="#24292F" stroke-width="4" stroke-linecap="round"/>`,
   pot: (it) => `<path d="M-12 -18L12 -18L9 0L-9 0Z" fill="#B5603A"/><path d="M0 -18L-6 -30M0 -18L6 -32M0 -18L0 -34" stroke="#2E7D4F" stroke-width="2.5"/><circle cx="-7" cy="-33" r="5" fill="${col(it.color)}"/><circle cx="7" cy="-35" r="5" fill="${col(it.color)}"/><circle cx="0" cy="-38" r="5" fill="${col(it.color)}"/>`,
@@ -452,6 +470,13 @@ const P = {
   ball: (it) => `<ellipse cx="0" cy="1" rx="11" ry="2.5" fill="#000" opacity=".14"/><circle cx="0" cy="-11" r="11" fill="${col(it.color)}"/><path d="M-11 -11Q0 -4 11 -11" stroke="#fff" stroke-width="2" fill="none"/>`,
   suitcase: (it) => `<ellipse cx="0" cy="1" rx="16" ry="3" fill="#000" opacity=".12"/><rect x="-14" y="-40" width="28" height="38" rx="5" fill="${col(it.color)}"/><path d="M-6 -40V-50H6V-40" stroke="#2A2E33" stroke-width="2.5" fill="none"/><circle cx="-8" cy="0" r="3" fill="#2A2E33"/><circle cx="8" cy="0" r="3" fill="#2A2E33"/><rect x="-14" y="-24" width="28" height="3" fill="#000" opacity=".15"/>`,
   stroller: (it) => `<ellipse cx="0" cy="2" rx="26" ry="3.5" fill="#000" opacity=".12"/><circle cx="-14" cy="-7" r="7" fill="#24292F"/><circle cx="14" cy="-7" r="7" fill="#24292F"/><path d="M-22 -18Q-22 -46 4 -46L4 -18Z" fill="${col(it.color)}"/><rect x="-22" y="-20" width="38" height="8" rx="3" fill="${col(it.color)}"/><path d="M16 -18L24 -50L30 -50" stroke="#24292F" stroke-width="3" fill="none"/>`,
+  // bisiklet süren kişi (yolda; sayılan "geçen" bisiklet): bisiklet + oturan kişi
+  rider: (it) => {
+    const top = col(it.top || 'mavi')
+    const skin = it.skin || SKIN[1]
+    const hair = HAIR[it.hair] || HAIR.kahve
+    return P.bike(it) + `<path d="M-6 -47L4 -27L0 -14" stroke="#3B4656" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-8 -48L6 -90" stroke="${top}" stroke-width="18" stroke-linecap="round"/><path d="M4 -84L18 -50" stroke="${top}" stroke-width="6" stroke-linecap="round"/><circle cx="18" cy="-49" r="3.5" fill="${skin}"/><circle cx="10" cy="-104" r="11" fill="${skin}"/><path d="M-1 -105Q0 -118 11 -116Q21 -114 21 -104Q15 -110 7 -108Q2 -107 -1 -105Z" fill="${hair}"/><circle cx="15" cy="-104" r="1.4" fill="#1d1d1f"/>`
+  },
   pigeon: () => `<ellipse cx="0" cy="1" rx="10" ry="2" fill="#000" opacity=".12"/><ellipse cx="0" cy="-9" rx="11" ry="7" fill="#8E949C"/><circle cx="9" cy="-16" r="5" fill="#7D838B"/><path d="M13 -16l5 1l-5 2Z" fill="#E0A92E"/><path d="M-11 -9l-6 -3l1 6Z" fill="#6E747C"/><path d="M-2 -2V1M2 -2V1" stroke="#C9655A" stroke-width="1.5"/>`,
   crate: (it) => `<rect x="-22" y="-30" width="44" height="30" rx="2" fill="${col(it.color)}"/><path d="M-22 -20H22M-22 -10H22" stroke="#000" stroke-width="2" opacity=".18"/><rect x="-22" y="-30" width="44" height="4" fill="#000" opacity=".15"/>`,
   basket: () => `<path d="M-18 -22L18 -22L14 0L-14 0Z" fill="#C9A26E"/><path d="M-16 -14H16M-15 -7H15" stroke="#9C7650" stroke-width="2"/><path d="M-12 -22Q0 -40 12 -22" stroke="#9C7650" stroke-width="3" fill="none"/>`,
@@ -459,7 +484,10 @@ const P = {
   cone: () => `<rect x="-12" y="-4" width="24" height="4" rx="1" fill="#E06A2A"/><path d="M-8 -4L-2 -34L2 -34L8 -4Z" fill="#F28C38"/><path d="M-6 -14L6 -14L5 -20L-5 -20Z" fill="#fff"/>`,
   bench: (it) => bench(0, 0, col(it.color || 'kahve')),
   hydrant: (it) => `<rect x="-8" y="-32" width="16" height="30" rx="4" fill="${col(it.color)}"/><path d="M-9 -32Q0 -44 9 -32Z" fill="${col(it.color)}"/><rect x="-13" y="-24" width="26" height="6" rx="3" fill="${col(it.color)}"/><rect x="-10" y="-4" width="20" height="4" fill="#000" opacity=".25"/>`,
-  chair: (it) => `<rect x="-12" y="-48" width="4" height="48" fill="${col(it.color)}"/><rect x="-12" y="-48" width="20" height="4" fill="${col(it.color)}"/><rect x="-12" y="-24" width="26" height="5" rx="2" fill="${col(it.color)}"/><rect x="10" y="-22" width="4" height="22" fill="${col(it.color)}"/>`,
+  chair: (it) => {
+    const c = col(it.color)
+    return `<ellipse cx="0" cy="1" rx="16" ry="3" fill="#000" opacity=".12"/><rect x="-11" y="-50" width="4" height="30" rx="1.5" fill="${c}"/><rect x="6" y="-50" width="4" height="30" rx="1.5" fill="${c}"/><rect x="-12" y="-50" width="23" height="6" rx="2" fill="${c}"/><rect x="-11" y="-38" width="21" height="4" rx="1.5" fill="${c}"/><path d="M-15 -24L13 -24L15 -19L-13 -19Z" fill="${c}"/><path d="M-15 -24L13 -24L15 -19L-13 -19Z" fill="#000" opacity=".12"/><rect x="-13" y="-19" width="3.5" height="19" rx="1.2" fill="${c}"/><rect x="11" y="-19" width="3.5" height="19" rx="1.2" fill="${c}"/><rect x="-6" y="-19" width="3" height="16" rx="1.2" fill="${c}" opacity=".7"/><rect x="5" y="-19" width="3" height="16" rx="1.2" fill="${c}" opacity=".7"/><rect x="-13" y="-19" width="28" height="19" fill="#000" opacity=".06"/>`
+  },
   watermelon: () => `<ellipse cx="0" cy="1" rx="18" ry="3" fill="#000" opacity=".12"/><ellipse cx="0" cy="-12" rx="18" ry="13" fill="#2E7D4F"/><path d="M-12 -20Q-4 -24 4 -22M-14 -10Q0 -16 14 -8" stroke="#7FB24E" stroke-width="2.5" fill="none"/>`,
 }
 export const ITEM_TYPES = Object.keys(P)
@@ -473,7 +501,7 @@ const VENDOR_GOODS = {
 function vendor(v, p, o) {
   const x = 0
   const y = 0
-  const cart = `<ellipse cx="${x}" cy="${y + 2}" rx="46" ry="5" fill="#000" opacity=".14"/><path d="M${x - 2} ${y - 56}L${x - 2} ${y - 128}" stroke="#8A8F95" stroke-width="3"/><path d="M${x - 56} ${y - 120}Q${x - 2} ${y - 148} ${x + 52} ${y - 120}Z" fill="#E0474C"/><path d="M${x - 28} ${y - 128}Q${x - 2} ${y - 148} ${x + 24} ${y - 128}L${x + 10} ${y - 120}L${x - 14} ${y - 120}Z" fill="#fff" opacity=".45"/><rect x="${x - 40}" y="${y - 56}" width="80" height="34" rx="4" fill="#B8332F"/><rect x="${x - 40}" y="${y - 56}" width="80" height="6" fill="#000" opacity=".18"/>${VENDOR_GOODS[v.type]?.(x, y) ?? ''}<circle cx="${x - 24}" cy="${y - 10}" r="11" fill="#24292F"/><circle cx="${x + 24}" cy="${y - 10}" r="11" fill="#24292F"/><circle cx="${x - 24}" cy="${y - 10}" r="4" fill="#9AA0A6"/><circle cx="${x + 24}" cy="${y - 10}" r="4" fill="#9AA0A6"/>`
+  const cart = `<ellipse cx="${x}" cy="${y + 2}" rx="46" ry="5" fill="#000" opacity=".14"/><path d="M${x - 2} ${y - 56}L${x - 2} ${y - 128}" stroke="#8A8F95" stroke-width="3"/><path d="M${x - 56} ${y - 120}Q${x - 2} ${y - 148} ${x + 52} ${y - 120}Z" fill="#E0474C"/><path d="M${x - 28} ${y - 128}Q${x - 2} ${y - 148} ${x + 24} ${y - 128}L${x + 10} ${y - 120}L${x - 14} ${y - 120}Z" fill="#fff" opacity=".45"/><rect x="${x - 40}" y="${y - 56}" width="80" height="34" rx="4" fill="#B8332F"/><rect x="${x - 40}" y="${y - 56}" width="80" height="6" fill="#000" opacity=".18"/>${VENDOR_GOODS[v.goods]?.(x, y) ?? ''}<circle cx="${x - 24}" cy="${y - 10}" r="11" fill="#24292F"/><circle cx="${x + 24}" cy="${y - 10}" r="11" fill="#24292F"/><circle cx="${x - 24}" cy="${y - 10}" r="4" fill="#9AA0A6"/><circle cx="${x + 24}" cy="${y - 10}" r="4" fill="#9AA0A6"/>`
   return `<g transform="translate(${f(v.x)} ${f(v.y)})">${cart}</g>` + person({ x: v.x + 60, y: v.y - 4, s: 0.98, top: 'beyaz', skin: SKIN[2], hair: 'gri', dir: -1, hat: v.hat || null, walk: false }, p, o)
 }
 export function item(it, p = PAL.day, o = {}) {
@@ -481,7 +509,9 @@ export function item(it, p = PAL.day, o = {}) {
   if (it.type === 'vendor') return vendor(it, p, o)
   const draw = P[it.type]
   if (!draw) return ''
-  return `<g transform="translate(${f(it.x)} ${f(it.y)}) scale(${it.dir || 1} 1)">${draw(it)}</g>`
+  const body = `<g transform="translate(${f(it.x)} ${f(it.y)}) scale(${it.dir || 1} 1)">${draw(it)}</g>`
+  if (it.type === 'rider' && o.motion && it.v) return `<g class="fe-go" style="--t:${o.walkSec || 40}s;--dx:${f((it.dir || 1) * it.v * (o.walkSec || 40))}px">${body}</g>`
+  return body
 }
 // Araba: lane 'far' (sola akar) ya da 'near' (sağa akar). drive: { t: sn, dx: birim } verilirse kendi hızıyla akar.
 export function car(k, p = PAL.day, o = {}) {
@@ -490,7 +520,7 @@ export function car(k, p = PAL.day, o = {}) {
   const y = LANES[lane]
   const c = k.taxi ? COLORS.sari.hex : col(k.color)
   const wheel = (wx) => `<g class="fe-wheel"><circle cx="${wx}" cy="-12" r="17" fill="#1C1E21"/><circle cx="${wx}" cy="-12" r="8" fill="#A9AFB6"/><rect x="${wx - 1.5}" y="-20" width="3" height="16" fill="#5D646C"/></g>`
-  let g = `<ellipse cx="0" cy="2" rx="86" ry="8" fill="#000" opacity=".22"/><path d="M-84 -14Q-86 -34 -70 -38L-46 -42Q-30 -66 -6 -68L30 -68Q46 -66 58 -44L76 -40Q88 -36 86 -14Z" fill="${c}"/><path d="M-84 -26L86 -26L86 -14L-84 -14Z" fill="#000" opacity=".12"/>`
+  let g = `<ellipse cx="0" cy="2" rx="86" ry="8" fill="#000" opacity=".22"/><path d="M-84 -14Q-86 -34 -70 -38L-46 -42Q-30 -66 -6 -68L30 -68Q46 -66 58 -44L76 -40Q88 -36 86 -14Z" fill="${c}"${['siyah', 'lacivert'].includes(k.color) && !k.taxi ? ' stroke="#C9CED3" stroke-opacity=".7" stroke-width="2"' : ''}/><path d="M-84 -26L86 -26L86 -14L-84 -14Z" fill="#000" opacity=".12"/>`
   g += `<path d="M-38 -44Q-26 -62 -8 -62L-8 -44Z" fill="url(#fe-${o.m || 'day'}-glass)"/><path d="M-2 -62L28 -62Q40 -60 50 -44L-2 -44Z" fill="url(#fe-${o.m || 'day'}-glass)"/><rect x="-6" y="-44" width="2" height="30" fill="#000" opacity=".18"/>`
   g += `<rect x="80" y="-34" width="7" height="6" rx="2" fill="${p.glow ? '#FFF2C4' : '#F4E7BE'}"/><rect x="-86" y="-32" width="6" height="6" rx="2" fill="#C8333A"/>`
   if (k.taxi) g += `<rect x="-14" y="-80" width="30" height="12" rx="3" fill="#24292F"/><text x="1" y="-71" transform="scale(${dir} 1)" text-anchor="middle" font-size="8" font-weight="800" fill="${COLORS.sari.hex}" font-family="Onest, system-ui">TAKSİ</text><rect x="-60" y="-24" width="120" height="5" fill="#24292F" opacity=".75"/>`
@@ -516,22 +546,28 @@ export function renderScene(model, opts = {}) {
   const vw = opts.vw ?? L
   const vh = opts.vh ?? H
   const o = { motion: Boolean(opts.motion), walkSec: opts.walkSec, m }
-  let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vx} ${vy} ${vw} ${vh}" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" role="img" aria-label="${opts.label ?? 'Sahne'}">`
+  let s = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vx} ${vy} ${vw} ${vh}" preserveAspectRatio="${opts.par ?? 'xMidYMid slice'}" width="100%" height="100%" role="img" aria-label="${opts.label ?? 'Sahne'}">`
   if (o.motion) s += MOTION_CSS
   s += defs(p, m)
   // Görünüm dışı çizilmez (PLAN §8: uzun SVG): yatayda kırpımın 120 birim ötesi, dikeyde görünür katlar
   const seen = (x0, x1) => x1 >= vx - 120 && x0 <= vx + vw + 120
+  // Kırpım seçenekleri (tasarım tur 2): wholeSigns: kenarda (yanda ya da üstte) yarım kalan tabela levhası ve yazısı
+  // çizilmez (tabela ya tam ya hiç); edgeDecor: false: kırpıma tam sığmayan ağaç ve lamba çizilmez (köşede kesik parça
+  // kalmaz); blank: bu x'teki dükkânın/tezgâhın levhası boş, vitrin malı yok (cam figürde konu yerin kendisiyse)
+  const inView = (b) => b.x >= vx - 0.5 && b.x + b.w <= vx + vw + 0.5 && b.y >= vy - 0.5 && b.y + b.h <= vy + vh + 0.5
+  const decoOk = (b) => opts.edgeDecor !== false || inView(b)
+  const signOf = (box, x) => ({ hide: Boolean(opts.wholeSigns) && !inView(box), blank: opts.blank != null && opts.blank === x })
   const sky = clouds(L, r, p) + skyline(L, r, p)
   s += `<rect width="${L}" height="${H}" fill="url(#fe-${m}-sky)"/>` + (vy < Y.side - SHOP_H - 20 ? sky : '') + `<rect width="${L}" height="${Y.side}" fill="${p.sky[1]}" opacity="${p.haze}"/>`
   if (sc.kind === 'street') {
     for (const b of model.buildings) {
-      const out = building(b, p, r, m, vy)
+      const out = building(b, p, r, m, vy, signOf(signBox(b), b.x))
       if (seen(b.x, b.x + b.w)) s += out
     }
     s += `<rect width="${L}" height="${Y.side}" fill="url(#fe-${m}-sun)"/>` + ground(L, p, m, sc.weather === 'yagmur')
     s += `<rect y="${Y.side}" width="${L}" height="16" fill="#000" opacity=".07"/>`
-    for (const t of model.trees) if (seen(t.x - 70, t.x + 70)) s += tree(t, p)
-    for (const l of model.lamps) if (seen(l.x - 70, l.x + 100)) s += lamp(l, p, m)
+    for (const t of model.trees) if (seen(t.x - 70, t.x + 70) && decoOk({ x: t.x - 70, y: 286, w: 140, h: Y.side + 12 - 286 })) s += tree(t, p)
+    for (const l of model.lamps) if (seen(l.x - 70, l.x + 100) && decoOk({ x: l.x - 7, y: Y.side + 40 - 236, w: 52, h: 238 })) s += lamp(l, p, m)
   } else if (sc.kind === 'market') {
     s += backRow(model.back, p, r, m, Y.side - 220)
     s += `<rect y="${Y.side}" width="${L}" height="${H - Y.side}" fill="${p.sideA}"/>`
@@ -539,30 +575,36 @@ export function renderScene(model, opts = {}) {
     for (let gy = Y.side + 40; gy < H; gy += 40) s += `<rect y="${gy}" width="${L}" height="1.5" fill="${p.tile}"/>`
     s += `<path d="M0 340Q${L / 4} 368 ${L / 2} 340T${L} 340" stroke="#555" stroke-width="2" fill="none"/>`
     for (let fx = 20; fx < L; fx += 40) s += `<path d="M${fx} ${f(338 + Math.sin((fx / L) * Math.PI * 4) * 6)}l20 0l-10 18Z" fill="${col(['kirmizi', 'sari', 'mavi', 'yesil', 'turuncu'][Math.floor(fx / 40) % 5])}"/>`
-    for (const st of model.stalls) s += stallBack(st)
+    for (const st of model.stalls) s += stallBack(st, signOf(stallSignBox(st), st.x))
     for (const v of model.stallVendors ?? []) s += person({ ...v, walk: false }, p, o)
     for (const st of model.stalls) s += stallFront(st)
   } else {
     s += backRow(model.back, p, r, m, Y.side - 140)
-    for (const t of model.trees) s += parkTree(t, p)
+    for (const t of model.trees) if (decoOk({ x: t.x - 70 * t.s, y: 520 - 232 * t.s, w: 140 * t.s, h: 232 * t.s + 6 })) s += parkTree(t, p)
     s += `<path d="M0 470Q${L * 0.25} 440 ${L * 0.5} 470T${L} 466L${L} ${H}L0 ${H}Z" fill="${p.grass[0]}"/>`
     s += `<path d="M0 ${Y.side - 20}Q${L * 0.3} ${Y.side - 50} ${L * 0.6} ${Y.side - 20}T${L} ${Y.side - 26}L${L} ${H}L0 ${H}Z" fill="${p.grass[1]}"/>`
     s += `<rect y="${Y.side + 20}" width="${L}" height="${Y.road + 20 - Y.side - 20}" fill="${p.path}"/><rect y="${Y.side + 18}" width="${L}" height="4" fill="#000" opacity=".06"/>`
     s += `<rect y="${Y.road + 20}" width="${L}" height="${H - Y.road - 20}" fill="${p.grass[2]}"/>`
     for (const b of model.benches) s += bench(b.x, Y.side + 14)
-    for (const l of model.lamps) s += lamp(l, p, m, Y.side + 14)
+    for (const l of model.lamps) if (decoOk({ x: l.x - 7, y: Y.side + 14 - 236, w: 52, h: 238 })) s += lamp(l, p, m, Y.side + 14)
   }
   const crowd = []
   for (const q of model.people ?? []) crowd.push({ ...q, type: 'person' })
   for (const c of model.cats ?? []) crowd.push({ type: 'cat', y: ROWS[1], ...c })
   for (const b of model.bikes ?? []) crowd.push({ type: 'bike', y: ROWS[0], ...b })
-  for (const v of model.vendors ?? []) crowd.push({ type: 'vendor', y: ROWS[0] + 4, ...v })
+  // satıcı: v.type malın türüdür (simit, mısır…); çizim türü 'vendor' sonra yazılır (önceden mal türü çizim türünü
+  // eziyordu ve satıcı hiç çizilmiyordu)
+  for (const v of model.vendors ?? []) crowd.push({ y: ROWS[0] + 4, ...v, goods: v.goods ?? v.type, type: 'vendor' })
   for (const it of model.items ?? []) crowd.push(it)
   crowd.sort(byDepth)
+  // bisiklet şeridi: yolun ön kenarında sürülen bisiklet varsa kesik beyaz çizgiyle ayrılır
+  if (crowd.some((it) => it.type === 'rider' && it.y > Y.lane)) s += `<path d="M0 ${Y.roadEnd - 16}H${L}" stroke="#fff" stroke-opacity=".6" stroke-width="2.5" stroke-dasharray="16 12"/>`
   // yürüyen kişi ve akan araba kırpım dışından girebilir: hareketliyken yatay ayıklama yok
-  for (const it of crowd) if (o.motion || seen(it.x - 160, it.x + 160)) s += item(it, p, o)
+  const front = (it) => it.type === 'rider' && it.y > Y.lane // yolun ön kenarındaki bisikletli arabaların önünde
+  for (const it of crowd) if (!front(it) && (o.motion || seen(it.x - 160, it.x + 160))) s += item(it, p, o)
   for (const k of (model.cars ?? []).filter((c) => c.lane === 'far')) if (o.motion || seen(k.x - 100, k.x + 100)) s += car(k, p, o)
   for (const k of (model.cars ?? []).filter((c) => c.lane !== 'far')) if (o.motion || seen(k.x - 100, k.x + 100)) s += car(k, p, o)
+  for (const it of crowd) if (front(it) && (o.motion || seen(it.x - 160, it.x + 160))) s += item(it, p, o)
   if (sc.weather === 'yagmur') {
     let rain = ''
     for (let x = vx - 40; x < vx + vw + 40; x += 23) for (let y = vy - 40; y < vy + vh; y += 70) rain += `<path d="M${x + ((y * 7) % 19)} ${y}l-6 22" stroke="#fff" stroke-width="1.6" opacity=".45"/>`

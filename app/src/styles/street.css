@@ -1,58 +1,316 @@
-/* Fark Ettin mi? (screens/StreetWalk.jsx) */
-.sw { gap: 14px; min-height: 100dvh; }
-.sw > .grow { flex: 1; }
-.sw-top { display: flex; align-items: center; gap: 12px; min-height: 40px; }
-.sw-top .oq-bar { flex: 1; }
-.sw-ey { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
-.sw-h { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; line-height: 1.24; text-wrap: balance; margin: 0; }
-.sw-task { display: flex; gap: 12px; align-items: center; background: var(--surface); border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); border-radius: 18px; padding: 14px; }
-.sw-task b { display: block; font-family: var(--font-display); font-size: 1.05rem; }
-.sw-task-ico { width: 64px; height: 50px; flex: none; }
-.sw-jev { display: flex; gap: 10px; align-items: flex-start; }
-.sw-jev p { margin: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 10px 12px; font-size: 0.92rem; }
-.sw-src { font: 500 0.7rem/1.5 var(--font-mono); color: var(--ink-3); margin: 0; }
-
-/* Yürüyüş: tam ekran; üst gök, alt yol rengi (sahne ortada) */
-.sw-walk { position: relative; height: 100dvh; overflow: hidden; background: linear-gradient(#cfe7f2 50%, #4a4f57 50%); }
-.sw-scene svg { position: absolute; left: 0; width: auto; will-change: transform; }
-.sw-hud { position: absolute; left: 12px; right: 12px; top: calc(12px + env(safe-area-inset-top)); display: flex; align-items: center; gap: 8px; z-index: 2; }
-.sw-chip { font: 700 0.85rem var(--font-body); background: rgba(7, 12, 18, 0.8); color: #eef3f6; border-radius: 999px; padding: 8px 12px; }
-.sw-t { margin-left: auto; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-.sw-walk .bob { animation: sw-bob 0.9s ease-in-out infinite; }
-@keyframes sw-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
-
-/* Sorular: büyük seçenekler */
-.sw-opts { display: flex; flex-direction: column; gap: 10px; }
-.sw-opts.grid { display: grid; grid-template-columns: 1fr 1fr; }
-.sw-opt {
-  display: flex; align-items: center; gap: 10px; min-height: 60px; padding: 0 14px; border-radius: 16px; cursor: pointer; text-align: left;
-  border: 2px solid var(--border); background: var(--surface); color: var(--ink); font: 700 1.05rem var(--font-body);
+/* Fark Ettin mi? (screens/StreetWalk.jsx; maket/son.html A yönü: sade kartlar). Geçişler tek ve yumuşak (≥ 300 ms),
+   yanıp sönme yok; prefers-reduced-motion'da geçiş ve dalga yok. Dokunma alanları ≥ 44 pt.
+   Renk anlamları: yeşil doğru (TAM, GÖRDÜN), amber yakın (YAKIN), turkuaz tahmin (TAHMİN), kırmızımsı kaçtı. */
+.sw { gap: 12px; min-height: 100dvh; }
+/* yerel tokenlar (tasarım TASARIM.md "Ölçüler"); sayfa (12-kart) main'in dışında olduğu için orada da */
+.sw, .sw-pop, .sw-scrim2 {
+  --sw-tile: #e9eef2; --sw-tile-edge: rgba(11, 18, 25, 0.08);
+  --sw-well: #3a4450;                              /* renk yuvarlağının arkasındaki zıt dolu halka (açık tema) */
+  --sw-hud: rgba(7, 12, 18, 0.82); --sw-hud-ink: #eef3f6;
+  --sw-key-edge: #d5dde4;
+  --sw-scrim: rgba(11, 18, 25, 0.45); --sw-sheet: var(--surface);
 }
-.sw-opt.center { justify-content: center; font-size: 1.3rem; font-variant-numeric: tabular-nums; }
-.sw-opt.ok { border-color: var(--ok); background: var(--ok-bg); }
-.sw-opt.no { border-color: var(--warn); background: var(--warn-bg); }
-.sw-opt.guess { grid-column: 1 / -1; justify-content: center; text-align: center; font-weight: 600; font-size: 0.95rem; min-height: 50px; color: var(--ink-2); border-style: dashed; }
-.sw-opt.guess.on { border-color: var(--lens); color: var(--lens-text); }
-.sw-opt:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-.sw-swatch { width: 24px; height: 24px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ink) 30%, transparent); }
-.sw-fb { min-height: 2.6em; margin: 0; font-size: 0.95rem; }
-.sw-fb b.ok, .sw-card b.ok { color: var(--ok); }
-.sw-fb b.no, .sw-card b.no { color: var(--warn); }
-.sw-fb b.near { color: var(--lens-text); }
+/* koyu tema: simge karoları temaya uyar (parlamaz); siyah yuvarlak açık halkayla görünür; perde güçlü */
+:root[data-theme='dark'] :is(.sw, .sw-pop, .sw-scrim2) { --sw-tile: #3b4754; --sw-tile-edge: rgba(255, 255, 255, 0.1); --sw-well: #dfe4e8; --sw-key-edge: rgba(255, 255, 255, 0.16); --sw-scrim: rgba(0, 0, 0, 0.72); --sw-sheet: #18232e; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme='light']) :is(.sw, .sw-pop, .sw-scrim2) { --sw-tile: #3b4754; --sw-tile-edge: rgba(255, 255, 255, 0.1); --sw-well: #dfe4e8; --sw-key-edge: rgba(255, 255, 255, 0.16); --sw-scrim: rgba(0, 0, 0, 0.72); --sw-sheet: #18232e; } }
+.sw-mid { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: flex-start; gap: 12px; }
+.sw .grow { flex: 1; min-height: 0; }
+.sw-fill { height: 100dvh; min-height: 0; overflow: hidden; }
+.sw-in { animation: sw-in 0.32s ease both; }
+/* içerik solarak gelir; boş kare yok (kapı 3. tur) */
+@keyframes sw-in { from { opacity: 0.45; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.sw-m1 .sep { white-space: pre; }
+.sw-top { display: flex; align-items: center; gap: 12px; height: 44px; flex: none; }
+.sw-top .oq-bar { flex: 1; transition: opacity 0.3s ease, transform 0.3s ease; }
+/* üst etiket ilerleme çizgisinin hemen üstünde (etiket + 7 px + 6 px çizgi) */
+.sw-tb { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 7px; padding-top: 1px; }
+.sw-tb .sw-ey { line-height: 16px; }
+.sw-tb .oq-bar { flex: none; }
+/* ezberleme anında adım çizgisi sönük ve ince (süre çizgisi belirgin olan tek çizgi) */
+.sw-top.dim .oq-bar { opacity: 0.35; transform: scaleY(0.5); }
+.sw-ey { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); flex: none; }
+.sw-h { font-family: var(--font-display); font-weight: 700; font-size: 1.55rem; line-height: 1.14; letter-spacing: -0.015em; word-spacing: 0.12em; text-wrap: balance; margin: 0; flex: none; overflow-wrap: break-word; }
+.sw-lead { margin: -4px 0 0; font-size: 1rem; line-height: 1.4; color: var(--ink-2); flex: none; min-height: 1.4em; }
+.sw-lead.cue { color: var(--accent); font-weight: 700; }
+.sw-gone { visibility: hidden; }
+.sw-src { font-size: 0.8125rem; line-height: 1.45; color: var(--ink-2); margin: 0; flex: none; }
+.sw-row { display: flex; align-items: center; justify-content: flex-start; gap: 10px; flex: none; }
 
-/* Sonuç */
-.sw-stat { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.sw-stat div { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 12px 14px; }
-.sw-stat b { display: block; font-family: var(--font-display); font-size: 1.9rem; }
-.sw-stat span { font-size: 0.8rem; color: var(--ink-3); }
-.sw-list { display: flex; flex-direction: column; gap: 8px; }
-.sw-list div { display: flex; gap: 8px; align-items: flex-start; font-size: 0.92rem; }
-.sw-list i { font-style: normal; font: 500 0.72rem var(--font-mono); padding: 2px 7px; border-radius: 6px; flex: none; }
-.sw-list i.ok { background: var(--ok-bg); color: var(--ok); }
-.sw-list i.no { background: var(--warn-bg); color: var(--warn); }
-.sw-list i.gs { background: var(--lens-soft); color: var(--lens-text); }
-.sw-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
-.sw-card p { margin: 0; font-size: 0.92rem; }
-.sw-card .h { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
-.sw-cite { font: 500 0.7rem/1.5 var(--font-mono); color: var(--ink-3); overflow-wrap: anywhere; }
-@media (prefers-reduced-motion: reduce) { .sw-walk .bob { animation: none; } }
+/* Görev */
+.sw-intro-scene { flex: 1; min-height: 120px; border-radius: 24px; overflow: hidden; position: relative; clip-path: inset(0 round 24px); isolation: isolate; }
+.sw-intro-scene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sw-task { display: flex; gap: 14px; align-items: center; flex: none; }
+/* simge karosu iki temada da açık zeminli: simgenin koyu parçaları (lastik, saç) görünür */
+.sw-task-ico { width: 64px; height: 64px; flex: none; display: grid; place-items: center; padding: 6px; border-radius: 18px; background: var(--sw-tile); box-shadow: inset 0 0 0 1px var(--sw-tile-edge); }
+.sw-task-ico svg { width: 100%; height: 100%; }
+.sw-task-l { display: block; font-size: 0.8125rem; color: var(--ink-3); font-weight: 600; }
+.sw-parts { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; flex: none; }
+.sw-parts li { font-size: 0.875rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.sw-nef { display: flex; gap: 12px; align-items: center; flex: none; }
+.sw-nef p { margin: 0; font-size: 0.95rem; line-height: 1.4; color: var(--ink-2); }
+
+/* Caddeden geç: sahne ekranı doldurur */
+.sw-walk { position: relative; height: 100dvh; overflow: hidden; background: var(--bg); }
+.sw-scene svg { position: absolute; left: 0; top: 0; will-change: transform; }
+.sw-scrim { position: absolute; left: 0; right: 0; top: 0; height: calc(96px + env(safe-area-inset-top)); background: linear-gradient(rgba(5, 9, 14, 0.55), rgba(5, 9, 14, 0)); z-index: 1; pointer-events: none; }
+.sw-hud { position: absolute; left: 12px; right: 12px; top: calc(12px + env(safe-area-inset-top)); display: flex; align-items: center; justify-content: space-between; gap: 10px; z-index: 2; }
+.sw-chip { font: 700 0.875rem var(--font-body); background: rgba(7, 12, 18, 0.82); color: #eef3f6; border-radius: 999px; padding: 10px 14px; max-width: calc(100% - 60px); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2); }
+.sw-ring { width: 44px; height: 44px; flex: none; border-radius: 50%; background: rgba(7, 12, 18, 0.82); display: grid; place-items: center; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2); }
+.sw-ring .clk { fill: none; stroke: rgba(255, 255, 255, 0.8); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.sw-ring svg { width: 34px; height: 34px; }
+.sw-ring .bg { fill: none; stroke: rgba(255, 255, 255, 0.22); stroke-width: 4.5; }
+.sw-ring .fg { fill: none; stroke: #19c2d1; stroke-width: 4.5; stroke-linecap: round; }
+
+/* ---------- 04 · Sayı sorusu: donmuş kare + başparmak tuşları; cevaptan sonra tepsi ---------- */
+.sw-panel { flex: 1; min-height: 0; position: relative; border-radius: 24px; overflow: hidden; isolation: isolate; background: var(--surface-2); }
+.sw-scn, .sw-scn > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* tepsi panelin üstünde (üst kenar): kaldırımdaki kişiler örtülmez */
+.sw-tray { position: absolute; left: 10px; right: 10px; top: 10px; z-index: 2; padding: 12px; border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.35), inset 0 0 0 1px var(--sw-tile-edge);
+  display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 10px; animation: sw-up 0.36s ease-out both; }
+.sw-tile { position: relative; aspect-ratio: 3 / 2.3; border-radius: 12px; display: grid; place-items: center; padding: 5px; background: var(--sw-tile); box-shadow: inset 0 0 0 1px var(--sw-tile-edge); animation: sw-up 0.32s ease-out both; animation-delay: calc(0.18s + var(--i) * 0.09s); }
+.sw-tile > svg { width: 100%; height: 100%; }
+.sw-tile.extra { background: transparent; box-shadow: none; outline: 2px dashed color-mix(in srgb, var(--ink) 35%, transparent); outline-offset: -2px; }
+/* kişinin cevabı: karo sırasında ince dikey işaret (bu karodan sonrasını saymadın) */
+.sw-tile.cut::after, .sw-tile.cut0::before { content: ''; position: absolute; top: -4px; bottom: -4px; width: 3px; border-radius: 2px; background: var(--ink); }
+.sw-tile.cut::after { right: -6.5px; }
+.sw-tile.cut0::before { left: -6.5px; }
+.sw-cq { flex: none; display: grid; }
+.sw-cq > * { grid-area: 1 / 1; align-self: end; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; min-width: 0; }
+.sw-ask.gone, .sw-fbk.ghost { visibility: hidden; }
+.sw-ask.gone { transition: visibility 0s 0.32s; }
+.sw-fbk.on { animation: sw-up 0.34s ease-out 0.12s both; }
+.sw-fbk .sw-h.ok { color: var(--ok); }
+.sw-fbk .sw-h.near { color: var(--lens-text); }
+.sw-lead.strong { color: var(--ink); font-weight: 600; margin-top: -6px; }
+.sw-keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.sw-key { height: 72px; border-radius: 20px; border: 1.5px solid var(--sw-key-edge); background: var(--surface); box-shadow: var(--shadow); font: 700 1.75rem/1 var(--font-display); font-variant-numeric: tabular-nums; color: var(--ink); cursor: pointer; }
+.sw-key:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+@keyframes sw-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes sw-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sw-fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes sw-pop { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+
+/* ---------- 05–08 · Ne değişti?: başlık kutusu, kare ve alt blok her hâlde aynı yerde; grup dikeyde ortada ---------- */
+.sw-chg { --hh: calc(2 * 1.14 * 1.75rem + 6px + 1.4 * 1.05rem); --blk: 108px; --fm: 14px; }
+.sw-cg { flex: 1; min-height: 0; display: flex; flex-direction: column; container-type: size; }
+.sw-sp { flex: 1 1 0; }
+.sw-chead { flex: none; display: flex; flex-direction: column; gap: 6px; }
+.sw-chead .sw-h { font-size: 1.75rem; height: calc(2 * 1.14em); display: flex; flex-direction: column; justify-content: flex-end; } /* başlık hep iki satırlık kutu */
+.sw-chead .sw-lead { height: 1.4em; margin: 0; font-size: 1.05rem; min-height: 0; }
+/* kare: genişlikten doğar (4:5), sığmazsa yükseklikten; aynı formül 05–08 */
+.sw-frame { position: relative; flex: none; align-self: center; width: min(100cqw, calc((100cqh - var(--hh) - var(--blk) - 2 * var(--fm)) * 0.8)); aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden; background: var(--surface-2); margin-top: var(--fm); }
+.sw-frame.live { cursor: pointer; }
+.sw-frame > div, .sw-img { position: absolute; inset: 0; }
+.sw-frame svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sw-img.off { visibility: hidden; }
+.sw-blk { flex: none; height: var(--blk); margin-top: var(--fm); display: flex; flex-direction: column; gap: 10px; }
+.sw-blk .btn { flex: none; }
+/* süre: tek, kalın, belirgin turkuaz çizgi; ilk karede dolu, 3 sn doğrusal boşalır */
+.sw-tbar { flex: none; height: 14px; border-radius: 7px; background: var(--surface-3); overflow: hidden; box-shadow: inset 0 0 0 1px var(--sw-tile-edge); }
+.sw-tbar i { display: block; height: 100%; border-radius: 7px; background: var(--accent-graphic); transform-origin: left center; animation: sw-tbar 3s linear both; }
+@keyframes sw-tbar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+.sw-again { min-height: 56px; background: var(--surface); color: var(--ink); border: 1.5px solid color-mix(in srgb, var(--ink) 34%, transparent); font-weight: 650; box-shadow: var(--shadow); }
+/* göz kırpması: üstten ve alttan iki yarım perde (göz kapağı) 200 ms kapanır, 200 ms açılır; yanıp sönme yok */
+.sw-lid { position: absolute; left: 0; right: 0; height: 50.5%; background: #0b1016; transform: scaleY(0); transition: transform 0.2s ease; pointer-events: none; }
+.sw-lid.top { top: 0; transform-origin: top; border-radius: 0 0 50% 50% / 0 0 24px 24px; }
+.sw-lid.bot { bottom: 0; transform-origin: bottom; border-radius: 50% 50% 0 0 / 24px 24px 0 0; }
+.sw-lid.on { transform: scaleY(1); }
+.sw-frame > .sw-lid { inset: auto; left: 0; right: 0; }
+.sw-frame > .sw-lid.top { top: 0; }
+.sw-frame > .sw-lid.bot { bottom: 0; }
+.sw-mark { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+/* eski yer: koyu dolu alt çizgi + beyaz kesik çizgi (açık gündüz sahnesinde de seçilir) */
+.sw-mark .ghost-under { fill: rgba(16, 22, 28, 0.12); stroke: rgba(16, 22, 28, 0.72); stroke-width: 5.5; }
+.sw-mark .ghost { fill: rgba(255, 255, 255, 0.2); stroke: #fff; stroke-width: 2.5; stroke-dasharray: 8 6; }
+/* öğrenme anı: köşede önceki hâlin küçük kırpımı */
+.sw-inset { position: absolute; width: 32%; aspect-ratio: 1; border-radius: 12px; overflow: hidden; border: 3px solid #fff; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28); }
+.sw-inset.tl { top: 3%; left: 3%; } .sw-inset.tr { top: 3%; right: 3%; } .sw-inset.bl { bottom: 3%; left: 3%; } .sw-inset.br { bottom: 3%; right: 3%; }
+.sw-inset svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sw-mark .ring { fill: none; stroke: #19c2d1; stroke-width: 4.5; }
+/* bulununca iki halka dalgası, art arda, bir kez (yanıp sönme yok) */
+.sw-mark .wave { fill: none; stroke: #19c2d1; stroke-width: 5; transform-box: fill-box; transform-origin: center; animation: sw-wave 0.9s ease-out both; }
+.sw-mark .wave.w2 { animation-delay: 0.22s; }
+@keyframes sw-wave { from { transform: scale(1); opacity: 0.95; } to { transform: scale(var(--ws, 1.75)); opacity: 0; } } /* --ws: dalga sahne içinde kalır */
+.sw-chip-ok, .sw-chip-n { display: flex; align-items: center; min-height: 44px; padding: 7px 13px; border-radius: 14px; font-weight: 700; font-size: 0.875rem; line-height: 1.3; flex: none; }
+.sw-chip-ok { background: var(--ok-bg); color: var(--ok); }
+.sw-chip-n { background: var(--surface-2); color: var(--ink); }
+
+/* ---------- 09 / 10 / 11 · Gözünden kaçan: cam figür; başlık yeri, kart ve alt blok üç adımda sabit ---------- */
+.sw-ms { --mb: 134px; }
+.sw-mhead { flex: none; display: grid; }
+.sw-mh { grid-area: 1 / 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; }
+.sw-mh .sw-lead { margin: 0; text-wrap: pretty; }
+.sw-mh.ghost { visibility: hidden; }
+/* 11: başlık figür renge döndükten sonra (600 ms) gelir; o ana dek soru yerinde kalır */
+.sw-mh.out { animation: sw-fade-out 0.25s ease 0.6s forwards; }
+.sw-mh.in { animation: sw-fade 0.36s ease 0.6s both; }
+.sw-mcard { flex: 1; min-height: 0; position: relative; margin: 0; border-radius: 24px; overflow: hidden; isolation: isolate; background: var(--surface-2); }
+.sw-ml { position: absolute; inset: 0; }
+.sw-ml > svg, .sw-mmark { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sw-ml.real { opacity: 0; }
+/* 11: yalnız figür döner (cam → renk, 600 ms); sahne katmanı hep opak, solmaz */
+.sw-mcard.turned .glass { animation: sw-fade-out 0.6s ease 0.05s both; }
+.sw-mcard.turned .real { opacity: 1; animation: sw-fade 0.6s ease 0.05s both; }
+.sw-mmark { pointer-events: none; }
+.sw-mmark .rg { fill: none; stroke-width: 3.5; vector-effect: non-scaling-stroke; transition: stroke 0.4s ease; }
+.sw-mmark .rg.halo { stroke: rgba(0, 0, 0, 0.35); stroke-width: 6.5; }
+.sw-mmark .rg.fg { stroke: #ffffff; }
+.st-11 .sw-mmark .rg.fg { stroke: #19c2d1; }
+.sw-mmark .wv { fill: none; stroke: #19c2d1; stroke-width: 4; vector-effect: non-scaling-stroke; transform-box: fill-box; transform-origin: center; opacity: 0; animation: sw-ring-wave 0.9s ease-out 0.6s both; }
+.sw-mmark .wv.w2 { animation-delay: 0.82s; }
+@keyframes sw-ring-wave { 0% { transform: scale(1); opacity: 0; } 12% { opacity: 0.9; } 100% { transform: scale(1.7); opacity: 0; } }
+.sw-pill { position: absolute; left: 12px; bottom: 12px; z-index: 3; font: 600 0.8125rem/1.2 var(--font-body); color: var(--sw-hud-ink); background: var(--sw-hud); border-radius: 999px; padding: 8px 12px; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.18); }
+.sw-mblk { flex: none; height: var(--mb); position: relative; }
+.sw-mblk > div { position: absolute; inset: 0; }
+.sw-yn { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sw-yn button { border-radius: 22px; border: 1.5px solid var(--sw-key-edge); background: var(--surface); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font: 700 1.15rem var(--font-body); color: var(--ink); cursor: pointer; }
+.sw-yn button svg { width: 30px; height: 30px; stroke-width: 1.9; color: var(--accent); }
+.sw-mopts { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; }
+.sw-mopt { display: flex; align-items: center; gap: 12px; padding: 0 14px; border-radius: 18px; border: 1.5px solid var(--sw-key-edge); background: var(--surface); font: 700 1.05rem var(--font-body); color: var(--ink); cursor: pointer; text-align: left; min-width: 0; }
+.sw-yn button:focus-visible, .sw-mopt:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.sw-ans { display: flex; flex-direction: column; gap: 12px; justify-content: flex-end; }
+/* cevap çipi figürle birlikte gelir (boş delik yok) */
+.sw-picks { display: flex; flex-wrap: wrap; gap: 8px; animation: sw-fade 0.6s ease 0.05s both; }
+.sw-pick { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px 0 10px; border-radius: 999px; background: var(--ok-bg); color: var(--ink); font: 700 1rem/1 var(--font-body); box-shadow: inset 0 0 0 1.5px var(--ok); --sw-gap: var(--surface); }
+.sw-pick .sw-mk { color: var(--ok); }
+.sw-pick.no { background: transparent; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ink) 25%, transparent); color: var(--ink-3); font-weight: 600; }
+.sw-pick.no .sw-mk { color: var(--warn); }
+.sw-pick s, .sw-rtx s { text-decoration-thickness: 1.5px; }
+.sw-pick .sw-swatch { width: 22px; height: 22px; }
+.sw-cite { display: flex; gap: 8px; align-items: center; margin: 0; font: 500 0.8125rem/1.35 var(--font-body); color: var(--ink-2); }
+.sw-cite svg { flex: none; color: var(--ink-3); }
+.sw-gone { visibility: hidden; }
+.sw-mk { flex: none; }
+/* renk yuvarlağı: iç koyu çizgi, araya zemin, dışta temaya göre zıt dolu halka (açıkta koyu, koyuda açık). Her renkte
+   aynı: siyah koyu temada, beyaz açık temada görünür; hiçbir renk ötekilerden kalın ya da seçili gibi durmaz */
+.sw-swatch { width: 26px; height: 26px; border-radius: 50%; flex: none; margin: 0 2px; box-shadow: inset 0 0 0 1.5px rgba(16, 22, 28, 0.42), 0 0 0 2px var(--sw-gap, var(--surface)), 0 0 0 4px var(--sw-well); }
+.sw-dot { display: inline-block; flex: none; width: 13px; height: 13px; border-radius: 50%; margin: 0 3px; box-shadow: inset 0 0 0 1px rgba(16, 22, 28, 0.42), 0 0 0 1.5px var(--sw-gap, var(--surface-2)), 0 0 0 3px var(--sw-well); }
+.sw-nw { white-space: nowrap; }
+
+/* ---------- 12 · Sonuç ---------- */
+.sw-res { gap: 14px; }
+.sw-rh { font-size: 1.85rem; line-height: 1.1; }
+.sw-strip { flex: none; display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+.sw-th { position: relative; aspect-ratio: 170 / 112; border-radius: 16px; overflow: hidden; background: var(--surface-2); isolation: isolate; animation: sw-up 0.34s ease-out both; animation-delay: calc(0.12s + var(--i) * 0.1s); }
+.sw-thi, .sw-thi > svg, .sw-thm { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sw-thm .rg { fill: none; stroke: #19c2d1; stroke-width: 3; vector-effect: non-scaling-stroke; }
+.sw-thm .rg.halo { stroke: rgba(0, 0, 0, 0.4); stroke-width: 5.5; }
+.sw-thm .rg.miss { stroke: #fff; stroke-dasharray: 6 4; }
+.sw-thb { position: absolute; top: 7px; right: 7px; z-index: 2; width: 22px; height: 22px; border-radius: 50%; background: var(--accent-graphic); color: #041017; display: grid; place-items: center; box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9); animation: sw-pop 0.32s ease-out both; animation-delay: calc(0.55s + var(--i) * 0.1s); }
+/* en kalabalık bulunan sahne: mercek sarısı çerçeve (R2 cümlesi açıklar) */
+.sw-th.best::after { content: ''; position: absolute; inset: 0; border-radius: 16px; box-shadow: inset 0 0 0 3px var(--lens); z-index: 3; pointer-events: none; animation: sw-fade 0.4s ease 0.9s both; }
+.sw-r2 { flex: none; margin: 0; font-size: 1rem; line-height: 1.4; font-weight: 600; color: var(--ink); text-wrap: pretty; }
+.sw-verdict:empty { display: none; }
+.sw-rows { flex: none; display: grid; gap: 8px; }
+.sw-row2 { display: flex; align-items: center; gap: 12px; padding: 8px 12px 8px 8px; border-radius: 16px; background: var(--surface-2); min-height: 58px; animation: sw-up 0.32s ease-out both; }
+.sw-rth { width: 40px; height: 44px; border-radius: 10px; overflow: hidden; flex: none; position: relative; background: var(--sw-tile); box-shadow: inset 0 0 0 1px var(--sw-tile-edge); }
+.sw-rth > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sw-rth.ic { padding: 4px; display: grid; place-items: center; }
+.sw-rth.ic > svg { position: static; }
+.sw-rtx { flex: 1; min-width: 0; font-size: 0.9rem; line-height: 1.32; color: var(--ink-2); }
+.sw-rtx .a { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin-top: 3px; color: var(--ink); font-weight: 700; --sw-gap: var(--surface-2); }
+.sw-rtx .a > span { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.sw-rtx .a .yes .sw-mk { color: var(--ok); }
+.sw-rtx .a .not { color: var(--ink-3); font-weight: 600; }
+.sw-rtx .a .not .sw-mk { color: var(--warn); }
+.sw-tag { font-style: normal; font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.05em; padding: 5px 8px; border-radius: 9px; flex: none; }
+/* TAHMİN = "görmedim" deyip doğru tahmin: yeşil ailede (11'deki "doğru bildin" ile çelişmez) */
+.sw-tag.ok, .sw-tag.guess { background: var(--ok-bg); color: var(--ok); }
+.sw-tag.near { background: var(--lens-soft); color: var(--lens-text); }
+.sw-tag.no { background: var(--warn-bg); color: var(--warn); }
+.sw-fact { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 52px; padding: 0 12px 0 14px; border-radius: 16px; border: 1px solid var(--border); background: var(--surface); color: var(--ink); font: 650 0.95rem var(--font-body); cursor: pointer; }
+.sw-fact .l, .sw-pop-hd .l { display: flex; align-items: center; gap: 10px; }
+.sw-fact .l svg, .sw-pop-hd .l svg { color: var(--accent); }
+.sw-res > .btn { margin-top: auto; }
+/* 12-kart: alttan açılan sayfa (tam genişlik, iç kenar 20 px); tek çıkış kapatma */
+.sw-scrim2 { position: fixed; inset: 0; background: var(--sw-scrim); z-index: 50; animation: sw-fade 0.32s ease both; }
+.sw-pop { position: fixed; left: 0; right: 0; bottom: 0; z-index: 51; max-width: 560px; max-height: calc(100dvh - 24px); overflow-y: auto; margin: 0 auto; border-radius: 26px 26px 0 0; background: var(--sw-sheet); box-shadow: 0 -12px 40px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08); padding: 8px 20px calc(32px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 12px; animation: sw-sheet 0.36s cubic-bezier(0.2, 0.8, 0.2, 1) both; color: var(--ink); }
+@keyframes sw-sheet { from { transform: translateY(100%); } to { transform: none; } }
+.sw-grab { width: 40px; height: 5px; border-radius: 3px; background: color-mix(in srgb, var(--ink) 22%, transparent); margin: 0 auto 2px; flex: none; }
+.sw-pop-hd { display: flex; align-items: center; justify-content: space-between; min-height: 44px; font: 650 0.95rem var(--font-body); }
+.sw-pop-hd .x { width: 44px; height: 44px; margin-right: -10px; border: 0; background: none; display: grid; place-items: center; color: var(--ink-2); cursor: pointer; }
+.sw-art { position: relative; height: 128px; flex: none; border-radius: 18px; overflow: hidden; background: var(--surface-2); isolation: isolate; }
+.sw-art .sw-chip { position: absolute; right: 10px; bottom: 10px; font-size: 0.8125rem; padding: 8px 12px; z-index: 2; }
+.sw-claim { margin: 0; font: 700 1.1rem/1.3 var(--font-display); letter-spacing: -0.01em; word-spacing: 0.08em; text-wrap: balance; }
+.sw-body { margin: 0; font-size: 0.98rem; line-height: 1.48; color: var(--ink-2); text-wrap: pretty; }
+.sw-body b.ok { color: var(--ok); } .sw-body b.no { color: var(--warn); }
+.sw-src { display: flex; gap: 10px; align-items: flex-start; margin: 0; padding-top: 12px; border-top: 1px solid var(--border); font: 500 0.875rem/1.45 var(--font-body); color: var(--ink-2); }
+.sw-src svg { flex: none; margin-top: 1px; color: var(--ink-3); }
+.sw-src .ln { display: block; }
+
+@media (max-width: 340px) {
+  .sw { gap: 9px; }
+  .sw-ey { letter-spacing: 0.08em; font-size: 0.6875rem; }
+  .sw-tb .sw-ey { line-height: 15px; }
+  /* görev üst başlığı 320'de iki satır: "Fark Ettin mi? · 2 dk" / sahne adı */
+  .sw-m1 .sep { display: none; }
+  .sw-m1 .l2 { display: block; }
+  .sw-fill { padding-top: calc(10px + env(safe-area-inset-top)); padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
+  .sw-h { font-size: 1.3rem; }
+  .sw-lead { font-size: 0.9rem; }
+  .sw-parts li { font-size: 0.8rem; }
+  .sw-nef p { font-size: 0.85rem; }
+  .sw-task-ico { width: 54px; height: 54px; padding: 5px; }
+  .sw-fill .btn { min-height: 48px; padding: 10px 14px; }
+  /* 04 */
+  .sw-tray { padding: 9px; gap: 8px; left: 8px; right: 8px; top: 8px; border-radius: 16px; }
+  .sw-tile { border-radius: 10px; padding: 3px; }
+  .sw-key { height: 60px; border-radius: 16px; font-size: 1.45rem; }
+  .sw-cq > * { gap: 10px; }
+  /* 05–08 */
+  .sw-chg { --hh: calc(2 * 1.14 * 1.12rem + 4px + 1.4 * 0.86rem); --blk: 95px; --fm: 8px; }
+  .sw-chead { gap: 4px; }
+  .sw-chead .sw-h { font-size: 1.12rem; }
+  .sw-chead .sw-lead { font-size: 0.86rem; }
+  .sw-blk { gap: 7px; }
+  .sw-tbar { height: 12px; }
+  .sw-again { min-height: 48px; }
+  .sw-chip-ok, .sw-chip-n { min-height: 40px; font-size: 0.8rem; padding: 6px 11px; }
+  /* 09–11 */
+  .sw-ms { --mb: 114px; }
+  .sw-mh { gap: 5px; }
+  .sw-mh.end .sw-h { font-size: 1.12rem; } /* 11 başlığı (Ş1 iki satıra sığar); örneği her adımda aynı boyda: kart oynamaz */
+  .sw-yn button { border-radius: 18px; font-size: 1.05rem; gap: 6px; }
+  .sw-yn button svg { width: 26px; height: 26px; }
+  .sw-mopts, .sw-yn { gap: 8px; }
+  .sw-ans { gap: 8px; }
+  .sw-mopt { font-size: 0.98rem; gap: 10px; padding: 0 12px; border-radius: 16px; }
+  .sw-swatch { width: 22px; height: 22px; }
+  .sw-mcard { border-radius: 20px; }
+  .sw-pill { font-size: 0.75rem; padding: 7px 10px; left: 10px; bottom: 10px; }
+  .sw-cite { font-size: 0.75rem; }
+  .sw-pick { height: 34px; font-size: 0.9rem; }
+  .sw-pick .sw-swatch { width: 18px; height: 18px; }
+  /* 12 */
+  .sw-res { gap: 9px; }
+  .sw-rh { font-size: 1.35rem; }
+  .sw-strip { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .sw-th { aspect-ratio: 4 / 5; border-radius: 12px; }
+  .sw-th.best::after { border-radius: 12px; box-shadow: inset 0 0 0 2.5px var(--lens); }
+  .sw-thb { width: 17px; height: 17px; top: 4px; right: 4px; }
+  .sw-thb svg { width: 10px; height: 10px; }
+  .sw-r2 { font-size: 0.875rem; line-height: 1.36; }
+  .sw-rows { gap: 6px; }
+  .sw-row2 { min-height: 50px; padding: 6px 10px 6px 6px; gap: 10px; border-radius: 14px; }
+  .sw-rth { width: 34px; height: 40px; border-radius: 9px; }
+  .sw-rtx { font-size: 0.8125rem; line-height: 1.3; }
+  .sw-tag { font-size: 0.625rem; padding: 4px 6px; }
+  .sw-fact { min-height: 46px; font-size: 0.875rem; }
+  .sw-pop { padding: 6px 20px calc(14px + env(safe-area-inset-bottom)); gap: 9px; border-radius: 22px 22px 0 0; }
+  .sw-pop-hd { min-height: 40px; font-size: 0.875rem; }
+  .sw-art { height: 92px; border-radius: 14px; }
+  .sw-claim { font-size: 0.98rem; }
+  .sw-body { font-size: 0.875rem; line-height: 1.45; }
+  .sw-src { font-size: 0.8125rem; padding-top: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sw-in, .sw-tray, .sw-tile, .sw-fbk.on, .sw-th, .sw-thb, .sw-th.best::after, .sw-row2, .sw-picks, .sw-scrim2, .sw-pop, .sw-mh.in { animation: none; }
+  .sw-mh.out { display: none; }
+  .sw-mcard.turned .glass { animation: none; opacity: 0; }
+  .sw-mcard.turned .real { animation: none; }
+  .sw-lid, .sw-top .oq-bar, .sw-mmark .rg { transition: none; }
+  .sw-mark .wave, .sw-mmark .wv { display: none; }
+  /* süre bilgisi hareket değil, bilgidir: çizgi doğrusal azalmaya devam eder */
+}

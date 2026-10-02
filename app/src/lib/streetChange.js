@@ -8,7 +8,7 @@
 // bakışta bulunan da bulunamamış sayılır, VARSAYIM); sınır 6–30; son değer sonraki turun başlangıcı (Luck & Vogel 1997,
 // PMID 9384378; Simons & Jensen 2009, PMID 19293113; adım büyüklüğü VARSAYIM). Ölçü changeN: lib/street.js changeNOf.
 // Nesne sayısı karedeki öğelerdir (kişi, hayvan, bisiklet, saksı…); bina, ağaç ve lamba sayılmaz (VARSAYIM).
-import { SCENES, SIGN, Y, COLORS, itemBox, signBox, overlaps, rng } from './streetScenes.js'
+import { SCENES, SIGN, Y, COLORS, itemBox, signBox, partBox as personPart, overlaps, rng } from './streetScenes.js'
 import { LADDERS } from './ladders.js'
 import {
   SESSION_TYPE, SCENE_TARGETS, TARGETS, TEMPLATES, CLOTH, FACTS, genStreet, missedQuestion, templatesFor, sceneStage,
@@ -38,7 +38,8 @@ export function startN(sessions = []) {
 const ALL4 = ['renk', 'gelir', 'gider', 'yer']
 const MOVE = ['gelir', 'gider', 'yer']
 const STREETS = Object.keys(SCENES).filter((k) => SCENES[k].kind === 'street')
-const C8 = Object.keys(COLORS)
+// Öğe renkleri: siyah yok (koyu kaldırım ve asfaltta dolgulu çizim okunmuyordu; kapı 3. tur)
+const C8 = Object.keys(COLORS).filter((c) => c !== 'siyah')
 export const OBJECTS = {
   hat: { on: 'person', attr: 'hat', kinds: ['renk', 'gelir', 'gider'], palette: CLOTH },
   bag: { on: 'person', attr: 'bag', kinds: ['renk', 'gelir', 'gider'], palette: CLOTH },
@@ -53,8 +54,8 @@ export const OBJECTS = {
   bike: { kinds: ALL4, palette: C8 },
   scooter: { kinds: ALL4, palette: C8 },
   pot: { kinds: ALL4, palette: ['kirmizi', 'sari', 'mor', 'beyaz', 'turuncu', 'mavi'] },
-  bin: { kinds: ALL4, palette: ['yesil', 'mavi', 'siyah', 'gri', 'turuncu'] },
-  aboard: { kinds: ALL4, palette: ['siyah', 'yesil', 'mavi', 'kirmizi', 'mor'] },
+  bin: { kinds: ALL4, palette: ['yesil', 'mavi', 'gri', 'turuncu'] },
+  aboard: { kinds: ALL4, palette: ['yesil', 'mavi', 'kirmizi', 'mor'] },
   ball: { kinds: ALL4, palette: C8 },
   suitcase: { kinds: ALL4, palette: C8 },
   stroller: { kinds: ALL4, palette: C8 },
@@ -76,9 +77,18 @@ export const family = (kind) => (kind === 'gelir' || kind === 'gider' ? 'nesne' 
 
 // Kare: 4:5, her genişlikte aynı (PLAN §5b madde 1)
 export const FRAME = { vw: 376, vh: 470, vy: 330 }
+// Caddede kare ön kaldırımı da gösterir (374..844): öğeler iki kaldırımda durur, yola yalnız bisiklet, scooter ve
+// güvercin çıkar (kapı tur 1: saksı ve musluk yolun ortasında duruyordu)
+const FRAME_VY = { street: 374 }
+const ROAD_OK = ['bike', 'scooter', 'pigeon']
 const MIN_HIT = 60
-const BAND = { street: { person: 604, small: 578 }, market: { person: 608, small: 608 }, park: { person: 600, small: 600 } }
-const BOTTOM = 786
+// Ayak çizgisi aralıkları: [alt, üst]; kişi kaldırımda ayaklarıyla durur
+const BAND = {
+  street: { person: [[604, 630], [804, 842]], small: [[578, 630], [804, 842]], road: [[648, 672]] }, // yol: kaldırım kenarına yakın
+  market: { person: [[608, 786]], small: [[608, 786]] },
+  park: { person: [[600, 786]], small: [[600, 786]] },
+}
+const HIT_MARGIN = 12 // dokunma kutusu ve vurgu halkası karenin içinde kalır
 const FILL = {
   street: ['person', 'person', 'person', 'person', 'cat', 'dog', 'bike', 'scooter', 'pot', 'bin', 'aboard', 'ball', 'suitcase', 'stroller', 'pigeon', 'crate', 'basket', 'bucket', 'cone', 'hydrant', 'chair'],
   market: ['person', 'person', 'person', 'person', 'crate', 'crate', 'basket', 'bucket', 'watermelon', 'cat', 'dog', 'pigeon', 'suitcase', 'stroller', 'scooter', 'ball', 'pot', 'chair', 'bin', 'aboard'],
@@ -117,7 +127,7 @@ export function frameView(model, anchor) {
   if (kind === 'street') vx = model.buildings[anchor % model.buildings.length].x - 40
   else if (kind === 'market') vx = model.stalls[anchor % model.stalls.length].x - 70
   else vx = 100 + (anchor * 397) % Math.max(1, model.L - 600)
-  return { vx: Math.max(0, Math.min(model.L - FRAME.vw, vx)), vy: FRAME.vy, vw: FRAME.vw, vh: FRAME.vh }
+  return { vx: Math.max(0, Math.min(model.L - FRAME.vw, vx)), vy: FRAME_VY[kind] ?? FRAME.vy, vw: FRAME.vw, vh: FRAME.vh }
 }
 
 // Tek kare: spec { obj, kind, anchor, seed }, n: karedeki nesne sayısı (değişen nesne dahil, görünür olduğu hâlde)
@@ -132,9 +142,11 @@ export function makeFrame(model, spec, n) {
   const minX = view.vx + 30
   const maxX = view.vx + view.vw - 30
   const at = (it) => {
-    const y0 = it.type === 'person' ? band.person : band.small
-    return { ...it, x: minX + r() * (maxX - minX), y: y0 + r() * (BOTTOM - y0) }
+    const bands = [...(it.type === 'person' ? band.person : band.small), ...(band.road && ROAD_OK.includes(it.type) ? band.road : [])]
+    const [a, b] = bands[Math.floor(r() * bands.length)]
+    return { ...it, x: minX + r() * (maxX - minX), y: a + r() * (b - a) }
   }
+  const hitInside = (b) => inside(padHit(b), { vx: view.vx + HIT_MARGIN, vy: view.vy + HIT_MARGIN, vw: view.vw - 2 * HIT_MARGIN, vh: view.vh - 2 * HIT_MARGIN })
   const tryPlace = (it, ok) => {
     for (let k = 0; k < 400; k++) {
       const c = at(it)
@@ -177,8 +189,8 @@ export function makeFrame(model, spec, n) {
       if (spec.kind === 'gelir') base[o.attr] = null
     }
     const shown = (it) => (o.on === 'person' ? { ...it, [o.attr]: it[o.attr] ?? (o.palette ? pick(o.palette) : true) } : it)
-    target = tryPlace(base, (c) => inside(itemBox(shown(c)), view))
-    if (!target) target = { ...base, x: view.vx + view.vw / 2, y: BOTTOM }
+    target = tryPlace(base, (c) => inside(itemBox(shown(c)), view) && hitInside(itemBox(shown(c))))
+    if (!target) target = { ...base, x: view.vx + view.vw / 2, y: (o.on === 'person' ? band.person : band.small)[0][1] }
     if (o.on === 'person') {
       const full = shown(target)
       change.dress = Boolean(target.dress) // üstün adı: elbise ya da tişört
@@ -197,8 +209,8 @@ export function makeFrame(model, spec, n) {
       hit = [padHit(itemBox(full))]
     } else if (spec.kind === 'yer') {
       const h1 = padHit(itemBox(target))
-      target2 = tryPlace(target, (c) => inside(itemBox(c), view) && !overlaps(padHit(itemBox(c)), h1, 20))
-      if (!target2) target2 = { ...target, x: target.x > view.vx + view.vw / 2 ? view.vx + 40 : view.vx + view.vw - 40 }
+      target2 = tryPlace(target, (c) => inside(itemBox(c), view) && hitInside(itemBox(c)) && !overlaps(padHit(itemBox(c)), h1, 20))
+      if (!target2) target2 = { ...target, x: target.x > view.vx + view.vw / 2 ? view.vx + 84 : view.vx + view.vw - 84 }
       hit = [h1, padHit(itemBox(target2))]
       change.from = { x: Math.round(target.x), y: Math.round(target.y) }
       change.to = { x: Math.round(target2.x), y: Math.round(target2.y) }
@@ -241,7 +253,12 @@ export function makeFrame(model, spec, n) {
     after.items = [...others]
   }
   const count = Math.max(before.items.length, after.items.length)
-  return { n: count, obj: spec.obj, kind: spec.kind, view, before, after, hit, change }
+  // Değişen şeyin kendi kutusu (vurgu halkası ve öğrenme anı için): önce ve sonra; kişide değişen parça, binada parça
+  const boxOf = (t) => (!t ? null : o.on === 'person' ? personPart({ ...t, [o.attr]: t[o.attr] ?? change.to ?? change.from }, o.attr) : itemBox(t))
+  const box = o.on === 'building'
+    ? { before: partBox(before.buildings[spec.anchor % before.buildings.length], spec.obj), after: partBox(after.buildings[spec.anchor % after.buildings.length], spec.obj) }
+    : { before: spec.kind === 'gelir' && o.on !== 'person' ? null : boxOf(target), after: spec.kind === 'gider' && o.on !== 'person' ? null : boxOf(target2) }
+  return { n: count, obj: spec.obj, kind: spec.kind, view, before, after, hit, change, box }
 }
 export const hitTest = (frame, x, y) => frame.hit.some((h) => x >= h.x && x <= h.x + h.w && y >= h.y && y <= h.y + h.h)
 

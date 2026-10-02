@@ -2,11 +2,12 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import {
   genStreet, makeQuestions, countOptions, taskScore, scoreRound, nextLevel, makeRecord, optionLabel, FACTS, factFor, isStreet,
-  LEVELS, TASKS, CLOTH, SAW, SCENE_IDS, SCENE_TARGETS, TEMPLATES, templatesFor, sceneStage, changeNOf, missedQuestion, countAll, VH, WALK_VY,
+  LEVELS, TASKS, CLOTH, SAW, SCENE_IDS, SCENE_TARGETS, TEMPLATES, templatesFor, sceneStage, changeNOf, missedQuestion, countAll, VH, WALK_VY, targetXs,
+  coverView, coverModel, coverBoxes, coverBlocks, countModel, countView, countPanel, COUNT_VIEW,
 } from './street.js'
-import { streetSVG, sceneSVG, car, cat, bike } from './streetSvg.js'
-import { H, Y, SIGN, SKY_MAX, PERSON_TOP, renderScene, backdrop, itemBox, signBox, treeBoxes, lampBoxes, headBox, overlaps, SCENES } from './streetScenes.js'
-import { TEXTS, say, textOr, optionText, lines, pastOf, changeSentence, missedLines, taskLines, sceneName, colorName } from './streetText.js'
+import { streetSVG, sceneSVG, car, cat, bike, missedCard, missedSubject, subjectThumb } from './streetSvg.js'
+import { H, Y, SIGN, SKY_MAX, PERSON_TOP, renderScene, backdrop, itemBox, signBox, treeBoxes, lampBoxes, headBox, overlaps, SCENES, person } from './streetScenes.js'
+import { TEXTS, say, textOr, optionText, lines, pastOf, changeSentence, missedLines, taskLines, sceneName, colorName, countRow, resultHead } from './streetText.js'
 import { OBJECTS } from './streetChange.js'
 import { LADDERS } from './ladders.js'
 
@@ -42,7 +43,7 @@ describe('cadde üretimi', () => {
       expect(s.counts.blueCar).toBeGreaterThanOrEqual(2)
       expect(s.counts.taxi).toBeGreaterThanOrEqual(2)
       expect(s.counts.cat).toBe(s.cats.length)
-      expect(s.counts.bike).toBe(s.bikes.length)
+      expect(s.counts.bike).toBe(s.bikes.length + s.items.filter((it) => it.type === 'bike' || it.type === 'rider').length)
       expect(TASKS.map((t) => t.id)).toContain(s.task.id)
     }
   })
@@ -57,6 +58,39 @@ describe('cadde üretimi', () => {
           expect(s.counts[taskId], `${scene} ${taskId} ${seed}`).toBeLessThanOrEqual(6)
           expect(countAll(s)).toEqual(s.counts)
         }
+      }
+    }
+  })
+  it('targetXs: her hedefin sayısı kadar konum (kapak kırpımı hedefi içerir)', () => {
+    for (const scene of SCENE_IDS) for (const taskId of SCENE_TARGETS[scene]) {
+      const s = genStreet(11, 3, { scene, taskId, subjects: [] })
+      expect(targetXs(s, taskId).length, `${scene} ${taskId}`).toBe(s.counts[taskId])
+    }
+  })
+  it('kapak kırpımı (01/02): yan kenarlar bina/tezgâh sınırında, tabela tam ya da hiç, kenarda bölünen kişi yok, hedef içeride; 390 ve 320 aynı mantık', () => {
+    // 390: kutu ≈ 358×260; 320: kutu ≈ 288×170 (oran değişir, kural aynı)
+    for (const seed of SEEDS.slice(0, 80)) for (const scene of SCENE_IDS) {
+      const taskId = SCENE_TARGETS[scene][seed % SCENE_TARGETS[scene].length]
+      const s = genStreet(seed, 1 + (seed % 5), { scene, taskId, subjects: templatesFor(scene, taskId).slice(0, 3) })
+      const blocks = coverBlocks(s)
+      for (const ratio of [358 / 260, 288 / 170]) {
+        const v = coverView(s, taskId, ratio)
+        const x1 = v.vx + v.vw
+        const tag = `${seed} ${scene} ${taskId} ${ratio.toFixed(2)}`
+        expect(blocks.some((b) => b.x === v.vx), tag).toBe(true)
+        expect(blocks.some((b) => b.x + b.w === x1), tag).toBe(true)
+        expect(v.vw / v.vh).toBeCloseTo(ratio, 6)
+        // tabela (cadde dükkânı ve pazar tezgâhı levhası) kenarda kesilmez
+        for (const b of [...(s.buildings ?? []).map(signBox), ...(s.stalls ?? [])]) {
+          const cut = (x) => b.x < x && b.x + b.w > x
+          expect(cut(v.vx) || cut(x1), tag).toBe(false)
+        }
+        // dikeyde tabela sırası tam içeride
+        expect(v.vy).toBeLessThanOrEqual(SIGN.top - 8)
+        // kapak modelinde kenarda bölünen kişi ya da öğe yok; en az bir hedef tam içeride
+        const m = coverModel(s, v)
+        for (const b of coverBoxes(m)) expect((b.x < v.vx - 1 && b.x + b.w > v.vx + 1) || (b.x < x1 - 1 && b.x + b.w > x1 + 1), tag).toBe(false)
+        expect(targetXs(m, taskId).some((x) => x > v.vx + 40 && x < x1 - 40), tag).toBe(true)
       }
     }
   })
@@ -80,6 +114,140 @@ describe('cadde üretimi', () => {
       // sağa akan (yakın şerit) araba, yürüyüş bitmeden kameranın sağ kenarına girer
       for (const c of s.cars.filter((k) => k.lane === 'near')) expect(c.x).toBeLessThanOrEqual(s.L - c.v * T - 200)
     }
+  })
+  // "geçti" soruları (mavi araba, sarı taksi, kırmızı araba, bisiklet, bebek arabası): sayılan her hedef gerçekten geçer.
+  // Geçmek: yürüyüşün başında ekran ortasının önünde, sonunda arkasında. Kamera (StreetWalk) sahneyi 0'dan L − vw'ye
+  // eşit hızla kaydırır: ortası half + (L − 2·half)·t/T. Telefon genişlikleri için half 150–240 birim.
+  const passes = (x0, v, s) => {
+    const T = s.walkSec
+    for (const half of [150, 195, 240]) {
+      const t = (x0 - half) / ((s.L - 2 * half) / T - v) // v: işaretli hız (sağa +)
+      if (!(t > 0 && t < T)) return false
+    }
+    return true
+  }
+  it('geçti: arabalar akar ve her araba kameranın ortasından geçer', () => {
+    for (const seed of SEEDS.slice(0, 60)) for (const taskId of ['blueCar', 'taxi', 'redCar']) {
+      const s = genStreet(seed, 1 + (seed % 5), { scene: seed % 2 ? 'cadde' : 'aksam', taskId, subjects: [] })
+      expect(s.counts[taskId]).toBeGreaterThanOrEqual(2)
+      for (const c of s.cars) {
+        expect(c.v).toBeGreaterThan(0)
+        expect(passes(c.x, c.lane === 'far' ? -c.v : c.v, s)).toBe(true)
+      }
+    }
+  })
+  it('geçti: hedef bisiklet sürülür (yolun ön kenarında ya da park yolunda) ve geçer; park bisikleti hiç çizilmez', () => {
+    for (const seed of SEEDS.slice(0, 60)) for (const scene of ['cadde', 'aksam', 'park', 'yagmur']) {
+      const subjects = templatesFor(scene, 'bike').slice(0, 2)
+      const s = genStreet(seed, 3, { scene, taskId: 'bike', subjects })
+      const riders = s.items.filter((it) => it.type === 'rider')
+      expect(s.bikes).toEqual([])
+      expect(s.items.filter((it) => it.type === 'bike')).toEqual([])
+      expect(riders.length).toBe(s.counts.bike)
+      expect(riders.length).toBeGreaterThanOrEqual(2)
+      for (const b of riders) {
+        expect(b.v).toBeGreaterThan(0)
+        expect(passes(b.x, -b.v, s)).toBe(true)
+        if (scene === 'park') expect(b.y).toBeGreaterThan(Y.side + 60)
+        else expect(b.y).toBeGreaterThan(Y.lane) // yolda: yakın şeridin önündeki bisiklet şeridi
+        expect(b.y).toBeLessThanOrEqual(Y.roadEnd)
+      }
+      // hareketli çizimde her bisikletli akar (fe-go), şerit çizgisi caddede var
+      const svg = renderScene(s, { vx: 0, vy: WALK_VY, vw: s.L, vh: VH, motion: true, walkSec: s.walkSec })
+      expect((svg.match(/class="fe-go" style="--t:[\d.]+s;--dx:-/g) ?? []).length).toBeGreaterThanOrEqual(riders.length)
+    }
+  })
+  it('geçti: bebek arabası hep yürüyen biriyle gider; duran bebek arabası yok', () => {
+    for (const seed of SEEDS.slice(0, 60)) for (const taskId of ['stroller', 'ball']) {
+      const s = genStreet(seed, 4, { scene: 'park', taskId, subjects: [] })
+      expect(s.items.filter((it) => it.type === 'stroller')).toEqual([])
+      const pushers = s.people.filter((p) => p.stroller)
+      expect(pushers.length).toBeGreaterThanOrEqual(1)
+      for (const p of pushers) expect(p.walk).not.toBe(false)
+      if (taskId === 'stroller') {
+        expect(s.counts.stroller).toBe(pushers.length)
+        expect(s.counts.stroller).toBeGreaterThanOrEqual(2)
+      }
+    }
+  })
+})
+
+describe('tasarım tur 2 aktarımı (04 donmuş kare, cam figür, kırpım seçenekleri)', () => {
+  it('04 donmuş kare: sayılan hedef ve soru konusu yok; sokak seviyesi (tabela sırasından yolun sonuna), caddenin sonu', () => {
+    for (const seed of SEEDS.slice(0, 40)) for (const scene of SCENE_IDS) {
+      const taskId = SCENE_TARGETS[scene][seed % SCENE_TARGETS[scene].length]
+      const s = genStreet(seed, 1 + (seed % 5), { scene, taskId, subjects: templatesFor(scene, taskId).slice(0, 3) })
+      const m = countModel(s, taskId)
+      expect(countAll(m)[taskId], `${scene} ${taskId}`).toBe(0)
+      expect(m.people.some((p) => p.id)).toBe(false)
+      expect(m.items.some((i) => i.id)).toBe(false)
+      expect(m.vendors).toEqual([])
+      for (const ratio of [350 / 566, 280 / 330, 1.2]) {
+        const v = countView(s, ratio)
+        expect(v.vw / v.vh).toBeCloseTo(ratio, 6)
+        expect(v.vy + v.vh).toBe(COUNT_VIEW.bottom)
+        expect(v.vy).toBeLessThanOrEqual(SIGN.top - 8)
+        expect(v.vx + v.vw).toBe(s.L)
+        // kalabalığa göre seçilen kırpım: caddenin son üç ekranı içinde; panelde hedef yok, kenarda bölünen kişi/araba yok
+        const w = countView(s, ratio, m)
+        expect(w.vx).toBeGreaterThanOrEqual(Math.max(0, s.L - 3 * w.vw) - 16)
+        const pm = countPanel(s, taskId, w)
+        expect(countAll(pm)[taskId]).toBe(0)
+        const cut = (x0, x1, x) => x0 < x - 1 && x1 > x + 1
+        for (const b of coverBoxes(pm)) expect(cut(b.x, b.x + b.w, w.vx) || cut(b.x, b.x + b.w, w.vx + w.vw)).toBe(false)
+        for (const k of pm.cars) expect(cut(k.x - 92, k.x + 92, w.vx) || cut(k.x - 92, k.x + 92, w.vx + w.vw)).toBe(false)
+      }
+    }
+  })
+  it('renderScene wholeSigns: yarım tabela (levha ve yazı) çizilmez; edgeDecor: false: kırpıma sığmayan ağaç ve lamba çizilmez', () => {
+    const s = genStreet(124, 2, { scene: 'cadde', taskId: 'blueCar', subjects: [] })
+    const b = s.buildings[3]
+    const v = { vx: b.x + 40, vy: 300, vw: b.w, vh: 500 } // b yarım, sağındaki bina yarım
+    const plain = renderScene(s, { ...v, motion: false })
+    const whole = renderScene(s, { ...v, motion: false, wholeSigns: true })
+    expect(plain).toContain(`>${b.shop}<`)
+    expect(whole).not.toContain(`>${b.shop}<`)
+    expect(whole).not.toContain(`>${s.buildings[4].shop}<`)
+    const full = { vx: b.x, vy: 300, vw: b.w, vh: 500 }
+    expect(renderScene(s, { ...full, wholeSigns: true })).toContain(`>${b.shop}<`)
+    // kenar süsleri: bina sınırındaki kırpımda ağaç/lamba (aralıkta) ya hiç ya tam
+    const deco = (svg) => (svg.match(/fill="#6B4A31"|fill="#353B43"/g) ?? []).length
+    expect(deco(renderScene(s, { ...full, edgeDecor: false }))).toBe(0)
+    expect(deco(renderScene(s, { ...full }))).toBeGreaterThan(0)
+  })
+  it('köpek tasması elden köpeğin boynuna gider (kuyruğa değil); satıcı sahnede çizilir', () => {
+    const svg = person({ x: 0, y: 0, dir: 1, dog: 'sari', walk: false })
+    expect(svg).toMatch(/M6 -57Q40 -38 72 -31/)
+    const s = genStreet(77, 2, { scene: 'cadde', taskId: 'blueCar', subjects: ['vendor'] })
+    expect(s.vendors.length).toBe(1)
+    expect(renderScene(s, {})).toContain('#B8332F') // satıcı arabası (önceden mal türü çizim türünü eziyordu)
+  })
+  it('cam figür kartı: her şablonda konu tam içeride; cam renksiz (saturate 0) ve orta tona sıkıştırılmış; cevap parçası camda yok', () => {
+    for (const scene of SCENE_IDS) for (const id of templatesFor(scene, 'blueCar')) {
+      const s = genStreet(321, 3, { scene, taskId: 'blueCar', subjects: [id] })
+      for (const ratio of [350 / 450, 280 / 265]) {
+        const c = missedCard(s, id, { ratio, mode: SCENES[scene].mode, uid: 't' })
+        if (!c) continue
+        const v = c.view
+        const subj = missedSubject(s, id)
+        const tag = `${scene} ${id} ${ratio.toFixed(2)}`
+        expect(v.vw / v.vh, tag).toBeCloseTo(ratio, 6)
+        if (!subj.place) {
+          expect(subj.box.x, tag).toBeGreaterThanOrEqual(v.vx)
+          expect(subj.box.x + subj.box.w, tag).toBeLessThanOrEqual(v.vx + v.vw)
+          expect(subj.box.y, tag).toBeGreaterThanOrEqual(v.vy)
+          expect(c.glass, tag).toContain('<feColorMatrix type="saturate" values="0"/>')
+          expect(c.glass, tag).toMatch(/feFuncR type="linear" slope="0\.\d+" intercept="0\.\d+"/)
+          expect(c.real).not.toContain('<rect width=') // gerçek katman yalnız konu (sahne ayrı, solmaz)
+        }
+      }
+    }
+    const s = genStreet(124, 2, { scene: 'cadde', taskId: 'blueCar', subjects: ['shop'] })
+    const c = missedCard(s, 'shop', { ratio: 0.8 })
+    const green = s.buildings.find((b) => b.aw === 'yesil')
+    expect(c.base).not.toContain(`>${green.shop}<`) // yerin kendisi konu: levha boş
+    expect(c.real).toContain(`>${green.shop}<`)
+    expect(subjectThumb(s, 'shop')).toContain('<svg')
   })
 })
 
@@ -295,7 +463,7 @@ describe('metinler: yalnız METINLER\'deki onaylı metin ekrana çıkar', () => 
   owner.R5 = [sec.match(/R5 [^"]*"([^"]+)"/)[1]] // rozetler tırnaksız, satır tırnaklı
   const effective = (r) => (owner[r[1]] || r[1] === 'R3' ? 'S' : r.at(-2))
   // örnekler doldurulmuş hâldir: örneğin değerleri
-  const EX = { M1: { sahne: 'Cadde' }, M2: { görev: 'Mavi arabaları say' }, M3: { hedef: 'mavi arabalarda' }, D1: { i: 2, n: 4 }, G2: { Yer: 'Caddede', kim: 'kahkaha atan bir kadın' }, G4: { soru: 'Elbisesi ne renkti?' } }
+  const EX = { M1: { sahne: 'Cadde' }, M2: { görev: 'Mavi arabaları say' }, M3: { hedef: 'mavi arabalarda' }, M4: { k: 4 }, D1: { i: 2, n: 4 }, G2: { Yer: 'Caddede', kim: 'kahkaha atan bir kadın' }, G4: { soru: 'Elbisesi ne renkti?' } }
   it('sahip onaylılar harfi harfine (örnek değerleriyle); iki parçalılar: D8 ayrı kimlik, R2 satır; R3 Gelişim\'in sözü', () => {
     expect(Object.keys(owner).sort()).toEqual(['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'G1', 'G2', 'G3', 'G4', 'G5', 'M1', 'M2', 'M3', 'M4', 'R1', 'R2', 'R4', 'R5', 'Y1', 'Y2', 'Ş1'])
     for (const [id, parts] of Object.entries(owner)) {
@@ -321,6 +489,10 @@ describe('metinler: yalnız METINLER\'deki onaylı metin ekrana çıkar', () => 
       if (st.startsWith('onaylı')) {
         expect(TEXTS[id].status).toBe('onayli')
         expect(say(id)).toBe(r[2])
+      } else if (/^S\b/.test(st) && st !== 'S') {
+        // tabloda doğrudan S olan satır (M5, sahip onayı 2026-10-02): harfi harfine
+        expect(TEXTS[id].status, id).toBe('S')
+        expect(say(id), id).toBe(r[2])
       } else if (st !== 'S') {
         expect(TEXTS[id].text, id).toBeUndefined()
         expect(say(id), id).toBeNull()
@@ -328,6 +500,8 @@ describe('metinler: yalnız METINLER\'deki onaylı metin ekrana çıkar', () => 
       }
     }
     expect(Object.keys(TEXTS).filter((id) => TEXTS[id].status === 'T')).toEqual(['N1', 'N2', 'N3', 'N4'])
+    expect(say('M5')).toBe('Bu bir fark etme alıştırması. Günlük hayatta daha çok fark etmeni sağladığına dair henüz kanıt yok.')
+    expect(rows.find((r) => r[1] === 'M5')[2]).toBe(say('M5'))
   })
   it('modüldeki her S metni METINLER\'de var (yer tutuculular örnekle; M3 odak tablosu türetilmiştir)', () => {
     for (const [id, e] of Object.entries(TEXTS)) {
@@ -384,8 +558,55 @@ describe('metinler: yalnız METINLER\'deki onaylı metin ekrana çıkar', () => 
     // bugünkü dört görev aynen
     for (const t of TASKS) expect([say(`task.${t.id}`), say(`count.${t.id}`)]).toEqual([t.text, t.q])
   })
+  it('R5 sayım satırı: METINLER listesi ve dört kalıp harfi harfine; 22 hedefin hepsi', () => {
+    const r5 = metinler.slice(metinler.indexOf('## R5 sayım satırı'))
+    const r5flat = r5.replace(/\s+/g, ' ')
+    const names = r5flat.match(/\{Hedefler\}: (Mavi arabalar[^.]+)\./)[1].split(' · ')
+    expect(names).toHaveLength(22)
+    const all = SCENE_IDS.flatMap((sc) => SCENE_TARGETS[sc])
+    expect(new Set(all).size).toBe(22)
+    for (const id of new Set(all)) expect(names).toContain(say(`targets.${id}`))
+    for (const k of ['R5.move.same', 'R5.move.diff', 'R5.stay.same', 'R5.stay.diff']) expect(r5flat.includes(`"${TEXTS[k].text}"`), k).toBe(true)
+    expect(countRow('blueCar', 3, 0)).toBe('Mavi arabalar: 3 geçti, sen 0 dedin')
+    expect(countRow('flowerBucket', 3, 4)).toBe('Çiçek dolu kovalar: 3 vardı, sen 4 dedin')
+    expect(countRow('stroller', 2, 2)).toBe('Bebek arabaları: 2 geçti, sen de 2 dedin')
+    expect(countRow('cat', 5, 5)).toBe('Kediler: 5 vardı, sen de 5 dedin')
+  })
+  it('B1 ve S0 (METINLER "Ezberleme başlığı ve sonuç başlığı") harfi harfine', () => {
+    const sec = metinler.slice(metinler.indexOf('## Ezberleme başlığı')).replace(/\s+/g, ' ')
+    for (const id of ['B1', 'S0.1', 'S0.2', 'S0.3', 'S0.all', 'S0.none']) {
+      expect(TEXTS[id].status, id).toBe('S')
+      expect(sec.includes(`"${TEXTS[id].text}"`), id).toBe(true)
+    }
+    expect([0, 1, 2, 3, 4].map((k) => resultHead(k, 4))).toEqual(['Bu turda değişiklikler gözünden kaçtı', "4 sahnenin 1'inde buldun", "4 sahnenin 2'sinde buldun", "4 sahnenin 3'ünde buldun", '4 sahnenin hepsinde buldun'])
+    expect(resultHead(3, 3)).toBe('3 sahnenin hepsinde buldun')
+  })
+  it('Ö1–Ö6 (METINLER "Gözünden kaçan başlıkları ve ekran okuyucu etiketleri") harfi harfine; Ö4 kullanılmaz', () => {
+    const sec = metinler.slice(metinler.indexOf('## Gözünden kaçan başlıkları ve ekran okuyucu etiketleri')).replace(/\s+/g, ' ')
+    for (const id of ['Ö1', 'Ö2', 'Ö3', 'Ö6']) {
+      expect(TEXTS[id].status, id).toBe('S')
+      expect(sec.includes(`"${TEXTS[id].text}"`), id).toBe(true)
+    }
+    for (const id of ['Ö5.found', 'Ö5.miss']) {
+      expect(TEXTS[id].status, id).toBe('S')
+      expect(sec.includes(`"${TEXTS[id].text}"`), id).toBe(true)
+    }
+    expect(say('Ö5.found', { i: 2, N: 14 })).toBe('2. sahne: değişikliği buldun, sahnede 14 nesne vardı')
+    expect(Object.keys(TEXTS).filter((k) => k.startsWith('Ö4'))).toEqual([])
+    const src = readFileSync(new URL('../screens/StreetWalk.jsx', import.meta.url), 'utf8')
+    for (const id of ['Ö1', 'Ö2', 'Ö3', 'Ö5.found', 'Ö5.miss', 'Ö6']) expect(src.includes(`'${id}'`), id).toBe(true)
+  })
   it('D7 geçmiş eki tr.grammar ile: 12 renk', () => {
     expect(['kirmizi', 'mavi', 'sari', 'yesil', 'mor', 'turuncu', 'siyah', 'beyaz', 'gri', 'kahve', 'lacivert', 'bordo'].map((k) => pastOf(colorName(k)))).toEqual(['kırmızıydı', 'maviydi', 'sarıydı', 'yeşildi', 'mordu', 'turuncuydu', 'siyahtı', 'beyazdı', 'griydi', 'kahverengiydi', 'lacivertti', 'bordoydu'])
+  })
+  it('ekran (StreetWalk.jsx) düz metin yazmaz: JSX metni ve aria-label yalnız streetText üzerinden', () => {
+    const src = readFileSync(new URL('../screens/StreetWalk.jsx', import.meta.url), 'utf8')
+      .replace(/\{\/\*[\s\S]*?\*\/\}/g, '').replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '').replace(/ \/\/ .*$/gm, '')
+    const jsxText = (src.match(/>[^<>{}\n]*[A-Za-zÇĞİÖŞÜçğıöşü]{2,}[^<>{}\n]*</g) ?? []).filter((x) => !/[=?:&|+*/]/.test(x)) // JS ifadeleri değil, yalnız JSX metni
+    expect(jsxText).toEqual([])
+    expect(src.match(/aria-label="[^"]*"/g) ?? []).toEqual([])
+    expect((src.match(/'[^'\n]*[çğıöşüÇĞİÖŞÜ][^'\n]*'/g) ?? []).filter((x) => !/^'(Ş1|Ö[0-9](\.[a-z]+)?)'$/.test(x))).toEqual([])
+    expect(src).toContain("from '../lib/streetText.js'")
   })
   it('kaynak dosyalarda taslak cümle (N1–N4) yok', () => {
     const sentences = rows.filter((r) => effective(r) === 'T').flatMap((r) => r[2].split(/(?<=[.?!:]) /)).map((x) => x.replace(/\(.*\)/g, '').trim()).filter((x) => x.length >= 12 && !x.includes('{') && x !== 'Fark Ettin mi?')

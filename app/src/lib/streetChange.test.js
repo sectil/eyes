@@ -70,6 +70,21 @@ describe('Ne değişti? karesi', () => {
         expectOneChange(f, tag)
       }
     }
+  }, 30000) // ağır: her nesne × tür × 5 n; tam takım yükünde 5 sn'yi aşıyordu
+  it('caddede öğeler kaldırımda (yola yalnız bisiklet, scooter, güvercin); dokunma kutusu karenin 12 birim içinde', () => {
+    let k = 0
+    for (const c of cases.filter((x) => SCENES[x.scene].kind === 'street')) {
+      const f = makeFrame(c.model, { obj: c.obj, kind: c.kind, anchor: 1 + (k % 5), seed: 77 + k++ }, 22)
+      for (const it of [...f.before.items, ...f.after.items]) {
+        if (it.y > 640 && it.y < 796) expect(['bike', 'scooter', 'pigeon'], `${c.obj} ${it.type} ${it.y}`).toContain(it.type)
+      }
+      for (const h of f.hit) {
+        expect(h.x).toBeGreaterThanOrEqual(f.view.vx + 12)
+        expect(h.x + h.w).toBeLessThanOrEqual(f.view.vx + f.view.vw - 12)
+        expect(h.y).toBeGreaterThanOrEqual(f.view.vy + 12)
+        expect(h.y + h.h).toBeLessThanOrEqual(f.view.vy + f.view.vh - 12)
+      }
+    }
   })
   it('aynı tohum aynı kare; çizim iki görüntüyü de verir; dokunma testi', () => {
     const m = genStreet(5, 2, { scene: 'cadde', taskId: 'cat', subjects: [] })

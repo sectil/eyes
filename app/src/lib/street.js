@@ -8,7 +8,7 @@
 // eder (Kreitz 2020, DOI 10.1177/1747021820911324); "Fark etmedim" deyip doğru tahmin ayrı sayılır.
 // İddia sınırı: gerçek hayatta daha çok fark ettirdiği gösterilmedi; soru beklendiği için "Gözünden kaçan" ölçü değildir.
 import {
-  COLORS, SKIN, HAIR, ANIMAL, SCENES, SHOPS, ROWS, INSTRUMENTS, CHILD_ITEMS, backdrop, rng,
+  COLORS, SKIN, HAIR, ANIMAL, SCENES, SHOPS, ROWS, INSTRUMENTS, CHILD_ITEMS, BIKE_LANE, backdrop, rng, itemBox,
 } from './streetScenes.js'
 import { LADDERS } from './ladders.js'
 import { stageOf } from './progression.js'
@@ -123,7 +123,8 @@ export function genStreet(seed, level = 1, opts = {}) {
   // yuvalar: kaldırımda 64 birimde bir, sıra sıra (arka/orta/ön)
   const rowsOf = kind === 'park' ? [622, 636, 650] : ROWS
   const slots = []
-  for (let sx = 120, i = 0; sx < L - 80; sx += SLOT, i++) slots.push({ x: sx + Math.floor(r() * 18), y: rowsOf[i % 3] })
+  // son görünümde kenarda yarım öğe kalmasın
+  for (let sx = 120, i = 0; sx < L - 140; sx += SLOT, i++) slots.push({ x: sx + Math.floor(r() * 18), y: rowsOf[i % 3] })
   const free = shuffleWith(r, slots)
   const take = () => free.pop() ?? null
   const V = (L - 300) / T // ekranın sahne birimi hızı (eski ekran: 390 pt ≈ 300 birim)
@@ -185,7 +186,7 @@ export function genStreet(seed, level = 1, opts = {}) {
 
   // Görev hedefi: 2–6 tane (sayılacak şey en az 2)
   const nTarget = 2 + Math.floor(r() * 5)
-  const personTarget = { hat: (q) => ({ ...q, hat: pick(['kirmizi', 'mavi', 'yesil', 'siyah', 'beyaz']) }), glasses: (q) => ({ ...q, glasses: true }), redUmbrella: (q) => ({ ...q, umbrella: 'kirmizi' }), yellowCoat: (q) => ({ ...q, coat: 'sari' }), balloon: (q) => ({ ...q, balloon: pick(['kirmizi', 'mavi', 'sari', 'mor']) }), kite: (q) => ({ ...q, s: 0.7, kite: pick(['kirmizi', 'mavi', 'sari', 'mor', 'turuncu']) }), runner: (q) => ({ ...q, run: true, top: pick(['kirmizi', 'mavi', 'yesil', 'turuncu']), dress: false, bag: null, phone: false }) }
+  const personTarget = { hat: (q) => ({ ...q, hat: pick(['kirmizi', 'mavi', 'yesil', 'siyah', 'beyaz']) }), glasses: (q) => ({ ...q, glasses: true }), redUmbrella: (q) => ({ ...q, umbrella: 'kirmizi' }), yellowCoat: (q) => ({ ...q, coat: 'sari' }), balloon: (q) => ({ ...q, balloon: pick(['kirmizi', 'mavi', 'sari', 'mor']) }), kite: (q) => ({ ...q, s: 0.7, kite: pick(['kirmizi', 'mavi', 'sari', 'mor', 'turuncu']) }), runner: (q) => ({ ...q, run: true, top: pick(['kirmizi', 'mavi', 'yesil', 'turuncu']), dress: false, bag: null, phone: false }), stroller: (q) => ({ ...q, stroller: pick(['mavi', 'yesil', 'mor']), bag: null }) }
   if (personTarget[task.id]) for (let n = 0; n < nTarget; n++) place(personTarget[task.id](ordinary(chance(0.5) ? 'k' : 'e')))
   const addItems = (type, n, extra = () => ({})) => {
     for (let i = 0; i < n; i++) {
@@ -205,14 +206,18 @@ export function genStreet(seed, level = 1, opts = {}) {
   // Görev öğeleri sıradan kişilerden önce yerleşir (sayılacak şey yuvasız kalmaz)
   const itemTarget = {
     cat: () => addTo(s.cats, nTarget, catColor),
-    bike: () => addTo(s.bikes, nTarget, bikeColor),
+    // sayılan bisiklet "geçer": yolun ön kenarında (parkta yolda) sürülür, sola akar; park bisikleti çizilmez
+    bike: () => {
+      const y = kind === 'park' ? BIKE_LANE.park : BIKE_LANE.street
+      const gap = (L - 500) / nTarget
+      for (let i = 0; i < nTarget; i++) s.items.push({ type: 'rider', x: Math.round(300 + i * gap + r() * gap * 0.5), y, dir: -1, v: Math.round(0.25 * V), ...bikeColor(), top: pick(CLOTH), skin: pick(SKIN), hair: pick(['kahve', 'siyah', 'gri']) })
+    },
     dog: () => addItems('dog', nTarget, dogColor),
     watermelon: () => addItems('watermelon', nTarget),
     redCrate: () => addItems('crate', nTarget, () => ({ color: 'kirmizi' })),
     basket: () => addItems('basket', nTarget),
     flowerBucket: () => addItems('bucket', nTarget, () => ({ color: pick(['kirmizi', 'sari', 'mor']) })),
     ball: () => addItems('ball', nTarget, () => ({ color: pick(['kirmizi', 'mavi', 'sari']) })),
-    stroller: () => addItems('stroller', nTarget, () => ({ color: pick(['mavi', 'yesil', 'mor']) })),
     pigeon: () => addItems('pigeon', nTarget),
   }
   itemTarget[task.id]?.()
@@ -240,7 +245,8 @@ export function genStreet(seed, level = 1, opts = {}) {
   }
   if (kind === 'park') {
     if (!want('ball')) addItems('ball', 1, () => ({ color: pick(['kirmizi', 'mavi', 'sari']) }))
-    if (!want('stroller')) addItems('stroller', 1, () => ({ color: pick(['mavi', 'yesil', 'mor']) }))
+    // bebek arabası hep yürüyen biriyle gider (duran bebek arabası yok)
+    if (!want('stroller')) place({ ...ordinary(chance(0.5) ? 'k' : 'e'), stroller: pick(['mavi', 'yesil', 'mor']), bag: null })
     if (!want('pigeon')) addItems('pigeon', 2)
   }
   // yuva kalmadıysa yerleşmeyenler düşer (sayımlar yerleşenlerden)
@@ -249,7 +255,7 @@ export function genStreet(seed, level = 1, opts = {}) {
   // Arabalar (yalnız caddede): iki şerit, şerit başına sabit hız (kendi hızında akar, birbirine binmez)
   if (kind === 'street') {
     const colorsPool = ['kirmizi', 'beyaz', 'siyah', 'yesil', 'mavi', 'lacivert', 'gri', 'bordo', 'beyaz', 'turuncu']
-    const lanes = { far: { v: 0.35 * V, from: 60, to: L - 120 }, near: { v: 0.3 * V, from: 60, to: L - 0.3 * V * T - 240 } }
+    const lanes = { far: { v: 0.35 * V, from: 260, to: L - 120 }, near: { v: 0.3 * V, from: 260, to: L - 0.3 * V * T - 260 } } // her araba ekran ortasından geçer (başta ortanın önünde, sonda arkasında)
     for (const [lane, cfg] of Object.entries(lanes)) {
       for (let cx = cfg.from + Math.floor(r() * 80); cx < cfg.to; cx += 220 + Math.floor(r() * 140)) {
         const color = pick(colorsPool)
@@ -257,14 +263,16 @@ export function genStreet(seed, level = 1, opts = {}) {
       }
     }
     // Mavi, taksi ve kırmızı en az 2 (görev hangisiyse 2–6)
-    const fix = (pred, set, min) => {
+    const fix = (pred, set, min, exact = false) => {
       const have = s.cars.filter(pred).length
       const pool = shuffleWith(r, s.cars.filter((k) => !k.taxi && !['mavi', 'kirmizi', 'sari'].includes(k.color)))
       pool.slice(0, Math.max(0, min - have)).forEach(set)
+      // görev hedefiyse fazlası başka renge (hedef sayısı 2–6: R5 sayım satırı)
+      if (exact) shuffleWith(r, s.cars.filter(pred)).slice(min).forEach((k) => { k.color = 'beyaz'; k.taxi = false })
     }
-    fix((k) => k.color === 'mavi' && !k.taxi, (k) => { k.color = 'mavi' }, want('blueCar') ? nTarget : 2)
-    fix((k) => k.taxi, (k) => { k.color = 'sari'; k.taxi = true }, want('taxi') ? nTarget : 2)
-    fix((k) => k.color === 'kirmizi' && !k.taxi, (k) => { k.color = 'kirmizi' }, want('redCar') ? nTarget : 2)
+    fix((k) => k.color === 'mavi' && !k.taxi, (k) => { k.color = 'mavi' }, want('blueCar') ? nTarget : 2, want('blueCar'))
+    fix((k) => k.taxi, (k) => { k.color = 'sari'; k.taxi = true }, want('taxi') ? nTarget : 2, want('taxi'))
+    fix((k) => k.color === 'kirmizi' && !k.taxi, (k) => { k.color = 'kirmizi' }, want('redCar') ? nTarget : 2, want('redCar'))
     // Akşam: yanan vitrinler
     if (SCENES[scene].light === 'aksam') {
       const lit = want('litShop') ? nTarget : Math.floor(s.buildings.length * 0.4)
@@ -275,6 +283,137 @@ export function genStreet(seed, level = 1, opts = {}) {
   s.counts = countAll(s)
   if (legacy) s.questions = makeQuestions(s, r)
   return s
+}
+
+// Kapak kırpımının yan kenarlarına oturan bloklar: caddede bina, pazarda tezgâh (aralığın ortasına kadar), parkta arka bina
+export function coverBlocks(s) {
+  const kind = SCENES[s.scene]?.kind ?? 'street'
+  if (kind === 'market') return (s.stalls ?? []).map((st) => ({ x: st.x - 18, w: st.w + 36 }))
+  if (kind === 'park') return (s.back ?? []).map((b) => ({ x: b.x, w: b.w }))
+  return (s.buildings ?? []).map((b) => ({ x: b.x, w: b.w }))
+}
+// Kenarda bölünebilecek her şeyin kutusu (kişi, satıcı, kedi, bisiklet, öğe; arabalar yolda akar, sayılmaz)
+const COVER_LISTS = {
+  people: (q) => ({ ...q, type: 'person' }), stallVendors: (q) => ({ ...q, type: 'person' }),
+  cats: (c) => ({ type: 'cat', y: ROWS[1], ...c }), bikes: (b) => ({ type: 'bike', y: ROWS[0], ...b }),
+  vendors: (v) => ({ y: ROWS[0] + 4, ...v, goods: v.type, type: 'vendor' }), items: (it) => it,
+}
+export function coverBoxes(s) {
+  return Object.entries(COVER_LISTS).flatMap(([k, f]) => (s[k] ?? []).map((x) => itemBox(f(x))))
+}
+const straddles = (b, x) => b.x < x - 1 && b.x + b.w > x + 1
+// Kapakta çizilecek model: kırpımın yan kenarında bölünecek kişi ve öğeler kapağa çizilmez (yürüyüşte yerinde durur)
+export function coverModel(s, view) {
+  const x1 = view.vx + view.vw
+  const out = { ...s }
+  for (const [k, f] of Object.entries(COVER_LISTS)) {
+    if (s[k]) out[k] = s[k].filter((x) => { const b = itemBox(f(x)); return !straddles(b, view.vx) && !straddles(b, x1) })
+  }
+  return out
+}
+// Görev ekranı kapak kırpımı (01/02). ratio: kutunun genişlik/yükseklik oranı (390 ve 320 aynı mantık, yalnız oran farklı).
+// Yan kenarlar blok sınırında (tabela ya tam ya hiç), en az bir hedef tam içeride; genişlik eski kırpımın (380 birim
+// yükseklik) genişliğine en yakın, eşitlikte kenarda az kişi bölen. Kenarda kalan kişi ve öğeler coverModel ile kapağa
+// çizilmez (kalabalıkta her bina sınırında biri durur). Dikeyde tabela sırasının üstünden başlar; uzun kutuda alt kenar
+// yakın şeridin altına (792) oturur.
+export const COVER = { vh: 380, top: 416, bottom: 792, edge: 40 }
+export function coverView(s, taskId, ratio) {
+  const want = COVER.vh * ratio
+  const blocks = coverBlocks(s)
+  const boxes = coverBoxes(s)
+  const xs = targetXs(s, taskId)
+  const cuts = (x) => boxes.filter((b) => straddles(b, x)).length
+  let best = null
+  for (let i = 0; i < blocks.length; i++) {
+    const x0 = blocks[i].x
+    if (x0 < 0) continue
+    for (let j = i; j < blocks.length; j++) {
+      const x1 = blocks[j].x + blocks[j].w
+      const vw = x1 - x0
+      if (x1 > s.L || vw > want * 1.8) break
+      if (vw < want * 0.6) continue
+      // hedef kenarda bölünüp kapaktan düşüyorsa sayılmaz
+      const hits = targetXs(coverModel(s, { vx: x0, vw }), taskId).filter((x) => x > x0 + COVER.edge && x < x1 - COVER.edge).length
+      // dar kırpım alçalır (tabela ile yakın şerit birlikte sığmaz): darlık genişlikten üç kat pahalı
+      const off = Math.log(vw / want)
+      const score = (hits ? 0 : 5000) + (off < 0 ? -off * 900 : off * 300) + (cuts(x0) + cuts(x1)) * 12 - Math.min(hits, 3) * 4
+      if (!best || score < best.score) best = { score, x0, vw }
+    }
+  }
+  const vw = best ? best.vw : want
+  const vx = best ? best.x0 : (xs[Math.floor(xs.length / 2)] ?? s.L / 3) - want / 2
+  const vh = vw / ratio
+  const vy = vh >= COVER.bottom - COVER.top ? COVER.bottom - vh : COVER.top
+  return { vx, vy, vw, vh }
+}
+
+// 04 sayı sorusunun donmuş karesi: yürüyüşün sonu, sayılan hedefler ve soru konuları (id taşıyan kişi/öğe, satıcı)
+// çıkarılmış; öbür kişi ve arabalar yerinde. Hedef süzgeci countAll'ın kendisi: tek başına sayıma giren öğe çıkar.
+export function countModel(s, taskId) {
+  const none = { people: [], items: [], cars: [], cats: [], bikes: [], buildings: [], stallVendors: [] }
+  const hits = (key, e) => (countAll({ ...none, [key]: [e] })[taskId] ?? 0) > 0
+  const keep = (key, extra = () => true) => (s[key] ?? []).filter((e) => extra(e) && !hits(key, e))
+  return {
+    ...s,
+    people: keep('people', (p) => !p.id),
+    items: keep('items', (i) => !i.id),
+    cars: keep('cars'),
+    cats: keep('cats'),
+    bikes: keep('bikes'),
+    vendors: [],
+    buildings: (s.buildings ?? []).map((b) => (hits('buildings', b) ? { ...b, lit: false } : b)),
+    stallVendors: (s.stallVendors ?? []).map((v) => (hits('stallVendors', v) ? { ...v, hat: null } : v)),
+  }
+}
+// Donmuş karenin kırpımı (ratio: panelin genişlik/yükseklik oranı): sokak seviyesi. Alt kenar yolun bittiği yer,
+// tabela sırasından yolun sonuna (üst kat cephesi yok; genişlik en az 220 birim) ve tabela sırası hep içeride; yatayda caddenin sonu
+// (yürüyüşün son karesi). Yarım tabela ve kenarda bölünen kişi renderScene wholeSigns ve coverModel ile çizilmez.
+export const COUNT_VIEW = { bottom: 796, top: 418, minW: 220 }
+// model verilirse (countModel): caddenin son üç ekranı içinde en çok kişinin tam göründüğü yer (eşitlikte sona en
+// yakın); boş kaldırım ve yarım araba kalmasın diye kenarda bölünen araba countPanel'de çizilmez.
+export function countView(s, ratio, model = null) {
+  const vw = Math.max(COUNT_VIEW.minW, (COUNT_VIEW.bottom - COUNT_VIEW.top) * ratio)
+  const vh = vw / ratio
+  let vx = s.L - vw
+  if (model) {
+    const boxes = coverBoxes(model)
+    const score = (x0) => {
+      const x1 = x0 + vw
+      const inside = (model.people ?? []).filter((p) => { const b = itemBox({ ...p, type: 'person' }); return b.x >= x0 && b.x + b.w <= x1 }).length
+      const cut = boxes.filter((b) => straddles(b, x0) || straddles(b, x1)).length
+      return inside * 10 - cut * 3
+    }
+    let best = -Infinity
+    for (let x0 = s.L - vw; x0 >= Math.max(0, s.L - 3 * vw); x0 -= 16) {
+      const sc = score(x0)
+      if (sc > best) { best = sc; vx = x0 }
+    }
+  }
+  return { vx, vy: COUNT_VIEW.bottom - vh, vw, vh }
+}
+// 04 panelinin modeli: hedefsiz (countModel), kenarda bölünen kişi/öğe (coverModel) ve araba çizilmez
+export function countPanel(s, taskId, view) {
+  const m = coverModel(countModel(s, taskId), view)
+  const x1 = view.vx + view.vw
+  return { ...m, cars: (m.cars ?? []).filter((k) => !straddles({ x: k.x - 92, w: 184 }, view.vx) && !straddles({ x: k.x - 92, w: 184 }, x1)) }
+}
+
+// Sayılan hedeflerin yatay konumları (görev ekranının kapak kırpımı en az birini içersin)
+export function targetXs(s, id) {
+  const ppl = s.people ?? []
+  const items = (t, pred = () => true) => (s.items ?? []).filter((i) => i.type === t && pred(i)).map((i) => i.x)
+  const cars = (pred) => (s.cars ?? []).filter(pred).map((c) => c.x)
+  const who = (pred) => ppl.filter(pred).map((p) => p.x)
+  const X = {
+    blueCar: () => cars((c) => c.color === 'mavi' && !c.taxi), taxi: () => cars((c) => c.taxi), redCar: () => cars((c) => c.color === 'kirmizi' && !c.taxi),
+    bike: () => [...(s.bikes ?? []).map((b) => b.x), ...items('bike'), ...items('rider')], cat: () => (s.cats ?? []).map((c) => c.x), dog: () => [...items('dog'), ...who((p) => p.dog)],
+    hat: () => who((p) => p.hat), glasses: () => who((p) => p.glasses), redUmbrella: () => who((p) => p.umbrella === 'kirmizi'), yellowCoat: () => who((p) => p.coat === 'sari'),
+    balloon: () => who((p) => p.balloon || p.child === 'balon'), kite: () => who((p) => p.kite), runner: () => who((p) => p.run),
+    litShop: () => (s.buildings ?? []).filter((b) => b.lit).map((b) => b.x + b.w / 2), hatVendor: () => (s.stallVendors ?? []).filter((v) => v.hat).map((v) => v.x),
+    watermelon: () => items('watermelon'), redCrate: () => items('crate', (i) => i.color === 'kirmizi'), basket: () => items('basket'), flowerBucket: () => items('bucket'),
+    ball: () => items('ball'), stroller: () => [...items('stroller'), ...who((p) => p.stroller)], pigeon: () => items('pigeon'),
+  }
+  return (X[id]?.() ?? []).filter(Number.isFinite).sort((a, b) => a - b)
 }
 
 // Sahnedeki sayılar (görev sorusunun doğru cevabı; çizimle aynı modelden)
@@ -288,7 +427,7 @@ export function countAll(s) {
     taxi: cars.filter((c) => c.taxi).length,
     redCar: cars.filter((c) => c.color === 'kirmizi' && !c.taxi).length,
     cat: (s.cats ?? []).length,
-    bike: (s.bikes ?? []).length + typed('bike'),
+    bike: (s.bikes ?? []).length + typed('bike') + typed('rider'),
     dog: typed('dog') + ppl.filter((p) => p.dog).length,
     hat: ppl.filter((p) => p.hat).length,
     glasses: ppl.filter((p) => p.glasses).length,
@@ -304,7 +443,7 @@ export function countAll(s) {
     kite: ppl.filter((p) => p.kite).length,
     runner: ppl.filter((p) => p.run).length,
     ball: typed('ball'),
-    stroller: typed('stroller'),
+    stroller: typed('stroller') + ppl.filter((p) => p.stroller).length,
     pigeon: typed('pigeon'),
   }
 }
