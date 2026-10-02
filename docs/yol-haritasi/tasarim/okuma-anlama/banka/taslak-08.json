@@ -12,7 +12,7 @@
       "yazar": "Mehr ve ark.",
       "dergi": "Current Biology",
       "yil": 2018,
-      "metin": "İnsanlar pek çok iş için şarkı söyler: dans etmek, bebeği yatıştırmak ya da sevgilerini anlatmak için. Peki hiç tanımadığımız bir topluluğun şarkısını duyunca, şarkının ne işe yaradığını anlayabilir miyiz? Bir ekip bunu internette sınadı. 60 ülkeden 750 kişi, çoğu küçük topluluklarda kaydedilmiş şarkılardan kısa parçalar dinledi. Parçalar arasında dans şarkıları, ninniler ve aşk şarkıları vardı; her biri yalnız 14 saniye sürüyordu. Dinleyiciler her şarkının ne için söylendiğini puanladı. Bu toplulukları hiç tanımadıkları hâlde tahminleri doğru çıktı. İkinci bir deneyde başka dinleyiciler, şarkıcının kadın mı erkek mi olduğu gibi ipuçlarını ve ezginin karmaşıklığı gibi müzik özelliklerini puanladı. Sonuçlar, bir şarkının kulağa nasıl geldiğiyle ne işe yaradığı arasında, dünyanın her yerinde geçerli bir bağ olabileceğini düşündürüyor.",
+      "metin": "İnsanlar pek çok iş için şarkı söyler: dans etmek, bebeği yatıştırmak ya da sevgilerini anlatmak için. Peki hiç tanımadığımız bir topluluğun şarkısını duyunca ne işe yaradığını anlayabilir miyiz? Bir ekip bunu internet üzerinden araştırdı. 60 ülkeden 750 kişi, çoğu küçük topluluklarda kaydedilmiş şarkılardan kısa parçalar dinledi. Parçalar arasında dans şarkıları, ninniler ve aşk şarkıları vardı; her biri yalnız 14 saniye sürüyordu. Dinleyiciler her şarkının ne için söylendiğini puanladı. Bu toplulukları hiç tanımadıkları hâlde tahminleri doğru çıktı. İkinci bir deneyde başka dinleyiciler, şarkıcının kadın mı erkek mi olduğu gibi ipuçlarını ve ezginin karmaşıklığı gibi müzik özelliklerini puanladı. Sonuçlar, bir şarkının kulağa nasıl geldiğiyle ne işe yaradığı arasında, dünyanın her yerinde geçerli bir bağ olabileceğini düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -86,7 +86,7 @@
       "yazar": "Lafer-Sousa ve ark.",
       "dergi": "Current Biology",
       "yil": 2015,
-      "metin": "İnternette bir elbise fotoğrafı yayılınca insanlar ikiye bölündü: kimi elbiseyi beyaz ve altın rengi, kimi mavi ve siyah gördü. Oysa fotoğraftaki renkler aslında kahverengi ve maviydi. Bu bölünme, internetteki sorunun yalnız iki seçenekle sorulmasından mı doğmuştu? Bir ekip bunu anlamak için 1401 kişiye, seçenek vermeden elbisenin rengini sordu. Fotoğrafı ilk kez görenler dahil çoğu kişi yine beyaz ve altın ya da mavi ve siyah dedi; bazıları ise mavi ve kahverengi gördü. Yaşlılar ve kadınlar arasında beyaz ve altın diyenler daha çoktu. Yeniden sorulunca bazı kişilerin gördüğü renk değişti. Ekibe göre insanlar, fotoğrafın nasıl bir ışıkta çekildiğini farklı tahmin ediyor olabilir. Nitekim fotoğrafa ışığı belli eden ipuçları eklenince elbisenin görünen rengi değişti.",
+      "metin": "İnternette bir elbise fotoğrafı yayılınca insanlar ikiye bölündü: kimi elbiseyi beyaz ve altın rengi, kimi mavi ve siyah gördü. Oysa fotoğraftaki piksellerin rengi aslında kahverengi ve maviydi. Bu bölünme, internetteki sorunun yalnız iki seçenekle sorulmasından mı doğmuştu? Bir ekip bunu anlamak için 1401 kişiye, seçenek vermeden elbisenin rengini sordu. Fotoğrafı ilk kez görenler dahil çoğu kişi yine beyaz ve altın ya da mavi ve siyah dedi; bazıları ise mavi ve kahverengi gördü. Beyaz ve altın demek yaşlılarda ve kadınlarda, gençlere ve erkeklere göre daha yaygındı. Yeniden sorulunca bazı kişilerin gördüğü renk değişti. Ekibe göre insanlar, fotoğrafın nasıl bir ışıkta çekildiğini farklı tahmin ediyor olabilir. Nitekim fotoğrafa ışığı belli eden ipuçları eklenince elbisenin görünen rengi değişti.",
       "sorular": [
         {
           "tur": "ana",
@@ -100,11 +100,11 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Fotoğraftaki renkler aslında neydi?",
+          "soru": "Fotoğraftaki piksellerin rengi aslında neydi?",
           "secenekler": [
             "Kahverengi ve mavi",
             "Beyaz ve altın",
-            "Mavi ve siyah",
+            "Siyah ve altın",
             "Kırmızı ve koyu yeşil"
           ]
         },
@@ -120,17 +120,17 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bazı kişiler elbiseyi hangi renklerde gördü?",
+          "soru": "Kişilere renk yeniden sorulunca ne oldu?",
           "secenekler": [
-            "Mavi ve kahverengi",
-            "Yeşil ve sarı",
-            "Mor ve açık turuncu",
-            "Pembe ve gri"
+            "Bazı kişilerin gördüğü renk değişti",
+            "Herkes ilk söylediği rengi yineledi",
+            "Çoğu kişi bu kez mavi ve siyah dedi",
+            "Kimse yanıt vermek istemedi"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Beyaz ve altın diyenler kimler arasında daha çoktu?",
+          "soru": "Beyaz ve altın demek kimlerde daha yaygındı?",
           "secenekler": [
             "Yaşlılar ve kadınlar",
             "Gençler ve erkekler",
@@ -194,7 +194,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Deneyde dokunuş hareketten sonra ne zaman geliyordu?",
+          "soru": "Deneyde dokunuş, harekete göre ne zaman geliyordu?",
           "secenekler": [
             "Hep belli bir gecikmeyle",
             "Her seferinde rastgele bir anda",
@@ -251,9 +251,9 @@
           "soru": "Eşek hıyarı tohumlarını nasıl atar?",
           "secenekler": [
             "Yüksek basınçlı bir sıvıyla fışkırtarak",
-            "Kabuğunu yavaşça açıp dökerek",
-            "Rüzgâra bırakarak",
-            "Hayvanların tüylerine yapıştırıp uzağa taşıtarak"
+            "Biriken havayı birden fışkırtarak",
+            "Sapını bir yay gibi gerip birden bırakarak",
+            "Yapışkan bir özsuyla yavaşça akıtarak"
           ]
         },
         {
@@ -308,7 +308,7 @@
       "yazar": "Toyota ve ark.",
       "dergi": "Science",
       "yil": 2018,
-      "metin": "Bir hayvanın vücudunun bir yerinde olan bir olayın haberi, uzaktaki bölgelere de hızla ulaşmalıdır. Omurgalıların sinir sisteminde bu haberleri taşıyan maddelerden biri glutamattır. Glutamat bir amino asittir ve sinir hücreleri arasında sinyal taşır. Bitkilerin de benzer bir ihtiyacı vardır. Örneğin otçul bir hayvan bir yaprağı yemeye başlayınca, bitki bunu fark eder ve haberi her yanına yayar. Böylece zarar görmemiş bölgelerde de savunma hızla başlar. Bir ekip, glutamatın bitkilerde de yaralanma haberini taşıyan bir sinyal olduğunu gösterdi. Bu sinyali hücrelerdeki bazı iyon kanalları algılıyor. Kanallar sinyali alınca, hücrenin içindeki kalsiyum miktarı artıyor. Bu kalsiyum artışı bitkinin uzaktaki bölümlerine yayılıyor ve orada savunma tepkilerini başlatıyor.",
+      "metin": "Hayvanlarda, vücudun bir yerinde olan bir olayın haberi uzak bölgelere de hızla ulaşmalıdır. Omurgalıların sinir sisteminde bu haberleri taşıyan maddelerden biri glutamattır. Glutamat bir amino asittir ve sinir hücreleri arasında sinyal taşır. Bitkilerin de benzer bir ihtiyacı vardır. Örneğin otçul bir hayvan bir yaprağı yemeye başlayınca, bitki bunu fark eder ve haberi her yanına yayar. Böylece zarar görmemiş bölgelerde de savunma hızla başlar. Bir ekip, glutamatın bitkilerde de yaralanma haberini taşıyan bir sinyal olduğunu gösterdi. Bu sinyali hücrelerdeki bazı iyon kanalları algılıyor. Kanallar sinyali alınca, hücrenin içindeki kalsiyum miktarı artıyor. Bu kalsiyum artışı bitkinin uzaktaki bölümlerine yayılıyor ve orada savunma tepkilerini başlatıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -325,9 +325,9 @@
           "soru": "Omurgalıların sinir sisteminde glutamat ne işe yarar?",
           "secenekler": [
             "Sinir hücreleri arasında sinyal taşır",
-            "Kemiklerin büyümesini ve güçlenmesini sağlar",
-            "Kanın pıhtılaşmasını sağlar",
-            "Vücudun sıcaklığını korur"
+            "Sinirlerin çevresini bir kılıf gibi sarar",
+            "Kopan sinir hücrelerini onarır",
+            "Sinir hücrelerinin büyümesini sağlar"
           ]
         },
         {
@@ -510,11 +510,11 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Eski rotifer laboratuvarda nasıl çoğaldı?",
+          "soru": "Eski rotifer laboratuvarda nasıl yeni bireyler üretti?",
           "secenekler": [
-            "Eş olmadan",
+            "Eşle çiftleşmeden çoğalarak",
             "Yalnız soğukta yumurtlayarak",
-            "Bir eşle çiftleşerek",
+            "Başka bir türle çiftleşerek",
             "Başka hayvanların içinde yaşayarak"
           ]
         }
@@ -530,7 +530,7 @@
       "yazar": "Lauga ve ark.",
       "dergi": "Biophysical Journal",
       "yil": 2005,
-      "metin": "E. coli, en çok incelenen bakterilerden biridir ve sıvının içinde yüzerek ilerler. Bu bakteri katı bir yüzeyin yakınında yüzerken ilginç bir şey yapar: saat yönünde daireler çizer. Peki bunun nedeni ne olabilir? Bir ekip, bu davranışı açıklamak için sıvının hareketine dayanan bir model kurdu. Bakteri kendi gücüyle yüzer; onu dışarıdan iten ya da döndüren ayrı bir kuvvet yoktur. Modele göre ise bakteri ile yüzey, aradaki sıvı aracılığıyla birbirini etkiler; daireler de bu etkinin doğal sonucudur. Aynı etki, bakterileri yüzeye yakın tutar; sanki onları orada hapseder. Ekip, modelin sonuçlarını deneylerde ölçülen verilerle karşılaştırdı ve ikisinin oldukça iyi uyuştuğunu gördü. Ayrıca gövdesi daha uzun olan bakterilerin daha geniş daireler çizdiği görüldü.",
+      "metin": "E. coli, en çok incelenen bakterilerden biridir ve sıvının içinde yüzerek ilerler. Bu bakteri katı bir yüzeyin yakınında yüzerken ilginç bir şey yapar: saat yönünde daireler çizer. Peki bunun nedeni ne olabilir? Bir ekip, bu davranışı açıklamak için sıvının hareketine dayanan bir model kurdu. Modelde bakteri kendi gücüyle yüzer; onu dışarıdan iten ya da döndüren ayrı bir kuvvet yoktur. Yine de bakteri ile yüzey, aradaki sıvı aracılığıyla birbirini etkiler; daireler de bu etkinin doğal sonucudur. Aynı etki, bakterileri yüzeye yakın tutar; sanki onları orada hapseder. Ekip, modelin sonuçlarını deneylerde ölçülen verilerle karşılaştırdı ve ikisinin oldukça iyi uyuştuğunu gördü. Ayrıca gövdesi daha uzun olan bakterilerin daha geniş daireler çizdiği görüldü.",
       "sorular": [
         {
           "tur": "ana",
@@ -662,8 +662,8 @@
           "secenekler": [
             "Saniyeler içinde",
             "Birkaç gün içinde",
-            "Yalnız mevsim değişince",
-            "Hiç değişmiyor"
+            "Birkaç hafta içinde",
+            "Birkaç ay içinde"
           ]
         }
       ]

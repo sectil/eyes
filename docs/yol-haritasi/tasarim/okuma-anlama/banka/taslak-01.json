@@ -86,13 +86,13 @@
       "yazar": "Saito ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2019,
-      "metin": "Köpeklerin insanla nasıl anlaştığı uzun zamandır araştırılıyor, ama kediler bu konuda daha az incelendi. Japonya'daki araştırmacılar, kedilerin kendi adlarını başka sözcüklerden ayırıp ayıramadığını sınadı. Kedilere önce art arda dört sözcük dinletildi. Bunlar sıradan sözcükler ya da aynı evdeki öteki kedilerin adlarıydı. Kediler her yeni sözcüğe biraz daha az tepki verdi; yani bu seslere alıştılar. Sonra her kedinin kendi adı söylendi. Evde yaşayan kediler o anda yeniden belirgin bir tepki gösterdi. Adı bir yabancı söylediğinde de sonuç değişmedi. Kedi kafelerinde yaşayan kediler de adlarını sıradan sözcüklerden ayırdı. Ama kendi adlarını, aynı kafedeki öteki kedilerin adlarından ayıramadılar. Demek ki kediler, kim söylerse söylesin, kendi adlarını başka sözcüklerden ayırt edebiliyor.",
+      "metin": "Köpeklerin insanla nasıl anlaştığı uzun zamandır araştırılıyor, ama kediler bu konuda daha az incelendi. Japonya'daki araştırmacılar, kedilerin kendi adlarını başka sözcüklerden ayırıp ayıramadığını sınadı. Kedilere önce art arda dört sözcük dinletildi. Bunlar sıradan sözcükler ya da aynı evdeki öteki kedilerin adlarıydı. Kediler her yeni sözcüğe biraz daha az tepki verdi; yani bu seslere alıştılar. Sonra her kedinin kendi adı söylendi. Evde yaşayan kediler o anda yeniden belirgin bir tepki gösterdi. Adı bir yabancı söylediğinde de sonuç değişmedi. Kedi kafelerinde yaşayan kediler de adlarını sıradan sözcüklerden ayırdı. Ama kendi adlarını, aynı kafedeki öteki kedilerin adlarından ayıramadılar. Demek ki kediler, kim söylerse söylesin, kendi adlarını sıradan sözcüklerden ayırt edebiliyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Kedilerin kendi adlarını başka sözcüklerden ayırt edebildiğini",
+            "Kedilerin kendi adlarını duyunca tanıyabildiğini",
             "Kedilerin sözcükleri öğrenmede köpeklerden çok daha akıllı olduğunu",
             "Kedilerin yalnız sahiplerinin sesini duyduğunu",
             "Kedi kafelerinin nasıl kurulduğunu"
@@ -217,9 +217,9 @@
           "soru": "Yavrularla bebeklerin ortak özelliklerinden biri hangisidir?",
           "secenekler": [
             "Heceleri tekrarlamak",
-            "Yalnız uyurken ses çıkarmak",
-            "Annesinin sesini hiç taklit etmemek",
-            "Yalnız yemek isterken ses çıkarmak"
+            "Her heceyi yalnız bir kez söylemek",
+            "Sesleri hiçbir ritim olmadan çıkarmak",
+            "Bu sesleri ancak yetişkin olunca çıkarmak"
           ]
         }
       ]
@@ -234,7 +234,7 @@
       "yazar": "Schnell ve ark.",
       "dergi": "Proceedings of the Royal Society B",
       "yil": 2021,
-      "metin": "Bir ödülü hemen almak yerine daha iyisi için beklemek kolay değildir. Bu beceriye kendini tutma denir. Bu beceri bugüne kadar çoğunlukla omurgalı hayvanlarda incelenmişti. Bu kez sıra, omurgası olmayan bir deniz canlısına, mürekkep balığına geldi. Araştırmacılar mürekkep balıklarına iki seçenek sundu. Biri hemen alınabilen sıradan bir yiyecekti. Öteki, biraz beklenirse gelecek daha iyi bir yiyecekti. Mürekkep balıkları daha iyi yiyecek için 50 ile 130 saniye arasında sabırla bekleyebildi. Ekip ayrıca onlara, iki işaretten hangisinin ödül getirdiğini öğretti; sonra kuralı tersine çevirdi. Daha uzun bekleyebilen mürekkep balıkları, değişen kuralı da daha iyi öğrendi. Demek ki bu canlının sabrı, zekâsıyla bilinen bazı omurgalılarınkiyle boy ölçüşebiliyor.",
+      "metin": "Bir ödülü hemen almak yerine daha iyisi için beklemek kolay değildir. Bu beceriye kendini tutma denir. Bu beceri bugüne kadar çoğunlukla omurgalı hayvanlarda incelenmişti. Bu kez sıra, omurgası olmayan bir deniz canlısına, mürekkep balığına geldi. Araştırmacılar mürekkep balıklarına iki seçenek sundu. Biri hemen alınabilen sıradan bir yiyecekti. Öteki, biraz beklenirse gelecek daha iyi bir yiyecekti. Mürekkep balıkları daha iyi yiyecek için 50 ile 130 saniye arasında sabırla bekleyebildi. Ekip ayrıca onlara, iki işaretten hangisinin ödül getirdiğini öğretti; sonra kuralı tersine çevirdi. Daha uzun bekleyebilen mürekkep balıkları, değişen kuralı da daha iyi öğrendi. Araştırmacılara göre bu sabır, zekâsıyla bilinen bazı omurgalıların sabrına yakın.",
       "sorular": [
         {
           "tur": "ana",
@@ -271,9 +271,9 @@
           "soru": "Metne göre mürekkep balığı nasıl bir canlıdır?",
           "secenekler": [
             "Omurgası olmayan bir deniz canlısı",
-            "Bir memeli",
-            "Bir kuş",
-            "Göllerde ve nehirlerde yaşayan bir tatlı su balığı"
+            "Omurgalı bir deniz balığı",
+            "Omurgalı bir tatlı su balığı",
+            "Hem karada hem suda yaşayan bir omurgalı"
           ]
         },
         {
@@ -345,7 +345,7 @@
           "soru": "Ekip atların başka neyini ölçtü?",
           "secenekler": [
             "Kalp atışını",
-            "Vücut ısısını",
+            "Vücut sıcaklığını",
             "Koşu hızını",
             "Kilosunu"
           ]
@@ -382,7 +382,7 @@
       "yazar": "Laumer ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2024,
-      "metin": "Sumatra adasında yaşayan bir erkek orangutanın yüzünde bir yara açıldı. Araştırmacılar onu izlemeyi sürdürdü ve kısa süre sonra şaşırtıcı bir şey gördü. Yaralanmasından üç gün sonra orangutan, ormandaki bir sarmaşığın yapraklarını seçerek kopardı. Yaprakları çiğnedi ve çıkan suyu defalarca yarasına sürdü. Son olarak yaranın üzerini çiğnenmiş yapraklarla tamamen kapattı, tıpkı bir sargı gibi. Bu sarmaşık, Güneydoğu Asya'nın tropik ormanlarında yetişiyor. Bazı hayvanların belli yaprakları yuttuğu ya da tüylerine sürdüğü daha önce de görülmüştü. Ama yabani bir hayvanın kendi yarasını bir bitkiyle böyle özenle tedavi ettiği ilk kez bu kadar ayrıntılı kaydedildi. Araştırmacılar bu davranışın, orangutanın kendi bulduğu yeni bir alışkanlık olabileceğini düşünüyor.",
+      "metin": "Sumatra adasında yaşayan bir erkek orangutanın yüzünde bir yara açıldı. Araştırmacılar onu izlemeyi sürdürdü ve kısa süre sonra şaşırtıcı bir şey gördü. Yaralanmasından üç gün sonra orangutan, ormandaki bir sarmaşığın yapraklarını seçerek kopardı. Yaprakları çiğnedi ve çıkan suyu defalarca yarasına sürdü. Son olarak yaranın üzerini çiğnenmiş yapraklarla tamamen kapattı, tıpkı bir sargı gibi. Güneydoğu Asya'nın tropik ormanlarında yetişen bu sarmaşık, ağrı kesici ve ateş düşürücü etkileriyle biliniyor. Bazı hayvanların belli yaprakları yuttuğu ya da tüylerine sürdüğü daha önce de görülmüştü. Ama yabani bir hayvanın kendi yarasını bir bitkiyle böyle özenle tedavi ettiği ilk kez bu kadar ayrıntılı kaydedildi. Araştırmacılar bu davranışın, orangutanın kendi bulduğu yeni bir alışkanlık olabileceğini düşünüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -409,19 +409,19 @@
           "soru": "Orangutan yapraklarla ne yaptı?",
           "secenekler": [
             "Çiğneyip suyunu yarasına sürdü",
-            "Yuvasına serdi",
-            "Yavrularına verdi",
-            "Suya attı"
+            "Kurutup toz hâlinde yarasına serpti",
+            "Suda ıslatıp yarasına bastırdı",
+            "Yutup ardından yarasını yaladı"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Orangutan en son ne yaptı?",
+          "soru": "Orangutanın kullandığı sarmaşık neyle biliniyor?",
           "secenekler": [
-            "Yaranın üzerini çiğnenmiş yapraklarla kapattı",
-            "Yarayı dereden aldığı temiz suyla uzun uzun yıkadı",
-            "Yaprakları toprağa gömdü",
-            "Başka bir ağaca geçti"
+            "Ağrı kesici ve ateş düşürücü etkileriyle",
+            "Zehirli ve acı meyveleriyle",
+            "Çok hızlı büyüyüp ağaçları sarmasıyla",
+            "Güzel kokulu, iri çiçekleriyle"
           ]
         },
         {
@@ -604,7 +604,7 @@
       "yazar": "Newport ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2016,
-      "metin": "Okçu balıkları, suyun üstündeki böcekleri ağızlarından fışkırttıkları suyla vurup düşürerek avlanır. Bu iş keskin bir göz ister. Avustralya'daki araştırmacılar, bu balıkların insan yüzlerini ayırt etmeyi öğrenip öğrenemeyeceğini sınadı. Balıklar doğada insan yüzüyle neredeyse hiç karşılaşmaz, yani böyle bir beceriye ihtiyaçları yoktur. Ekip balıklara her seferinde iki yüz resmi gösterdi ve hangisini seçmeleri gerektiğini öğretti. İlk deneyde balıklar 44 farklı yüzü birbirinden ayırmayı başardı. İkinci deneyde araştırmacılar yüzlerin rengini, baş biçimini ve parlaklığını birbirine eşitledi. Balıklar bu kez de 18 yüz arasından büyük ölçüde doğru seçim yaptı. Demek ki insan yüzü için özel bir yeteneği olmayan bir canlı bile yüzleri ayırt etmeyi öğrenebiliyor.",
+      "metin": "Okçu balıkları, suyun üstündeki böcekleri ağızlarından fışkırttıkları suyla vurup düşürerek avlanır. Bu iş keskin bir göz ister. Avustralya'daki araştırmacılar, bu balıkların insan yüzlerini ayırt etmeyi öğrenip öğrenemeyeceğini sınadı. Balıklar doğada insan yüzüyle neredeyse hiç karşılaşmaz, yani böyle bir beceriye ihtiyaçları yoktur. Ekip balıklara her seferinde iki ayrı yüzün resmini gösterdi ve hangisini seçmeleri gerektiğini öğretti. İlk deneyde balıklar 44 farklı yüzü birbirinden ayırmayı başardı. İkinci deneyde araştırmacılar yüzlerin rengini, baş biçimini ve parlaklığını birbirine eşitledi. Balıklar bu kez de 18 yüz arasından büyük ölçüde doğru seçim yaptı. Demek ki insan yüzü için özel bir yeteneği olmayan bir canlı bile yüzleri ayırt etmeyi öğrenebiliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -678,7 +678,7 @@
       "yazar": "King ve ark.",
       "dergi": "Proceedings of the Royal Society B",
       "yil": 2013,
-      "metin": "Şişe burunlu yunusların her birinin kendine özgü bir ıslığı vardır; bu ıslık onun imzası gibidir. Bilim insanları, yunusların bazen başka bir yunusun ıslığını kopyaladığını fark etti. Peki bunu neden yapıyorlar? Bir araştırma ekibi, bu kopyaların ne zaman ve kimler arasında duyulduğunu inceledi. Kopyalar neredeyse yalnız birbirine yakın yunuslar arasında duyuldu: anne ile yavrusu ya da birlikte dolaşan erkekler gibi. Üstelik kopyalar çoğunlukla bu yunuslar birbirinden ayrı düştüğünde ortaya çıktı. Kopyalamanın ardından hiç kavga görülmedi. Kopyalayan yunus, ıslığın bazı özelliklerini hep biraz değiştiriyordu. Böylece kopya, asıl ıslıktan ayırt edilebiliyordu. Araştırmacılar bu davranışı insan diline benzetiyor: İkisinde de amaç, yakınlarla kurulan bağı korumak gibi görünüyor.",
+      "metin": "Şişe burunlu yunusların her birinin kendine özgü bir ıslığı vardır; bu ıslık onun imzası gibidir. Bilim insanları, yunusların bazen başka bir yunusun ıslığını kopyaladığını fark etti. Peki bunu neden yapıyorlar? Bir araştırma ekibi, bu kopyaların ne zaman ve kimler arasında duyulduğunu inceledi. Kopyalar neredeyse yalnız birbirine yakın yunuslar arasında duyuldu: anne ile yavrusu ya da birlikte dolaşan erkekler gibi. Üstelik kopyalar çoğunlukla bu yunuslar birbirinden ayrı düştüğünde ortaya çıktı. Kopyalamanın ardından hiç kavga görülmedi. Kopyalayan yunus, ıslığın bazı özelliklerini hep biraz değiştiriyordu. Böylece kopya, asıl ıslıktan ayırt edilebiliyordu. Araştırmacılar bu davranışı, insanların konuşurken birbirinin sözlerini yinelemesine benzetiyor: İkisinde de amaç, yakınlarla kurulan bağı korumak gibi görünüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -695,9 +695,9 @@
           "soru": "Kopyalar en çok kimler arasında duyuldu?",
           "secenekler": [
             "Anne ile yavrusu gibi yakın yunuslar arasında",
-            "Daha önce hiç karşılaşmamış, birbirine yabancı yunuslar arasında",
-            "Rakip gruplar arasında",
-            "Yunuslarla balinalar arasında"
+            "Aynı sürüdeki bütün yunuslar arasında",
+            "Yeni karşılaşan genç yunuslar arasında",
+            "Yiyecek için yarışan yunuslar arasında"
           ]
         },
         {
@@ -734,10 +734,10 @@
           "tur": "ayrinti",
           "soru": "Araştırmacılar bu davranışı neye benzetiyor?",
           "secenekler": [
-            "İnsan diline",
-            "Kuşların kavga ötüşüne",
-            "Bir oyuna",
-            "Bir uyarı sesine"
+            "İnsanların birbirinin sözlerini yinelemesine",
+            "Kuşların kavgada birbirinin ötüşünü yinelemesine",
+            "Papağanların insan sesini taklit etmesine",
+            "Maymunların birbirini uyarmak için bağırmasına"
           ]
         }
       ]

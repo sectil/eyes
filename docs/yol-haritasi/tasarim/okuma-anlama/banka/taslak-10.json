@@ -29,9 +29,9 @@
           "soru": "Darwin kıvrılmış sülükleri neye benzetmişti?",
           "secenekler": [
             "Yumuşak yaylara",
-            "Sert çubuklara",
-            "Kalın halatlara",
-            "Kuş yuvalarına"
+            "Sert yaylara",
+            "Kıvrık kancalara",
+            "Burgulu vidalara"
           ]
         },
         {
@@ -120,22 +120,22 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "İncelenen güve hangi sesleri duyabiliyor?",
+          "soru": "İncelenen güvenin duyabildiği en tiz ses neye yaklaşıyor?",
           "secenekler": [
-            "300 kilohertze yaklaşan sesleri",
-            "Yalnız 20 kilohertzin altındaki sesleri",
-            "Yalnız insan konuşmasını",
-            "Yalnız kendi kanat sesini"
+            "300 kilohertze",
+            "100 kilohertze",
+            "200 kilohertze",
+            "500 kilohertze"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu güvenin işitmesini öteki hayvanlarınkinden ayıran ne?",
+          "soru": "Güveler yaklaşan yarasayı neyle duymaya çalışır?",
           "secenekler": [
-            "En tiz sesleri duyabilmesi",
-            "Yalnız çok pes sesleri duyabilmesi",
-            "Kulaklarının bedeninden büyük olması",
-            "Yarasa seslerini taklit edebilmesi"
+            "Çok küçük kulaklarıyla",
+            "Uzun duyargalarıyla",
+            "Kanatlarındaki ince pullarla",
+            "Bacaklarındaki tüylerle"
           ]
         },
         {
@@ -178,8 +178,8 @@
           "secenekler": [
             "Çok düşük miktarda bile",
             "Yalnız çok yüksek miktarda",
-            "Yalnız ısıtılınca",
-            "Yalnız ıslanınca"
+            "Ancak orta ya da yüksek miktarda",
+            "Yalnız havada yoğun bir miktar birikince"
           ]
         },
         {
@@ -217,9 +217,9 @@
           "soru": "Bir kollembol türünün duyargaları neye tepki verdi?",
           "secenekler": [
             "Geosmine ve 2-MIB'e",
-            "Yalnız ışığa",
-            "Yalnız sıcaklığa",
-            "Yalnız titreşime"
+            "Yalnız geosmine",
+            "Yalnız 2-MIB'e",
+            "2-MIB'e ve toprağın nemine"
           ]
         }
       ]
@@ -281,9 +281,9 @@
           "soru": "Bebeklerin doğmadan önce duydukları dilin neyi etkilediği biliniyordu?",
           "secenekler": [
             "Sesleri nasıl algıladıklarını",
-            "Ne kadar uyuyacaklarını",
-            "Hangi yiyecekleri seveceklerini",
-            "Ne zaman yürüyeceklerini"
+            "Ne kadar sık ağlayacaklarını",
+            "Hangi sözcükleri önce söyleyeceklerini",
+            "Seslerinin ne kadar yüksek çıkacağını"
           ]
         },
         {
@@ -293,7 +293,7 @@
             "Ses şiddetine ve ezgisine",
             "Süresine ve gün içindeki saatine",
             "Gözyaşı miktarına ve yüz rengine",
-            "Hangi odada olduğuna ve kimin yanında olduğuna"
+            "Sıklığına ve ne kadar çabuk dindiğine"
           ]
         }
       ]
@@ -308,7 +308,7 @@
       "yazar": "Gianoli ve Carrasco-Urra",
       "dergi": "Current Biology",
       "yil": 2014,
-      "metin": "Bir canlının başka bir canlıya benzeyerek kazanç sağlamasına taklit denir. Taklit hayvanlarda oldukça yaygındır, ama bitkilerde az sayıda örneği bilinir. Araştırmacılar ılıman bir yağmur ormanında yaşayan odunsu bir sarmaşık türünü inceledi. Bu sarmaşığın yaprakları, sarıldığı ağacın yapraklarına boy, biçim, renk, duruş yönü, sap uzunluğu ya da ucunun dikenli olması bakımından benziyordu. Tek bir sarmaşık farklı ağaçlara uzandığında, yaprakları her ağaçta o ağacın yaprağına benziyordu. Hiçbir şeye tutunmayan sarmaşıkların yaprakları, yapraklı ağaçlara tırmananlarınkinden farklıydı. Ekip, yaprakların ne kadarının yendiğine de baktı. Yaprakları en çok yenenler, yapraksız gövdelere tırmananlardı. En az yenenler ise yapraklı ağaçlara tırmananlardı. Yani sarmaşığı yalnız tırmanmak değil, sarıldığı ağacın yapraklarına benzemek de koruyor.",
+      "metin": "Bir canlının başka bir canlıya benzeyerek kazanç sağlamasına taklit denir. Taklit hayvanlarda oldukça yaygındır, ama bitkilerde az sayıda örneği bilinir. Araştırmacılar ılıman bir yağmur ormanında yaşayan odunsu bir sarmaşık türünü inceledi. Bu sarmaşığın yaprakları, sarıldığı ağacın yapraklarına boy, biçim, renk, duruş yönü, sap uzunluğu ya da ucunun dikenli olması bakımından benziyordu. Tek bir sarmaşık farklı ağaçlara uzandığında, yaprakları her ağaçta o ağacın yaprağına benziyordu. Hiçbir şeye tutunmayan sarmaşıkların yaprakları, yapraklı ağaçlara tırmananlarınkinden farklıydı. Ekip, yaprakların ne kadarının yendiğine de baktı. Yaprakları en çok yenenler, yapraksız gövdelere tırmananlardı. En az yenenler ise yapraklı ağaçlara tırmananlardı. Yani sarmaşığı asıl koruyan şey, sarıldığı ağacın yapraklarına benzemesi.",
       "sorular": [
         {
           "tur": "ana",
@@ -322,12 +322,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Metne göre bitkilerde taklidin ne kadar örneği bilinir?",
+          "soru": "Metne göre bitkilerde bilinen taklit örneklerinin sayısı, hayvanlardakine göre nasıldır?",
           "secenekler": [
-            "Az sayıda",
-            "Çok sayıda",
-            "Yüzlerce",
-            "Binlerce"
+            "Çok daha azdır",
+            "Aşağı yukarı aynıdır",
+            "Biraz daha fazladır",
+            "Çok daha fazladır"
           ]
         },
         {
@@ -354,10 +354,10 @@
           "tur": "ayrinti",
           "soru": "Sarmaşığın yaprakları ağacın yapraklarına hangi bakımlardan benziyordu?",
           "secenekler": [
-            "Boy, biçim ve renk gibi bakımlardan",
-            "Yalnız kokusu bakımından",
-            "Yalnız tadı bakımından",
-            "Yalnız kalınlığı bakımından"
+            "Boy, biçim ve renk bakımından",
+            "Koku ve tat bakımından",
+            "Kalınlık ve tüylülük bakımından",
+            "Sertlik ve su tutma bakımından"
           ]
         },
         {
@@ -382,7 +382,7 @@
       "yazar": "King ve ark.",
       "dergi": "PNAS",
       "yil": 2015,
-      "metin": "Mantar yetiştiren bazı termitlerin boyu yalnız birkaç milimetredir, ama yerden metrelerce yükselen dev tepeler yaparlar. Termitler tepenin içinde değil, altındaki yuvada yaşar; tepe ise geniş tünellerle doludur. Bu tepelerin, mantar ve yavru yetiştirmeye uygun olsun diye yuvanın ısısını, nemini ve hava değişimini düzenlediği kabul edilir. Ancak tepedeki havayı neyin hareket ettirdiği, yerinde ölçüm yapılmadığı için kesin bilinmiyordu. Bir ekip, bir türün tepelerinde yüzeydeki kanallardan geçen havayı gün boyu ölçtü. Gündüz dıştaki ince kanallar, daha derindeki bacalardan daha hızlı ısınıyordu. Bu yüzden hava kanallarda yükselip bacadan aşağı iniyordu. Gece ise akış tersine dönüyordu. Bu döngü yuvadaki karbondioksidi dışarı atıp havayı tazeliyor. Tepe böylece gece ile gündüz arasındaki sıcaklık farkıyla kendini havalandırıyor.",
+      "metin": "Mantar yetiştiren bazı termitlerin boyu yalnız birkaç milimetredir, ama yerden metrelerce yükselen dev tepeler yaparlar. Termitler tepenin içinde değil, altındaki yuvada yaşar; tepe ise geniş tünellerle doludur. Bu tepelerin, mantar ve yavru yetiştirmeye uygun olsun diye yuvanın sıcaklığını, nemini ve hava değişimini düzenlediği kabul edilir. Ancak tepedeki havayı neyin hareket ettirdiği, yerinde ölçüm yapılmadığı için kesin bilinmiyordu. Bir ekip, bir türün tepelerinde yüzeydeki kanallardan geçen havayı gün boyu ölçtü. Gündüz dıştaki ince kanallar, daha derindeki bacalardan daha hızlı ısınıyordu. Bu yüzden hava kanallarda yükselip bacadan aşağı iniyordu. Gece ise akış tersine dönüyordu. Bu döngü yuvadaki karbondioksidi dışarı atıp havayı tazeliyor. Tepe böylece gece ile gündüz arasındaki sıcaklık farkıyla kendini havalandırıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -411,7 +411,7 @@
             "Yerinde ölçüm yapılmadığı için",
             "Termitler ölçüm aletlerini bozduğu için",
             "Tepeler çok uzak ülkelerde olduğu için",
-            "Tepelerin içi tümüyle dolu olduğu için"
+            "Tepeler ölçüm için fazla yüksek olduğu için"
           ]
         },
         {
@@ -436,12 +436,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu hava döngüsü yuvadan neyi dışarı atıyor?",
+          "soru": "Termitlerin yaptığı tepenin içi neyle doludur?",
           "secenekler": [
-            "Karbondioksidi",
-            "Mantar sporlarını",
-            "Yağmur suyunu",
-            "Kumu ve toprağı"
+            "Geniş tünellerle",
+            "Mantar bahçeleriyle",
+            "Termit yumurtalarıyla",
+            "Sıkıştırılmış toprakla"
           ]
         }
       ]
@@ -500,12 +500,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekibin bulduğu bakteriler oksijen artınca hangi yöne yüzüyordu?",
+          "soru": "Güneye yönelen bakterilerin oranı ne arttıkça artıyordu?",
           "secenekler": [
-            "Güneye",
-            "Kuzeye",
-            "Doğuya",
-            "Yüzeye"
+            "Ortamın oksitleme gücü",
+            "Suyun sıcaklığı",
+            "Ortamdaki demir miktarı",
+            "Suyun derinliği"
           ]
         },
         {
@@ -513,9 +513,9 @@
           "soru": "Zıt yönlere yüzen bakterilerin bir arada yaşaması neyle çelişiyor?",
           "secenekler": [
             "Bu davranışın kazancını anlatan bugünkü açıklamalarla",
-            "Bakterilerin demir içerdiği bilgisiyle",
-            "Dünya'nın yuvarlak olduğu bilgisiyle",
-            "Bakterilerin suda yaşadığı bilgisiyle"
+            "Bakterilerin içinde demir kristali bulunduğu bilgisiyle",
+            "Bakterilerin manyetik alana tepki verdiği bilgisiyle",
+            "Oksijenin suyun üst katmanlarında daha çok olduğu bilgisiyle"
           ]
         }
       ]
@@ -544,12 +544,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Dikkatle bakmamız gereken bir işte göz kırpmamız nasıl değişir?",
+          "soru": "Başlayıp biteceği zamanı bildiğimiz işlerde ne zaman göz kırparız?",
           "secenekler": [
-            "Azalır",
-            "İki katına çıkar",
-            "Hiç değişmez",
-            "Tümüyle durur"
+            "İşten önce ya da sonra",
+            "İşin tam ortasında",
+            "İşin en zor anında",
+            "İş sürdükçe düzenli aralıklarla"
           ]
         },
         {
@@ -567,9 +567,9 @@
           "soru": "İzleyicilerin göz kırpmaları sahne geçişlerine bağlı mıydı?",
           "secenekler": [
             "Doğrudan bağlı değildi",
-            "Yalnız sahne geçişlerinde oldu",
-            "Her geçişte iki kez oldu",
-            "Yalnız ilk geçişte oldu"
+            "Tümüyle bağlıydı",
+            "Yalnız ilk geçişte bağlıydı",
+            "Yalnız sesli sahnelerde bağlıydı"
           ]
         },
         {
@@ -604,7 +604,7 @@
       "yazar": "Arndt ve ark.",
       "dergi": "Science",
       "yil": 2015,
-      "metin": "Bombardıman böcekleri kendilerini korumak için sıcak bir sıvı püskürtür. Bu püskürtme tek bir fışkırma değildir; çok hızlı art arda gelen patlamalardan oluşur. Böceğin vücudunun arka ucunda bir bez vardır. Bu bezin iki bölmesi bulunur: maddelerin saklandığı bir depo ve tepkime odası. Patlamalar tepkime odasında olur. Bir ekip, püskürtmenin neden kesik kesik çıktığını anlamak istedi. Ekip bezin yapısını inceledi; ayrıca özel bir X ışını düzeneğiyle canlı böceklerin içini görüntüleyip patlamaları doğrudan izledi. Tepkime odasındaki buharın nasıl hareket ettiğini de ölçtü. Ölçümlere göre kesik kesik akışı, iki bölmenin birleştiği yerdeki, kabuk maddesinden yapılmış özel parçalar denetliyor. Modellere göre her patlama bu parçaları yerinden oynatıyor olabilir. Yani püskürtmenin kesik kesik çıkmasını patlamanın kendisi sağlıyor olabilir.",
+      "metin": "Bombardıman böcekleri kendilerini korumak için sıcak bir sıvı püskürtür. Bu püskürtme tek bir fışkırma değildir; çok hızlı art arda gelen patlamalardan oluşur. Böceğin vücudunun arka ucunda bir bez vardır. Bu bezin iki bölmesi bulunur: maddelerin saklandığı bir depo ve tepkime odası. Patlamalar tepkime odasında olur. Bir ekip, püskürtmenin neden kesik kesik çıktığını anlamak istedi. Ekip bezin yapısını inceledi; ayrıca bir X ışını düzeneğiyle canlı böceklerin içini görüntüleyip patlamaları doğrudan izledi. Tepkime odasındaki buharın nasıl hareket ettiğini de ölçtü. Ölçümlere göre iki bölmenin birleştiği yerdeki, kabuk maddesinden yapılmış özel parçalar, akışın kesik kesik olmasını denetliyor. Modellere göre her patlama bu parçaları yerinden oynatıyor olabilir. Yani püskürtmenin kesik kesik çıkmasını patlamanın kendisi sağlıyor olabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -648,7 +648,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kesik kesik akışı ne denetliyor?",
+          "soru": "Akışın kesik kesik olmasını ne denetliyor?",
           "secenekler": [
             "İki bölmenin birleştiği yerdeki özel parçalar",
             "Böceğin bacaklarındaki kaslar",
@@ -678,7 +678,7 @@
       "yazar": "Christner ve ark.",
       "dergi": "Science",
       "yil": 2008,
-      "metin": "Havada suyun donmasını başlatan parçacıklara buz çekirdeği denir. Bu parçacıklar, yağmurun ve karın oluşmasında önemli bir yer tutar. Yine de nereden geldikleri ve havada nasıl dağıldıkları iyi bilinmiyordu. Araştırmacılar, ekvatordan uzak, farklı yerlere yağan karı inceledi. Kardaki en etkili buz çekirdekleri canlılardan geliyordu. Ekip, sıfırın altında 7 dereceden daha ılık havada da işe yarayan ve 0,2 mikrometreden büyük olan çekirdeklere baktı. Kar örneğine göre bunların yüzde 69 ile 100'ü canlı kökenliydi. Bir mikrometre, milimetrenin binde biridir. Canlı kökenli çekirdeklerin önemli bir bölümü bakteriydi. Ekibe göre bu parçacıklar yağış döngüsünü etkileyebilir. Havada taşınırken kendilerinin yağışla yere inişini de etkiliyor olabilirler.",
+      "metin": "Havada suyun donmasını başlatan parçacıklara buz çekirdeği denir. Bu parçacıklar, yağmurun ve karın oluşmasında önemli bir yer tutar. Yine de nereden geldikleri ve havada nasıl dağıldıkları iyi bilinmiyordu. Araştırmacılar, ekvatordan uzak, farklı yerlere yağan karı inceledi. Kardaki en etkili buz çekirdekleri canlılardan geliyordu. Ekip, eksi 7 dereceden daha yüksek sıcaklıklarda da donmayı başlatabilen ve 0,2 mikrometreden büyük olan çekirdeklere baktı. Örnekten örneğe değişmekle birlikte bunların yüzde 69 ile 100'ü canlı kökenliydi. Bir mikrometre, milimetrenin binde biridir. Canlı kökenli çekirdeklerin önemli bir bölümü bakteriydi. Ekibe göre bu parçacıklar yağış döngüsünü etkileyebilir. Havada taşınırken kendilerinin yağışla yere inişini de etkiliyor olabilirler.",
       "sorular": [
         {
           "tur": "ana",

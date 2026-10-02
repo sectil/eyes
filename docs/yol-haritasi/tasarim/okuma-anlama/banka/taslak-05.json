@@ -12,7 +12,7 @@
       "yazar": "Otter ve ark.",
       "dergi": "Current Biology",
       "yil": 2020,
-      "metin": "Bir kuşun şarkısı zamanla değişebilir mi? Kuzey Amerika'da yaşayan bir serçe türü, eskiden beri ıslığı andıran bir şarkı söyler. Bu şarkı, üç notalık bir kalıbın tekrarıyla biter. 1960'larda Kanada'nın her yerinde duyulan şarkı buydu. Sonra Kayalık Dağlar'ın batısında, iki notalık bir kalıpla biten yeni bir şarkı eskisinin yerini aldı. Araştırmacılar, yirmi yıl boyunca kıtanın dört bir yanından toplanan kayıtları inceledi. Yeni şarkının artık kıta boyunca yayıldığını gördüler. Kuşlara takılan konum aygıtları, batı Kanada'dan gelen kuşların kışı orta Kanada'dan gelenlerle birlikte geçirdiğini gösterdi. Yeni şarkı da önce orta Kanada'ya yayılmıştı. Orta Kanadalı kuşlar şarkıyı belki de kışladıkları yerde batılı kuşlardan öğreniyor. Yeni şarkı yayıldığı her yerde önce az duyuluyor, sonunda o bölgenin tek şarkısı oluyordu.",
+      "metin": "Bir kuşun şarkısı zamanla değişebilir mi? Kuzey Amerika'da yaşayan bir serçe türü, eskiden beri ıslığı andıran bir şarkı söyler. Bu şarkı, üç notalık bir kalıbın tekrarıyla biter. 1960'larda Kanada'nın her yerinde duyulan şarkı buydu. Sonra Kayalık Dağlar'ın batısında, iki notalık bir kalıpla biten yeni bir şarkı eskisinin yerini aldı. Araştırmacılar, yirmi yıl boyunca kıtanın dört bir yanından toplanan kayıtları inceledi. Yeni şarkının artık kıtanın geniş kesimlerine yayıldığını gördüler. Kuşlara takılan konum aygıtları, batı Kanada'dan gelen kuşların kışı orta Kanada'dan gelenlerle birlikte geçirdiğini gösterdi. Yeni şarkı da önce orta Kanada'ya yayılmıştı. Orta Kanadalı kuşlar şarkıyı belki de kışladıkları yerde batılı kuşlardan öğreniyor. Yeni şarkı yayıldığı her yerde önce az duyuluyor, sonunda o bölgenin tek şarkısı oluyordu.",
       "sorular": [
         {
           "tur": "ana",
@@ -113,9 +113,9 @@
           "soru": "Kealar tahmin yaparken neyi hesaba kattı?",
           "secenekler": [
             "Miktarların oranını",
-            "Parçaların kokusunu",
-            "Parçaların sesini",
-            "Parçaların sıcaklığını"
+            "Parçaların büyüklüğünü",
+            "Son çekilen parçanın rengini",
+            "Yığının toplam ağırlığını"
           ]
         },
         {
@@ -123,9 +123,9 @@
           "soru": "Kealar tahmin yaparken başka neye dikkat etti?",
           "secenekler": [
             "Çekilişi etkileyen bir engel olup olmadığına",
-            "Odadaki ışığın ne kadar parlak olduğuna",
-            "Rüzgârın hangi yönden estiğine",
-            "Kafesin yerden ne kadar yüksek olduğuna"
+            "Deneycinin parçaları ne kadar hızlı çektiğine",
+            "Yığındaki parçaların hangi sırayla dizildiğine",
+            "Daha önce kaç kez doğru tahmin ettiklerine"
           ]
         },
         {
@@ -160,7 +160,7 @@
       "yazar": "Osuna-Mascaró ve ark.",
       "dergi": "Current Biology",
       "yil": 2023,
-      "metin": "Bir hayvan, işini görmek için iki aleti birlikte yanına alabilir mi? Doğada birkaç aleti bir takım gibi kullandığı bilinen yalnız iki tür var: şempanzeler ve Goffin kakadusu adlı bir papağan. Şempanzelerin, gerektiğinde alet takımlarını yanlarında taşıdığı biliniyor. İki aleti birlikte taşıyan bir hayvan, işe başlamadan ikisine de ihtiyacı olacağını anlamış demektir. Araştırmacılar, insan bakımında yaşayan kakadularla üç deney yaptı. Görevleri, şempanzelerin termit yuvasından termit çıkarmak için kullandığı yöntemden esinlenerek hazırladılar. Bazı kakadular yeni bir alet takımını kullanmayı kendi kendilerine buldu. Takımı duruma göre kullandılar. Gerektiğinde de onu birazdan kullanmak üzere yanlarında taşıdılar. Yani bu kuşlar aletleri gelişigüzel art arda kullanmıyor; ikisine de gerek olduğunu baştan biliyorlar.",
+      "metin": "Bir hayvan, işini görmek için iki aleti birlikte yanına alabilir mi? Doğada birkaç aleti bir takım gibi kullandığı bilinen yalnız iki tür var: şempanzeler ve Goffin kakadusu adlı bir papağan. Şempanzelerin, gerektiğinde alet takımlarını yanlarında taşıdığı biliniyor. İki aleti birlikte taşıyan bir hayvan, işe başlamadan ikisine de ihtiyacı olacağını anlamış demektir. Araştırmacılar, insan bakımında yaşayan kakadularla üç deney yaptı. Görevleri, şempanzelerin termit yuvasından termit çıkarmak için kullandığı yöntemden esinlenerek hazırladılar. Bazı kakadular yeni bir alet takımını kullanmayı kendi kendilerine buldu. Takımı duruma göre kullandılar. Gerektiğinde de onu birazdan kullanmak üzere yanlarında taşıdılar. Yani bu kakadular aletleri gelişigüzel art arda kullanmıyor; ikisine de gerek olduğunu baştan biliyorlar.",
       "sorular": [
         {
           "tur": "ana",
@@ -174,7 +174,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Metne göre doğada alet takımı kullandığı bilinen iki tür hangisi?",
+          "soru": "Metne göre doğada alet takımı kullandığı bilinen iki tür hangileri?",
           "secenekler": [
             "Şempanzeler ve Goffin kakadusu",
             "Kargalar ve yunuslar",
@@ -278,12 +278,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Kuşlar gündüz neden daha az hareket ediyordu?",
+          "soru": "Kuşlar gündüz büyük olasılıkla neden daha az hareket ediyordu?",
           "secenekler": [
-            "Sıcak hava akımlarında süzülüyorlardı",
-            "Ağaç dallarında dinleniyorlardı",
-            "Yağmurdan saklanıyorlardı",
-            "Binaların çatısında uyuyorlardı"
+            "Sıcak hava akımlarında süzüldükleri için",
+            "Ağaç dallarında dinlendikleri için",
+            "Yağmurdan saklandıkları için",
+            "Binaların çatısında uyudukları için"
           ]
         },
         {
@@ -355,9 +355,9 @@
           "soru": "Bu sayede kurbağalar ne kadar daha saydam oluyordu?",
           "secenekler": [
             "2 ila 3 kat",
+            "5 ila 6 kat",
             "10 ila 20 kat",
-            "Yüzde 1 kadar",
-            "Hiç değişmiyordu"
+            "Yüzde 1 kadar"
           ]
         },
         {
@@ -382,7 +382,7 @@
       "yazar": "Leal ve ark.",
       "dergi": "Biology Letters",
       "yil": 2011,
-      "metin": "Bir kertenkele yeni bir sorunu çözebilir mi? Yeni durumlara uyum sağlama becerisi, yani davranış esnekliği, bugüne dek çoğunlukla memelilerde ve kuşlarda incelendi. Kertenkelelerin ise öğrenme becerilerinin sınırlı olduğu, hep aynı kalıpta davrandığı sanılır. Araştırmacılar, tropik bölgede ağaçlarda yaşayan bir kertenkele türünü bir dizi deneyle sınadı. Kertenkeleler, daha önce hiç görmedikleri ve beceri isteyen bir görevi birkaç farklı yolla çözdü. Doğru seçenek değiştirilince yeni doğruyu da öğrendiler. Bir işaretle ödül arasındaki bağı da hızla öğrendiler. Bu esneklik araştırmacıları şaşırttı. Onlara göre bu kertenkelenin becerileri, esnekliğiyle tanınan bazı sıcakkanlı türlerinkine benziyor. Bu yüzden soğukkanlı hayvanların neler yapabildiğine yeniden bakmak gerekiyor.",
+      "metin": "Bir kertenkele yeni bir sorunu çözebilir mi? Yeni durumlara uyum sağlama becerisi, yani davranış esnekliği, bugüne dek çoğunlukla memelilerde ve kuşlarda incelendi. Kertenkelelerin ise öğrenme becerilerinin sınırlı olduğu, hep aynı kalıpta davrandığı sanılır. Araştırmacılar, tropik bölgede ağaçlarda yaşayan bir kertenkele türünü bir dizi deneyle sınadı. Kertenkeleler, daha önce hiç görmedikleri ve beceri isteyen bir görevi birkaç farklı yolla çözdü. Ödül getiren seçim değiştirilince yeni doğruyu da öğrendiler. Bir işaretle ödül arasındaki bağı da hızla öğrendiler. Bu esneklik araştırmacıları şaşırttı. Onlara göre bu kertenkelenin becerileri, esnekliğiyle tanınan bazı sıcakkanlı türlerinkine benziyor. Bu yüzden soğukkanlı hayvanların neler yapabildiğine yeniden bakmak gerekiyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -420,13 +420,13 @@
           "secenekler": [
             "Birkaç farklı yolla",
             "Hep tek bir yolla",
-            "Başka kertenkeleyi izleyerek",
+            "Başka bir kertenkeleyi izleyerek",
             "Ancak yardım alarak"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Doğru seçenek değiştirilince kertenkeleler ne yaptı?",
+          "soru": "Ödül getiren seçim değiştirilince kertenkeleler ne yaptı?",
           "secenekler": [
             "Yeni doğruyu öğrendi",
             "Görevi bıraktı",
@@ -510,12 +510,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Algılayıcılar ışığı hangi aralıkta algılıyor?",
+          "soru": "Algılayıcıların hepsi birlikte hangi aralığı kapsıyor?",
           "secenekler": [
             "Morötesinden koyu kırmızıya",
-            "Yalnız maviden yeşile",
-            "Yalnız sarıdan kırmızıya",
-            "Yalnız mordan maviye"
+            "Maviden kızılötesine",
+            "Yeşilden koyu kırmızıya",
+            "Morötesinden yeşile"
           ]
         }
       ]
@@ -530,7 +530,7 @@
       "yazar": "Garland ve ark.",
       "dergi": "Current Biology",
       "yil": 2011,
-      "metin": "Bir şarkı okyanusta topluluktan topluluğa nasıl geçer? Erkek kambur balinalar, kalıplaşmış, tekrar eden ve zamanla adım adım değişen bir şarkı söyler. Bu şarkı, dişileri çekmeye ya da erkeklerin kendi aralarındaki ilişkileri düzenlemeye yarar. Bir topluluktaki bütün erkekler, şarkının o sıradaki biçimini söyler. Araştırmacılar, Güney Pasifik'in batısındaki ve ortasındaki balina topluluklarının şarkılarını 11 yıl boyunca inceledi. Birçok yeni şarkı biçimi topluluktan topluluğa hızla ve tekrar tekrar yayıldı. Yayılma hep tek yönde, batıdan doğuya doğru ilerledi. Şarkılar anneden yavruya değil, akraba olmayan yaşıt balinalar arasında aktarıldı. Böyle geniş bir alanda, birçok toplulukta tekrar tekrar yaşanan bir kültür değişimi ilk kez belgelendi.",
+      "metin": "Bir şarkı okyanusta topluluktan topluluğa nasıl geçer? Erkek kambur balinalar, kalıplaşmış, tekrar eden ve zamanla adım adım değişen bir şarkı söyler. Bu şarkı, dişileri çekmeye ya da erkeklerin kendi aralarındaki ilişkileri düzenlemeye yarar. Bir topluluktaki bütün erkekler, şarkının o sıradaki biçimini söyler. Araştırmacılar, Güney Pasifik'in batısındaki ve ortasındaki balina topluluklarının şarkılarını 11 yıl boyunca inceledi. Birçok yeni şarkı biçimi topluluktan topluluğa hızla ve tekrar tekrar yayıldı. Yayılma hep tek yönde, batıdan doğuya doğru ilerledi. Şarkılar anneden yavruya değil, akraba olmayan yaşıt balinalar arasında aktarıldı. Böyle geniş bir alanda, birçok toplulukta tekrar tekrar yaşanan kültürel bir değişim ilk kez belgelendi.",
       "sorular": [
         {
           "tur": "ana",
@@ -547,9 +547,9 @@
           "soru": "Şarkıyı kambur balinaların hangileri söyler?",
           "secenekler": [
             "Erkekler",
-            "Sürünün en yaşlısı",
-            "Yalnız yavrular",
-            "Yalnız anneler"
+            "Dişiler",
+            "Yavrular",
+            "Yaşlı balinalar"
           ]
         },
         {
@@ -577,9 +577,9 @@
           "soru": "Şarkılar hangi balinalar arasında aktarıldı?",
           "secenekler": [
             "Akraba olmayan yaşıt balinalar arasında",
-            "Yalnız anneler ve yavruları arasında",
-            "Yalnız kardeşler arasında",
-            "Yalnız aynı aileden gelen balinalar arasında"
+            "Anneler ve yavruları arasında",
+            "Kardeşler arasında",
+            "Yaşlı ve genç balinalar arasında"
           ]
         },
         {
@@ -604,7 +604,7 @@
       "yazar": "Barker ve ark.",
       "dergi": "Science",
       "yil": 2021,
-      "metin": "Bir hayvan topluluğunun kendine özgü bir şivesi olabilir mi? Çıplak köstebek fareleri, hayvanlar âleminin en iş birlikçi topluluklarından birinde yaşar. Birkaç kuşağın bir arada yaşadığı her kolonide yalnız bir kraliçe yavru yapar ve koloniyi o yönetir. Bu sıkı düzenin nasıl korunduğu bilinmiyordu. Araştırmacılar, bu hayvanların en sık çıkardığı ses olan yumuşak cıvıltıyı inceledi. Cıvıltı, hayvanın hangi koloniden olduğunu belli ediyordu; her koloninin ayrı bir şivesi vardı. Kayıtlar dinletildiğinde hayvanlar, kendi kolonilerinin şivesine yabancı şivelerden daha sık sesle karşılık verdi. Doğumdan kısa süre sonra başka koloniye verilen yavrular, yeni kolonilerinin şivesini öğrendi. Kraliçe ortadan kalkınca koloninin şivesi bozulmaya başladı. Yeni bir kraliçe başa geçince şive yeniden belirginleşti.",
+      "metin": "Bir hayvan topluluğunun kendine özgü bir şivesi olabilir mi? Çıplak köstebek fareleri, hayvanlar âleminin en iş birlikçi topluluklarından birinde yaşar. Birkaç kuşağın bir arada yaşadığı her kolonide yalnız bir kraliçe yavru yapar ve koloniyi o yönetir. Bu sıkı düzenin nasıl korunduğu bilinmiyordu. Araştırmacılar, bu hayvanların en sık çıkardığı ses olan yumuşak cıvıltıyı inceledi. Cıvıltı, hayvanın hangi koloniden olduğunu belli ediyordu; her koloninin ayrı bir şivesi vardı. Kayıtlar dinletildiğinde hayvanlar, kendi kolonilerinin şivesine yabancı şivelerden daha sık sesle karşılık verdi. Doğumdan kısa süre sonra başka koloniye verilen yavrular, yeni kolonilerinin şivesini öğrendi. Kraliçe ortadan kalkınca şive bozulmaya başladı. Yeni bir kraliçe başa geçince şive yeniden belirginleşti. Demek ki şiveyi de kısmen kraliçe denetliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -612,7 +612,7 @@
           "secenekler": [
             "Çıplak köstebek farelerinin koloniye özgü şivesini",
             "Köstebek farelerinin toprak altında uzun tüneller kazmasını",
-            "Kraliçenin yavrularını beslemesini",
+            "Farelerin kokuyla birbirini tanımasını",
             "Farelerin karanlıkta görmesini"
           ]
         },
@@ -628,12 +628,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Her kolonide kim yavru yapar?",
+          "soru": "Her kolonide yavruları kim yapar?",
           "secenekler": [
-            "Yalnız bir kraliçe",
-            "En yaşlı erkek",
-            "Kolonideki en iri ve en yaşlı birkaç dişi",
-            "En büyük yavru"
+            "Tek bir dişi",
+            "Bütün yetişkin dişiler",
+            "En iri birkaç dişi",
+            "Her kuşaktan bir dişi"
           ]
         },
         {
@@ -687,7 +687,7 @@
             "Zürafaların gece çıkardığı mırıltıyı",
             "Zürafaların yaprak seçmesini",
             "Zürafaların uzun boyunlarını",
-            "Fillerin kilometrelerce uzaktan birbirleriyle sesleşmesini"
+            "Zürafaların su içmek için nasıl eğildiğini"
           ]
         },
         {
@@ -712,17 +712,17 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Mırıltı hangi kayıtlarda bulundu?",
+          "soru": "Gece kayıtlarında bulunan mırıltı nasıl bir sesti?",
           "secenekler": [
-            "Gece kayıtlarında",
-            "Sabah kayıtlarında",
-            "Öğle kayıtlarında",
-            "Yalnız beslenme saatlerinde"
+            "Uzun süren, perdesi inip çıkan bir ses",
+            "Kısa ve kesik kesik bir ses",
+            "Perdesi hiç değişmeyen, tekdüze bir ses",
+            "Hırıltıya benzeyen boğuk bir ses"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Yaygın görüşe göre zürafalar hangi hayvan gibi çok pes sesler çıkarır?",
+          "soru": "Yaygın görüşe göre zürafalar hangi hayvanlar gibi çok pes sesler çıkarır?",
           "secenekler": [
             "Filler",
             "Aslanlar",

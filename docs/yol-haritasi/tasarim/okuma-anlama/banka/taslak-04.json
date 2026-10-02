@@ -66,11 +66,11 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Böcek kapana kapandıktan sonra ne yapar?",
+          "soru": "Kapan kapandıktan sonra içindeki böcek ne yapar?",
           "secenekler": [
             "Kurtulmaya çalışırken tüylere tekrar tekrar dokunur",
             "Hemen hareketsiz kalır",
-            "Kapanı dışarıdan açar",
+            "Kapanı kemirip delerek kaçar",
             "Kapanın içinde yumurta bırakır"
           ]
         }
@@ -204,12 +204,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Fideler domatesten elde edilen uçucu maddelere ne zaman yöneldi?",
+          "soru": "Başka hiçbir ipucu yokken, domatesten elde edilen uçucu maddeler fideleri nasıl etkiledi?",
           "secenekler": [
-            "Başka hiçbir ipucu yokken de",
-            "Yalnız gece karanlığında",
-            "Yalnız toprak ıslakken",
-            "Yalnız domates yanlarında dururken"
+            "Fideleri kendilerine doğru yöneltti",
+            "Fideleri kendilerinden uzaklaştırdı",
+            "Fidelerin büyümesini tamamen durdurdu",
+            "Fideleri hiç etkilemedi"
           ]
         },
         {
@@ -308,7 +308,7 @@
       "yazar": "Mitchell ve ark.",
       "dergi": "Nature",
       "yil": 2009,
-      "metin": "Bazı mikropların yaşadığı ortamın koşulları gelişigüzel değişir, bazılarınınki ise önceden kestirilebilir. Kestirilebilir bir ortamda sıradaki değişikliğe önceden hazırlanılabilir. Bir ekip bu fikri bir bakteri ve bir mayayla sınadı. Bu mikroplar doğada bazı değişikliklerle genellikle belli bir sırayla karşılaşır. İlk değişikliği önceden yaşayan mikroplar, ikincisiyle daha iyi başa çıktı. Bir evrim deneyinde ise yalnız ilk değişikliği tekrar tekrar yaşayan bakteriler bu hazırlığı yitirdi. Genler incelenince, doğadaki sıranın genlerin çalışma düzenine işlendiği görüldü. Erken gelen değişiklik, ileride gerekecek genleri de önceden çalıştırıyordu. Geç gelen değişiklik ise yalnız onunla başa çıkmaya yarayan genleri çalıştırıyordu. Araştırmacılara göre bu hazırlık evrim boyunca tekrar tekrar seçilmiştir ve canlılarda yaygın olabilir.",
+      "metin": "Bazı mikropların yaşadığı ortamın koşulları gelişigüzel değişir, bazılarınınki ise önceden kestirilebilir. Kestirilebilir bir ortamda mikroplar sıradaki değişikliğe önceden hazırlanabilir. Bir ekip bu fikri bir bakteri ve bir mayayla sınadı. Bu mikroplar doğada bazı değişikliklerle genellikle belli bir sırayla karşılaşır. İlk değişikliği önceden yaşayan mikroplar, ikincisiyle daha iyi başa çıktı. Bir evrim deneyinde ise yalnız ilk değişikliği tekrar tekrar yaşayan bakteriler bu hazırlığı yitirdi. Genler incelenince, doğadaki sıranın genlerin çalışma düzenine işlendiği görüldü. Erken gelen değişiklik, ileride gerekecek genleri de önceden çalıştırıyordu. Geç gelen değişiklik ise yalnız onunla başa çıkmaya yarayan genleri çalıştırıyordu. Araştırmacılara göre bu hazırlık evrim boyunca tekrar tekrar seçilmiştir ve canlılarda yaygın olabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -355,8 +355,8 @@
           "soru": "Erken gelen değişiklik hangi genleri çalıştırıyordu?",
           "secenekler": [
             "İleride gerekecek genleri de",
-            "Yalnız geç değişiklikle başa çıkmaya yarayanları",
-            "Hiçbir geni",
+            "Yalnız kendisiyle başa çıkmaya yarayanları",
+            "Rastgele seçilen genleri",
             "Yalnız rengi belirleyen genleri"
           ]
         },
@@ -382,13 +382,13 @@
       "yazar": "Nityananda ve ark.",
       "dergi": "Scientific Reports",
       "yil": 2016,
-      "metin": "Üç boyutlu görme, derinliği algılamamızı sağlar. Bilim insanları algıyı incelerken bu yeteneği sık sık örnek olarak kullanır. Ne var ki bu yeteneğin nasıl işlediği hakkında bildiklerimizin neredeyse hepsi omurgalı hayvanlardan geliyor. Omurgasızlar arasında üç boyutlu görme yalnız peygamberdevesinde gösterilmişti. Ama uygun yöntem eksikliği, bu konudaki araştırmaları 30 yıldır durdurmuştu. Bir ekip, böcekler için minicik üç boyut gözlükleri yaptı. Gözlükler her göze ayrı bir görüntü gösteriyordu. Işığı dönme yönüne göre süzen gözlükler işe yaramadı, çünkü iki görüntü birbirine fazla karışıyordu. Renge göre süzen gözlükler ise peygamberdevesinde açıkça bir derinlik yanılsaması yarattı. Böylece peygamberdevelerinin üç boyutlu gördüğü kesin olarak gösterildi.",
+      "metin": "Üç boyutlu görme, derinliği algılamamızı sağlar. Bilim insanları algıyı incelerken bu yeteneği sık sık örnek olarak kullanır. Ne var ki bu yeteneğin nasıl işlediği hakkında bildiklerimizin neredeyse hepsi omurgalı hayvanlardan geliyor. Omurgasızlar arasında üç boyutlu görme yalnız peygamberdevesinde gösterilmişti. Ama uygun yöntem eksikliği, bu konudaki araştırmaları 30 yıldır durdurmuştu. Bir ekip, böcekler için minicik üç boyut gözlükleri yaptı. Gözlükler her göze ayrı bir görüntü gösteriyordu. Işığı dönme yönüne göre süzen gözlükler işe yaramadı, çünkü iki görüntü birbirine fazla karışıyordu. Renge göre süzen gözlükler ise peygamberdevesinde açıkça bir derinlik yanılsaması yarattı. Böylece peygamberdevesinin üç boyutlu gördüğü yeni bir yöntemle kesin olarak doğrulandı. Bu yöntem, böceklerde üç boyutlu görmeyi incelemenin yolunu açıyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Peygamberdevesinin üç boyutlu gördüğünün gözlükle gösterilmesini",
+            "Peygamberdevesinin üç boyutlu gördüğünün gözlükle doğrulanmasını",
             "Peygamberdevesinin nasıl avlandığını",
             "Böceklerin renkleri nasıl gördüğünü",
             "İnsanlar için yeni bir gözlük yapılmasını"
@@ -399,9 +399,9 @@
           "soru": "Üç boyutlu görme hakkında bildiklerimiz çoğunlukla hangi hayvanlardan geliyor?",
           "secenekler": [
             "Omurgalı hayvanlardan",
-            "Yalnız böceklerden ve örümceklerden",
-            "Yalnız balıklardan",
-            "Yalnız kuşlardan"
+            "Omurgasız hayvanlardan",
+            "Böceklerden ve örümceklerden",
+            "Deniz yıldızlarından ve yengeçlerden"
           ]
         },
         {
@@ -436,12 +436,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Gözlükler her göze ne gösteriyordu?",
+          "soru": "Bu çalışmadan önce omurgasızlar arasında üç boyutlu görme hangi hayvanda gösterilmişti?",
           "secenekler": [
-            "Ayrı bir görüntü",
-            "Aynı görüntü",
-            "Yalnız beyaz ışık",
-            "Hiçbir şey"
+            "Yalnız peygamberdevesinde",
+            "Yalnız arılarda ve sineklerde",
+            "Yalnız ahtapotlarda",
+            "Yalnız kelebeklerde"
           ]
         }
       ]
@@ -510,12 +510,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bulgulara göre ateşböcekleri yakınlarındakilere nasıl uyuyor?",
+          "soru": "Hangi ateşböceğinin hangisini göreceğini ne belirliyor olabilir?",
           "secenekler": [
-            "Görerek",
-            "Koklayarak",
-            "Ses çıkararak",
-            "Dokunarak"
+            "Arazinin ve bitkilerin görüşü kapatması",
+            "Ateşböceklerinin yaşı ve vücut büyüklüğü",
+            "Ayın gökyüzündeki konumu ve parlaklığı",
+            "Havanın o geceki sıcaklığı ve nemi"
           ]
         }
       ]
@@ -678,7 +678,7 @@
       "yazar": "Dudley ve File",
       "dergi": "Biology Letters",
       "yil": 2007,
-      "metin": "Hayvanların toplu yaşamında akrabayı tanımak önemlidir. Bitkiler de çoğu zaman akrabalarıyla yarışır. Ama bitkilerin bu yarışta akrabalarını tanıdığını gösteren doğrudan bir kanıt şimdiye kadar yoktu. Bir ekip, ömrünü bir yılda tamamlayan bir bitki türünü gruplar hâlinde saksılarda büyüttü. Kimi saksılarda birbirine yabancı bitkiler, kimilerinde kardeşler vardı. Yabancılar aynı saksıyı paylaşınca büyümelerinin daha büyük bölümünü köklere ayırdı. Kardeşler aynı saksıyı paylaşınca böyle bir artış görülmedi. Bulgular, bitkilerin yarışırken akrabalarını ayırt edebildiğini gösteriyor. Bitkiler akrabalarını, kökleri birbirini etkilediğinde tanıyor olabilir. Daha fazla kökün toprak altındaki yarışta güç kazandırdığı düşünülüyor. Bu yüzden kardeşlerin kök payını artırmaması, akrabaların birbirini kayırdığı fikriyle uyumlu.",
+      "metin": "Hayvanların toplu yaşamında akrabayı tanımak önemlidir. Bitkiler de çoğu zaman akrabalarıyla yarışır. Ama bitkilerin bu yarışta akrabalarını tanıdığını gösteren doğrudan bir kanıt henüz yoktu. Bir ekip, ömrünü bir yılda tamamlayan bir bitki türünü gruplar hâlinde saksılarda büyüttü. Kimi saksılarda birbirine yabancı bitkiler, kimilerinde kardeşler vardı. Ekip, bitkilerin büyümelerinin ne kadarını köklere ayırdığını ölçtü. Yabancılarla saksı paylaşan bitkiler köklere, kardeşleriyle paylaşanlardan daha büyük pay ayırdı. Bulgular, bitkilerin yarışırken akrabalarını ayırt edebildiğini gösteriyor. Bitkiler akrabalarını, kökleri birbirini etkilediğinde tanıyor olabilir. Daha fazla kökün toprak altındaki yarışta güç kazandırdığı düşünülüyor. Bu yüzden kardeşlerin köklere daha az pay ayırması, akrabaların birbirini kayırdığı fikriyle uyumlu.",
       "sorular": [
         {
           "tur": "ana",
@@ -702,22 +702,22 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Yabancı bitkiler aynı saksıyı paylaşınca ne yaptı?",
+          "soru": "Yabancılarla saksı paylaşan bitkiler köklere nasıl bir pay ayırdı?",
           "secenekler": [
-            "Büyümelerinin daha büyük bölümünü köklere ayırdı",
-            "Hemen çiçek açtı",
-            "Gövdesini yana eğdi",
-            "Büyümeyi tamamen durdurup bütün yapraklarını döktü"
+            "Kardeşleriyle paylaşanlardan daha büyük",
+            "Kardeşleriyle paylaşanlardan daha küçük",
+            "Kardeşleriyle paylaşanlarla tam olarak aynı",
+            "Kardeşleriyle paylaşanların ancak yarısı kadar"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Kardeşler aynı saksıyı paylaşınca ne görüldü?",
+          "soru": "Metnin sonuna göre kardeşlerde görülen sonuç hangi fikirle uyumlu?",
           "secenekler": [
-            "Köklere ayrılan payda artış görülmedi",
-            "Kökleri iki katına çıktı ve gövde uzadı",
-            "Bitkiler kurudu",
-            "Bitkiler birbirine sarıldı"
+            "Akrabaların birbirini kayırdığı fikriyle",
+            "Yabancıların birbirine yardım ettiği fikriyle",
+            "Bitkilerin yalnız ışık için yarıştığı fikriyle",
+            "Köklerin yalnız su bulmaya yaradığı fikriyle"
           ]
         },
         {

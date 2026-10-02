@@ -22,7 +22,7 @@
       "yazar": "Drerup ve ark.",
       "dergi": "Journal of Experimental Biology",
       "yil": 2025,
-      "metin": "Birçok hayvan, çevresinin rengine ve dokusuna benzeyerek gizlenir. Sığ sularda ise dipteki görüntü durmadan değişir, çünkü dibin üzerinde parlak ışık bantları kayar. Mürekkep balıkları, derilerindeki küçük çıkıntıları kabartıp indirerek gizlenebilir. Araştırmacılar, kayan ışığın bu çıkıntıları etkileyip etkilemediğini sınadı. Hayvanlara dokusu ve rengi farklı taşlar gösterdiler; bunu hem kayan hem durgun ışıkta yaptılar. Gördükleri sahnede açık ve koyu yerler arasındaki fark büyüdükçe hayvanlar çıkıntılarını daha çok kabarttı. Kayan ışık bantları da tek başına çıkıntıları kabarttı. Bu tepki, ortada bir taş olsa da olmasa da görüldü. Peki bu tepki, avcılardan gizlenmeye yarayan bir uyum mu, yoksa hayvanın görme yeteneğindeki bir sınırdan mı kaynaklanıyor? Araştırmacılar bunu tartışıyor.",
+      "metin": "Birçok hayvan, çevresinin rengine ve dokusuna benzeyerek gizlenir. Sığ sularda ise dipteki görüntü durmadan değişir, çünkü dibin üzerinde parlak ışık bantları kayar. Mürekkep balıkları, derilerindeki küçük çıkıntıları kabartıp indirerek gizlenebilir. Araştırmacılar, kayan ışığın bu çıkıntıları etkileyip etkilemediğini sınadı. Hayvanlara dokusu ve rengi farklı taşlar gösterdiler; bunu hem kayan hem durgun ışıkta yaptılar. Gördükleri sahnede açık ve koyu yerler arasındaki fark büyüdükçe hayvanlar çıkıntılarını daha çok kabarttı. Kayan ışık bantları da, ortada bir taş olsa da olmasa da, çıkıntıları kabarttı. Peki bu tepki, avcılardan gizlenmeye yarayan bir uyum mu, yoksa hayvanın görme yeteneğindeki bir sınırdan mı kaynaklanıyor? Araştırmacılar bunu tartışıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -66,12 +66,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Çıkıntılar kayan ışıkta hangi durumda kabardı?",
+          "soru": "Ortada hiç taş yokken kayan ışık bantları ne yaptı?",
           "secenekler": [
-            "Ortada taş olsa da olmasa da",
-            "Yalnız ortada bir taş varken",
-            "Yalnız hayvanlar beslenirken",
-            "Yalnız gece karanlığında"
+            "Çıkıntıları yine kabarttı",
+            "Hiçbir tepkiye yol açmadı",
+            "Çıkıntıları indirip düzleştirdi",
+            "Hayvanların rengini koyulaştırdı"
           ]
         },
         {
@@ -88,7 +88,7 @@
     },
     {
       "id": "oa102",
-      "baslik": "İki yıl sonra bile hatırlayan köpekler",
+      "baslik": "Adları hatırlayan köpekler",
       "etiket": "memeli",
       "kaynak": "dror2024",
       "pmid": "39226922",
@@ -113,9 +113,9 @@
           "soru": "Nesnelerin adını öğrenebilen köpekler için metin ne diyor?",
           "secenekler": [
             "Çok ender görülürler",
-            "Her evde bir tane bulunur",
-            "Hepsi aynı cinstendir",
-            "Hepsi çok yaşlıdır"
+            "Köpeklerin çoğunu oluştururlar",
+            "Öğrenme yolları iyi bilinir",
+            "Konuşmayı da öğrenebilirler"
           ]
         },
         {
@@ -170,7 +170,7 @@
       "yazar": "Bostwick ve ark.",
       "dergi": "Proceedings of the Royal Society B",
       "yil": 2009,
-      "metin": "Bir kuş kanatlarıyla şarkı söyleyebilir mi? Küçük bir kuş türünün erkekleri, kur yaparken özel kanat tüyleriyle uzun süren, tek perdeli bir ses çıkarır. Bu sesin perdesi, saniyede yaklaşık 1500 titreşime denk gelir. Bu tüylerin sapları olağandan çok kalındır. Sesin, bu sapların bir zil gibi çınlamasından doğduğu düşünülüyordu. Araştırmacılar tüylerin titreşimini lazer ışığıyla ölçtü. Aynı ölçümü, aynı aileden olup özel tüyleri olmayan iki türde de yaptılar. Özel tüyler bu perdede güçlü biçimde çınladı; canlılarda bu kadar ince bir ayara pek rastlanmaz. Aynı kanattaki sıradan tüyler tek başına güçlü çınlamadı, ama özel tüylere bağlıyken onlarla tek parça gibi çınladı. Öteki iki türün tüyleri ise daha zayıf çınladı. Bulgular, sesin tüylerin çınlamasından doğduğunu güçlü biçimde destekliyor.",
+      "metin": "Bir kuş kanatlarıyla şarkı söyleyebilir mi? Küçük bir kuş türünün erkekleri, kur yaparken özel kanat tüyleriyle uzun süren, tek perdeli bir ses çıkarır. Bu sesin perdesi, saniyede yaklaşık 1500 titreşime denk gelir. Bu tüylerin sapları olağandan çok kalındır. Sesin, bu sapların bir zil gibi çınlamasından doğduğu düşünülüyordu. Araştırmacılar tüylerin titreşimini lazer ışığıyla ölçtü. Aynı ölçümü, özel tüyleri olmayan iki akraba türde de yaptılar. Özel tüyler bu perdede güçlü biçimde çınladı; canlılarda bu kadar ince bir ayara pek rastlanmaz. Aynı kanattaki sıradan tüyler tek başına güçlü çınlamadı, ama özel tüylere bağlıyken onlarla tek parça gibi çınladı. Öteki iki türün tüyleri de aynı perdede, ama çok daha zayıf çınladı. Bulgular, sesin tüylerin çınlamasından doğduğunu güçlü biçimde destekliyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -184,12 +184,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Erkekler bu sesi neyle çıkarır?",
+          "soru": "Bu sesin perdesi saniyede yaklaşık kaç titreşime denk gelir?",
           "secenekler": [
-            "Özel kanat tüyleriyle",
-            "Gagalarını dala vurarak",
-            "Ayaklarını yere sürterek",
-            "Boğazlarını şişirerek"
+            "1500",
+            "150",
+            "15 000",
+            "500"
           ]
         },
         {
@@ -224,12 +224,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Öteki iki türün tüyleri nasıl çınladı?",
+          "soru": "Öteki iki türün tüyleri, özel tüylere göre nasıl çınladı?",
           "secenekler": [
-            "Daha zayıf",
+            "Çok daha zayıf",
             "Çok daha güçlü",
             "Tıpatıp aynı güçte",
-            "Yalnız kanattan ayrılınca"
+            "Biraz daha güçlü"
           ]
         }
       ]
@@ -375,9 +375,9 @@
           "soru": "Çok bükülüp burulunca köşeli model neyi daha iyi korudu?",
           "secenekler": [
             "Eklemlerinin düzenini",
-            "Rengini",
-            "Ağırlığını",
-            "Uzunluğunu"
+            "Köşelerinin keskinliğini",
+            "Zırhının kalınlığını",
+            "Yüzeyinin düzgünlüğünü"
           ]
         }
       ]
@@ -483,9 +483,9 @@
           "soru": "Mikro uyku nedir?",
           "secenekler": [
             "Birkaç saniyelik uykuya dalış",
-            "Birkaç saatlik derin uyku",
-            "Kış boyu süren uzun uyku",
-            "Yalnız öğlen yapılan şekerleme"
+            "Birkaç dakikalık şekerleme",
+            "Gözler açıkken kısa bir dalgınlık",
+            "Uykudayken birkaç saniye uyanma"
           ]
         },
         {
@@ -493,9 +493,9 @@
           "soru": "Kayıtlar nerede alındı?",
           "secenekler": [
             "Hem denizde hem yuvada",
-            "Yalnız bir hayvanat bahçesinde",
-            "Yalnız buzun altında",
-            "Yalnız bir laboratuvarda"
+            "Hem yuvada hem bir hayvanat bahçesinde",
+            "Hem denizde hem bir laboratuvarda",
+            "Hem buzun altında hem bir mağarada"
           ]
         },
         {
@@ -513,9 +513,9 @@
           "soru": "Her uyku ortalama ne kadar sürdü?",
           "secenekler": [
             "4 saniye",
-            "4 dakika",
-            "4 saat",
-            "40 dakika"
+            "1 saniye",
+            "14 saniye",
+            "40 saniye"
           ]
         },
         {
@@ -567,9 +567,9 @@
           "soru": "İki grup bu çözümü nasıl bulmuş?",
           "secenekler": [
             "Birbirinden bağımsız olarak",
-            "Birbirini izleyip öğrenerek",
-            "İnsanların yetiştirmesiyle",
-            "Aynı yuvada büyüyerek"
+            "Ortak bir atadan miras alarak",
+            "Biri ötekinden türeyerek",
+            "Aynı yerde birlikte gelişerek"
           ]
         },
         {
@@ -606,7 +606,7 @@
     },
     {
       "id": "oa109",
-      "baslik": "Yüzlerce küçük ayak",
+      "baslik": "Deniz yıldızının adımları",
       "etiket": "deniz",
       "kaynak": "deridoux2026",
       "pmid": "41528874",
@@ -631,8 +631,8 @@
           "soru": "Deniz yıldızları neyle sürünür?",
           "secenekler": [
             "Yüzlerce küçük tüp ayakla",
+            "Birkaç büyük, kaslı ayakla",
             "Beş kolunu kürek gibi çırparak",
-            "Su püskürterek",
             "Dikenleriyle iterek"
           ]
         },

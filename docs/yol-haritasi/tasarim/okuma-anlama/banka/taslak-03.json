@@ -12,7 +12,7 @@
       "yazar": "Kohda ve ark.",
       "dergi": "PLoS Biology",
       "yil": 2022,
-      "metin": "Bir hayvan aynada kendini tanıyabilir mi? Bunu anlamak için hayvanın vücuduna, ancak aynada görebileceği bir leke konur. Hayvan lekeyi silmeye çalışırsa kendini tanıdığı düşünülür. Temkinli yorumlara göre bu sınavı şimdiye dek inandırıcı biçimde yalnız büyük maymunlar geçti. Araştırmacılar aynı sınavı temizlikçi balık denen bir deniz balığıyla yeniden yaptı. Boğazına kahverengi leke konan 14 balığın hepsi, boğazını bir yere sürterek lekeyi silmeye çalıştı. Ama bunu yalnız karşılarında ayna varken yaptılar. Mavi ve yeşil lekeler ise böyle bir davranışa yol açmadı. Aynı lekeyi başka bir balıkta gören balıklar da boğazlarını sürtmedi. Daha önce hiç ayna görmemiş balıklar ise boğazlarını daha seyrek sürttü. Araştırmacılara göre bu balıklar sınavı geçiyor, ama yalnız leke doğada karşılaşabilecekleri türden olduğunda.",
+      "metin": "Bir hayvan aynada kendini tanıyabilir mi? Bunu anlamak için hayvanın vücuduna, ancak aynada görebileceği bir leke konur. Hayvan lekeyi silmeye çalışırsa kendini tanıdığı düşünülür. Temkinli yorumlara göre bu sınavı şimdiye dek inandırıcı biçimde yalnız büyük maymunlar geçti. Araştırmacılar aynı sınavı temizlikçi balık denen bir deniz balığıyla yeniden yaptı. Boğazına kahverengi leke konan 14 balığın hepsi, boğazını bir yere sürterek lekeyi silmeye çalıştı. Ama bunu yalnız karşılarında ayna varken yaptılar. Mavi ve yeşil lekeler ise buna yol açmadı. Aynı lekeyi başka bir balıkta gören balıklar da boğazlarını sürtmedi. Hiç ayna görmemiş balıklar ise boğazlarını, aynaya alışkın balıklardan daha seyrek sürttü. Araştırmacılara göre bu balıklar sınavı geçiyor, ama yalnız kahverengi leke gibi doğada karşılaşabilecekleri bir lekeyle sınanınca.",
       "sorular": [
         {
           "tur": "ana",
@@ -26,7 +26,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Balıklar boğazlarına hangi renk leke konunca onu silmeye çalıştı?",
+          "soru": "Balıklar boğazlarına hangi renkte leke konunca onu silmeye çalıştı?",
           "secenekler": [
             "Kahverengi",
             "Mavi",
@@ -56,12 +56,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Hangi balıklar boğazlarını daha seyrek sürttü?",
+          "soru": "Hiç ayna görmemiş balıklar boğazlarını ne sıklıkta sürttü?",
           "secenekler": [
-            "Daha önce hiç ayna görmemiş olanlar",
-            "En genç olanlar",
-            "En iri olanlar",
-            "Aynı akvaryumda başka balıkla yaşayanlar"
+            "Aynaya alışkın balıklardan daha seyrek",
+            "Aynaya alışkın balıklardan daha sık",
+            "Aynaya alışkın balıklarla aynı sıklıkta",
+            "Aynaya alışkın balıkların iki katı sıklıkta"
           ]
         },
         {
@@ -86,7 +86,7 @@
       "yazar": "Bshary ve ark.",
       "dergi": "PLoS Biology",
       "yil": 2006,
-      "metin": "Farklı türden iki hayvan birlikte ava çıkabilir mi? Kızıldeniz'de yapılan gözlemler, iki balığın şaşırtıcı bir ortaklığını ortaya koydu. Bunlardan biri orfoz ailesinden iri bir balık, öteki dev bir müren balığıydı. Bu iki balığın yan yana görülmesi rastlantı değildi. İri balık, mürene işaret vererek onu birlikte ava çağırıyor, sonra da avın saklandığı yere ona yol gösteriyordu. İri balık bu işaretleri kendi açlığına göre veriyordu. Ortaklıktan iki balık da kazançlı çıkıyordu. Araştırmacılara göre bunun nedeni, iki türün av becerilerinin birbirini tamamlamasıydı. Avı yakalayan balık onu hemen bütün olarak yutuyordu. Bu yüzden öteki balık avı ondan zorla alamıyordu. Ekibe göre başka türlerden avcı ikililerinin çoğunda ortak avlanmanın önündeki asıl engel, birinin avı zorla kendine alabilmesidir.",
+      "metin": "Farklı türden iki hayvan birlikte ava çıkabilir mi? Kızıldeniz'de yapılan gözlemler, iki balığın şaşırtıcı bir ortaklığını ortaya koydu. Bunlardan biri orfoz ailesinden iri bir balık, öteki dev bir müren balığıydı. Bu iki balığın yan yana görülmesi rastlantı değildi. İri balık, mürene işaret vererek onu birlikte ava çağırıyor, sonra da avın saklandığı yere ona yol gösteriyordu. İri balık bu işaretleri kendi açlığına göre veriyordu. Ortaklıktan iki balık da kazançlı çıkıyordu. Araştırmacılara göre bunun nedeni, iki türün av becerilerinin birbirini tamamlamasıydı. Avı yakalayan balık onu hemen bütün olarak yutuyordu. Bu yüzden öteki balık avı ondan zorla alamıyordu. Ekibe göre farklı türden avcıların birlikte avlanmasının önündeki asıl engel, çoğu durumda birinin avı zorla kendine alabilmesidir.",
       "sorular": [
         {
           "tur": "ana",
@@ -160,7 +160,7 @@
       "yazar": "Godfrey-Smith ve ark.",
       "dergi": "PLoS ONE",
       "yil": 2022,
-      "metin": "Ahtapotlar bir şeyi hedefe doğru fırlatabilir mi? Avustralya'daki bir koyda yaşayan yabani ahtapotlar sık sık bir şeyler fırlatıyor. Kollarının arasına kabuk, çamur ya da yosun alıyor, sonra bunları bırakırken kollarının altındaki huni denen borudan güçlü bir su püskürtüyor. Böylece bunlar suyun içinde ileri savruluyor. Ahtapotlar başka ahtapotlarla karşılaştığında, attıkları şeyler sık sık karşılarındaki ahtapota çarpıyordu. Bu atışlar ötekilerden daha güçlüydü ve daha çok çamurla yapılıyordu. Güçlü atışlarda ahtapotun vücudu da daha sık tek renkli ya da koyu oluyordu. Bazı atışlar kolların altından farklı bir yöne doğru yapılıyordu; bu atışlar başka ahtapotlara daha sık çarpıyordu. İnsan dışında, kendi türünden birine bir şey fırlatan hayvanlar daha önce yalnız bazı sosyal memeliler arasında görülmüştü.",
+      "metin": "Ahtapotlar bir şeyi hedefe doğru fırlatabilir mi? Avustralya'daki bir koyda yaşayan yabani ahtapotlar sık sık bir şeyler fırlatıyor. Kollarının arasına kabuk, çamur ya da yosun alıyor, sonra bunları bırakırken kollarının altındaki huni denen borudan güçlü bir su püskürtüyor. Böylece bunlar suda ileri savruluyor. Ahtapotlar başka ahtapotlarla karşılaştığında, attıkları şeyler sık sık karşılarındaki ahtapota çarpıyordu. Bu karşılaşmalarda yapılan atışlar ötekilerden daha güçlüydü ve daha çok çamurla yapılıyordu. Güçlü atışlarda ahtapotun vücudu da daha sık tek renkli ya da koyu oluyordu. Bazı atışlar kolların altından, her zamankinden farklı bir yöne doğru yapılıyordu; bu atışlar başka ahtapotlara daha sık çarpıyordu. İnsan dışında, kendi türünden birine bir şey fırlatan hayvanlar daha önce yalnız bazı sosyal memeliler arasında görülmüştü.",
       "sorular": [
         {
           "tur": "ana",
@@ -177,9 +177,9 @@
           "soru": "Ahtapotlar neleri fırlatıyor?",
           "secenekler": [
             "Kabuk, çamur ya da yosun",
-            "Yalnız balık kılçıkları",
-            "Yalnız balık parçaları",
-            "Yalnız küçük ve yuvarlak taşlar"
+            "Taş, çakıl ya da balık kılçığı",
+            "Kemik, mercan ya da balık pulu",
+            "Odun, taş ya da deniz kestanesi"
           ]
         },
         {
@@ -209,7 +209,7 @@
             "Daha sık tek renkli ya da koyu",
             "Daha sık çizgili ve açık",
             "Daha sık benekli ve parlak",
-            "Daha sık açık renkli ve sık çizgili"
+            "Daha sık alacalı ve soluk"
           ]
         },
         {
@@ -234,7 +234,7 @@
       "yazar": "Boles ve Lohmann",
       "dergi": "Nature",
       "yil": 2003,
-      "metin": "Bir hayvanı hiç görmediği bir yere götürseniz evinin yönünü bulabilir mi? Bu beceriye gerçek yön bulma denir. Şimdiye dek bu yetenek yalnız birkaç omurgalıda gösterilmişti. İncelenen omurgasızlar ise yolu tanıdık işaretlere bakarak ya da pusula gibi bir yön tutarak buluyordu. Araştırmacılar gerçek yön bulmayı dikenli ıstakozlarla sınadı. Istakozlar yakalandıkları yerden 12 ile 37 kilometre uzaktaki, hiç bilmedikleri yerlere taşındı. Yolda bilinen hiçbir yön ipucu verilmediği hâlde yakalandıkları yere doğru yöneldiler. Ekip ardından ıstakozları, belli yerlerin manyetik alanını taklit eden düzeneklere koydu. Istakozlar, yakalandıkları yerin kuzeyindeki bir noktanın alanı verilince güneye, güneydeki bir noktanın alanı verilince kuzeye yöneldi. Sonuç, ıstakozların Dünya'nın manyetik alanını bir tür harita gibi kullandığını düşündürüyor.",
+      "metin": "Bir hayvanı hiç görmediği bir yere götürseniz evinin yönünü bulabilir mi? Bu beceriye gerçek yön bulma denir. Şimdiye dek bu yetenek yalnız birkaç omurgalıda gösterilmişti. İncelenen omurgasızlar ise yolu tanıdık işaretlere bakarak ya da pusula gibi bir yön tutarak buluyordu. Araştırmacılar gerçek yön bulmayı dikenli ıstakozlarla sınadı. Istakozlar yakalandıkları yerden 12 ile 37 kilometre uzaktaki, hiç bilmedikleri yerlere taşındı. Yolda bilinen hiçbir yön ipucunu alamadıkları hâlde yakalandıkları yere doğru yöneldiler. Ekip ardından ıstakozları, belli yerlerin manyetik alanını taklit eden düzeneklere koydu. Istakozlar, yakalandıkları yerin kuzeyindeki bir noktanın manyetik alanında güneye, güneyindeki bir noktanın alanında kuzeye yöneldi. Sonuç, ıstakozların Dünya'nın manyetik alanını bir tür harita gibi kullandığını düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -268,7 +268,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Yakalandıkları yerin kuzeyindeki bir noktanın alanı verilince ıstakozlar ne yaptı?",
+          "soru": "Yakalandıkları yerin kuzeyindeki bir noktanın manyetik alanı taklit edilince ıstakozlar ne yaptı?",
           "secenekler": [
             "Güneye yöneldi",
             "Kuzeye yöneldi",
@@ -278,7 +278,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Gerçek yön bulma şimdiye kadar hangi hayvanlarda gösterilmişti?",
+          "soru": "Bu çalışmadan önce gerçek yön bulma hangi hayvanlarda gösterilmişti?",
           "secenekler": [
             "Yalnız birkaç omurgalıda",
             "Bütün omurgasızlarda",
@@ -352,12 +352,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ortada başka kaplumbağa yokken yakılan ışık nasıl bir etki yaptı?",
+          "soru": "Ortada başka kaplumbağa yokken yakılan ışıkla yapılan deneme neyi gösterdi?",
           "secenekler": [
-            "Aynı etkiyi yapmadı",
-            "Kaplumbağaları korkuttu",
-            "Kaplumbağaları uyuttu",
-            "Aynı etkiyi daha güçlü yaptı"
+            "Işığın aynı etkiyi yapmadığını",
+            "Işığın kaplumbağaları korkuttuğunu",
+            "Işığın kaplumbağaları ışığa doğru yürüttüğünü",
+            "Işığın aynı etkiyi daha güçlü yaptığını"
           ]
         },
         {
@@ -365,9 +365,9 @@
           "soru": "Bakışı izlemek hayvanlara ne sağlayabilir?",
           "secenekler": [
             "Yiyecek ya da düşman gibi önemli şeyleri fark etmeyi",
-            "Daha hızlı kaçabilmeyi",
-            "Kışın uzun uyuyabilmeyi",
-            "Su altında uzun kalabilmeyi"
+            "Gruptaki en güçlü hayvanı bakışından tanımayı",
+            "Başkalarıyla göz göze gelmeyip kavgadan uzak durmayı",
+            "Karanlıkta yolunu daha kolay bulmayı"
           ]
         }
       ]
@@ -382,7 +382,7 @@
       "yazar": "Putman ve ark.",
       "dergi": "Current Biology",
       "yil": 2011,
-      "metin": "Uzun yolculuk yapan bir hayvan yolunu bulmak için iki şeyi bilmelidir: ne kadar kuzeyde ya da güneyde, ne kadar doğuda ya da batıda olduğunu. Birincisine enlem, ikincisine boylam denir. Bazı hayvanların enlemi manyetik ipuçlarıyla bulduğu biliniyordu. Ama hiçbir hayvanın boylamı nasıl algıladığı bilinmiyordu. Dünya'nın manyetik alanı da bu iş için uygun görünmüyordu, çünkü genellikle doğu-batı yönünde daha az değişir. Araştırmacılar Florida'da yumurtadan yeni çıkmış iribaş deniz kaplumbağalarıyla çalıştı. Atlas Okyanusu'nun iki yakasında, aynı enlemdeki iki yerin manyetik alanını taklit ettiler. Yavrular bu iki alanda farklı yönlere yüzdü. İki yön de onları daire biçimindeki göç yollarında ilerletecek yöndü. Böylece bir göçmen hayvanın boylamı manyetik alandan okuyabildiği ilk kez gösterildi.",
+      "metin": "Uzun yolculuk yapan bir hayvan yolunu bulmak için iki şeyi bilmelidir: ne kadar kuzeyde ya da güneyde, ne kadar doğuda ya da batıda olduğunu. Birincisine enlem, ikincisine boylam denir. Bazı hayvanların enlemi manyetik ipuçlarıyla bulduğu biliniyordu. Ama hiçbir hayvanın boylamı nasıl algıladığı bilinmiyordu. Dünya'nın manyetik alanı da bu iş için uygun görünmüyordu, çünkü genellikle doğu-batı yönünde, kuzey-güney yönünde olduğundan daha az değişir. Araştırmacılar Florida'da yumurtadan yeni çıkmış iribaş deniz kaplumbağalarıyla çalıştı. Atlas Okyanusu'nun iki yakasındaki, aynı enlemde bulunan iki yerin manyetik alanını taklit ettiler. Yavrular bu iki alanda farklı yönlere yüzdü. İki yön de onları daire biçimindeki göç yollarında ilerletecek yöndü. Böylece bir göçmen hayvanın boylamı manyetik alandan okuyabildiği ilk kez gösterildi.",
       "sorular": [
         {
           "tur": "ana",
@@ -408,10 +408,10 @@
           "tur": "ayrinti",
           "soru": "Manyetik alan neden boylam için uygun görünmüyordu?",
           "secenekler": [
-            "Doğu-batı yönünde daha az değiştiği için",
-            "Kaplumbağalar yalnız gece yüzdüğü için",
-            "Okyanusta hiç ışık olmadığı için",
-            "Yavrular çok küçük olduğu için"
+            "Doğu-batı yönünde, kuzey-güney yönünde olduğundan daha az değiştiği için",
+            "Kuzey-güney yönünde, doğu-batı yönünde olduğundan daha az değiştiği için",
+            "Okyanusun derinliğine göre değiştiği için",
+            "Gece ile gündüz arasında değiştiği için"
           ]
         },
         {
@@ -438,7 +438,7 @@
           "tur": "ayrinti",
           "soru": "Araştırmacılar hangi iki yerin manyetik alanını taklit etti?",
           "secenekler": [
-            "Atlas Okyanusu'nun iki yakasında aynı enlemdeki iki yer",
+            "Atlas Okyanusu'nun iki yakasındaki, aynı enlemde bulunan iki yer",
             "Aynı kıyıda birbirine çok yakın iki kumsal",
             "Biri kuzey kutbunda biri ekvatorda iki yer",
             "Pasifik Okyanusu'nun ortasında birbirinden çok uzak iki küçük ada"
@@ -456,7 +456,7 @@
       "yazar": "Kis ve ark.",
       "dergi": "Animal Cognition",
       "yil": 2014,
-      "metin": "Başkasını izleyip aynı hareketi yaparak öğrenmeye taklit denir. Uzun süre bunun yalnız insana özgü olduğu düşünüldü. Sonra memelilerin ve kuşların da taklit edebildiği gösterildi, ama sürüngenlerin taklit edip edemediği bilinmiyordu. Bilim insanları bunu sakallı ejder denen bir kertenkeleyle sınadı. Bir gruptaki kertenkeleler, başka bir sakallı ejderin küçük bir kapağı bir yana doğru açışını izledi. Ardından onlar da kapağı aynı yana doğru açtı. Başka bir grup ise kapağın kimse dokunmadan kendi kendine açıldığını izledi. Bu gruptaki kertenkeleler kapağı açmayı başaramadı. Araştırmacılara göre bu öğrenme, dikkatin kapağa çekilmesi gibi basit yollarla açıklanamıyor. Demek ki sürüngenler de memelilerde ve kuşlarda görülene benzer bir beceriye sahip. Bu da taklit yoluyla öğrenmenin çok eski kökleri olabileceğini düşündürüyor.",
+      "metin": "Başkasını izleyip aynı hareketi yaparak öğrenmeye taklit denir. Uzun süre bunun yalnız insana özgü olduğu düşünüldü. Sonra memelilerin ve kuşların da taklit edebildiği gösterildi, ama sürüngenlerin taklit edip edemediği bilinmiyordu. Bilim insanları bunu sakallı ejder denen bir kertenkeleyle sınadı. Bir gruptaki kertenkeleler, başka bir sakallı ejderin küçük bir kapağı bir yana doğru açışını izledi. Ardından onlar da kapağı aynı yana doğru açtı. Başka bir grup ise kapağın kimse dokunmadan kendi kendine açıldığını izledi. Bu gruptaki kertenkeleler kapağı açmayı başaramadı. Araştırmacılara göre bu öğrenme, dikkatin kapağa çekilmesi gibi basit yollarla açıklanamıyor. Demek ki en azından bazı sürüngenler de memelilerde ve kuşlarda görülene benzer bir beceriye sahip. Bu da taklit yoluyla öğrenmenin çok eski kökleri olabileceğini düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -504,8 +504,8 @@
           "secenekler": [
             "Memelilerin ve kuşların",
             "Balıkların ve kurbağaların",
-            "Yalnız böceklerin",
-            "Yalnız yılanların"
+            "Böceklerin ve örümceklerin",
+            "Ahtapotların ve yengeçlerin"
           ]
         },
         {
@@ -678,7 +678,7 @@
       "yazar": "Delgado ve Jacobs",
       "dergi": "Royal Society Open Science",
       "yil": 2017,
-      "metin": "Bazı sincaplar yiyeceklerini tek bir yere değil, pek çok farklı noktaya gömer. Sonra bu yiyeceklerin yerini hatırlamaları ve onları başkalarına kaptırmamaları gerekir. Peki sincaplar gömdükleri yiyecekleri türüne göre grupluyor mu? Böyle bir gruplama hatırlamayı kolaylaştırabilirdi. Araştırmacılar doğada yaşayan 45 tilki sincabının her birine dört farklı türden 16 kuruyemiş verdi. Kuruyemişler kimi zaman dörder dörder aynı türden, kimi zaman karışık sırayla verildi. Bazı sincaplar her kuruyemişi ayrı bir noktadan, bazıları hepsini aynı noktadan aldı. Ekip, kuruyemişlerin gömüldüğü yerleri uydu konum aygıtıyla haritaya geçirdi. Sincaplar yiyecekleri türüne göre ayrı bölgelere gömdü, ama yalnız hepsini tek bir noktadan aldıklarında. Böyle bir düzen, yiyeceğini dağınık gömen bir hayvanda ilk kez gösterildi.",
+      "metin": "Bazı sincaplar yiyeceklerini tek bir yere değil, pek çok farklı noktaya gömer. Sonra bu yiyeceklerin yerini hatırlamaları ve onları başkalarına kaptırmamaları gerekir. Peki sincaplar gömdükleri yiyecekleri türüne göre grupluyor mu? Böyle bir gruplama hatırlamayı kolaylaştırabilirdi. Araştırmacılar doğada yaşayan 45 tilki sincabının her birine dört farklı türden 16 kuruyemiş verdi. Bazı sincaplar her kuruyemişi ayrı bir noktadan, bazıları hepsini aynı noktadan aldı. Ekip, kuruyemişlerin gömüldüğü yerleri uydu konum aygıtıyla haritaya geçirdi. Sincaplar yiyecekleri türüne göre ayrı bölgelere gömdü, ama yalnız hepsini tek bir noktadan aldıklarında. Böyle bir düzen, yiyeceğini dağınık gömen bir hayvanda ilk kez gösterildi. Bu da yiyeceği dağınık gömmenin ne kadar zihin gücü istediğini gösteriyor.",
       "sorular": [
         {
           "tur": "ana",

@@ -12,7 +12,7 @@
       "yazar": "Alem ve ark.",
       "dergi": "PLoS Biology",
       "yil": 2016,
-      "metin": "Bir hayvan topluluğunda yeni bir beceri nasıl yayılır? Araştırmacılar bu soruyu bombus arılarıyla sınadı. Arıların ulaşamayacağı bir yere bir ödül kondu; ödüle ancak bir ipi çekerek ulaşılabiliyordu. Bu iş, arıların doğada yaptığı bir şey olmadığı için seçildi. Arıların yalnız küçük bir kısmı işi kendi kendine çözdü. Adım adım eğitilince ise çoğu ipi çekmeyi öğrendi. Hiç eğitilmemiş arılar da eğitilmiş bir arıyı uzaktan izleyerek beceriyi kaptı. Öğrenme ani bir kavrayışla değil, deneme yanılmayla oldu. Bir yuvada beceri, onu bilen tek bir arıdan başlayıp yiyecek toplayan arıların çoğuna hızla yayıldı. Öğrenenler de sonradan yeni arılara örnek oldu. Böylece beceri, onu ilk öğrenen arılardan daha uzun süre yuvada yaşayabilirdi. Becerinin böyle yayılması için üstün bir zekâ gerekmiyordu.",
+      "metin": "Bir hayvan topluluğunda yeni bir beceri nasıl yayılır? Araştırmacılar bunun yanıtını bombus arılarında aradı. Ödül, arıların doğrudan ulaşamayacağı bir yere kondu; arılar ona ancak bir ipi çekerek ulaşabiliyordu. Bu iş, arıların doğada yaptığı bir şey olmadığı için seçildi. Arıların yalnız küçük bir kısmı işi kendi kendine çözdü. Adım adım eğitilince ise çoğu ipi çekmeyi öğrendi. Hiç eğitilmemiş arılar da eğitilmiş bir arıyı uzaktan izleyerek beceriyi kaptı. Öğrenme ani bir kavrayışla değil, deneme yanılmayla oldu. Bir yuvada beceri, onu bilen tek bir arıdan başlayıp yiyecek toplayan arıların çoğuna hızla yayıldı. Öğrenenler de sonradan yeni arılara örnek oldu. Böylece beceri, onu ilk öğrenen arılardan daha uzun süre yuvada yaşayabiliyordu. Becerinin böyle yayılması için üstün bir zekâ gerekmiyordu.",
       "sorular": [
         {
           "tur": "ana",
@@ -26,12 +26,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ödüle nasıl ulaşılabiliyordu?",
+          "soru": "İp çekme işi neden seçildi?",
           "secenekler": [
-            "Bir ipi çekerek",
-            "Kapağı iterek",
-            "Tüpe girerek",
-            "Tuşa basarak"
+            "Arıların doğada yaptığı bir şey olmadığı için",
+            "Arıların doğada sık sık yaptığı bir şey olduğu için",
+            "Bütün arıların kendiliğinden çözebildiği bir iş olduğu için",
+            "Hiç eğitim gerektirmeyen kolay bir iş olduğu için"
           ]
         },
         {
@@ -40,7 +40,7 @@
           "secenekler": [
             "Yalnız küçük bir kısmı",
             "Neredeyse hepsi",
-            "Yalnız en yaşlı arılar",
+            "Yarıdan biraz fazlası",
             "Hiçbiri"
           ]
         },
@@ -68,10 +68,10 @@
           "tur": "ayrinti",
           "soru": "Yuvada beceri kaç arıdan başlayarak yayıldı?",
           "secenekler": [
-            "Onu bilen tek bir arıdan",
-            "Eğitilmiş on arıdan",
-            "Kraliçe arıdan",
-            "Bütün arılardan aynı anda"
+            "Tek bir arıdan",
+            "Üç arıdan",
+            "On arıdan",
+            "Yüzlerce arıdan"
           ]
         }
       ]
@@ -134,7 +134,7 @@
           "secenekler": [
             "Dizideki kaçıncı ses olduğunu",
             "Karganın boyunu",
-            "Havanın ısısını",
+            "Havanın sıcaklığını",
             "Günün saatini"
           ]
         },
@@ -217,9 +217,9 @@
           "soru": "Nektarın daha tatlı olması neyi artırabilir?",
           "secenekler": [
             "Tozlaşma şansını",
-            "Çiçeğin boyunu",
-            "Yaprak sayısını",
-            "Kökün uzunluğunu"
+            "Çiçeğin açık kalma süresini",
+            "Çiçeğin titreşme gücünü",
+            "Tohumların büyüklüğünü"
           ]
         }
       ]
@@ -308,7 +308,7 @@
       "yazar": "Wittlinger ve ark.",
       "dergi": "Science",
       "yil": 2006,
-      "metin": "Çöl karıncaları uçsuz bucaksız çölde yuvalarının yolunu, hangi yöne ve ne kadar yürüdüklerini sürekli hesaplayarak bulur. Yönü, gökyüzünü pusula gibi kullanarak izledikleri biliniyordu. Ama ne kadar yol aldıklarını nasıl ölçtükleri hâlâ bir bilmeceydi. Araştırmacılar, karıncaların yürürken adımlarını sayıyor olabileceğini düşündü. Bunu sınamak için serbestçe yürüyen bazı karıncaların bacaklarını uzattılar, bazılarınınkini kısalttılar. Böylece karıncaların her adımının boyu da değişti. Uzun bacaklı karıncalar daha büyük, kısa bacaklılar daha küçük adımlar attı. Uzun bacaklılar gittikleri yolu olduğundan uzun sandı. Kısa bacaklılar ise aynı yolu olduğundan kısa sandı. Bu sonuç, karıncaların mesafeyi bir tür adım sayacıyla, yani attıkları adımları sayarak ölçtüğünü düşündürüyor.",
+      "metin": "Çöl karıncaları uçsuz bucaksız çölde yuvalarının yolunu, hangi yöne ve ne kadar yürüdüklerini sürekli hesaplayarak bulur. Yönü, gökyüzünü pusula gibi kullanarak izledikleri biliniyordu. Ama ne kadar yol aldıklarını nasıl ölçtükleri hâlâ bir bilmeceydi. Araştırmacılar, karıncaların yürürken adımlarını sayıyor olabileceğini düşündü. Öyleyse adımları büyüyen bir karınca, aynı sayıda adımla daha uzun bir yol almalıydı. Bunu sınamak için serbestçe yürüyen bazı karıncaların bacaklarını uzattılar, bazılarınınkini kısalttılar. Uzun bacaklılar daha büyük, kısa bacaklılar daha küçük adımlar attı. Gerçekten de uzaklığı tutturamadılar: Uzun bacaklılar gerekenden uzun, kısa bacaklılar gerekenden kısa bir yol yürüdü. Bu sonuç, karıncaların mesafeyi bir tür adım sayacıyla ölçtüğünü düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -342,32 +342,32 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Uzun bacaklı karıncalar nasıl adımlar attı?",
+          "soru": "Araştırmacılar karıncaların bacaklarına ne yaptı?",
           "secenekler": [
-            "Daha büyük adımlar",
-            "Daha küçük adımlar",
-            "Geri geri adımlar",
-            "Yana doğru adımlar"
+            "Bazılarınınkini uzatıp bazılarınınkini kısalttı",
+            "Hepsinin bacaklarını biraz kısalttı",
+            "Hepsinin bacaklarını biraz uzattı",
+            "Bacaklarına küçük ağırlıklar bağladı"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Uzun bacaklı karıncalar yolu nasıl sandı?",
+          "soru": "Uzun bacaklı karıncalar nasıl bir yol yürüdü?",
           "secenekler": [
-            "Olduğundan uzun",
-            "Olduğundan kısa",
-            "Tam olduğu gibi",
-            "Hiç tahmin edemedi"
+            "Gerekenden uzun bir yol",
+            "Gerekenden kısa bir yol",
+            "Tam gerektiği uzunlukta bir yol",
+            "Hiç durmadan zikzaklı bir yol"
           ]
         },
         {
           "tur": "ayrinti",
-          "soru": "Kısa bacaklı karıncalar yolu nasıl sandı?",
+          "soru": "Bacakları değiştirilen karıncalar nasıl yürüyordu?",
           "secenekler": [
-            "Olduğundan kısa",
-            "Olduğundan uzun",
-            "Tam olduğu gibi",
-            "Hiç tahmin edemedi"
+            "Serbestçe",
+            "Bir tüpün içinde",
+            "Bir koşu bandının üstünde",
+            "Bir ipe bağlı olarak"
           ]
         }
       ]
@@ -456,7 +456,7 @@
       "yazar": "Atamian ve ark.",
       "dergi": "Science",
       "yil": 2016,
-      "metin": "Genç ayçiçekleri gün boyunca güneşi doğudan batıya doğru izler. Gece ise şafağı bekler gibi yeniden doğuya döner. Olgunlaşan bitkilerde bu hareket tümüyle durur; çiçek tablaları doğuya bakar hâlde kalır. Bir araştırma ekibi bu iki davranışın nedenini araştırdı. İkisini de bitkinin iç saatinin düzenlediği ortaya çıktı. Güneşi izleme, gövdenin doğu ve batı yanlarının sırayla uzamasıyla oluyordu. Gövdenin iki yanında farklı biçimde çalışan genler saat genleri değil, ışığa doğru büyümeyi yöneten genlerdi. Yani iç saat bu genlerle birlikte çalışarak bitkiyi günün düzenli değişimlerine önceden hazırlıyor. Bu düzen bitkinin daha çok büyümesini sağladı. Tozlaşmayı sağlayan böcekler de doğuya bakan çiçekleri daha sık ziyaret etti.",
+      "metin": "Genç ayçiçekleri gün boyunca güneşi doğudan batıya doğru izler. Gece ise şafağı bekler gibi yeniden doğuya döner. Olgunlaşan bitkilerde bu hareket tümüyle durur; çiçek tablaları doğuya bakar hâlde kalır. Bir araştırma ekibi bu iki davranışın nedenini araştırdı. İkisini de bitkinin iç saatinin düzenlediği ortaya çıktı. Güneşi izleme, gövdenin doğu ve batı yanlarının sırayla uzamasıyla oluyordu. Gövdenin iki yanında farklı biçimde çalışan genler saat genleri değil, ışığa doğru büyümeyi yöneten genlerdi. Yani iç saat bu genlerle birlikte çalışarak bitkiyi günün düzenli değişimlerine önceden hazırlıyor. İç saatin yönettiği bu iki davranış, hem bitkinin büyümesini hem de tozlaşmayı sağlayan böceklerin çiçeklere gelişini artırıyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -510,7 +510,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu düzen bitkiye ne kazandırdı?",
+          "soru": "İç saatin yönettiği bu davranışlar bitkiye ne kazandırıyor?",
           "secenekler": [
             "Daha çok büyüme ve böcek ziyareti",
             "Daha az su ihtiyacı ve daha kalın bir kabuk",
@@ -604,13 +604,13 @@
       "yazar": "Dong ve ark.",
       "dergi": "Science",
       "yil": 2023,
-      "metin": "Bal arıları kovanda özel bir dansla yiyeceğin yerini birbirine anlatır. Dans eden arı, yiyeceğin hangi yönde ve ne kadar uzakta olduğunu, bir de ne kadar değerli olduğunu hareket ve sesle anlatır. Peki arılar bu dansı doğuştan mı biliyor, yoksa başkalarından mı öğreniyor? Araştırmacılar bazı arıların ilk danslarından önce hiç dans izlemesine izin vermedi. Bu arıların dansları belirgin biçimde daha düzensizdi ve yönü daha çok yanlış gösteriyordu. Yiyeceğin uzaklığını da yanlış anlatıyorlardı. Deneyim kazandıkça düzensizlik ve yön hataları azaldı. Ama uzaklık hatası ömür boyu sürdü. Başka dansçıları izleyebilen arıların ilk danslarında ise bu sorunların hiçbiri yoktu. Demek ki arılar da, tıpkı insan bebekleri ve kuşlar gibi, iletişim kurmayı başkalarından öğreniyor.",
+      "metin": "Bal arıları kovanda özel bir dansla yiyeceğin yerini birbirine anlatır. Dans eden arı, yiyeceğin hangi yönde ve ne kadar uzakta olduğunu, bir de ne kadar değerli olduğunu hareket ve sesle anlatır. Peki arılar bu dansı doğuştan mı biliyor, yoksa başkalarından mı öğreniyor? Araştırmacılar bazı arıların ilk danslarından önce hiç dans izlemesine izin vermedi. Bu arıların dansları, dans izleyebilen arılarınkinden belirgin biçimde daha düzensizdi; yön hataları da daha büyüktü. Yiyeceğin uzaklığını da yanlış anlatıyorlardı. Deneyim kazandıkça düzensizlik ve yön hataları azaldı. Ama uzaklık hatası ömür boyu sürdü. Başka dansçıları izleyebilen arıların ilk danslarında ise bu sorunların hiçbiri yoktu. Demek ki arılar da, tıpkı insan bebekleri ve kuşlar gibi, dansı doğru yapmayı başkalarından öğreniyor.",
       "sorular": [
         {
           "tur": "ana",
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
-            "Bal arılarının dansı başka arıları izleyerek öğrenmesini",
+            "Bal arılarının dansı doğru yapmayı başka arıları izleyerek öğrenmesini",
             "Bal arılarının çiçeklerden nasıl bal yaptığını",
             "Arıların sıcak günlerde kovanı nasıl soğuttuğunu",
             "Arıların çiçek kokularını nasıl ayırt ettiğini"
@@ -628,12 +628,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Hiç dans izlemeden dans eden arıların dansı nasıldı?",
+          "soru": "Hiç dans izlemeyen arıların ilk dansları, ötekilerinkine göre nasıldı?",
           "secenekler": [
             "Belirgin biçimde daha düzensiz",
             "Belirgin biçimde daha düzenli",
-            "Kısa ama baştan sona hep kusursuz",
-            "Ötekilerle tıpatıp aynı"
+            "Daha kısa ama daha düzenli",
+            "Ötekilerinkiyle hemen hemen aynı"
           ]
         },
         {
@@ -653,7 +653,7 @@
             "Ömür boyu sürdü",
             "Bir günde düzeldi",
             "Öteki arılar onu düzeltti",
-            "Hiç hata yapılmadı"
+            "Yalnız ilk dansta görüldü"
           ]
         },
         {
@@ -661,9 +661,9 @@
           "soru": "Dans izleyebilen arıların ilk dansları nasıldı?",
           "secenekler": [
             "Sorunsuzdu",
-            "Ötekilerinkinden de düzensizdi",
-            "Çok kısa ve sessizdi",
-            "Yalnız yönü yanlış gösteriyordu"
+            "Uzaklığı yanlış gösteriyordu",
+            "Yönü yanlış gösteriyordu",
+            "Çok kısa ve sessizdi"
           ]
         }
       ]
@@ -678,7 +678,7 @@
       "yazar": "Aplin ve ark.",
       "dergi": "Nature",
       "yil": 2014,
-      "metin": "Hayvanlar arasında da bir gelenek doğup uzun süre yaşayabilir mi? Araştırmacılar bunu yabani büyük baştankaralarla sınadı. Birkaç ayrı baştankara topluluğuna yiyeceğe ulaşmanın yeni yollarını tanıttılar. Her toplulukta yalnız iki kuşa bir yöntem öğretildi. Kuşların hareketleri otomatik bir izleme düzeniyle kaydedildi. Yöntem, birbiriyle yakın ilişkideki kuşlar arasında hızla yayıldı ve kuşların ortalama yüzde 75'ine ulaştı. Toplam 414 kuş yöntemi öğrendi ve onu 57 binden fazla kez kullandı. Her topluluk, en başta kendisine tanıtılan yöntemi kullanmayı sürdürdü. Topluluklara sürekli yeni kuşlar katılsa da bu yerel gelenekler iki kuşak boyunca korundu. Yeni öğrenen kuşlar çoğunlukla çevrede en yaygın yöntemi seçti. Kendi deneyimlerinden çok başkalarını izlemeye güvendiler.",
+      "metin": "Hayvanlar arasında da bir gelenek doğup uzun süre yaşayabilir mi? Araştırmacılar bunu yabani büyük baştankaralarla sınadı. Yiyeceğe ulaşmak için birbirinden farklı yeni yöntemler tasarladılar. Birkaç ayrı baştankara topluluğunun her birinde yalnız iki kuşa bu yöntemlerden biri öğretildi. Kuşların hareketleri otomatik bir izleme düzeniyle kaydedildi. Yöntem, birbiriyle yakın ilişkideki kuşlar arasında hızla yayıldı ve kuşların ortalama yüzde 75'ine ulaştı. Toplam 414 kuş yöntemi öğrendi ve onu 57 binden fazla kez kullandı. Her topluluk, en başta kendisine tanıtılan yöntemi kullanmayı sürdürdü. Topluluklara sürekli yeni kuşlar katılsa da bu yerel gelenekler iki kuşak boyunca korundu. Yeni öğrenen kuşlar çoğunlukla çevrede en yaygın yöntemi seçti. Kendi deneyimlerinden çok başkalarını izlemeye güvendiler.",
       "sorular": [
         {
           "tur": "ana",

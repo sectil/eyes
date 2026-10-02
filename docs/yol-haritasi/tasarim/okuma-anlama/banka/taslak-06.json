@@ -19,7 +19,7 @@
           "soru": "Metin en çok neyi anlatıyor?",
           "secenekler": [
             "Tek hücreli bir mayadan kısa sürede çok hücreli kümelerin evrilmesini",
-            "Mayaların ekmek hamurunu nasıl kabarttığını ve neden ısı istediğini",
+            "Mayaların ekmek hamurunu nasıl kabarttığını ve neden sıcak ortam istediğini",
             "Çok hücreli canlıların tek hücrelilere geri dönüşünü gösteren bir deneyi",
             "Mayaların farklı ortamlarda ne kadar hızlı ve nasıl çoğaldığını"
           ]
@@ -86,7 +86,7 @@
       "yazar": "Pfeffer ve ark.",
       "dergi": "Nature",
       "yil": 2012,
-      "metin": "Deniz dibindeki çamurun derin ve oksijensiz katmanlarında, canlı kalıntıları çürürken sülfür denen bir madde oluşur. Çamurun yüzeyinde ise oksijen vardır. Yüzeyde oksijen harcanırken derindeki sülfür de çoğu zaman tepkimeye girer; bu iki olay birbirine bağlıdır. Önceki ölçümler, bu bağı birkaç santimetre boyunca akan elektrik akımlarının kurabildiğini göstermişti. Ama akımı neyin taşıdığı bilinmiyordu. Araştırmacılar, akımı taşıyanların uzun, ip gibi bakteriler olduğunu gösteren kanıtlar buldu. Bu bakteriler, çamurda elektrik akımı olan yerlerde çoktu. İçlerinde boydan boya uzanan, elektrik taşımaya uygun ince şeritler vardı. Yani bu bakteriler canlı birer elektrik kablosu gibi. Bu buluş, doğayı anlamamıza yeni bir kapı açıyor; ileride teknolojide de işe yarayabilir.",
+      "metin": "Deniz dibindeki çamurun derin ve oksijensiz katmanlarında, canlı kalıntıları çürürken sülfür denen bir madde oluşur. Çamurun yüzeyinde ise oksijen vardır. Yüzeyde oksijen harcanırken derindeki sülfür de çoğu zaman tepkimeye girer; bu iki olay birbirine bağlıdır. Önceki ölçümler, bu bağı birkaç santimetre boyunca akan elektrik akımlarının kurabildiğini göstermişti. Ama akımı neyin taşıdığı bilinmiyordu. Araştırmacılar, akımı taşıyanların uzun, ip gibi bakteriler olduğunu gösteren kanıtlar buldu. Bu bakteriler, çamurda elektrik akımı olan yerlerde çoktu. İçlerinde boydan boya uzanan, elektrik taşımaya uygun ince şeritler vardı. Yani bu bakteriler canlı birer elektrik kablosu gibi çalışıyor. Bu buluş, doğayı anlamamıza yeni bir kapı açıyor; ileride teknolojide de işe yarayabilir.",
       "sorular": [
         {
           "tur": "ana",
@@ -322,12 +322,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Bu kısa söz ne zaman kullanılır?",
+          "soru": "Dillerde bu sözün hangi yönleri birbirine çok benziyordu?",
           "secenekler": [
-            "Birinin söylediğini tam duyamayınca",
-            "Birine yardımı için içtenlikle teşekkür etmek istediğimizde",
-            "Bir şeye çok şaşırıp sevindiğimizde",
-            "Konuşmayı bitirip ayrılırken"
+            "Biçimi ve görevi",
+            "Yazılışı ve harf sayısı",
+            "Kaç kişi tarafından kullanıldığı",
+            "Hangi yaşta öğrenildiği"
           ]
         },
         {
@@ -420,7 +420,7 @@
           "secenekler": [
             "Su yüzeyini yırtmaya yetecek kuvvetin hemen altında",
             "Su yüzeyini yırtmaya yetecek kuvvetin iki katı",
-            "Robotun uyguladığı kuvvetle tamamen aynı",
+            "Su yüzeyini yırtmaya yetecek kuvvetin onda biri kadar",
             "Her sıçrayışta rastgele değişen, bazen çok büyük bir kuvvet"
           ]
         },
@@ -456,7 +456,7 @@
       "yazar": "Mlot ve ark.",
       "dergi": "PNAS",
       "yil": 2011,
-      "metin": "Tek bir ateş karıncası suya düşünce zorlanır, ama bir karınca topluluğu günlerce suyun üstünde rahatça yüzebilir. Bunu nasıl başarıyorlar? Araştırmacılar, karıncaların bedenlerini birbirine bağlayarak su geçirmez sallar kurmasını aralıklı fotoğraf çekimiyle izledi. Suyu itebilmenin bugüne dek yapraklar ya da böcek kabukları gibi yüzeylerin hiç değişmeyen bir özelliği olduğu sanılıyordu. Oysa karıncalar bedenlerini birbirine bağlayınca suyu çok daha iyi itiyordu. Ekip bu bağlanmayı su geçirmez bir kumaş dokumaya benzetiyor. Salın üstündeki karıncaların yollarını izleyerek salın ne hızla kurulduğunu açıklayan bir model de geliştirdiler. Kurulumda en önemli şey, salın kenarına gelen karıncaları komşularının orada tutmasıydı. Bu, iş birliği gibi görünen bazı davranışların aslında zorlamaya dayanabileceğini düşündürüyor.",
+      "metin": "Tek bir ateş karıncası suya düşünce zorlanır, ama bir karınca topluluğu günlerce suyun üstünde rahatça yüzebilir. Bunu nasıl başarıyorlar? Araştırmacılar, karıncaların bedenlerini birbirine bağlayarak su geçirmez sallar kurmasını aralıklı fotoğraf çekimiyle izledi. Su geçirmezliğin bugüne dek yaprak ya da böcek kabuğu gibi yüzeylerin değişmeyen bir özelliği olduğu sanılıyordu. Oysa karıncalar birbirine tutunarak bu özelliklerini büyük ölçüde artırabiliyordu. Ekip bu bağlanmayı su geçirmez bir kumaş dokumaya benzetiyor. Salın üstündeki karıncaların yollarını izleyerek salın ne hızla kurulduğunu açıklayan bir model de geliştirdiler. Kurulumda en önemli şey, salın kenarına gelen karıncaları komşularının orada tutmasıydı. Bu, iş birliği gibi görünen bazı davranışların aslında zorlamaya dayanabileceğini düşündürüyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -490,10 +490,10 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Suyu itebilmenin daha önce neyin özelliği olduğu sanılıyordu?",
+          "soru": "Su geçirmezliğin daha önce hangi yüzeylerin değişmeyen bir özelliği olduğu sanılıyordu?",
           "secenekler": [
             "Yaprakların ya da böcek kabuklarının",
-            "Yalnız su kuşlarının yağlı tüylerinin",
+            "Su kuşlarının yağla kaplı kanat tüylerinin",
             "Taşların ve kumun",
             "Balık pullarının"
           ]
@@ -564,12 +564,12 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Nişasta birikimi ne zaman bitiyordu?",
+          "soru": "Bitki nişastayı harcama hızını hangi durumda ayarlıyordu?",
           "secenekler": [
-            "Neredeyse tam şafak sökerken",
-            "Gece yarısından hemen önce",
-            "Ertesi günün öğle saatlerinde",
-            "Karanlık bastıktan hemen sonra"
+            "Karanlık erken ya da geç bastığında",
+            "Hava birden soğuyup ısındığında",
+            "Toprağın nemi gün içinde azalıp arttığında",
+            "Rüzgâr hızlanıp yavaşladığında"
           ]
         },
         {
@@ -584,7 +584,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Ekip bölme işi için kaç model önerdi?",
+          "soru": "Ekip bu hesabı yapabilecek kaç model önerdi?",
           "secenekler": [
             "İki",
             "Bir",
@@ -705,9 +705,9 @@
           "soru": "Araştırmacılar düzensiz küçük yapıları nerede buldu?",
           "secenekler": [
             "Çiçekli bitkilerin büyük gruplarının çoğunda",
-            "Yalnız tropik ormanlarda yetişen tek bir çiçek türünde",
-            "Yalnız bitkilerin köklerinde",
-            "Yalnız arıların kanatlarında"
+            "Tropik ormanlarda yetişen tek bir çiçek türünde",
+            "Bitkilerin köklerinde",
+            "Bombus arılarının kanatlarında"
           ]
         },
         {
