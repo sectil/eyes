@@ -79,3 +79,23 @@ PLAN.v2 §B.5, §A.2.2 (23:30), §E.6 #5; PLAN.v3 §D.3 ve Ders 3'ün 45 sn penc
 - Kodek testi paketi (`b/mac/kodek_testi.sh` girdisi) → sahibin Mac'inde çalışır; sonuca göre uygulama dosyaları (AAC-LC).
 - SPEC §10 yardımcı dosyaları (ilk ders girişi, bırakma ön klipleri, durdurma dönüşü).
 - Dosyaları uygulamaya koymak kod oturumunun işi (`musicTailFile` dahil); bu oturum `app/`'e dokunmaz.
+
+## Kod oturumuna devir notu (sahip, 2026-09-30: "ekleyelim")
+Kod oturumu (C adımı, dal `claude/cool-pasteur-j5yupf`) ses dalını kendiliğinden görmez; bu not ona verilir:
+
+- Sesler dal `claude/eager-clarke-7547q6`'da, PR sectil/eyes#3 (taban `claude/cool-pasteur-j5yupf`; tabanla
+  birleştirildi, çakışma yok). Gerekirse önce PR birleştirilir ya da dal çekilir: `git fetch origin claude/eager-clarke-7547q6`.
+- Dosyalar `yoga-pilot/render/out/ilk-bolum/`: `ders1-{3,5,15}.mp3`, `ders2-{5,15,20}.mp3`, `ders3-{5,15}.mp3`,
+  `ders5-{3,5,15}.mp3`; her birinin yanında `.timeline.json` (schema `nefona.yoga.timeline/2`; hedef uygulama adı
+  `appFile` alanında, ör. `yoga-d03-15dk.m4a`); `ders3-kuyruk.mp3` (Ders 3 müzik kuyruğu). Kulak listeleri
+  `kulak-ders{1,2,3,5}.md`, ölçümler `_rapor/*.json`. Sahip dört dersi kabul etti (SAHIP_ISTEKLERI 17–18).
+- Müzik kuyruğu tek dosya, uygulama sözleşmesine göre (`AlarmPlugin.swift`: `numberOfLoops = -1`, 2 sn açılış, son
+  `fade` sn kısma): 600 sn, kararmasız, sonu başına dikişsiz. `app/src/lib/yogaLessons.js`'teki Ders 3
+  `musicTailFile: null` bu dosyayla doldurulabilir.
+- Biçim: dosyalar MP3 önizleme (Xing başlıklı). Asıl biçim AAC-LC m4a (SPEC.v3 §14); kodek testi yapılmadı
+  (`b/mac/kodek_testi.sh` için test paketi hazırlanmadı), m4a dosyaları yok. O zamana kadar MP3 kullanmak bilinçli karar ister.
+- Ders verisi: `b/ders1/ders1.lesson.json` içinde periyodu 1,2 sn olan 8 "ver…" klibinin `gapFloor` değeri 0,6 → 0,5 sn
+  (sahip kararı, madde 16). Uygulama bu değeri okuyorsa güncel dosya alınmalı.
+- Kurulmayanlar: SPEC §10 yardımcı dosyaları (ilk ders girişi, bırakma ön klipleri, durdurma dönüşü). Uygulama
+  intro/prelude dosyası bekliyorsa bu dosyalar yok.
+- Ses oturumu `app/`'e dokunmadı; dosyaları uygulamaya koymak kod oturumunun işi.
