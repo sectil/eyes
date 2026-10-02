@@ -12,7 +12,7 @@
       "yazar": "Böhm ve ark.",
       "dergi": "Current Biology",
       "yil": 2016,
-      "metin": "Venüs sinekkapanı, besince fakir topraklarda yetişince hayvan yiyerek beslenmeye muhtaç olan bir bitkidir. Bir böcek kapanın iç yüzündeki tüylere dokununca bitkide küçük elektrik sinyalleri doğar. İki sinyalden sonra kapan hızla kapanır ve böceği içine hapseder. Kurtulmaya çalışan böcek sonraki saatlerde tüylere tekrar tekrar dokunur. Bir ekip, bitkinin yakaladığı şeyi besin saymak için kaç dokunuş beklediğini araştırdı. İkinci dokunuştan sonra dokunmaya tepki veren bir sinyal yolu çalıştı. Avı sindirecek maddelerin genleri için ise üçten fazla sinyal gerekti. Bu genlerin etkinliği dokunuş sayısıyla birlikte arttı. Bitki, çözülen avdaki sodyumu da bezleri yoluyla içine aldı. Kısacası çırpınan avın dokunuş sayısı, bitkiye yakaladığı şeyin besin olduğunu bildiriyor.",
+      "metin": "Venüs sinekkapanı, besince fakir topraklarda yetişince hayvan yiyerek beslenmeye muhtaç olan bir bitkidir. Bir böcek kapanın iç yüzündeki tüylere dokununca bitkide elektrik sinyalleri doğar. İki sinyalden sonra kapan hızla kapanır ve böceği içine hapseder. Kurtulmaya çalışan böcek sonraki saatlerde tüylere tekrar tekrar dokunur. Bir ekip, bitkinin yakaladığı şeyi besin saymak için kaç dokunuş beklediğini araştırdı. İkinci dokunuştan sonra dokunmaya tepki veren bir sinyal yolu çalıştı. Avı sindirecek maddelerin genleri için ise üçten fazla sinyal gerekti. Bu genlerin etkinliği dokunuş sayısıyla birlikte arttı. Bitki, çözülen avdaki sodyumu da bezleri yoluyla içine aldı. Kısacası çırpınan avın dokunuş sayısı, bitkiye yakaladığı şeyin besin olduğunu bildiriyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -123,7 +123,7 @@
           "soru": "Alışma hangi bitkilerde daha belirgindi?",
           "secenekler": [
             "Enerji bulmanın zor olduğu ortamda büyüyenlerde",
-            "Hiç ışık görmeyenlerde",
+            "En genç olanlarda",
             "En yaşlı olanlarda",
             "Bol suyla sulananlarda"
           ]
@@ -160,7 +160,7 @@
       "yazar": "Runyon ve ark.",
       "dergi": "Science",
       "yil": 2006,
-      "metin": "Bitkilerin havaya saldığı uçucu maddelerin bitkiler arasındaki ilişkilerde ne kadar önemli olduğu çok tartışılıyor. Küsküt, kendi besinini başka bitkilerden alan asalak bir bitkidir. Bir ekip, küsküt fidelerinin konağı nasıl bulduğunu araştırdı. Fideler yakındaki domates bitkilerine doğru uzandı. Domatesten elde edilen uçucu maddelere de, başka hiçbir ipucu yokken, aynı biçimde yöneldiler. Kına çiçeği ve buğday da fidelerin onlara doğru uzanmasına yol açtı. Fideler domatesle buğdayın uçucu maddelerini ayırt edebildi ve domatese doğru uzanmayı seçti. Domatesten ve buğdaydan alınan birkaç tek madde fideleri kendine çekti, buğdaydan bir madde ise fideleri uzaklaştırdı. Bulgular, uçucu maddelerin bitki türleri arasındaki önemli ilişkilere aracılık ettiğini gösteriyor.",
+      "metin": "Bitkilerin havaya saldığı uçucu maddelerin bitkiler arasındaki ilişkilerde ne kadar önemli olduğu çok tartışılıyor. Küsküt, kendi besinini başka bitkilerden alan asalak bir bitkidir. Bir ekip, küsküt fidelerinin konağı nasıl bulduğunu araştırdı. Fideler yakındaki domates bitkilerine doğru uzandı. Domatesten elde edilen uçucu maddelere de, başka hiçbir ipucu yokken, aynı biçimde yöneldiler. Camgüzeli ve buğday da fidelerin onlara doğru uzanmasına yol açtı. Fideler domatesle buğdayın uçucu maddelerini ayırt edebildi ve domatese doğru uzanmayı seçti. Domatesten ve buğdaydan alınan birkaç tek madde fideleri kendine çekti, buğdaydan bir madde ise fideleri uzaklaştırdı. Bulgular, uçucu maddelerin bitki türleri arasındaki önemli ilişkilere aracılık ettiğini gösteriyor.",
       "sorular": [
         {
           "tur": "ana",
@@ -216,7 +216,7 @@
           "tur": "ayrinti",
           "soru": "Fidelerin doğru uzandığı bitkiler arasında hangisi var?",
           "secenekler": [
-            "Kına çiçeği",
+            "Camgüzeli",
             "Ayçiçeği",
             "Sarı papatya",
             "Çam"
@@ -251,7 +251,7 @@
           "soru": "Bakterilerin bir arada yaşadığı topluluğa ne denir?",
           "secenekler": [
             "Biyofilm",
-            "Koloni ağı",
+            "Yuva",
             "Sürü",
             "Kovan"
           ]
@@ -262,7 +262,7 @@
           "secenekler": [
             "Potasyum",
             "Demir",
-            "Şeker",
+            "Kalsiyum",
             "Çözünmüş şeker"
           ]
         },
@@ -648,7 +648,7 @@
         },
         {
           "tur": "ayrinti",
-          "soru": "Metne göre eğilimi açıklayamayan şeylerden biri hangisi?",
+          "soru": "Metinde eğilimi açıklamadığı söylenen şeylerden biri hangisi?",
           "secenekler": [
             "Resimlerdeki görsel özellikler",
             "Katılımcıların yaşı",
