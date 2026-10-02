@@ -94,3 +94,11 @@ Yeni ya da değişen cümle sahip onayı olmadan koda girmez: taslak → 5 kişi
 1. "Bugünün bulgusu hazır" · "Kısa bir bilim metni ve dört soru. İki dakika yeter."
 2. "Bir metin, dört soru" · "Bugün hangi hayvanın sırrını okuyacaksın? Kendi hızında."
 3. "Okuma molası" · "Kısa bir bulgu oku; hızın anladığınla birlikte sayılır."
+
+### Sahip onayı sonradan (2026-10-02, "onay"; kapi/metin-tur1.md)
+- Hız sayılmadı, çok yavaş: "Bu okuma çok uzun sürdü; hız ancak ara vermeden okuyunca sayılır." (5/5)
+- Sürüm notu 2026-10-02-3: "Oku ve Anla geldi: kısa bir bilim bulgusu oku, dört soruyu cevapla. Hızın yalnız metni
+  anladığında sayılır." (4/5) · "Okuma testi artık günün yolunda değil; istediğinde Pratikler'den açabilirsin. Yoldaki
+  yerini Oku ve Anla aldı." (5/5; VARSAYIM: sahip a/b seçmedi, ilk aday)
+- Sayılmadı (düşük anlama) Nef satırı ve kaynak satırı ekranda sahip onaylı maketteki biçimle: "Hız, en az 3 doğruyla
+  sayılır. Bir dahakine biraz daha yavaş oku." · "{yazar}, {yıl}" (kapi/kod-tur1.md, kod-tur2.md).

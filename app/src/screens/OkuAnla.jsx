@@ -131,7 +131,8 @@ const VERDICT_LINE = {
   'dusuk-anlama': 'Hız, en az 3\u00a0doğruyla sayılır. Bir\u00a0dahakine biraz daha yavaş oku.',
   'cok-hizli': 'Bu sefer hız sayılmadı; bu kadar hızlı okuma göz gezdirmeye döner. Bir dahakine her cümleyi oku.',
   ara: 'Okurken uygulamadan çıktın, bu yüzden hız sayılmadı.',
-  // cok-yavas: onaylı cümle yok (METINLER.md §5); Nef satırı çıkmaz
+  // Sahip onayı 2026-10-02 (kapi/metin-tur1.md Y3, 5/5)
+  'cok-yavas': 'Bu okuma çok uzun sürdü; hız ancak ara vermeden okuyunca sayılır.',
 }
 
 export default function OkuAnla({ sessions = [], storage = globalThis.localStorage, onSave, onExit, remindField = null, now: nowProp = null }) {

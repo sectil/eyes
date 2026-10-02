@@ -6,6 +6,16 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Oku ve Anla sonsuz yolda, okuma testi Pratikler'de. Metin sahip onaylı (2026-10-02; okuma-anlama/kapi/metin-tur1.md
+    // S1b 4/5, S2a 5/5). VARSAYIM: sahip "onay" dedi, a/b seçmedi; ilk aday (S2a) kullanıldı.
+    id: '2026-10-02-3',
+    title: '2 Ekim, üçüncü güncelleme',
+    items: [
+      { kind: 'new', text: 'Oku ve Anla geldi: kısa bir bilim bulgusu oku, dört soruyu cevapla. Hızın yalnız metni anladığında sayılır.' },
+      { kind: 'change', text: "Okuma testi artık günün yolunda değil; istediğinde Pratikler'den açabilirsin. Yoldaki yerini Oku ve Anla aldı." },
+    ],
+  },
+  {
     // Fark Ettin mi? F1–F3: sahne motoru, Ne değişti?, yeni ekranlar. Metin sahip onaylı (2026-10-02; kapı fark-surum*).
     id: '2026-10-02-2',
     title: '2 Ekim, ikinci güncelleme',
