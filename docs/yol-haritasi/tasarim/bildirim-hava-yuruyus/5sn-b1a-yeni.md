@@ -109,7 +109,7 @@ hatırlatmaları mı listelesin (+ "Hatırlatma ekle"), veri yokken öneri saati
   "hiç hatırlatma yoksa…", "App bayrakları" (NOTIFY_PAGE true). İkinci test değişmeden geçti. Eşdeğerlik testi geçti.
 - Öneri saatleri (modüle göre, kaynaklı) ayrı adım: tablo sahibe; onaya dek 16.30.
 
-## B2-2 · hava sayfası saatlik şerit (2026-10-03) · İKİ TUR GEÇMEDİ, sahibe gösterildi
+## B2-2 · hava sayfası saatlik şerit (2026-10-03) · İKİ TUR GEÇMEDİ; sahip: "Şimdiki hâli kalsın"
 
 Sahip: "saatlik şerit sağda kesiliyor". Düzenek: `duzenek/sky.jsx`, sahte 30 saatlik tahmin.
 
@@ -121,3 +121,6 @@ Sahip: "saatlik şerit sağda kesiliyor". Düzenek: `duzenek/sky.jsx`, sahte 30 
 Tur 2 kodu `serit-tur2.patch`ta; uygulamaya girmedi. 16°/14°: düzenek verisi uç örnek, ama uygulamada da olabilir:
 büyük sayı canlı `forecast.now`, şeridin "Şimdi" sütunu saatlik tahmin (`lib/skyView.js` nowView ve şerit).
 İki tur kuralı gereği üçüncü tur yok; karar sahipte.
+
+Sahip kararı (2026-10-03): şerit şimdiki hâliyle kalır; tur 2 girmez. "Şimdi" sütunu büyük sayıyla aynı derece
+gösterir ("Aynı olsun"): `screens/Sky.jsx`, test `Sky.test.jsx` (düzeltme olmadan kırıldığı görüldü).

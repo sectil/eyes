@@ -54,7 +54,8 @@ export default function Sky({ place, onBack, onChange, morning = null, onMorning
   const data = st.cache?.data
   const cur = data ? nowView(data, now) : null
   const Icon = ICONS[cur?.icon] ?? Cloud
-  const hours = data ? hourStrip(data.hours, now) : []
+  // "Şimdi" sütunu büyük sayıyla aynı derece (sahip 2026-10-03): canlı `now` ile o saatin tahmini ayrışabiliyor
+  const hours = data ? hourStrip(data.hours, now).map((h) => (h.now && cur ? { ...h, temp: cur.temp } : h)) : []
   const nef = data ? nefLine(data.hours, now) : null
   const range = data ? todayRange(data.days, now) : null
   const a = attr ?? ATTR_FALLBACK
