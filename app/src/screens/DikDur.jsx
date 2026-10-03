@@ -21,18 +21,19 @@ const seen = (storage) => {
   }
 }
 
-// Yandan insan çizgisi (sağa bakar); hareketin yönü altın okla. Metin yok.
+// Yandan üst gövde silueti (sağa bakar): alın, burun, çene, boyun, göğüs, sırt; kulak ve kol çizgisi; hareketin yönü
+// altın okla. Metin yok.
+const SILHOUETTE = 'M140 56 C159 56 171 70 171 88 L178 101 L170 104 C170 113 164 119 156 121 L155 133 C167 141 173 161 173 191 L173 228 H115 L115 188 C115 162 121 146 128 133 L126 117 C114 111 109 99 109 88 C109 70 121 56 140 56 Z'
 export function PostureArt({ move = null }) {
   return (
     <g className="dd-art">
-      {move === 'uzat' && <path className="dd-string" d="M138 18 V64" />}
-      <path className="dd-body" d="M126 132 C122 150 120 170 122 214" />
-      <path className="dd-body" d="M124 150 C112 152 104 160 102 172" />
-      <circle className="dd-head" cx="138" cy="98" r="30" />
-      <path className="dd-body" d="M167 96 l7 6 l-7 3" />
-      {move === 'uzat' && <path className="dd-arrow" d="M196 96 V58 m-9 10 l9 -10 l9 10" />}
-      {move === 'cene' && <path className="dd-arrow" d="M214 124 H178 m10 -9 l-10 9 l10 9" />}
-      {move === 'omuz' && <path className="dd-arrow" d="M150 150 C140 160 128 164 114 164 m10 -9 l-10 9 l10 9" />}
+      {move === 'uzat' && <path className="dd-string" d="M140 12 V50" />}
+      <path className="dd-sil" d={SILHOUETTE} />
+      <path className="dd-line" d="M128 88 q-6 6 0 12" />
+      <path className="dd-line" d="M140 150 C142 170 145 188 148 208" />
+      {move === 'uzat' && <path className="dd-arrow" d="M200 96 V54 m-10 11 l10 -11 l10 11" />}
+      {move === 'cene' && <path className="dd-arrow" d="M222 108 H188 m11 -10 l-11 10 l11 10" />}
+      {move === 'omuz' && <path className="dd-arrow" d="M160 142 C146 150 128 156 100 158 m11 -10 l-11 10 l11 10" />}
     </g>
   )
 }
@@ -107,7 +108,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
         <div className="ex-intro">
           <h1 className="ex-title">Dik Dur</h1>
           <p className="dd-lead">Günde birkaç kez kısa bir dikleşme molası.</p>
-          <svg className="dd-hero" viewBox="60 0 180 230" aria-hidden="true"><PostureArt move="uzat" /></svg>
+          <svg className="dd-hero" viewBox="80 6 160 226" aria-hidden="true"><PostureArt move="uzat" /></svg>
           <p className="ex-para">Üç hareket, her birini 10 saniye tut: boyunu uzat, çeneni içeri çek, omuzlarını geri ve aşağı al.</p>
           <p className="ex-para">Saatlerce dik durman gerekmez. Önemli olan sık sık pozisyon değiştirmek ve gün içinde kısa molalar vermek.</p>
           <p className="dd-ev">Çökük oturmak ruh hâlini biraz düşürebilir; dikleşmek o an daha iyi hissettirebilir.</p>
@@ -203,12 +204,12 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
         <h1 className="ex-title" aria-live="assertive">{mv.name}</h1>
         <p className="ex-para dd-cue">{mv.cue}</p>
       </div>
-      <div className="ex-mid">
+      <div className="ex-mid dd-mid">
         <Arena progress={part} off={step.kind !== 'hold'}>
           <PostureArt move={shown.move} />
         </Arena>
+        <div className="dd-left" aria-hidden="true">{step.kind === 'hold' ? left : ''}</div>
       </div>
-      <div className="dd-left" aria-hidden="true">{step.kind === 'hold' ? left : ''}</div>
       <div className="ex-foot" />
     </main>
   )

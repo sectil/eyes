@@ -8,15 +8,23 @@
 .dd-cue { max-width: 320px; text-align: center; text-wrap: balance; }
 
 .dd-art { fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.dd-body { stroke: var(--ex-ink2); stroke-width: 7; }
-.dd-head { stroke: var(--ex-ink2); stroke-width: 7; fill: var(--ex-glass); }
+.dd-line { stroke: var(--ex-ink2); stroke-width: 4; opacity: 0.7; }
+.dd-sil { fill: color-mix(in srgb, var(--ex-ink2) 14%, transparent); stroke: var(--ex-ink2); stroke-width: 5; }
 .dd-string { stroke: var(--ex-gold); stroke-width: 3; stroke-dasharray: 6 7; }
 .dd-arrow { stroke: var(--ex-gold); stroke-width: 6; }
 
 .dd-count { font-family: var(--font-display); font-size: 64px; font-weight: 650; fill: var(--ex-ink); font-variant-numeric: tabular-nums; }
-.dd-left { flex: none; min-height: 52px; margin-top: 4px; text-align: center; font-family: var(--font-display); font-size: 2.6rem; font-weight: 650; line-height: 1; color: var(--ex-ink); font-variant-numeric: tabular-nums; }
+.dd-mid { flex-direction: column; gap: 10px; }
+.dd-left { flex: none; min-height: 52px; text-align: center; font-family: var(--font-display); font-size: 2.6rem; font-weight: 650; line-height: 1; color: var(--ex-ink); font-variant-numeric: tabular-nums; }
 
+/* Giriş uzun: kısa ekranda kaydırılabilir; çizim küçülür ya da kalkar (320 × 568'de düğmeler ekranda kalsın) */
+.dd.ex-start { overflow-y: auto; }
+@media (max-height: 760px) { .dd-hero { width: 110px; height: 150px; } }
 @media (max-height: 640px) {
-  .dd-hero { width: 110px; height: 140px; }
+  .dd-hero { display: none; }
+  .dd .ex-intro { gap: 8px; margin-top: 10px; }
+  .dd .ex-intro .ex-title { font-size: 1.75rem; }
+  .dd .ex-para { font-size: 0.9rem; }
+  .dd .ex-foot { min-height: 0; }
   .dd-left { min-height: 40px; font-size: 2.1rem; }
 }
