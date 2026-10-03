@@ -217,6 +217,11 @@ korunur: aralıklı kip kapalıyken bildirim planı bugünküyle 0 fark.
 3. Devamlılık: **B · kayan ufuk** (5 gün; her 1 saatte 2 gün).
 4. Varsayılan her 2 saat 09.00–19.00; kamera ilk oturumda sorulur (metin onaya); ses önce cihaz sesi (ElevenLabs
    ayrıca onaya); bildirim düzeyi etkin; §4.3'teki beş test yeri bilerek değişebilir: **hepsi kabul**.
+5. Sesli bildirim (sahip sorusu "sesli bildirim olmayacak mı elevenlab ile", 2026-10-03): **ayarda seçilsin**.
+   Varsayılan sessiz; Dik Dur ayarında bir düğmeyle açılır (yazısı onaya). Açıksa bildirim, uygulamaya gömülü kısa bir
+   ElevenLabs sesiyle gelir (eklentinin `sound` alanı; iOS'ta paket içi .wav/.caf, en çok 30 sn; telefon sessizdeyse
+   çalmaz). Üretim ücretli: ses, dosya sayısı ve maliyet ayrıca sahibe sorulur. Ses dosyaları uygulama paketine
+   girdiği için D2'de (Mac derlemesi) gelir.
 
 ## 7. Senden kararlar
 
