@@ -21,7 +21,7 @@ yapıyorsanırırm en kalitlei işi daha zamanda yapamalrını sağla"
    ayrı, kısa bir iş olarak onarılır.
 4. **Test:** çalışırken yalnız ilgili test dosyaları (`npx vitest run <dosyalar>`); bütün takım ve derleme ajan başına
    bir kez, sonda.
-5. **Kapı:** en çok iki tur (bir düzeltme). Kalite ölçütü değişmez: her ekranda beş bağımsız değerlendiriciden en az üçü.
+5. **Kapı:** en çok iki tur (bir düzeltme); sonra iki sürümden en iyisi seçilir, üçüncü tur yok (aşağıda "Tur sınırı"). Kalite ölçütü değişmez: her ekranda beş bağımsız değerlendiriciden en az üçü.
 6. **Aynı anda en çok iki iş akışı.** Ağır işler (kod + test) sıraya konur.
 7. **Kapsam:** izinli dosya listesi; kapsam dışı iş yok. Rapor en çok 30 satır; ayrıntı dosyada.
 
@@ -41,3 +41,19 @@ nereye gittiğini ve nasıl hayır diyeceğini anladın mı?" Beş kişinin en a
 - Rıza sayfalarında anlaşılırlık ölçütü (yukarıda) da kalır: ikisi birlikte aranır.
 - Yalnız "anlaşılırlık" ile geçmiş ekranlar (ör. Hatırlatmalar sayfası, D5+D6: 5/5 anlaşıldı) etkileme için yeniden
   sınanır.
+
+## Tur sınırı: en çok iki tur, sonra en iyisi seçilir (sahip, 2026-10-03)
+
+Sahibin sözü, kelimesi kelimesine: "şöyle bazen çok uğraşıyrosun örneğin 2 tur düzeltme yaptım içerisinde hangisi en iyisi ise onu seç... 3. tura kalmasın çok fazla token harcıyorsun bunnu bir kural olarak yaz . yoksa devvamlı döngüde kalıyorsun... 5 sn ve mükemmlik kuralna uygun olarak."
+
+- Her iş en çok iki tur yapılır. Tur, bir sürüm üretip denemektir: ilk sürüm 1. tur, bir düzeltme 2. tur.
+  **Üçüncü tur açılmaz.**
+- İki turun sonunda iki sürüm karşılaştırılır ve en iyisi seçilir. Ölçüt 5 sn ve mükemmellik: önce kapıda daha çok E
+  alan; eşitse ölçüm kusuru daha az olan (taşma, kesik yazı, dokunma alanı, sığma); o da eşitse daha az değişiklik
+  isteyen.
+- Seçilen sürüm kapıdan geçtiyse iş biter. Geçmediyse yeni tur açılmaz, yöntem de değiştirilmez: en iyi sürüm, kapı
+  sonucu ve kalan kusurlar sahibe gösterilir, karar onundur. Bu durumda kusurlar açıkça yazılır.
+- Gözden geçirme, doğrulama ve kapı turları da bu sınırdadır: her biri en çok iki tur.
+- İş akışlarında (Workflow, paralel Agent) döngüler en çok iki turla kurulur; üçüncü tura izin veren döngü yazılmaz.
+- Bu kural kişisel kural 5'i ("aynı yöntem 2 kez başarısız olduysa 3.'yü deneme") sıkılaştırır: iki turdan sonra yeni
+  yöntem de denenmez; en iyisi seçilir ya da sahibe sorulur.

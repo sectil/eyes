@@ -203,6 +203,10 @@ Ayrıntı `docs/yol-haritasi/YAPILACAKLAR.md` ve `docs/yol-haritasi/ACIK_ISLER.m
 6. Varsayım yapıyorsan açıkça "VARSAYIM:" diye işaretle. Sessiz varsayım yok.
 7. Büyük değişiklikten önce planı yaz, onay bekle. Yarı yolda scope büyütme yok.
 8. Daha önce düzeltilmiş bir bug'ı tekrar "düzeltmeye" kalkmadan önce CLAUDE.md / git log / memory kontrol et.
+9. Tur sınırı (2026-10-03): "şöyle bazen çok uğraşıyrosun örneğin 2 tur düzeltme yaptım içerisinde hangisi en iyisi ise onu seç... 3. tura kalmasın çok fazla token harcıyorsun bunnu bir kural olarak yaz . yoksa devvamlı döngüde kalıyorsun... 5 sn ve mükemmlik kuralna uygun olarak."
+   Uygulaması: her iş en çok iki tur (ilk sürüm + bir düzeltme). Sonra iki sürümden 5 sn ve mükemmellik ölçütüne göre
+   en iyisi seçilir. Üçüncü tur ve yeni yöntem yok; seçilen sürüm kapıdan geçmediyse sahibe gösterilir, karar onundur.
+   İş akışı döngüleri de en çok iki tur kurulur. Ayrıntı `docs/yol-haritasi/IS_AKISI_KURALLARI.md` "Tur sınırı".
 
 ### 4.2 Güvenlik
 
@@ -228,8 +232,8 @@ Ayrıntı `docs/yol-haritasi/YAPILACAKLAR.md` ve `docs/yol-haritasi/ACIK_ISLER.m
   Commit mesajında, PR'da, kodda ve belgelerde model adı yazılmaz. Push'tan önce `git fetch`.
 - **5 saniye kapısı:** ayrıntı `docs/yol-haritasi/IS_AKISI_KURALLARI.md` "Her tasarım: 5 saniyede etkileme ve
   mükemmellik". Beş bağımsız değerlendirici, "etkilendin mi?", "idare eder" = hayır, en az 4/5, iki tema, 390 ve 320.
-  En çok 2 tur; sonra yöntem değişir ya da sahibe sorulur. Geçse de ben görüntülere bakarım; kusurlu şey sahibe
-  gösterilmez. Nasıl yapıldığı §5.1.
+  En çok 2 tur; sonra iki sürümden en iyisi seçilir, üçüncü tur yok (§4.1 kural 9). Geçse de ben görüntülere
+  bakarım; kapıdan geçmeyen en iyi sürüm sahibe kusurları yazılarak gösterilir, karar onundur. Nasıl yapıldığı §5.1.
 - **Görünür her cümle:** taslak → 5 kişilik metin kapısı → benim onayım → sahibin onayı. Sahip bu oturumda onayı bana
   bıraktı ("sen onayla"); bu yetki yalnız Yakala Yaz ve Oku ve Anla yenilemesi için verildi, genel değildir. Ekran
   okuyucu etiketleri ve sürüm notları da görünür metindir.
@@ -270,8 +274,9 @@ Ayrıntı `docs/yol-haritasi/YAPILACAKLAR.md` ve `docs/yol-haritasi/ACIK_ISLER.m
    soru: ekran başına "ekran: E/H — neden". E = 5 saniyede ne olduğu ve ne yapacağı anlaşılıyor, Türkçesi doğal.
    Uygulamada olmayan özellik isteği H nedeni değildir; "öneri:" diye ayrı yazdırılır.
 3. Giriş ekranı için ayrıca a–d soruları: ne yapacaksın, nasıl bitireceksin, sonra ne olacak, ne ölçülüyor.
-4. İki tur geçmezse yöntem değişir. Bu oturumda işe yarayanlar: kusur listesi doğrulaması (önceki bulgular K1…Kn,
-   her biri "düzeldi / düzelmedi"), kör A/B, önce/sonra karşılaştırma.
+4. En çok iki tur. İki turdan sonra iki sürümden en iyisi seçilir; yeni tur ve yeni yöntem yok (§4.1 kural 9). Kapı
+   içinde kullanılabilecek yöntemler: kusur listesi doğrulaması (önceki bulgular K1…Kn, her biri "düzeldi / düzelmedi"),
+   kör A/B, önce/sonra karşılaştırma.
 5. Kayıt `tasarim/<modul>/kapi/` altına; onaylı cümleler `METINLER.md`'ye.
 
 ### 5.2 Metin bankası: kurallar ve denetim
@@ -290,7 +295,8 @@ Ayrıntı `docs/yol-haritasi/YAPILACAKLAR.md` ve `docs/yol-haritasi/ACIK_ISLER.m
 - Node'da `okumaBank.js`'i doğrudan import etmek için `with { type: 'json' }` gerekir; en kolayı vitest.
 - Metin kapısı: 30 rastgele metin, 5 okura 6'şar; "oaNNN: E/H — neden"; ölçüt bu oturumda ≥ 24/30 E kondu
   (sahip onaylamadı). Metin değişince `duzenek/stres.mjs` yeniden koşulur.
-- Yöntem sırası, geçmeyince: düzelt ve örneklemle sına (iki tur) → tam tarama + ayrı düzeltme + ayrı doğrulama.
+- En çok iki tur (§4.1 kural 9). 2026-10-02'de banka dört tur gördü; bu artık yapılmaz. İkinci turdan sonra iki
+  sürümden en iyisi seçilir ve sahibe gösterilir.
 
 ### 5.3 Düzenekler (depoda, bu commit ile)
 
