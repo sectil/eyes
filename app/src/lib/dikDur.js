@@ -5,6 +5,9 @@
 // 3 tekrar, aralar 3 sn (VARSAYIM; gün içi mini oturum dozu denemelerde yok). Tam tur çene ve omuz hareketi 3 bölüm ×
 // 10 tekrar, bölümler arası 1 dk (Alghadir 3×10×10 sn; aralar denemede 2 dk, kısa tutmak için 1 dk VARSAYIM).
 
+// İlk açılıştaki güvenlik ekranı görüldü mü (manifest storageKeys: "Tüm verileri sil"de temizlenir)
+export const SAFETY_KEY = 'eyes.dikDur.safety.v1'
+
 export const HOLD_S = 10
 export const GAP_S = 3
 export const REST_S = 60
