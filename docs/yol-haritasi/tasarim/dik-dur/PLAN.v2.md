@@ -1,4 +1,4 @@
-# Dik Dur modülü · PLAN v2 (sahip onayı bekliyor)
+# Dik Dur modülü · PLAN v2 (iki eleştiri turu bitti; sahip onayı bekliyor)
 
 Sahip isteği (2026-10-03): dik durma egzersizi; istediği saatlerde ya da "şu saatler arası her 1 / her 2 saatte" devamlı
 hatırlatma; kamera duruşu takip etsin, kafa geri, omuzlar geri (kamera isteğe bağlı kapatılabilir); "başının üstünde
@@ -135,44 +135,54 @@ arasındaki yatay fark ve açı**: boyun açısının ölçüldüğü yön tam o
 
 ### 4.2 Aralıklı kip
 
-"Başlangıç–bitiş saati, her 1 ya da her 2 saatte, hangi günler". Saat kipi (günde 3 saate kadar) de kalır.
-Aralıklı saatler **kişinin seçtiği saat** sayılır: gece ve pencere kuralı uygulanmaz (senin kuralın); yalnız 01–05 yok.
+"Başlangıç–bitiş saati, her 1 ya da her 2 saatte, hangi günler". Seçenek yalnız bu ikisi. Saat kipi (günde 3 saate
+kadar) de kalır. Aralık sınırı: her 1 saatte en çok 12 saatlik aralık (günde en çok 13 dilim); 01.00–05.00 arası
+seçilemez (giriş sınırı). Varsayılan: her 2 saat, 09.00–19.00 = günde 6 dilim (VARSAYIM).
 
-**Devamlılık (karar 2):**
+Aralıklı saatler kişinin seçtiği saat sayılır: gece sessizliği ve pencere kuralı uygulanmaz (senin 2026-10-01 kuralın).
+
+**Devamlılık (karar 2).** Uygulama planı yalnız açıkken kurar; arka plan yenilemesi yok.
 
 | Yol | Nasıl | Artı | Eksi |
 |---|---|---|---|
-| **A · Tekrarlayan** (öneri) | Her dilim için bir günlük tekrar (`on: { hour, minute }`); 09–21 her 2 saat = 7 bekleyen, her 1 saat = 13 | Uygulama açılmasa da her gün gelir: "devamlı" | Gün seçimi yalnız "her gün" (hafta içi seçimi 5 kat bekleyen ister); "az önce yaptım, sıradakini atla" yapılamaz (tek günü atlamak bütün tekrarı siler) |
-| B · Kayan pencere | Önümüzdeki 48 saat, tek tek | Gün seçimi, "yaptım, atla" | Uygulama 2 gün açılmazsa durur |
+| **B · Kayan ufuk** (öneri) | Ayrı 32 kimlik (7868–7899) içinde ileriye tek tek; ufuk 32'ye sığan gün kadar, en çok 5: varsayılan 6 dilimle 5 gün, her 1 saatte (11–13 dilim) 2 gün | Gün seçimi; "Yaptım, sıradakini atla"; "Bugünlük yeter"; her gün başka cümle; yorgunluk koruması | Uygulama 5 gün (her 1 saatte 2 gün) açılmazsa durur; son bildirimde "Hatırlatmaların sürmesi için uygulamayı bir aç" yazar |
+| A · Tekrarlayan | Her dilim günlük tekrar (`on: { hour, minute }`) | Uygulama hiç açılmasa da her gün gelir | Gün seçimi yok (hafta içi seçimi her 1 saatte 65 bekleyen ister: iPhone sınırı 64, imkânsız); atlama ve "bugünlük yeter" yok; yorgunluk koruması çalışmaz; uygulama bırakılsa da durmadan çalar; uygulamanın bugünkü kurma düzeni bunu taşımıyor (aşağıda) |
 
-**Bütçe:** A yolunda 7 ya da 13 bekleyen sabit ve önce ayrılır; 58 sınırı aşılırsa bugünkü kural işler (öteki modüllerin
-ufku 3→2→1 güne iner). Bu yüzden her 1 saat seçilince ayarda bir satır: "Öteki hatırlatmalar daha az gün ileriye
-kurulur." (VARSAYIM; testle sabitlenir.)
+Öneriyi B'ye çevirdim: A "devamlı"yı daha iyi karşılar ama senin uygulamandaki bildirim düzeninin temel kuralını
+("tekrarlayan tek günü atlayamaz", `notifyApply.js:8`) bozar ve durdurulamaz.
 
-**Başka hatırlatmayla aynı yarım saat:** bugün iki farklı modülün elle seçilmiş saatleri 30 dk içindeyse tek bildirimde
-birleşir (`notifyAll.js:309-315`). A yolunda Dik Dur dilimi her gün sabit çalar, birleşemez: aynı yarım saate başka bir
-hatırlatma düşerse ikisi de gelir (A yolunun sınırı; açıkça yazıyoruz). B yolunda o dilim ötekiyle birleşir.
+**Bütçe ve öteki bildirimler:**
+- Dik Dur ayrı kova: modül hatırlatmalarının günde 6 sınırına (`notifyAll.js:49`) ve 20'lik kimlik bütçesine
+  (`moduleRemind.js:20`) girmez; birleşmeye girmez, dokununca hep Kısa açılır.
+- Başka bir bildirime 30 dk'dan yakın düşen Dik Dur dilimi o gün atlanır (dizinin bir dilimi; öteki hatırlatma hiç kaymaz).
+- Dik Dur dilimleri Nef'in kendi seçtiği saatlerin kaçındığı dolu saatlere girer.
+- Bekleyen 58 sınırı aşılırsa önce Dik Dur ufku kısalır (5→2→1 gün), sonra bugünkü kural (öteki modüllerin ufku).
 
 **Bildirim:** kısa ve tek iş, örnek taslak "Dik dur · Başının tepesinden bir ip çekiliyor gibi uzan." (metin kapısı +
-senin onayın; dilimlere göre birkaç cümle dönüşümlü). Düzey sessiz (`interruptionLevel: 'passive'`): Odak kipinde
-susar, ses çıkarmaz (eklenti 8.1+ destekliyor; cihazda denenecek). Dokununca Kısa açılır.
+senin onayın; günden güne dönüşümlü). Uygulamanın bütün bildirimleri zaten sessiz (ses ayarlanmıyor). Düzey kararı
+(karar 7): **etkin** (ekranı yakar; bugünkü gibi) ya da **pasif** (ekranı yakmaz, yalnız Bildirim Merkezi'ne düşer;
+görülmeyebilir). Öneri: etkin.
 
-**Bildirim düğmeleri (ayrı parça, D4):** "15 dk sonra" ve "Yaptım" (`registerActionTypes`, eklentide var); "Bugünlük
-yeter" (o günün kalanını susturur; A yolunda tekrarı silmeden yapılamaz, B yolunda yapılır). Bir hafta hiç açılmazsa
-Nef "her 2 saate alalım mı" diye sorar (yorgunluk koruması; VARSAYIM).
+**Bildirim düğmeleri (D4):** "Yaptım" ve "15 dk sonra". Arka planda çalışan düğme JS'i çalıştıramayabiliyor (eklenti
+hemen bitiriyor); bu yüzden ya düğme uygulamayı açar (`foreground: true`) ya da D2'deki Swift'e yerel bir karşılayıcı
+yazılır. Bildirim kategorileri tek yerden kurulur (`registerActionTypes` bütün kategorileri değiştiriyor; Swift'in
+kendi kategorileriyle çakışmasın). "Bugünlük yeter" ve "bir hafta hiç dokunulmadıysa Nef 'her 2 saate alalım mı' diye
+sorar" B yolunda çalışır (VARSAYIM; kanıtı yok).
 
-**Varsayılan aralık:** her 2 saat, 09.00–19.00 (VARSAYIM). Kanıt: kısa molalar 30 dakikada bir denendi (Cochrane);
-duruş hatırlatması için en iyi sıklığı gösteren çalışma bulunamadı. 30 dakikadan sık seçenek yok.
+**Sıklığın dayanağı:** kısa molalar 30 dakikada bir denendi (Cochrane, oturma); duruş hatırlatması için en iyi sıklığı
+gösteren çalışma bulunamadı. Her 1 ve her 2 saat VARSAYIM.
 
 ### 4.3 Kod işi ve testler
 
 Dokunulmaz üç dosyaya gerek yok. Değişecek dosyalar: `moduleRemind.js` (aralık ayarı `normalizeModuleReminders`'tan
-düşmesin; `capOf`), `registry.js` (`validateRemind`), `notifyAll.js` (ayrı kova, birleşme), `notifyApply.js` (yeni kimlik
-aralığı 7868–7899, `OWN_RANGES`, `isNewId`, tekrarlayan kurulum), `notifyTap.js` (dokununca Kısa).
+düşmesin; `capOf`), `registry.js` (`validateRemind`), `notifyAll.js` (ayrı kova, 30 dk atlama, bütçe sırası),
+`notifyApply.js` (`OWN_RANGES`, `isNewId`; A seçilirse ayrıca `wantedFrom`, `same`, `toLN` tekrarlayan biçim için ve
+"plan değişmeden yeniden açılış 0 iptal, 0 kurulum" testi), `notifyTap.js` (dokununca Kısa).
 
-Yeni kimlik aralığı iptal listesine girdiği için **üç test bilerek değişir**: `notifyAll.equiv.test.js:203`,
-`notifyApply.test.js:266`, `notifyAll.test.js:37` (iptal kimlik listesi). Eşdeğerliğin özü korunur: aralıklı kip kapalıyken
-bildirim planı bugünküyle 0 fark. Bu üç test için iznin karar 6'da.
+**Bilerek değişecek testler** (karar 6): `notifyAll.equiv.test.js:203` (iptal kimlik listesi), `notifyApply.test.js:268`
+ve `:273` (iptal sayısı ve 7868'in iptal edilmediği), `notifyApply.test.js:420` (7899'un iptal edilmediği),
+`notifyAll.test.js:37` (plan kimlikleri listesi; güncellenmezse :714'teki bekleyen sayımı eksik sayar). Eşdeğerliğin özü
+korunur: aralıklı kip kapalıyken bildirim planı bugünküyle 0 fark.
 
 ---
 
@@ -203,13 +213,15 @@ bildirim planı bugünküyle 0 fark. Bu üç test için iznin karar 6'da.
 ## 7. Senden kararlar
 
 1. **3 saat sınırına istisna:** Dik Dur aralıklı kipte günde 13'e kadar çıkabilsin mi? (Öneri: evet, yalnız bu modül.)
-2. **Devamlılık:** A tekrarlayan (her gün, uygulama açılmasa da) mı, B kayan 48 saat (gün seçimi var, açılmazsa durur) mı?
-   (Öneri: A.)
+2. **Devamlılık:** B kayan ufuk (her 2 saatte 5 gün ileri; gün seçimi, atlama, "bugünlük yeter"; uygulama 5 gün
+   açılmazsa durur) mı, A tekrarlayan (uygulama açılmasa da her gün, ama gün seçimi ve atlama yok, durdurulamaz) mı?
+   (Öneri: B.)
 3. **Varsayılan aralık:** her 2 saat mi, her 1 saat mi? (Öneri: 2.)
 4. **Kamera:** ilk oturumda sorulsun mu? (Öneri: evet; açıklama ekranı + izin; metin senin onayından geçer.)
 5. **Ses:** önce cihazın sesi, cümleler oturunca ElevenLabs (ücretli, senin onayınla) mı? (Öneri: evet.)
-6. **Üç test izni:** §4.3'teki üç test yeni kimlik aralığı için bilerek değişebilir mi?
-7. **Sıra** (öneri):
+6. **Test izni:** §4.3'teki beş test yeri yeni kimlik aralığı için bilerek değişebilir mi?
+7. **Bildirim düzeyi:** etkin (ekranı yakar) mı, pasif (yalnız Bildirim Merkezi) mi? (Öneri: etkin.)
+8. **Sıra** (öneri):
    - **D1** (yalnız JS, tek TestFlight): egzersiz Kısa ve Tam + saat ve aralıklı hatırlatma + kamera deneme ekranı (ham
      sinyaller; Okurken göz denemesi gibi) + önden kamerayla adım doğrulama (uzaklık ve eğim, göreli).
    - **D2** (Swift, Mac'te derlenir): gerçek baş eğimi, telefon kıpırdadı mı, Vision ile omuz kalkması + Yan kontrol denemesi.
@@ -232,7 +244,7 @@ bildirim planı bugünküyle 0 fark. Bu üç test için iznin karar 6'da.
 | Çene geri alma için baş eğimi sinyali | Asıl sinyal uzaklık; doğru yapılan hareket eğimi neredeyse değiştirmez |
 | "Omuzlar geri ölçülemez" ve orada bitiyordu | Yan kontrol eklendi (yandan kulak–omuz), önce cihazda denenir |
 | Aralıklı saatlere gece ve 30 dk kuralı | Senin 2026-10-01 kuralın: elle seçilen saat kısıtlanmaz |
-| 1 gün ufuk; açılmazsa sessizlik | Tekrarlayan bildirim (A) ya da 48 saat (B); karar 2 |
+| 1 gün ufuk; açılmazsa sessizlik | Kayan 5 gün (B, öneri) ya da tekrarlayan (A); karar 2 |
 | "5°'den küçük fark gösterilmez" (Gallego-Izquierdo) | O sayı yandan fotoğraf ölçüsü içindi; eşik cihaz gürültüsünden ölçülecek |
 | Abadiyan'dan "sık hatırlatma iyi değil" çıkarımı | Kaldırıldı: o çalışmada sık hatırlatan kol daha iyiydi; sıklık VARSAYIM |
 | Alghadir dozu dik oturarak çene geri alma içinmiş gibi | Doz sırtüstü, gözetimli bir egzersizden ödünç; açıkça yazıldı |
@@ -243,3 +255,4 @@ bildirim planı bugünküyle 0 fark. Bu üç test için iznin karar 6'da.
 | İlk TestFlight zayıf (aralıklı ve kamera yoktu) | D1'e aralıklı hatırlatma ve kamera girdi |
 | Güvenlik tek satır | İlk açılışta tarama ekranı + yumuşak dil |
 | Nef sözleşmesinin gereği eksik | §5 |
+| v2 ilk hâli: tekrarlayan öneri, "pasif susar", arka plan "Yaptım", üç test | Son tur: öneri B; pasif ekranı yakmaz (karar 7); düğme uygulamayı açar ya da Swift; DAY_CAP ve birleşme dışı; beş test yeri |
