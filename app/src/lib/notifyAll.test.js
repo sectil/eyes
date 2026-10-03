@@ -459,7 +459,7 @@ describe('planAll: sabah havası', () => {
     expect(p.notifications.filter((n) => n.id < 7700)).toEqual(planNotifications(i).notifications)
     // Onaylı metin bağlı (notifyApply kurar); texts: true onu değiştirmez
     expect(w[0].title).toBe('Gaziemir 18° · en çok 24°')
-    expect(w[0].body).toBe('Sabah 06.50 tahminine göre kuru bir gün bekleniyor; hissedilen 17°, serin.\nKaynak: Apple Weather')
+    expect(w[0].body).toBe('Sabah 06.50 tahminine göre yağmur beklenmiyor; hava serin, hissedilen 17°.\nKaynak: Apple Weather')
     expect(weatherOf(planAll({ ...i, texts: true }))).toEqual(w)
   })
 

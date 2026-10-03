@@ -1,4 +1,6 @@
-# Sabah havası cümleleri v2 (D11) · TASLAK, sahip onayı bekliyor
+# Sabah havası cümleleri v2 (D11) · ONAYLANDI (sahip, 2026-10-03), koda girdi
+
+**Not:** eski cümleler `sabah-havasi-onay.md`'de kalır; beş karar (saat, hissedilen, kısa başlık, sessizlik, iptal) oradan geçerli.
 
 Sahip (2026-10-01): sabah havası bildirimi "doğallıktan çok uzak". Eski onaylı takım: `sabah-havasi-onay.md`.
 Değişen yalnız gövdenin ilk satırı; başlık ("Gaziemir 17° · en çok 26°"), "Kaynak: Apple Weather" satırı, saat kuralları,
@@ -34,7 +36,7 @@ Olasılık hücreleri yeni: bugün %30–59 günlerde onaylı cümle olmadığı
 | 2 | C1 "yağmur olasılığı %40 … Montunu giy" | — | 1/5 (ses öteki cümlelerden ayrı) | — |
 | 2 | C2 "%40 yağmur ihtimali var … Mont ve şemsiye al" | — | **5/5** | — |
 
-Seçilen: yağmur A, olasılık C2, kuru B. Kendi onayım: evet.
+Seçilen: yağmur A, olasılık C2, kuru B. Kendi onayım: evet. Sahip onayı 2026-10-03 ("Onay"); `lib/weatherNotify.js` MORNING_TEMPLATES, test `weatherNotify.test.js` bu tabloyu harfi harfine okur.
 
 ## Yürüyüşe yağmur (D11'in ikinci yarısı)
 
