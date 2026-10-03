@@ -180,7 +180,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
         </div>
         <div className="ex-copy">
           <h1 className="ex-title" aria-live="polite">Dinlen.</h1>
-          <p className="ex-para dd-cue">Sonraki bölüm 1 dakika sonra başlar.</p>
+          <p className="ex-para dd-cue">Sonraki bölüm sayaç bitince başlar.</p>
         </div>
         <div className="ex-mid">
           <Arena progress={Math.min(1, elapsed / (step.s * 1000))} tone="gold"><text className="dd-count" x="130" y="152" textAnchor="middle">{`${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')}`}</text></Arena>

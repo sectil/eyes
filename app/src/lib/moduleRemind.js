@@ -14,6 +14,7 @@
 import { normalizeReminders, toMinutes } from './reminders.js'
 import { dayKey, keyDay } from './habitLog.js'
 import { LEAD_MS, walkThreshold } from './notifyPlan.js'
+import { normalizeInterval } from './postureRemind.js'
 
 export const MR_ID = 7800
 export const MR_ID_LAST = 7859
@@ -94,6 +95,8 @@ export function normalizeModuleReminders(raw) {
       autoAt: isIso(v.autoAt) ? v.autoAt : null,
       setAt: isIso(v.setAt) ? v.setAt : null,
     }
+    // Dik Dur aralıklı kip (lib/postureRemind.js): yalnız ayarda varsa taşınır (öteki kayıtların biçimi değişmez)
+    if (isObj(v.interval)) out[id].interval = normalizeInterval(v.interval)
   }
   return out
 }
@@ -256,7 +259,7 @@ export function planModuleReminders({
   for (const m of list) {
     if (m.remind.legacy) continue
     const cfg = mr[m.id]
-    if (!cfg?.on) continue
+    if (!cfg?.on || cfg.interval?.on) continue // aralıklı kip açıkken saatler kurulmaz (planAll postureRemind'le kurar)
     const cap = capOf(m.id, m.remind)
     let times = cfg.times.slice(0, cap)
     if (cfg.mode === 'auto' && recalcDue(cfg.autoAt, base) && Array.isArray(m.records)) {

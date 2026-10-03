@@ -34,7 +34,7 @@ const isWeather = (n) => n.id >= 7700 && n.id <= 7701
 const isFreeWeather = (n) => isWeather(n) && !n.extra?.alarm && !n.keepPending
 const isAlarmWeather = (n) => isWeather(n) && !isFreeWeather(n)
 const minOf = (d) => d.getHours() * 60 + d.getMinutes()
-const OWN = [[7400, 7499], [7500, 7509], [7700, 7701], [7800, 7859], [7860, 7867]]
+const OWN = [[7400, 7499], [7500, 7509], [7700, 7701], [7800, 7859], [7860, 7867], [7868, 7899]] // 7868–7899 Dik Dur aralıklı (sahip izni 2026-10-03)
 const pick3 = (n) => ({ id: n.id, title: n.title, body: n.body, at: n.at.getTime() })
 // Saati kişi mi seçti (sahip kararı 2026-10-01): modül hatırlatmasında (birleşikte ilk modül) ya da ek saatte türün
 // kaydı elle (mode 'manual'). Bunlar 30 dk'ya, pencereye ve gece kurallarına uymaz; Nef'in saatleri uyar.

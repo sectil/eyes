@@ -98,6 +98,16 @@ export const TEXTS = Object.freeze({
     { id: 'YY2', title: 'Bir tur Yakala Yaz?', body: 'Yaklaşık 2 dakika. Hazır olduğunda dokun.', source: 'rubin1992' },
     { id: 'YY3', title: 'Yakala Yaz', body: 'Bugünkü basamağın seni bekliyor. Seçim senin: şimdi ya da sonra.', source: 'rubin1992' },
   ],
+  // Dik Dur (dik-dur/metin-D1-onay.md §J; sahip onayı 2026-10-03). Kaynak yok: cümle bulgu söylemiyor.
+  'remind.dik-dur': [
+    { id: 'DD1', title: 'Dik dur', body: 'Boyunu uzat, çeneni içeri çek, omuzlarını geri al. Kısa tur 2 dakika sürer.', source: null },
+    { id: 'DD2', title: 'Kısa bir mola', body: 'Bir an dikleş, omuzlarını geriye ve aşağı al. Dokun, birlikte yapalım.', source: null },
+    { id: 'DD3', title: 'Nasıl oturuyorsun?', body: 'Çökmüş müsün? Dikleş, çeneni içeri çek. Kısa tur 2 dakika sürer.', source: null },
+  ],
+  // Aralıklı kipte kurulan son bildirim (lib/postureRemind.js LAST_TEXT_KEY)
+  'remind.dik-dur-son': [
+    { id: 'DS1', title: 'Dik Dur', body: 'Hatırlatmalar burada bitiyor. Sürmesi için uygulamayı bir kez aç.', source: null },
+  ],
   'remind.merged': [
     { id: 'BR1', title: '2 hatırlatma bir arada', body: '{A} ve {B} hazır. Hangisiyle başlarsın?', source: null },
     { id: 'BR2', title: 'Sırada 2 pratik', body: '{A} ile {B} hazır. Dokun, Ana sayfadan birini seç.', source: null },
@@ -141,6 +151,8 @@ export const NAMES = Object.freeze({
   'yon': 'Yön',
   'okuma-anlama': 'Oku ve Anla',
   'yakala-yaz': 'Yakala Yaz',
+  'dik-dur': 'Dik Dur',
+  'dik-dur-son': 'Dik Dur', // anahtar adı (remindTexts.test: her remind.<x> başlığı); modül değil
 })
 
 export const SCI_LINES = Object.freeze({

@@ -21,6 +21,7 @@ const OWN_RANGES = [
   [7700, 7701],
   [7800, 7859],
   [7860, 7867],
+  [7868, 7899], // Dik Dur aralıklı hatırlatma (lib/postureRemind.js; dik-dur/PLAN.v2.md §4.3)
   [7900, 7919], // Nef'in kendi bildirimi (lib/nef/notify.js; Nef PLAN §4.3, ANA_OTURUM_ISTEMI madde 5)
 ]
 const CANCEL_ONLY_RANGES = [[7710, 7719]]
@@ -40,7 +41,7 @@ const isTidyId = (id) => inRanges([...OWN_RANGES, ...CANCEL_ONLY_RANGES], id) &&
 // Yeni özelliğin kurduğu kimlikler (sabah havası, modül hatırlatmaları, ek saatler). Gruplama (threadIdentifier,
 // relevanceScore, açılış temizliği) yalnız bunlardan en az biri gerçekten kurulacaksa devreye girer: metni bağlanmamış
 // bildirim kurulmadığı için plan.grouped tek başına yetmez (inceleme; B1a'da metinler bağlanınca kendiliğinden açılır).
-const isNewId = (id) => inRanges([[7700, 7701], [7800, 7867], [7900, 7919]], id)
+const isNewId = (id) => inRanges([[7700, 7701], [7800, 7899], [7900, 7919]], id)
 
 // Bildirim Merkezi'nde tek grup (yalnız yeni özellik açıkken). relevanceScore özet sıralaması içindir (VARSAYIM:
 // çalışma oturumu en üstte, sonra hava, deney ve ek saatler, en altta modül hatırlatmaları).

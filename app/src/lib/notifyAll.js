@@ -44,6 +44,7 @@ import { nextRing, SLEEP_TARGET_H } from './alarm.js'
 import { resolvePlanTexts } from './remindTexts.js'
 import { planMorningWeather, morningOn } from './weatherNotify.js'
 import { planNef } from './nef/notify.js'
+import { planPosture, POSTURE_ID } from './postureRemind.js'
 
 export const MIN_APART_MIN = 30 // planlayıcıda iki bildirim arası en az (VARSAYIM, §A.4)
 export const DAY_CAP = 6 // modül hatırlatmalarından günde en çok (VARSAYIM, §A.4)
@@ -71,7 +72,7 @@ const isFocusBreak = (n) => n?.extra?.kind === 'focus'
 // Yeni özellik açık mı: açık bir modül hatırlatması ya da legacy türde ek saat. "Kapalı" = moduleReminders boş
 // (§5.4). VARSAYIM: yalnız kapalı (on: false) ve saatsiz kayıtlar da kapalı sayılır.
 export function newFeaturesOn({ moduleReminders } = {}) {
-  return Object.entries(normalizeModuleReminders(moduleReminders)).some(([k, c]) => c.on || (k in LEGACY_ORDER && c.times.length > 0))
+  return Object.entries(normalizeModuleReminders(moduleReminders)).some(([k, c]) => c.on || c.interval?.on === true || (k in LEGACY_ORDER && c.times.length > 0))
 }
 
 // Gece sessizliği ayarı → dakika. Başlangıç 22.00–24.00 ('00:00' = 24.00, VARSAYIM), bitiş 06.00–10.00; aralık
@@ -199,6 +200,20 @@ export function planAll(input = {}) {
 
   const baseKept = base.notifications.filter((n) => !result.clash.has(n.id))
   const notifications = [...baseKept, ...result.extras.map((e) => e.n), ...result.weather, ...result.modules.map(toNotification)]
+  // Dik Dur aralıklı kip (lib/postureRemind.js): öteki her şey yerleştikten sonra kalan paya; başka bildirime 30 dk
+  // yakın dilim atlanır. Kişinin seçtiği saatler: gece sessizliği, yatma öncesi ve oturum uygulanmaz (sahip 2026-10-01).
+  if (mrAll[POSTURE_ID]?.interval?.on) {
+    const posture = planPosture({
+      now,
+      interval: mrAll[POSTURE_ID].interval,
+      taken: notifications.map((n) => n.at),
+      sessions,
+      room: MAX_PENDING - notifications.length,
+      science: remindOf(POSTURE_ID)?.science ?? [],
+    })
+    notifications.push(...posture.notifications)
+    result.skipped.push(...posture.skipped)
+  }
   notifications.sort((a, b) => a.at - b.at || a.id - b.id)
   const plan = {
     notifications,

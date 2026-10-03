@@ -95,8 +95,12 @@ export default function Notifications({ modules = [], moduleReminders, reminders
       {(rows.length > 0 || legacy.length > 0) && <div className="nt-list">
         {rows.map((m) => {
           const c = mr[m.module]
-          const on = Boolean(master && c?.on)
-          const alt = (c && sub(c)) || (idle(m) ? { pre: 'Her gün ', t: dot(idle(m)), nef: false } : null)
+          // Dik Dur aralıklı kip (lib/postureRemind.js): "İki saatte bir · 09.00–19.00"; kapatılınca da aralık görünür
+          const iv = c?.interval && !c.times.length ? c.interval : null
+          const on = Boolean(master && (c?.on || iv?.on))
+          const alt = iv
+            ? { pre: `${iv.every === 60 ? 'Saatte bir' : 'İki saatte bir'} · `, t: `${dot(iv.from)}–${dot(iv.to)}`, nef: false }
+            : (c && sub(c)) || (idle(m) ? { pre: 'Her gün ', t: dot(idle(m)), nef: false } : null)
           return row(m.module, { label: NAMES[m.module] ?? m.module, Icon: iconOf(m.module), sub: alt, on, onTap: () => onOpen?.(m.module), onFlip: (v) => onToggle?.(m.module, v) })
         })}
         {legacy.map((t) => {

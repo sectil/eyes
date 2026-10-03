@@ -53,7 +53,8 @@ Dik Dur
 - Yüz kaybolunca: Yüzünü göremiyorum. Sayaç sen görünene kadar bekliyor.
 - İlerleme (kısa tur): Tekrar 2 / 3
 - İlerleme (tam tur): Bölüm 1 / 3 · Tekrar 4 / 10
-- Bölüm arası: Dinlen. Sonraki bölüm 1 dakika sonra başlar. · Düğme: Şimdi başla
+- Bölüm arası: başlık "Dinlen.", altında "Sonraki bölüm sayaç bitince başlar.", halkada kalan süre 0:40 biçiminde · Düğme: Şimdi başla
+- Ara (iki tutma arası 3 sn): etiket "Hazırlan · Tekrar 1 / 3", sıradaki hareket soluk, altta 3-2-1
 
 ## H. Bitiş
 - Başlık: Bitti
@@ -82,3 +83,9 @@ Dik Dur
 ## K. Kamera izni açıklaması (Info.plist NSCameraUsageDescription)
 Ön kamerayı gözünün telefona uzaklığını ölçmek, göz kırpmalarını saymak ve Dik Dur'da başının duruşuna bakmak için
 kullanırız. Görüntüler telefonundan çıkmaz ve kaydedilmez.
+
+## Değişiklik (5 sn kapısı, 2026-10-03; onay yetkisi Claude'da, PLAN.v2 §10)
+
+- Bölüm arası: tur 1'de tek başlık sağda kesildi (2/5); tur 2'de "1 dakika sonra başlar" yazısı 0:40 sayacıyla
+  çelişti (0/5). İki tur doldu; kapı bulgusuna göre cümle "Sonraki bölüm sayaç bitince başlar." oldu.
+- Ara: tur 1'de donmuş gibi göründü (0/5); "Hazırlan" etiketi ve 3-2-1 sayacıyla tur 2'de 5/5.

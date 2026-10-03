@@ -199,8 +199,8 @@ describe('eşdeğerlik (ii): notifyApply çağrı dizisi ≡ taban notifyApply (
     const w = want[0][1].notifications.map((n) => n.id)
     expect(w.every((id) => g.includes(id))).toBe(true)
     const range = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => a + i)
-    // Nef 7900–7919 (Nef PLAN, ANA_OTURUM_ISTEMI madde 5)
-    expect(g.filter((id) => !w.includes(id)).sort()).toEqual([...range(7700, 7701), ...range(7710, 7719), ...range(7800, 7867), ...range(7900, 7919)])
+    // Nef 7900–7919 (Nef PLAN, ANA_OTURUM_ISTEMI madde 5); Dik Dur aralıklı 7868–7899 (dik-dur/PLAN.v2.md §4.3, sahip izni 2026-10-03)
+    expect(g.filter((id) => !w.includes(id)).sort()).toEqual([...range(7700, 7701), ...range(7710, 7719), ...range(7800, 7899), ...range(7900, 7919)])
     expect(got[1]).toEqual(want[1])
   })
 

@@ -8,6 +8,7 @@
 // | 7400–7509 | bugünkü (nudge/focus)     | bugünkü (türün ekranı + markTapped / mola)               |
 // | 7600–7607 | alarm                     | uyanma işareti                                           |
 // | 7800–7859 | remind / remindMerged     | modül ya da Ana sayfa (birleşik), üstte bilim kartı      |
+// | 7868–7899 | remind (Dik Dur aralıklı) | Dik Dur (kısa tur girişi), üstte bilim kartı              |
 // | 7860–7867 | nudge                     | bugünkü deney yönlendirmesi + markTapped (günü dokunulmuş sayar) |
 // | 7700–7701 | weather                   | hava sayfası (WEATHER_ROUTE); açılamıyorsa Ana sayfa     |
 // Hava sayfası screens/Sky.jsx (rota 'sky'); App routeOk onu yalnız SKY_UI açıkken tanır, kapalıyken Ana sayfa açılır.
@@ -24,6 +25,7 @@ import { WEATHER_IDS } from './weatherNotify.js'
 export const TAP_ROUTE = Object.freeze({ mola: 'mola', walk: 'home', breath: 'breath-1', water: 'water', study: 'home' })
 export const REMIND_IDS = Object.freeze([7800, 7859])
 export const EXTRA_IDS = Object.freeze([7860, 7867])
+export const POSTURE_TAP_IDS = Object.freeze([7868, 7899]) // lib/postureRemind.js POSTURE_IDS ile aynı
 export { WEATHER_IDS } // tek tanım weatherNotify.js'te
 export const WEATHER_ROUTE = 'sky'
 
@@ -53,7 +55,7 @@ export function tapAction(ev, { routeOk = () => true } = {}) {
   if (extra?.kind === 'weather' && inRange(WEATHER_IDS, id)) {
     return { kind: 'weather', route: routeOk(WEATHER_ROUTE) ? WEATHER_ROUTE : 'home', date: typeof extra.date === 'string' ? extra.date : null }
   }
-  if ((extra?.kind === 'remind' || extra?.kind === 'remindMerged') && inRange(REMIND_IDS, id)) {
+  if ((extra?.kind === 'remind' || extra?.kind === 'remindMerged') && (inRange(REMIND_IDS, id) || (extra.kind === 'remind' && inRange(POSTURE_TAP_IDS, id)))) {
     // Birleşik bildirim bugünkü Ana sayfayı açar (özel ekran yok); tekil hatırlatma modülün remind.route'unu
     const route = extra.kind === 'remindMerged' ? 'home' : typeof extra.route === 'string' && extra.route && routeOk(extra.route) ? extra.route : 'home'
     return { kind: 'remind', route, science: scienceOf(extra.evidence) }

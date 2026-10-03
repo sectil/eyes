@@ -208,3 +208,17 @@
 .qh-ri { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--surface-2); color: var(--ink-2); }
 .qh-lr b { flex: 1; font-weight: 500; }
 .qh-lr em { font-style: normal; color: var(--qh-amber); font-variant-numeric: tabular-nums; }
+
+/* Dik Dur aralıklı kip (RemindSheet; metin-D1-onay.md §I) */
+.rs-iv { display: grid; gap: 14px; margin-top: 16px; }
+.rs-seg.rs-seg-sm { margin-top: 0; }
+.rs-ivt { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rs-ivl { display: grid; gap: 6px; min-width: 0; }
+.rs-ivl span, .rs-ivh { font-size: 0.85rem; font-weight: 600; color: var(--ink-2); }
+.rs-ivl .rs-input { width: 100%; min-width: 0; }
+.rs-days { display: grid; gap: 8px; }
+.rs-dchips { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.rs-day { min-height: 44px; padding: 0; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--ink-3); font: 600 0.9rem var(--font-body); cursor: pointer; }
+.rs-day.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.rs-iv .rs-note { margin-top: 0; }
+.rs-note.rs-err { color: var(--warn, #b4431c); }

@@ -131,6 +131,20 @@ Kaynak: `rayner2016`. Cümleler `okuma-anlama/METINLER.md` §5'ten harfi harfine
 
 Kaynak: `rubin1992`. Cümleler `kelime-hafiza/METINLER.md` H1–H3'ten harfi harfine; sahip onayı 2026-10-02 ("onay"). Metin kapısı ana oturumda gerçek ekranla (bildirim) yapılmadı: bildirim sayfası uygulamada kapalı.
 
+### `remind.dik-dur` · Dik Dur
+
+- DD1 · **Dik dur** · Boyunu uzat, çeneni içeri çek, omuzlarını geri al. Kısa tur 2 dakika sürer. · 7/75
+- DD2 · **Kısa bir mola** · Bir an dikleş, omuzlarını geriye ve aşağı al. Dokun, birlikte yapalım. · 13/70
+- DD3 · **Nasıl oturuyorsun?** · Çökmüş müsün? Dikleş, çeneni içeri çek. Kısa tur 2 dakika sürer. · 18/64
+
+Kaynak: yok (cümle bir bulgu söylemiyor; bildirim modülün havuzundan kart taşır). Cümleler `dik-dur/metin-D1-onay.md` §J'den harfi harfine; sahip onayı 2026-10-03. Aralıklı kipte (7868–7899) ve saat kipinde (7800–7859) aynı anahtar.
+
+### `remind.dik-dur-son` · Dik Dur
+
+- DS1 · **Dik Dur** · Hatırlatmalar burada bitiyor. Sürmesi için uygulamayı bir kez aç. · 7/65
+
+Yalnız aralıklı kipte, kurulan son bildirimde (`dik-dur/metin-D1-onay.md` §J DD-SON; kimlik kural gereği DS1). Sahip onayı 2026-10-03.
+
 ### `remind.merged` · Birleşik bildirim
 
 - BR1 · **2 hatırlatma bir arada** · {A} ve {B} hazır. Hangisiyle başlarsın? · 22/61

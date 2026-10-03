@@ -17,6 +17,9 @@ export default {
   },
   gates: {},
   home: { section: 'exercise', order: 92 },
+  // "Bana hatırlat": saat kipi (günde en çok 3 saat) ve aralıklı kip (lib/postureRemind.js; settings.moduleReminders
+  // ['dik-dur'].interval). Öneri saati 11.00 (PLAN §4.2, VARSAYIM: ekran işinin ortası).
+  remind: { route: 'dik-dur', window: 'move', defaultTime: '11:00', science: ['nair2015', 'elkjaer2022', 'xing2026', 'alghadir2021'] },
   // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-03, metin kapısı 5/5): ad çekimleri, genel anlar, kanıt.
   nef: {
     name: { tr: { '': 'Dik Dur egzersizi', ABL: 'Dik Dur egzersizinden', ACC: 'Dik Dur egzersizini', LOC: 'Dik Dur egzersizinde', DAT: 'Dik Dur egzersizine', INS: 'Dik Dur egzersiziyle', POSS: 'Dik Dur egzersizin', 'POSS-ABL': 'Dik Dur egzersizinden' } },

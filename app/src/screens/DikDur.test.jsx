@@ -68,7 +68,7 @@ describe('Dik Dur ekranı', () => {
     // ilk bölüm: 20 tutma + 19 ara, adım adım (her adımın zamanlayıcısı ekran yenilenince kurulur)
     for (const st of stepsOf('tam').slice(0, 39)) await v.run(st.s * 1000)
     expect(v.text()).toContain('Dinlen.')
-    expect(v.text()).toContain('Sonraki bölüm 1 dakika sonra başlar.')
+    expect(v.text()).toContain('Sonraki bölüm sayaç bitince başlar.')
     expect(v.text()).toContain('1:00')
     await v.tap('Şimdi başla')
     expect(v.text()).toContain('Bölüm 2 / 3 · Tekrar 1 / 10')
