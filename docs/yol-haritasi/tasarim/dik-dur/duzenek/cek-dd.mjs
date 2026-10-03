@@ -13,7 +13,7 @@ async function open(w, theme, seen) {
   await page.clock.install({ time: new Date(2026, 9, 3, 12) })
   await page.goto(`${BASE}?theme=${theme === 'koyu' ? 'dark' : 'light'}${seen ? '&seen=1' : ''}`)
   await page.evaluate(() => document.fonts.ready)
-  await page.addStyleTag({ content: `.ex-stage{padding-top:${d.top + 8}px!important}` })
+  await page.addStyleTag({ content: `.ex-stage{padding-top:${d.top + 8}px!important} *{transition:none!important}` }) // saat donuk: geçişler kapalı
   await page.waitForTimeout(200)
   return page
 }
@@ -34,7 +34,7 @@ for (const theme of ['acik', 'koyu']) for (const w of [390, 320]) {
   await shot(p, 'tutma', w, theme)
   await p.clock.runFor(6500)
   await shot(p, 'ara', w, theme)
-  for (let i = 0; i < 40; i++) await p.clock.runFor(2000)
+  for (let i = 0; i < 70 && !(await p.getByText('Bitti').count()); i++) await p.clock.runFor(2000)
   await shot(p, 'bitis', w, theme)
   await p.close()
   p = await open(w, theme, true)

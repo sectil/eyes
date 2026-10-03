@@ -26,7 +26,7 @@ const seen = (storage) => {
 const SILHOUETTE = 'M140 56 C159 56 171 70 171 88 L178 101 L170 104 C170 113 164 119 156 121 L155 133 C167 141 173 161 173 191 L173 228 H115 L115 188 C115 162 121 146 128 133 L126 117 C114 111 109 99 109 88 C109 70 121 56 140 56 Z'
 export function PostureArt({ move = null }) {
   return (
-    <g className="dd-art">
+    <g className="dd-art" transform="translate(-14 2)">
       {move === 'uzat' && <path className="dd-string" d="M140 12 V50" />}
       <path className="dd-sil" d={SILHOUETTE} />
       <path className="dd-line" d="M128 88 q-6 6 0 12" />
@@ -179,10 +179,11 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
           <SoundToggle className="ex-sound" />
         </div>
         <div className="ex-copy">
-          <h1 className="ex-title" aria-live="polite">Dinlen. Sonraki bölüm 1 dakika sonra başlar.</h1>
+          <h1 className="ex-title" aria-live="polite">Dinlen.</h1>
+          <p className="ex-para dd-cue">Sonraki bölüm 1 dakika sonra başlar.</p>
         </div>
         <div className="ex-mid">
-          <Arena progress={Math.min(1, elapsed / (step.s * 1000))} tone="gold"><text className="dd-count" x="130" y="146" textAnchor="middle">{left}</text></Arena>
+          <Arena progress={Math.min(1, elapsed / (step.s * 1000))} tone="gold"><text className="dd-count" x="130" y="152" textAnchor="middle">{`${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')}`}</text></Arena>
         </div>
         <div className="ex-foot">
           <button type="button" className="ex-btn" onClick={next}><Play aria-hidden="true" fill="currentColor" /> Şimdi başla</button>
@@ -200,7 +201,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
         <SoundToggle className="ex-sound" />
       </div>
       <div className="ex-copy" key={`${shown.set}-${shown.rep}-${shown.move}`}>
-        <span className="ex-step"><b>{progressText(mode, shown)}</b></span>
+        <span className="ex-step">{step.kind === 'gap' ? <>Hazırlan · <b>{progressText(mode, shown)}</b></> : <b>{progressText(mode, shown)}</b>}</span>
         <h1 className="ex-title" aria-live="assertive">{mv.name}</h1>
         <p className="ex-para dd-cue">{mv.cue}</p>
       </div>
@@ -208,7 +209,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
         <Arena progress={part} off={step.kind !== 'hold'}>
           <PostureArt move={shown.move} />
         </Arena>
-        <div className="dd-left" aria-hidden="true">{step.kind === 'hold' ? left : ''}</div>
+        <div className={`dd-left${step.kind === 'gap' ? ' wait' : ''}`} aria-hidden="true">{left}</div>
       </div>
       <div className="ex-foot" />
     </main>

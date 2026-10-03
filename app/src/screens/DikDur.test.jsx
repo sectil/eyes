@@ -50,6 +50,7 @@ describe('Dik Dur ekranı', () => {
     expect(v.text()).toContain('Boyunu uzat')
     await v.run(10000) // ilk tutma biter → ara: sıradaki hareket görünür
     expect(v.text()).toContain('Çeneni içeri çek')
+    expect(v.text()).toContain('Hazırlan')
     for (let i = 0; i < 40; i++) await v.run(1000 * 10)
     expect(v.text()).toContain('Bitti')
     expect(v.text()).toContain("3 hareket, 3'er tekrar · 2 dakika")
@@ -66,7 +67,9 @@ describe('Dik Dur ekranı', () => {
     expect(v.text()).toContain('Çeneni içeri çek')
     // ilk bölüm: 20 tutma + 19 ara, adım adım (her adımın zamanlayıcısı ekran yenilenince kurulur)
     for (const st of stepsOf('tam').slice(0, 39)) await v.run(st.s * 1000)
-    expect(v.text()).toContain('Dinlen. Sonraki bölüm 1 dakika sonra başlar.')
+    expect(v.text()).toContain('Dinlen.')
+    expect(v.text()).toContain('Sonraki bölüm 1 dakika sonra başlar.')
+    expect(v.text()).toContain('1:00')
     await v.tap('Şimdi başla')
     expect(v.text()).toContain('Bölüm 2 / 3 · Tekrar 1 / 10')
     expect(totalSeconds('tam')).toBeGreaterThan(14 * 60)

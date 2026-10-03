@@ -15,6 +15,7 @@
 
 .dd-count { font-family: var(--font-display); font-size: 64px; font-weight: 650; fill: var(--ex-ink); font-variant-numeric: tabular-nums; }
 .dd-mid { flex-direction: column; gap: 10px; }
+.dd-left.wait { color: var(--ex-ink3); }
 .dd-left { flex: none; min-height: 52px; text-align: center; font-family: var(--font-display); font-size: 2.6rem; font-weight: 650; line-height: 1; color: var(--ex-ink); font-variant-numeric: tabular-nums; }
 
 /* Giriş uzun: kısa ekranda kaydırılabilir; çizim küçülür ya da kalkar (320 × 568'de düğmeler ekranda kalsın) */
