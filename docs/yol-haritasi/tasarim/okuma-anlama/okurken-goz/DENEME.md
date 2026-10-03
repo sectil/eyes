@@ -65,3 +65,6 @@ paylaş" çıktısını gönder. Karar o veriyle verilir.
 - Sonuç ekranı kapısı tur 1: 390 açık ve koyu 5/5; 320 0/5 (grafik kartı düğmenin arkasında kesik). Tur 2: ölçüt cümlesi
   "Ayrıntılar"a, kısa ekranda büyük sayı küçük; ölçüm: kart düğmenin 48 px üstünde biter (320), 219 px (390). Ayrıca
   önceki kapının iki kusuru düzeldi: açıklamada nokta yazısıyla aynı satırda, "Ayrıntılar"da açılır ok.
+- Sonuç ekranı kapısı tur 2: 320 açık 5/5, 320 koyu 5/5, 390 koyu 4/5 (bir kişi "Ayrıntılar" ile düğme arası boşluğu
+  kusur saydı). Geçti.
+- Kalan (önceki kapıdan, sahibe bildirildi): 320 okumada 1. sayfanın son satırında "baktı." tek başına.
