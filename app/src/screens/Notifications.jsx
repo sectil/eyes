@@ -55,13 +55,13 @@ export default function Notifications({ modules = [], moduleReminders, reminders
     return on ? <>{p.pre}<b>{p.t}</b>{p.nef && <>{' · '}<em>Nef seçti</em></>}</> : `${p.pre}${p.t}${nef}`
   }
   // Tek satır: sol taraf saat sayfasını açar, sağda anahtar.
-  const row = (key, { label, Icon, sub: parts, on, onTap, onFlip }) => (
+  const row = (key, { label, Icon, sub: parts, on, onTap, onFlip, wrap = false }) => (
     <div key={key} className={`nt-row${on ? ' on' : ''}`}>
       <button type="button" className="nt-main" aria-label={`${label} saatleri`} onClick={onTap}>
         <span className="nt-ri" aria-hidden="true"><Icon size={19} /></span>
         <span className="nt-l">
           <b>{label}</b>
-          {parts && <span className="nt-s">{line(on, parts)}</span>}
+          {parts && <span className={`nt-s${wrap ? ' nt-wrap' : ''}`}>{line(on, parts)}</span>}
         </span>
       </button>
       <button type="button" className="pref-toggle nt-sw" role="switch" aria-checked={on} aria-label={label} onClick={() => onFlip(!on)}>
@@ -99,9 +99,10 @@ export default function Notifications({ modules = [], moduleReminders, reminders
           const iv = c?.interval && !c.times.length ? c.interval : null
           const on = Boolean(master && (c?.on || iv?.on))
           const alt = iv
-            ? { pre: `${daysLabel(iv.days)} · ${iv.every === 60 ? 'saatte bir' : 'iki saatte bir'} · `, t: `${dot(iv.from)}–${dot(iv.to)}`, nef: false }
+            ? { pre: `${daysLabel(iv.days)} · ${(iv.every === 60 ? 'saatte bir' : 'iki saatte bir').replace(/ /g, '\u00a0')} · `, t: `${dot(iv.from)}–${dot(iv.to)}`, nef: false }
             : (c && sub(c)) || (idle(m) ? { pre: 'Her gün ', t: dot(idle(m)), nef: false } : null)
-          return row(m.module, { label: NAMES[m.module] ?? m.module, Icon: iconOf(m.module), sub: alt, on, onTap: () => onOpen?.(m.module), onFlip: (v) => onToggle?.(m.module, v) })
+          // Aralık satırı uzun (günler, sıklık, saatler): kesilmesin, gerekirse iki satır (5 sn kapısı tur 2)
+          return row(m.module, { label: NAMES[m.module] ?? m.module, Icon: iconOf(m.module), sub: alt, on, wrap: Boolean(iv), onTap: () => onOpen?.(m.module), onFlip: (v) => onToggle?.(m.module, v) })
         })}
         {legacy.map((t) => {
           const ex = extras.find((s) => s.type === t)?.times ?? mr[t]?.times ?? []

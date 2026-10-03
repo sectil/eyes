@@ -29,3 +29,11 @@
   .dd .ex-foot { min-height: 0; }
   .dd-left { min-height: 40px; font-size: 2.1rem; }
 }
+
+/* Kamera düğmesi (giriş) ve izin uyarısı */
+.dd-cam { display: flex; align-items: center; gap: 12px; width: 100%; margin-top: 4px; padding: 12px 14px; border: 1px solid var(--ex-glass-line); border-radius: 16px; background: var(--ex-glass); color: var(--ex-ink); text-align: left; cursor: pointer; }
+.dd-cam > svg { flex: none; color: var(--ex-ink2); }
+.dd-cam-l { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.dd-cam-l b { font-size: 0.95rem; }
+.dd-cam-l span { font-size: 0.82rem; color: var(--ex-ink3); }
+.dd-warn { margin: 4px 0 0; font-size: 0.92rem; font-weight: 600; line-height: 1.4; color: var(--ex-warn); }

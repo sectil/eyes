@@ -1,17 +1,24 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Check, ChevronLeft, Play, X } from 'lucide-react'
+import { Camera, Check, ChevronLeft, Play, X } from 'lucide-react'
 import SoundToggle from '../components/SoundToggle.jsx'
 import { Arena } from '../components/ExerciseArt.jsx'
+import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { SAFETY_KEY, MOVES, MODES, stepsOf, totalSeconds, progressText, summaryText, weekCount, weekText, makeRecord } from '../lib/dikDur.js'
+import { CAM_KEY, CALIB_KEY, FIX_AFTER_MS, MAX_FIXES, sampleOf, poseOf, calibrate, judge, resultText, loadJson, saveJson } from '../lib/postureSense.js'
 import { speak, unlockAudio } from '../lib/cue.js'
 import { haptic } from '../lib/native.js'
+import '../styles/info.css' // .pref-toggle anahtarı (kamera düğmesi)
 import '../styles/exercise.css'
 import '../styles/dikdur.css'
 
 // Dik Dur (plan docs/yol-haritasi/tasarim/dik-dur/PLAN.v2.md; metinler metin-D1-onay.md, harfi harfine).
-// giriş → (ilk kez) güvenlik → adımlar → bitiş. Kamera D1-4'te eklenir. Ses: cihazın kendi sesi (sahip kararı; ElevenLabs
-// sonra, ayrı onayla). Geri/çarpı kaydetmeden çıkar; yalnız tamamlanan oturum kaydedilir.
+// giriş → (ilk kez) güvenlik → (TrueDepth'li cihazda ilk kez) kamera sorusu → kameralıysa telefonu yasla → duruşunu
+// gösterme (bir kez; sonra "aynı yerde mi") → adımlar → bitiş. Kamera yalnız TrueDepth'te (baş eğimi sinyali); ötekilerde
+// her şey süreyle. Ses: cihazın kendi sesi (sahip kararı; ElevenLabs sonra, ayrı onayla). Geri/çarpı kaydetmeden çıkar.
+// Görüntü cihazdan çıkmaz ve kaydedilmez: yalnız uzaklık ve baş eğimi sayıları (lib/postureSense.js).
 const TICK_MS = 100
+const CALIB_S = 5
+const FACE_GONE_MS = 600
 
 const seen = (storage) => {
   try {
@@ -38,26 +45,62 @@ export function PostureArt({ move = null }) {
   )
 }
 
-export default function DikDur({ onFinish, onBack, sessions = [], remindField = null, storage = globalThis.localStorage, now = () => new Date() }) {
-  const [phase, setPhase] = useState('intro') // intro | safety | run | done
+export default function DikDur({ onFinish, onBack, sessions = [], remindField = null, trueDepth = false, storage = globalThis.localStorage, now = () => new Date() }) {
+  const [phase, setPhase] = useState('intro') // intro | safety | camAsk | place | samePlace | calib | calibDone | perm | run | done
   const [mode, setMode] = useState('kisa')
   const [idx, setIdx] = useState(0)
   const [elapsed, setElapsed] = useState(0)
-  const stepStart = useRef(0)
+  const [camOn, setCamOn] = useState(() => trueDepth && loadJson(storage, CAM_KEY)?.on === true)
+  const [cal, setCal] = useState(() => loadJson(storage, CALIB_KEY))
+  const [calStage, setCalStage] = useState('normal')
+  const [status, setStatus] = useState(null) // { text, tone }
+  const [result, setResult] = useState(null)
   const startedAt = useRef(0)
   const steps = useMemo(() => stepsOf(mode), [mode])
   const step = steps[idx]
 
-  function begin(m) {
+  // Zaman tik ile ilerler (yüz kaybolunca sayaç durur); değerler ref'te, ekran setElapsed ile
+  const live = useRef({ idx: 0, elapsed: 0, faceAt: 0, sample: null, samples: [], notIn: 0, fixed: {}, fixShown: false, poseMs: 0, totalMs: 0 })
+  const useCam = trueDepth && camOn
+  const camPhase = useCam && ['place', 'samePlace', 'calib', 'calibDone', 'run'].includes(phase)
+  const cam = useFaceTracking({
+    enabled: camPhase,
+    trueDepth: true,
+    onFrame: (f) => {
+      const s = sampleOf(f)
+      if (!s) return
+      live.current.faceAt = Date.now()
+      live.current.sample = s
+      if (phase === 'calib') live.current.samples.push(s)
+    },
+  })
+  useEffect(() => {
+    if (camPhase && cam.error === 'permission') setPhase('perm')
+  }, [camPhase, cam.error])
+  const faceSeen = () => Date.now() - live.current.faceAt < FACE_GONE_MS
+  const camWorks = () => useCam && !cam.error
+
+  function begin(m = mode) {
     unlockAudio()
     setMode(m)
     setIdx(0)
-    startedAt.current = performance.now()
+    setElapsed(0)
+    setStatus(null)
+    setResult(null)
+    Object.assign(live.current, { idx: 0, elapsed: 0, notIn: 0, fixed: {}, fixShown: false, poseMs: 0, totalMs: 0 })
+    startedAt.current = Date.now()
+    const first = stepsOf(m)[0]
+    if (first?.kind === 'hold') speak(MOVES[first.move].cue)
     setPhase('run')
+  }
+  function afterSafety(m = mode) {
+    if (trueDepth && !loadJson(storage, CAM_KEY)?.asked) setPhase('camAsk')
+    else if (trueDepth && camOn) setPhase('place')
+    else begin(m)
   }
   function choose(m) {
     setMode(m)
-    if (seen(storage)) begin(m)
+    if (seen(storage)) afterSafety(m)
     else setPhase('safety')
   }
   function acceptSafety() {
@@ -66,36 +109,144 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
     } catch {
       // kalıcı olmasa da bugünkü oturum sürer
     }
-    begin(mode)
+    afterSafety()
+  }
+  function answerCam(on) {
+    saveJson(storage, CAM_KEY, { asked: true, on })
+    setCamOn(on)
+    if (on) setPhase('place')
+    else begin()
+  }
+  function flipCam() {
+    const on = !camOn
+    saveJson(storage, CAM_KEY, { asked: true, on })
+    setCamOn(on)
+  }
+  function placed() {
+    if (cal?.ok) setPhase('samePlace')
+    else startCalib()
+  }
+  function startCalib() {
+    live.current.samples = []
+    live.current.elapsed = 0
+    live.current.normal = null
+    setElapsed(0)
+    setCalStage('normal')
+    setPhase('calib')
+    speak('Her zamanki gibi otur.')
   }
 
-  // Adım başı: tutmada yönerge sesle; zamanlayıcı
+  // Tik: duruşunu gösterme ve adımlar
   useEffect(() => {
-    if (phase !== 'run' || !step) return undefined
-    stepStart.current = performance.now()
-    setElapsed(0)
-    if (step.kind === 'hold') speak(MOVES[step.move].cue)
-    const t = setTimeout(() => next(), step.s * 1000)
-    return () => clearTimeout(t)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, idx])
-
-  useEffect(() => {
-    if (phase !== 'run') return undefined
-    const t = setInterval(() => setElapsed(performance.now() - stepStart.current), TICK_MS)
+    if (phase !== 'run' && phase !== 'calib') return undefined
+    let last = Date.now()
+    const t = setInterval(() => {
+      const nowMs = Date.now()
+      const dt = nowMs - last
+      last = nowMs
+      if (phase === 'calib') tickCalib(dt)
+      else tickRun(dt)
+    }, TICK_MS)
     return () => clearInterval(t)
-  }, [phase])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase, calStage, mode, cal])
+
+  function tickCalib(dt) {
+    const L = live.current
+    if (camWorks() && !faceSeen()) {
+      setStatus({ text: 'Yüzünü göremiyorum. Sayaç sen görünene kadar bekliyor.', tone: 'w' })
+      return
+    }
+    setStatus(null)
+    L.elapsed += dt
+    setElapsed(L.elapsed)
+    if (L.elapsed < CALIB_S * 1000) return
+    haptic('success')
+    if (calStage === 'normal') {
+      L.normal = poseOf(L.samples)
+      L.samples = []
+      L.elapsed = 0
+      setElapsed(0)
+      setCalStage('tall')
+      speak('Şimdi dikleş: boyunu uzat, çeneni içeri çek.')
+      return
+    }
+    const c = calibrate(L.normal, poseOf(L.samples))
+    saveJson(storage, CALIB_KEY, c)
+    setCal(c)
+    setPhase('calibDone')
+    speak('Tamam, iki duruşunu da öğrendim.')
+  }
+
+  function tickRun(dt) {
+    const L = live.current
+    const st = steps[L.idx]
+    if (!st) return
+    const judged = st.kind === 'hold' && MOVES[st.move].camera && camWorks() && cal?.ok
+    // Yüz yoksa tutma sayacı bekler (kameralıyken)
+    if (st.kind === 'hold' && camWorks() && !faceSeen()) {
+      setStatus({ text: 'Yüzünü göremiyorum. Sayaç sen görünene kadar bekliyor.', tone: 'w' })
+      return
+    }
+    const shownMove = st.kind === 'gap' ? steps[L.idx + 1]?.move : st.kind === 'hold' ? st.move : null // arada sıradaki hareket
+    if (shownMove === 'omuz' && camWorks()) setStatus({ text: 'Omuzlarını kamera göremiyor; bu adımı kendin yap.', tone: 'n' })
+    else if (!L.fixShown) setStatus(null)
+    if (judged) {
+      const j = judge(cal, L.sample, st.move)
+      if (j.inPose != null) {
+        L.totalMs += dt
+        if (j.inPose) {
+          L.poseMs += dt
+          L.notIn = 0
+          if (L.fixShown) { L.fixShown = false; setStatus(null) }
+        } else {
+          L.notIn += dt
+          const n = L.fixed[st.move] ?? 0
+          if (L.notIn >= FIX_AFTER_MS && !L.fixShown && n < MAX_FIXES) {
+            L.fixed[st.move] = n + 1
+            L.fixShown = true
+            const fix = MOVES[st.move].fix
+            setStatus({ text: fix, tone: 'g' })
+            speak(fix)
+          }
+        }
+      }
+    }
+    L.elapsed += dt
+    setElapsed(L.elapsed)
+    if (L.elapsed >= st.s * 1000) next()
+  }
 
   function next() {
-    if (steps[idx]?.kind === 'hold') haptic('success')
-    if (idx + 1 < steps.length) setIdx(idx + 1)
-    else setPhase('done')
+    const L = live.current
+    if (steps[L.idx]?.kind === 'hold') haptic('success')
+    L.elapsed = 0
+    L.notIn = 0
+    L.fixShown = false
+    setElapsed(0)
+    setStatus(null)
+    if (L.idx + 1 < steps.length) {
+      L.idx += 1
+      setIdx(L.idx)
+      const st = steps[L.idx]
+      if (st.kind === 'hold') speak(MOVES[st.move].cue)
+    } else {
+      if (camWorks() && cal?.ok && L.totalMs >= 5000) setResult(L.poseMs / L.totalMs)
+      setPhase('done')
+    }
   }
 
   function finish() {
-    const seconds = startedAt.current ? (performance.now() - startedAt.current) / 1000 : totalSeconds(mode)
-    onFinish?.(makeRecord({ mode, holds: steps.filter((s) => s.kind === 'hold').length, seconds }))
+    const seconds = startedAt.current ? (Date.now() - startedAt.current) / 1000 : totalSeconds(mode)
+    onFinish?.(makeRecord({ mode, holds: steps.filter((s) => s.kind === 'hold').length, seconds, cameraUsed: result != null, inPose: result }))
   }
+
+  const top = (back = () => setPhase('intro')) => (
+    <div className="ex-top">
+      <button type="button" className="ex-ic" onClick={back} aria-label="Geri"><ChevronLeft aria-hidden="true" /></button>
+    </div>
+  )
+  const statusLine = status ? <div className="ex-st" role="status"><span className={status.tone}>{status.text}</span></div> : <div className="ex-st" />
 
   if (phase === 'intro') {
     return (
@@ -112,6 +263,13 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
           <p className="ex-para">Üç hareket, her birini 10 saniye tut: boyunu uzat, çeneni içeri çek, omuzlarını geri ve aşağı al.</p>
           <p className="ex-para">Saatlerce dik durman gerekmez. Önemli olan sık sık pozisyon değiştirmek ve gün içinde kısa molalar vermek.</p>
           <p className="dd-ev">Çökük oturmak ruh hâlini biraz düşürebilir; dikleşmek o an daha iyi hissettirebilir.</p>
+          {trueDepth && loadJson(storage, CAM_KEY)?.asked && (
+            <button type="button" className="pref-toggle dd-cam" role="switch" aria-checked={camOn} onClick={flipCam}>
+              <Camera size={18} aria-hidden="true" />
+              <span className="dd-cam-l"><b>Kamerayla takip</b><span>Başının duruşuna bakar</span></span>
+              <span className="pref-switch" aria-hidden="true"><span className="pref-knob" /></span>
+            </button>
+          )}
         </div>
         <div className="ex-foot">
           <button type="button" className="ex-btn" onClick={() => choose('kisa')}><Play aria-hidden="true" fill="currentColor" /> Kısa tur · 2 dakika</button>
@@ -125,9 +283,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
   if (phase === 'safety') {
     return (
       <main className="ex-stage ex-start dd">
-        <div className="ex-top">
-          <button type="button" className="ex-ic" onClick={() => setPhase('intro')} aria-label="Geri"><ChevronLeft aria-hidden="true" /></button>
-        </div>
+        {top()}
         <div className="ex-intro dd-safety">
           <h1 className="ex-title">Başlamadan önce</h1>
           <p className="ex-para">Yakın zamanda boyun ya da omuz sakatlığın, ameliyatın ya da kola yayılan ağrın olduysa önce doktoruna danış.</p>
@@ -135,6 +291,76 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
         </div>
         <div className="ex-foot">
           <button type="button" className="ex-btn" onClick={acceptSafety}><Check aria-hidden="true" /> Anladım</button>
+        </div>
+      </main>
+    )
+  }
+
+  if (phase === 'camAsk' || phase === 'perm') {
+    return (
+      <main className="ex-stage ex-start dd">
+        {top()}
+        <div className="ex-intro dd-safety">
+          <h1 className="ex-title">Kamerayla takip edelim mi?</h1>
+          <p className="ex-para">Önce normal duruşunu ve dik duruşunu birer kez gösterirsin. Egzersizde kamera, dik duruşunda ne kadar kaldığını söyler.</p>
+          <p className="ex-para">Görüntü telefonundan çıkmaz ve hiçbir yere kaydedilmez.</p>
+          <p className="dd-ev">Kamera omuzlarını önden göremez; omuz adımını kendin yaparsın.</p>
+          {phase === 'perm' && <p className="dd-warn" role="status">Kamera izni kapalı. Açmak için Ayarlar'a git.</p>}
+        </div>
+        <div className="ex-foot">
+          {phase === 'camAsk' && <button type="button" className="ex-btn" onClick={() => answerCam(true)}><Camera aria-hidden="true" /> Kamerayla</button>}
+          <button type="button" className={`ex-btn${phase === 'camAsk' ? ' ghost' : ''}`} onClick={() => answerCam(false)}>Kamerasız</button>
+        </div>
+      </main>
+    )
+  }
+
+  if (phase === 'place' || phase === 'samePlace') {
+    const same = phase === 'samePlace'
+    return (
+      <main className="ex-stage ex-start dd">
+        {top()}
+        <div className="ex-intro dd-safety">
+          <h1 className="ex-title">{same ? 'Telefon geçen seferki yerinde mi?' : 'Telefonu yasla'}</h1>
+          {!same && <p className="ex-para">Telefonu göz hizana yakın, bir kol boyu uzağa yasla. Yüzün ekranda görünsün.</p>}
+        </div>
+        <div className="ex-foot">
+          {same ? (
+            <>
+              <button type="button" className="ex-btn" onClick={() => begin()}><Check aria-hidden="true" /> Evet</button>
+              <button type="button" className="ex-btn ghost" onClick={startCalib}>Hayır, yeniden göstereyim</button>
+            </>
+          ) : (
+            <button type="button" className="ex-btn" onClick={placed}><Check aria-hidden="true" /> Hazırım</button>
+          )}
+        </div>
+      </main>
+    )
+  }
+
+  if (phase === 'calib' || phase === 'calibDone') {
+    const done = phase === 'calibDone'
+    const left = Math.max(0, Math.ceil(CALIB_S - elapsed / 1000))
+    const title = done ? 'Tamam, iki duruşunu da öğrendim.' : calStage === 'normal' ? 'Her zamanki gibi otur.' : 'Şimdi dikleş: boyunu uzat, çeneni içeri çek.'
+    return (
+      <main className="ex-stage dd">
+        <div className="ex-top">
+          <button type="button" className="ex-ic" onClick={onBack} aria-label="Egzersizden çık"><X aria-hidden="true" /></button>
+          <span style={{ flex: 1 }} />
+          <SoundToggle className="ex-sound" />
+        </div>
+        <div className="ex-copy">
+          <h1 className="ex-title" aria-live="assertive">{title}</h1>
+        </div>
+        <div className="ex-mid dd-mid">
+          <Arena progress={done ? 1 : Math.min(1, elapsed / (CALIB_S * 1000))} off={!done && calStage === 'normal'}>
+            <PostureArt move={done || calStage === 'normal' ? null : 'uzat'} />
+          </Arena>
+          <div className="dd-left" aria-hidden="true">{done ? '' : left}</div>
+        </div>
+        {statusLine}
+        <div className="ex-foot">
+          {done && <button type="button" className="ex-btn" onClick={() => begin()}><Play aria-hidden="true" fill="currentColor" /> {mode === 'tam' ? 'Tam tur · 15 dakika' : 'Kısa tur · 2 dakika'}</button>}
         </div>
       </main>
     )
@@ -151,6 +377,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
           </svg>
           <h1 className="ex-title">Bitti</h1>
           <p className="ex-para">{summaryText(mode)}</p>
+          {result != null && <p className="ex-para">{resultText(result)}</p>}
           <p className="ex-para">{weekText(weekCount(sessions, now()) + 1)}</p>
         </div>
         {remindField}
@@ -211,6 +438,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
         </Arena>
         <div className={`dd-left${step.kind === 'gap' ? ' wait' : ''}`} aria-hidden="true">{left}</div>
       </div>
+      {useCam ? statusLine : null}
       <div className="ex-foot" />
     </main>
   )

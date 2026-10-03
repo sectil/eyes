@@ -1,6 +1,7 @@
 // Dik Dur (plan docs/yol-haritasi/tasarim/dik-dur/PLAN.v2.md, sahip onayı 2026-10-03; metinler metin-D1-onay.md).
 // Kısa ve tam tur; kayıt lib/dikDur.js makeRecord. "Bana hatırlat" (saat ve aralıklı kip) D1-3'te eklenir.
 import { SAFETY_KEY } from '../../lib/dikDur.js'
+import { CAM_KEY, CALIB_KEY } from '../../lib/postureSense.js'
 
 export default {
   id: 'dik-dur',
@@ -9,7 +10,7 @@ export default {
   ring: 'life',
   kind: 'exercise',
   progress: { domain: 'body' },
-  storageKeys: [SAFETY_KEY],
+  storageKeys: [SAFETY_KEY, CAM_KEY, CALIB_KEY], // kamera tercihi ve iki duruşun sayıları (görüntü yok)
   sessions: {
     match: (s) => s?.type === 'dik-dur',
     countsTowardGoal: true,

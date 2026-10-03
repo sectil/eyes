@@ -61,7 +61,7 @@ describe('Dik Dur · Bildirimler satırı ve anahtar', () => {
   it('satır aralığı söyler; kapatınca aralık kapanır, saatsiz açınca geri gelir; saatle kaydedince aralık düşer', async () => {
     const mr = { 'dik-dur': { on: false, mode: 'manual', times: [], interval: iv } }
     const v = await mount(h(Notifications, { modules: [DD], moduleReminders: mr, reminders: { optIn: 'yes', types: {} }, now: NOW, slots: [] }))
-    expect(v.text()).toContain('Her gün · iki saatte bir · 09.00–19.00')
+    expect(v.text().replace(/\u00a0/g, ' ')).toContain('Her gün · iki saatte bir · 09.00–19.00')
     expect(v.btn('Dik Dur').getAttribute('aria-checked')).toBe('true')
     const off = applyRemind({ moduleId: 'dik-dur', remind: DD, moduleReminders: mr, reminders: { optIn: 'yes' }, times: [], on: false, now: NOW })
     expect(normalizeModuleReminders(off.moduleReminders)['dik-dur'].interval.on).toBe(false)
