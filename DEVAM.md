@@ -18,10 +18,10 @@ güvenme; sahibe "önceki oturumda şöyleydi" diye sorma, burada yazanı uygula
   PR'ın taban dalı `claude/cool-pasteur-j5yupf`; onun taslak PR'ı https://github.com/sectil/eyes/pull/2, tabanı `master`.
   Zincir: `master` ← #2 ← #16. İki PR de açık, birleştirilmedi; #16 çakışmasız.
 - Son kod işi: Ana sayfa kısayol halkaları (§2.4, 2026-10-03).
-- Ağaç temiz. Tam takım yeşil: 193 dosya, 3004 test, 5 todo (`cd app && npx vitest run`, 4–5 dk). `npm run build` geçti.
-- Son sürüm notu kimliği `2026-10-03-1`. Her TestFlight yeni kimlik alır; eski girdiye madde eklenmez (Bug 31).
-- TestFlight komutu sahibin Mac'inde: `bash ~/Projects/eyes/app/scripts/testflight.sh`. 2026-10-02-5 ve 2026-10-03-1 için
-  komut sahibe verildi. Sahibin derleyip cihazda bakıp bakmadığı bilinmiyor.
+- Ağaç temiz. Tam takım yeşil: 193 dosya, 3006 test, 5 todo (`cd app && npx vitest run`, 4–5 dk). `npm run build` geçti.
+- Son sürüm notu kimliği `2026-10-03-2`. Her TestFlight yeni kimlik alır; eski girdiye madde eklenmez (Bug 31).
+- TestFlight komutu sahibin Mac'inde: `bash ~/Projects/eyes/app/scripts/testflight.sh`. 2026-10-02-5, 2026-10-03-1 ve 2026-10-03-2
+  için komut sahibe verildi. Sahibin derleyip cihazda bakıp bakmadığı bilinmiyor.
 - Sahibin cevap vermediği sorular §3.1'de. İlk iş onlar değil; ilk iş sahibin cihaz geri bildirimi gelirse onu düzeltmek.
 
 ## 1. Depo, dal ve nasıl başlanır
@@ -170,6 +170,9 @@ Hepsi sahibe yazıldı; cevap yok. Yeni oturum kısa ve tek tek sorabilir. Hiçb
 - 2026-10-02-3 Oku ve Anla, 2026-10-02-4 Yakala Yaz, 2026-10-02-5 Oku ve Anla yenileme. Sahip bu üç derlemeden
   hangisini cihaza aldı, bilinmiyor. Geri bildirim gelirse ekran görüntüsüyle düzelt; yeni TestFlight gerekirse yeni
   sürüm notu kimliği, sürüm notu da kapı ve sahip onayından geçer.
+- 2026-10-03-2 Yakala Yaz ilk cihaz geri bildiriminin düzeltmesi (ses ikinci kelimeyi kesiyordu, Gönder düğmesi yoktu,
+  klavye açılınca ekran kayıyordu; `kelime-hafiza/PLAN.md` §10.1). Klavye düzeltmesi cihazda bakılmadı; sahibin
+  denemesi bekleniyor.
 - 2026-10-03-1 Ana sayfa halkaları: cihazda bakılmadı. Bakılacaklar: güvenli alan ve dokunma hissi, VoiceOver okuması
   ("Kısayollar", "…, bugün yapıldı", "…, mola bitene kadar kilitli"), yazı tipi geç gelince satırın zıplaması
   (PLAN §8.5), 320×568'de ilk hafta gizli kalması (PLAN §8.4), Dinamik Yazı büyükken (PLAN §8.12).
@@ -391,7 +394,7 @@ modül; tam takım ve derleme yeşil olmadan commit yok; her yeni modülün mani
 
 ## 8. Sıra
 
-1. **Sahibin cihaz geri bildirimi gelirse önce onu düzelt** (2026-10-02-3/-4/-5, 2026-10-03-1). Yeni TestFlight gerekirse yeni
+1. **Sahibin cihaz geri bildirimi gelirse önce onu düzelt** (2026-10-02-3/-4/-5, 2026-10-03-1/-2). Yeni TestFlight gerekirse yeni
    sürüm notu kimliği; sürüm notu kapı ve sahip onayından geçer.
 2. **§3.1'deki kararları kısa ve tek tek sor.** Cevap gelmeden hiçbirini yapma.
 3. **Fark Ettin mi?** F3 cihaz kararı, sonra F4–F7 (önceki devrin sırası).

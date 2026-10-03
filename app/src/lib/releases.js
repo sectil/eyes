@@ -6,6 +6,16 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Yakala Yaz ilk cihaz geri bildirimi (kelime-hafiza/PLAN.md §10.1). Metin kapısı tur 1: düzeltme 5/5, değişiklik
+    // 0/5 ve 3/5; tur 2: değişiklik 5/5. Sahip yetkisi "sen onayla" (Yakala Yaz, 2026-10-02)
+    id: '2026-10-03-2',
+    title: '3 Ekim, ikinci güncelleme',
+    items: [
+      { kind: 'fix', text: "Yakala Yaz'da söylediğin iki kelime artık alana eksiksiz yazılıyor." },
+      { kind: 'change', text: "Yakala Yaz'da yazı alanının yanında artık Gönder düğmesi var." },
+    ],
+  },
+  {
     // Ana sayfa kısayol halkaları (sahibin isteği 2026-10-03; halkalar/PLAN.md). Metin kapısı tur 1: iki taslak 0/5 ve
     // 1/5; tur 2: bu metin 5/5 (halkalar/kapi/metin-kapisi-tur2.json). Sahip onayı 2026-10-03
     id: '2026-10-03-1',
