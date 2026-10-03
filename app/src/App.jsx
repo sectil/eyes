@@ -78,6 +78,7 @@ import { registry } from './modules/registry.js'
 import { viewFor } from './modules/views.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
 import GazeCalibration from './screens/GazeCalibration.jsx'
+import OkuGozDeneme from './screens/OkuGozDeneme.jsx'
 import GazeTest from './screens/GazeTest.jsx'
 import { alarmCheck, consumeOpen, cancelAlarm, alarmDiag, ALARM_CHANGED } from './lib/alarmNative.js'
 import { loadAlarm, loadAlarmLog, addAlarmEvent } from './lib/alarmLog.js'
@@ -1328,6 +1329,8 @@ export default function App() {
       return <GazeTest onBack={() => go('info')} onCalibrate={() => go('gaze-cal')} />
     case 'gaze-cal':
       return <GazeCalibration onDone={() => go('gaze-test')} onCancel={() => go('info')} />
+    case 'oku-goz':
+      return <OkuGozDeneme sessions={sessions} trueDepth={native.trueDepth} onExit={() => go('info')} />
     default:
       break
   }
@@ -1343,6 +1346,7 @@ export default function App() {
         onGo={(s) => (s === 'schedule' ? openSchedule('info') : go(s))}
         onSkyTry={SKY_UI ? () => startSky('locate') : null}
         onAlarmDiag={SKY_UI ? () => alarmDiag() : null}
+        onReadGaze={SKY_UI && native.trueDepth ? () => go('oku-goz') : null}
         iosApp={isIOSApp()}
         trueDepth={native.trueDepth}
         calibration={settings.calibration}
