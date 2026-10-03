@@ -7,11 +7,11 @@ const OUT = process.argv[2]
 const BASE = `http://127.0.0.1:${process.env.PORT ?? 4392}/@fs${new URL('.', import.meta.url).pathname}dd.html`
 const DEV = { 390: { h: 844, top: 47 }, 320: { h: 568, top: 20 } }
 const b = await launch()
-async function open(w, theme, seen) {
+async function open(w, theme, seen, extra = '') {
   const d = DEV[w]
   const page = await b.newPage({ viewport: { width: w, height: d.h }, colorScheme: theme === 'koyu' ? 'dark' : 'light', deviceScaleFactor: 2, locale: 'tr-TR' })
   await page.clock.install({ time: new Date(2026, 9, 3, 12) })
-  await page.goto(`${BASE}?theme=${theme === 'koyu' ? 'dark' : 'light'}${seen ? '&seen=1' : ''}`)
+  await page.goto(`${BASE}?theme=${theme === 'koyu' ? 'dark' : 'light'}${seen ? '&seen=1' : ''}${extra}`)
   await page.evaluate(() => document.fonts.ready)
   await page.addStyleTag({ content: `.ex-stage{padding-top:${d.top + 8}px!important} *{transition:none!important}` }) // saat donuk: geçişler kapalı
   await page.waitForTimeout(200)
@@ -24,7 +24,30 @@ const shot = async (page, name, w, theme) => {
   console.log(name, w, theme, JSON.stringify(m))
 }
 const tap = (page, label) => page.getByRole('button', { name: label, exact: true }).click()
+const ONLY = process.env.ONLY ?? 'temel,kamera'
 for (const theme of ['acik', 'koyu']) for (const w of [390, 320]) {
+  if (ONLY.includes('kamera')) {
+    let k = await open(w, theme, true, '&td=1')
+    await tap(k, 'Kısa tur · 2 dakika')
+    await shot(k, 'kamera-soru', w, theme)
+    await tap(k, 'Kamerayla')
+    await shot(k, 'yasla', w, theme)
+    await tap(k, 'Hazırım')
+    await k.clock.runFor(2500)
+    await shot(k, 'gosterme-normal', w, theme)
+    await k.clock.runFor(4000)
+    await shot(k, 'gosterme-dik', w, theme)
+    await k.clock.runFor(4000)
+    await shot(k, 'gosterme-tamam', w, theme)
+    await k.close()
+    k = await open(w, theme, true, '&td=1&cam=1&cal=1')
+    await shot(k, 'giris-kamera', w, theme)
+    await tap(k, 'Kısa tur · 2 dakika')
+    await tap(k, 'Hazırım')
+    await shot(k, 'ayni-yer', w, theme)
+    await k.close()
+  }
+  if (!ONLY.includes('temel')) continue
   let p = await open(w, theme, false)
   await shot(p, 'giris', w, theme)
   await tap(p, 'Kısa tur · 2 dakika')
