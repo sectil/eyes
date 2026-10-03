@@ -6,6 +6,17 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Dik Dur D1 (dik-dur/PLAN.v2.md; sahip onayı 2026-10-03; onay yetkisi Claude'da, PLAN §10). Metin kapısı: m1 5/5,
+    // m2 4/5; kamera maddesi tur 1'de 2/5 (gün boyu izliyor gibi okundu), tur 2'de 5/5. Hava işleri yazılmadı (yalnız test).
+    id: '2026-10-03-5',
+    title: '3 Ekim, beşinci güncelleme',
+    items: [
+      { kind: 'new', text: 'Yeni egzersiz: Dik Dur. Ana sayfada; boyunu uzat, çeneni içeri çek, omuzlarını geri ve aşağı al. Kısa tur 2 dakika.' },
+      { kind: 'new', text: "Dik Dur hatırlatması belirli saatlerde ya da belli aralıklarla, örneğin iki saatte bir, gelebilir. Profil → Bildirimler'den kurarsın." },
+      { kind: 'new', text: "Dik Dur'da kamera isteğe bağlı (Face ID'li iPhone'larda): yalnız egzersiz sırasında açılır ve dik duruşunda ne kadar kaldığını söyler. Görüntü telefonundan çıkmaz." },
+    ],
+  },
+  {
     // B1a D14 (2026-10-03): Bildirimler yalnız kurulanlar + "Hatırlatma ekle"; modüle göre öneri saatleri ve "Nef seçsin"
     // cümlesi. Metin kapısı: madde 1 tur 1'de 5/5; madde 2 tur 1'de 1/5, tur 2'de 4/5. Sahip onayı 2026-10-03.
     // Hava işleri (D2 düğmesi, "Şimdi" sütunu) yazılmadı: hava sayfası yalnız test derlemesinde açık (SKY_UI).
