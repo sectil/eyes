@@ -33,16 +33,14 @@ const TITLES = {
 }
 const titleOf = (id) => TITLES[id] ?? NAMES[id] ?? TYPE_LABEL[id] ?? ''
 
-// "Nef seçsin" nedeni. Veri yokken ve saat 16.30 iken plan cümlesi aynen; veriyle kurulan cümle modül adının
-// hâlini istiyor (plan örneği yalnız nefes). YER TUTUCU (dönüşte listelendi): remindSheet.reason.default (16.30 dışı
-// varsayılan saat) ve remindSheet.reason.data.<modül> (kayıtlardan). Onaylı cümle gelene kadar neden satırı çıkmaz
-// (null); büyük saat yine görünür.
+// "Nef seçsin" nedeni. Veri yokken: önerilen saatle tek cümle (sahip onayı 2026-10-03, metin kapısı 5/5; planlayıcı
+// "beş kez" değil beş ayrı gün bekler, MIN_DAYS). Veriyle kurulan cümle modül adının hâlini istiyor (plan örneği yalnız
+// nefes). YER TUTUCU (dönüşte listelendi): remindSheet.reason.data.<modül> (kayıtlardan). Onaylı cümle gelene kadar
+// neden satırı çıkmaz (null); büyük saat yine görünür.
 function reasonOf(moduleId, pick) {
   if (!pick || !pick.times.length) return null
   if (pick.source === 'default') {
-    return pick.times[0] === '16:30'
-      ? 'Henüz saatini bilmiyorum. 16.30\'la başlayalım; beş kez yaptıktan sonra senin saatine göre ayarlarım.'
-      : null // YER TUTUCU remindSheet.reason.default
+    return `Henüz saatini bilmiyorum; şimdilik saat ${dot(pick.times[0])} olsun. Beş ayrı gün yaptıktan sonra senin saatine göre ayarlarım.`
   }
   return null // YER TUTUCU remindSheet.reason.data.<modül>
 }

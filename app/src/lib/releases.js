@@ -6,6 +6,17 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // B1a D14 (2026-10-03): Bildirimler yalnız kurulanlar + "Hatırlatma ekle"; modüle göre öneri saatleri ve "Nef seçsin"
+    // cümlesi. Metin kapısı: madde 1 tur 1'de 5/5; madde 2 tur 1'de 1/5, tur 2'de 4/5. Sahip onayı 2026-10-03.
+    // Hava işleri (D2 düğmesi, "Şimdi" sütunu) yazılmadı: hava sayfası yalnız test derlemesinde açık (SKY_UI).
+    id: '2026-10-03-4',
+    title: '3 Ekim, dördüncü güncelleme',
+    items: [
+      { kind: 'change', text: 'Profil → Bildirimler artık yalnız kurduğun hatırlatmaları gösterir; ötekileri altta "Hatırlatma ekle"den kurarsın.' },
+      { kind: 'change', text: '"Nef seçsin" ile kurulan hatırlatmanın ilk saati artık egzersize göre önerilir: göz kırpma 10.30, yoga 21.30 gibi. O egzersizi beş ayrı gün yaptıktan sonra Nef saati sana göre ayarlar; saati her zaman kendin de değiştirebilirsin.' },
+    ],
+  },
+  {
     // Sahibin cihaz geri bildirimi (2026-10-03): göz kırpma döngüsü kısaldı (15 tekrar kalır), Yakala Yaz ilk tur 10,
     // Ana sayfada su sayacı. Metin kapısı: göz kırpma ve Yakala Yaz tur 1'de 5/5 ve 4/5; su tur 2'de 5/5
     id: '2026-10-03-3',

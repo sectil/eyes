@@ -98,7 +98,7 @@ describe('Bildirimler → modül hatırlatması', () => {
     expect(v.text()).toContain('Nef seçsin')
     expect(v.text()).toContain('Saatleri ben seçeyim')
     expect(v.text()).toContain('Önerilen')
-    expect(v.text()).toContain('Henüz saatini bilmiyorum. 16.30\'la başlayalım; beş kez yaptıktan sonra senin saatine göre ayarlarım.')
+    expect(v.text()).toContain('Henüz saatini bilmiyorum; şimdilik saat 16.30 olsun. Beş ayrı gün yaptıktan sonra senin saatine göre ayarlarım.')
     expect(v.byClass('iris-mark').length).toBe(1)
     await v.tap('Hatırlatmayı aç')
     expect(settings.moduleReminders.blink).toMatchObject({ on: true, mode: 'auto', times: ['16:30'] })

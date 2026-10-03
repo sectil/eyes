@@ -50,6 +50,13 @@ describe('RemindField', () => {
     expect(v.text()).toContain('Hatırlatman açık · Her gün 16.30 · saati Nef seçti')
   })
 
+  it('önerilen saat 16.30 değilse "Nef seçsin" cümlesi o saatle (sahip onayı 2026-10-03)', async () => {
+    const v = await mount(h(RemindField, { moduleId: 'blink', remind: { ...BLINK, defaultTime: '10:30' }, settings: { reminders: rem() }, now: NOW, onChange: () => {} }))
+    const row = document.body.querySelectorAll((n) => n.nodeName === 'BUTTON' && n.textContent.startsWith('Bana hatırlat'))[0]
+    await act(async () => row.click())
+    expect(v.text()).toContain('Henüz saatini bilmiyorum; şimdilik saat 10.30 olsun. Beş ayrı gün yaptıktan sonra senin saatine göre ayarlarım.')
+    expect(v.text()).not.toContain('16.30')
+  })
   it('optIn null iken "Nef seçsin" → modül açılır, optIn yes, mola kapanır', async () => {
     let got = null
     const v = await mount(h(RemindField, { moduleId: 'blink', remind: BLINK, settings: { reminders: rem() }, now: NOW, onChange: (n) => { got = n } }))
@@ -58,7 +65,7 @@ describe('RemindField', () => {
     await act(async () => row.click())
     expect(v.text()).toContain('Nef seçsin')
     expect(v.text()).toContain('Önerilen')
-    expect(v.text()).toContain('Henüz saatini bilmiyorum. 16.30\'la başlayalım; beş kez yaptıktan sonra senin saatine göre ayarlarım.')
+    expect(v.text()).toContain('Henüz saatini bilmiyorum; şimdilik saat 16.30 olsun. Beş ayrı gün yaptıktan sonra senin saatine göre ayarlarım.')
     await v.tap('Hatırlatmayı aç')
     expect(got.moduleReminders.blink).toMatchObject({ on: true, mode: 'auto', times: ['16:30'] })
     expect(got.reminders.optIn).toBe('yes')

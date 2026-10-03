@@ -24,3 +24,8 @@ Deney türleri (Mola, Yürüyüş, Nefes, Su) kendi varsayılan saatlerinde kal�
 
 **Uygulama (2026-10-03):** dokuz manifestte `remind.defaultTime`. Gerçek kayıt defteriyle denendi: her modülde
 veri yokken ilk saat tablodaki saat. Değişen test yok; tam takım yeşil.
+
+**"Nef seçsin" cümlesi (sahip onayı 2026-10-03):** "Henüz saatini bilmiyorum; şimdilik saat {saat} olsun. Beş ayrı gün
+yaptıktan sonra senin saatine göre ayarlarım." Metin kapısı: tur 1'de iki aday 0/5 ("beş kez" yanlış söz; planlayıcı beş
+ayrı gün bekler), tur 2'de 5/5. Eski 16.30 cümlesi de bu biçime geçti (sahip: "Yeni biçime geçsin"). İki testte yalnız
+beklenen cümle değişti (sahip izni); 10.30 için yeni test eklendi.
