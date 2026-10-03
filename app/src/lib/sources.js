@@ -289,6 +289,41 @@ export const SOURCES = {
     duration: '2 hafta egzersiz + bıraktıktan 2 hafta sonra ölçüm',
     limit: 'Egzersiz bırakılınca ölçümler 2 haftada çoğunlukla başa döndü; kırpma hızı ve gözyaşı ölçümlerinin bir kısmı değişmedi.',
   },
+  // Dik Dur (dik-dur/kaynak-D1-taslak.md; metin kapısı ve sahip onayı 2026-10-03). PubMed kayıtları o gün açıldı.
+  nair2015: {
+    authors: ['Nair S', 'Sagar M', 'Sollers J', 'Consedine N', 'Broadbent E'], year: 2015,
+    title: 'Do slumped and upright postures affect stress responses? A randomized trial.',
+    titleTr: 'Çökük ve dik oturuş stres tepkilerini etkiler mi? Randomize bir deneme.',
+    journal: 'Health Psychol', cite: '34(6):632-41', doi: '10.1037/hea0000146', pmid: '25222091',
+    design: 'rct', n: '74 kişi',
+    limit: 'Tek laboratuvarda, stres görevi sırasında anlık ölçüm; uzun süreli etki ölçülmedi.',
+  },
+  // basım 2022, e-yayın 2020-06-22
+  elkjaer2022: {
+    authors: ['Elkjær E', 'Mikkelsen MB', 'Michalak J', 'Mennin DS', "O'Toole MS"], year: 2022,
+    title: 'Expansive and Contractive Postures and Movement: A Systematic Review and Meta-Analysis of the Effect of Motor Displays on Affective and Behavioral Responses.',
+    titleTr: 'Açık ve kapalı duruş ve hareketin duygu ve davranışa etkisi: sistematik derleme ve meta-analiz.',
+    journal: 'Perspect Psychol Sci', cite: '17(1):276-304', doi: '10.1177/1745691620919358', pmid: '32569503',
+    design: 'meta', n: '73 çalışma',
+    limit: 'Fark kapalı duruştan geliyor; açık duruşun nötr duruşa göre etkisi sıfıra yakın.',
+  },
+  xing2026: {
+    authors: ['Xing Y', 'Wang R', 'Zhao X', 'Xu A'], year: 2026,
+    title: 'Therapeutic Exercise for Forward Head Posture in Neck Pain Patients: A Systematic Review and Meta-Analysis.',
+    titleTr: 'Boyun ağrılı kişilerde baş öne duruşu için egzersiz: sistematik derleme ve meta-analiz.',
+    journal: 'J Pain Res', cite: '19:614524', doi: '10.2147/JPR.S614524', pmid: '42445930',
+    design: 'meta', n: '10 randomize çalışma, 550 kişi',
+    limit: 'Kanıtın kesinliği düşük-orta; katılımcılar boyun ağrılı ve baş öne duruşlu kişiler.',
+  },
+  // Gruplar kurayla ayrıldı ama yayında "Observational Study"; tür yayındaki gibi. Tutma süresi (10 sn) buradan ödünç.
+  alghadir2021: {
+    authors: ['Alghadir AH', 'Iqbal ZA'], year: 2021,
+    title: 'Effect of Deep Cervical Flexor Muscle Training Using Pressure Biofeedback on Pain and Forward Head Posture in School Teachers with Neck Pain: An Observational Study.',
+    titleTr: 'Boyun ağrılı öğretmenlerde basınç biyogeri bildirimiyle derin boyun kası egzersizinin ağrıya ve öne eğik baş duruşuna etkisi.',
+    journal: 'Biomed Res Int', cite: '2021:5588580', doi: '10.1155/2021/5588580', pmid: '34095302',
+    design: 'observational', n: '50 öğretmen (boyun ağrılı)',
+    limit: 'Gözetimli, sırtüstü yapılan farklı bir egzersiz; 10 saniyelik tutma süresini buradan aldık.',
+  },
   fincham2023: {
     authors: ['Fincham GW', 'Strauss C', 'Montero-Marin J', 'Cavanagh K'], year: 2023,
     title: 'Effect of breathwork on stress and mental health: A meta-analysis of randomised-controlled trials.',

@@ -269,3 +269,11 @@ korunur: aralıklı kip kapalıyken bildirim planı bugünküyle 0 fark.
 | Güvenlik tek satır | İlk açılışta tarama ekranı + yumuşak dil |
 | Nef sözleşmesinin gereği eksik | §5 |
 | v2 ilk hâli: tekrarlayan öneri, "pasif susar", arka plan "Yaptım", üç test | Son tur: öneri B; pasif ekranı yakmaz (karar 7); düğme uygulamayı açar ya da Swift; DAY_CAP ve birleşme dışı; beş test yeri |
+
+## 10. Onay yetkisi (sahip, 2026-10-03)
+
+Sahip: "bana onay için sorma senin mükemmel yapacağını biliyorum benim yerime kontrol et ve onayla 5 sn ve mükemmel
+kuralı". Dik Dur'da görünen metinleri, ekranları ve bilerek değişen testleri Claude onaylar: önce kapı (metin kapısı ya
+da 5 sn kapısı, 5 kişi, ≥4/5), iki turda geçmezse iki turun en iyisi + kapı bulgularına göre düzeltme, karar bu belgeye
+yazılır. VARSAYIM (sahibe yazıldı): ücretli çağrı (ElevenLabs), rıza metinleri ve cihazdan veri çıkaran her şey yine
+sahibe sorulur.
