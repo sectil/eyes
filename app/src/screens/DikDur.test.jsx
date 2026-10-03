@@ -22,7 +22,8 @@ async function mount(props = {}) {
   const btn = (label) => all().querySelectorAll((n) => n.nodeName === 'BUTTON' && (n.textContent.trim() === label || n.getAttribute('aria-label') === label))[0]
   const tap = async (label) => { const b = btn(label); if (!b) throw new Error(`düğme yok: ${label} — ${all().textContent}`); await act(async () => b.click()) }
   const run = async (ms) => { await act(async () => { vi.advanceTimersByTime(ms) }) }
-  return { btn, tap, run, text: () => all().textContent }
+  const media = (tag) => all().querySelectorAll((n) => n.nodeName === tag).map((n) => n.getAttribute('src'))
+  return { btn, tap, run, media, text: () => all().textContent }
 }
 
 afterEach(() => { vi.useRealTimers(); mem.clear() })
@@ -84,5 +85,19 @@ describe('Dik Dur ekranı', () => {
     await v.tap('Egzersizden çık')
     expect(back).toBe(1)
     expect(saved).toBe(0)
+  })
+  it('gerçek kişi videosu: tutmada hareketin videosu baştan oynar, arada sıradaki hareketin ilk karesi', async () => {
+    vi.useFakeTimers()
+    mem.set(SAFETY_KEY, '1')
+    const v = await mount()
+    expect(v.media('VIDEO').some((s) => s.endsWith('dikdur/uzat.mp4'))).toBe(true) // giriş
+    await v.tap('Kısa tur · 2 dakika')
+    expect(v.media('VIDEO').some((s) => s.endsWith('dikdur/uzat.mp4'))).toBe(true)
+    await v.run(10100) // tutma bitti: hazırlan
+    expect(v.text()).toContain('Hazırlan')
+    expect(v.media('VIDEO')).toEqual([])
+    expect(v.media('IMG').some((s) => s.endsWith('dikdur/cene-ilk.jpg'))).toBe(true)
+    await v.run(3000)
+    expect(v.media('VIDEO').some((s) => s.endsWith('dikdur/cene.mp4'))).toBe(true)
   })
 })

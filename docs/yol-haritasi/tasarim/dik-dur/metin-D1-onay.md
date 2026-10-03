@@ -99,3 +99,5 @@ kullanırız. Görüntüler telefonundan çıkmaz ve kaydedilmez.
 - Tur 2 (kamera ekranları): yüz görünüyor 5/5, yüz aranıyor 320 açık 4/5, 390 koyu 3/5 (sönük Hazırım'ın koyu yazısı
   koyu zeminde okunmadı); kameralı giriş 320 × 693 5/5, 375 × 812 5/5; kamerasız giriş 375 × 667 5/5. İki tur
   doldu; bulguya göre sönük düğme kesik çizgili cam zemin ve soluk yazı oldu (iki temada okunur, ölçü düzenekte).
+- Duruşunu gösterme: halkada artık gerçek kişi var; yüz görünürken durum satırı "Yüzünü görüyorum." (kapı tur 1'de 3/5,
+  tur 2'de 5/5; ayrıntı video.md).

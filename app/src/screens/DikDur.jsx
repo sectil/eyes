@@ -47,6 +47,27 @@ export function PostureArt({ move = null }) {
   )
 }
 
+// Gerçek kişi videosu (public/dikdur; ElevenLabs ile üretildi, uygulama ağa çıkmaz): hareket baştan bir kez oynar ve son
+// karede durur (tutma). play yoksa hareketin ilk karesi (hazırlan), end ile son kare, move yoksa normal duruş. Çene
+// videosu iki çekimdir: tersten oynayan geniş çekimde baş öndeki duruştan geriye kayar, sonra yakın çekimde çene içeride. Hareketi azalt açıksa son kare. Dosya yoksa çizim.
+const clipBase = () => `${(typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL) || './'}dikdur/`
+const reduceMotion = () => {
+  try {
+    return globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true
+  } catch {
+    return false
+  }
+}
+export function PostureClip({ move = null, play = false, end = false, className = 'dd-clip' }) {
+  const [failed, setFailed] = useState(false)
+  if (failed) return <svg className={`${className} dd-clip-art`} viewBox="80 6 160 226" aria-hidden="true"><PostureArt move={move} /></svg>
+  const still = (src) => <img className={className} src={src} alt="" aria-hidden="true" onError={() => setFailed(true)} />
+  if (!move) return still(`${clipBase()}durus.jpg`)
+  if (end || (play && reduceMotion())) return still(`${clipBase()}${move}-son.jpg`)
+  if (!play) return still(`${clipBase()}${move}-ilk.jpg`)
+  return <video className={className} src={`${clipBase()}${move}.mp4`} poster={`${clipBase()}${move}-ilk.jpg`} muted playsInline autoPlay preload="auto" aria-hidden="true" onError={() => setFailed(true)} />
+}
+
 export default function DikDur({ onFinish, onBack, sessions = [], remindField = null, trueDepth = false, storage = globalThis.localStorage, now = () => new Date() }) {
   const [phase, setPhase] = useState('intro') // intro | safety | camAsk | place | samePlace | calib | calibDone | perm | run | done
   const [mode, setMode] = useState('kisa')
@@ -169,7 +190,8 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
       setStatus({ text: 'Yüzünü göremiyorum. Sayaç sen görünene kadar bekliyor.', tone: 'w' })
       return
     }
-    setStatus(null)
+    // Halkadaki örnek kişi: kameranın seni gördüğü ayrıca söylenir (5 sn kapısı)
+    setStatus(camWorks() ? { text: 'Yüzünü görüyorum.', tone: 'ok' } : null)
     L.elapsed += dt
     setElapsed(L.elapsed)
     if (L.elapsed < CALIB_S * 1000) return
@@ -186,6 +208,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
     const c = calibrate(L.normal, poseOf(L.samples))
     saveJson(storage, CALIB_KEY, c)
     setCal(c)
+    setStatus(null)
     setPhase('calibDone')
     sayPhrase('ddCalDone')
   }
@@ -271,7 +294,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
         <div className="ex-intro">
           <h1 className="ex-title">Dik Dur</h1>
           <p className="dd-lead">Günde birkaç kez kısa bir dikleşme molası.</p>
-          <div className="dd-hero-box"><svg className="dd-hero" viewBox="80 6 160 226" aria-hidden="true"><PostureArt move="uzat" /></svg></div>
+          <div className="dd-hero-box"><PostureClip move="uzat" play className="dd-hero" /></div>
           <p className="ex-para">Üç hareket, her birini 10 saniye tut: boyunu uzat, çeneni içeri çek, omuzlarını geri ve aşağı al.</p>
           <p className="ex-para">Saatlerce dik durman gerekmez. Önemli olan sık sık pozisyon değiştirmek ve gün içinde kısa molalar vermek.</p>
           <p className="dd-ev">Çökük oturmak ruh hâlini biraz düşürebilir; dikleşmek o an daha iyi hissettirebilir.</p>
@@ -375,9 +398,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
           <h1 className="ex-title" aria-live="assertive">{title}</h1>
         </div>
         <div className="ex-mid dd-mid">
-          <Arena progress={done ? 1 : Math.min(1, elapsed / (CALIB_S * 1000))} off={!done && calStage === 'normal'}>
-            <PostureArt move={done || calStage === 'normal' ? null : 'uzat'} />
-          </Arena>
+          <Arena progress={done ? 1 : Math.min(1, elapsed / (CALIB_S * 1000))} off={!done && calStage === 'normal'} overlay={<PostureClip move={done || calStage === 'tall' ? 'uzat' : null} play={!done && calStage === 'tall'} end={done} />} />
           <div className="dd-left" aria-hidden="true">{done ? '' : left}</div>
         </div>
         {statusLine}
@@ -455,9 +476,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
         <p className="ex-para dd-cue">{mv.cue}</p>
       </div>
       <div className="ex-mid dd-mid">
-        <Arena progress={part} off={step.kind !== 'hold'}>
-          <PostureArt move={shown.move} />
-        </Arena>
+        <Arena progress={part} off={step.kind !== 'hold'} overlay={<PostureClip key={idx} move={shown.move} play={step.kind === 'hold'} />} />
         <div className={`dd-left${step.kind === 'gap' ? ' wait' : ''}`} aria-hidden="true">{left}</div>
       </div>
       {useCam ? statusLine : null}

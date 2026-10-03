@@ -10,6 +10,7 @@ const b = await launch()
 async function open(w, theme, seen, extra = '') {
   const d = DEV[w]
   const page = await b.newPage({ viewport: { width: d.w ?? w, height: d.h }, colorScheme: theme === 'koyu' ? 'dark' : 'light', deviceScaleFactor: 2, locale: 'tr-TR' })
+  await page.emulateMedia({ reducedMotion: 'reduce' }) // bu Chromium H.264 oynatmaz: videonun son karesi (tutmadaki duruş) görünsün
   await page.clock.install({ time: new Date(2026, 9, 3, 12) })
   await page.goto(`${BASE}?theme=${theme === 'koyu' ? 'dark' : 'light'}${seen ? '&seen=1' : ''}${extra}`)
   await page.evaluate(() => document.fonts.ready)
@@ -66,6 +67,8 @@ for (const theme of ['acik', 'koyu']) for (const w of [390, 320]) {
   await shot(p, 'tutma', w, theme)
   await p.clock.runFor(6500)
   await shot(p, 'ara', w, theme)
+  await p.clock.runFor(4000)
+  await shot(p, 'tutma-cene', w, theme)
   for (let i = 0; i < 70 && !(await p.getByText('Bitti').count()); i++) await p.clock.runFor(2000)
   await shot(p, 'bitis', w, theme)
   await p.close()

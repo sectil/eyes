@@ -62,7 +62,9 @@ describe('Dik Dur · kamera', () => {
     expect(v.text()).toContain('Yüzünü görüyorum.')
     await v.tap('Hazırım')
     expect(v.text()).toContain('Her zamanki gibi otur.')
-    await v.feed(NORMAL, 5100)
+    await v.feed(NORMAL, 300)
+    expect(v.text()).toContain('Yüzünü görüyorum.')
+    await v.feed(NORMAL, 4800)
     expect(v.text()).toContain('Şimdi dikleş: boyunu uzat, çeneni içeri çek.')
     await v.feed(null, 1000) // yüz yok: sayaç bekler
     expect(v.text()).toContain('Yüzünü göremiyorum. Sayaç sen görünene kadar bekliyor.')

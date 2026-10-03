@@ -63,3 +63,9 @@
 .dd-face.on .dd-face-ic { border-style: solid; border-color: var(--ex-ok); }
 .dd .ex-btn:disabled { animation: none; background: var(--ex-glass); border: 1px dashed var(--ex-glass-line); color: var(--ex-ink3); box-shadow: none; cursor: default; }
 .dd-home .ex-para { text-wrap: pretty; }
+
+/* Gerçek kişi videosu: halkanın içinde daire (egzersiz, duruşunu gösterme); girişte yuvarlak köşeli kare */
+.dd-clip { display: block; width: 90%; aspect-ratio: 1; border-radius: 50%; object-fit: cover; background: #d9d6d2; transition: opacity 0.3s, filter 0.3s; }
+.ex-arena.off .dd-clip { opacity: 0.55; filter: grayscale(1); }
+.dd-hero-box .dd-hero { aspect-ratio: 1; border-radius: 22px; object-fit: cover; background: #d9d6d2; }
+.dd-clip-art { background: none; border-radius: 0; }
