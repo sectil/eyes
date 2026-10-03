@@ -16,13 +16,21 @@ const s = q.get('s') || 'kurulu'
 const now = new Date(2026, 9, 3, 9, 0)
 const modules = registry.reminders()
 const kurulu = s !== 'bos'
+const cok = s === 'cok' // gerçekçi dolu hâl: dört deney türü ve beş modül, biri birden çok saatli
 const dd = s === 'dd' || s === 'ddsaat'
 const moduleReminders = kurulu ? {
   blink: { on: true, mode: 'auto', times: ['16:30'], autoAt: now.toISOString() },
   yoga: { on: false, mode: 'manual', times: ['21:30'] },
   ...(dd ? { 'dik-dur': { on: false, mode: 'manual', times: [], interval: { on: true, every: 120, from: '09:00', to: '19:00', days: [1, 2, 3, 4, 5] } } } : {}),
 } : undefined
-const reminders = { optIn: 'yes', types: { mola: { on: kurulu, time: '12:30' } } }
+if (cok) Object.assign(moduleReminders, {
+  dalga: { on: true, mode: 'manual', times: ['08:00', '13:00', '22:00'] },
+  gokyuzu: { on: true, mode: 'auto', times: ['11:00'], autoAt: now.toISOString() },
+  'dik-dur': { on: false, mode: 'manual', times: [], interval: { on: true, every: 120, from: '09:00', to: '19:00', days: [0, 1, 2, 3, 4, 5, 6] } },
+})
+const reminders = cok
+  ? { optIn: 'yes', types: { mola: { on: true, time: '12:30' }, walk: { on: true, time: '17:00' }, breath: { on: true, time: '21:30' }, water: { on: true, time: '10:00' } } }
+  : { optIn: 'yes', types: { mola: { on: kurulu, time: '12:30' } } }
 const entry = (id) => modules.find((m) => m.module === id)
 createRoot(document.getElementById('root')).render(
   <>
