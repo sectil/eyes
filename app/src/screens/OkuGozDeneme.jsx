@@ -1,11 +1,14 @@
 // Okurken göz (deneme; sahip 2026-10-03, yalnız test derlemesi: App.jsx SKY_UI): bugünün Oku ve Anla metninde kelimeler
 // seçilen hızda sırayla yanar; TrueDepth göz verisi kaydedilir; sonunda satır dönüşleri yanan satırla karşılaştırılır
-// (lib/readGaze.js). Soru: telefonun göz verisi okumayı izleyebiliyor mu? Oku ve Anla ölçümüne dokunmaz, kayıt yazmaz.
+// (lib/readGaze.js). Soru: telefonun göz verisi okumayı izleyebiliyor mu? Okuma bitince Oku ve Anla'nın dört sorusu
+// (sahip 2026-10-03: "okurun anladığını da tabii test edeceğiz"); sonuçta anlama da yazar. Oku ve Anla ölçümüne
+// dokunmaz, kayıt yazmaz.
 // Kamera görüntüsü kaydedilmez; yalnız göz yönü sayıları bellekte, "Ham veriyi paylaş" ile kişinin isteğiyle çıkar.
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import { ChevronLeft, X, Eye } from 'lucide-react'
+import { ChevronLeft, ChevronDown, X, Eye } from 'lucide-react'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
-import { todayText } from '../lib/okumaSelect.js'
+import { todayText, questionSet } from '../lib/okumaSelect.js'
+import OkuSoru from '../components/OkuSoru.jsx'
 import { SEED_KEY } from '../modules/okuma-anlama/manifest.js'
 import { SPEEDS, PASS_RATE, analyze, litAt, payloadOf } from '../lib/readGaze.js'
 import { shareText } from '../lib/share.js'
@@ -19,12 +22,17 @@ const FONT_MIN = 15
 const seedOf = (storage) => {
   try { return storage?.getItem(SEED_KEY) || 'oa' } catch { return 'oa' }
 }
+// "4 sorunun 3’ü doğru" (Oku ve Anla sonuç çipiyle aynı söz)
+const EK = { 0: 'ı', 1: 'i', 2: 'si', 3: 'ü', 4: 'ü' }
 const pct = (v) => `%${Math.round((v ?? 0) * 100)}`
 
 export default function OkuGozDeneme({ sessions = [], storage = globalThis.localStorage, trueDepth = false, onExit }) {
-  const [{ text }] = useState(() => todayText({ seed: seedOf(storage), sessions }))
+  const [{ text, cycle }] = useState(() => todayText({ seed: seedOf(storage), sessions }))
+  const questions = useMemo(() => questionSet(text, cycle), [text, cycle])
+  const [qi, setQi] = useState(0)
+  const [answers, setAnswers] = useState([])
   const words = useMemo(() => text.metin.split(/\s+/).filter(Boolean), [text])
-  const [phase, setPhase] = useState('giris') // giris | hazir | okuma | sonuc
+  const [phase, setPhase] = useState('giris') // giris | hazir | okuma | soru | sonuc
   const [wpm, setWpm] = useState(200)
   const [lit, setLit] = useState(-1)
   const [count, setCount] = useState(null)
@@ -115,7 +123,9 @@ export default function OkuGozDeneme({ sessions = [], storage = globalThis.local
       if (now >= end) {
         setLit(-1)
         setResult(analyze({ frames: frames.current, rects: rects.current, t0: t0.current, wpm }))
-        setPhase('sonuc')
+        setQi(0)
+        setAnswers([])
+        setPhase('soru')
         return
       }
       setLit(litAt(now, t0.current, words.length, wpm))
@@ -135,8 +145,15 @@ export default function OkuGozDeneme({ sessions = [], storage = globalThis.local
     setPhase('hazir')
   }
   const stop = () => { setLit(-1); setPhase('giris') }
+  const choose = (opt) => {
+    if (answers[qi]) return
+    const next = [...answers]
+    next[qi] = { id: questions[qi].id, chosen: opt.text, correct: opt.correct }
+    setAnswers(next)
+  }
+  const nextQ = () => (qi + 1 < questions.length ? setQi(qi + 1) : setPhase('sonuc'))
   const share = async () => {
-    const payload = payloadOf({ result, frames: frames.current, rects: rects.current, t0: t0.current, wpm, title: text.baslik, build: buildInfo().version })
+    const payload = payloadOf({ result, frames: frames.current, rects: rects.current, t0: t0.current, wpm, title: text.baslik, build: buildInfo().version, correct: answers.filter((a) => a?.correct).length })
     const r = await shareText('Nefona okurken göz verisi', payload)
     setNote(r === 'shared' ? 'Paylaşıldı.' : r === 'copied' ? 'Panoya kopyalandı.' : 'Kopyalanamadı.')
   }
@@ -191,8 +208,14 @@ export default function OkuGozDeneme({ sessions = [], storage = globalThis.local
     )
   }
 
+  if (phase === 'soru') {
+    const close = <button type="button" className="oa-ib" onClick={stop} aria-label="Kapat"><X size={20} aria-hidden="true" /></button>
+    return <OkuSoru key={`q${qi}`} q={questions[qi]} qi={qi} total={questions.length} answers={answers} onChoose={choose} onNext={nextQ} close={close} />
+  }
+
   // ---------- Sonuç ----------
   const r = result
+  const k = answers.filter((a) => a?.correct).length
   const verdict = !r?.ok ? 'Yüzün yeterince görülmedi.' : r.pass ? 'Gözün satırları izledi.' : 'Satır dönüşleri yakalanamadı.'
   return (
     <main className="og">
@@ -201,11 +224,12 @@ export default function OkuGozDeneme({ sessions = [], storage = globalThis.local
         <div className="og-kick">Satır dönüşü</div>
         <div className="og-big"><b>{r?.matched ?? 0}</b><span>/{r?.expected ?? 0}</span><em className={r?.pass ? 'ok' : 'no'}>{pct(r?.rate)}</em></div>
         <p className="og-verdict">{verdict}</p>
-        <p className="og-small">Ölçüt: dönüşlerin en az {pct(PASS_RATE)}'i yanan satırla yarım saniye içinde.</p>
+        <p className="og-anla"><b>Anlama</b><span>{k === 4 ? '4 sorunun hepsi doğru' : `4 sorunun ${k}’${EK[k]} doğru`}</span></p>
         {r?.ok ? <Chart r={r} /> : null}
         {/* Teknik sayılar kapalı bölümde (5 sn kapısı tur 1: ana ekranda anlamsız geliyordu) */}
         <details className="og-more">
-          <summary>Ayrıntılar</summary>
+          <summary>Ayrıntılar<ChevronDown size={16} strokeWidth={2.4} aria-hidden="true" /></summary>
+          <p className="og-small top">Ölçüt: dönüşlerin en az {pct(PASS_RATE)}'i yanan satırla yarım saniye içinde.</p>
           <dl className="og-stats">
             <div><dt>Yanan kelimeyle uyum</dt><dd>{Number.isFinite(r?.r) ? pct(r.r) : '—'}</dd></div>
             <div><dt>Yüzün görüldü</dt><dd>{pct(r?.trackedShare)}</dd></div>
@@ -247,7 +271,12 @@ function Chart({ r }) {
         <path d={path(pts, ny)} className="eye" />
         {r.pairs.map((p, k) => <circle key={k} cx={x(p.f)} cy={H - 4} r="3" className="hit" />)}
       </svg>
-      <figcaption><span className="k eye" />Göz<span className="k tgt" />Yanan kelime<span className="k exp" />Satır sonu<span className="k dot" />Yakalanan dönüş</figcaption>
+      <figcaption>
+        <span className="it"><span className="k eye" />Göz</span>
+        <span className="it"><span className="k tgt" />Yanan kelime</span>
+        <span className="it"><span className="k exp" />Satır sonu</span>
+        <span className="it"><span className="k dot" />Yakalanan dönüş</span>
+      </figcaption>
     </figure>
   )
 }

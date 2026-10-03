@@ -157,10 +157,10 @@ export function analyze({ frames, rects, t0, wpm }) {
 }
 
 // Paylaşılacak ham veri (kalibrasyon raporu gibi; yalnız sayılar)
-export function payloadOf({ result, frames, rects, t0, wpm, title, build }) {
+export function payloadOf({ result, frames, rects, t0, wpm, title, build, correct = null }) {
   const r2 = (v) => (Number.isFinite(v) ? Math.round(v * 100) / 100 : null)
   return JSON.stringify({
-    kind: 'okurken-goz-deneme', v: 1, build: build ?? null, wpm, title,
+    kind: 'okurken-goz-deneme', v: 1, build: build ?? null, wpm, title, correct,
     result: { lines: result.lines, expected: result.expected, matched: result.matched, rate: r2(result.rate), r: r2(result.r), signal: result.signal, flipped: result.flipped ?? null, lagMs: r2(result.lagMs), trackedShare: r2(result.trackedShare), widthMm: r2(result.widthMm), distMm: r2(result.distMm) },
     words: rects.map((r) => [Math.round(r.x), Math.round(r.y), Math.round(r.w)]),
     frames: frames.map((f) => [Math.round(f.ts - t0), f.tracked ? 1 : 0, r2(FEATURES.scrX(f)), r2(FEATURES.scrY(f)), r2(FEATURES.camX(f)), r2(FEATURES.camY(f)), r2(FEATURES.headX(f)), r2(FEATURES.scrZ(f))]),

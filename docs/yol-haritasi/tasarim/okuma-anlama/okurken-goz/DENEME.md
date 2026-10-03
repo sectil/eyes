@@ -55,3 +55,13 @@ paylaş" çıktısını gönder. Karar o veriyle verilir.
 - Sonuç 390 koyu: 0/5. Kalan kusur: grafik açıklamasında yeşil nokta bir satırda, "Yakalanan dönüş" yazısı alt satırda;
   "Ayrıntılar"ın açılır olduğunu gösteren ok yok, altında boşluk.
 - İki kare iki turda da geçmedi; sahibe gösterildi, karar onun. Deneme ekranı yalnız test derlemesinde.
+
+## Anlama soruları (sahip 2026-10-03: "Sonunda Testler ve okurun anladığını da tabii test edeceğiz"; karar "Şimdi denemeye")
+
+- Okuma bitince Oku ve Anla'nın aynı dört sorusu (`questionSet`); sonuçta "Anlama · 4 sorunun N'i doğru" (Oku ve Anla
+  sonuç çipiyle aynı söz). Kayıt yazılmaz; paylaşılan ham veride `correct`.
+- Soru ekranı ortak parçaya ayrıldı: `app/src/components/OkuSoru.jsx` (Oku ve Anla da onu kullanır). Oku ve Anla'nın
+  28 düzenek çekimi (soru ekranları dahil) değişiklikten önce ve sonra piksel piksel aynı (`cmp`, 28/28).
+- Sonuç ekranı kapısı tur 1: 390 açık ve koyu 5/5; 320 0/5 (grafik kartı düğmenin arkasında kesik). Tur 2: ölçüt cümlesi
+  "Ayrıntılar"a, kısa ekranda büyük sayı küçük; ölçüm: kart düğmenin 48 px üstünde biter (320), 219 px (390). Ayrıca
+  önceki kapının iki kusuru düzeldi: açıklamada nokta yazısıyla aynı satırda, "Ayrıntılar"da açılır ok.

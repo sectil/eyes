@@ -41,6 +41,9 @@
 .og-big em.ok { background: var(--ok-bg); color: var(--ok); }
 .og-big em.no { background: var(--surface-2); color: var(--ink-2); }
 .og-verdict { font-size: 17px; font-weight: 600; line-height: 1.4; margin: 8px 0 0; text-wrap: balance; }
+.og-anla { display: flex; align-items: center; gap: 10px; margin: 12px 0 0; font-size: 15.5px; font-weight: 650; }
+.og-anla b { font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.og-anla span { background: var(--surface-2); border-radius: 12px; padding: 5px 10px; }
 .og-chart { margin: 16px 0 0; padding: 12px; border-radius: 18px; background: var(--surface); border: 1px solid var(--border); }
 .og-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
 .og-chart .exp { stroke: var(--border); stroke-width: 1; stroke-dasharray: 3 3; }
@@ -48,15 +51,30 @@
 .og-chart .eye { fill: none; stroke: var(--ink); stroke-width: 1.25; stroke-linejoin: round; }
 .og-chart .hit { fill: var(--ok); }
 .og-chart figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-top: 8px; font-size: 12.5px; color: var(--ink-2); }
-.og-chart .k { display: inline-block; width: 14px; height: 0; border-top: 2px solid; margin-right: -6px; vertical-align: middle; }
+.og-chart .it { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.og-chart .k { display: inline-block; width: 14px; height: 0; border-top: 2px solid; }
 .og-chart .k.eye { border-color: var(--ink); }
 .og-chart .k.tgt { border-color: var(--accent); opacity: 0.6; }
 .og-chart .k.exp { border-color: var(--border); border-top-style: dashed; }
-.og-chart .k.dot { width: 7px; height: 7px; border: 0; border-radius: 50%; background: var(--ok); margin-right: -8px; }
+.og-chart .k.dot { width: 7px; height: 7px; border: 0; border-radius: 50%; background: var(--ok); }
 .og-chart .k.tgt { border-top-width: 3px; }
 .og-more { margin: 12px 0 0; }
-.og-more summary { cursor: pointer; font-size: 14.5px; font-weight: 650; color: var(--ink-2); padding: 8px 0; }
+.og-more summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 6px; font-size: 14.5px; font-weight: 650; color: var(--ink-2); padding: 8px 0; }
+.og-more summary::-webkit-details-marker { display: none; }
+.og-more summary svg { transition: transform 0.15s; }
+.og-more[open] summary svg { transform: rotate(180deg); }
 .og-stats { margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .og-stats div { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 10px 12px; }
 .og-stats dt { font-size: 12.5px; color: var(--ink-3); font-weight: 600; }
 .og-stats dd { margin: 3px 0 0; font-size: 15.5px; font-weight: 700; }
+/* Kısa ekran (320 × 568): sonuç kartı düğmelerin üstünde bitsin (5 sn kapısı, anlama turu 1) */
+.og-small.top { margin: 0 0 8px; }
+@media (max-height: 640px) {
+  .og-big b { font-size: 44px; }
+  .og-big span { font-size: 22px; }
+  .og-verdict { font-size: 16px; margin-top: 6px; }
+  .og-anla { margin-top: 8px; }
+  .og-chart { margin-top: 10px; padding: 10px; }
+  .og-chart figcaption { font-size: 12px; margin-top: 6px; }
+  .og-foot { padding-top: 8px; gap: 2px; }
+}
