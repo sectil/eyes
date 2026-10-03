@@ -4,11 +4,11 @@ import { describe, it, expect, vi, afterEach } from 'vitest'
 import '../test/fakeDom.js'
 import { createElement as h, act } from 'react'
 
-const cam = vi.hoisted(() => ({ onFrame: null, error: null }))
+const cam = vi.hoisted(() => ({ onFrame: null, error: null, face: true }))
 vi.mock('../hooks/useFaceTracking.js', () => ({
   useFaceTracking: ({ enabled, onFrame }) => {
     cam.onFrame = enabled ? onFrame : null
-    return { ready: true, error: enabled ? cam.error : null, face: true, mm: null, videoRef: { current: null } }
+    return { ready: true, error: enabled ? cam.error : null, face: cam.face, mm: null, videoRef: { current: null } }
   },
 }))
 
@@ -45,7 +45,7 @@ async function mount(props = {}) {
   return { btn, tap, feed, text: () => all().textContent }
 }
 
-afterEach(() => { vi.useRealTimers(); mem.clear(); cam.error = null })
+afterEach(() => { vi.useRealTimers(); mem.clear(); cam.error = null; cam.face = true })
 
 describe('Dik Dur · kamera', () => {
   it('ilk oturum: soru → yasla → iki duruş → kısa tur; düzeltme, yüz kaybında bekleme, bitişte oran', async () => {
@@ -58,7 +58,8 @@ describe('Dik Dur · kamera', () => {
     expect(v.text()).toContain('Kamera omuzlarını önden göremez; omuz adımını kendin yaparsın.')
     await v.tap('Kamerayla')
     expect(JSON.parse(mem.get(CAM_KEY))).toEqual({ asked: true, on: true })
-    expect(v.text()).toContain('Telefonu göz hizana yakın, bir kol boyu uzağa yasla. Yüzün ekranda görünsün.')
+    expect(v.text()).toContain('Telefonu göz hizana yakın, bir kol boyu uzağa yasla. Ön kamera yüzüne dönük olsun.')
+    expect(v.text()).toContain('Yüzünü görüyorum.')
     await v.tap('Hazırım')
     expect(v.text()).toContain('Her zamanki gibi otur.')
     await v.feed(NORMAL, 5100)
@@ -113,6 +114,20 @@ describe('Dik Dur · kamera', () => {
     expect(v.text()).not.toContain('Kamerayla takip')
     await v.tap('Kısa tur · 2 dakika')
     expect(v.text()).toContain('Boyunu uzat')
+  })
+  it('yasla: yüz yokken Hazırım kapalı; "Kamerasız devam et" bu oturumu kamerasız başlatır, ayarı değiştirmez', async () => {
+    vi.useFakeTimers()
+    mem.set(SAFETY_KEY, '1')
+    mem.set(CAM_KEY, JSON.stringify({ asked: true, on: true }))
+    cam.face = false
+    const v = await mount()
+    await v.tap('Kısa tur · 2 dakika')
+    expect(v.text()).toContain('Yüzünü arıyorum…')
+    expect(v.btn('Hazırım').hasAttribute('disabled')).toBe(true)
+    await v.tap('Kamerasız devam et')
+    expect(v.text()).toContain('Boyunu uzat')
+    expect(cam.onFrame).toBeNull()
+    expect(JSON.parse(mem.get(CAM_KEY))).toEqual({ asked: true, on: true })
   })
   it('kamera izni kapalıysa onaylı uyarı ve kamerasız devam', async () => {
     vi.useFakeTimers()

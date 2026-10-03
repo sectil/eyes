@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Camera, Check, ChevronLeft, Play, X } from 'lucide-react'
+import { Camera, Check, ChevronLeft, Play, ScanFace, X } from 'lucide-react'
 import SoundToggle from '../components/SoundToggle.jsx'
 import { Arena } from '../components/ExerciseArt.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
@@ -55,13 +55,14 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
   const [calStage, setCalStage] = useState('normal')
   const [status, setStatus] = useState(null) // { text, tone }
   const [result, setResult] = useState(null)
+  const [skipCam, setSkipCam] = useState(false) // yasla ekranında "Kamerasız devam et": yalnız bu oturum
   const startedAt = useRef(0)
   const steps = useMemo(() => stepsOf(mode), [mode])
   const step = steps[idx]
 
   // Zaman tik ile ilerler (yüz kaybolunca sayaç durur); değerler ref'te, ekran setElapsed ile
   const live = useRef({ idx: 0, elapsed: 0, faceAt: 0, sample: null, samples: [], notIn: 0, fixed: {}, fixShown: false, poseMs: 0, totalMs: 0 })
-  const useCam = trueDepth && camOn
+  const useCam = trueDepth && camOn && !skipCam
   const camPhase = useCam && ['place', 'samePlace', 'calib', 'calibDone', 'run'].includes(phase)
   const cam = useFaceTracking({
     enabled: camPhase,
@@ -121,6 +122,10 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
     const on = !camOn
     saveJson(storage, CAM_KEY, { asked: true, on })
     setCamOn(on)
+  }
+  function withoutCam() {
+    setSkipCam(true)
+    begin()
   }
   function placed() {
     if (cal?.ok) setPhase('samePlace')
@@ -250,7 +255,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
 
   if (phase === 'intro') {
     return (
-      <main className="ex-stage ex-start dd">
+      <main className="ex-stage ex-start dd dd-home">
         <div className="ex-top">
           <button type="button" className="ex-ic" onClick={onBack} aria-label="Geri"><ChevronLeft aria-hidden="true" /></button>
           <span style={{ flex: 1 }} />
@@ -259,7 +264,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
         <div className="ex-intro">
           <h1 className="ex-title">Dik Dur</h1>
           <p className="dd-lead">Günde birkaç kez kısa bir dikleşme molası.</p>
-          <svg className="dd-hero" viewBox="80 6 160 226" aria-hidden="true"><PostureArt move="uzat" /></svg>
+          <div className="dd-hero-box"><svg className="dd-hero" viewBox="80 6 160 226" aria-hidden="true"><PostureArt move="uzat" /></svg></div>
           <p className="ex-para">Üç hareket, her birini 10 saniye tut: boyunu uzat, çeneni içeri çek, omuzlarını geri ve aşağı al.</p>
           <p className="ex-para">Saatlerce dik durman gerekmez. Önemli olan sık sık pozisyon değiştirmek ve gün içinde kısa molalar vermek.</p>
           <p className="dd-ev">Çökük oturmak ruh hâlini biraz düşürebilir; dikleşmek o an daha iyi hissettirebilir.</p>
@@ -317,13 +322,20 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
 
   if (phase === 'place' || phase === 'samePlace') {
     const same = phase === 'samePlace'
+    const seenNow = cam.face && !cam.error
     return (
       <main className="ex-stage ex-start dd">
         {top()}
         <div className="ex-intro dd-safety">
           <h1 className="ex-title">{same ? 'Telefon geçen seferki yerinde mi?' : 'Telefonu yasla'}</h1>
-          {!same && <p className="ex-para">Telefonu göz hizana yakın, bir kol boyu uzağa yasla. Yüzün ekranda görünsün.</p>}
+          {!same && <p className="ex-para">Telefonu göz hizana yakın, bir kol boyu uzağa yasla. Ön kamera yüzüne dönük olsun.</p>}
         </div>
+        {!same && (
+          <div className={`dd-face${seenNow ? ' on' : ''}`} role="status">
+            <span className="dd-face-ic" aria-hidden="true"><ScanFace /></span>
+            <span>{cam.error ? 'Kamera açılamadı.' : seenNow ? 'Yüzünü görüyorum.' : 'Yüzünü arıyorum…'}</span>
+          </div>
+        )}
         <div className="ex-foot">
           {same ? (
             <>
@@ -331,7 +343,10 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
               <button type="button" className="ex-btn ghost" onClick={startCalib}>Hayır, yeniden göstereyim</button>
             </>
           ) : (
-            <button type="button" className="ex-btn" onClick={placed}><Check aria-hidden="true" /> Hazırım</button>
+            <>
+              {!cam.error && <button type="button" className="ex-btn" disabled={!seenNow} onClick={placed}><Check aria-hidden="true" /> Hazırım</button>}
+              <button type="button" className="ex-btn ghost" onClick={withoutCam}>Kamerasız devam et</button>
+            </>
           )}
         </div>
       </main>

@@ -21,6 +21,20 @@
 /* Giriş uzun: kısa ekranda kaydırılabilir; çizim küçülür ya da kalkar (320 × 568'de düğmeler ekranda kalsın) */
 .dd.ex-start { overflow-y: auto; }
 @media (max-height: 760px) { .dd-hero { width: 110px; height: 150px; } }
+@media (max-width: 340px) {
+  .dd-home .ex-intro { gap: 8px; }
+  .dd-home .ex-para { font-size: 0.9rem; }
+  .dd-home .dd-lead { font-size: 1rem; }
+  .dd-home .dd-cam { padding: 10px 12px; }
+}
+/* Giriş ekranı: düğmeler hep ekranda; çizim kalan yere göre küçülür, yer yoksa metin kendi içinde kayar */
+.dd.dd-home { overflow: hidden; }
+.dd-home .ex-intro { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow-y: auto; }
+.dd-home .ex-intro > * { flex: none; }
+.dd-home .ex-intro > .dd-hero-box { flex: 1 1 190px; min-height: 0; max-height: 194px; container-type: size; display: grid; place-items: center; }
+.dd-hero-box .dd-hero { width: auto; height: 100%; max-height: 190px; margin: 0; }
+@container (max-height: 64px) { .dd-hero-box .dd-hero { display: none; } }
+@media (max-height: 760px) { .dd-home .ex-intro:has(.dd-cam) > .dd-hero-box { display: none; } } /* kısa ekranda kamera düğmesine yer */
 @media (max-height: 640px) {
   .dd-hero { display: none; }
   .dd .ex-intro { gap: 8px; margin-top: 10px; }
@@ -28,6 +42,9 @@
   .dd .ex-para { font-size: 0.9rem; }
   .dd .ex-foot { min-height: 0; }
   .dd-left { min-height: 40px; font-size: 2.1rem; }
+  .dd-face-ic { width: 104px; height: 104px; }
+  .dd-home .ex-foot { margin-top: 8px; gap: 8px; }
+  .dd-home .ex-btn { min-height: 50px; }
 }
 
 /* Kamera düğmesi (giriş) ve izin uyarısı */
@@ -37,3 +54,12 @@
 .dd-cam-l b { font-size: 0.95rem; }
 .dd-cam-l span { font-size: 0.82rem; color: var(--ex-ink3); }
 .dd-warn { margin: 4px 0 0; font-size: 0.92rem; font-weight: 600; line-height: 1.4; color: var(--ex-warn); }
+
+/* Telefonu yasla: yüz görünüyor mu (görüntü gösterilmez; yalnız durum) */
+.dd-face { flex: 1; min-height: 0; display: grid; place-content: center; justify-items: center; gap: 14px; color: var(--ex-ink3); font-size: 1rem; font-weight: 600; text-align: center; }
+.dd-face-ic { display: grid; place-items: center; width: 132px; height: 132px; border-radius: 50%; border: 3px dashed var(--ex-glass-line); background: var(--ex-glass); }
+.dd-face-ic svg { width: 54px; height: 54px; stroke-width: 1.5; }
+.dd-face.on { color: var(--ex-ok); }
+.dd-face.on .dd-face-ic { border-style: solid; border-color: var(--ex-ok); }
+.dd .ex-btn:disabled { animation: none; background: var(--ex-glass); border: 1px dashed var(--ex-glass-line); color: var(--ex-ink3); box-shadow: none; cursor: default; }
+.dd-home .ex-para { text-wrap: pretty; }

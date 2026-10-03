@@ -33,8 +33,9 @@ Dik Dur
 
 ## E. Telefon yerleşimi
 - Başlık: Telefonu yasla
-- Metin: Telefonu göz hizana yakın, bir kol boyu uzağa yasla. Yüzün ekranda görünsün.
-- Düğme: Hazırım
+- Metin: Telefonu göz hizana yakın, bir kol boyu uzağa yasla. Ön kamera yüzüne dönük olsun.
+- Durum: Yüzünü arıyorum… · Yüzünü görüyorum. · Kamera açılamadı.
+- Düğmeler: Hazırım (yüz görünene kadar kapalı) · Kamerasız devam et (yalnız bu oturum)
 
 ## F. Duruşunu gösterme (bir kez)
 - Adım 1: Her zamanki gibi otur.
@@ -89,3 +90,12 @@ kullanırız. Görüntüler telefonundan çıkmaz ve kaydedilmez.
 - Bölüm arası: tur 1'de tek başlık sağda kesildi (2/5); tur 2'de "1 dakika sonra başlar" yazısı 0:40 sayacıyla
   çelişti (0/5). İki tur doldu; kapı bulgusuna göre cümle "Sonraki bölüm sayaç bitince başlar." oldu.
 - Ara: tur 1'de donmuş gibi göründü (0/5); "Hazırlan" etiketi ve 3-2-1 sayacıyla tur 2'de 5/5.
+- Telefonu yasla: tur 1'de 0/5; "Yüzün ekranda görünsün" dedi ama ekranda görüntü yoktu (TrueDepth görüntü vermez).
+  Cümle "Ön kamera yüzüne dönük olsun." oldu; yüz durumu göstergesi, yüz görünene kadar kapalı Hazırım ve
+  "Kamerasız devam et" eklendi.
+- Giriş (kamera anahtarıyla): tur 1'de 320 × 568'de Tam tur düğmesi kesildi (0/5). Ölçünce 375 × 667, 320 × 693
+  ve 390 × 844'te de taşıdığı görüldü. Düzen değişti: düğmeler hep ekranda, çizim kalan yere göre küçülür, yer
+  yoksa gizlenir. Face ID'li boylarda (320 × 693, 375 × 812, 390 × 844) her şey sığar; 320 × 568'de Face ID yok.
+- Tur 2 (kamera ekranları): yüz görünüyor 5/5, yüz aranıyor 320 açık 4/5, 390 koyu 3/5 (sönük Hazırım'ın koyu yazısı
+  koyu zeminde okunmadı); kameralı giriş 320 × 693 5/5, 375 × 812 5/5; kamerasız giriş 375 × 667 5/5. İki tur
+  doldu; bulguya göre sönük düğme kesik çizgili cam zemin ve soluk yazı oldu (iki temada okunur, ölçü düzenekte).

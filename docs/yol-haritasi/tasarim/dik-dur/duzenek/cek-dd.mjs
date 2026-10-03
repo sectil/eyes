@@ -5,11 +5,11 @@ const { chromium } = createRequire(process.env.PW_DIR ?? '/opt/node-tools/node_m
 const launch = () => chromium.launch({ executablePath: process.env.CHROME ?? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--lang=tr-TR'] }).catch(() => chromium.launch())
 const OUT = process.argv[2]
 const BASE = `http://127.0.0.1:${process.env.PORT ?? 4392}/@fs${new URL('.', import.meta.url).pathname}dd.html`
-const DEV = { 390: { h: 844, top: 47 }, 320: { h: 568, top: 20 } }
+const DEV = { 390: { h: 844, top: 47 }, 320: { h: 568, top: 20 }, '320z': { w: 320, h: 693, top: 50 }, 375: { h: 667, top: 20 }, '375x': { w: 375, h: 812, top: 50 } } // 320z: mini, büyütülmüş ekran · 375: SE · 375x: mini
 const b = await launch()
 async function open(w, theme, seen, extra = '') {
   const d = DEV[w]
-  const page = await b.newPage({ viewport: { width: w, height: d.h }, colorScheme: theme === 'koyu' ? 'dark' : 'light', deviceScaleFactor: 2, locale: 'tr-TR' })
+  const page = await b.newPage({ viewport: { width: d.w ?? w, height: d.h }, colorScheme: theme === 'koyu' ? 'dark' : 'light', deviceScaleFactor: 2, locale: 'tr-TR' })
   await page.clock.install({ time: new Date(2026, 9, 3, 12) })
   await page.goto(`${BASE}?theme=${theme === 'koyu' ? 'dark' : 'light'}${seen ? '&seen=1' : ''}${extra}`)
   await page.evaluate(() => document.fonts.ready)
@@ -25,6 +25,11 @@ const shot = async (page, name, w, theme) => {
 }
 const tap = (page, label) => page.getByRole('button', { name: label, exact: true }).click()
 const ONLY = process.env.ONLY ?? 'temel,kamera'
+if (ONLY.includes('giris')) for (const theme of ['acik', 'koyu']) {
+  // giriş düzeni farklı boylarda (kameralı giriş yalnız Face ID'li boylarda: 320z, 375x, 390)
+  for (const w of [390, 375, 320]) { const p = await open(w, theme, true); await shot(p, 'giris', w, theme); await p.close() }
+  for (const w of ['320z', '375x']) { const p = await open(w, theme, true, '&td=1&cam=1&cal=1'); await shot(p, 'giris-kamera', w, theme); await p.close() }
+}
 for (const theme of ['acik', 'koyu']) for (const w of [390, 320]) {
   if (ONLY.includes('kamera')) {
     let k = await open(w, theme, true, '&td=1')
@@ -32,6 +37,10 @@ for (const theme of ['acik', 'koyu']) for (const w of [390, 320]) {
     await shot(k, 'kamera-soru', w, theme)
     await tap(k, 'Kamerayla')
     await shot(k, 'yasla', w, theme)
+    const y = await open(w, theme, true, '&td=1&cam=1&face=0')
+    await tap(y, 'Kısa tur · 2 dakika')
+    await shot(y, 'yasla-arama', w, theme)
+    await y.close()
     await tap(k, 'Hazırım')
     await k.clock.runFor(2500)
     await shot(k, 'gosterme-normal', w, theme)
