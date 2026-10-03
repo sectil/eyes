@@ -1,0 +1,7 @@
+node_modules
+.vite-cache
+vite.log
+tur*/
+mic*/
+kor*/
+*.png
