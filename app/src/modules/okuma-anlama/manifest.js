@@ -70,6 +70,7 @@ export default {
   remind: {
     route: ID,
     window: 'calm',
+    defaultTime: '20:00',
     science: ['rayner2016'],
     doneToday: (sessions, now) => sessions.some((s) => isFinished(s) && isSameDay(s, now)),
   },

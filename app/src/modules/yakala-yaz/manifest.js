@@ -80,7 +80,7 @@ export default {
     if (!done && tekBakisOnPath(ctx)) return null
     return { title: 'Yakala Yaz', minutes: 2, slot: 'body', order: 96, dropRank: 1.5, weekDays: days, done }
   },
-  remind: { route: ID, window: 'move', science: ['rubin1992'] },
+  remind: { route: ID, window: 'move', defaultTime: '13:30', science: ['rubin1992'] },
   // Nef'e 7 günlük özet (PLAN §4.3): ms7 son 7 günün tur eşiklerinin ortancası (en iyi tur değil)
   coach(sessions, now) {
     const all = sessions.filter((s) => isYakala(s) && Number.isFinite(s.thresholdMs))

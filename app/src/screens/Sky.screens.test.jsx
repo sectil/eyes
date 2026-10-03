@@ -73,15 +73,15 @@ describe('K · il ve ilçe', () => {
     expect(v.text()).toContain('yaklaşık')
     expect(v.text()).toContain('Telefonda yalnız il ve ilçe adı kalır.')
     const items = v.btns((n) => n.getAttribute('role') === 'listitem').map((n) => n.textContent)
-    expect(items[0]).toBe('Yalnız İzmir')
+    expect(items).not.toContain('Yalnız İzmir') // ilçesiz devam liste satırı değil, il kartının altında düğme (D2)
     expect(items).toContain('Gaziemir')
     await v.tap('Gaziemir')
     expect(got).toEqual({ il: 'İzmir', ilce: 'Gaziemir', approx: false })
   })
-  it('"Yalnız İzmir" ilçesiz devam eder', async () => {
+  it('"Yalnız İzmir ile devam et" ilçesiz devam eder', async () => {
     let got = null
     const v = await mount(h(SkyPlace, { il: 'İzmir', approx: true, onPick: (p) => { got = p }, onBack: () => {} }))
-    await v.tap('Yalnız İzmir')
+    await v.tap('Yalnız İzmir ile devam et')
     expect(got).toEqual({ il: 'İzmir', ilce: null, approx: true })
   })
   it('konum yok: önce il listesi ("Hangi ildesin?"), il seçilince ilçeler', async () => {

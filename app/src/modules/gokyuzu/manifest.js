@@ -19,7 +19,7 @@ export default {
   home: { section: 'practice', order: 36 },
   // "Bana hatırlat" (bildirim PLAN.v1 §A.1 modül tablosu; metin lib/remindTexts.js, sahip onaylı metin-B1a-onay.md).
   // Kendi rotası, sakin pencere (08.00–22.00). Kaynaklar zayıf destek (onay dosyası). VARSAYIM: defaultTime yok.
-  remind: { route: 'gokyuzu', window: 'calm', science: ['yamashita2021', 'talens2022'] },
+  remind: { route: 'gokyuzu', window: 'calm', defaultTime: '15:00', science: ['yamashita2021', 'talens2022'] },
   sessions: {
     match: (s) => s?.type === SESSION_TYPE,
     countsTowardGoal: true,

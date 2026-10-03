@@ -72,7 +72,7 @@
   font: 500 1rem/1.2 var(--font-body); color: var(--ink); text-align: left; cursor: pointer; }
 .sky-li + .sky-li { border-top: 1px solid var(--border); }
 .sky-li svg { color: var(--ink-3); flex: none; }
-.sky-li-only { font-weight: 600; color: var(--accent); }
+.sky-ok { margin-top: 10px; } /* D2: ilçesiz devam, il kartının altında */
 
 /* ---------- G · "…'de misin?" ---------- */
 .sky-g { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; gap: 20px; padding-top: calc(60px + env(safe-area-inset-top, 0px)); }

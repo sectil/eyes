@@ -17,7 +17,7 @@ export default {
   home: { section: 'exercise', order: 90 },
   // "Bana hatırlat" (bildirim PLAN.v1 §A.1 modül tablosu; metin lib/remindTexts.js, sahip onaylı metin-B1a-onay.md).
   // Kendi rotası, hareket penceresi (09.00–21.00). VARSAYIM: defaultTime yok (FALLBACK_TIME).
-  remind: { route: 'blink', window: 'move', science: ['kim2020', 'wolffsohn2025'] },
+  remind: { route: 'blink', window: 'move', defaultTime: '10:30', science: ['kim2020', 'wolffsohn2025'] },
   // Nef (registry.js `nef` sözleşmesi; ad sahip onaylı 2026-10-01): ad çekimleri, genel anlar, kanıt, tanıtım satırı.
   nef: {
     name: { tr: { '': 'göz kırpma egzersizi', ABL: 'göz kırpma egzersizinden', ACC: 'göz kırpma egzersizini', LOC: 'göz kırpma egzersizinde', DAT: 'göz kırpma egzersizine', INS: 'göz kırpma egzersiziyle', POSS: 'göz kırpma egzersizin', 'POSS-ABL': 'göz kırpma egzersizinden' } },
