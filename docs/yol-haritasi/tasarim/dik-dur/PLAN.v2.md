@@ -1,4 +1,4 @@
-# Dik Dur modülü · PLAN v2 (iki eleştiri turu bitti; sahip onayı bekliyor)
+# Dik Dur modülü · PLAN v2 · ONAYLANDI (sahip, 2026-10-03)
 
 Sahip isteği (2026-10-03): dik durma egzersizi; istediği saatlerde ya da "şu saatler arası her 1 / her 2 saatte" devamlı
 hatırlatma; kamera duruşu takip etsin, kafa geri, omuzlar geri (kamera isteğe bağlı kapatılabilir); "başının üstünde
@@ -209,6 +209,14 @@ korunur: aralıklı kip kapalıyken bildirim planı bugünküyle 0 fark.
 - AirPods baş izleme (kamerasız baş eğimi) v2 adayı; doğrulanmadı.
 
 ---
+
+## 7a. Sahibin kararları (2026-10-03)
+
+1. Plan ve sıra (D1 → D4): **onay**.
+2. 3 saat sınırına istisna: **evet, yalnız Dik Dur** (aralıklı kipte günde en çok 13).
+3. Devamlılık: **B · kayan ufuk** (5 gün; her 1 saatte 2 gün).
+4. Varsayılan her 2 saat 09.00–19.00; kamera ilk oturumda sorulur (metin onaya); ses önce cihaz sesi (ElevenLabs
+   ayrıca onaya); bildirim düzeyi etkin; §4.3'teki beş test yeri bilerek değişebilir: **hepsi kabul**.
 
 ## 7. Senden kararlar
 
