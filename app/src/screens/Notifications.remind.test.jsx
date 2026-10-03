@@ -57,26 +57,37 @@ async function mount() {
 }
 
 describe('Bildirimler → modül hatırlatması', () => {
-  it('kurulmamış modül kapalı satırda Nef\'in önerisiyle durur; anahtar açar ve kapatır', async () => {
+  // Sahip kararı 2026-10-03 (D14 "Yalnız kurduklarım"; beklenti bilerek değişti, sahibin izniyle): kurulmamış modül
+  // listede satır olarak durmaz, "Hatırlatma ekle"de saatsiz hap olur; kurulan satır anahtarla kapatılınca listede kalır.
+  it('yalnız kurulan hatırlatma listede; kurulmamış "Hatırlatma ekle" hapında; kapatılan satır listede kalır', async () => {
     settings = { moduleReminders: undefined, reminders: { optIn: null, types: { mola: { on: true, time: '12:30' } } } }
     const v = await mount()
     expect(v.text()).toContain('Gece sessizliği')
-    expect(v.text()).toContain('Göz kırpma')
-    expect(v.text()).toContain('Her gün 16.30')
-    expect(v.sw('Göz kırpma').getAttribute('aria-checked')).toBe('false')
+    expect(v.sw('Göz kırpma')).toBeUndefined()
+    expect(v.text()).not.toContain('Her gün 16.30')
+    expect(v.text()).toContain('Hatırlatma ekle')
+    expect(v.byClass('nt-chip').map((n) => n.getAttribute('aria-label'))).toEqual(expect.arrayContaining(['Göz kırpma saatleri', 'Yoga saatleri']))
+    expect(v.byClass('nt-chip').some((n) => n.getAttribute('aria-label') === 'Mola saatleri')).toBe(false) // mola açık: listede
 
-    await act(async () => v.sw('Göz kırpma').click())
+    await v.tap('Göz kırpma saatleri')
+    await v.tap('Hatırlatmayı aç')
     expect(settings.moduleReminders.blink).toMatchObject({ on: true, mode: 'auto', times: ['16:30'] })
-    expect(settings.reminders.optIn).toBe('yes')
     expect(v.sw('Göz kırpma').getAttribute('aria-checked')).toBe('true')
-    expect(v.text()).toContain('Her gün 16.30 · Nef seçti')
+    expect(v.byClass('nt-chip').some((n) => n.getAttribute('aria-label') === 'Göz kırpma saatleri')).toBe(false)
 
     await act(async () => v.sw('Göz kırpma').click())
     expect(settings.moduleReminders.blink.on).toBe(false)
     expect(settings.moduleReminders.blink.times).toEqual(['16:30']) // kapatılan satır saatiyle listede kalır
     expect(v.sw('Göz kırpma').getAttribute('aria-checked')).toBe('false')
-    // öteki modüle dokunulmadı
     expect(settings.moduleReminders.yoga).toBeUndefined()
+  })
+
+  it('hiç hatırlatma yoksa kısa cümle ve ekleme hapları', async () => {
+    settings = { moduleReminders: undefined, reminders: { optIn: null, types: { mola: { on: false, time: '12:30' } } } } // mola varsayılan açık; burada kapalı
+    const v = await mount()
+    expect(v.text()).toContain('Henüz kurduğun hatırlatma yok.')
+    expect(v.byClass('nt-list').length).toBe(0)
+    expect(v.byClass('nt-chip').length).toBeGreaterThanOrEqual(2)
   })
 
   it('satıra dokununca saat sayfası açılır ("Nef seçsin", Nef işareti bir kez); kaydedince satır açık', async () => {
@@ -100,11 +111,12 @@ describe('Bildirimler → modül hatırlatması', () => {
     expect(settings.moduleReminders.yoga).toBeUndefined()
   })
 
-  it('App bayrakları: bitiş satırı ve Bildirimler kapalı (5 sn kapısı geçmedi)', async () => {
+  // Beklenti bilerek değişti (sahibin izniyle, 2026-10-03, D14): Bildirimler yeniden açık; bitiş satırı kapalı kalır
+  it('App bayrakları: bitiş satırı kapalı, Bildirimler açık', async () => {
     const { readFileSync } = await import('node:fs')
     const app = readFileSync(new URL('../App.jsx', import.meta.url), 'utf8')
     expect(app).toMatch(/^const REMIND_ROW = false$/m)
-    expect(app).toMatch(/^const NOTIFY_PAGE = false\b/m)
+    expect(app).toMatch(/^const NOTIFY_PAGE = true\b/m)
     expect(app).toMatch(/if \(!REMIND_ROW\) return null/)
     expect(app).toMatch(/notify=\{NOTIFY_PAGE && isIOSApp\(\)/)
     expect(app).not.toMatch(/REMIND_UI/)

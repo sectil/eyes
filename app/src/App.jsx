@@ -178,7 +178,7 @@ function useEyeClock(kind) {
 //     components/RemindSheet.jsx 5/5 geçti). AÇIK: modül hatırlatması yalnız Bildirimler'den kurulur. Hiçbir modül
 //     hatırlatması açık değilken plan bugünkü gibi kalır (eşdeğerlik: lib/notifyAll.equiv.test.js).
 const REMIND_ROW = false
-const NOTIFY_PAGE = false // uygulamadaki hâl 5 sn kapısında 1/5 (5sn-b1a-yeni.md son bölüm); sahip kararı: durdu
+const NOTIFY_PAGE = true // yeniden açık (sahip 2026-10-03, D14): yalnız kurulan hatırlatmalar + "Hatırlatma ekle"; önce 1/5'ti
 // B2 hava (PLAN.v1 §3.B; tasarım b2-tasarim/: R-katmanli, K-C, G-tur2). SKY_UI: bütün B2 arayüzü (rıza, il/ilçe, onay
 // rotaları) bu bayrağın arkasında; SkyPlugin.swift Mac'te derlenip cihazda doğrulanana kadar KAPALI. Akış: rıza
 // (weather) → iOS konum izni ("Kullanırken", yaklaşık varsayılan) → il ve en yakın ilçe kendiliğinden (sahip kararı

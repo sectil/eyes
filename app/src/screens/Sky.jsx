@@ -95,7 +95,9 @@ export default function Sky({ place, onBack, onChange, morning = null, onMorning
           )}
 
           {hours.length > 0 && (
-            <div className="wx-hours" role="list">
+            // Sağda solma: yarım kalan sütun "devamı var" diye okunsun (sahip: "saatlik şerit sağda kesiliyor"); sona gelince kalkar
+            <div className="wx-hours-card">
+            <div className="wx-hours fade" role="list" onScroll={(e) => { const el = e.currentTarget; el.classList.toggle('fade', el.scrollLeft + el.clientWidth < el.scrollWidth - 2) }}>
               {hours.map((h) => (
                 <div key={h.at} role="listitem" className={`wx-hr${h.now ? ' now' : ''}`}>
                   <span>{h.label}</span>
@@ -104,6 +106,7 @@ export default function Sky({ place, onBack, onChange, morning = null, onMorning
                   <span>{h.chanceText}</span>
                 </div>
               ))}
+            </div>
             </div>
           )}
 

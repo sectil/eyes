@@ -121,9 +121,15 @@
 .wx-nef .wx-dot { width: 30px; height: 30px; box-shadow: none; }
 .wx-nef p { margin: 0; font: 500 0.95rem/1.4 var(--font-body); color: var(--ink); }
 .wx-nef small { display: block; font: 600 0.66rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+/* Kart (zemin, kenar) dışta; kaydırılan şerit içte: sağdaki solma yalnız içeriği soldurur, kart kenarı yerinde kalır */
+.wx-hours-card { border-radius: 20px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
 .wx-hours { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 28px) / 8); gap: 4px; padding: 12px 10px; overflow-x: auto; scroll-snap-type: x proximity;
-  border-radius: 20px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); scrollbar-width: none; }
+  scrollbar-width: none; }
+/* Dar ekranda yedi sütun: "Şimdi" sekizli sütuna sığmıyordu (320'de sütun 29 px) */
+@media (max-width: 360px) { .wx-hours { grid-auto-columns: calc((100% - 24px) / 7); } }
 .wx-hours::-webkit-scrollbar { display: none; }
+/* Sağ kenarda solma (D11 açık işi "şerit sağda kesiliyor"): kaydırılabildiği belli olsun; sona gelince kalkar (Sky.jsx) */
+.wx-hours.fade { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent); }
 .wx-hr { display: grid; justify-items: center; gap: 5px; font: 500 0.7rem/1 var(--font-mono); color: var(--ink-3); scroll-snap-align: start; }
 .wx-hr b { font: 600 0.82rem/1 var(--font-mono); color: var(--ink); }
 .wx-hr.now b, .wx-hr.now > span:first-child { color: var(--accent); }

@@ -92,3 +92,19 @@ aktarımda Bildirimler listesine hatırlatma alabilen yedi modülün hepsi eklen
 dolgu yerine kontur (tasarımda dolgu). Sahip kararı ("4/5 çıkmazsa durdur") gereği B1a arayüzü durdu: iki bayrak da
 kapalı (REMIND_ROW, NOTIFY_PAGE); kod ve testler duruyor. Yeniden açmak için gereken karar: Bildirimler yalnız kurulu
 hatırlatmaları mı listelesin (+ "Hatırlatma ekle"), veri yokken öneri saati modül başına farklı mı olsun (plan: 16.30).
+
+## D14 · yeniden açılış (sahip 2026-10-03: "Yalnız kurduklarım", "Modüle göre farklı"; testler için izin)
+
+- Bildirimler yalnız kurulan hatırlatmaları listeler (kapatılan listede kalır); kurulmamışlar altta "Hatırlatma ekle"
+  haplarında (saatsiz, anahtarsız; dokununca saat sayfası ya da Hatırlatmalar). Hiç yoksa "Henüz kurduğun hatırlatma
+  yok." `NOTIFY_PAGE = true`; bitiş satırı (`REMIND_ROW`) kapalı kalır. Yürüyüş hapı zil yerine adım simgesi.
+- Saat sayfası: belgedeki "seçili sekme dolgu yerine kontur" notu onaylı tasarımın kendi CSS'iyle (b1a-son/ekranlar.html
+  `.seg > span.on`, kontur) çelişiyordu; uygulama tasarımla aynı, değiştirilmedi. Düzenekte Nef simgesi home.css ile.
+- Düzenek `duzenek/` (nt.html, cek-nt.mjs; gerçek `registry.reminders()`), uygulamanın kendi ekranları.
+- 5 sn kapısı tur 1 (5 kişi): kurulu 390 açık 5/5, kurulu 320 koyu 4/5, boş 390 koyu 5/5, boş 320 açık 4/5, saat sayfası
+  390 açık 5/5, 320 koyu 5/5; "Hatırlatma ekle" 5/5, "Henüz kurduğun hatırlatma yok." 5/5. GEÇTİ.
+- Notlar: Hızlı Bakış ile Yakala Yaz aynı şimşek simgesi (modüllerin kendi simgesi; ayrı iş). 320'de haplar tek tek alt
+  alta düşüp uzun bir merdiven oluyor (geçti ama düzensiz denildi).
+- Testler (sahibin izniyle değişti): `Notifications.remind.test.jsx` "kurulmamış modül…" → "yalnız kurulan…", yeni
+  "hiç hatırlatma yoksa…", "App bayrakları" (NOTIFY_PAGE true). İkinci test değişmeden geçti. Eşdeğerlik testi geçti.
+- Öneri saatleri (modüle göre, kaynaklı) ayrı adım: tablo sahibe; onaya dek 16.30.
