@@ -14,9 +14,9 @@ export const REST_S = 60
 
 // Onaylı adlar ve yönergeler (metin-D1-onay.md §G). camera: önden kamerayla doğrulanabilir mi (PLAN §3.1).
 export const MOVES = Object.freeze({
-  uzat: Object.freeze({ id: 'uzat', name: 'Boyunu uzat', cue: 'Başının tepesinden bir ip seni yukarı çekiyor gibi boyunu uzat.', fix: 'Biraz daha uzat.', camera: true }),
-  cene: Object.freeze({ id: 'cene', name: 'Çeneni içeri çek', cue: 'Çeneni hafifçe içeri çek, başını düz geriye kaydır; çift çene yapar gibi.', fix: 'Başını eğme, düz geriye kaydır.', camera: true }),
-  omuz: Object.freeze({ id: 'omuz', name: 'Omuzlar', cue: 'Omuzlarını zorlamadan geriye ve aşağı al.', fix: null, camera: false }),
+  uzat: Object.freeze({ id: 'uzat', name: 'Boyunu uzat', cue: 'Başının tepesinden bir ip seni yukarı çekiyor gibi boyunu uzat.', fix: 'Biraz daha uzat.', voice: 'ddUzat', fixVoice: 'ddUzatFix', camera: true }),
+  cene: Object.freeze({ id: 'cene', name: 'Çeneni içeri çek', cue: 'Çeneni hafifçe içeri çek, başını düz geriye kaydır; çift çene yapar gibi.', fix: 'Başını eğme, düz geriye kaydır.', voice: 'ddCene', fixVoice: 'ddCeneFix', camera: true }),
+  omuz: Object.freeze({ id: 'omuz', name: 'Omuzlar', cue: 'Omuzlarını zorlamadan geriye ve aşağı al.', fix: null, voice: 'ddOmuz', fixVoice: null, camera: false }),
 })
 
 // kisa: her tekrar üç hareketin hepsi; tam: her bölümde önce çene 10 tekrar, sonra omuz 10 tekrar.

@@ -1,6 +1,7 @@
 // Dik Dur çekirdeği: adım sırası, süreler, ilerleme ve bitiş satırları (lib/dikDur.js; metinler metin-D1-onay.md)
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
+import { PHRASES } from './voicePack.js'
 import { MOVES, MODES, stepsOf, totalSeconds, progressText, distributive, summaryText, weekCount, weekText, weekStart, makeRecord, HOLD_S, GAP_S, REST_S } from './dikDur.js'
 
 const DOC = readFileSync(new URL('../../../docs/yol-haritasi/tasarim/dik-dur/metin-D1-onay.md', import.meta.url), 'utf8')
@@ -72,5 +73,14 @@ describe('dik dur · satırlar', () => {
   it('kayıt', () => {
     expect(makeRecord({ mode: 'kisa', holds: 9, seconds: 114.4 })).toEqual({ type: 'dik-dur', mode: 'kisa', reps: 9, seconds: 114, cameraUsed: false })
     expect(makeRecord({ mode: 'kisa', holds: 9, seconds: 114, cameraUsed: true, inPose: 1.2 }).inPose).toBe(1)
+  })
+})
+
+describe('dik dur · seslendirme', () => {
+  it('ses dosyası cümleleri ekrandaki onaylı metinle aynı', () => {
+    for (const m of Object.values(MOVES)) {
+      expect(PHRASES.tr[m.voice], m.id).toBe(m.cue)
+      if (m.fix) expect(PHRASES.tr[m.fixVoice], m.id).toBe(m.fix)
+    }
   })
 })

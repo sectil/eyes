@@ -5,7 +5,9 @@ import { Arena } from '../components/ExerciseArt.jsx'
 import { useFaceTracking } from '../hooks/useFaceTracking.js'
 import { SAFETY_KEY, MOVES, MODES, stepsOf, totalSeconds, progressText, summaryText, weekCount, weekText, makeRecord } from '../lib/dikDur.js'
 import { CAM_KEY, CALIB_KEY, FIX_AFTER_MS, MAX_FIXES, sampleOf, poseOf, calibrate, judge, resultText, loadJson, saveJson } from '../lib/postureSense.js'
-import { speak, unlockAudio } from '../lib/cue.js'
+import { unlockAudio } from '../lib/cue.js'
+import { sayPhrase, preloadPhrases } from '../lib/voiceCue.js'
+import { releaseBreathSfx } from '../lib/breathSfx.js'
 import { haptic } from '../lib/native.js'
 import '../styles/info.css' // .pref-toggle anahtarı (kamera düğmesi)
 import '../styles/exercise.css'
@@ -14,7 +16,7 @@ import '../styles/dikdur.css'
 // Dik Dur (plan docs/yol-haritasi/tasarim/dik-dur/PLAN.v2.md; metinler metin-D1-onay.md, harfi harfine).
 // giriş → (ilk kez) güvenlik → (TrueDepth'li cihazda ilk kez) kamera sorusu → kameralıysa telefonu yasla → duruşunu
 // gösterme (bir kez; sonra "aynı yerde mi") → adımlar → bitiş. Kamera yalnız TrueDepth'te (baş eğimi sinyali); ötekilerde
-// her şey süreyle. Ses: cihazın kendi sesi (sahip kararı; ElevenLabs sonra, ayrı onayla). Geri/çarpı kaydetmeden çıkar.
+// her şey süreyle. Ses: Profilim'deki ElevenLabs sesi (voicePack dd*; dosya yoksa cihaz sesi). Geri/çarpı kaydetmeden çıkar.
 // Görüntü cihazdan çıkmaz ve kaydedilmez: yalnız uzaklık ve baş eğimi sayıları (lib/postureSense.js).
 const TICK_MS = 100
 const CALIB_S = 5
@@ -78,6 +80,11 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
   useEffect(() => {
     if (camPhase && cam.error === 'permission') setPhase('perm')
   }, [camPhase, cam.error])
+  // Seslendirmeyi baştan çöz (Profilim'deki ElevenLabs sesi); ekrandan çıkınca ses oturumu bırakılır
+  useEffect(() => {
+    preloadPhrases()
+    return () => releaseBreathSfx(0)
+  }, [])
   const faceSeen = () => Date.now() - live.current.faceAt < FACE_GONE_MS
   const camWorks = () => useCam && !cam.error
 
@@ -91,7 +98,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
     Object.assign(live.current, { idx: 0, elapsed: 0, notIn: 0, fixed: {}, fixShown: false, poseMs: 0, totalMs: 0 })
     startedAt.current = Date.now()
     const first = stepsOf(m)[0]
-    if (first?.kind === 'hold') speak(MOVES[first.move].cue)
+    if (first?.kind === 'hold') sayPhrase(MOVES[first.move].voice)
     setPhase('run')
   }
   function afterSafety(m = mode) {
@@ -138,7 +145,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
     setElapsed(0)
     setCalStage('normal')
     setPhase('calib')
-    speak('Her zamanki gibi otur.')
+    sayPhrase('ddCalNormal')
   }
 
   // Tik: duruşunu gösterme ve adımlar
@@ -173,14 +180,14 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
       L.elapsed = 0
       setElapsed(0)
       setCalStage('tall')
-      speak('Şimdi dikleş: boyunu uzat, çeneni içeri çek.')
+      sayPhrase('ddCalTall')
       return
     }
     const c = calibrate(L.normal, poseOf(L.samples))
     saveJson(storage, CALIB_KEY, c)
     setCal(c)
     setPhase('calibDone')
-    speak('Tamam, iki duruşunu da öğrendim.')
+    sayPhrase('ddCalDone')
   }
 
   function tickRun(dt) {
@@ -212,7 +219,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
             L.fixShown = true
             const fix = MOVES[st.move].fix
             setStatus({ text: fix, tone: 'g' })
-            speak(fix)
+            sayPhrase(MOVES[st.move].fixVoice)
           }
         }
       }
@@ -234,7 +241,7 @@ export default function DikDur({ onFinish, onBack, sessions = [], remindField = 
       L.idx += 1
       setIdx(L.idx)
       const st = steps[L.idx]
-      if (st.kind === 'hold') speak(MOVES[st.move].cue)
+      if (st.kind === 'hold') sayPhrase(MOVES[st.move].voice)
     } else {
       if (camWorks() && cal?.ok && L.totalMs >= 5000) setResult(L.poseMs / L.totalMs)
       setPhase('done')
