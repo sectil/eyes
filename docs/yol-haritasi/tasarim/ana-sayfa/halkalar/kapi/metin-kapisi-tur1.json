@@ -1,0 +1,42 @@
+{
+ "n1": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "a1": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "a2": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "Bu uygulamada \"açılır\" başlamak anlamında da kullanıldığı için set mola bitince kendiliğinden başlayacakmış gibi anlaşılabiliyor. Öneri: \"Tam set, kilitli, mola bitince yapılabilir\".",
+   "\"Açılır\" kilidin kalkması mı, setin kendiliğinden başlaması mı, belli değil; görenin gördüğü kilit de söylenmiyor. Öneri: \"Tam set, kilitli, mola bitince yapılabilir\".",
+   "Uygulamada 'açılır' zaten 'dokununca başlar' anlamında kullanıldığı için bu cümle setin mola bitince kendiliğinden başlayacağı gibi anlaşılabiliyor, kilitli olduğunu da söylemiyor. Öneri: 'Tam set, mola bitene kadar kilitli'."
+  ]
+ },
+ "r1": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "\"Bölüm yazısının üstüne\" kullanıcıya bir şey anlatmayan iç ayrıntı, \"göz egzersizlerinin tam setine\" de ağır kalıyor. Öneri: \"Bugün ekranına kısayollar geldi: sesli yoga, müzik, nefes ve tam göz seti tek dokunuşla açılır. Bugün yaptıkların tikle işaretlenir.\"",
+   "\"Bugün ekranında\" ilk okumada \"bugün, ekranında\" diye anlaşılabiliyor; \"bölüm yazısının üstüne\" kullanıcıya gereksiz, teknik bir ayrıntı; \"nefese geçersin\" de tuhaf duruyor. Öneri: \"Ana sayfaya kısayollar eklendi: sesli yoga, müzik, nefes egzersizi ve tam set artık tek dokunuşla açılıyor. Bugün yaptıklarının köşesine tik konur.\"",
+   "\"Bölüm yazısının üstüne\" kullanıcıya bir şey anlatmayan, cümleyi ağırlaştıran bir iç ayrıntı. Öneri: \"Bugün ekranına kısayollar geldi: sesli yoga, müzik, nefes ve tam set tek dokunuşla açılır; bugün yaptıkların tikle işaretlenir.\"",
+   "'Bölüm yazısının üstüne kısayol yuvarlakları geldi' tasarımcı ağzıyla yazılmış bir yerleşim tarifi ve robot gibi duruyor, cümle de uzun. Öneri: 'Bugün ekranında artık kısayollar var: sesli yoga, müzik, nefes ve tam set tek dokunuşla açılır. Bugün yaptıklarının köşesinde tik görürsün.'",
+   "'Bölüm yazısının üstüne' iç tasarım dili gibi duruyor, 'Bugün ekranında' sözü 'bugün' diye okunabiliyor (bağlamda ekranın adı Ana sayfa) ve 'bugün' iki kez geçiyor; öneri: 'Ana sayfaya kısayollar geldi: sesli yoga, müzik, nefes ve tam set artık tek dokunuşla açılıyor. Bugün yaptıklarının yanında tik görürsün.'"
+  ]
+ },
+ "r2": {
+  "yes": 1,
+  "n": 5,
+  "why": [
+   "\"Tek dokunuş uzağında\" İngilizceden çeviri kokuyor; \"Bugün\" kelimesi iki kez geçiyor ve ilki \"bugün, ekranına\" diye de okunabiliyor. Öneri: \"Ana sayfaya kısayollar eklendi: sesli yoga, müzik, nefes ve tam set artık tek dokunuşla açılıyor. Bugün yaptıklarının köşesinde bir tik görürsün.\"",
+   "\"Tek dokunuş uzağında\" çeviri kokuyor, ayrıca iki ayrı anlamdaki \"Bugün\" art arda gelince kafa karışıyor. Öneri: \"...artık tek dokunuşla açılıyor; bugün yaptıklarının köşesinde tik görürsün.\"",
+   "'Kısayol yuvarlakları eklendi' iç jargon gibi duruyor, 'bütün göz egzersizleri' her egzersizin ayrı kısayolu varmış gibi anlaşılabiliyor (oysa tek bir tam set var), 'yaptığın her birinin' de ağır kaçıyor. Öneri: 'Bugün ekranında artık kısayollar var: sesli yoga, müzik, nefes ve tam set tek dokunuş uzağında. Bugün yaptıklarının köşesinde tik görürsün.'",
+   "'Bugün ekranına' sesli okununca 'bugün ekranına bir şey eklendi' gibi anlaşılabiliyor, ekranın adı bağlamda Ana sayfa ve iki 'Bugün' art arda geliyor; öneri: 'Ana sayfaya dört kısayol eklendi: sesli yoga, müzik, nefes ve tam set artık tek dokunuş uzağında. Bugün yaptıklarının köşesinde tik görürsün.'"
+  ]
+ }
+}

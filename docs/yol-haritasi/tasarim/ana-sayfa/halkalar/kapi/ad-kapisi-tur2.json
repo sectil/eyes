@@ -1,0 +1,513 @@
+{
+ "tally": {
+  "V1:1:Yoga dersi": {
+   "label": "Yoga dersi",
+   "slot": 1,
+   "n": 5,
+   "correct": 4,
+   "natural": 2,
+   "E": 2,
+   "choices": {
+    "D": 4,
+    "E": 1
+   },
+   "why": [
+    "✓ D: Lotus/filiz çizimi ve \"ders\" kelimesi bana sesli, sakin bir yoga ya da gevşeme dersini düşündürdü; ad doğal ama göz yogası mı beden yogası mı olduğu ilk bakışta tam belli değil.",
+    "✓ D: Filiz ya da lotus çizimi ve 'Yoga dersi' adı bana sakin, sesli bir yoga ya da gevşeme dersini çağrıştırdı. Göz uygulaması olduğu için göz yogası da olabilir ama ad bunu açıkça söylemiyor.",
+    "✗ (doğal değil) E: Yaprak çizimi ve göz uygulaması olması bana göz yogasını düşündürdü, ama adda 'göz' yok; 'Yoga dersi' daha çok uzun bir beden yogası dersi gibi duruyor.",
+    "✓ (doğal değil) D: Bitki çizimiyle 'Yoga dersi' sakin, sesli bir ders gibi duruyor; ama göz uygulamasında göz mü beden yogası mı belli değil, insan önce spor yogası sanıyor.",
+    "✓ (doğal değil) D: Lotus/filiz çizimi ve \"ders\" sözcüğü rehberli, sesli bir gevşeme seansını çağrıştırıyor; ama adda \"göz\" geçmediği için bir göz uygulamasında beden yogası mı göz yogası mı olduğu belirsiz kalıyor."
+   ]
+  },
+  "V1:2:Müzik": {
+   "label": "Müzik",
+   "slot": 2,
+   "n": 5,
+   "correct": 5,
+   "natural": 5,
+   "E": 5,
+   "choices": {
+    "B": 5
+   },
+   "why": [
+    "✓ B: Dalga çizimi ve \"Müzik\" adı açıkça dinlenecek bir müzik ya da ses anlamına geliyor.",
+    "✓ B: 'Müzik' adı açık, dinlenecek bir ses ya da müzik açılır diye düşündüm. Dalga çizimi de sakinleştirici sese uyuyor.",
+    "✓ B: Dalga çizimi ses dalgası gibi duruyor, 'Müzik' adıyla birlikte sakinleşmek için müzik dinleme olduğu hemen anlaşılıyor.",
+    "✓ B: Dalga çizimiyle 'Müzik' adı birlikte ses dinleme diyor, açık ve doğal.",
+    "✓ B: Dalga çizimi tek başına dalga takibi gibi okunabilirdi ama \"Müzik\" adı bunu kesin olarak ses dinlemeye bağlıyor; kısa, doğal ve açık."
+   ]
+  },
+  "V1:3:Nefes": {
+   "label": "Nefes",
+   "slot": 3,
+   "n": 5,
+   "correct": 5,
+   "natural": 5,
+   "E": 5,
+   "choices": {
+    "C": 5
+   },
+   "why": [
+    "✓ C: Rüzgâr/hava çizgileri ve \"Nefes\" adı doğrudan nefes egzersizi diyor.",
+    "✓ C: Rüzgar çizimiyle birlikte 'Nefes' adı doğrudan bir nefes egzersizini anlatıyor.",
+    "✓ C: Rüzgar çizimi ile 'Nefes' adı birbirini tamamlıyor, nefes egzersizi olduğu çok net.",
+    "✓ C: Rüzgar çizimiyle 'Nefes' adı tek bakışta nefes egzersizi olduğunu söylüyor.",
+    "✓ C: Rüzgâr/hava akışı çizimi ve \"Nefes\" adı birbirini tam tutuyor; tek kelimeyle doğal ve açık."
+   ]
+  },
+  "V1:4:Göz seti": {
+   "label": "Göz seti",
+   "slot": 4,
+   "n": 5,
+   "correct": 5,
+   "natural": 0,
+   "E": 0,
+   "choices": {
+    "F": 5
+   },
+   "why": [
+    "✓ (doğal değil) F: Dambıl çizimi ve \"set\" kelimesi art arda yapılan kısa bir egzersiz setini düşündürdü, ama \"Göz seti\" Türkçede makyaj ya da göz damlası seti gibi bir ürün paketi gibi duruyor, doğal değil.",
+    "✓ (doğal değil) F: Dambıl çizimi bir egzersiz seti olduğunu düşündürdü. Ama 'Göz seti' Türkçede göz farı ya da gözlük takımı gibi satılan bir ürünü çağrıştırıyor, 'göz egzersizleri' gibi bir ad daha açık olurdu.",
+    "✓ (doğal değil) F: Dambıl çizimi spor setini çağrıştırdığı için göz egzersizlerinin art arda yapıldığı kısa bir set sandım, ama 'Göz seti' kulağa makyaj ya da göz damlası seti gibi geliyor.",
+    "✓ (doğal değil) F: Dambıl çizimi antrenman gibi, o yüzden egzersiz seti sandım; ama 'Göz seti' kulağa satılık bir göz bakım kiti gibi geliyor, 'göz egzersizi' daha net olurdu.",
+    "✓ (doğal değil) F: Dambıl çizimi \"set\" sözcüğünü egzersiz setine bağlıyor; ama \"Göz seti\" Türkçede ilk anda makyaj seti ya da bakım seti gibi bir ürün paketi gibi okunuyor, \"Göz egzersizi seti\" ya da \"Hızlı set\" daha açık olurdu."
+   ]
+  },
+  "V2:1:Sesli yoga": {
+   "label": "Sesli yoga",
+   "slot": 1,
+   "n": 5,
+   "correct": 5,
+   "natural": 5,
+   "E": 5,
+   "choices": {
+    "D": 5
+   },
+   "why": [
+    "✓ D: Filiz/lotus çizimi ile 'Sesli yoga' birlikte gözler kapalı, dinleyerek yapılan bir gevşeme dersi gibi okunuyor; ad kısa ve anlaşılır.",
+    "✓ D: Filiz/lotus çizimi ve 'sesli' sözü, gözler kapalı dinlenerek yapılan sesli bir gevşeme dersi gibi geliyor. 'Sesli kitap' gibi anlaşılır bir ad, ama göz yogası olduğunu söylemiyor.",
+    "✓ D: Yaprak/bitki çizimi ve 'Sesli yoga' adı bana dinleyerek yapılan, sakinleştirici bir yoga ya da gevşeme dersi gibi geldi; 'sesli kitap' gibi anlaşılır bir ad.",
+    "✓ D: Lotus çizimi ve 'Sesli yoga' adı bana kulaklıkla dinlenen, gözler kapalı bir yoga ya da gevşeme dersi gibi geldi; ad açık ama göz mü beden mi olduğunu söylemiyor.",
+    "✓ D: Filiz/lotus çizimi ve \"Sesli yoga\" adı, gözler kapalı, sesle yönlendirilen bir yoga ya da gevşeme dersi gibi okunuyor. Ad açık, ancak \"göz\" sözcüğü geçmediği için genel bir beden yogası da sanılabilir."
+   ]
+  },
+  "V2:2:Dalga": {
+   "label": "Dalga",
+   "slot": 2,
+   "n": 5,
+   "correct": 4,
+   "natural": 0,
+   "E": 0,
+   "choices": {
+    "I": 1,
+    "B": 4
+   },
+   "why": [
+    "✗ (doğal değil) I: Dalga çizimi deniz sesi gibi bir rahatlama sesini de, gözle takip edilen bir dalgayı da çağrıştırıyor; tek başına 'Dalga' ne yapılacağını söylemiyor, üstelik akla 'dalga geçmek' de geliyor.",
+    "✓ (doğal değil) B: Deniz dalgası çizimi bana önce sakinleştiren deniz sesini düşündürdü. Tek başına 'Dalga' ne yapacağımı söylemiyor, 'dalga geçmek' de akla geliyor.",
+    "✓ (doğal değil) B: Dalga çizimi ilk bakışta deniz sesi gibi rahatlatıcı bir ses çağrıştırıyor; tek başına 'Dalga' çok belirsiz, göz egzersizi olduğu hiç anlaşılmıyor, üstelik 'dalga geçmek' anlamı da akla geliyor.",
+    "✓ (doğal değil) B: Deniz dalgası çizimi ve 'Dalga' adı ilk bakışta dinlenmek için dalga sesi çağrıştırıyor; tek kelime 'Dalga' ne yapacağımı söylemiyor, 'dalga geçmek' bile akla geliyor.",
+    "✓ (doğal değil) B: Dalga çizgileri ve tek başına \"Dalga\" adı, gözle izlenecek bir egzersizden çok deniz sesi ya da rahatlatıcı bir ses gibi duruyor. Ad ne yapılacağını söylemiyor, \"dalga geçmek\" çağrışımı da var."
+   ]
+  },
+  "V2:3:Nefes": {
+   "label": "Nefes",
+   "slot": 3,
+   "n": 5,
+   "correct": 5,
+   "natural": 5,
+   "E": 5,
+   "choices": {
+    "C": 5
+   },
+   "why": [
+    "✓ C: Rüzgâr/hava çizgileri ve 'Nefes' adı birlikte açıkça nefes egzersizi diyor.",
+    "✓ C: Rüzgar çizimiyle 'Nefes' adı birbirini tutuyor, açıkça nefes egzersizi.",
+    "✓ C: Rüzgar çizimi ve 'Nefes' adı tek anlamlı, açıkça nefes egzersizi.",
+    "✓ C: Rüzgar çizimi ve 'Nefes' adı doğrudan nefes egzersizi diyor, düşünmeye gerek yok.",
+    "✓ C: Rüzgar çizgileri ve \"Nefes\" adı birbirini tutuyor; hemen nefes egzersizi diye anlaşılıyor."
+   ]
+  },
+  "V2:4:Tam set": {
+   "label": "Tam set",
+   "slot": 4,
+   "n": 5,
+   "correct": 2,
+   "natural": 0,
+   "E": 0,
+   "choices": {
+    "F": 2,
+    "H": 3
+   },
+   "why": [
+    "✓ (doğal değil) F: Göz uygulamasında 'Tam set' bütün egzersizlerin art arda yapıldığı bir set gibi duruyor; ama dambıl çizimiyle birlikte spor salonu jargonu gibi okunuyor, beden egzersizi sanılabilir ve Başla kartından farkı da belli değil.",
+    "✓ (doğal değil) F: 'Tam set' bütün egzersizlerin art arda yapıldığı bir set gibi geliyor. Ama halter çizimiyle birlikte spor salonu ya da beden egzersizi çağrışımı yapıyor ve göz egzersizi olduğu anlaşılmıyor.",
+    "✗ (doğal değil) H: Dambıl çizimiyle 'Tam set' spor salonundaki tam antrenman seti gibi okunuyor; göz egzersizlerinin toplu bir seti olduğunu ad da çizim de anlatmıyor.",
+    "✗ (doğal değil) H: Dambıl çizimi ve 'Tam set' adı spor salonu antrenman seti gibi duruyor; 'set' spor lafı, göz egzersizlerinin hepsi olduğu hiç anlaşılmıyor.",
+    "✗ (doğal değil) H: Dambıl çizimi ve spor salonu dilindeki \"Tam set\" adı bir beden antrenmanı izlenimi veriyor. Neyin seti olduğu belli değil, \"Başla\" kartıyla da karışabilir."
+   ]
+  }
+ },
+ "raw": [
+  {
+   "v": "V1",
+   "who": "34 yaşında, telefonu çok kullanan bir grafik tasarımcı",
+   "labels": [
+    "Yoga dersi",
+    "Müzik",
+    "Nefes",
+    "Göz seti"
+   ],
+   "answers": [
+    {
+     "slot": 1,
+     "choice": "D",
+     "natural": true,
+     "why": "Lotus/filiz çizimi ve \"ders\" kelimesi bana sesli, sakin bir yoga ya da gevşeme dersini düşündürdü; ad doğal ama göz yogası mı beden yogası mı olduğu ilk bakışta tam belli değil."
+    },
+    {
+     "slot": 2,
+     "choice": "B",
+     "natural": true,
+     "why": "Dalga çizimi ve \"Müzik\" adı açıkça dinlenecek bir müzik ya da ses anlamına geliyor."
+    },
+    {
+     "slot": 3,
+     "choice": "C",
+     "natural": true,
+     "why": "Rüzgâr/hava çizgileri ve \"Nefes\" adı doğrudan nefes egzersizi diyor."
+    },
+    {
+     "slot": 4,
+     "choice": "F",
+     "natural": false,
+     "why": "Dambıl çizimi ve \"set\" kelimesi art arda yapılan kısa bir egzersiz setini düşündürdü, ama \"Göz seti\" Türkçede makyaj ya da göz damlası seti gibi bir ürün paketi gibi duruyor, doğal değil."
+    }
+   ]
+  },
+  {
+   "v": "V1",
+   "who": "58 yaşında, gözlük kullanan, teknolojiyle arası orta bir öğretmen",
+   "labels": [
+    "Yoga dersi",
+    "Müzik",
+    "Nefes",
+    "Göz seti"
+   ],
+   "answers": [
+    {
+     "slot": 1,
+     "choice": "D",
+     "natural": true,
+     "why": "Filiz ya da lotus çizimi ve 'Yoga dersi' adı bana sakin, sesli bir yoga ya da gevşeme dersini çağrıştırdı. Göz uygulaması olduğu için göz yogası da olabilir ama ad bunu açıkça söylemiyor."
+    },
+    {
+     "slot": 2,
+     "choice": "B",
+     "natural": true,
+     "why": "'Müzik' adı açık, dinlenecek bir ses ya da müzik açılır diye düşündüm. Dalga çizimi de sakinleştirici sese uyuyor."
+    },
+    {
+     "slot": 3,
+     "choice": "C",
+     "natural": true,
+     "why": "Rüzgar çizimiyle birlikte 'Nefes' adı doğrudan bir nefes egzersizini anlatıyor."
+    },
+    {
+     "slot": 4,
+     "choice": "F",
+     "natural": false,
+     "why": "Dambıl çizimi bir egzersiz seti olduğunu düşündürdü. Ama 'Göz seti' Türkçede göz farı ya da gözlük takımı gibi satılan bir ürünü çağrıştırıyor, 'göz egzersizleri' gibi bir ad daha açık olurdu."
+    }
+   ]
+  },
+  {
+   "v": "V1",
+   "who": "22 yaşında, Instagram'ı her gün kullanan bir üniversite öğrencisi",
+   "labels": [
+    "Yoga dersi",
+    "Müzik",
+    "Nefes",
+    "Göz seti"
+   ],
+   "answers": [
+    {
+     "slot": 1,
+     "choice": "E",
+     "natural": false,
+     "why": "Yaprak çizimi ve göz uygulaması olması bana göz yogasını düşündürdü, ama adda 'göz' yok; 'Yoga dersi' daha çok uzun bir beden yogası dersi gibi duruyor."
+    },
+    {
+     "slot": 2,
+     "choice": "B",
+     "natural": true,
+     "why": "Dalga çizimi ses dalgası gibi duruyor, 'Müzik' adıyla birlikte sakinleşmek için müzik dinleme olduğu hemen anlaşılıyor."
+    },
+    {
+     "slot": 3,
+     "choice": "C",
+     "natural": true,
+     "why": "Rüzgar çizimi ile 'Nefes' adı birbirini tamamlıyor, nefes egzersizi olduğu çok net."
+    },
+    {
+     "slot": 4,
+     "choice": "F",
+     "natural": false,
+     "why": "Dambıl çizimi spor setini çağrıştırdığı için göz egzersizlerinin art arda yapıldığı kısa bir set sandım, ama 'Göz seti' kulağa makyaj ya da göz damlası seti gibi geliyor."
+    }
+   ]
+  },
+  {
+   "v": "V1",
+   "who": "45 yaşında, uygulamaları hızlı ve sabırsız kullanan bir esnaf",
+   "labels": [
+    "Yoga dersi",
+    "Müzik",
+    "Nefes",
+    "Göz seti"
+   ],
+   "answers": [
+    {
+     "slot": 1,
+     "choice": "D",
+     "natural": false,
+     "why": "Bitki çizimiyle 'Yoga dersi' sakin, sesli bir ders gibi duruyor; ama göz uygulamasında göz mü beden yogası mı belli değil, insan önce spor yogası sanıyor."
+    },
+    {
+     "slot": 2,
+     "choice": "B",
+     "natural": true,
+     "why": "Dalga çizimiyle 'Müzik' adı birlikte ses dinleme diyor, açık ve doğal."
+    },
+    {
+     "slot": 3,
+     "choice": "C",
+     "natural": true,
+     "why": "Rüzgar çizimiyle 'Nefes' adı tek bakışta nefes egzersizi olduğunu söylüyor."
+    },
+    {
+     "slot": 4,
+     "choice": "F",
+     "natural": false,
+     "why": "Dambıl çizimi antrenman gibi, o yüzden egzersiz seti sandım; ama 'Göz seti' kulağa satılık bir göz bakım kiti gibi geliyor, 'göz egzersizi' daha net olurdu."
+    }
+   ]
+  },
+  {
+   "v": "V1",
+   "who": "39 yaşında, Türkçeye ve ürün diline dikkat eden bir UX yazarı",
+   "labels": [
+    "Yoga dersi",
+    "Müzik",
+    "Nefes",
+    "Göz seti"
+   ],
+   "answers": [
+    {
+     "slot": 1,
+     "choice": "D",
+     "natural": false,
+     "why": "Lotus/filiz çizimi ve \"ders\" sözcüğü rehberli, sesli bir gevşeme seansını çağrıştırıyor; ama adda \"göz\" geçmediği için bir göz uygulamasında beden yogası mı göz yogası mı olduğu belirsiz kalıyor."
+    },
+    {
+     "slot": 2,
+     "choice": "B",
+     "natural": true,
+     "why": "Dalga çizimi tek başına dalga takibi gibi okunabilirdi ama \"Müzik\" adı bunu kesin olarak ses dinlemeye bağlıyor; kısa, doğal ve açık."
+    },
+    {
+     "slot": 3,
+     "choice": "C",
+     "natural": true,
+     "why": "Rüzgâr/hava akışı çizimi ve \"Nefes\" adı birbirini tam tutuyor; tek kelimeyle doğal ve açık."
+    },
+    {
+     "slot": 4,
+     "choice": "F",
+     "natural": false,
+     "why": "Dambıl çizimi \"set\" sözcüğünü egzersiz setine bağlıyor; ama \"Göz seti\" Türkçede ilk anda makyaj seti ya da bakım seti gibi bir ürün paketi gibi okunuyor, \"Göz egzersizi seti\" ya da \"Hızlı set\" daha açık olurdu."
+    }
+   ]
+  },
+  {
+   "v": "V2",
+   "who": "34 yaşında, telefonu çok kullanan bir grafik tasarımcı",
+   "labels": [
+    "Sesli yoga",
+    "Dalga",
+    "Nefes",
+    "Tam set"
+   ],
+   "answers": [
+    {
+     "slot": 1,
+     "choice": "D",
+     "natural": true,
+     "why": "Filiz/lotus çizimi ile 'Sesli yoga' birlikte gözler kapalı, dinleyerek yapılan bir gevşeme dersi gibi okunuyor; ad kısa ve anlaşılır."
+    },
+    {
+     "slot": 2,
+     "choice": "I",
+     "natural": false,
+     "why": "Dalga çizimi deniz sesi gibi bir rahatlama sesini de, gözle takip edilen bir dalgayı da çağrıştırıyor; tek başına 'Dalga' ne yapılacağını söylemiyor, üstelik akla 'dalga geçmek' de geliyor."
+    },
+    {
+     "slot": 3,
+     "choice": "C",
+     "natural": true,
+     "why": "Rüzgâr/hava çizgileri ve 'Nefes' adı birlikte açıkça nefes egzersizi diyor."
+    },
+    {
+     "slot": 4,
+     "choice": "F",
+     "natural": false,
+     "why": "Göz uygulamasında 'Tam set' bütün egzersizlerin art arda yapıldığı bir set gibi duruyor; ama dambıl çizimiyle birlikte spor salonu jargonu gibi okunuyor, beden egzersizi sanılabilir ve Başla kartından farkı da belli değil."
+    }
+   ]
+  },
+  {
+   "v": "V2",
+   "who": "58 yaşında, gözlük kullanan, teknolojiyle arası orta bir öğretmen",
+   "labels": [
+    "Sesli yoga",
+    "Dalga",
+    "Nefes",
+    "Tam set"
+   ],
+   "answers": [
+    {
+     "slot": 1,
+     "choice": "D",
+     "natural": true,
+     "why": "Filiz/lotus çizimi ve 'sesli' sözü, gözler kapalı dinlenerek yapılan sesli bir gevşeme dersi gibi geliyor. 'Sesli kitap' gibi anlaşılır bir ad, ama göz yogası olduğunu söylemiyor."
+    },
+    {
+     "slot": 2,
+     "choice": "B",
+     "natural": false,
+     "why": "Deniz dalgası çizimi bana önce sakinleştiren deniz sesini düşündürdü. Tek başına 'Dalga' ne yapacağımı söylemiyor, 'dalga geçmek' de akla geliyor."
+    },
+    {
+     "slot": 3,
+     "choice": "C",
+     "natural": true,
+     "why": "Rüzgar çizimiyle 'Nefes' adı birbirini tutuyor, açıkça nefes egzersizi."
+    },
+    {
+     "slot": 4,
+     "choice": "F",
+     "natural": false,
+     "why": "'Tam set' bütün egzersizlerin art arda yapıldığı bir set gibi geliyor. Ama halter çizimiyle birlikte spor salonu ya da beden egzersizi çağrışımı yapıyor ve göz egzersizi olduğu anlaşılmıyor."
+    }
+   ]
+  },
+  {
+   "v": "V2",
+   "who": "22 yaşında, Instagram'ı her gün kullanan bir üniversite öğrencisi",
+   "labels": [
+    "Sesli yoga",
+    "Dalga",
+    "Nefes",
+    "Tam set"
+   ],
+   "answers": [
+    {
+     "slot": 1,
+     "choice": "D",
+     "natural": true,
+     "why": "Yaprak/bitki çizimi ve 'Sesli yoga' adı bana dinleyerek yapılan, sakinleştirici bir yoga ya da gevşeme dersi gibi geldi; 'sesli kitap' gibi anlaşılır bir ad."
+    },
+    {
+     "slot": 2,
+     "choice": "B",
+     "natural": false,
+     "why": "Dalga çizimi ilk bakışta deniz sesi gibi rahatlatıcı bir ses çağrıştırıyor; tek başına 'Dalga' çok belirsiz, göz egzersizi olduğu hiç anlaşılmıyor, üstelik 'dalga geçmek' anlamı da akla geliyor."
+    },
+    {
+     "slot": 3,
+     "choice": "C",
+     "natural": true,
+     "why": "Rüzgar çizimi ve 'Nefes' adı tek anlamlı, açıkça nefes egzersizi."
+    },
+    {
+     "slot": 4,
+     "choice": "H",
+     "natural": false,
+     "why": "Dambıl çizimiyle 'Tam set' spor salonundaki tam antrenman seti gibi okunuyor; göz egzersizlerinin toplu bir seti olduğunu ad da çizim de anlatmıyor."
+    }
+   ]
+  },
+  {
+   "v": "V2",
+   "who": "45 yaşında, uygulamaları hızlı ve sabırsız kullanan bir esnaf",
+   "labels": [
+    "Sesli yoga",
+    "Dalga",
+    "Nefes",
+    "Tam set"
+   ],
+   "answers": [
+    {
+     "slot": 1,
+     "choice": "D",
+     "natural": true,
+     "why": "Lotus çizimi ve 'Sesli yoga' adı bana kulaklıkla dinlenen, gözler kapalı bir yoga ya da gevşeme dersi gibi geldi; ad açık ama göz mü beden mi olduğunu söylemiyor."
+    },
+    {
+     "slot": 2,
+     "choice": "B",
+     "natural": false,
+     "why": "Deniz dalgası çizimi ve 'Dalga' adı ilk bakışta dinlenmek için dalga sesi çağrıştırıyor; tek kelime 'Dalga' ne yapacağımı söylemiyor, 'dalga geçmek' bile akla geliyor."
+    },
+    {
+     "slot": 3,
+     "choice": "C",
+     "natural": true,
+     "why": "Rüzgar çizimi ve 'Nefes' adı doğrudan nefes egzersizi diyor, düşünmeye gerek yok."
+    },
+    {
+     "slot": 4,
+     "choice": "H",
+     "natural": false,
+     "why": "Dambıl çizimi ve 'Tam set' adı spor salonu antrenman seti gibi duruyor; 'set' spor lafı, göz egzersizlerinin hepsi olduğu hiç anlaşılmıyor."
+    }
+   ]
+  },
+  {
+   "v": "V2",
+   "who": "39 yaşında, Türkçeye ve ürün diline dikkat eden bir UX yazarı",
+   "labels": [
+    "Sesli yoga",
+    "Dalga",
+    "Nefes",
+    "Tam set"
+   ],
+   "answers": [
+    {
+     "slot": 1,
+     "choice": "D",
+     "natural": true,
+     "why": "Filiz/lotus çizimi ve \"Sesli yoga\" adı, gözler kapalı, sesle yönlendirilen bir yoga ya da gevşeme dersi gibi okunuyor. Ad açık, ancak \"göz\" sözcüğü geçmediği için genel bir beden yogası da sanılabilir."
+    },
+    {
+     "slot": 2,
+     "choice": "B",
+     "natural": false,
+     "why": "Dalga çizgileri ve tek başına \"Dalga\" adı, gözle izlenecek bir egzersizden çok deniz sesi ya da rahatlatıcı bir ses gibi duruyor. Ad ne yapılacağını söylemiyor, \"dalga geçmek\" çağrışımı da var."
+    },
+    {
+     "slot": 3,
+     "choice": "C",
+     "natural": true,
+     "why": "Rüzgar çizgileri ve \"Nefes\" adı birbirini tutuyor; hemen nefes egzersizi diye anlaşılıyor."
+    },
+    {
+     "slot": 4,
+     "choice": "H",
+     "natural": false,
+     "why": "Dambıl çizimi ve spor salonu dilindeki \"Tam set\" adı bir beden antrenmanı izlenimi veriyor. Neyin seti olduğu belli değil, \"Başla\" kartıyla da karışabilir."
+    }
+   ]
+  }
+ ]
+}

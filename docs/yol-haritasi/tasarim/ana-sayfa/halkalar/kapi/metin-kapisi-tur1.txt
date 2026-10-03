@@ -1,0 +1,7 @@
+Bağlam: Göz sağlığı uygulaması (iPhone). Ana sayfada, "1. bölüm" yazısının üstünde dört kısayol yuvarlağı var: Sesli yoga (gözler kapalı sesli yoga dersi), Müzik (sakinleşmek ya da enerji için müzik), Nefes (nefes egzersizi) ve Tam set (bütün göz egzersizleri art arda, yaklaşık 3 dakika). Dokununca o iş doğrudan açılır; bugün yapılan yuvarlağın köşesine tik gelir. Göz molası sırasında (ekrandan uzak durma zamanı) Tam set yuvarlağında kilit rozeti olur; dokununca mola ekranı açılır, mola bitince set yapılabilir. Aşağıdaki satırlardan ilk üçü görme engelliler için ekran okuyucunun (VoiceOver) sesli okuduğu adlardır; son ikisi güncellemeden sonra uygulama ilk açıldığında "Yenilikler" penceresinde görünen sürüm notu seçenekleridir (ikisinden biri kullanılacak).
+
+n1 | VoiceOver: dört yuvarlağın bulunduğu satırın adı | Kısayollar
+a1 | VoiceOver: bugün yapılmış bir yuvarlak | Nefes, bugün yapıldı
+a2 | VoiceOver: göz molasında kilitli Tam set yuvarlağı | Tam set, mola bitince açılır
+r1 | Yenilikler penceresi, sürüm notu (seçenek 1) | Bugün ekranında bölüm yazısının üstüne kısayol yuvarlakları geldi. Sesli yogaya, müziğe, nefese ve göz egzersizlerinin tam setine tek dokunuşla geçersin; bugün yaptıkların tikle işaretlenir.
+r2 | Yenilikler penceresi, sürüm notu (seçenek 2) | Bugün ekranına kısayol yuvarlakları eklendi: yoga, müzik, nefes ve bütün göz egzersizleri artık tek dokunuş uzağında. Bugün yaptığın her birinin köşesinde bir tik görürsün.

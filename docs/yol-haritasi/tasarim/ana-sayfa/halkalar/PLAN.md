@@ -389,3 +389,46 @@ Ad kapısı (5 kişi, 5 sn):
 
 Kararı sahip verecek (sürüm, kusurların düzeltilip düzeltilmeyeceği, adlar). Kanıt: `<scratchpad>/halka-kapi/`,
 sonuç `<scratchpad>/../tasks/wq0p8pthv.output`.
+
+### 11.1 Sahibin kararları (2026-10-03, seçim kapısından sonra)
+
+- Sürüm: "Tur 2 olduğu gibi". Düzeltme turu yok; tur 2 kodu uygulamaya alındı (`halkalar.patch`).
+- Adlar: "Son bir ad kapısı". İçeriğe uygun adaylarla ikinci ve son tur; iki turun en iyisi sahibe.
+- Tekrar: "Gizlensin". Büyük kartın modülü halkada tekrar etmez (`ringHide`).
+
+### 11.2 Ad kapısı tur 2 (son tur)
+
+Tur 1'in önerileri ("Göz yogası", "Göz takibi") içeriğe uymuyordu: Yoga gözler kapalı sesli ders (lib/yogaLessons.js),
+Dalga müzik (lib/dalga.js: Sakin, Güç, Motivasyon). Tur 2 içeriğe göre adaylarla yapıldı.
+
+- Yöntem: halkaların adları silinmiş ekran (`kapi/ad-kapisi-tur2-ekran.png`); iki aday takımı, takım başına beş kişi.
+  Soru çoktan seçmeli: "dokununca ne açılır?" (9 seçenek; doğrusu kodla puanlandı) ve "ad doğal mı?". E = doğru ve doğal.
+  Betik `kapi/ad-kapisi-tur2.js`, sonuç `kapi/ad-kapisi-tur2.json`.
+- Ölçüm (kapıdan önce, Onest 600): "Dalga müzik" 65–69 px, her boyda dairenin çapını aşıyor (62/56/50/46); kapıya
+  alınmadı. Öteki adaylar 390'da çapın içinde; "Yoga dersi" ve "Sesli yoga" en küçük adımda (46 px) 4–8 px taşar
+  (düğme adın genişliğine açılır, `nowrap`).
+
+| Yuvarlak | Aday | Doğru | Doğal | E | Not |
+|---|---|---|---|---|---|
+| 1 | Sesli yoga | 5/5 | 5/5 | **5/5** | geçti |
+| 1 | Yoga dersi | 4/5 | 2/5 | 2/5 | "beden yogası mı göz yogası mı" |
+| 2 | Müzik | 5/5 | 5/5 | **5/5** | geçti |
+| 2 | Dalga | 4/5 | 0/5 | 0/5 | "ne yapacağımı söylemiyor", "dalga geçmek" |
+| 3 | Nefes | 10/10 | 10/10 | **10/10** | iki takımda da geçti |
+| 4 | Göz seti | 5/5 | 0/5 | 0/5 | "makyaj ya da göz damlası seti gibi" |
+| 4 | Tam set | 2/5 | 0/5 | 0/5 | dambılla birlikte "spor salonu", üç kişi "beden egzersizi" seçti |
+
+İki turun en iyisi: Sesli yoga, Müzik, Nefes. Dördüncü yuvarlakta iki turda da geçen ad yok; karar sahibin.
+
+### 11.3 Uygulama (ara kayıt, sahip onayı bekliyor)
+
+- `uygulama.patch`: tur 2 kodu + adlar "Sesli yoga", "Müzik" (ad kapısı tur 2'de geçenler) + iki yeni test dosyası
+  (`components/home/HomeRings.test.jsx`: sıra, rota, yapıldı kuralı, kilit, `ringAria`; `screens/Home.rings.test.jsx`:
+  yer, kartla ikizlik A/C/D, 8. gün sonrası). Uygulamak için: `git apply docs/yol-haritasi/tasarim/ana-sayfa/halkalar/uygulama.patch`.
+- Tam takım (tur 2 kodu, eski adlar): 191 dosya, 2989 test geçti; iki yeni dosya 14/14. Kırılma denetimi: `ringHide`
+  boşaltılınca `Home.rings.test.jsx`'in üç testi kırılıyor. `npm run build` geçti.
+- Yeni adlarla çekim (`<scratchpad>/halka-cekim/adlar/`, G2 ve G2-iki; 390×844, 320×640, 320×568; iki tema): yatay taşma 0,
+  sağ boşluk 0; 320'de "Sesli yoga" çaptan geniş olduğu için ilk daire sol kenardan 2.5 px içeride (390'da 0.3 px).
+- Metin kapısı tur 1 (`kapi/metin-kapisi-tur1.json`): "Kısayollar" 5/5, "Nefes, bugün yapıldı" 5/5 geçti;
+  ", mola bitince açılır" 2/5 ("açılır" kendiliğinden başlayacak gibi), sürüm notu iki taslak 0/5 ve 1/5. Tur 2 sürüyor.
+- Commit ve TestFlight sahip onayından sonra; adlar ve kilit eki onaya göre son kez değişebilir.
