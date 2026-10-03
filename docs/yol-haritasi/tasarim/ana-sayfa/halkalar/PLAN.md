@@ -350,3 +350,42 @@ Gözden geçirmenin 22 bulgusu (sırası gözden geçirmedeki gibi). Kanıt yoll
 2. Metin kapısı ve sahip onayı (§8.10).
 3. §8'deki kararlardan sonra ana dala alma; tam takım ve derleme; TestFlight; cihazda bakış (güvenli alan, dokunma hissi,
    VoiceOver okuması, yazı tipinin geç gelmesi).
+
+## 11. Seçim kapısı: tur 1 mi tur 2 mi (2026-10-03)
+
+Tur sınırı kuralı gereği üçüncü tur açılmadı (tur 3 düzeltici durduruldu, yarım düzenleme
+`<scratchpad>/halka-tur3-yarim.patch`). İki sürüm beş kör değerlendiriciye A/B olarak gösterildi; kareler G2 390×844
+açık/koyu, G2-iki 390×844 açık/koyu, G2 320×640 açık. Anahtar: k1 A=tur 1 B=tur 2; k2 A=tur 2 B=tur 1.
+
+| Kare | tur 1 E | tur 2 E |
+|---|---|---|
+| G2 390 açık | 1/5 | 3/5 |
+| G2 390 koyu | 1/5 | 3/5 |
+| G2-iki 390 açık | 2/5 | 2/5 |
+| G2-iki 390 koyu | 2/5 | 2/5 |
+| G2 320×640 açık | 5/5 | 2/5 |
+| Toplam | 11 | 12 |
+
+- Tercih: beşi de A'yı seçti (üçü tur 1, ikisi tur 2). Yerleşim yanlılığı güçlü; tercih oyu karar vermiyor.
+- Kural (en çok E): **tur 2 seçildi** (12'ye 11). Hiçbir 390 karesi 4/5'e ulaşmadı: **kapıdan geçmedi**, sahibe gösteriliyor.
+- tur 2'nin kalan kusurları (değerlendiricilerin ortak sözü):
+  1. Adlar "1. bölüm"e çok yakın (~12 px; 320'de ~10 px); satır bölümün parçası gibi okunuyor.
+  2. "Yapıldı" hâli zayıf: halka gri kalıyor, disk az koyulaşıyor, koyu temada neredeyse yalnız tik taşıyor.
+  3. Gri diskler donuk; Tam set pasif düğme gibi.
+- tur 1'in kusurları: 390'da satır sola yaslı, sağda ~40 px boşluk; renkli "yapıldı" halkası gün şeridinin "bugün"
+  halkasına benziyor (tik bunu çözüyor).
+- Dört değerlendiricinin önerisi: tur 2'nin hizası + tur 1'in dikey boşluğu ve renkli "yapıldı" halkası. Bu üçüncü tur
+  sayılır; ancak sahip isterse yapılır.
+- Beş değerlendiriciden dördü "Tam set ile Başla kartı arasındaki fark belli değil" dedi.
+
+Ad kapısı (5 kişi, 5 sn):
+
+| Ad | E | Öneriler |
+|---|---|---|
+| Yoga | 1/5 | Göz yogası |
+| Dalga | 0/5 | Göz takibi, Dalga takibi, Dalga izle |
+| Nefes | 5/5 | — |
+| Tam set | 0/5 | Tam seans, Hepsi, Hepsini yap, Tümü (dambıl simgesi de "spor salonu" okunuyor) |
+
+Kararı sahip verecek (sürüm, kusurların düzeltilip düzeltilmeyeceği, adlar). Kanıt: `<scratchpad>/halka-kapi/`,
+sonuç `<scratchpad>/../tasks/wq0p8pthv.output`.
