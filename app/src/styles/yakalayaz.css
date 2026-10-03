@@ -133,6 +133,7 @@
 .yy-stage .q .live i { width: 8px; height: 8px; border-radius: 50%; background: #ff5a4a; box-shadow: 0 0 0 3px rgba(255, 90, 74, 0.2); flex: none; }
 /* Mikrofon düğmesi tek genişlik: boşta "Söyle", dinlerken "Durdur"; alan genişliği değişmez (dinleme kapısı tur 4) */
 .yy-input .rb[data-wide] { width: 112px; display: flex; gap: 6px; align-items: center; justify-content: center; font: 700 16px var(--font-body); }
+.yy-input .rb.send { padding: 0 14px; display: flex; gap: 6px; align-items: center; justify-content: center; font: 700 16px var(--font-body); background: var(--accent-grad); border: 0; color: var(--accent-ink); box-shadow: 0 0 0 4px rgba(17, 169, 184, 0.22); } /* alanda yazı varken Gönder (sahip 2026-10-03) */
 .yy-input .rb.on { padding: 0 16px; display: flex; gap: 8px; align-items: center; font: 700 16px var(--font-body); background: var(--accent-grad); border: 0; color: var(--accent-ink); box-shadow: 0 0 0 4px rgba(17, 169, 184, 0.22); } /* dinlerken "■ Durdur" (sahip kararı 2026-10-02) */
 /* İzin sayfası: arka plan koyu ve bulanık (kenarın arkadaki merdiveni kesiyor gibi görünmesin); altta ev çubuğu payı */
 .yy-sheetbg { position: fixed; inset: 0; z-index: 30; background: rgba(4, 8, 12, 0.66); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); display: flex; align-items: flex-end; }

@@ -4,7 +4,7 @@
 // → "Ne gördün?" → cevap (klavye tur boyunca açık) → 900 ms geri bildirim. Gösterimi 1 kareden çok sapan deneme ölçüye
 // girmez, merdiveni oynatmaz, yeni çiftle tekrarlanır. Kelime gösterilirken ekran okuyucu kelimeyi okumaz.
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import { X, Mic, Square, Smartphone, Keyboard, Check } from 'lucide-react'
+import { X, Mic, Square, Smartphone, Keyboard, Check, ArrowUp } from 'lucide-react'
 import { pickPairs } from '../lib/yakalaYazWords.js'
 import { MS, STEPS, msOf, nextStep, startStepOf, checkAnswer, markTyped, makeRecord, isBadShow, seriesOf, ROUND_TRIALS, DOT_MS, MASK_MS, FEEDBACK_MS, isYakala } from '../lib/yakalaYaz.js'
 import { metricStatusV2 } from '../lib/progress.js'
@@ -18,17 +18,24 @@ const NEED_DAYS = 8 // ölçü kuralı v2: 2 alışma + 6 başlangıç günü
 const EK = { 1: 'i', 2: 'si', 3: 'ü', 4: 'ü', 5: 'i', 6: 'sı', 7: 'si', 8: 'i', 9: 'u', 0: 'ı' }
 const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
-// Görünür alan yüksekliği (klavye açıkken): düzen klavyenin üstünde kalır
-function useViewportHeight() {
-  const [h, setH] = useState(() => globalThis.visualViewport?.height ?? globalThis.innerHeight ?? 800)
+// Görünür alan (klavye açıkken): düzen klavyenin üstünde kalır. iOS klavye açılınca pencereyi kaydırır; yalnız yükseklik
+// verilince ekranın üstü görünür alanın dışına çıkıyor, altta boş şerit kalıyordu (cihaz, sahip 2026-10-03). Giriş ve
+// deneme ekranı bu yüzden görünür alanın üstüne sabitlenir: top = visualViewport.offsetTop, height = visualViewport.height
+function useViewport() {
+  const read = () => {
+    const vv = globalThis.visualViewport
+    return { h: vv?.height ?? globalThis.innerHeight ?? 800, top: vv?.offsetTop ?? 0 }
+  }
+  const [v, setV] = useState(read)
   useEffect(() => {
     const vv = globalThis.visualViewport
     if (!vv) return undefined
-    const on = () => setH(vv.height)
+    const on = () => setV((p) => { const n = read(); return n.h === p.h && n.top === p.top ? p : n })
     vv.addEventListener('resize', on)
-    return () => vv.removeEventListener('resize', on)
+    vv.addEventListener('scroll', on)
+    return () => { vv.removeEventListener('resize', on); vv.removeEventListener('scroll', on) }
   }, [])
-  return h
+  return v
 }
 
 // lost: yanlışta bırakılan basamaklar (yeni basamaktan sonra, eskisine dek) işaretli; düşüş görünür (kör kapı, sahip 2026-10-02)
@@ -89,7 +96,9 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
   const now = useMemo(() => nowProp ?? new Date(), [nowProp])
   const start = useMemo(() => startStepOf(sessions, now), [sessions, now])
   const pairs = useMemo(() => pickPairs({ seed: 'yakala-yaz', sessions, now }), [sessions, now])
-  const vh = useViewportHeight()
+  const vp = useViewport()
+  const vh = vp.h
+  const pin = { position: 'fixed', top: vp.top, left: 0, right: 0, height: vp.h }
   const [phase, setPhase] = useState('giris') // giris | run | sonuc
   const [sub, setSub] = useState('dot') // dot | show | mask | ask | fb
   const [step, setStep] = useState(start)
@@ -253,7 +262,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
   // ---------- Giriş ----------
   if (phase === 'giris') {
     return (
-      <main className="yy yy-giris" style={{ height: vh }}>
+      <main className="yy yy-giris" style={pin}>
         <div className="yy-top"><button type="button" className="yy-x" onClick={onExit} aria-label="Kapat"><X size={16} strokeWidth={2.2} aria-hidden="true" /></button><span className="sp" /><span className="cnt">2 dk</span></div>
         <div className="yy-ey">Yakala Yaz</div>
         <h1 className="yy-h1">İki kelime, <br />bir an.</h1>
@@ -324,7 +333,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
   const showing = sub === 'dot' || sub === 'show' || sub === 'mask'
   const trial = Math.min(ROUND_TRIALS, good + (sub === 'fb' ? 0 : 1))
   return (
-    <main className="yy run" style={{ height: vh }}>
+    <main className="yy run" style={pin}>
       <div className="yy-top">
         <button type="button" className="yy-x" onClick={exit} aria-label="Kapat"><X size={16} strokeWidth={2.2} aria-hidden="true" /></button>
         <div className="yy-bar"><b style={{ width: `${(trial / ROUND_TRIALS) * 100}%` }} /></div>
@@ -380,8 +389,13 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
             {...INPUT}
           />
         </span>
-        {/* Alanın yanında yalnız mikrofon; gönderme klavyenin "Gönder"i (5sn-tur2: tek gönderme yolu) */}
-        {micReady ? (
+        {/* Alanın yanında tek düğme: dinlerken Durdur; alanda yazı varken Gönder (klavye kapalıyken de gönderilebilsin; cihaz,
+            sahip 2026-10-03: "gönder butonu çıkmıyor"); boşken Söyle. Klavyenin Gönder'i de gönderir. */}
+        {!listening && value.trim() ? (
+          <button type="submit" className="rb send" data-wide="1" onPointerDown={(e) => e.preventDefault()}>
+            <ArrowUp size={18} strokeWidth={2.6} aria-hidden="true" />Gönder
+          </button>
+        ) : micReady ? (
           <button type="button" className={`rb${listening ? ' on' : ''}`} aria-label={listening ? undefined : 'Sesle söyle'} data-wide="1" aria-pressed={listening} onPointerDown={(e) => e.preventDefault()} onClick={onMicTap}>
             {listening ? <><Square size={14} strokeWidth={0} fill="currentColor" aria-hidden="true" />Durdur</> : <><Mic size={20} strokeWidth={2.2} aria-hidden="true" />Söyle</>}
           </button>

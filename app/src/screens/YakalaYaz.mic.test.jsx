@@ -111,5 +111,12 @@ describe('Yakala Yaz · mikrofon', () => {
     const input = container.querySelectorAll((n) => n.nodeName === 'INPUT' && String(n.className ?? n.attrs?.class ?? '').includes('field'))[0]
     expect(input?.value ?? input?.attrs?.value).toBe('çınar vapur')
     expect(text(container)).toContain('Ne gördün?') // gönderilmedi: hâlâ soru
+    // İkinci kelime oturunca dinleme biter (SETTLE_MS); alanda yazı var: Söyle'nin yerinde Gönder (cihaz, 2026-10-03)
+    expect(btn(container, 'Gönder')).toBeNull()
+    await act(async () => { await vi.advanceTimersByTimeAsync(1000) })
+    expect(text(container)).toContain("Doğruysa Gönder'e bas.")
+    const send = btn(container, 'Gönder')
+    expect(send?.getAttribute?.('type') ?? send?.attrs?.type).toBe('submit')
+    expect(btn(container, 'Sesle söyle')).toBeNull()
   })
 })

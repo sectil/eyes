@@ -225,6 +225,23 @@ Her aşamada yalnız ilgili testler; sonda tam takım ve derleme (İş akışı 
 - [ ] Gelişim → Dikkat'te "İki kelimeyi yakaladığın süre" satırı; sonuç çipiyle aynı sözcük.
 - [ ] 5 sn kapısı gerçek ekranla (390 ve 320, iki tema; beş yeni kişi, ≥ 4/5).
 
+### 10.1 İlk cihaz geri bildirimi (sahip, 2026-10-03; ekran görüntüleri sohbette)
+
+1. **Ses ikinci kelimeyi kesiyordu.** Sahip: "zarf üzüm" deyince alanda "Zarf üz". Kök neden `lib/yakalaMic.js`: dinleme
+   ARA sonuçta iki kelime görünür görünmez bitiyordu; iOS ara sonucu harf harf büyütür (`SpeechPlugin.swift`
+   `shouldReportPartialResults`). Düzeltme: iki kelimeden sonra metin `SETTLE_MS` (1000 ms) değişmeden durunca biter;
+   son sonuç ya da hata hemen; 4 sn sessizlik kuralı aynı. Test `yakalaMic.test.js` ("Zarf üz" → "Zarf üzüm").
+2. **Gönder düğmesi yoktu.** Tasarım gönderme yolunu klavyenin tuşuna bırakmıştı (5sn-tur2); sesle doldurunca klavye
+   kapalı kaldığı için ekran "Doğruysa Gönder'e bas" diyor ama gönderme yolu görünmüyordu. Düzeltme: alanda yazı varken
+   (dinlemiyorken) Söyle'nin yerinde dolu "Gönder" düğmesi (`type="submit"`, odak alanda kalır); klavyenin tuşu da sürer.
+3. **Klavye açılınca ekran kayıyordu** (alan en üstte, altında boş şerit). Kök neden: ekranın yalnız yüksekliği görünür
+   alana eşitleniyordu; iOS klavye açılınca pencereyi kaydırınca ekranın üstü dışarıda kalıyordu. Düzeltme: giriş ve
+   deneme ekranı görünür alanın üstüne sabit (`position: fixed`, `top = visualViewport.offsetTop`,
+   `height = visualViewport.height`; resize ve scroll dinlenir). **Cihazda bakılmadı**: iOS'un pencere kaydırması
+   düzenekte taklit edilemiyor.
+- Düzenek `duzenek/cek-gonder.mjs` (430/390/320 × klavyeli/klavyesiz × iki tema): alan "Zarf üzüm", Gönder görünür, yatay
+  taşma 0. 5 sn kapısı (beş kişi; 430 açık, 390 koyu klavyeli, 320 açık): üç kare 5/5. Tam takım 193 dosya, 3006 test.
+
 ## 11. Riskler
 | Risk | Önlem |
 |---|---|

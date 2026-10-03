@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { firstTwo, createListener, SILENCE_MS } from './yakalaMic.js'
+import { firstTwo, createListener, SILENCE_MS, SETTLE_MS } from './yakalaMic.js'
 
 const flush = () => new Promise((r) => setTimeout(r, 0))
 
@@ -17,19 +17,56 @@ describe('Yakala Yaz mikrofonu · dinleme', () => {
     expect(firstTwo('Çınar, vapur kedi')).toBe('Çınar vapur')
     expect(firstTwo('  ')).toBe('')
   })
-  it('iki kelime duyulunca biter; metin alana gider, gönderilmez', async () => {
+  it('iki kelime duyulup oturunca biter; metin alana gider, gönderilmez', async () => {
+    vi.useFakeTimers()
+    try {
+      const s = fakeSpeech()
+      const texts = []
+      const done = vi.fn()
+      createListener({ start: s.start, onText: (t) => texts.push(t), onDone: done })
+      await vi.advanceTimersByTimeAsync(0)
+      s.cb({ text: 'çınar' })
+      s.cb({ text: 'çınar vapur' })
+      expect(texts).toEqual(['çınar', 'çınar vapur'])
+      await vi.advanceTimersByTimeAsync(SETTLE_MS - 1)
+      expect(done).not.toHaveBeenCalled()
+      await vi.advanceTimersByTimeAsync(1)
+      expect(done).toHaveBeenCalledWith({ text: 'çınar vapur', heard: true, failed: false })
+      await vi.advanceTimersByTimeAsync(0)
+      expect(s.stopped).toBe(1)
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+  it('ikinci kelime harf harf gelir: yarım kelimede bitmez (cihaz: "zarf üzüm" → "Zarf üz", 2026-10-03)', async () => {
+    vi.useFakeTimers()
+    try {
+      const s = fakeSpeech()
+      const done = vi.fn()
+      createListener({ start: s.start, onDone: done })
+      await vi.advanceTimersByTimeAsync(0)
+      s.cb({ text: 'Zarf' })
+      s.cb({ text: 'Zarf üz' })
+      await vi.advanceTimersByTimeAsync(300)
+      s.cb({ text: 'Zarf üzü' })
+      await vi.advanceTimersByTimeAsync(300)
+      s.cb({ text: 'Zarf üzüm' })
+      await vi.advanceTimersByTimeAsync(SETTLE_MS - 1)
+      s.cb({ text: 'Zarf üzüm' }) // aynı metnin tekrarı beklemeyi uzatmaz
+      expect(done).not.toHaveBeenCalled()
+      await vi.advanceTimersByTimeAsync(1)
+      expect(done).toHaveBeenCalledWith({ text: 'Zarf üzüm', heard: true, failed: false })
+    } finally {
+      vi.useRealTimers()
+    }
+  })
+  it('son sonuç (isFinal) hemen bitirir', async () => {
     const s = fakeSpeech()
-    const texts = []
     const done = vi.fn()
-    createListener({ start: s.start, onText: (t) => texts.push(t), onDone: done })
+    createListener({ start: s.start, onDone: done })
     await flush()
-    s.cb({ text: 'çınar' })
-    expect(done).not.toHaveBeenCalled()
-    s.cb({ text: 'çınar vapur' })
-    expect(texts).toEqual(['çınar', 'çınar vapur'])
-    expect(done).toHaveBeenCalledWith({ text: 'çınar vapur', heard: true, failed: false })
-    await flush()
-    expect(s.stopped).toBe(1)
+    s.cb({ text: 'zarf üzüm', isFinal: true })
+    expect(done).toHaveBeenCalledWith({ text: 'zarf üzüm', heard: true, failed: false })
   })
   it('4 sn sessizlikte biter; hiçbir şey duyulmadıysa heard false (D11, deneme sayılmaz)', async () => {
     vi.useFakeTimers()
