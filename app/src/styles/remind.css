@@ -222,3 +222,4 @@
 .rs-day.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
 .rs-iv .rs-note { margin-top: 0; }
 .rs-note.rs-err { color: var(--warn, #b4431c); }
+.rs-eqseg .rs-seg button { flex: 1 1 0; } /* Dik Dur: alt alta iki seçici aynı yerden bölünsün (5 sn kapısı) */

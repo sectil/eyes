@@ -104,7 +104,7 @@ export default function RemindSheet({
 
   return createPortal(
     <div className="rs-back" role="presentation" onClick={(e) => e.target === e.currentTarget && onClose?.()}>
-      <div className="rs-sheet" role="dialog" aria-modal="true" aria-labelledby="rs-title">
+      <div className={`rs-sheet${posture ? ' rs-eqseg' : ''}`} role="dialog" aria-modal="true" aria-labelledby="rs-title">
         <span className="rs-grab" aria-hidden="true" />
         <div className="rs-top">
           <h2 id="rs-title" className="rs-title">{titleOf(moduleId)}</h2>
