@@ -2,14 +2,14 @@
 // node cek-dd.mjs <çıktı> (cek.sh ile). Saat playwright clock ile ileri sarılır.
 import { createRequire } from 'node:module'
 const { chromium } = createRequire(process.env.PW_DIR ?? '/opt/node-tools/node_modules/')('playwright')
-const launch = () => chromium.launch({ executablePath: process.env.CHROME ?? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' }).catch(() => chromium.launch())
+const launch = () => chromium.launch({ executablePath: process.env.CHROME ?? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--lang=tr-TR'] }).catch(() => chromium.launch())
 const OUT = process.argv[2]
 const BASE = `http://127.0.0.1:${process.env.PORT ?? 4392}/@fs${new URL('.', import.meta.url).pathname}dd.html`
 const DEV = { 390: { h: 844, top: 47 }, 320: { h: 568, top: 20 } }
 const b = await launch()
 async function open(w, theme, seen) {
   const d = DEV[w]
-  const page = await b.newPage({ viewport: { width: w, height: d.h }, colorScheme: theme === 'koyu' ? 'dark' : 'light', deviceScaleFactor: 2 })
+  const page = await b.newPage({ viewport: { width: w, height: d.h }, colorScheme: theme === 'koyu' ? 'dark' : 'light', deviceScaleFactor: 2, locale: 'tr-TR' })
   await page.clock.install({ time: new Date(2026, 9, 3, 12) })
   await page.goto(`${BASE}?theme=${theme === 'koyu' ? 'dark' : 'light'}${seen ? '&seen=1' : ''}`)
   await page.evaluate(() => document.fonts.ready)
