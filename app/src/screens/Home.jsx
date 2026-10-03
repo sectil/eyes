@@ -25,6 +25,7 @@ import { leadCandidates, pickLead, pathDayOn, goFace, todayLead, firstStop, lead
 import LongPath from '../components/home/LongPath.jsx'
 import ChapterStrip from '../components/home/ChapterStrip.jsx'
 import SkyChip from '../components/home/SkyChip.jsx'
+import HomeRings from '../components/home/HomeRings.jsx'
 import { projectDays, seenBefore, firstNews, chapterOf, chapterEnd } from '../lib/pathAhead.js'
 import { loadAlarm } from '../lib/alarmLog.js'
 import { nextRing } from '../lib/alarm.js'
@@ -50,6 +51,9 @@ export const SUGGEST_BREATH = 'breath-5'
 // İlk görünümde gözün boyu (pt): sığdırmanın alt ve üst sınırı (styles/home.css .hf --iris)
 const IRIS_MIN = 132
 const IRIS_MAX = 336
+// Kısayol halkaları (sahibin kararı 2026-10-03, "Başla kartı hep görünsün"): ilk 7 günde Güne başla kartının altı sekme
+// çubuğunun en az bu kadar üstünde kalır; kalmıyorsa o çizimde halkalar küçülür, yine kalmıyorsa gizlenir
+const RINGS_GAP = 12
 const homeSection = (section) => registry.inSection(section).filter((m) => onHome(m))
 // Yoga sabah kartı (modul.md §9; veri merkezi işinin bileşeni). Dosya yoksa kart yok: import.meta.glob boş döner, derleme
 // kırılmaz. Kart ne zaman soracağına kendisi karar verir (gece başlanmış Uykuya Geçiş, 04.00–11.59, alarm sorusu önce).
@@ -383,6 +387,23 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   const heroRef = useRef(null)
   const heroInRef = useRef(null)
   const lpRef = useRef(null)
+  // Halkaların boyu (data-fit: '' olağan, 'sm' küçük, 'off' gizli): olağandan başlanır, kart sığana dek bir adım küçülür.
+  // Kartın altı belge koordinatında (kaydırılmış sayfada da aynı karar); sekme çubuğu yoksa (testler) dokunulmaz.
+  // Sayfa kaydırılmışken verilmiş karar kalır: mobil tarayıcıda kaydırınca araç çubuğu küçülüp büyür (resize) ve karar
+  // gidip gelirse ekranın üstündeki satır boy değiştirip içeriği zıplatırdı. Karar sayfa en üstteyken yenilenir.
+  const fitRings = (scene) => {
+    const rings = scene.querySelector?.('.hk')
+    const card = scene.querySelector?.('.hg')
+    const tab = globalThis.document?.querySelector?.('.tabbar')
+    if (!rings?.setAttribute || !card?.getBoundingClientRect || !tab?.getBoundingClientRect) return
+    const sy = window.scrollY || 0
+    if (sy > 0 && rings.hasAttribute?.('data-fit')) return
+    const edge = tab.getBoundingClientRect().top - RINGS_GAP
+    for (const step of ['', 'sm', 'off']) {
+      rings.setAttribute('data-fit', step)
+      if (card.getBoundingClientRect().bottom + sy <= edge) break
+    }
+  }
   useLayoutEffect(() => {
     // Sahne en az ekran boyu (CSS min-height); düğmenin altı ile sahnenin dibi arasında kalan pay gözü büyütür. Göz en
     // büyük boyuna varınca artan pay sahnenin dibinde kalır ve yol o kadar yukarı çıkar (D9: ilk görünümün altında boşluk
@@ -393,6 +414,7 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       if (!scene?.getBoundingClientRect || typeof getComputedStyle !== 'function') return
       if (firstWeek) {
         scene.style.marginBottom = ''
+        fitRings(scene)
         return
       }
       const disc = scene.querySelector?.('.hi-disc')
@@ -446,8 +468,13 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
       // çubuğun kenarının hemen altından başlar (kaydırınca yolun üstünde ~90 pt boş şerit kalıyordu); ilk görünüm aynı
       // Yalnız yol ekranın tümüyle altında başlıyorsa (ilk görünümde yolun hiçbir yeri yok); ilk görünüm aynı kalır
       const top0 = box.getBoundingClientRect().top
-      if (top0 > window.innerHeight && window.scrollY === 0) box.style.marginTop = `${-Math.round(top0 - edge - 12)}px`
-      const nodes = [...box.querySelectorAll('.lp-lb, .lp-btx, .lp-nef, .lp-day-h, .lp-tc-h, .lp-tp, .lp-tc-more, .lp-cc-t, .lp-cc-new, .lp-cc-d, .lp-cc-pr, .lp-gm, .lp-al, .lp-rem, .lp-n')]
+      // Kısayol halkaları (8. günden sonra yolun başında) Başla kartının üstüne binmez: sahne ekrandan uzunsa (320 × 568)
+      // kart sekme çubuğunun ardına uzanır; yol o zaman kartın altından başlar (önceden "N. bölüm" hapı kartın altına giriyordu)
+      const cardEnd = scene.querySelector?.('.hg')?.getBoundingClientRect?.().bottom ?? -Infinity
+      const up = Math.min(top0 - edge - 12, top0 - cardEnd - 12)
+      if (top0 > window.innerHeight && window.scrollY === 0 && up > 0) box.style.marginTop = `${-Math.round(up)}px`
+      // .hk-b: yolun başındaki kısayol halkaları da sekme çubuğunun kenarında kesilmez (8. günden sonra)
+      const nodes = [...box.querySelectorAll('.hk-b, .lp-lb, .lp-btx, .lp-nef, .lp-day-h, .lp-tc-h, .lp-tp, .lp-tc-more, .lp-cc-t, .lp-cc-new, .lp-cc-d, .lp-cc-pr, .lp-gm, .lp-al, .lp-rem, .lp-n')]
       const els = nodes.map((e) => e.getBoundingClientRect())
       // İlk 7 gün (tur 6): yol Başla kartının hemen altından başlar; boşluk yolun başına değil, kesilecek yazının bulunduğu
       // satırın önüne girer (çizgi o boşluktan da geçer: --pre). Öteki günlerde bugünkü kural (yolun başına boşluk).
@@ -491,6 +518,15 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
   // altından başlar; ad ilk görünümde bir kez). 8. günden sonra yol ilk görünümün altında: sıradaki durak yolun başında,
   // dolu ve halkalı (tur 2: "şu an buradasın" işareti yoktu).
   const todayStops = firstWeek && plan.doneCount === 0 ? plan.stops.filter((s) => s.key !== nextGo?.key) : plan.stops
+  // Kısayol halkaları: büyük kartın açtığı modül halkada tekrar etmez (D9: bugünün ilk işi ekranda bir kez adıyla; yolun
+  // Dalga bandı ve "Nefes · 5 dk mola" bandıyla aynı ilke). Kart Dalga ise Dalga; göz molası önerisi ya da yolun Nefes
+  // durağıysa Nefes; yolun Yoga durağıysa Yoga halkası o çizimde yok. Tam set yolun durağı değil (yolun tam set günü
+  // "Normal set", routine-normal).
+  const ringHide = [
+    sug.primary.kind === 'dalga' && 'dalga',
+    (sug.primary.kind === 'breath' || nextGo?.id === 'breath') && 'breath',
+    nextGo?.id === 'yoga' && 'yoga',
+  ].filter(Boolean)
 
   return (
     <>
@@ -546,6 +582,9 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
           </section>
         )}
 
+        {/* Kısayol halkaları (sahibin isteği 2026-10-03): ilk 7 günde "N. bölüm" yazısının hemen üstünde; sığmazsa fit küçültür */}
+        {firstWeek && <HomeRings sessions={sessions} now={now} locked={locked} hide={ringHide} onStart={onStart} />}
+
         <div className="hf-hero" ref={heroRef}>
           <div className="hf-hero-in" ref={heroInRef}>
             {firstWeek
@@ -560,6 +599,8 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
 
       {/* Uzun yol (D9): bugünün kalan durakları, Nef'in yorumu, yarın ve sonraki günler; bölümler ve ödüller */}
       <div className="lp-box" ref={lpRef}>
+        {/* 8. günden sonra halkalar yolun başında, "N. bölüm" hapının hemen üstünde (sahibin kararı 2026-10-03) */}
+        {!firstWeek && <HomeRings sessions={sessions} now={now} locked={locked} hide={ringHide} onStart={onStart} className="at-path" />}
         <LongPath
           plan={plan}
           today={todayStops}

@@ -6,6 +6,15 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Ana sayfa kısayol halkaları (sahibin isteği 2026-10-03; halkalar/PLAN.md). Metin kapısı tur 1: iki taslak 0/5 ve
+    // 1/5; tur 2: bu metin 5/5 (halkalar/kapi/metin-kapisi-tur2.json). Sahip onayı 2026-10-03
+    id: '2026-10-03-1',
+    title: '3 Ekim, birinci güncelleme',
+    items: [
+      { kind: 'new', text: 'Ana sayfaya kısayollar geldi: sesli yoga, müzik, nefes ve göz egzersizlerinin tam seti tek dokunuşla açılıyor. Bugün yaptıklarının köşesinde tik görürsün.' },
+    ],
+  },
+  {
     // Oku ve Anla: giriş adımları, ekran cümleleri, 120 metnin Türkçesi ve ana fikir soruları. Sahip yetkisi "sen onayla"
     // (2026-10-02). Metin kapısı tur 1 (tek değerlendirici, beş okur gibi): A 3/5, B 3/5; tur 2 (beş ayrı okur):
     // A 5/5, B 4/5; B'ye beşinci okurun "baştan sona" önerisi işlendi (okuma-anlama/kapi/ekran-yenileme-2026-10-02.md)

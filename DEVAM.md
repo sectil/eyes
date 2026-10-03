@@ -17,11 +17,11 @@ güvenme; sahibe "önceki oturumda şöyleydi" diye sorma, burada yazanı uygula
 - Çalışılan dal: `claude/charming-thompson-hbx2wd`. Taslak PR: https://github.com/sectil/eyes/pull/16.
   PR'ın taban dalı `claude/cool-pasteur-j5yupf`; onun taslak PR'ı https://github.com/sectil/eyes/pull/2, tabanı `master`.
   Zincir: `master` ← #2 ← #16. İki PR de açık, birleştirilmedi; #16 çakışmasız.
-- Son kod commit'i `c7dba35`. Bu dosya ve düzenek klasörleri ondan sonra eklendi.
-- Ağaç temiz. Tam takım yeşil: 191 dosya, 2989 test, 5 todo (`cd app && npx vitest run`, 4–5 dk). `npm run build` geçti.
-- Son sürüm notu kimliği `2026-10-02-5`. Her TestFlight yeni kimlik alır; eski girdiye madde eklenmez (Bug 31).
-- TestFlight komutu sahibin Mac'inde: `bash ~/Projects/eyes/app/scripts/testflight.sh`. 2026-10-02-5 için komut sahibe
-  verildi. Sahibin derleyip cihazda bakıp bakmadığı bilinmiyor.
+- Son kod işi: Ana sayfa kısayol halkaları (§2.4, 2026-10-03).
+- Ağaç temiz. Tam takım yeşil: 193 dosya, 3004 test, 5 todo (`cd app && npx vitest run`, 4–5 dk). `npm run build` geçti.
+- Son sürüm notu kimliği `2026-10-03-1`. Her TestFlight yeni kimlik alır; eski girdiye madde eklenmez (Bug 31).
+- TestFlight komutu sahibin Mac'inde: `bash ~/Projects/eyes/app/scripts/testflight.sh`. 2026-10-02-5 ve 2026-10-03-1 için
+  komut sahibe verildi. Sahibin derleyip cihazda bakıp bakmadığı bilinmiyor.
 - Sahibin cevap vermediği sorular §3.1'de. İlk iş onlar değil; ilk iş sahibin cihaz geri bildirimi gelirse onu düzeltmek.
 
 ## 1. Depo, dal ve nasıl başlanır
@@ -30,7 +30,7 @@ güvenme; sahibe "önceki oturumda şöyleydi" diye sorma, burada yazanı uygula
 git fetch origin claude/charming-thompson-hbx2wd claude/cool-pasteur-j5yupf
 git checkout -B claude/charming-thompson-hbx2wd origin/claude/charming-thompson-hbx2wd
 cd app && npm ci        # node_modules yoksa
-npx vitest run          # 191 dosya yeşil olmalı
+npx vitest run          # 193 dosya yeşil olmalı
 npm run build
 ```
 
@@ -127,6 +127,23 @@ aynen `okuma-anlama/kapi/okur-bulgulari-2026-10-02.md`:
   (başlık sorulardan sonra görünsün ya da soru "bu metnin başlığı ne olmalı" olsun).
 - Sürüm notu `2026-10-02-5` (A 5/5, B 4/5, kayıt `ekran-yenileme-2026-10-02.md` sonu).
 
+### 2.4 Ana sayfa kısayol halkaları (sahip isteği 2026-10-03, bitti)
+
+- İstek: "1. Bölüm yazan kısmın hemen üstüne İnstagram hayaleti gibi yuvarlak ... 5 sn kuralı ve mükemmellik önemli".
+  Ayrıntı ve bütün kapı kayıtları `docs/yol-haritasi/tasarim/ana-sayfa/halkalar/PLAN.md` (§11 son durum), `kapi/`.
+- Kod: `app/src/components/home/HomeRings.jsx`, `screens/Home.jsx` (yer, `fitRings`, `ringHide`), `styles/home.css`
+  (`.hk*`); testler `components/home/HomeRings.test.jsx`, `screens/Home.rings.test.jsx`.
+- Dört halka: Sesli yoga → `yoga` (yalnız iPhone), Müzik → `dalga`, Nefes → `breath`, Göz seti → `routine-full`.
+  İlk 7 günde ilk görünümde "1. bölüm"ün üstünde; 8. günden sonra yolun başında. Başla kartı sığmazsa küçülür, yine
+  sığmazsa o çizimde gizlenir (320×568'de ilk hafta gizli). Büyük kartın modülü halkada tekrar etmez. Molada Göz seti
+  kilit rozetli. "Yapıldı" yalnız bugünkü kayıttan; tik rozeti.
+- Seçim: iki tur yapıldı, tur sınırı kuralıyla üçüncü açılmadı; kör seçimde tur 2 12 E, tur 1 11 E, ikisi de kapıdan
+  geçmedi; sahip "Tur 2 olduğu gibi" dedi. Kalan kusurlar (PLAN §11): adlar "1. bölüm"e yakın, "yapıldı" hâli koyu temada
+  zayıf, Tam set ile Başla kartının farkı belirsiz.
+- Adlar: ad kapısı tur 2'de Sesli yoga 5/5, Müzik 5/5, Nefes 10/10; dördüncüde geçen ad yok, sahip "Göz seti"ni seçti.
+  Dambıl simgesi "spor salonu" okunuyor; sahip simgeyi değiştirmedi.
+- Sürüm notu `2026-10-03-1` (metin kapısı tur 2, 5/5; sahip onayı).
+
 ## 3. Açık işler
 
 ### 3.1 Sahibin cevabını bekleyenler (bu oturumdan, cevap gelmedi)
@@ -153,6 +170,9 @@ Hepsi sahibe yazıldı; cevap yok. Yeni oturum kısa ve tek tek sorabilir. Hiçb
 - 2026-10-02-3 Oku ve Anla, 2026-10-02-4 Yakala Yaz, 2026-10-02-5 Oku ve Anla yenileme. Sahip bu üç derlemeden
   hangisini cihaza aldı, bilinmiyor. Geri bildirim gelirse ekran görüntüsüyle düzelt; yeni TestFlight gerekirse yeni
   sürüm notu kimliği, sürüm notu da kapı ve sahip onayından geçer.
+- 2026-10-03-1 Ana sayfa halkaları: cihazda bakılmadı. Bakılacaklar: güvenli alan ve dokunma hissi, VoiceOver okuması
+  ("Kısayollar", "…, bugün yapıldı", "…, mola bitene kadar kilitli"), yazı tipi geç gelince satırın zıplaması
+  (PLAN §8.5), 320×568'de ilk hafta gizli kalması (PLAN §8.4), Dinamik Yazı büyükken (PLAN §8.12).
 - Oku ve Anla'da cihazda henüz hiç bakılmayanlar: okuma süresi gerçek cihazda, "Bitirdim" dokunma alanı, arka plana
   geçince `ara` nedeni, yazı boyutu büyütülmüş telefonda sığma.
 
@@ -261,6 +281,9 @@ Ayrıntı `docs/yol-haritasi/YAPILACAKLAR.md` ve `docs/yol-haritasi/ACIK_ISLER.m
 - Oku ve Anla yenileme: "Türkçe + kaynak özeti", "Uygun, başla", "Onay" (ana fikir soruları), "Somut kusurları düzelt,
   bitir".
 
+- Ana sayfa halkaları: "Tek ekran Tam set", "Bölüm yazısının üstünde", "Başla kartı hep görünsün", "Bugünkü kural
+  kalsın"; seçimden sonra "Tur 2 olduğu gibi", "Son bir ad kapısı", "Gizlensin"; adlar "Göz seti", metinler "Onay".
+
 Önceki devrin kararları (Fark Ettin mi?, Nef N1, D9) `git show d0f40a9:DEVAM.md` §4.5–4.7'de; hepsi geçerli.
 
 ## 5. Yöntemler ve araçlar
@@ -368,7 +391,7 @@ modül; tam takım ve derleme yeşil olmadan commit yok; her yeni modülün mani
 
 ## 8. Sıra
 
-1. **Sahibin cihaz geri bildirimi gelirse önce onu düzelt** (2026-10-02-3/-4/-5). Yeni TestFlight gerekirse yeni
+1. **Sahibin cihaz geri bildirimi gelirse önce onu düzelt** (2026-10-02-3/-4/-5, 2026-10-03-1). Yeni TestFlight gerekirse yeni
    sürüm notu kimliği; sürüm notu kapı ve sahip onayından geçer.
 2. **§3.1'deki kararları kısa ve tek tek sor.** Cevap gelmeden hiçbirini yapma.
 3. **Fark Ettin mi?** F3 cihaz kararı, sonra F4–F7 (önceki devrin sırası).

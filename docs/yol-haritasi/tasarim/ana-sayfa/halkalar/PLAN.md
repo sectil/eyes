@@ -420,15 +420,31 @@ Dalga müzik (lib/dalga.js: Sakin, Güç, Motivasyon). Tur 2 içeriğe göre ada
 
 İki turun en iyisi: Sesli yoga, Müzik, Nefes. Dördüncü yuvarlakta iki turda da geçen ad yok; karar sahibin.
 
-### 11.3 Uygulama (ara kayıt, sahip onayı bekliyor)
+### 11.3 Uygulama (bitti, 2026-10-03)
 
-- `uygulama.patch`: tur 2 kodu + adlar "Sesli yoga", "Müzik" (ad kapısı tur 2'de geçenler) + iki yeni test dosyası
-  (`components/home/HomeRings.test.jsx`: sıra, rota, yapıldı kuralı, kilit, `ringAria`; `screens/Home.rings.test.jsx`:
-  yer, kartla ikizlik A/C/D, 8. gün sonrası). Uygulamak için: `git apply docs/yol-haritasi/tasarim/ana-sayfa/halkalar/uygulama.patch`.
+- Depoya girdi: tur 2 kodu + sahip onaylı metinler + iki yeni test dosyası (`components/home/HomeRings.test.jsx`: sıra,
+  rota, adlar, yapıldı kuralı, kilit, `ringAria`; `screens/Home.rings.test.jsx`: yer, kartla ikizlik A/C/D, 8. gün
+  sonrası). Ara kayıttaki `uygulama.patch` uygulandıktan sonra silindi.
 - Tam takım (tur 2 kodu, eski adlar): 191 dosya, 2989 test geçti; iki yeni dosya 14/14. Kırılma denetimi: `ringHide`
   boşaltılınca `Home.rings.test.jsx`'in üç testi kırılıyor. `npm run build` geçti.
 - Yeni adlarla çekim (`<scratchpad>/halka-cekim/adlar/`, G2 ve G2-iki; 390×844, 320×640, 320×568; iki tema): yatay taşma 0,
   sağ boşluk 0; 320'de "Sesli yoga" çaptan geniş olduğu için ilk daire sol kenardan 2.5 px içeride (390'da 0.3 px).
 - Metin kapısı tur 1 (`kapi/metin-kapisi-tur1.json`): "Kısayollar" 5/5, "Nefes, bugün yapıldı" 5/5 geçti;
   ", mola bitince açılır" 2/5 ("açılır" kendiliğinden başlayacak gibi), sürüm notu iki taslak 0/5 ve 1/5. Tur 2 sürüyor.
-- Commit ve TestFlight sahip onayından sonra; adlar ve kilit eki onaya göre son kez değişebilir.
+- Metin kapısı tur 2 (`kapi/metin-kapisi-tur2.json`, son tur): "Tam set, mola bitene kadar kilitli" 5/5; sürüm notu
+  "Ana sayfaya kısayollar geldi: sesli yoga, müzik, nefes ve göz egzersizlerinin tam seti tek dokunuşla açılıyor. Bugün
+  yaptıklarının köşesinde tik görürsün." 5/5 (öteki seçenekler 2/5 ve 0/5).
+
+### 11.4 Son kararlar ve son durum (2026-10-03)
+
+- Sahip: dördüncü halka "Göz seti" (iki turda geçen ad yoktu; seçenekler "Göz seti" ve "Tam set" sunuldu); metinler
+  "Onay": adlar Sesli yoga, Müzik, Nefes, Göz seti; erişilebilir ad "Kısayollar", ", bugün yapıldı",
+  ", mola bitene kadar kilitli"; sürüm notu `2026-10-03-1`.
+- Tam takım: 193 dosya, 3004 test geçti, 5 todo. `npm run build` geçti.
+- Son çekim deponun kendi kodundan (`<scratchpad>/halka-cekim/son/`, G2, G2-iki, G2-kilit; 390×844, 320×640, 320×568;
+  iki tema): yatay taşma 0, kart sekme çubuğunun en az 12 px üstünde (18/18). Dört halkada sağ boşluk 0, sol fark 390'da
+  0.3 px, 320'de 2.5 px ("Sesli yoga" çaptan geniş). Molada üç halka ortada (390: 48/47.7; 320: 37.3/34.9, aynı neden).
+  320×568'de ilk hafta satır gizli (sahibin "Başla kartı hep görünsün" kararı).
+- Açık kalanlar (sahibe sorulmadı ya da cihazda bakılacak): §8.3 molada satırı hiç göstermemek, §8.4 320×568'de satırı
+  yolun başına taşımak, §8.5 açılışta zıplama, §8.7 Wind iki anlamda, §8.9 `settle()` değişikliği halkalarla geldi, §8.12
+  büyük yazı; dambıl simgesi "spor salonu" okunuyor (ad kapısı tur 1 ve 2).
