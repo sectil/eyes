@@ -121,7 +121,8 @@ describe('remindTexts: seçim', () => {
       const n = Math.min(3, TEXTS[key].length)
       const ids = Array.from({ length: n }, (_, i) => pickText(key, '2026-09-30', i).id)
       expect(new Set(ids).size, key).toBe(n)
-      expect(pickText(key, '2026-10-01', 0).id).not.toBe(pickText(key, '2026-09-30', 0).id)
+      // Tek cümleli anahtar (remind.dik-dur-son: aralıklı kipin son bildirimi) dönmez (Dik Dur, 2026-10-03)
+      if (TEXTS[key].length > 1) expect(pickText(key, '2026-10-01', 0).id).not.toBe(pickText(key, '2026-09-30', 0).id)
     }
     expect(pickText('remind.snake-yok', '2026-09-30')).toBeNull()
   })

@@ -9,6 +9,8 @@
 export const DESIGNS = {
   meta: 'Meta-analiz',
   review: 'Sistematik derleme',
+  // Sistematik olmayan, anlatı biçiminde derleme (ör. Rayner 2016; sahip onayı 2026-10-02)
+  narrative: 'Derleme',
   cohort: 'Prospektif kohort çalışması',
   validation: 'Geçerlik ve güvenirlik çalışması',
   rct: 'Randomize kontrollü çalışma',
@@ -25,7 +27,7 @@ export const DESIGNS = {
   expert: 'Uzman önerisi',
 }
 // Kanıtın gücü için kaba sıra (yüksek = daha güçlü). Kullanıcıya "ne kadar güvenilir?" diye gösterilir.
-export const DESIGN_RANK = { meta: 4, review: 3, rct: 3, mrt: 3, crossover: 3, cohort: 2, experiment: 2, field: 2, quasi: 2, validation: 1, prepost: 1, observational: 1, case: 0, expert: 0 }
+export const DESIGN_RANK = { meta: 4, review: 3, narrative: 1, rct: 3, mrt: 3, crossover: 3, cohort: 2, experiment: 2, field: 2, quasi: 2, validation: 1, prepost: 1, observational: 1, case: 0, expert: 0 }
 
 export const SOURCES = {
   ulrich1984: {
@@ -287,6 +289,41 @@ export const SOURCES = {
     duration: '2 hafta egzersiz + bıraktıktan 2 hafta sonra ölçüm',
     limit: 'Egzersiz bırakılınca ölçümler 2 haftada çoğunlukla başa döndü; kırpma hızı ve gözyaşı ölçümlerinin bir kısmı değişmedi.',
   },
+  // Dik Dur (dik-dur/kaynak-D1-taslak.md; metin kapısı ve sahip onayı 2026-10-03). PubMed kayıtları o gün açıldı.
+  nair2015: {
+    authors: ['Nair S', 'Sagar M', 'Sollers J', 'Consedine N', 'Broadbent E'], year: 2015,
+    title: 'Do slumped and upright postures affect stress responses? A randomized trial.',
+    titleTr: 'Çökük ve dik oturuş stres tepkilerini etkiler mi? Randomize bir deneme.',
+    journal: 'Health Psychol', cite: '34(6):632-41', doi: '10.1037/hea0000146', pmid: '25222091',
+    design: 'rct', n: '74 kişi',
+    limit: 'Tek laboratuvarda, stres görevi sırasında anlık ölçüm; uzun süreli etki ölçülmedi.',
+  },
+  // basım 2022, e-yayın 2020-06-22
+  elkjaer2022: {
+    authors: ['Elkjær E', 'Mikkelsen MB', 'Michalak J', 'Mennin DS', "O'Toole MS"], year: 2022,
+    title: 'Expansive and Contractive Postures and Movement: A Systematic Review and Meta-Analysis of the Effect of Motor Displays on Affective and Behavioral Responses.',
+    titleTr: 'Açık ve kapalı duruş ve hareketin duygu ve davranışa etkisi: sistematik derleme ve meta-analiz.',
+    journal: 'Perspect Psychol Sci', cite: '17(1):276-304', doi: '10.1177/1745691620919358', pmid: '32569503',
+    design: 'meta', n: '73 çalışma',
+    limit: 'Fark kapalı duruştan geliyor; açık duruşun nötr duruşa göre etkisi sıfıra yakın.',
+  },
+  xing2026: {
+    authors: ['Xing Y', 'Wang R', 'Zhao X', 'Xu A'], year: 2026,
+    title: 'Therapeutic Exercise for Forward Head Posture in Neck Pain Patients: A Systematic Review and Meta-Analysis.',
+    titleTr: 'Boyun ağrılı kişilerde baş öne duruşu için egzersiz: sistematik derleme ve meta-analiz.',
+    journal: 'J Pain Res', cite: '19:614524', doi: '10.2147/JPR.S614524', pmid: '42445930',
+    design: 'meta', n: '10 randomize çalışma, 550 kişi',
+    limit: 'Kanıtın kesinliği düşük-orta; katılımcılar boyun ağrılı ve baş öne duruşlu kişiler.',
+  },
+  // Gruplar kurayla ayrıldı ama yayında "Observational Study"; tür yayındaki gibi. Tutma süresi (10 sn) buradan ödünç.
+  alghadir2021: {
+    authors: ['Alghadir AH', 'Iqbal ZA'], year: 2021,
+    title: 'Effect of Deep Cervical Flexor Muscle Training Using Pressure Biofeedback on Pain and Forward Head Posture in School Teachers with Neck Pain: An Observational Study.',
+    titleTr: 'Boyun ağrılı öğretmenlerde basınç biyogeri bildirimiyle derin boyun kası egzersizinin ağrıya ve öne eğik baş duruşuna etkisi.',
+    journal: 'Biomed Res Int', cite: '2021:5588580', doi: '10.1155/2021/5588580', pmid: '34095302',
+    design: 'observational', n: '50 öğretmen (boyun ağrılı)',
+    limit: 'Gözetimli, sırtüstü yapılan farklı bir egzersiz; 10 saniyelik tutma süresini buradan aldık.',
+  },
   fincham2023: {
     authors: ['Fincham GW', 'Strauss C', 'Montero-Marin J', 'Cavanagh K'], year: 2023,
     title: 'Effect of breathwork on stress and mental health: A meta-analysis of randomised-controlled trials.',
@@ -514,6 +551,132 @@ export const SOURCES = {
     design: 'observational', n: '1411 genç (14–17 yaş)',
     limit: 'Uyku günlükle (öznel) ölçüldü.',
     only: 'moon',
+  },
+  // Oku ve Anla (okuma-anlama/arastirma/KAYNAKLAR.md §A; künye PubMed'den, 2026-10-02). finding/limit yok: bilim kartı
+  // cümleleri henüz kapıdan ve sahip onayından geçmedi.
+  rayner2016: {
+    authors: ['Rayner K', 'Schotter ER', 'Masson ME', 'Potter MC', 'Treiman R'], year: 2016,
+    title: 'So Much to Read, So Little Time: How Do We Read, and Can Speed Reading Help?',
+    titleTr: 'Okunacak çok şey, az zaman: Nasıl okuruz ve hızlı okuma işe yarar mı?',
+    journal: 'Psychol Sci Public Interest', cite: '17(1):4-34', doi: '10.1177/1529100615623267', pmid: '26769745',
+    design: 'narrative', // VARSAYIM: güç sırası 1 (sistematik olmayan derleme; geçerlik çalışmasıyla aynı)
+    // Bilim kartı: Yakala Yaz METINLER B3 (sahip onaylı 2026-10-02)
+    finding: 'Okumayı iki üç kat hızlandırıp aynı anlamayı korumak olası görünmüyor; hızın özü dil becerisi.',
+    limit: 'Derleme; hızlı okuma programlarını değerlendirir.',
+  },
+  kuperman2021: {
+    authors: ['Kuperman V', 'Kyröläinen AJ', 'Porretta V', 'Brysbaert M', 'Yang S'], year: 2021,
+    title: 'A lingering question addressed: Reading rate and most efficient listening rate are highly similar.',
+    titleTr: 'Uzun süredir sorulan bir soru: Okuma hızı ile en verimli dinleme hızı birbirine çok yakın.',
+    journal: 'J Exp Psychol Hum Percept Perform', cite: '47(8):1103-1112', doi: '10.1037/xhp0000932', pmid: '34516216',
+    design: 'experiment',
+  },
+  miyata2012: {
+    authors: ['Miyata H', 'Minagawa-Kawai Y', 'Watanabe S', 'Sasaki T', 'Ueda K'], year: 2012,
+    title: 'Reading speed, comprehension and eye movements while reading Japanese novels: evidence from untrained readers and cases of speed-reading trainees.',
+    titleTr: 'Japonca roman okurken okuma hızı, anlama ve göz hareketleri: Eğitimsiz okurlar ve hızlı okuma kursiyerleri.',
+    journal: 'PLoS One', cite: '7(5):e36091', doi: '10.1371/journal.pone.0036091', pmid: '22590519',
+    design: 'observational', n: '17 ve 15 kişilik iki çalışma',
+  },
+  trauzettel2012: {
+    authors: ['Trauzettel-Klosinski S', 'Dietz K'], year: 2012,
+    title: 'Standardized assessment of reading performance: the New International Reading Speed Texts IReST.',
+    titleTr: 'Okuma performansının standart ölçümü: Yeni Uluslararası Okuma Hızı Metinleri IReST.',
+    journal: 'Invest Ophthalmol Vis Sci', cite: '53(9):5452-61', doi: '10.1167/iovs.11-8284', pmid: '22661485',
+    design: 'validation', n: '17 dilde 436 kişi',
+  },
+  // Yakala Yaz (kelime-hafiza/arastirma/KAYNAKLAR.md; künye PubMed'den, 2026-10-02). finding ve limit yalnız METINLER B1–B4
+  // olanlarda (rubin1992, garcia1998, rayner2016, simons2016); ötekiler yalnız kanıt havuzu. levitt1971 ve baddeley2003
+  // girmez: PubMed'de DOI ya da özet yok.
+  rubin1992: {
+    authors: ['Rubin GS', 'Turano K'], year: 1992,
+    title: 'Reading without saccadic eye movements.',
+    titleTr: 'Sıçrayan göz hareketleri olmadan okuma.',
+    journal: 'Vision Res', cite: '32(5):895-902', doi: '10.1016/0042-6989(92)90032-e', pmid: '1604858',
+    design: 'experiment', n: '13 kişi',
+    finding: 'Tek tek gösterilen kelimeyi doğru okumak için gereken en kısa süre ortalama 69 ms çıktı.',
+    limit: '13 kişilik bir deney; iki kelime ve yazma bizim eklememiz.',
+  },
+  legge2001: {
+    authors: ['Legge GE', 'Mansfield JS', 'Chung ST'], year: 2001,
+    title: 'Psychophysics of reading. XX. Linking letter recognition to reading speed in central and peripheral vision.',
+    titleTr: 'Okumanın psikofiziği XX: Merkez ve yan görüşte harf tanımanın okuma hızıyla bağı.',
+    journal: 'Vision Res', cite: '41(6):725-43', doi: '10.1016/s0042-6989(00)00295-9', pmid: '11248262',
+    design: 'experiment',
+  },
+  akutsu1991: {
+    authors: ['Akutsu H', 'Legge GE', 'Ross JA', 'Schuebel KJ'], year: 1991,
+    title: 'Psychophysics of reading--X. Effects of age-related changes in vision.',
+    titleTr: 'Okumanın psikofiziği X: Yaşa bağlı görme değişikliklerinin etkisi.',
+    journal: 'J Gerontol', cite: '46(6):P325-31', doi: '10.1093/geronj/46.6.p325', pmid: '1940088',
+    design: 'experiment', n: '16 genç, 14 yaşlı',
+  },
+  chung2021: {
+    authors: ['Chung STL'], year: 2021,
+    title: 'Training to improve temporal processing of letters benefits reading speed for people with central vision loss.',
+    titleTr: 'Harflerin zamansal işlenmesini geliştiren alıştırma, merkez görme kaybı olanlarda okuma hızına yarar.',
+    journal: 'J Vis', cite: '21(1):14', doi: '10.1167/jov.21.1.14', pmid: '33507207',
+    design: 'prepost',
+  },
+  garcia1998: {
+    authors: ['García-Pérez MA'], year: 1998,
+    title: 'Forced-choice staircases with fixed step sizes: asymptotic and small-sample properties.',
+    titleTr: 'Sabit adımlı zorunlu seçim merdivenleri: uzun ve kısa dizilerde davranışları.',
+    journal: 'Vision Res', cite: '38(12):1861-81', doi: '10.1016/s0042-6989(97)00340-4', pmid: '9797963',
+    design: 'experiment', // VARSAYIM: benzetim çalışması; DESIGNS'ta ayrı tür yok
+    finding: 'Doğruda küçük, yanlışta büyük adımla ayarlanan merdiven sabit bir doğruluk noktasına yerleşir.',
+    limit: 'Benzetim çalışması; kişilerde denenmedi.',
+  },
+  kaernbach1991: {
+    authors: ['Kaernbach C'], year: 1991,
+    title: 'Simple adaptive testing with the weighted up-down method.',
+    titleTr: 'Ağırlıklı yukarı–aşağı yöntemiyle basit uyarlanan ölçüm.',
+    journal: 'Percept Psychophys', cite: '49(3):227-9', doi: '10.3758/bf03214307', pmid: '2011460',
+    design: 'experiment', // VARSAYIM: yöntem ve benzetim
+  },
+  breitmeyer2000: {
+    authors: ['Breitmeyer BG', 'Ogmen H'], year: 2000,
+    title: 'Recent models and findings in visual backward masking: a comparison, review, and update.',
+    titleTr: 'Görsel geriye maskelemede yeni modeller ve bulgular: karşılaştırma, derleme ve güncelleme.',
+    journal: 'Percept Psychophys', cite: '62(8):1572-95', doi: '10.3758/bf03212157', pmid: '11140180',
+    design: 'narrative',
+  },
+  elze2010: {
+    authors: ['Elze T'], year: 2010,
+    title: 'Misspecifications of stimulus presentation durations in experimental psychology: a systematic review of the psychophysics literature.',
+    titleTr: 'Deneysel psikolojide gösterim sürelerinin yanlış belirtilmesi: psikofizik yazınının sistematik derlemesi.',
+    journal: 'PLoS One', cite: '5(9):e12792', doi: '10.1371/journal.pone.0012792', pmid: '20927362',
+    design: 'review', n: '79 makale',
+  },
+  harding2005: {
+    authors: ['Harding G', 'Wilkins AJ', 'Erba G', 'Barkley GL', 'Fisher RS'], year: 2005,
+    title: 'Photic- and pattern-induced seizures: expert consensus of the Epilepsy Foundation of America Working Group.',
+    titleTr: 'Işık ve desenle tetiklenen nöbetler: Amerika Epilepsi Vakfı çalışma grubunun uzman uzlaşısı.',
+    journal: 'Epilepsia', cite: '46(9):1423-5', doi: '10.1111/j.1528-1167.2005.31305.x', pmid: '16146438',
+    design: 'expert',
+  },
+  schotter2014: {
+    authors: ['Schotter ER', 'Tran R', 'Rayner K'], year: 2014,
+    title: "Don't believe what you read (only once): comprehension is supported by regressions during reading.",
+    titleTr: 'Okuduğuna (bir kez okuyarak) inanma: Geri dönüşler anlamaya yardım eder.',
+    journal: 'Psychol Sci', cite: '25(6):1218-26', doi: '10.1177/0956797614531148', pmid: '24747167',
+    design: 'experiment',
+  },
+  simons2016: {
+    authors: ['Simons DJ', 'Boot WR', 'Charness N', 'Gathercole SE', 'Chabris CF', 'Hambrick DZ', 'Stine-Morrow EA'], year: 2016,
+    title: 'Do "Brain-Training" Programs Work?',
+    titleTr: 'Zihin alıştırma programları işe yarıyor mu?',
+    journal: 'Psychol Sci Public Interest', cite: '17(3):103-186', doi: '10.1177/1529100616661983', pmid: '27697851',
+    design: 'narrative',
+    finding: 'Alıştırılan görevde ilerleme güçlü; günlük hayata aktarım için kanıt az.',
+    limit: 'Derleme; tek bir alıştırmayı değil alanı değerlendirir.',
+  },
+  goz2017: {
+    authors: ['Göz İ', 'Tekcan AI', 'Erciyes AA'], year: 2017,
+    title: 'Subjective age-of-acquisition norms for 600 Turkish words from four age groups.',
+    titleTr: 'Dört yaş grubundan 600 Türkçe kelime için öznel edinim yaşı normları.',
+    journal: 'Behav Res Methods', cite: '49(5):1736-1746', doi: '10.3758/s13428-016-0817-y', pmid: '27743317',
+    design: 'observational', n: '457 kişi',
   },
 }
 

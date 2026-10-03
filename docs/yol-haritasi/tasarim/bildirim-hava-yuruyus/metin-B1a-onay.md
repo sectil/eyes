@@ -115,6 +115,36 @@ Kaynak: GY1, GY3 `yamashita2021`; GY2 `talens2022`. İkisi de zayıf destek.
 
 Kaynak: geçici `bell2023`, genel destek, karar 2. YN3 çıkarıldı: iki inceleme de reddetti.
 
+### `remind.okuma-anlama` · Oku ve Anla
+
+- OA1 · **Bugünün bulgusu hazır** · Kısa bir bilim metni ve dört soru. İki dakika yeter. · 21/52
+- OA2 · **Bir metin, dört soru** · Bugün hangi hayvanın sırrını okuyacaksın? Kendi hızında. · 20/56
+- OA3 · **Okuma molası** · Kısa bir bilim metni oku; soruları bilirsen hızın kaydedilir. · 12/61
+
+Kaynak: `rayner2016`. Cümleler `okuma-anlama/METINLER.md` §5'ten harfi harfine; sahip onayı 2026-10-02 ("Onay", okuma-anlama/ARA_RAPOR_1.md §11). 5 kişilik metin kapısından geçmedi, sahip doğrudan onayladı.
+
+### `remind.yakala-yaz` · Yakala Yaz
+
+- YY1 · **Yakala Yaz hazır** · İki kelime, bir an. Kısa bir tur ister misin? · 16/45
+- YY2 · **Bir tur Yakala Yaz?** · Yaklaşık 2 dakika. Hazır olduğunda dokun. · 19/41
+- YY3 · **Yakala Yaz** · Bugünkü basamağın seni bekliyor. Seçim senin: şimdi ya da sonra. · 10/64
+
+Kaynak: `rubin1992`. Cümleler `kelime-hafiza/METINLER.md` H1–H3'ten harfi harfine; sahip onayı 2026-10-02 ("onay"). Metin kapısı ana oturumda gerçek ekranla (bildirim) yapılmadı: bildirim sayfası uygulamada kapalı.
+
+### `remind.dik-dur` · Dik Dur
+
+- DD1 · **Dik dur** · Boyunu uzat, çeneni içeri çek, omuzlarını geri al. Kısa tur 2 dakika sürer. · 7/75
+- DD2 · **Kısa bir mola** · Bir an dikleş, omuzlarını geriye ve aşağı al. Dokun, birlikte yapalım. · 13/70
+- DD3 · **Nasıl oturuyorsun?** · Çökmüş müsün? Dikleş, çeneni içeri çek. Kısa tur 2 dakika sürer. · 18/64
+
+Kaynak: yok (cümle bir bulgu söylemiyor; bildirim modülün havuzundan kart taşır). Cümleler `dik-dur/metin-D1-onay.md` §J'den harfi harfine; sahip onayı 2026-10-03. Aralıklı kipte (7868–7899) ve saat kipinde (7800–7859) aynı anahtar.
+
+### `remind.dik-dur-son` · Dik Dur
+
+- DS1 · **Dik Dur** · Hatırlatmalar burada bitiyor. Sürmesi için uygulamayı bir kez aç. · 7/65
+
+Yalnız aralıklı kipte, kurulan son bildirimde (`dik-dur/metin-D1-onay.md` §J DD-SON; kimlik kural gereği DS1). Sahip onayı 2026-10-03.
+
 ### `remind.merged` · Birleşik bildirim
 
 - BR1 · **2 hatırlatma bir arada** · {A} ve {B} hazır. Hangisiyle başlarsın? · 22/61

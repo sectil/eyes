@@ -88,6 +88,26 @@ export const TEXTS = Object.freeze({
     { id: 'YN1', title: 'Yön', body: 'Kendine birkaç dakika ayır. Kısa bir yazı egzersizi hazır.', source: null },
     { id: 'YN2', title: 'Kendine bir soru', body: 'Yön\'de kısa bir egzersiz var. Hazır hissettiğinde dokun.', source: null },
   ],
+  'remind.okuma-anlama': [
+    { id: 'OA1', title: 'Bugünün bulgusu hazır', body: 'Kısa bir bilim metni ve dört soru. İki dakika yeter.', source: 'rayner2016' },
+    { id: 'OA2', title: 'Bir metin, dört soru', body: 'Bugün hangi hayvanın sırrını okuyacaksın? Kendi hızında.', source: 'rayner2016' },
+    { id: 'OA3', title: 'Okuma molası', body: 'Kısa bir bilim metni oku; soruları bilirsen hızın kaydedilir.', source: 'rayner2016' },
+  ],
+  'remind.yakala-yaz': [
+    { id: 'YY1', title: 'Yakala Yaz hazır', body: 'İki kelime, bir an. Kısa bir tur ister misin?', source: 'rubin1992' },
+    { id: 'YY2', title: 'Bir tur Yakala Yaz?', body: 'Yaklaşık 2 dakika. Hazır olduğunda dokun.', source: 'rubin1992' },
+    { id: 'YY3', title: 'Yakala Yaz', body: 'Bugünkü basamağın seni bekliyor. Seçim senin: şimdi ya da sonra.', source: 'rubin1992' },
+  ],
+  // Dik Dur (dik-dur/metin-D1-onay.md §J; sahip onayı 2026-10-03). Kaynak yok: cümle bulgu söylemiyor.
+  'remind.dik-dur': [
+    { id: 'DD1', title: 'Dik dur', body: 'Boyunu uzat, çeneni içeri çek, omuzlarını geri al. Kısa tur 2 dakika sürer.', source: null },
+    { id: 'DD2', title: 'Kısa bir mola', body: 'Bir an dikleş, omuzlarını geriye ve aşağı al. Dokun, birlikte yapalım.', source: null },
+    { id: 'DD3', title: 'Nasıl oturuyorsun?', body: 'Çökmüş müsün? Dikleş, çeneni içeri çek. Kısa tur 2 dakika sürer.', source: null },
+  ],
+  // Aralıklı kipte kurulan son bildirim (lib/postureRemind.js LAST_TEXT_KEY)
+  'remind.dik-dur-son': [
+    { id: 'DS1', title: 'Dik Dur', body: 'Hatırlatmalar burada bitiyor. Sürmesi için uygulamayı bir kez aç.', source: null },
+  ],
   'remind.merged': [
     { id: 'BR1', title: '2 hatırlatma bir arada', body: '{A} ve {B} hazır. Hangisiyle başlarsın?', source: null },
     { id: 'BR2', title: 'Sırada 2 pratik', body: '{A} ile {B} hazır. Dokun, Ana sayfadan birini seç.', source: null },
@@ -129,6 +149,10 @@ export const NAMES = Object.freeze({
   'dalga': 'Dalga',
   'gokyuzu': 'Gökyüzü molası',
   'yon': 'Yön',
+  'okuma-anlama': 'Oku ve Anla',
+  'yakala-yaz': 'Yakala Yaz',
+  'dik-dur': 'Dik Dur',
+  'dik-dur-son': 'Dik Dur', // anahtar adı (remindTexts.test: her remind.<x> başlığı); modül değil
 })
 
 export const SCI_LINES = Object.freeze({

@@ -5,7 +5,7 @@
 // Yalnız yayımlanmış süreler aday olur ("her ders kendi denetimlerinden geçince görünür"; SAHIP_ISTEKLERI.md madde 10).
 // Kayıt yardımcıları (ders kaydı, tamamlanma, sabah sorusu, kaldığın yer) bu dosyada değil, lib/yogaRecord.js'tedir.
 import { dayKey } from './calendar.js'
-import { runDayOf, lastComplete, calendarDaysBetween, weeklyStatus, readingStatus } from './today.js'
+import { runDayOf, lastComplete, calendarDaysBetween, weeklyStatus } from './today.js'
 import { isYogaDone } from './yogaRecord.js' // tamamlanma ölçütü tek yerde (modul.md §6.1)
 
 // Kütüphane sırası (PLAN.v2 §A.3). Uykuya Geçiş (3) sırada yoktur; akşam ders ekranında öneri satırı olur (§B.2-6).
@@ -65,12 +65,9 @@ export function weeklyDayToday(tests = [], sessions = [], now = new Date()) {
   return ![...tests, ...sessions].some(before) // hiç kaydı yok: 1. gün
 }
 
-// Ölçüm günü: haftalık E testi bugün yolda (zamanı geldi, yarım ya da bugün bitti) ya da okuma testi bugün. Tam ders o
-// güne düşmez.
-const measureDay = (tests, sessions, now) => {
-  const r = readingStatus(tests, now, sessions).state
-  return weeklyStatus(tests, now).state !== 'idle' || r === 'due' || r === 'done'
-}
+// Ölçüm günü: haftalık E testi bugün yolda (zamanı geldi, yarım ya da bugün bitti). Tam ders o güne düşmez. Okuma testi
+// 2026-10-02'den beri yolda değil (sahip kararı; Pratikler'de), ölçüm günü saymaz.
+const measureDay = (tests, sessions, now) => weeklyStatus(tests, now).state !== 'idle'
 
 // Yayımlanmış süreler üç biçimde gelebilir:
 //   publishedMinutes (ders → [dk, …]; lib/yogaLessons.js) ya da { [ders]: [dk, …] } (PUBLISHED_MINUTES): o süre

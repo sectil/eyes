@@ -1,0 +1,18 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>yy</title>
+<style>
+#kb{position:fixed;left:0;right:0;bottom:0;background:var(--kbbg);padding:8px 3px 30px}
+:root{--kbbg:#d1d4da;--key:#fff;--key2:#adb3bc;--kink:#0b1219}
+:root[data-theme=dark]{--kbbg:#2a2c30;--key:#6a6c71;--key2:#46484c;--kink:#fff}
+#kb .row{display:flex;justify-content:center;gap:6px;margin-bottom:11px;padding:0 3px}
+#kb .row span{flex:1;max-width:32px;height:42px;border-radius:6px;background:var(--key);color:var(--kink);display:grid;place-items:center;font:21px system-ui;box-shadow:0 1px 0 rgba(0,0,0,.3)}
+#kb .row span.w2{max-width:44px;flex:1.4;background:var(--key2);font-size:16px}
+#kb .row span.sp{max-width:none;flex:5;font-size:15px}
+#kb .row span.send{max-width:none;flex:2;background:#0a84ff;color:#fff;font-size:15px;font-weight:600}
+@media (max-width:340px){#kb{padding:6px 2px 4px}#kb .row{gap:4px;margin-bottom:7px}#kb .row span{height:38px;font-size:18px}}
+</style></head>
+<body><div id="root"></div><div id="kb" hidden>
+<div class="row"><span>q</span><span>w</span><span>e</span><span>r</span><span>t</span><span>y</span><span>u</span><span>ı</span><span>o</span><span>p</span><span>ğ</span><span>ü</span></div>
+<div class="row"><span>a</span><span>s</span><span>d</span><span>f</span><span>g</span><span>h</span><span>j</span><span>k</span><span>l</span><span>ş</span><span>i</span></div>
+<div class="row"><span class="w2">⇧</span><span>z</span><span>x</span><span>c</span><span>v</span><span>b</span><span>n</span><span>m</span><span>ö</span><span>ç</span><span class="w2">⌫</span></div>
+<div class="row"><span class="w2">123</span><span class="sp">boşluk</span><span class="send">Gönder</span></div></div>
+<script type="module" src="./yy.jsx"></script></body></html>

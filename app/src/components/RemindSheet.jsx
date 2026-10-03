@@ -5,6 +5,9 @@ import { pickAutoTime, capOf, windowOf, fromMinutes } from '../lib/moduleRemind.
 import { NAMES } from '../lib/remindTexts.js'
 import { TYPE_LABEL } from '../lib/reminders.js'
 import { applyRemind, checkTimes, sheetNear, dot } from './remindUi.js'
+import { POSTURE_ID, normalizeInterval, intervalError } from '../lib/postureRemind.js'
+import { normalizeModuleReminders } from '../lib/moduleRemind.js'
+import { WEEKDAY_SHORT, WEEKDAY_LONG } from '../lib/alarm.js'
 import NearNote from './NearNote.jsx'
 import { IrisMark } from './ui.jsx'
 import '../styles/remind.css'
@@ -33,16 +36,14 @@ const TITLES = {
 }
 const titleOf = (id) => TITLES[id] ?? NAMES[id] ?? TYPE_LABEL[id] ?? ''
 
-// "Nef seçsin" nedeni. Veri yokken ve saat 16.30 iken plan cümlesi aynen; veriyle kurulan cümle modül adının
-// hâlini istiyor (plan örneği yalnız nefes). YER TUTUCU (dönüşte listelendi): remindSheet.reason.default (16.30 dışı
-// varsayılan saat) ve remindSheet.reason.data.<modül> (kayıtlardan). Onaylı cümle gelene kadar neden satırı çıkmaz
-// (null); büyük saat yine görünür.
+// "Nef seçsin" nedeni. Veri yokken: önerilen saatle tek cümle (sahip onayı 2026-10-03, metin kapısı 5/5; planlayıcı
+// "beş kez" değil beş ayrı gün bekler, MIN_DAYS). Veriyle kurulan cümle modül adının hâlini istiyor (plan örneği yalnız
+// nefes). YER TUTUCU (dönüşte listelendi): remindSheet.reason.data.<modül> (kayıtlardan). Onaylı cümle gelene kadar
+// neden satırı çıkmaz (null); büyük saat yine görünür.
 function reasonOf(moduleId, pick) {
   if (!pick || !pick.times.length) return null
   if (pick.source === 'default') {
-    return pick.times[0] === '16:30'
-      ? 'Henüz saatini bilmiyorum. 16.30\'la başlayalım; beş kez yaptıktan sonra senin saatine göre ayarlarım.'
-      : null // YER TUTUCU remindSheet.reason.default
+    return `Henüz saatini bilmiyorum; şimdilik saat ${dot(pick.times[0])} olsun. Beş ayrı gün yaptıktan sonra senin saatine göre ayarlarım.`
   }
   return null // YER TUTUCU remindSheet.reason.data.<modül>
 }
@@ -67,6 +68,13 @@ export default function RemindSheet({
   const [mode, setMode] = useState('auto')
   const [times, setTimes] = useState(() => (pick.times.length ? [pick.times[0]] : [fromMinutes(win.from)]))
   const [permNote, setPermNote] = useState(false)
+  // Dik Dur: "Belirli saatlerde" | "Belli aralıklarla" (metin-D1-onay.md §I; lib/postureRemind.js). Kayıtlı aralık açıksa
+  // sayfa aralıkla açılır.
+  const posture = moduleId === POSTURE_ID
+  const saved = normalizeModuleReminders(moduleReminders)[moduleId]?.interval
+  const [kind, setKind] = useState(() => (posture && saved?.on ? 'interval' : 'times'))
+  const [iv, setIv] = useState(() => normalizeInterval(saved ?? null))
+  const ivError = intervalError(iv)
   const checks = checkTimes(times)
   const bad = mode === 'manual' && checks.some((c) => c.error)
   const ownLabel = NAMES[moduleId] ?? TYPE_LABEL[remind.legacy] ?? TYPE_LABEL[moduleId] ?? null
@@ -83,16 +91,56 @@ export default function RemindSheet({
   }
 
   const setAt = (i, v) => setTimes((ts) => ts.map((t, j) => (j === i ? v : t)))
+  function saveInterval() {
+    if (ivError) return
+    if (permission === 'prompt' && !permNote) {
+      setPermNote(true)
+      return
+    }
+    onSave?.(applyRemind({ moduleId, remind, moduleReminders, reminders, interval: iv, now }))
+    if (permission === 'prompt') onAskPermission?.()
+  }
+  const flipDay = (d) => setIv((c) => ({ ...c, days: c.days.includes(d) ? c.days.filter((x) => x !== d) : [...c.days, d].sort() }))
 
   return createPortal(
     <div className="rs-back" role="presentation" onClick={(e) => e.target === e.currentTarget && onClose?.()}>
-      <div className="rs-sheet" role="dialog" aria-modal="true" aria-labelledby="rs-title">
+      <div className={`rs-sheet${posture ? ' rs-eqseg' : ''}`} role="dialog" aria-modal="true" aria-labelledby="rs-title">
         <span className="rs-grab" aria-hidden="true" />
         <div className="rs-top">
           <h2 id="rs-title" className="rs-title">{titleOf(moduleId)}</h2>
           <button type="button" className="rs-x" aria-label="Kapat" onClick={() => onClose?.()}><X size={20} /></button>
         </div>
 
+        {posture && (
+          <div className="rs-seg" role="tablist">
+            <button type="button" role="tab" aria-selected={kind === 'times'} className={kind === 'times' ? 'on' : ''} onClick={() => setKind('times')}>Belirli saatlerde</button>
+            <button type="button" role="tab" aria-selected={kind === 'interval'} className={kind === 'interval' ? 'on' : ''} onClick={() => setKind('interval')}>Belli aralıklarla</button>
+          </div>
+        )}
+
+        {kind === 'interval' ? (
+          <div className="rs-iv">
+            <div className="rs-seg rs-seg-sm" role="tablist">
+              <button type="button" role="tab" aria-selected={iv.every === 60} className={iv.every === 60 ? 'on' : ''} onClick={() => setIv((c) => ({ ...c, every: 60 }))}>Saatte bir</button>
+              <button type="button" role="tab" aria-selected={iv.every === 120} className={iv.every === 120 ? 'on' : ''} onClick={() => setIv((c) => ({ ...c, every: 120 }))}>İki saatte bir</button>
+            </div>
+            <div className="rs-ivt">
+              <label className="rs-ivl"><span>Başlangıç</span><input className="input rs-input" type="time" value={iv.from} aria-invalid={ivError ? true : undefined} onChange={(e) => setIv((c) => ({ ...c, from: e.target.value }))} /></label>
+              <label className="rs-ivl"><span>Bitiş</span><input className="input rs-input" type="time" value={iv.to} aria-invalid={ivError ? true : undefined} onChange={(e) => setIv((c) => ({ ...c, to: e.target.value }))} /></label>
+            </div>
+            <div className="rs-days" role="group" aria-label="Günler">
+              <span className="rs-ivh">Günler</span>
+              <div className="rs-dchips">
+                {[1, 2, 3, 4, 5, 6, 0].map((d) => (
+                  <button key={d} type="button" className={`rs-day${iv.days.includes(d) ? ' on' : ''}`} aria-pressed={iv.days.includes(d)} aria-label={WEEKDAY_LONG[d]} onClick={() => flipDay(d)}>{WEEKDAY_SHORT[d]}</button>
+                ))}
+              </div>
+            </div>
+            {iv.every === 60 && <p className={`rs-note${ivError === 'span' ? ' rs-err' : ''}`}>Saatte bir seçince en çok 12 saatlik bir aralık seçebilirsin, örneğin 09.00–21.00.</p>}
+            <p className="rs-note">{iv.every === 60 ? 'Uygulamayı 2 gün hiç açmazsan hatırlatmalar durur.' : 'Uygulamayı 5 gün hiç açmazsan hatırlatmalar durur.'}</p>
+            <button type="button" className="btn" disabled={Boolean(ivError)} onClick={saveInterval}>Kaydet</button>
+          </div>
+        ) : <>
         <div className="rs-seg" role="tablist">
           <button type="button" role="tab" aria-selected={mode === 'auto'} className={mode === 'auto' ? 'on' : ''} onClick={() => setMode('auto')}>Nef seçsin</button>
           <button type="button" role="tab" aria-selected={mode === 'manual'} className={mode === 'manual' ? 'on' : ''} onClick={() => setMode('manual')}>Saatleri ben seçeyim</button>
@@ -147,6 +195,7 @@ export default function RemindSheet({
             <button type="button" className="btn" disabled={bad} onClick={() => save(times, 'manual')}>Kaydet</button>
           </div>
         )}
+        </>}
 
         {remind.legacy && onWhy && <button type="button" className="rs-link" onClick={() => onWhy()}>Bazı günler neden gelmez?</button>}
         {permNote && <p className="rs-note" role="status">Hatırlatmayı sana bildirimle göndereceğim; bir sonraki pencerede izin istenecek.</p>}

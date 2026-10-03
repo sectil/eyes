@@ -1,0 +1,407 @@
+[
+ {
+  "set": "k1",
+  "who": "34 yaşında, telefonu çok kullanan bir grafik tasarımcı",
+  "screens": [
+   {
+    "file": "G2-390x844-acik-A.png",
+    "e": "E",
+    "why": "Halka, ikon ve ad bir arada; dört yuvarlak hemen dokunulur kısayol gibi okunuyor. Numaralı gün dairelerinden büyük ve ikonlu, aradaki boşluk da yeterli, iki satır birbirine karışmıyor. Başla kartı hâlâ en güçlü renk. Tek kusur: satır sağ kenara ulaşmıyor, Tam set'in sağında yaklaşık 40pt boşluk kalıyor ve ortalanmış '1. bölüm'e göre sola kaçık duruyor."
+   },
+   {
+    "file": "G2-390x844-acik-B.png",
+    "e": "H",
+    "why": "Satır kart kenarlarına tam hizalı, bu iyi. Ama ad satırı '1. bölüm' başlığına neredeyse değiyor (üstteki boşluğun yarısı kadar), kısayollar gün satırıyla tek blok olup kaynaşıyor. Dolgulu diskler ağır ve Başla'yla daha çok yarışıyor. Tam set'in gri diski pasif bir düğme gibi duruyor."
+   },
+   {
+    "file": "G2-390x844-koyu-A.png",
+    "e": "E",
+    "why": "Koyu zeminde ince halka ve renkli ikonlar sakin ve temiz duruyor. Gün daireleri ayrı okunuyor, camgöbeği Başla açıkça ana iş."
+   },
+   {
+    "file": "G2-390x844-koyu-B.png",
+    "e": "H",
+    "why": "Açık temadaki sıkışıklık burada da var: adlar '1. bölüm'ün dibinde. Diskler koyu temada biraz daha dolgun ama ayrıştırmaya katkısı yok."
+   },
+   {
+    "file": "G2-iki-390x844-acik-A.png",
+    "e": "E",
+    "why": "'Bugün yapıldı' ilk bakışta belli: halka renkleniyor (Dalga turkuaz, Nefes mavi), üstüne onay rozeti geliyor. Ufak bir risk var: kalın renkli halka '2 bugün' dairesindeki 'şu an' halkasını andırıyor, neyse ki rozet bunu çözüyor."
+   },
+   {
+    "file": "G2-iki-390x844-acik-B.png",
+    "e": "H",
+    "why": "Yapıldı hâli onay rozetiyle okunuyor ama halka gri kalıyor, yalnızca dolgu koyulaşıyor. Bu 'tamamlandı'dan çok 'seçili' gibi duruyor. Başlığa olan sıkışıklık da sürüyor."
+   },
+   {
+    "file": "G2-iki-390x844-koyu-A.png",
+    "e": "E",
+    "why": "Renkli halkalar koyu zeminde parlıyor, rozetler net. Yapılan iki kısayol bir bakışta ayırt ediliyor."
+   },
+   {
+    "file": "G2-iki-390x844-koyu-B.png",
+    "e": "H",
+    "why": "Koyu temada dolgu değişimi çok silik (koyu turkuaz ile koyu lacivert arası), yapıldı bilgisini neredeyse yalnızca küçük rozet taşıyor. Başlığa sıkışıklık da devam ediyor."
+   },
+   {
+    "file": "G2-320x640-acik-A.png",
+    "e": "E",
+    "why": "Küçük ekranda dört yuvarlak rahat sığıyor, 'Tam set' tek satırda kalıyor, '1. bölüm'e nefes payı var. Başla kartı da sekme çubuğunun üstünde hâlâ görünüyor."
+   },
+   {
+    "file": "G2-320x640-acik-B.png",
+    "e": "H",
+    "why": "Yuvarlaklar kenarlara dayanmış, adlar '1. bölüm'e daha da yapışmış. Küçük ekranda üst yarı kalabalık ve sıkışık duruyor."
+   }
+  ],
+  "prefer": "A",
+  "preferWhy": "A'nın 'bölüm' başlığına bıraktığı boşluk sayesinde kısayollar ile gün satırı ayrı iki şey olarak okunuyor. Halkaları daha hafif, bu yüzden Başla kartı ana iş olarak kalıyor. 'Yapıldı' hâli (renklenen halka ve rozet) özellikle koyu temada B'den çok daha açık. B'nin tek üstünlüğü satırın kart kenarlarına hizalı olması. A'ya yalnızca bu eklenmeli: dört yuvarlak 390 genişlikte de kart kenarından kart kenarına eşit aralıkla yayılmalı, A'nın dikey boşlukları da korunmalı.",
+  "understood": "Bu yuvarlaklar günün yolundan bağımsız hızlı kısayollar: her biri tek bir alıştırma türünü doğrudan başlatan bir düğme. Yoga'ya dokununca göz yogası, Dalga'ya dokununca dalga gibi hareket eden bir şeyi gözle izleme alıştırması, Nefes'e dokununca nefes egzersizi açılıyor ve oynatıcı başlıyor. Tam set'in hepsini arka arkaya çalıştırdığını tahmin ediyorum. Bitince o yuvarlağa onay rozeti geliyor, yani 'bugün yapıldı'. Kafamı karıştıran tek şey şu: Tam set ile büyük Başla kartındaki '8 dakikalık bugünkü yol' arasındaki fark ilk bakışta belli değil.",
+  "labels": [
+   {
+    "label": "Yoga",
+    "e": "H",
+    "why": "Göz uygulamasında bunun beden yogası mı göz yogası mı olduğu belli değil; mat ve bitki ikonu da beden yogasını çağrıştırıyor. Öneri: 'Göz yogası'."
+   },
+   {
+    "label": "Dalga",
+    "e": "H",
+    "why": "Tek başına 'Dalga' ne açacağını söylemiyor, Türkçede 'dalga geçmek' ya da 'dalgın' gibi yan anlamları da var. Öneri: 'Dalga takibi' ya da 'Göz takibi'."
+   },
+   {
+    "label": "Nefes",
+    "e": "E",
+    "why": "Nefes egzersizi açacağı hemen anlaşılıyor, Türkçesi doğal."
+   },
+   {
+    "label": "Tam set",
+    "e": "H",
+    "why": "'Set' spor salonu jargonu, dambıl ikonuyla birlikte göz uygulamasında antrenman havası veriyor. Neyin 'tam' olduğu da belli değil. Öneri: 'Hepsi' ya da 'Tam seans'."
+   }
+  ]
+ },
+ {
+  "set": "k2",
+  "who": "58 yaşında, gözlük kullanan, teknolojiyle arası orta bir öğretmen",
+  "screens": [
+   {
+    "file": "G2-390x844-acik-A.png",
+    "e": "E",
+    "why": "Dört yuvarlak kartların sol ve sağ kenarıyla aynı hizada, aralar eşit ve satır ortalı. İkon ve ad olduğu için dokunulur kısayol olduğu anlaşılıyor. 60pt boyutları ve altlarındaki adlarla, çizgiyle bağlı küçük numaralı gün dairelerinden ayrışıyorlar. Başla kartı hâlâ en güçlü öğe. Tek kusur: 'Tam set' yazısıyla '1. bölüm' başlığı arasında yaklaşık 12pt var, başlık üstteki satıra yapışık duruyor."
+   },
+   {
+    "file": "G2-390x844-acik-B.png",
+    "e": "H",
+    "why": "Satır sola kaymış. Son yuvarlak kart kenarından yaklaşık 40pt önce bitiyor, sağda boşluk kalıyor. Satırın ortası, hemen altındaki ortalı '1. bölüm' başlığından yaklaşık 18pt solda. İlk bakışta 'kaymış' diye göze batıyor. Kısayol olduğu anlaşılıyor, Başla kartı da hâlâ ana iş gibi duruyor, ama hiza özensiz."
+   },
+   {
+    "file": "G2-iki-390x844-acik-A.png",
+    "e": "E",
+    "why": "Dalga ve Nefes'in köşesindeki koyu mavi tik rozeti, 1. gündeki tikle aynı dilde. 'Bugün yapıldı' hemen okunuyor. İç dolgunun koyulaşması zayıf kalıyor, işi rozet yapıyor ama yeterli. Hiza kusursuz, Yola devam et kartı açık ara ana iş."
+   },
+   {
+    "file": "G2-iki-390x844-acik-B.png",
+    "e": "H",
+    "why": "Renkli halka ve tik birlikte A'dan daha güçlü bir 'yapıldı' hâli veriyor. Ama satır yine sola kaymış, sağda boşluk var. Ayrıca turkuaz halka, alttaki '2 bugün' dairesinin 'şu anki gün' halkasıyla aynı dilde. Bir an 'seçili/aktif' gibi okunabiliyor, tik bunu düzeltiyor."
+   },
+   {
+    "file": "G2-390x844-koyu-A.png",
+    "e": "E",
+    "why": "Koyu zeminde renkli ikonlar net, gri dış halka yuvarlakları belli ediyor. Hiza kartlarla bire bir. Parlak turkuaz Başla düğmesi tartışmasız ana iş, yuvarlaklar onunla yarışmıyor."
+   },
+   {
+    "file": "G2-390x844-koyu-B.png",
+    "e": "H",
+    "why": "Açık temadaki sorunun aynısı: dört yuvarlak sola toplanmış, sağ kenarda boşluk var. Ortalı '1. bölüm' başlığı ve tam genişlikteki gün satırıyla çelişiyor."
+   },
+   {
+    "file": "G2-iki-390x844-koyu-A.png",
+    "e": "E",
+    "why": "Turkuaz-mavi gradyanlı tik rozeti koyu zeminde parlıyor, yapılanlar hemen seçiliyor. İç dolgu farkı (Dalga ile Yoga arası) koyu temada çok az. Tek başına yetmezdi ama rozet var. Hiza düzgün."
+   },
+   {
+    "file": "G2-iki-390x844-koyu-B.png",
+    "e": "H",
+    "why": "Yapıldı hâli en net bu ekranda: renkli halka ve parlak rozet. Ama sola kayma sürüyor. Nefes'in parlak mavi halkası satırda en yüksek sesli öğe oluyor, göz önce oraya gidiyor."
+   },
+   {
+    "file": "G2-320x640-acik-A.png",
+    "e": "E",
+    "why": "Küçük ekranda da dört yuvarlak kart kenarlarına tam oturuyor, 'Tam set' sığıyor, ikonlar okunuyor. Başla kartı alt menünün üstünde tam görünüyor. '1. bölüm' başlığına boşluk yine dar."
+   },
+   {
+    "file": "G2-320x640-acik-B.png",
+    "e": "E",
+    "why": "320'de satır neredeyse tam genişliğe yayılıyor, kayma fark edilmiyor. '1. bölüm' başlığına boşluk A'dan biraz daha rahat. Soluk iç dolgulu, ince halkalı yuvarlaklar temiz duruyor. Başla kartı görünür ve baskın."
+   }
+  ],
+  "prefer": "A",
+  "preferWhy": "En sık görülecek 390 genişlikte A, kartların kenarlarıyla aynı hizada ve ortalı. B ise sağda yaklaşık 40pt boşluk bırakıp sola kayıyor, ilk 5 saniyede göze batan şey bu oluyor. B'nin tek üstünlüğü, yapıldı hâlindeki renkli halka. İkinci turda en iyisini seçme kuralı gereği A seçilmeli ve iş üçüncü tura taşınmadan kapatılmalı. Tek istisna: tek satırlık bir düzeltme gerekirse B'nin renkli 'yapıldı' halkası A'ya alınabilir.",
+  "understood": "Bu dört yuvarlak, günün sırayla ilerleyen yolunu (Başla ve 1-6 numaralı günler) beklemeden tek bir alıştırmayı doğrudan açan kısayollar. Yoga'ya dokununca bir yoga seansı açılır; göz yogası mı beden yogası mı, emin değilim. Dalga'ya dokununca, sanırım gözle dalga çizgisini takip ettiğim bir göz alıştırması açılır; tahmin ediyorum, ad bunu söylemiyor. Nefes'e dokununca nefes egzersizi başlar. Tam set'e dokununca alıştırmaların hepsi arka arkaya yapılır. Alıştırmayı bitirince o yuvarlağın köşesine tik gelir; bugün yaptığım anlaşılır.",
+  "labels": [
+   {
+    "label": "Yoga",
+    "e": "E",
+    "why": "Lotus ikonuyla bir yoga seansı açacağı hemen anlaşılıyor, Türkçede de doğal. Göz uygulamasında göz yogası mı beden yogası mı, net değil. Ama ne açacağını tahmin etmeye yetiyor."
+   },
+   {
+    "label": "Dalga",
+    "e": "H",
+    "why": "5 saniyede ne açacağını anlamadım. Deniz sesi mi, rahatlama mı, göz takibi mi? Türkçede 'dalga' tek başına 'dalga geçmek' çağrışımı da taşıyor. Öneri: 'Dalga izle' (gözle takip ediliyorsa), ya da içeriğe göre 'Göz takibi'."
+   },
+   {
+    "label": "Nefes",
+    "e": "E",
+    "why": "Nefes egzersizi açacağı anında belli, Türkçesi doğal, rüzgar ikonu da destekliyor."
+   },
+   {
+    "label": "Tam set",
+    "e": "H",
+    "why": "'Set' spor salonu dili, halter ikonu da bunu pekiştiriyor. Göz uygulamasında neyin tam seti olduğu belli değil. Ne kadar süreceğini de söylemiyor. Öneri: 'Tam seans' ya da 'Hepsini yap'."
+   }
+  ]
+ },
+ {
+  "set": "k1",
+  "who": "22 yaşında, Instagram'ı her gün kullanan bir üniversite öğrencisi",
+  "screens": [
+   {
+    "file": "G2-390x844-acik-A.png",
+    "e": "H",
+    "why": "Instagram öne çıkanlar gibi duruyor, dokunulur olduğu hemen anlaşılıyor. Gün dairelerinden de büyüklük, ikon ve alttaki adla ayrışıyor. Başla kartı hâlâ en güçlü blok. Ama dört yuvarlak sola yaslı: Tam set'ten sonra sağda yaklaşık 60pt boşluk kalıyor. Alttaki gün sırası ve kartlar tam genişlikte, '1. bölüm' de ortalı olduğu için sıra kaymış görünüyor."
+   },
+   {
+    "file": "G2-390x844-acik-B.png",
+    "e": "H",
+    "why": "Sıra iki kenara da hizalı, bu iyi. Ama adlar '1. bölüm'e neredeyse yapışık (yaklaşık 12pt). '1. bölüm' kısayolların başlığı ya da beşinci etiketi gibi okunuyor. Üstte kısayol yuvarlakları, altta gün daireleri olunca iki sıra yuvarlak üst üste yığılmış gibi duruyor. Gri dolgular da sönük."
+   },
+   {
+    "file": "G2-iki-390x844-acik-A.png",
+    "e": "E",
+    "why": "Dalga ve Nefes renkli halka ve tik rozetiyle hemen öne çıkıyor; bugün ikisinin yapıldığı bir bakışta okunuyor. Büyük 'Yola devam et' kartı açıkça ana iş. Sağdaki boşluk kusuru hâlâ duruyor ama durum okuması güçlü."
+   },
+   {
+    "file": "G2-iki-390x844-acik-B.png",
+    "e": "H",
+    "why": "'Yapıldı' bilgisi neredeyse yalnızca küçük tikten geliyor. Dolgunun koyulaşması zayıf kalıyor, halka gri olarak aynı kalıyor. Adlarla '1. bölüm' arasındaki sıkışıklık da sürüyor."
+   },
+   {
+    "file": "G2-390x844-koyu-A.png",
+    "e": "H",
+    "why": "Koyu temada camgöbeği Başla düğmesi net biçimde ana iş, yuvarlaklar da dokunulur görünüyor. Ama aynı sola yaslı kayma burada da var: sağ boşluk ve altındaki tam genişlikteki sırayla hizasızlık."
+   },
+   {
+    "file": "G2-390x844-koyu-B.png",
+    "e": "H",
+    "why": "Kenar hizası iyi ama adlar '1. bölüm'e yapışık. Koyu gri dolgular birbirine çok yakın, sıra donuk ve kalabalık bir şerit gibi duruyor."
+   },
+   {
+    "file": "G2-iki-390x844-koyu-A.png",
+    "e": "E",
+    "why": "Koyu zeminde camgöbeği ve mavi halkalar tikle birlikte parlıyor. Hangi ikisinin bittiği anında belli, hero kartı da baskın kalıyor."
+   },
+   {
+    "file": "G2-iki-390x844-koyu-B.png",
+    "e": "H",
+    "why": "Koyuda yapılmış iki yuvarlağın dolgu farkı neredeyse görünmüyor. 'Yapıldı' hâlini yalnız küçük tik taşıyor, ilk bakışta kaçıyor."
+   },
+   {
+    "file": "G2-320x640-acik-A.png",
+    "e": "E",
+    "why": "Küçük ekranda sıra kenarlara dengeli oturmuş. Adlar ile '1. bölüm' arasında yeterli nefes payı var. Başla kartı tab barın üstünde tam görünüyor ve en güçlü renk bloğu."
+   },
+   {
+    "file": "G2-320x640-acik-B.png",
+    "e": "H",
+    "why": "Yuvarlaklar arası boşluk daralmış. Adlar '1. bölüm'e yaklaşık 10pt'ye kadar sokulmuş. Ekranın üst yarısı çip, kısayol ve gün sırasıyla tıka basa dolu görünüyor."
+   }
+  ],
+  "prefer": "A",
+  "preferWhy": "A'yı seçerim. Bugün yapıldı hâli halka rengi ve tik ile açık ve hızlı okunuyor, bu fark özellikle koyu temada belirgin. Adlar ile '1. bölüm' arasında nefes payı var, yani kısayollar ile bölüm başlığı ayrı gruplar olarak okunuyor. B'nin tek üstünlüğü 390 genişlikte kenar hizası. A'nın sola yaslı kayması ise 390'da sırayı kenardan kenara yaymakla kolayca düzeltilebilir. B'nin sıkışıklığını ve zayıf yapıldı hâlini düzeltmek tasarımı baştan değiştirmek demek. Instagram kullanıcısı olarak küçük bir not: Instagram'da renkli halka 'yeni, bakmadın' demek. A'da renkli halka 'bitti' anlamında kullanılıyor, ama tik rozeti bu çelişkiyi kapatıyor.",
+  "understood": "Bunlar günün yolundan bağımsız, hızlı egzersiz kısayolları. Birine dokununca o tek egzersiz doğrudan açılıp başlıyor sanırım: Yoga göz yogası, Dalga göze dalga çizgisi izletme, Nefes nefes çalışması. Tam set ise hepsini arka arkaya oynatıyor. Bitirince o yuvarlağa tik geliyor ve halka renkleniyor. Emin olamadığım iki şey var: Tam set, Başla'daki 8 dakikalık bugünkü yolla aynı şey mi? Bu kısayollar günün ilerlemesine sayılıyor mu?",
+  "labels": [
+   {
+    "label": "Yoga",
+    "e": "H",
+    "why": "'Yoga' deyince mat ve vücut yogası aklıma geliyor. Göz uygulamasında neyi açacağı 5 saniyede belli değil, bitki ikonu da yardımcı olmuyor. Öneri: 'Göz yogası'."
+   },
+   {
+    "label": "Dalga",
+    "e": "H",
+    "why": "Tek başına anlamsız kalıyor: dalga sesi mi, gözle dalgalı çizgi takibi mi? Gündelik dilde 'dalga geçmek' çağrışımı da var. Öneri: 'Göz takibi' (gözle dalga çizgisini izlemekse)."
+   },
+   {
+    "label": "Nefes",
+    "e": "E",
+    "why": "Net ve doğal; nefes egzersizi açacağı hemen anlaşılıyor, ikon da uyuyor."
+   },
+   {
+    "label": "Tam set",
+    "e": "H",
+    "why": "'Set' spor salonu dili, dambıl ikonu bunu daha da güçlendiriyor. Neyin tamamı olduğu belirsiz ve Başla'daki günlük yolla karışıyor. Öneri: 'Tam seans'."
+   }
+  ]
+ },
+ {
+  "set": "k2",
+  "who": "45 yaşında, uygulamaları hızlı ve sabırsız kullanan bir esnaf",
+  "screens": [
+   {
+    "file": "G2-390x844-acik-A.png",
+    "e": "E",
+    "why": "Dört yuvarlak tam olarak kartların sol ve sağ kenarına hizalı, eşit aralıklı. İkon ve ad taşıdıkları için düğme oldukları belli. Büyük 'Başla' kartı hâlâ en baskın öğe. Küçük kusur: adlarla '1. bölüm' arasındaki boşluk (~13pt), üstteki alarm çipiyle arasındaki boşluktan dar. Bu yüzden satır bölüme aitmiş gibi duruyor."
+   },
+   {
+    "file": "G2-390x844-acik-B.png",
+    "e": "H",
+    "why": "Grup sola yaslanmış: 'Tam set' kartların sağ kenarından yaklaşık 40pt içeride bitiyor, sağ boşluk soldakinin iki katı. Altındaki tam genişlik kartlarla hizası yok. Fark etmeden 'bir şey yamuk' hissi veriyor."
+   },
+   {
+    "file": "G2-iki-390x844-acik-A.png",
+    "e": "E",
+    "why": "Dalga ve Nefes'teki tik rozeti, alttaki 1. günün tamamlandı dairesiyle aynı. 'Yapıldı' anlamı hemen okunuyor. Dolgu biraz koyulaşıyor ama halka gri kalıyor, yani asıl işi tik görüyor. Hiza düzgün."
+   },
+   {
+    "file": "G2-iki-390x844-acik-B.png",
+    "e": "H",
+    "why": "Renkli halka ile tik birleşince 'yapıldı' hâli A'dan daha güçlü. Ama sola yaslanma sorunu sürüyor. Ayrıca turkuaz halka, alttaki '2 bugün' dairesinin halkasıyla aynı. Orada 'bugünkü/sıradaki' anlamına geliyor, burada 'bitti'. Aynı işaret iki farklı anlamda kullanılmış."
+   },
+   {
+    "file": "G2-390x844-koyu-A.png",
+    "e": "E",
+    "why": "Koyu zeminde renkli ikonlar seçiliyor. Satır kartlarla hizalı, Başla'nın turkuaz düğmesi hâlâ ana iş gibi duruyor. Gri halkalar biraz soluk ama yuvarlakların düğme olduğu anlaşılıyor."
+   },
+   {
+    "file": "G2-390x844-koyu-B.png",
+    "e": "H",
+    "why": "Açık temadaki hiza hatası koyuda da aynı: sağda boşluk kalıyor, satır alttaki kartlarla aynı genişlikte değil."
+   },
+   {
+    "file": "G2-iki-390x844-koyu-A.png",
+    "e": "E",
+    "why": "Gradyan tik rozetleri koyu zeminde net görünüyor. Yapılanla yapılmayan 5 saniyede ayrılıyor. Dolgu farkı (Nefes'in maviliği) zayıf ama tik tek başına yetiyor."
+   },
+   {
+    "file": "G2-iki-390x844-koyu-B.png",
+    "e": "H",
+    "why": "Parlayan renkli halkalar en canlı 'bitti' görüntüsü ve göze hoş geliyor. Ama satır yine sola kaymış, turkuaz halka da '2 bugün' halkasıyla karışıyor."
+   },
+   {
+    "file": "G2-320x640-acik-A.png",
+    "e": "E",
+    "why": "Küçük ekranda dört yuvarlak kenardan kenara sığıyor, 'Tam set' kesilmiyor. Başla kartı katlanma çizgisinin üstünde kalıyor. Sıkışık nokta yine adların '1. bölüm'e çok yakın olması."
+   },
+   {
+    "file": "G2-320x640-acik-B.png",
+    "e": "E",
+    "why": "320 genişlikte B'nin kayması kayboluyor (satır 46 ile 590 piksel arasında, neredeyse tam genişlik). Adların altında A'dan biraz daha fazla nefes payı var. Başla yine katlanma çizgisinin üstünde."
+   }
+  ],
+  "prefer": "A",
+  "preferWhy": "Asıl telefon boyunda (390) A kartlarla birebir hizalı, B ise sola yaslı ve sağda gözle görülür bir boşluk bırakıyor. Hızlı bakan biri bunu yamukluk olarak hissediyor. B'nin renkli halkası 'yapıldı' hâlini daha iyi gösteriyor, ama '2 bugün' dairesinin halkasıyla anlamca çakışıyor. A'nın tik rozeti ise alttaki tamamlanmış günle aynı dili konuşuyor. A'da düzeltilecek tek şey adların altındaki boşluk: '1. bölüm'e en az üstteki boşluk kadar (~8pt daha) yer açılmalı ki satır bölüme ait sanılmasın.",
+  "understood": "Bunlar günün yolundan bağımsız, tek dokunuşla açılan hızlı egzersiz düğmeleri. Birine basınca o egzersiz doğrudan açılır ya da başlar: Yoga göz yogası, Dalga gözle dalga gibi hareket eden bir şeyi takip etme, Nefes nefes çalışması. Tam set ise bütün egzersizleri arka arkaya yaptırır. Köşedeki tik o egzersizin bugün yapıldığını gösterir. Alttaki numaralı daireler ise programın günleri, onlar kısayol değil.",
+  "labels": [
+   {
+    "label": "Yoga",
+    "e": "H",
+    "why": "Yaprak ikonuyla birlikte önce beden yogası, mat aklıma geliyor. Göz uygulamasında olduğu 5 saniyede bağlanmıyor. Öneri: 'Göz yogası' (320'de sığmazsa 'Göz yoga' değil, ikinci satıra kırılsın)."
+   },
+   {
+    "label": "Dalga",
+    "e": "H",
+    "why": "Ne açacağı belli değil: deniz mi, ses mi? Günlük dilde 'dalga geçmek' çağrışımı da var. Öneri: 'Göz takibi' (ya da kısa hâliyle 'Takip')."
+   },
+   {
+    "label": "Nefes",
+    "e": "E",
+    "why": "Nefes egzersizi açacağı hemen anlaşılıyor, Türkçesi doğal, rüzgâr ikonu da destekliyor."
+   },
+   {
+    "label": "Tam set",
+    "e": "H",
+    "why": "'Set' spor salonu dili, halter ikonu da bunu pekiştiriyor. 'Başla'dan farkı ne, belli değil. Öneri: 'Hepsini yap' (dar ekranda 'Hepsi')."
+   }
+  ]
+ },
+ {
+  "set": "k1",
+  "who": "39 yaşında, sade ve düzenli ekranları seven bir mobil uygulama geliştiricisi",
+  "screens": [
+   {
+    "file": "G2-390x844-acik-A.png",
+    "e": "H",
+    "why": "Dört yuvarlak sola yaslı: sol kenara yaklaşık 4pt, sağda ise yaklaşık 40pt boşluk kalıyor. Bu yüzden kartların ve hapların sağ kenarıyla hizası bozuk, ilk bakışta yamuk duruyor. Bunun dışında yuvarlaklar dokunulur görünüyor, '1. bölüm' ile aralarında rahat bir boşluk var ve Başla kartı hâlâ ana iş."
+   },
+   {
+    "file": "G2-390x844-koyu-A.png",
+    "e": "H",
+    "why": "Açık temadaki sağ boşluk ve sola kayık sıra burada da aynen var. Koyu zeminde halkalar iyi okunuyor ama hizasızlık yine ilk göze çarpan şey."
+   },
+   {
+    "file": "G2-iki-390x844-acik-A.png",
+    "e": "H",
+    "why": "'Bugün yapıldı' hâli çok iyi: Dalga ve Nefes'in halkası renkleniyor, köşede tik var ve 5 saniyede anlaşılıyor. Ama sıra yine sola kayık, sağda 40pt boşluk var. Hizasızlık bu iyi fikri gölgeliyor."
+   },
+   {
+    "file": "G2-iki-390x844-koyu-A.png",
+    "e": "H",
+    "why": "Renkli halka ve tik koyu temada en net hâlini alıyor. Sağdaki boşluk ve sola yaslı sıra ise aynı kusur olarak duruyor."
+   },
+   {
+    "file": "G2-320x640-acik-A.png",
+    "e": "E",
+    "why": "Küçük ekranda sıra kenardan kenara eşit dağılıyor, sol ve sağ boşluk eşit. Etiketlerle '1. bölüm' arası rahat. Başla kartı hâlâ ekranın içinde ve en baskın öğe, numaralı gün dairelerinden de boyut ve ikonla net ayrışıyor."
+   },
+   {
+    "file": "G2-390x844-acik-B.png",
+    "e": "E",
+    "why": "Sıra kartların sol ve sağ kenarıyla birebir hizalı, aralıklar eşit. Kalın gri halka ile dolu iç disk, numaralı gün dairelerinden belirgin biçimde ayrışıyor. Kusur: etiketlerle '1. bölüm' arası yalnızca 12pt kadar, başlık biraz sıkışık."
+   },
+   {
+    "file": "G2-390x844-koyu-B.png",
+    "e": "E",
+    "why": "Hizalar düzgün, koyu diskler ve renkli ikonlar temiz okunuyor. Başla kartı hâlâ ana iş. Etiketlerle '1. bölüm' arasındaki sıkışıklık burada da var ama ilk bakışı bozmuyor."
+   },
+   {
+    "file": "G2-iki-390x844-acik-B.png",
+    "e": "H",
+    "why": "'Yapıldı' hâli zayıf: dış halka gri kalıyor, iç dolgu yalnızca biraz koyulaşıyor. Asıl sinyal küçük tik rozeti. Yoga ile Dalga'nın farkını 5 saniyede ancak rozetten çıkarabiliyorum."
+   },
+   {
+    "file": "G2-iki-390x844-koyu-B.png",
+    "e": "H",
+    "why": "Koyu temada dolgu değişimi neredeyse görünmüyor, 'yapıldı' bilgisini tek başına küçük rozet taşıyor. Halka olduğu hâlde dolmaması da kafa karıştırıyor."
+   },
+   {
+    "file": "G2-320x640-acik-B.png",
+    "e": "H",
+    "why": "Küçük ekranda 'Tam set' sağ kenara dayanıyor. Etiketlerle '1. bölüm' arası da 10pt kadar kalıyor, sıra bölüm başlığına yapışık ve kalabalık görünüyor."
+   }
+  ],
+  "prefer": "A",
+  "preferWhy": "A'yı tercih ederim. Belirleyici fark 'yapıldı' hâli: A'da halka renkleniyor ve tik ekleniyor, bu hem 'halka tamamlandı' fikriyle örtüşüyor hem de açık ve koyu temada 5 saniyede okunuyor. B'de halka gri kalıyor, bilgiyi yalnızca küçük rozet taşıyor. A'nın görsel ağırlığı da daha hafif ve '1. bölüm' ile arasında daha rahat bir boşluk var. A'nın tek ciddi kusuru 390 genişlikte sıranın sola yaslı olması ve sağda 40pt boşluk kalması. Bu da kolay düzeltilir: sırayı içerik genişliğine eşit dağıtmak yeterli, 320 ekranda zaten doğru duruyor. B'nin hizası doğru ama zayıf 'yapıldı' hâli ve sıkışık dikey boşluk tasarımın kendisinden geliyor.",
+  "understood": "Bunlar günün yolundan bağımsız, tek tek egzersizlere giden hızlı kısayollar: göz yogası ya da esneme, dalga hareketi (sanırım bir göz takip egzersizi), nefes egzersizi ve hepsinin art arda yapıldığı tam set. Birine dokununca o egzersiz doğrudan açılıp başlar, Başla kartındaki 'bugünkü yol' sırasını beklemezsin. Egzersizi bugün yaptıysan yuvarlağın köşesinde tik çıkar. Belirsiz kalan tek nokta 'Tam set' ile büyük Başla kartı arasındaki fark: ikisi de 'hepsini yap' gibi okunabiliyor.",
+  "labels": [
+   {
+    "label": "Yoga",
+    "e": "H",
+    "why": "Göz uygulamasında 'Yoga' tek başına beden yogası gibi okunuyor, bitki ikonu da bunu netleştirmiyor. 'Göz yogası' daha iyi; sığmazsa 'Esneme'."
+   },
+   {
+    "label": "Dalga",
+    "e": "H",
+    "why": "Ne açacağını söylemiyor; ses ve rahatlama da olabilir, göz hareketi de. Göz takip egzersiziyse 'Göz takibi' ya da kısaca 'Takip' daha iyi."
+   },
+   {
+    "label": "Nefes",
+    "e": "E",
+    "why": "Anında anlaşılıyor, Türkçesi doğal, ikon da destekliyor."
+   },
+   {
+    "label": "Tam set",
+    "e": "H",
+    "why": "'Set' spor salonu dili, dambıl ikonu da göz uygulamasına yabancı. Başla kartındaki günün yolundan farkı da anlaşılmıyor. 'Tümü' ya da 'Hepsi' daha iyi; ikon da dambıl yerine katman veya liste olmalı."
+   }
+  ]
+ }
+]

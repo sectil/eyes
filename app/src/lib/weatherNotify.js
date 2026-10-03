@@ -1,7 +1,8 @@
 // Sabah havası bildirimi, 1. katman (PLAN.v1 §2 "Sabah havası", §3.B.4, §5.5 madde 2 ve 7; DEVIR §2 "Hava").
 // Saf: planı üretir, kurmaz. planAll (lib/notifyAll.js) bunu öteki kaynaklarla dizer; 30 dk kuralı orada uygulanır
 // (alarma bağlı hava ondan ve gece sessizliğinden muaf; 01.00–05.00 burada, hiçbir ayarla açılmaz).
-// Cümleler sahip onaylı (docs/…/bildirim-hava-yuruyus/sabah-havasi-onay.md, 2026-10-01 "uygula"; beş karar):
+// Kurallar sahip onaylı (docs/…/bildirim-hava-yuruyus/sabah-havasi-onay.md, 2026-10-01 "uygula"; beş karar); cümleler
+// v2 (D11, sabah-havasi-v2-taslak.md, sahip onayı 2026-10-03; eski cümleler "doğallıktan çok uzak"):
 //
 //   - Kimlik 7700 (bugün), 7701 (yarın); günde tek hava bildirimi. extra { kind: 'weather', date, alarm }.
 //   - Karar 5: uygulama bildirim saatinden sonraki 2 saat içinde açılırsa (plan her açılışta yeniden kurulur) o günün
@@ -19,9 +20,8 @@
 //     dilime, 09.00'dan sonra biterse (karar 4) sessizliğin bittiği dakikaya kayar (extra.shifted). 30 dk kuralı için
 //     planAll ayrıca en çok 60 dk kaydırır; açılış bu son kaydırma aralığına düşerse bildirim iptal sayılır (sınır).
 //   - Yağmur (karar 1): bildirim anından gün sonuna saatlik olasılık ≥ %60 → "yağmur bekleniyor" hücreleri (ilk
-//     kesintisiz aralık); yoksa %30–59 → "olasılık" hücresi (chance.*): onaylı cümlesi YOK (yer tutucu anahtar
-//     CHANCE_TEXT_KEY), o gün bildirim kurulmaz (skipped 'noText'); < %30 kuru. SAHİBE: %30–59 günlerde sabah
-//     bildirimi hiç gelmez (sessizlik), cümle onaylanana dek bilinçli tercih.
+//     kesintisiz aralık); yoksa %30–59 → "olasılık" hücresi (chance.*; "Bugün %40 yağmur ihtimali var", v2'de
+//     onaylandı; öncesinde bu günlerde bildirim gelmiyordu); < %30 kuru.
 //   - Hissedilen (karar 2): bildirim saatindeki saatlik apparentC. data.now.apparentC yalnız now satırının saati
 //     bildirim anını kapsıyorsa kullanılır (tahminin çekildiği saatin hissedileni başka saate yazılmaz); yoksa feel
 //     null → hücre yok → skipped 'noText'. SkyPlugin.swift hourRows satırı apparentC taşır.
@@ -63,26 +63,32 @@ export const TEMP_BANDS = Object.freeze([
 ])
 export const CELLS = Object.freeze(['rain', 'dry'].flatMap((r) => TEMP_BANDS.map(([b]) => `${r}.${b}`)))
 export const CHANCE_CELLS = Object.freeze(TEMP_BANDS.map(([b]) => `chance.${b}`))
-export const CHANCE_TEXT_KEY = 'sky.morning.olasilik' // yer tutucu: %30–59 hücresinin cümlesi henüz onaylı değil
 export const TITLE_MAX = 30
 export const BODY_MAX = 110
 export const PLACE_TITLE_MAX = 12 // karar 3: ilçe adı bundan uzunsa başlıkta yalnız sıcaklık (title.short)
 
-// Sahip onaylı cümleler (sabah-havasi-onay.md, HARFİ HARFİNE). text: olgu cümlesi; note: Nef notu (tahmin
-// 1 saatten eskiyse düşer). walk: true taşıyan yok (cümleler yürüyüş önerisi taşımıyor; sessiz günde de aynı cümle).
-const RAIN_FACT = '{rainFrom:NUM}–{rainTo:NUM} arası yağmur bekleniyor; hissedilen {feel}°.'
-const dryFact = (word) => `Kuru bir gün bekleniyor; hissedilen {feel}°, ${word}.`
+// Sahip onaylı cümleler (v2: sabah-havasi-v2-taslak.md, HARFİ HARFİNE; metin kapısı 5/5). text: olgu cümlesi; note:
+// Nef notu (tahmin 1 saatten eskiyse düşer). walk: true taşıyan yok (cümleler yürüyüş önerisi taşımıyor; sessiz günde de
+// aynı cümle).
+const RAIN_FACT = 'Bugün {rainFrom:NUM}–{rainTo:NUM} arası yağmur bekleniyor, hissedilen {feel}°.'
+const CHANCE_FACT = 'Bugün %{rainChance} yağmur ihtimali var, hissedilen {feel}°.'
+const dryFact = (word) => `Yağmur beklenmiyor; hava ${word}, hissedilen {feel}°.`
 export const MORNING_TEMPLATES = Object.freeze([
-  { id: 'MW-R1', cell: 'rain.cold', text: RAIN_FACT, note: 'Şemsiyeyle montu hatırlatayım.' },
-  { id: 'MW-R2', cell: 'rain.cool', text: RAIN_FACT, note: 'Şemsiyeyle hırkayı hatırlatayım.' },
-  { id: 'MW-R3', cell: 'rain.mild', text: RAIN_FACT, note: 'Şemsiyeyi hatırlatayım.' },
-  { id: 'MW-R4', cell: 'rain.warm', text: RAIN_FACT, note: 'Şemsiyeyle suyu hatırlatayım.' },
-  { id: 'MW-R5', cell: 'rain.hot', text: RAIN_FACT, note: 'Şemsiyeyle suyu hatırlatayım.' },
-  { id: 'MW-D1', cell: 'dry.cold', text: dryFact('soğuk'), note: 'Kalın giyinmeni hatırlatayım.' },
-  { id: 'MW-D2', cell: 'dry.cool', text: dryFact('serin'), note: 'İnce bir hırkayı hatırlatayım.' },
-  { id: 'MW-D3', cell: 'dry.mild', text: dryFact('ılık'), note: 'Dışarıda biraz vakit geçirirdim.' },
-  { id: 'MW-D4', cell: 'dry.warm', text: dryFact('sıcak'), note: 'Suyunu yanına almanı hatırlatayım.' },
-  { id: 'MW-D5', cell: 'dry.hot', text: dryFact('çok sıcak'), note: 'Suyunu yanına almanı hatırlatayım.' },
+  { id: 'MW-R1', cell: 'rain.cold', text: RAIN_FACT, note: 'Şemsiye ve mont al.' },
+  { id: 'MW-R2', cell: 'rain.cool', text: RAIN_FACT, note: 'Şemsiye ve hırka al.' },
+  { id: 'MW-R3', cell: 'rain.mild', text: RAIN_FACT, note: 'Şemsiyeni unutma.' },
+  { id: 'MW-R4', cell: 'rain.warm', text: RAIN_FACT, note: 'Şemsiye ve su al.' },
+  { id: 'MW-R5', cell: 'rain.hot', text: RAIN_FACT, note: 'Şemsiye ve su al.' },
+  { id: 'MW-C1', cell: 'chance.cold', text: CHANCE_FACT, note: 'Mont ve şemsiye al.' },
+  { id: 'MW-C2', cell: 'chance.cool', text: CHANCE_FACT, note: 'Hırka ve şemsiye al.' },
+  { id: 'MW-C3', cell: 'chance.mild', text: CHANCE_FACT, note: 'Yanına şemsiye al.' },
+  { id: 'MW-C4', cell: 'chance.warm', text: CHANCE_FACT, note: 'Su ve şemsiye al.' },
+  { id: 'MW-C5', cell: 'chance.hot', text: CHANCE_FACT, note: 'Su ve şemsiye al.' },
+  { id: 'MW-D1', cell: 'dry.cold', text: dryFact('soğuk'), note: 'Çıkarken sıkı giyin.' },
+  { id: 'MW-D2', cell: 'dry.cool', text: dryFact('serin'), note: 'İnce bir hırka yeter.' },
+  { id: 'MW-D3', cell: 'dry.mild', text: dryFact('ılık'), note: 'Dışarıda biraz vakit geçirmeye değer.' },
+  { id: 'MW-D4', cell: 'dry.warm', text: dryFact('sıcak'), note: 'Suyunu yanına al.' },
+  { id: 'MW-D5', cell: 'dry.hot', text: dryFact('çok sıcak'), note: 'Suyunu al, gölgede kal.' },
   { id: 'MW-T', cell: 'title', text: '{place} {temp}° · en çok {high}°' },
   { id: 'MW-TS', cell: 'title.short', text: '{temp}° · en çok {high}°' },
   { id: 'MW-AY', cell: 'age.yesterday', text: 'Dün {ageAt} tahminine göre' },
@@ -262,14 +268,13 @@ export function planMorningWeather({ now = new Date(), morning, alarm = null, ca
       age: ageH > AGE_NOTE_H ? { day: dayKey(fetched) === date ? 'today' : 'yesterday', at: `${pad(fetched.getHours())}.${pad(fetched.getMinutes())}` } : null,
     }
     const cell = cellOf(kind, feelRaw)
-    const textKey = kind === 'chance' ? CHANCE_TEXT_KEY : WEATHER_TEXT_KEY
-    const n = { ...base, textKey, at: new Date(atMs), cell, walkOk, slots }
+    const n = { ...base, at: new Date(atMs), cell, walkOk, slots }
     if (templates === null) {
       out.notifications.push(n)
       return undefined
     }
     const text = composeMorning(n, templates)
-    if (!text) return skip('noText', { textKey, cell })
+    if (!text) return skip('noText', { textKey: WEATHER_TEXT_KEY, cell })
     out.notifications.push({ ...n, ...text })
     return undefined
   })

@@ -1,0 +1,746 @@
+{
+  "surum": "taslak-05",
+  "not": "Her soruda doğru seçenek ilk sıradadır; uygulama şıkları her gösterimde karıştırır. 'ana' sorusu her turda sorulur, kalan 3 soru 5 ayrıntı sorusundan seçilir. Konu alanı: kus, surungen, deniz, memeli.",
+  "metinler": [
+    {
+      "id": "oa041",
+      "baslik": "Serçenin yeni şarkısı",
+      "etiket": "kus",
+      "kaynak": "otter2020",
+      "pmid": "32619475",
+      "doi": "10.1016/j.cub.2020.05.084",
+      "yazar": "Otter ve ark.",
+      "dergi": "Current Biology",
+      "yil": 2020,
+      "metin": "Bir kuşun şarkısı zamanla değişebilir mi? Kuzey Amerika'da yaşayan bir serçe türü, eskiden beri ıslığı andıran bir şarkı söyler. Bu şarkı, üç notalık bir kalıbın tekrarıyla biter. 1960'larda Kanada'nın her yerinde duyulan şarkı buydu. Sonra Kayalık Dağlar'ın batısında, iki notalık bir kalıpla biten yeni bir şarkı eskisinin yerini aldı. Araştırmacılar, yirmi yıl boyunca kıtanın dört bir yanından toplanan kayıtları inceledi. Yeni şarkının artık kıtanın geniş kesimlerine yayıldığını gördüler. Kuşlara takılan konum aygıtları, batı Kanada'dan gelen kuşların kışı orta Kanada'dan gelenlerle birlikte geçirdiğini gösterdi. Yeni şarkı da önce orta Kanada'ya yayılmıştı. Orta Kanadalı kuşlar şarkıyı belki de kışladıkları yerde batılı kuşlardan öğreniyor. Yeni şarkı yayıldığı her yerde önce az duyuluyor, sonunda o bölgenin tek şarkısı oluyordu.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Yeni bir serçe şarkısının kıtaya yayılmasını",
+            "Eski serçe şarkısının ıslığa benzemesini",
+            "Yeni şarkının dağların batısında sıkışıp kalmasını",
+            "Serçelerin şarkı söyleyerek eş seçmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Eski şarkının sonunda tekrarlanan kalıp kaç notalık?",
+          "secenekler": [
+            "Üç",
+            "İki",
+            "Dört",
+            "Beş"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yeni şarkı ilk olarak nerede eskisinin yerini aldı?",
+          "secenekler": [
+            "Kayalık Dağlar'ın batısında",
+            "Orta Kanada'nın göllerinde",
+            "Kıtanın en güney ucunda",
+            "Okyanus kıyısındaki adalarda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacıların incelediği kayıtlar kaç yıl boyunca toplanmıştı?",
+          "secenekler": [
+            "Yirmi yıl",
+            "İki yıl",
+            "Beş yıl",
+            "Altmış yıl"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Konum aygıtları ne gösterdi?",
+          "secenekler": [
+            "Batılı ve orta Kanadalı kuşların kışı birlikte geçirdiğini",
+            "Kuşların hiç göç etmediğini",
+            "Kuşların yalnız gece uçtuğunu",
+            "Kuşların her yıl yuva değiştirdiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yeni şarkı yayıldığı yerlerde sonunda ne oldu?",
+          "secenekler": [
+            "O bölgenin tek şarkısı oldu",
+            "Yalnız dişilerin söylediği bir şarkı oldu",
+            "Kısa sürede unutulup gitti",
+            "Yalnız yavruların söylediği bir şarkı oldu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa042",
+      "baslik": "Papağanın tahmin oyunu",
+      "etiket": "kus",
+      "kaynak": "bastos2020",
+      "pmid": "32127523",
+      "doi": "10.1038/s41467-020-14695-1",
+      "yazar": "Bastos ve ark.",
+      "dergi": "Nature Communications",
+      "yil": 2020,
+      "metin": "Bir kuş, şansa bağlı bir çekilişin sonucunu kestirebilir mi? Yeni Zelanda'daki araştırmacılar bunu kea adlı papağanlarla denedi. Deneyci karışık bir yığından rastgele bir parça çekiyor, kealar da hangi parçanın çıkacağını tahmin etmeye çalışıyordu. Kealar tahmin yaparken yığında hangi parçadan daha çok olduğunu, yani miktarların oranını hesaba kattı. Çekilişi etkileyen bir engel olup olmadığına da dikkat ettiler. Deneycinin seçerken bir tür parçayı kayırdığını fark edince tahminlerini buna göre değiştirdiler. Böylece istatistiksel düşünmenin üç belirtisini gösterdiler. Yani farklı türden bilgileri birleştirip tahminlerini duruma göre ayarlayabiliyorlar. Araştırmacılara göre böyle bir düşünme yalnız büyük maymunlara özgü değil. Sinir sistemi maymunlarınkinden çok farklı olan canlılarda da gelişebiliyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Kea papağanlarının olasılığa dayalı tahmin yapmasını",
+            "Deneycinin yığından rastgele bir parça çekmesini",
+            "Papağanların büyük maymunlardan daha zeki olmasını",
+            "Kea papağanlarının tahminlerini yalnız şansa bırakmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmayı hangi ülkedeki araştırmacılar yaptı?",
+          "secenekler": [
+            "Yeni Zelanda",
+            "Kanada",
+            "Brezilya",
+            "Japonya"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kealar tahmin yaparken neyi hesaba kattı?",
+          "secenekler": [
+            "Miktarların oranını",
+            "Parçaların büyüklüğünü",
+            "Son çekilen parçanın rengini",
+            "Yığının toplam ağırlığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kealar tahmin yaparken başka neye dikkat etti?",
+          "secenekler": [
+            "Çekilişi etkileyen bir engel olup olmadığına",
+            "Deneycinin parçaları ne kadar hızlı çektiğine",
+            "Yığındaki parçaların hangi sırayla dizildiğine",
+            "Daha önce kaç kez doğru tahmin ettiklerine"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kealar istatistiksel düşünmenin kaç belirtisini gösterdi?",
+          "secenekler": [
+            "Üç",
+            "Bir",
+            "İki",
+            "Beş"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Deneycinin bir tür parçayı kayırdığını fark eden kealar ne yaptı?",
+          "secenekler": [
+            "Tahminlerini buna göre değiştirdi",
+            "Deneyden tamamen uzaklaştı",
+            "Tahmin yapmayı bıraktı",
+            "Her seferinde aynı tahmini yaptı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa043",
+      "baslik": "İki alet, tek plan",
+      "etiket": "kus",
+      "kaynak": "osunamascaro2023",
+      "pmid": "36773605",
+      "doi": "10.1016/j.cub.2023.01.023",
+      "yazar": "Osuna-Mascaró ve ark.",
+      "dergi": "Current Biology",
+      "yil": 2023,
+      "metin": "Bir hayvan, işini görmek için iki aleti birlikte yanına alabilir mi? Doğada birkaç aleti bir takım gibi kullandığı bilinen yalnız iki tür var: şempanzeler ve Goffin kakadusu adlı bir papağan. Şempanzelerin, gerektiğinde alet takımlarını yanlarında taşıdığı biliniyor. İki aleti birlikte taşıyan bir hayvan, işe başlamadan ikisine de ihtiyacı olacağını anlamış demektir. Araştırmacılar, insan bakımında yaşayan kakadularla üç deney yaptı. Görevleri, şempanzelerin termit yuvasından termit çıkarmak için kullandığı yöntemden esinlenerek hazırladılar. Bazı kakadular yeni bir alet takımını kullanmayı kendi kendilerine buldu. Takımı duruma göre kullandılar. Gerektiğinde de onu birazdan kullanmak üzere yanlarında taşıdılar. Yani bu kakadular aletleri gelişigüzel art arda kullanmıyor; ikisine de gerek olduğunu baştan biliyorlar.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Kakaduların bir alet takımını taşıyıp kullanmasını",
+            "Deneydeki kakaduların insan bakımında yaşamasını",
+            "Kakaduların aletleri gelişigüzel art arda kullanmasını",
+            "Kakaduların aletlerini ağaç dallarından yapmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre doğada alet takımı kullandığı bilinen iki tür hangileri?",
+          "secenekler": [
+            "Şempanzeler ve Goffin kakadusu",
+            "Kargalar ve yunuslar",
+            "Filler ve su samurları",
+            "Ahtapotlar ve kargalar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar kakadularla kaç deney yaptı?",
+          "secenekler": [
+            "Üç",
+            "Bir",
+            "İki",
+            "Altı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar görevleri neyden esinlenerek hazırladı?",
+          "secenekler": [
+            "Şempanzelerin termit çıkarma yönteminden",
+            "Kuşların yuva yapma biçiminden",
+            "Arıların bal toplama düzeninden",
+            "Karıncaların yol bulmasından"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kakadular alet takımını ne zaman kullanmak üzere taşıdı?",
+          "secenekler": [
+            "Birazdan",
+            "Ertesi gün",
+            "Bir hafta sonra",
+            "Kış geldiğinde"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İki aleti birlikte taşıyan bir hayvan neyi anlamış demektir?",
+          "secenekler": [
+            "İşe başlamadan ikisine de ihtiyacı olacağını",
+            "Aletlerin kolayca kırılabileceğini",
+            "Tek bir aletin her işi görmeye kendi başına yettiğini",
+            "Aletlerin hep aynı yerde durduğunu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa044",
+      "baslik": "Hiç konmayan kuş",
+      "etiket": "kus",
+      "kaynak": "hedenstrom2016",
+      "pmid": "28094028",
+      "doi": "10.1016/j.cub.2016.09.014",
+      "yazar": "Hedenström ve ark.",
+      "dergi": "Current Biology",
+      "yil": 2016,
+      "metin": "Bir kuş aylarca hiç konmadan yaşayabilir mi? Ebabiller, yiyeceklerini ve yuva malzemelerini havada yakalar. Bilim insanları, bu kuşların üreme dönemi dışında, Sahra'nın güneyinde kışlarken de hep havada kaldığını düşünüyordu. Kışın ebabil görmek zordu; Afrika'da geceledikleri bir yer de hiç bulunmamıştı. Araştırmacılar, bazı ebabillere hareketi ölçen küçük bir kayıt aygıtı taktı. İkinci yıl aygıtlara, kuşun yerini gün ışığından hesaplayan bir algılayıcı da eklendi. Kayıtlar, ebabillerin üreme dönemi dışındaki 10 ayın %99'undan fazlasını havada geçirdiğini gösterdi. Bazı kuşlar bu sürede bir kez bile konmadı. Kuşlar gündüz geceden daha az hareket ediyordu; büyük olasılıkla gündüzleri sıcak hava akımlarında uzun süre süzülüyorlardı. Sonuçlar yeni sorular doğuruyor: Bu kuşlar böyle uzun uçuşlara nasıl dayanıyor, havada nasıl uyuyor?",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Ebabillerin aylarca havada kalmasını",
+            "Kışın ebabil görmenin zor olmasını",
+            "Ebabillerin yalnız kışın havada kalmasını",
+            "Ebabillerin havada nasıl uyuduğunun çözülmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kuşun yeri ikinci yıl neye bakılarak hesaplandı?",
+          "secenekler": [
+            "Gün ışığına",
+            "Yıldızların konumuna",
+            "Uydu sinyallerine",
+            "Yerin manyetik alanına"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ebabiller üreme dönemi dışındaki zamanın ne kadarını havada geçirdi?",
+          "secenekler": [
+            "%99'undan fazlasını",
+            "%90'ından azını",
+            "%80'inden azını",
+            "%70'inden azını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ebabillerde üreme dönemi dışındaki süre kaç aydır?",
+          "secenekler": [
+            "10 ay",
+            "2 ay",
+            "4 ay",
+            "6 ay"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kuşlar gündüz büyük olasılıkla neden daha az hareket ediyordu?",
+          "secenekler": [
+            "Sıcak hava akımlarında süzüldükleri için",
+            "Güçlü rüzgârlarla sürüklendikleri için",
+            "Gündüz daha az böcek avladıkları için",
+            "Yüksekte daha yavaş kanat çırptıkları için"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar ebabillere ne taktı?",
+          "secenekler": [
+            "Hareketi ölçen küçük bir kayıt aygıtı",
+            "Renkli bir ayak halkası",
+            "Küçük bir kamera",
+            "Sesi kaydeden bir mikrofon"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa045",
+      "baslik": "Kanını saklayan kurbağa",
+      "etiket": "surungen",
+      "kaynak": "taboada2022",
+      "pmid": "36548427",
+      "doi": "10.1126/science.abl6620",
+      "yazar": "Taboada ve ark.",
+      "dergi": "Science",
+      "yil": 2022,
+      "metin": "Bir hayvan, içi görünecek kadar saydam olabilir mi? Saydamlık karmaşık bir gizlenme yoludur: vücut, ışığı olabildiğince az saçmalı ve az emmelidir. Omurgalı hayvanlarda bunu başarmak zordur, çünkü kandaki kırmızı hücreler ışığı güçlü biçimde zayıflatır. Peki cam kurbağası denen kurbağalar bu sorunu nasıl aşıyor? Araştırmacılar, kırmızı kan hücrelerini canlı hayvanda, ışık ve sesle çalışan bir görüntüleme yöntemiyle izledi. Dinlenen kurbağalar bu hücrelerin yaklaşık %89'unu dolaşımdan çekip karaciğerlerinde topluyordu. Böylece 2 ila 3 kat daha saydam oluyorlardı. Üstelik bunu kanları pıhtılaşmadan yapabiliyorlardı. Demek ki omurgalılarda saydamlık için saydam dokular yetmiyor; kırmızı hücreleri bu dokulardan uzaklaştıran etkin bir düzen de gerekiyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Cam kurbağalarının saydam kalmak için kanlarını saklamasını",
+            "Cam kurbağalarının kanının pıhtılaşmadan kalmasını",
+            "Saydamlık için yalnız saydam dokuların yetmesini",
+            "Cam kurbağalarının gündüzleri yaprakların altında saklanmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Omurgalılarda saydam olmayı ne zorlaştırır?",
+          "secenekler": [
+            "Kandaki kırmızı hücrelerin ışığı zayıflatması",
+            "Derinin çok kalın olması",
+            "Kemiklerin parlak olması",
+            "Kasların çok sert olması"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Dinlenen kurbağalar kırmızı kan hücrelerini nerede topluyordu?",
+          "secenekler": [
+            "Karaciğerlerinde",
+            "Kalplerinde",
+            "Derilerinin altında",
+            "Bacaklarında"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kurbağalar kırmızı hücrelerin yaklaşık yüzde kaçını dolaşımdan çekiyordu?",
+          "secenekler": [
+            "%89",
+            "%10",
+            "%25",
+            "%50"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bu sayede kurbağalar ne kadar daha saydam oluyordu?",
+          "secenekler": [
+            "2 ila 3 kat",
+            "5 ila 6 kat",
+            "10 ila 20 kat",
+            "Yüzde 1 kadar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar kırmızı kan hücrelerini nasıl izledi?",
+          "secenekler": [
+            "Işık ve sesle çalışan bir görüntüleme yöntemiyle",
+            "Kurbağaları boyayarak",
+            "Kan örneklerini sayarak",
+            "Kurbağaları her gün düzenli olarak tartıp ölçerek"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa046",
+      "baslik": "Ağaçtaki sorun çözücü",
+      "etiket": "surungen",
+      "kaynak": "leal2011",
+      "pmid": "21752816",
+      "doi": "10.1098/rsbl.2011.0480",
+      "yazar": "Leal ve ark.",
+      "dergi": "Biology Letters",
+      "yil": 2011,
+      "metin": "Bir kertenkele yeni bir sorunu çözebilir mi? Yeni durumlara uyum sağlama becerisi, yani davranış esnekliği, bugüne dek çoğunlukla memelilerde ve kuşlarda incelendi. Kertenkelelerin ise öğrenme becerilerinin sınırlı olduğu, hep aynı kalıpta davrandığı sanılır. Araştırmacılar, tropik bölgede ağaçlarda yaşayan bir kertenkele türünü bir dizi deneyle sınadı. Kertenkeleler, daha önce hiç görmedikleri ve beceri isteyen bir görevi birkaç farklı yolla çözdü. Ödül getiren seçim değiştirilince yeni doğruyu da öğrendiler. Bir işaretle ödül arasındaki bağı da hızla öğrendiler. Bu esneklik araştırmacıları şaşırttı. Onlara göre bu kertenkelenin becerileri, esnekliğiyle tanınan bazı sıcakkanlı türlerinkine benziyor. Bu yüzden soğukkanlı hayvanların neler yapabildiğine yeniden bakmak gerekiyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir kertenkelenin beklenmedik esnek davranışlarını",
+            "Kertenkelenin bir işaretle ödülü bağdaştırma hızını",
+            "Kertenkelelerin hep aynı kalıpta kalan davranışlarını",
+            "Tropik kertenkelelerin ağaçlarda beslenme alışkanlıklarını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Davranış esnekliği bugüne dek çoğunlukla hangi hayvanlarda incelendi?",
+          "secenekler": [
+            "Memelilerde ve kuşlarda",
+            "Balıklarda ve böceklerde",
+            "Kurbağalarda ve yılanlarda",
+            "Örümceklerde ve salyangozlarda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Deneylerdeki kertenkele nerede yaşıyor?",
+          "secenekler": [
+            "Tropik bölgede ağaçlarda",
+            "Çölde kum altında",
+            "Soğuk dağlarda kayalarda",
+            "Göl kıyısında suda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kertenkeleler yeni görevi nasıl çözdü?",
+          "secenekler": [
+            "Birkaç farklı yolla",
+            "Hep tek bir yolla",
+            "Başka bir kertenkeleyi izleyerek",
+            "Ancak yardım alarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ödül getiren seçim değiştirilince kertenkeleler ne yaptı?",
+          "secenekler": [
+            "Yeni doğruyu öğrendi",
+            "Görevi bıraktı",
+            "Eski seçimde ısrar etti",
+            "Rastgele seçmeye başladı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılara göre kertenkelenin becerileri hangi hayvanlarınkine benziyor?",
+          "secenekler": [
+            "Bazı sıcakkanlı türlerinkine",
+            "Öteki kertenkele türlerininkine",
+            "Kurbağalarınkine",
+            "Böceklerinkine"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa047",
+      "baslik": "Renkleri tarayan göz",
+      "etiket": "deniz",
+      "kaynak": "thoen2014",
+      "pmid": "24458639",
+      "doi": "10.1126/science.1245824",
+      "yazar": "Thoen ve ark.",
+      "dergi": "Science",
+      "yil": 2014,
+      "metin": "Renkleri ince ince ayırmak için gözde 3 ya da 4 çeşit ışık algılayıcı yeter. Oysa mantis karidesi denen deniz canlılarının bazı türlerinde tam 12 çeşit var. Her biri, morötesinden koyu kırmızıya uzanan aralıkta ışığın yalnız dar bir dilimini algılıyor. Bu kadar çeşidin ne işe yaradığı bir bilmeceydi. Araştırmacılar, bu canlıların birbirine çok yakın renkleri ne kadar iyi ayırdığını davranış deneyleriyle sınadı. Karidesler bu sınavda şaşırtıcı biçimde başarısız oldu. Demek ki renkleri bildiğimiz yolla karşılaştırmıyorlardı. Araştırmacılara göre bu canlılar bambaşka bir renk görme sistemi kullanıyor olabilir. Bu sistemde hayvan, gözünü bir yüzeyin üstünde tarar gibi gezdiriyor ve gelen sinyalleri zaman içinde sırayla okuyor. Bu yol, renkleri ince ayırmaktan çok tanımaya yarıyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Mantis karidesinin farklı bir renk görme biçimini",
+            "Çok sayıda algılayıcının renkleri daha ince ayırma gücünü",
+            "Mantis karidesinin avını sert bir darbeyle yakalama yolunu",
+            "Mantis karidesinin derin sularda gizlenme biçimini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Mantis karideslerinin bazı türlerinde kaç çeşit ışık algılayıcı var?",
+          "secenekler": [
+            "12",
+            "3",
+            "4",
+            "24"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Renkleri ince ayırmak için kaç çeşit algılayıcı yeter?",
+          "secenekler": [
+            "3 ya da 4",
+            "1 ya da 2",
+            "8 ya da 9",
+            "20 ya da daha fazla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Karidesler yakın renkleri ayırmakta ne kadar başarılıydı?",
+          "secenekler": [
+            "Şaşırtıcı biçimde başarısızdı",
+            "Bütün hayvanlardan daha başarılıydı",
+            "Her denemede kusursuzdu",
+            "İnsanlar kadar başarılıydı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Önerilen sistem neye dayanıyor?",
+          "secenekler": [
+            "Gözü gezdirip sinyalleri sırayla okumaya",
+            "Renkleri kokuyla birleştirmeye",
+            "Yalnız parlaklığı ölçmeye",
+            "Sesleri renklere çevirmeye"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Algılayıcıların hepsi birlikte hangi aralığı kapsıyor?",
+          "secenekler": [
+            "Morötesinden koyu kırmızıya",
+            "Maviden kızılötesine",
+            "Yeşilden koyu kırmızıya",
+            "Morötesinden yeşile"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa048",
+      "baslik": "Okyanusu dolaşan şarkılar",
+      "etiket": "deniz",
+      "kaynak": "garland2011",
+      "pmid": "21497089",
+      "doi": "10.1016/j.cub.2011.03.019",
+      "yazar": "Garland ve ark.",
+      "dergi": "Current Biology",
+      "yil": 2011,
+      "metin": "Bir şarkı okyanusta topluluktan topluluğa nasıl geçer? Erkek kambur balinalar, kalıplaşmış, tekrar eden ve zamanla adım adım değişen bir şarkı söyler. Bu şarkı, dişileri çekmeye ya da erkeklerin kendi aralarındaki ilişkileri düzenlemeye yarar. Bir topluluktaki bütün erkekler, şarkının o sıradaki biçimini söyler. Araştırmacılar, Güney Pasifik'in batısındaki ve ortasındaki balina topluluklarının şarkılarını 11 yıl boyunca inceledi. Birçok yeni şarkı biçimi topluluktan topluluğa hızla ve tekrar tekrar yayıldı. Yayılma hep tek yönde, batıdan doğuya doğru ilerledi. Şarkılar anneden yavruya değil, akraba olmayan yaşıt balinalar arasında aktarıldı. Böyle geniş bir alanda, birçok toplulukta tekrar tekrar yaşanan kültürel bir değişim ilk kez belgelendi.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Kambur balina şarkılarının topluluklar arasında yayılmasını",
+            "Kambur balina şarkısının kalıplaşmış bir yapıda olmasını",
+            "Balina şarkılarının yıllar boyu hiç değişmeden kalmasını",
+            "Kambur balinaların kışın sıcak sulara göç etmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Şarkıyı kambur balinaların hangileri söyler?",
+          "secenekler": [
+            "Erkekler",
+            "Dişiler",
+            "Yavrular",
+            "Yaşlı balinalar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar şarkıları kaç yıl boyunca inceledi?",
+          "secenekler": [
+            "11 yıl",
+            "2 yıl",
+            "5 yıl",
+            "30 yıl"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Şarkılar hangi yöne doğru yayıldı?",
+          "secenekler": [
+            "Doğuya",
+            "Batıya",
+            "Kuzeye",
+            "Güneye"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Şarkılar hangi balinalar arasında aktarıldı?",
+          "secenekler": [
+            "Akraba olmayan yaşıt balinalar arasında",
+            "Anneler ve yavruları arasında",
+            "Kardeşler arasında",
+            "Yaşlı ve genç balinalar arasında"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Çalışma okyanusun hangi bölümünde yapıldı?",
+          "secenekler": [
+            "Güney Pasifik'in batısı ve ortasında",
+            "Kuzey Atlas Okyanusu'nda",
+            "Hint Okyanusu'nun doğusunda",
+            "Kuzey Buz Denizi'nde"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa049",
+      "baslik": "Her koloninin kendi şivesi",
+      "etiket": "memeli",
+      "kaynak": "barker2021",
+      "pmid": "33510025",
+      "doi": "10.1126/science.abc6588",
+      "yazar": "Barker ve ark.",
+      "dergi": "Science",
+      "yil": 2021,
+      "metin": "Bir hayvan topluluğunun kendine özgü bir şivesi olabilir mi? Çıplak köstebek fareleri, hayvanlar âleminin en iş birlikçi topluluklarından birinde yaşar. Birkaç kuşağın bir arada yaşadığı her kolonide yalnız bir kraliçe yavru yapar ve koloniyi o yönetir. Bu sıkı düzenin nasıl korunduğu bilinmiyordu. Araştırmacılar, bu hayvanların en sık çıkardığı ses olan yumuşak cıvıltıyı inceledi. Cıvıltı, hayvanın hangi koloniden olduğunu belli ediyordu; her koloninin ayrı bir şivesi vardı. Kayıtlar dinletildiğinde hayvanlar, kendi kolonilerinin şivesine yabancı şivelerden daha sık sesle karşılık verdi. Doğumdan kısa süre sonra başka koloniye verilen yavrular, yeni kolonilerinin şivesini öğrendi. Kraliçe ortadan kalkınca şive bozulmaya başladı. Yeni bir kraliçe başa geçince şive yeniden belirginleşti. Demek ki şiveyi de kısmen kraliçe denetliyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Çıplak köstebek farelerinin koloniye özgü şivesini",
+            "Bütün çıplak köstebek farelerinin ortak tek şivesini",
+            "Koloni şivelerinin zamanla hiç bozulmadan aynı kalmasını",
+            "Çıplak köstebek farelerinin toprak altında besin bulma yolunu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar hangi sesi inceledi?",
+          "secenekler": [
+            "Yumuşak cıvıltıyı",
+            "Yüksek çığlığı",
+            "Diş gıcırtısını",
+            "Ayak vuruşunu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Her kolonide yavruları kim yapar?",
+          "secenekler": [
+            "Tek bir dişi",
+            "Bütün yetişkin dişiler",
+            "En iri birkaç dişi",
+            "Her kuşaktan bir dişi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Hayvanlar hangi şiveye daha sık sesle karşılık verdi?",
+          "secenekler": [
+            "Kendi kolonilerinin şivesine",
+            "Yabancı bir koloninin şivesine",
+            "Bütün şivelere aynı ölçüde",
+            "Hiçbir şiveye"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Başka koloniye verilen yavrular ne yaptı?",
+          "secenekler": [
+            "Yeni kolonilerinin şivesini öğrendi",
+            "Hiç ses çıkarmadı",
+            "Yalnız doğdukları koloninin şivesini kullandı",
+            "Kendi şivelerini uydurdu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Koloniyi yöneten hayvan ortadan kalkınca şiveye ne oldu?",
+          "secenekler": [
+            "Bozulmaya başladı",
+            "Daha da belirginleşti",
+            "Hiç değişmedi",
+            "Yavrulara geçti"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa050",
+      "baslik": "Zürafaların gece mırıltısı",
+      "etiket": "memeli",
+      "kaynak": "baotic2015",
+      "pmid": "26353836",
+      "doi": "10.1186/s13104-015-1394-3",
+      "yazar": "Baotic ve ark.",
+      "dergi": "BMC Research Notes",
+      "yil": 2015,
+      "metin": "Zürafalar birbirleriyle sesle anlaşır mı? Zürafa sürüleri sık sık dağılıp yeniden bir araya gelir. Böyle yaşayan başka türlerde bilgi alışverişi önemlidir ve sesle iletişim genellikle gelişmiştir. Zürafaların ses çıkardığı biliniyordu, ama bu sesleri anlaşmak için kullandıkları kanıtlanmamıştı. Yaygın bir görüşe göre zürafalar da filler gibi, insan kulağının duyamayacağı kadar pes sesler çıkarıyordu. Araştırmacılar, Avrupa'daki üç hayvanat bahçesinde gece ve gündüz 947 saatten fazla ses kaydı topladı. Bilinen homurtu ve burun seslerinin yanında, gece kayıtlarında uzun süren, perdesi inip çıkan bir mırıltı buldular. Kaydedilen seslerin hiçbiri o çok pes aralıkta değildi. Seslerin yapısına bakılırsa, bu mırıltılar zürafaların birbirine bilgi vermesine yarıyor olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Zürafalarda anlaşmaya yarayabilecek yeni bir ses bulunmasını",
+            "Zürafa sürülerinin sık sık dağılıp yeniden toplanmasını",
+            "Zürafaların geceleri burun sesleriyle birbirini uyarmasını",
+            "Zürafaların uzun boyunlarıyla yüksek dallara uzanmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kayıtlar kaç hayvanat bahçesinde toplandı?",
+          "secenekler": [
+            "Üç",
+            "Bir",
+            "Beş",
+            "On"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar toplam ne kadar ses kaydı topladı?",
+          "secenekler": [
+            "947 saatten fazla",
+            "9 saatten az",
+            "94 dakika kadar",
+            "Yalnız bir gece boyunca süren tek bir kayıt"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Gece kayıtlarında bulunan mırıltı nasıl bir sesti?",
+          "secenekler": [
+            "Uzun süren, perdesi inip çıkan bir ses",
+            "Kısa ve kesik kesik bir ses",
+            "Perdesi hiç değişmeyen, tekdüze bir ses",
+            "Hırıltıya benzeyen boğuk bir ses"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yaygın görüşe göre zürafalar hangi hayvanlar gibi çok pes sesler çıkarır?",
+          "secenekler": [
+            "Filler",
+            "Aslanlar",
+            "Atlar",
+            "Yunuslar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kaydedilen seslerin kaçı insanın duyamayacağı kadar pes aralıktaydı?",
+          "secenekler": [
+            "Hiçbiri",
+            "Hepsi",
+            "Yarısı",
+            "Çoğu"
+          ]
+        }
+      ]
+    }
+  ]
+}

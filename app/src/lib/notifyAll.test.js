@@ -34,7 +34,7 @@ const isWeather = (n) => n.id >= 7700 && n.id <= 7701
 const isFreeWeather = (n) => isWeather(n) && !n.extra?.alarm && !n.keepPending
 const isAlarmWeather = (n) => isWeather(n) && !isFreeWeather(n)
 const minOf = (d) => d.getHours() * 60 + d.getMinutes()
-const OWN = [[7400, 7499], [7500, 7509], [7700, 7701], [7800, 7859], [7860, 7867]]
+const OWN = [[7400, 7499], [7500, 7509], [7700, 7701], [7800, 7859], [7860, 7867], [7868, 7899]] // 7868–7899 Dik Dur aralıklı (sahip izni 2026-10-03)
 const pick3 = (n) => ({ id: n.id, title: n.title, body: n.body, at: n.at.getTime() })
 // Saati kişi mi seçti (sahip kararı 2026-10-01): modül hatırlatmasında (birleşikte ilk modül) ya da ek saatte türün
 // kaydı elle (mode 'manual'). Bunlar 30 dk'ya, pencereye ve gece kurallarına uymaz; Nef'in saatleri uyar.
@@ -459,7 +459,7 @@ describe('planAll: sabah havası', () => {
     expect(p.notifications.filter((n) => n.id < 7700)).toEqual(planNotifications(i).notifications)
     // Onaylı metin bağlı (notifyApply kurar); texts: true onu değiştirmez
     expect(w[0].title).toBe('Gaziemir 18° · en çok 24°')
-    expect(w[0].body).toBe('Sabah 06.50 tahminine göre kuru bir gün bekleniyor; hissedilen 17°, serin.\nKaynak: Apple Weather')
+    expect(w[0].body).toBe('Sabah 06.50 tahminine göre yağmur beklenmiyor; hava serin, hissedilen 17°.\nKaynak: Apple Weather')
     expect(weatherOf(planAll({ ...i, texts: true }))).toEqual(w)
   })
 

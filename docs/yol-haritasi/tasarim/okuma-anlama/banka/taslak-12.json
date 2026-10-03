@@ -1,0 +1,746 @@
+{
+  "surum": "taslak-12",
+  "not": "Takım 12. Konu alanı: insan, bitki, mikro, bocek, memeli, surungen. Kaynak ayrıntısı arastirma/KAYNAKLAR.md §B12. Doğru seçenek ilk sırada; uygulama karıştırır.",
+  "metinler": [
+    {
+      "id": "oa111",
+      "baslik": "Yuvarlak mı, sivri mi?",
+      "etiket": "insan",
+      "kaynak": "cwiek2021",
+      "pmid": "34775818",
+      "doi": "10.1098/rstb.2020.0390",
+      "yazar": "Ćwiek ve ark.",
+      "dergi": "Philos Trans R Soc Lond B Biol Sci",
+      "yil": 2021,
+      "metin": "Anlamı olmayan iki sözcük düşünün: bouba ve kiki. Hangisi yuvarlak, hangisi sivri bir şekle daha çok uyar? Bu eşleşmenin farklı kültürlerde ve yazı sistemlerinde ne kadar sağlam olduğu tartışılıyordu. Araştırmacılar bunu çevrim içi bir deneyle sınadı. Deneye katılanlar, dokuz dil ailesinden 25 farklı dil konuşuyordu. Bu diller 10 farklı yazı sistemiyle yazılıyordu. Sonuçta eşleşme dillerin genelinde güçlü çıktı: bouba yuvarlak şekle, kiki sivri şekle bağlandı. Bouba'yı yuvarlak şekle bağlayanlar, kiki'yi sivri şekle bağlayanlardan daha çoktu. Latin harfleri kullanan dilleri konuşanlar bu eşleşmeyi ötekilerden yalnız biraz daha sık yaptı. Bouba'nın yuvarlak, kiki'nin sivri harflerle yazıldığı yazı sistemlerinde de etki artmadı. Araştırmacılara göre eşleşme büyük ölçüde yazıdan bağımsız; sesle şekil arasındaki bir bağdan doğuyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Anlamsız iki sözcüğün şekillerle eşleşmesinin birçok dilde görüldüğünü",
+            "İki sözcüğün şekillerle eşleşmesinin dilden dile tamamen değiştiğini",
+            "Bouba'yı yuvarlak şekle bağlayanların daha çok olduğunu",
+            "Bebeklerin sözcükleri şekillerle hangi yaşta eşleştirdiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Deneye katılanlar toplam kaç farklı dil konuşuyordu?",
+          "secenekler": [
+            "25",
+            "5",
+            "60",
+            "2"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Deneye katılanların dilleri kaç farklı yazı sistemiyle yazılıyordu?",
+          "secenekler": [
+            "10",
+            "9",
+            "3",
+            "40"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Deney nasıl yapıldı?",
+          "secenekler": [
+            "Çevrim içi olarak",
+            "Okullarda kâğıt ve kalemle",
+            "Telefonla görüşerek",
+            "Bir müzede ziyaretçilerle"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Latin harfleri kullanan dilleri konuşanlarda ne görüldü?",
+          "secenekler": [
+            "Eşleşmeyi ötekilerden yalnız biraz daha sık yaptılar",
+            "Eşleşmeyi ötekilerden çok daha sık yaptılar",
+            "Eşleşmeyi hiç yapmadılar",
+            "Eşleşmeyi tersine çevirdiler"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılara göre eşleşme neyden doğuyor?",
+          "secenekler": [
+            "Sesle şekil arasındaki bir bağdan",
+            "Harflerin yazılış biçiminden",
+            "Okulda öğretilen kurallardan",
+            "Sözcüklerin sözlükteki anlamından"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa112",
+      "baslik": "Büyüdüğün yerin sokakları",
+      "etiket": "insan",
+      "kaynak": "coutrot2022",
+      "pmid": "35355009",
+      "doi": "10.1038/s41586-022-04486-7",
+      "yazar": "Coutrot ve ark.",
+      "dergi": "Nature",
+      "yil": 2022,
+      "metin": "Büyüdüğümüz yer, yıllar sonra yolumuzu bulma becerimizi etkiler mi? Araştırmacılar bu soruyu bir video oyununa yerleştirdikleri bir görevle inceledi. Görev, yön bulma becerisini sözcüklere dayanmadan ölçüyordu. Dünyanın 38 ülkesinden 397 binden fazla kişi bu oyunu oynadı. Genel olarak şehir dışında büyüyenler yön bulmada daha iyiydi. Daha yakından bakılınca, insanların büyüdükleri yere benzeyen ortamlarda daha başarılı olduğu görüldü. Chicago gibi sokakları daha düzenli şehirlerde büyüyenler, oyunun düzenli bölümlerinde daha iyi sonuç aldı. Şehir dışında ya da Prag gibi sokakları karmaşık şehirlerde büyüyenler ise karmaşık bölümlerde öne çıktı. Araştırmacılara göre bu bulgu, çevrenin düşünme becerilerimizi etkilediğini bütün dünyadan gelen verilerle gösteriyor. Şehirlerin nasıl tasarlandığı da bu yüzden önemli.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Büyüdüğümüz yerin sonraki yön bulma becerisiyle ilişkisini",
+            "Büyüdüğümüz yerin yön bulma becerisini hiç etkilememesini",
+            "Yaşlandıkça yön bulma becerisinde görülen değişimi",
+            "Kadınlarla erkeklerin yön bulma becerileri arasındaki farkı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yön bulma becerisi nasıl ölçüldü?",
+          "secenekler": [
+            "Bir video oyunundaki görevle",
+            "Ormanda yürüyüş yaptırarak",
+            "Kâğıda harita çizdirerek",
+            "Gerçek sokaklarda yol sordurarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Oyunu kaç ülkeden insan oynadı?",
+          "secenekler": [
+            "38",
+            "8",
+            "120",
+            "3"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Genel olarak kimler yön bulmada daha iyiydi?",
+          "secenekler": [
+            "Şehir dışında büyüyenler",
+            "Büyük şehirlerde büyüyenler",
+            "Hiç oyun oynamamış olanlar",
+            "Denize yakın yaşayanlar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Chicago gibi şehirlerde büyüyenler hangi bölümlerde daha iyiydi?",
+          "secenekler": [
+            "Düzenli bölümlerde",
+            "Karmaşık bölümlerde",
+            "Su altında geçen bölümlerde",
+            "Gece geçen bölümlerde"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılara göre bu bulgu neyin önemli olduğunu gösteriyor?",
+          "secenekler": [
+            "Şehirlerin nasıl tasarlandığının",
+            "Sokak tabelalarının çoğaltılmasının",
+            "Çocuklara harita okumanın öğretilmesinin",
+            "Şehirlerde daha çok park yapılmasının"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa113",
+      "baslik": "Parmakla tutulan zaman",
+      "etiket": "insan",
+      "kaynak": "hammerschmidt2020",
+      "pmid": "35475022",
+      "doi": "10.1525/mp.2020.37.4.263",
+      "yazar": "Hammerschmidt ve Wöllner",
+      "dergi": "Music Perception",
+      "yil": 2020,
+      "metin": "Müzik dinlerken zamanın nasıl geçtiğini hiç düşündünüz mü? Bir ekip, ritme farklı biçimlerde eşlik etmenin zaman algısını değiştirip değiştirmediğini inceledi. Müzisyenler ve müzisyen olmayanlar, üç farklı hızda çalınan ritim kalıplarını dinledi. Bazı denemelerde parmaklarıyla ritme uyarak tempo tuttular; bunu kimi zaman seyrek, kimi zaman sık yaptılar. Bazı denemelerde ise hiç vurmadan yalnız dinlediler. Her denemeden sonra parçanın ne kadar sürdüğünü tahmin ettiler. En seyrek vurdukları denemelerde süreyi en kısa tahmin ettiler; yani zaman onlara daha hızlı geçmiş gibi geldi. Hiç vurmadan yalnız dinlediklerinde ise süreyi en uzun tahmin ettiler. Ritim daha hızlı çalındığında tahmin edilen süre de uzadı. Müzisyenlerle ötekiler arasında fark çıkmadı; ama daha düzenli ve doğru vuranlar süreyi daha kısa tahmin etti.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Ritme eşlik etme biçiminin süre tahminini nasıl etkilediğini",
+            "Müzisyenlerin süreyi ötekilerden çok daha doğru tahmin ettiğini",
+            "Parmakla tempo tutunca zamanın daha yavaş geçtiğini",
+            "Parmakla tempo tutmanın ritmi hatırlamayı kolaylaştırdığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ritim kalıpları kaç farklı hızda çalındı?",
+          "secenekler": [
+            "Üç",
+            "İki",
+            "Dört",
+            "Beş"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Daha düzenli ve doğru vuranlar süreyi nasıl tahmin etti?",
+          "secenekler": [
+            "Daha kısa",
+            "Daha uzun",
+            "Ötekilerle aynı",
+            "Hiç tahmin edemediler"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Süre en kısa hangi denemelerde tahmin edildi?",
+          "secenekler": [
+            "En seyrek vurulan denemelerde",
+            "Hiç vurmadan yalnız dinlenen denemelerde",
+            "Gözler kapalı dinlenen denemelerde",
+            "Parçanın önceden bilindiği denemelerde"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ritim daha hızlı çalınınca tahmin edilen süre ne oldu?",
+          "secenekler": [
+            "Uzadı",
+            "Kısaldı",
+            "Hiç değişmedi",
+            "Önce kısaldı, sonra uzadı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Müzisyenlerle ötekiler karşılaştırılınca ne çıktı?",
+          "secenekler": [
+            "Aralarında fark çıkmadı",
+            "Müzisyenler hep daha kısa tahmin etti",
+            "Müzisyen olmayanlar deneyi bitiremedi",
+            "Müzisyenler hep daha uzun tahmin etti"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa114",
+      "baslik": "Yarasaya seslenen yaprak",
+      "etiket": "bitki",
+      "kaynak": "simon2011",
+      "pmid": "21798950",
+      "doi": "10.1126/science.1204210",
+      "yazar": "Simon ve ark.",
+      "dergi": "Science",
+      "yil": 2011,
+      "metin": "Gündüz açan pek çok çiçek, arıları ve kuşları göz alıcı görünüşüyle kendine çeker. Yarasalar ise çevrelerini, çıkardıkları seslerin yankısını dinleyerek tanır. Peki yarasaların tozlaştırdığı çiçekler de onlara yankıyla fark edilen bir işaret veriyor mu? Araştırmacılar, bir sarmaşık türünde çiçek salkımlarının hemen üstünde duran, çanak biçimli alışılmadık bir yaprağı inceledi. Bu yaprağın yankılarının, iyi bir işarette bulunması gereken özellikleri taşıdığını gösterdiler. Yankılar güçlüydü ve birçok yöne yayılıyordu. Ayrıca yankının, her seferinde aynı kalan ve kolayca tanınan bir izi vardı. Ardından çiçekleri ziyaret eden yarasalarla davranış deneyleri yaptılar. Yaprak varken yarasaların yiyecek arama süresi, yaprak yokkenkinin yarısıydı. Demek ki çanak yaprak, yankısıyla yarasaları çiçeklere çekiyor ve çiçekleri bulmayı kolaylaştırıyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir yaprağın yankısıyla yarasaları çiçeklere nasıl çektiğini",
+            "Yarasaların çiçekleri yalnız renklerine bakarak bulduğunu",
+            "Gündüz açan çiçeklerin arıları görünüşüyle nasıl çektiğini",
+            "Yarasaların yankıyla yapraklar arasında nasıl yol bulduğunu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İncelenen yaprak hangi biçimdeydi?",
+          "secenekler": [
+            "Çanak biçimli",
+            "İğne biçimli",
+            "Yıldız biçimli",
+            "Kalp biçimli"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yaprak bitkinin neresinde duruyordu?",
+          "secenekler": [
+            "Çiçek salkımlarının üstünde",
+            "Toprağın hemen altında",
+            "Gövdenin toprağa yakın en dibinde",
+            "Meyvelerin içinde"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre yaprağın yankıları nasıldı?",
+          "secenekler": [
+            "Güçlü ve birçok yöne yayılan",
+            "Zayıf ve tek yöne giden",
+            "Yalnız yağmurlu havalarda duyulabilen",
+            "Her seferinde değişen"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yaprak varken yarasaların yiyecek arama süresi, yaprak yokkenkine göre ne kadardı?",
+          "secenekler": [
+            "Yarısı kadardı",
+            "İki katı kadardı",
+            "Üç katı kadardı",
+            "Dörtte biri kadardı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar yankıları inceledikten sonra ne yaptı?",
+          "secenekler": [
+            "Yarasalarla davranış deneyleri yaptılar",
+            "Yaprakları kesip kuruttular",
+            "Çiçekleri başka bir ormana taşıdılar",
+            "Arıların uçuşunu kaydettiler"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa115",
+      "baslik": "Dikenlerdeki su",
+      "etiket": "bitki",
+      "kaynak": "ju2012",
+      "pmid": "23212376",
+      "doi": "10.1038/ncomms2253",
+      "yazar": "Ju ve ark.",
+      "dergi": "Nat Commun",
+      "yil": 2012,
+      "metin": "Bazı böceklerin sırtındaki tümsekler ve bazı örümcek ipekleri sisten su toplayabilir. Kaktüslerin birçok türü çok kurak yerlerde yaşar ve susuzluğa son derece dayanıklıdır. Araştırmacılar, bir kaktüs türünün kuraklığa dayanmasını sağlayan yollardan birini inceledi. Bu kaktüsün sisten su toplayan çok etkili bir düzeneği olduğunu gördüler. Gövdenin her yanına düzenli biçimde dağılmış öbekler vardı. Her öbekte koni biçimli dikenler ve ince tüyler bulunuyordu. Her diken birbirine bağlı üç bölümden oluşuyordu. Bu bölümlerin yüzeyleri farklıydı ve su toplamada her birinin ayrı bir görevi vardı. Dikenin kalınlığı ve yüzeyi, ucundan dibine doğru değişiyordu; düzeneği bu kadar etkili yapan, bütün bu farkların bir arada bulunmasıydı. Bu düzeneği anlamak, sisten su toplayan yeni malzemeler ve aletler tasarlamaya yardım edebilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir kaktüsün sisten su toplayan düzeneğini",
+            "Kaktüslerin suyu yalnız kökleriyle almasını",
+            "Kaktüs dikeninin her yerde aynı yapıda olmasını",
+            "Kaktüs gövdesinin suyu uzun süre saklamasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre sisten su toplayabilen öteki yapılar hangileri?",
+          "secenekler": [
+            "Böcek sırtındaki tümsekler ve örümcek ipekleri",
+            "Kuş tüyleri ve balık pulları",
+            "Ağaç kabukları ve yosunlar",
+            "Yarasa kanatları ve kedi bıyıkları"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kaktüsün gövdesindeki öbeklerde neler vardı?",
+          "secenekler": [
+            "Koni biçimli dikenler ve ince tüyler",
+            "Küçük çiçekler ve tohumlar",
+            "Delikler ve ince kökler",
+            "Yapışkan bezeler ve yapraklar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Her diken kaç bölümden oluşuyordu?",
+          "secenekler": [
+            "Üç bölümden",
+            "İki bölümden",
+            "Beş bölümden",
+            "On bölümden"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kaktüsün gövdesindeki öbekler nasıl dağılmıştı?",
+          "secenekler": [
+            "Her yana düzenli biçimde",
+            "Yalnız gövdenin en tepesine",
+            "Yalnız toprağa yakın kısma",
+            "Gelişigüzel, birkaç yere"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Dikenin kalınlığı ve yüzeyi nasıl değişiyordu?",
+          "secenekler": [
+            "Ucundan dibine doğru",
+            "Geceden gündüze",
+            "Mevsimden mevsime",
+            "Kaktüs yaşlandıkça"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa116",
+      "baslik": "Tek hücrede bir göz",
+      "etiket": "mikro",
+      "kaynak": "gavelis2015",
+      "pmid": "26131935",
+      "doi": "10.1038/nature14593",
+      "yazar": "Gavelis ve ark.",
+      "dergi": "Nature",
+      "yil": 2015,
+      "metin": "Kamera gibi çalışan gözler birkaç hayvan grubunda vardır. Böyle karmaşık bir yapının ancak çok hücreli canlılarda olabileceği düşünülür. Oysa dinoflagellat denen bazı tek hücrelilerde göze benzer bir yapı bulunur. Bu yapıda saydam bir ön katmana, merceğe, halkaya ve ışık alan bir tabakaya benzeyen parçalar vardır. Yapı o kadar karmaşıktır ki ilk başta çok hücreli bir göz sanılmıştı. Bu canlılar laboratuvarda yetiştirilemiyor ve doğada az bulunuyor. Bu yüzden yapının ne işe yaradığı ve nasıl oluştuğu bilinmiyordu. Araştırmacılar yapıyı elektron mikroskobu ve tek hücreden gen okuma yöntemleriyle inceledi. Saydam ön katman, hücrenin enerji üreten parçaları olan mitokondrilerden oluşuyordu. Işık alan tabakaya benzeyen parça ise plastit denen hücre parçalarının birleşmesiyle oluşmuştu. Yani yapı, hücrede zaten bulunan parçalardan kurulmuştu.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Tek hücreli bir canlıdaki göze benzer yapının nelerden kurulduğunu",
+            "Göze benzer yapının hücrenin yeni ürettiği parçalardan kurulduğunu",
+            "Kamera gibi çalışan gözlerin birkaç hayvan grubunda olduğunu",
+            "Tek hücreli canlıların ışığa doğru nasıl yüzüp ilerlediğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Göze benzer yapı hangi canlılarda bulunuyor?",
+          "secenekler": [
+            "Bazı dinoflagellatlarda",
+            "Bazı amiplerde",
+            "Bazı bakterilerde",
+            "Bazı terliksi hayvanlarda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yapı hakkında neden az şey biliniyordu?",
+          "secenekler": [
+            "Canlılar yetiştirilemiyor ve az bulunuyordu",
+            "Yapı yalnız gece ve çok soğuk sularda ortaya çıkıyordu",
+            "Canlılar çok hızlı yüzüyordu",
+            "Yapı çok çabuk bozulup kayboluyordu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Saydam ön katman neyden oluşuyordu?",
+          "secenekler": [
+            "Mitokondrilerden",
+            "Plastitlerden",
+            "Kum tanelerinden",
+            "Su damlacıklarından"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Işık alan tabakaya benzeyen parça neyden oluşmuştu?",
+          "secenekler": [
+            "Birleşen plastitlerden",
+            "Mitokondrilerden",
+            "Hücre zarının kıvrımlarından",
+            "Yağ damlalarından"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar yapıyı hangi yöntemlerle inceledi?",
+          "secenekler": [
+            "Elektron mikroskobu ve gen okuma yöntemleriyle",
+            "Işık mikroskobu ve boyama yöntemleriyle",
+            "X ışını görüntüleri ve bilgisayar modelleriyle",
+            "Laboratuvarda yetiştirme ve izleme yöntemleriyle"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa117",
+      "baslik": "Yürüyen tek hücre",
+      "etiket": "mikro",
+      "kaynak": "larson2022",
+      "pmid": "35963241",
+      "doi": "10.1016/j.cub.2022.07.034",
+      "yazar": "Larson ve ark.",
+      "dergi": "Curr Biol",
+      "yil": 2022,
+      "metin": "Tek bir hücre yürüyebilir mi? Euplotes denen tek hücrelilerden biri, yüzeylerde on dört küçük, bacağa benzeyen uzantıyla yürür. Araştırmacılar bu yürüyüşü ayrıntılı biçimde izledi. Hücre yürürken birkaç belirli adım biçimi arasında, belli kurallara göre geçiş yapıyordu. Bu geçişlerin birkaçı çok sıktı ve hep aynı yönde oluyordu; tersine dönüş olmuyordu. Geri kalan birçok geçiş ise seyrekti ve iki yönde de olabiliyordu. Bilgisayar benzetimleri ve deneyler, adımların sırasının yürüyüş için önemli olduğunu düşündürdü. Araştırmacılar hücreyi, belli kurallarla bir durumdan ötekine geçen basit makinelere benzetti. Uzantılar birbirine ince lif demetleriyle bağlıydı. Lifleri bozan deneyler, uzantıların birbirine uyarak çalışmasını bu liflerin sağladığını gösterdi. Yani yürüyüşü mekanik bir düzen yönetiyor olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Tek hücreli bir canlının yürüyüşünün nasıl düzenlendiğini",
+            "Adımların sırasının yürüyüş için hiç önemli olmadığını",
+            "Bilgisayar benzetimlerinin deneylerle birlikte kullanıldığını",
+            "Tek hücreli canlıların suda kamçıyla nasıl yüzdüğünü"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bu tek hücreli canlı kaç uzantıyla yürür?",
+          "secenekler": [
+            "On dört",
+            "İki",
+            "Altı",
+            "Yüz"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sık görülen geçişler nasıldı?",
+          "secenekler": [
+            "Hep aynı yönde oluyordu",
+            "İki yönde de olabiliyordu",
+            "Yalnız karanlıkta oluyordu",
+            "Her seferinde rastgele değişiyordu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar hücreyi neye benzetti?",
+          "secenekler": [
+            "Belli kurallarla durum değiştiren basit makinelere",
+            "Rüzgârda bir o yana bir bu yana savrulan bir yaprağa",
+            "Suda yüzen bir balığa",
+            "Durmadan dönen bir tekerleğe"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Uzantılar birbirine neyle bağlıydı?",
+          "secenekler": [
+            "İnce lif demetleriyle",
+            "Yapışkan bir sıvıyla",
+            "Kalın bir kabukla",
+            "Küçük hava kabarcıklarıyla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Lifleri bozan deneyler neyi gösterdi?",
+          "secenekler": [
+            "Uzantıların birbirine uymasını liflerin sağladığını",
+            "Liflerin hücreye besin taşıdığını",
+            "Liflerin ışığı algıladığını",
+            "Liflerin hücreyi ısıttığını"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa118",
+      "baslik": "Tıklayan böcek",
+      "etiket": "bocek",
+      "kaynak": "bolmin2021",
+      "pmid": "33468629",
+      "doi": "10.1073/pnas.2014569118",
+      "yazar": "Bolmin ve ark.",
+      "dergi": "PNAS",
+      "yil": 2021,
+      "metin": "Birçok küçük hayvan, kaslarının gücü yetmediğinde yaylardan ve kilitlerden yararlanır. Tıklayan böcekler de böyle yapar: gövdelerini göğüslerindeki bir menteşeden büker, sonra bir anda düzeltirler. Bu harekete tıklama denir; böceği tutan bir şey yoksa tıklama onu havaya sıçratır. Sıçrayış ayrıntılı incelenmişti, ama gövdeyi bu kadar hızlı düzelten düzenek bilinmiyordu. Araştırmacılar önce hareketi üç evreye ayırdı: kilitlenme, yüklenme ve enerjinin boşalması. Menteşenin içini çok hızlı çekilen X ışını görüntüleriyle izlediler. Menteşedeki yumuşak dış kabuğun, hızla geri esneyerek bir yay gibi çalıştığını gösteren kanıtlar buldular. Ardından hareketi matematikle modellediler. Araştırmacılara göre bu yöntemler, başka küçük hayvanların çok hızlı hareketlerini anlamaya da yardım edebilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir böceğin gövdesini nasıl çok hızlı düzelttiğini",
+            "Tıklayan böceklerin yalnız kas gücüyle sıçradığını",
+            "Hareketin daha sonra matematikle modellendiğini",
+            "Tıklayan böceklerin yumurtalarını nereye bıraktığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Küçük hayvanlar kaslarının gücü yetmeyince neyden yararlanır?",
+          "secenekler": [
+            "Yaylardan ve kilitlerden",
+            "Rüzgârdan ve sudan",
+            "Başka hayvanların sırtından",
+            "Kanatlarındaki tüylerden"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Böcek gövdesini nereden büker?",
+          "secenekler": [
+            "Göğsündeki bir menteşeden",
+            "Kuyruğunun ucundan",
+            "Başının arkasından",
+            "Bacaklarının ekleminden"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar hareketi hangi evrelere ayırdı?",
+          "secenekler": [
+            "Kilitlenme, yüklenme ve enerjinin boşalması",
+            "Bükülme, sıçrama ve yere konma",
+            "Isınma, koşma ve dinlenme",
+            "Görme, koklama ve dokunma"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Menteşenin içi nasıl izlendi?",
+          "secenekler": [
+            "Çok hızlı X ışını görüntüleriyle",
+            "Gözle ve büyüteçle",
+            "Ses kayıtlarıyla",
+            "Isı kameralarıyla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Menteşedeki yumuşak dış kabuk ne yapıyordu?",
+          "secenekler": [
+            "Geri esneyerek yay gibi çalışıyordu",
+            "Menteşeyi yerinde kilitliyordu",
+            "Hareketi yavaşlatıp bir fren gibi çalışıyordu",
+            "Menteşeyi yağlayıp kaydırıyordu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa119",
+      "baslik": "Küp biçimli dışkının sırrı",
+      "etiket": "memeli",
+      "kaynak": "yang2020",
+      "pmid": "33289747",
+      "doi": "10.1039/d0sm01230k",
+      "yazar": "Yang ve ark.",
+      "dergi": "Soft Matter",
+      "yil": 2020,
+      "metin": "Avustralya'da yaşayan bir vombat türü, küp biçimli dışkısıyla ünlüdür. Bu keseli hayvan toprak kazar ve bitkiyle beslenir. Peki yumuşak bir bağırsak, dışkıya düz yüzler ve keskin köşeler nasıl verir? Araştırmacılar bu soruyu deneylerle ve bilgisayar hesaplarıyla inceledi. Vombat bağırsaklarını incelediklerinde küplerin bağırsağın son yüzde 17'lik bölümünde oluştuğunu gördüler. Bağırsak duvarında, öteki yerlerden iki kat kalın ve dört kat sert bölgeler buldular. Bu sert bölgelerin, bağırsak kasıldığında köşelerin oluşmasına yardım ettiğini öne sürdüler. Ardından, sert ve yumuşak bölgeleri sırayla dizilmiş esnek bir halkanın kasılınca nasıl biçim aldığını hesapladılar. Sertlik farkı arttıkça şekil kareye daha çok benzedi. Köşeler, sert bölgeler hızlı kasılırken yumuşak bölgelerin ortası daha yavaş hareket edince ortaya çıktı.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Vombat dışkısının köşelerinin nasıl oluştuğunu",
+            "Köşelerin dışkı dışarı çıktıktan sonra oluştuğunu",
+            "Bu vombatın toprak kazan bir keseli olduğunu",
+            "Vombatların dışkıyla bölgelerini nasıl işaretlediğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Vombat neyle beslenir?",
+          "secenekler": [
+            "Bitkiyle",
+            "Böcekle",
+            "Balıkla",
+            "Küçük kuşlarla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Küpler bağırsağın neresinde oluşuyordu?",
+          "secenekler": [
+            "Son yüzde 17'lik bölümünde",
+            "İlk yüzde 17'lik bölümünde",
+            "Tam ortasında",
+            "Midenin içinde"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sert bölgeler ötekilere göre nasıldı?",
+          "secenekler": [
+            "İki kat kalın, dört kat sert",
+            "Yarı kalınlıkta ve daha yumuşak",
+            "Daha ince ve daha yumuşak",
+            "Aynı kalınlıkta, daha ıslak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Hesaplarda sertlik farkı arttıkça ne oldu?",
+          "secenekler": [
+            "Şekil kareye daha çok benzedi",
+            "Şekil daireye daha çok benzedi",
+            "Halka ikiye bölündü",
+            "Halka hiç kasılmadı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar bu soruyu nasıl inceledi?",
+          "secenekler": [
+            "Deneylerle ve bilgisayar hesaplarıyla",
+            "Hayvanat bahçesinde yalnız izleyerek",
+            "Eski kitapları okuyarak",
+            "Vombat bakıcılarıyla konuşarak"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa120",
+      "baslik": "Sağır görünen kurbağa",
+      "etiket": "surungen",
+      "kaynak": "boistel2013",
+      "pmid": "24003145",
+      "doi": "10.1073/pnas.1302218110",
+      "yazar": "Boistel ve ark.",
+      "dergi": "PNAS",
+      "yil": 2013,
+      "metin": "Karada yaşayan dört ayaklı hayvanlarda orta kulak, kara yaşamına uyum sağlamış bir yapıdır. Dünyanın en küçük dört ayaklı kara hayvanlarından biri olan bir kurbağa türünün ise orta kulağı yoktur. Bu yüzden bu kurbağa ilk bakışta sağır gibi görünür. Yine de seslerle haberleşir. Peki bu minik kurbağa nasıl duyuyor? Araştırmacılar, kulak çevresindeki dokuların özelliklerini çok güçlü X ışınlarıyla çekilen görüntülerden ölçtü. Sonra sesin bu dokularda nasıl yayıldığını modellediler. Modellere göre ses, kemikler üzerinden iç kulağa ulaşıyordu. Kurbağanın ağız boşluğu da sesle birlikte titreşerek bu iletimi güçlendiriyordu. Demek ki bu minik kurbağalar, orta kulakları olmasa da kemikleri ve ağız boşlukları sayesinde duyabiliyor ve sesle etkili biçimde haberleşebiliyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Çok küçük bir kurbağanın sesleri nasıl duyabildiğini",
+            "Bu minik kurbağanın seslerle haberleşemediğini",
+            "Bu kurbağanın en küçük dört ayaklılardan biri olduğunu",
+            "Bu küçük kurbağanın yumurtalarını nereye bıraktığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bu kurbağanın hangi yapısı yoktur?",
+          "secenekler": [
+            "Orta kulağı",
+            "Dili",
+            "Arka bacakları",
+            "Gözkapakları"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar kulak çevresindeki dokuları nasıl ölçtü?",
+          "secenekler": [
+            "Çok güçlü X ışını görüntüleriyle",
+            "Kurbağaları suya batırarak",
+            "Kurbağalara müzik çalarak",
+            "Dokuları tek tek tartarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Modellere göre ses iç kulağa nasıl ulaşıyordu?",
+          "secenekler": [
+            "Kemikler üzerinden",
+            "Deri üzerinden",
+            "Akciğerler üzerinden",
+            "Kulak zarı üzerinden"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kurbağanın ağız boşluğu ne yapıyordu?",
+          "secenekler": [
+            "Titreşerek iletimi güçlendiriyordu",
+            "Dışarıdan gelen bütün sesleri tamamen engelliyordu",
+            "Sesleri dışarı yansıtıyordu",
+            "Havayı ısıtıyordu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre orta kulak neye uyum sağlamış bir yapıdır?",
+          "secenekler": [
+            "Kara yaşamına",
+            "Su altı yaşamına",
+            "Uçmaya",
+            "Toprak kazmaya"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,756 @@
+{
+  "surum": "taslak-07",
+  "not": "Her soruda doğru seçenek ilk sıradadır; uygulama şıkları her gösterimde karıştırır. 'ana' sorusu her turda sorulur, kalan 3 soru 5 ayrıntı sorusundan seçilir.",
+  "etiketler": {
+    "bocek": "Böcekler",
+    "kus": "Kuşlar",
+    "memeli": "Memeliler",
+    "deniz": "Deniz canlıları",
+    "bitki": "Bitkiler",
+    "insan": "İnsan",
+    "mikro": "Mikroplar",
+    "surungen": "Sürüngenler ve kurbağalar"
+  },
+  "metinler": [
+    {
+      "id": "oa061",
+      "baslik": "Kumun içinde yüzen kertenkele",
+      "etiket": "surungen",
+      "kaynak": "maladen2009",
+      "pmid": "19608917",
+      "doi": "10.1126/science.1172490",
+      "yazar": "Maladen ve ark.",
+      "dergi": "Science",
+      "yil": 2009,
+      "metin": "Bir kertenkele kumun içinde yüzebilir mi? Çölde yaşayan bir kertenkele türü, kuru kumun içinde ilerleyebilir. Kuru kum ilginç bir maddedir: kimi zaman katı gibi, kimi zaman akışkan gibi davranır. Araştırmacılar kertenkeleyi kumun altında, saniyede çok sayıda görüntü çeken bir röntgen düzeneğiyle izledi. Kertenkele kuma girince bacaklarıyla kumu itmeyi bırakıyordu. Bunun yerine bedenini baştan kuyruğa doğru dalgalandırarak ilerliyordu. Bir canlının sudaki hızı hesaplanabiliyordu, ama kumdaki hızını hesaplamanın bir yolu yoktu. Bu yüzden ekip, küçük bir silindiri farklı açılarda kumun içinde ilerletti ve kumun ona ne kadar direnç gösterdiğini ölçtü. Bu ölçümlerle kertenkelenin hızını tahmin eden bir model kurdu. Modelin tahmini, ölçülen hızla uyuştu. Demek ki kertenkele kumda, sürtünmeli bir akışkanda yüzer gibi ilerliyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir kertenkelenin kuru kumun içinde nasıl ilerlediğini",
+            "Bir canlının sudaki hızının hesaplanabildiğini",
+            "Kertenkelenin kumdaki hızının hiç hesaplanamayacağını",
+            "Kertenkelelerin çölde gündüzün yakıcı sıcağından korunmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kuru kum nasıl davranır?",
+          "secenekler": [
+            "Kimi zaman katı, kimi zaman akışkan gibi",
+            "Kimi zaman katı, kimi zaman lastik gibi",
+            "Hep katı gibi, hiç akmadan",
+            "Hep sıvı gibi, hiç sertleşmeden"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar kertenkeleyi kumun altında neyle izledi?",
+          "secenekler": [
+            "Bir röntgen düzeneğiyle",
+            "Kumun üstüne konan bir mikrofonla",
+            "Kertenkelenin sırtına takılan küçük bir ışıklı aygıtla",
+            "Çıplak gözle, kumu kazarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kertenkele kuma girince bacaklarıyla ne yapmayı bırakıyordu?",
+          "secenekler": [
+            "Kumu itmeyi",
+            "Kumu kazmayı",
+            "Yön değiştirmeyi",
+            "Dengede durmayı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kertenkele kumun içinde nasıl ilerliyordu?",
+          "secenekler": [
+            "Bedenini baştan kuyruğa dalgalandırarak",
+            "Kuyruğunu dik tutarak",
+            "Ön bacaklarıyla kumu hızla kazıp önünü açarak",
+            "Kumun akıntısına kapılarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip kumun içinde neyi farklı açılarda ilerletti?",
+          "secenekler": [
+            "Küçük bir silindiri",
+            "Bir kertenkele maketini",
+            "Bir su damlasını",
+            "Büyük bir taşı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa062",
+      "baslik": "Kaplumbağanın tuhaf ağzı",
+      "etiket": "surungen",
+      "kaynak": "ip2012",
+      "pmid": "23053366",
+      "doi": "10.1242/jeb.068916",
+      "yazar": "Ip ve ark.",
+      "dergi": "Journal of Experimental Biology",
+      "yil": 2012,
+      "metin": "Bir kaplumbağa vücudundaki atığı ağzından atabilir mi? Yumuşak kabuklu bir kaplumbağa türü suda yaşamaya çok iyi uyum sağlamıştır; hafif tuzlu bataklıklarda bile yaşayabilir. Bu kaplumbağa karadayken arada bir başını su birikintilerine sokar. Bunu ağzından nefes almak için yaptığı düşünülüyordu. Bir ekip, kaplumbağanın ağzıyla üre denen bir atık maddeyi de dışarı atıp atmadığına baktı. Kaplumbağalar suyun içindeyken ürenin büyük kısmını böbreklerinden değil, ağızlarından attı. Karada tutulduklarında başlarını 20 ila 100 dakika suya soktular; bu sırada hem üre attılar hem oksijen aldılar. Tükürüklerindeki üre, kanlarındakinden çok daha yoğundu. Ekip, ağzın iç yüzeyinde üre taşıdığı düşünülen bir protein de buldu; bu protein böbrekte yoktu. Araştırmacılara göre bu yetenek, bu kaplumbağaların tuzlu sulara yayılmasını kolaylaştırmış olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir kaplumbağanın atık maddeyi ağzından atmasını",
+            "Tükürükteki ürenin kandakinden yoğun olmasını",
+            "Kaplumbağanın ürenin çoğunu böbreğiyle atmasını",
+            "Kaplumbağaların bataklıkta neyle beslendiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kaplumbağanın başını suya ne için soktuğu düşünülüyordu?",
+          "secenekler": [
+            "Ağzından nefes almak için",
+            "Su içmek için",
+            "Serinlemek için",
+            "Suyun dibinde yiyecek aramak için"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metindeki kaplumbağa türünün kabuğu nasıldır?",
+          "secenekler": [
+            "Yumuşak",
+            "Taş gibi sert",
+            "Dikenli",
+            "Parlak renkli"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Karada tutulan kaplumbağalar başlarını ne kadar süre suya soktu?",
+          "secenekler": [
+            "20 ila 100 dakika",
+            "1 ila 2 dakika",
+            "5 ila 10 saniye",
+            "Bütün bir gün boyunca"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Üre taşıdığı düşünülen protein nerede bulundu?",
+          "secenekler": [
+            "Ağzın iç yüzeyinde",
+            "Yalnız böbrekte",
+            "Kabuğun altında",
+            "Ayaklarının parmak arasındaki derisinde"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılara göre bu yetenek kaplumbağaların neyini kolaylaştırmış olabilir?",
+          "secenekler": [
+            "Tuzlu sulara yayılmasını",
+            "Karada daha hızlı yürümesini",
+            "Daha uzun süre uyumasını",
+            "Daha çok yumurta bırakmasını"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa063",
+      "baslik": "Derenin sesine karşı",
+      "etiket": "surungen",
+      "kaynak": "zhang2015",
+      "pmid": "32256536",
+      "doi": "10.1093/czoolo/61.6.996",
+      "yazar": "Zhang ve ark.",
+      "dergi": "Current Zoology",
+      "yil": 2015,
+      "metin": "Gürültülü bir derenin yanında sesini duyurmak kolay değildir. Akıntılı derelerin kıyısında yaşayan bir kurbağa türü, insan kulağının duyamayacağı kadar yüksek perdeli sesler de çıkarır. Bilim insanlarına göre kurbağa böylece sesini, hızla akan suyun kalın ve güçlü uğultusunda kaybolmaktan korur. Peki erkek kurbağalar, çevrelerindeki gürültüye göre seslerini değiştirir mi? Bir ekip, Çin'in ortasındaki Huangshan'da, gürültüsü farklı iki derede yaşayan erkek kurbağaların seslerini kaydetti. Sonra iki derenin kayıtlarını karşılaştırdı. Seslerin çoğu özelliği iki yerde de benzerdi. Yalnız seslerin temel perdesi ve bazı bölümlerinin süresi farklıydı. Daha gürültülü derenin kurbağaları genellikle daha yüksek perdeden sesleniyordu. Yüksek perde, sesin gürültü içinde daha kolay seçilmesini sağlıyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Kurbağaların gürültülü derede daha yüksek perdeden seslenmesini",
+            "Kurbağaların gürültülü derede seslerini tamamen kesmesini",
+            "Kurbağaların her derede hep aynı perdeden seslenmesini",
+            "Kurbağaların gürültülü derede daha alçak perdeden seslenmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip hangi kurbağaların seslerini kaydetti?",
+          "secenekler": [
+            "Erkek kurbağaların",
+            "Dişi kurbağaların",
+            "Yavru kurbağaların",
+            "Yaşlı kurbağaların"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip kaç derede kayıt yaptı?",
+          "secenekler": [
+            "2",
+            "1",
+            "5",
+            "10"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip kurbağaların seslerini nerede kaydetti?",
+          "secenekler": [
+            "Çin'in ortasındaki Huangshan'da",
+            "Çin'in güneyindeki bir adada",
+            "Japonya'daki bir dağ gölünün kıyısında",
+            "Hindistan'daki bir yağmur ormanında"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre hızla akan suyun uğultusu nasıldır?",
+          "secenekler": [
+            "Kalın ve güçlü",
+            "İnce ve tiz",
+            "Hafif ve kesik kesik",
+            "Yumuşak ve fısıltı gibi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yüksek perdenin kurbağaya yararı nedir?",
+          "secenekler": [
+            "Sesin gürültü içinde daha kolay seçilmesi",
+            "Sesin daha uzun sürmesi",
+            "Kurbağanın seslenirken daha az yorulması",
+            "Sesin suyun altına ulaşması"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa064",
+      "baslik": "Ağaçtan süzülen semender",
+      "etiket": "surungen",
+      "kaynak": "brown2022",
+      "pmid": "36111422",
+      "doi": "10.1242/jeb.244598",
+      "yazar": "Brown ve ark.",
+      "dergi": "Journal of Experimental Biology",
+      "yil": 2022,
+      "metin": "Bir semender ağaçtan düşerken ne yapar? Bir semender türü dünyanın en uzun ağaçlarının tepelerinde, dallarda yetişen eğrelti otlarının arasında yaşar. Bu semenderler rahatsız edildiklerinde hemen aşağı atlar. Kanat gibi özel bir yapıları yoktur; düşerken bacaklarını ve kuyruklarını hafifçe oynatarak dengede kalırlar. Araştırmacılar bu türü ve üç başka semender türünü iki durumda izledi: kısa bir yükseklikten düşerken ve yukarı doğru esen bir rüzgâr tünelinin içinde. Ağaçta yaşayan semenderler düşüşlerini yavaşlatmakta ve yönlendirmekte ötekilerden daha başarılıydı. Bunlardan ağaç tepesinde yaşayan tür ile yakın akrabası, düşerken hep paraşüt gibi yavaşlayıp süzüldü. Neredeyse dik düşüyorlardı, ama düşüşlerindeki küçük eğim bile, yüksekten atladıklarında onları kendi ağaçlarının gövdesine ya da yakın dallara ulaştırmaya yetebilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Ağaçta yaşayan semenderlerin düşerken süzülmesini",
+            "Semenderlerin eğrelti otlarının arasında yaşamasını",
+            "Semenderlerin ağaçtan ağaca uzun mesafeler süzülmesini",
+            "Ağaçta yaşayan semenderlerin süzülmede ötekilerden geri kalmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar ağaç tepesinde yaşayan türün yanında kaç semender türünü daha izledi?",
+          "secenekler": [
+            "Üç",
+            "Bir",
+            "Beş",
+            "On"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Semenderler rahatsız edildiklerinde ne yapar?",
+          "secenekler": [
+            "Hemen aşağı atlar",
+            "Hemen ağacın kovuğuna saklanır",
+            "Yüksek sesle bağırır",
+            "Renk değiştirir"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Semenderler düşerken nasıl dengede kalır?",
+          "secenekler": [
+            "Bacaklarını ve kuyruklarını hafifçe oynatarak",
+            "Kanat gibi açılan geniş deri katlarını gererek",
+            "Gövdelerini top gibi yuvarlayarak",
+            "Gözlerini kapatarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar semenderleri hangi iki durumda izledi?",
+          "secenekler": [
+            "Kısa bir yükseklikten düşerken ve rüzgâr tünelinde",
+            "Büyük bir akvaryumda ve sığ bir havuzda yüzerken",
+            "Karanlık bir mağarada ve toprak altında",
+            "Ağaç tepesinde tırmanırken ve dalda uyurken"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Düşüşlerindeki küçük eğim semenderleri nereye ulaştırmaya yetebilir?",
+          "secenekler": [
+            "Kendi ağaçlarının gövdesine ya da yakın dallara",
+            "Komşu ağacın tepesindeki eğrelti otlarına",
+            "Ağacın dibindeki toprağa ya da düşmüş yaprakların arasına",
+            "Rüzgârın sürüklediği uzak bir açıklığa"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa065",
+      "baslik": "Dağda soğuk bir gece",
+      "etiket": "kus",
+      "kaynak": "wolf2020",
+      "pmid": "32898456",
+      "doi": "10.1098/rsbl.2020.0428",
+      "yazar": "Wolf ve ark.",
+      "dergi": "Biology Letters",
+      "yil": 2020,
+      "metin": "Küçük bir kuş soğuk dağ gecelerine nasıl dayanır? Uyuşukluk denen hâlde vücut sıcaklığı düşer. Bu hâlin, soğuk yerlerde yaşayan ve az yağ depolayan küçük sıcakkanlı hayvanlar için önemli olduğu düşünülür. Ancak kuşlarda derin uyuşukluk seyrektir ve kuştan kuşa çok değişir. Bir ekip, tropik And Dağları'nda yaklaşık 3800 metre yükseklikte altı sinek kuşu türünden 26 kuşu inceledi. Kuşları bir gece boyunca dış havanın doğal sıcaklığında tuttu ve vücut sıcaklıklarını izledi. Bütün türler belirgin bir uyuşukluğa girdi. Bir kuşun vücut sıcaklığı 3,26 dereceye kadar indi. Bu, bir kuşta ya da kış uykusuna yatmayan bir memelide bugüne dek bildirilen en düşük değer. Uyuşukluğun derinliği ve süresi türden türe değişiyordu. Araştırmacılara göre bu kuşlar için derin uyuşukluk olağan.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Sinek kuşlarının soğuk gecelerde derin uyuşukluğa girmesini",
+            "Uyuşukluğun az yağ depolayan hayvanlara yaramasını",
+            "Sinek kuşlarının soğukta vücut sıcaklığını sabit tutmasını",
+            "Sinek kuşlarının dağlarda yuvalarını nasıl ısıttığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip kuşları kaç metre yükseklikte inceledi?",
+          "secenekler": [
+            "Yaklaşık 3800",
+            "Yaklaşık 380",
+            "Yaklaşık 1000",
+            "Yaklaşık 8000"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kaç sinek kuşu türü incelendi?",
+          "secenekler": [
+            "6",
+            "2",
+            "12",
+            "26"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kuşlar gece boyunca hangi sıcaklıkta tutuldu?",
+          "secenekler": [
+            "Dış havanın doğal sıcaklığında",
+            "Kuluçka makinesi sıcaklığında",
+            "Buzdolabı soğukluğunda",
+            "Sabit oda sıcaklığında"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bir kuşun vücut sıcaklığı en çok kaç dereceye indi?",
+          "secenekler": [
+            "3,26",
+            "33,6",
+            "13,2",
+            "0,5"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Uyuşukluğun derinliği ve süresi neye göre değişiyordu?",
+          "secenekler": [
+            "Kuşun türüne göre",
+            "Kuşun yaşına göre",
+            "Ayın evresine göre",
+            "Kuşun rengine göre"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa066",
+      "baslik": "Esneme kuşlara da bulaşır mı?",
+      "etiket": "kus",
+      "kaynak": "gallup2015",
+      "pmid": "26012708",
+      "doi": "10.1007/s10071-015-0873-1",
+      "yazar": "Gallup ve ark.",
+      "dergi": "Animal Cognition",
+      "yil": 2015,
+      "metin": "Bir kuş, başka bir kuşun esnediğini görünce o da esner mi? Birinin esnediğini görünce bizim de esnememize bulaşıcı esneme denir. Bulaşıcı esneme, bu araştırmadan önce yalnız dört memeli türünde deneyle gösterilmişti. Muhabbet kuşu, sürü hâlinde yaşayan bir papağan türüdür. Bir ekip bu kuşlarla iki deney yaptı. İlk deneyde kuşlar ikişer ikişer, yan yana kafeslere kondu. Kafeslerin arasında kimi zaman görüşü kapatan bir engel vardı, kimi zaman yoktu. Ekip, bir kuş esneyince yanındakinin de kısa süre içinde esneyip esnemediğine baktı. İkinci deneyde aynı kuşlara videolar izletildi: bazılarında başka muhabbet kuşları esniyor, bazılarında başka şeyler yapıyordu. İki deneyde de esnemenin bulaşıcı olduğu görüldü. Böylece bulaşıcı esneme, memeli olmayan bir hayvanda ilk kez deneyle gösterilmiş oldu.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Muhabbet kuşlarında esnemenin bulaşıcı olmasını",
+            "Muhabbet kuşlarının sürü hâlinde yaşamasını",
+            "Muhabbet kuşlarında esnemenin hiç bulaşmamasını",
+            "Muhabbet kuşlarının ağaç kovuklarında yuva kurmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bu çalışmadan önce bulaşıcı esneme kaç türde deneyle gösterilmişti?",
+          "secenekler": [
+            "Dört memeli türünde",
+            "Bir memeli türünde",
+            "Dört kuş türünde",
+            "Yüzlerce memeli türünde"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İlk deneyde kafeslerin arasına zaman zaman ne kondu?",
+          "secenekler": [
+            "Görüşü kapatan bir engel",
+            "Bir ayna",
+            "Su ve yiyecek dolu bir kap",
+            "Bir hoparlör"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İkinci deneyde kuşlara ne izletildi?",
+          "secenekler": [
+            "Başka muhabbet kuşlarının videoları",
+            "Kedilerin ve köpeklerin oynadığı videolar",
+            "İnsan yüzü fotoğrafları",
+            "Renkli ışıklar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İlk deneyde ekip neye baktı?",
+          "secenekler": [
+            "Bir kuş esneyince yanındakinin de esneyip esnemediğine",
+            "Bir kuş ötünce yanındakinin de ötüp ötmediğine",
+            "Kuşların gün boyunca ne kadar yem yediğine",
+            "Kuşların kafeste ne kadar uçtuğuna"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İlk deneyde kuşlar kafeslere nasıl yerleştirildi?",
+          "secenekler": [
+            "İkişer ikişer, yan yana",
+            "Tek tek, ayrı odalara",
+            "Üçer üçer, üst üste",
+            "Hepsi birlikte, tek bir kafese"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa067",
+      "baslik": "Buzun üstündeki küme",
+      "etiket": "kus",
+      "kaynak": "zitterbart2011",
+      "pmid": "21673816",
+      "doi": "10.1371/journal.pone.0020260",
+      "yazar": "Zitterbart ve ark.",
+      "dergi": "PLoS ONE",
+      "yil": 2011,
+      "metin": "İmparator penguenleri Antarktika kışında sıkı kümeler hâlinde birbirine sokulur. Kışı atlatmalarının sırrı bu kümelerdir. Kümede penguenler öyle sıkışıktır ki tek başına kımıldamak olanaksızdır. Oysa kümenin düzeni sürekli değişmelidir; çünkü kenarda bekleyen her penguenin de sırası gelince içeriye geçip orada yeterince kalabilmesi gerekir. Bir ekip, penguenlerin bu sorunu nasıl çözdüğünü inceledi. Penguenlerin hep birlikte, büyük bir uyum içinde hareket ettiğini gördü. Her 30 ila 60 saniyede bir, kümedeki bütün penguenler küçük adımlar atıyordu. Bu adımlar kümenin içinden bir dalga gibi geçiyordu. Zamanla bu küçük adımlar sayesinde kümenin düzeni baştan sona değişiyordu. Böylece küme hem sıkı kalıyor hem de kımıldayabiliyordu.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Penguenlerin sıkı kümede birlikte küçük adımlarla yer değiştirmesini",
+            "Kümedeki her penguenin kış boyunca hep aynı yerde kalmasını",
+            "Sıkı kümelerin penguenlerin kışı atlatmasına hiç yaramamasını",
+            "Erkek penguenlerin kış boyunca yumurtayı ayaklarının üstünde taşımasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kümede penguenleri tek başına kımıldamaktan alıkoyan nedir?",
+          "secenekler": [
+            "Çok sıkışık durmaları",
+            "Ayaklarının buza yapışması",
+            "Uykuda olmaları",
+            "Rüzgârın çok sert esmesi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kümenin düzeni neden sürekli değişmelidir?",
+          "secenekler": [
+            "Her penguen sırası gelince içeride kalabilsin diye",
+            "Penguenler yiyecek bulabilsin diye",
+            "Küme daha hızlı yürüyebilsin diye",
+            "Yavrular kalabalıkta annelerini kolayca bulabilsin diye"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Penguenler ne sıklıkla küçük adımlar atıyordu?",
+          "secenekler": [
+            "Her 30 ila 60 saniyede bir",
+            "Her 5 ila 10 dakikada bir, sırayla",
+            "Günde yalnız bir kez",
+            "Her saat başı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Küçük adımlar küme içinde nasıl yayılıyordu?",
+          "secenekler": [
+            "Bir dalga gibi",
+            "Rastgele, tek tek",
+            "Kenarlarda kalıp ortaya ulaşmadan",
+            "Ortada kalıp kenarlara ulaşmadan"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Zamanla küçük adımlar kümenin düzenini nasıl etkiliyordu?",
+          "secenekler": [
+            "Baştan sona değiştiriyordu",
+            "Yalnız kenarlarını değiştiriyordu",
+            "Kümeyi ikiye bölüyordu",
+            "Hiç değiştirmiyordu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa068",
+      "baslik": "Kimin sesi bu?",
+      "etiket": "memeli",
+      "kaynak": "thevenet2022",
+      "pmid": "35077689",
+      "doi": "10.1016/j.cub.2021.12.017",
+      "yazar": "Thévenet ve ark.",
+      "dergi": "Current Biology",
+      "yil": 2022,
+      "metin": "Su aygırları birbirlerini seslerinden tanıyabilir mi? Afrika'nın bu iri otçullarının birbirleriyle nasıl iletişim kurduğu hakkında çok az şey biliniyor. Bir ekip, su aygırı gruplarına hoparlörden üç çeşit ses dinletti. Seslerden biri grubun kendi üyelerinden birine, biri aynı göldeki komşu bir gruba, biri de uzaktaki yabancı bir gruba aitti. Su aygırları en güçlü tepkiyi yabancıların sesine verdi. Demek ki yabancıların sesini, tanıdık su aygırlarının sesinden ayırt edebiliyorlar. Çalışma, su aygırı gruplarının kendi bölgelerini sahiplendiğini ve komşularına yabancılardan daha az saldırgan davrandığını da gösterdi. Araştırmacılara göre hayvanları yeni bir yere taşımadan önce onlara oradakilerin sesini dinletmek, birbirini hiç görmemiş hayvanlar arasındaki kavgaları azaltabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Su aygırlarının birbirlerini seslerinden ayırt etmesini",
+            "Su aygırlarının iletişimi hakkında az şey bilinmesini",
+            "Su aygırlarının bütün seslere aynı tepkiyi vermesini",
+            "Su aygırlarının yavrularını yırtıcılardan nasıl koruduğunu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip su aygırlarına kaç çeşit ses dinletti?",
+          "secenekler": [
+            "3",
+            "1",
+            "6",
+            "10"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Komşu grubun sesi nereden geliyordu?",
+          "secenekler": [
+            "Aynı göldeki bir gruptan",
+            "Uzaktaki başka bir gruptan",
+            "Hayvanat bahçesinden",
+            "Grubun kendi üyelerinden birinden"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Su aygırları en güçlü tepkiyi hangi sese verdi?",
+          "secenekler": [
+            "Yabancı grubun sesine",
+            "Kendi gruplarından birinin sesine",
+            "Komşu grubun sesine",
+            "Kendi seslerinin kaydına"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Su aygırları komşularına nasıl davranıyor?",
+          "secenekler": [
+            "Yabancılara göre daha az saldırgan",
+            "Yabancılara göre daha saldırgan",
+            "Yabancılara davrandıkları gibi",
+            "Onlardan her zaman uzak durup kaçarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar taşınacak hayvanlara ne yapılmasını öneriyor?",
+          "secenekler": [
+            "Önceden oradakilerin sesinin dinletilmesini",
+            "Yeni yere tek başına bırakılmalarını",
+            "Götürülmeden önce bir süre yalnız tutulmalarını",
+            "Yeni yere hep gece karanlığında taşınmalarını"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa069",
+      "baslik": "Deniz dibindeki gizemli daireler",
+      "etiket": "deniz",
+      "kaynak": "kawase2013",
+      "pmid": "23811799",
+      "doi": "10.1038/srep02106",
+      "yazar": "Kawase ve ark.",
+      "dergi": "Scientific Reports",
+      "yil": 2013,
+      "metin": "Deniz dibindeki büyük, düzgün daireleri kim yapar? Bir balon balığı türünün erkekleri, kumu kazarak bu daireleri yapar. Bir ekip, bu dairelerin üremede ne işe yaradığını araştırdı. Erkekler kumda farklı açılarda uzanan oluklar kazıyordu. Böylece ortadaki yuvanın çevresinde, ışınlar gibi dizilmiş tepeler ve oluklar oluşuyordu. Yuvanın içinde ise ince kum tanelerinden düzensiz desenler yapıyorlardı. Daire, dişilerin eş seçimini etkiliyordu. Ayrıca dişilerin önem verdiği ince kumun yuvada toplanmasına yarıyordu. İşin tuhafı, erkekler bir yuvayı hiç yeniden kullanmıyor, her seferinde büyük emekle yeni bir daire kuruyordu. Araştırmacılara göre bunun nedeni, oluklarda birden çok üreme için yetecek kadar ince kum bulunmaması olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Balon balıklarının kumdan yaptığı dairelerin ne işe yaradığını",
+            "Balon balıklarının aynı daireyi her üremede yeniden kullanmasını",
+            "Yuvanın içindeki desenlerin düzensiz biçimde dizilmesini",
+            "Balon balıklarının deniz dibinde neyle beslendiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Daireleri kimler yapıyor?",
+          "secenekler": [
+            "Erkek balıklar",
+            "Dişi balıklar",
+            "Yavru balıklar",
+            "Erkek ve dişiler birlikte"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yuvanın çevresinde neler oluşuyordu?",
+          "secenekler": [
+            "Işınlar gibi dizilmiş tepeler ve oluklar",
+            "İç içe halkalar gibi dizilmiş kum setleri",
+            "Birbirine koşut, düz sıralar hâlinde oluklar",
+            "Gelişigüzel dağılmış küçük kum yığınları"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yuvanın içindeki desenler neyle yapılıyordu?",
+          "secenekler": [
+            "İnce kum taneleriyle",
+            "Deniz kabuklarıyla",
+            "Kopardıkları yosun parçalarıyla",
+            "Küçük taşlarla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Daire, eş seçimini etkilemenin yanında neye yarıyordu?",
+          "secenekler": [
+            "İnce kumun yuvada toplanmasına",
+            "Yavruları güçlü akıntılardan korumaya",
+            "Yiyecek saklamaya",
+            "Başka balıkları uzak tutmaya"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Erkeklerin her seferinde yeni bir daire kurmasının nedeni ne olabilir?",
+          "secenekler": [
+            "Oluklarda yeterince ince kum bulunmaması",
+            "Eski yuvanın akıntıyla kaybolması",
+            "Dişilerin eski yuvayı tanıması",
+            "Eski yuvaya başka erkeklerin yerleşmesi"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa070",
+      "baslik": "Ritim tutan deniz aslanı",
+      "etiket": "deniz",
+      "kaynak": "cook2025",
+      "pmid": "40312403",
+      "doi": "10.1038/s41598-025-95279-1",
+      "yazar": "Cook ve ark.",
+      "dergi": "Scientific Reports",
+      "yil": 2025,
+      "metin": "Ritim tutmak yalnız insanlara mı özgü? İnsan dışında, yeni seslere ve müziğe gecikmeden ve tutarlı biçimde uyabildiği gösterilen tek canlı, Ronan adlı eğitimli bir deniz aslanıdır. Ronan 3 yaşındayken de ritmi tutabiliyordu, ama hareketleri insanlarınkinden daha değişkendi. Bu fark yüzünden, onun ritmi insanlardan farklı bir yolla tuttuğu düşünülmüştü. Ronan sonraki 12 yıl boyunca ara ara ritim çalıştı. Bir ekip, Ronan'a daha önce duymadığı hızlarda metronom gibi düzenli sesler dinletti ve başını sallayarak ritme ne kadar iyi uyduğunu ölçtü. Aynı sesleri 10 kişiye de dinletip ritme uyarak kollarını sallamalarını istedi. Ronan ritmi şaşmadan ve düzenli biçimde, en az sıradan yetişkinler kadar iyi tuttu. Bu bulgu, ritim tutmanın insana özgü bir sinir sistemi yapısı gerektirdiği görüşünü sarsıyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Ritim tutmanın yalnız insanlara özgü bir yetenek olmadığını",
+            "Ekibin deneyde metronom gibi düzenli sesler kullanmasını",
+            "Deniz aslanının ritmi insanlardan başka yolla tuttuğunu",
+            "Deniz aslanlarının suyun altında nasıl ses çıkardığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ronan 3 yaşındayken hareketleri insanlarınkine göre nasıldı?",
+          "secenekler": [
+            "Daha değişkendi",
+            "Tamamen aynıydı",
+            "Çok daha düzenliydi",
+            "Hiç ritme uymuyordu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ronan kaç yıl boyunca ara ara ritim çalıştı?",
+          "secenekler": [
+            "12",
+            "3",
+            "1",
+            "30"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ronan ritme hangi hareketle uyuyordu?",
+          "secenekler": [
+            "Başını sallayarak",
+            "Yüzgecini çırparak",
+            "Kuyruğunu sallayarak",
+            "Ses çıkararak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ölçüme kaç kişi katıldı?",
+          "secenekler": [
+            "10",
+            "3",
+            "12",
+            "100"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ronan ritmi sıradan yetişkinlere göre ne kadar iyi tuttu?",
+          "secenekler": [
+            "En az onlar kadar iyi",
+            "Onlardan çok daha kötü",
+            "Yalnız yavaş seslerde onlar kadar iyi",
+            "Onların yarısı kadar iyi"
+          ]
+        }
+      ]
+    }
+  ]
+}

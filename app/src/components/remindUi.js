@@ -4,6 +4,7 @@
 import { normalizeModuleReminders, remindTimeError, capOf, fromMinutes, LEGACY_ORDER } from '../lib/moduleRemind.js'
 import { remindOptIn } from '../lib/notifyAll.js'
 import { normalizeReminders, toMinutes, TYPE_LABEL } from '../lib/reminders.js'
+import { normalizeInterval } from '../lib/postureRemind.js'
 
 // 'HH:MM' → '09.15' (ekranda saat noktayla yazılır; tasarım)
 export const dot = (t) => (typeof t === 'string' ? t.replace(':', '.') : '')
@@ -43,8 +44,10 @@ export function sheetNear(times, i, busy = [], label = null) {
 // - İlk kez açılınca optIn 'yes' değilse remindOptIn (mola kapanır, yalnız seçilen tür açılır; §A.2).
 // - Legacy türde ilk saat settings.reminders.types[legacy].time'da kalır; moduleReminders[tür].times yalnız 2. ve 3.
 // - Kapatınca legacy tür de kapanır (settings.reminders.types[legacy].on = false; saat kalır).
+// - Dik Dur aralıklı kip (interval verilirse): saatler boşalır, interval açılır (iki kip birbirini dışlar). Kapatınca
+//   aralık da kapanır; saatsiz yeniden açılınca önceki aralık geri gelir. Saatle kaydedince aralık düşer.
 // Dönüş: { moduleReminders (tam, yeni), reminders: yeni nesne | null (değişmediyse) }
-export function applyRemind({ moduleId, remind = {}, moduleReminders, reminders, mode = 'auto', times = [], on = true, now = new Date() }) {
+export function applyRemind({ moduleId, remind = {}, moduleReminders, reminders, mode = 'auto', times = [], on = true, now = new Date(), interval = null }) {
   const all = normalizeModuleReminders(moduleReminders)
   const prev = all[moduleId] ?? { on: false, mode: 'auto', times: [], autoAt: null, setAt: null }
   const cap = capOf(moduleId, remind)
@@ -63,9 +66,13 @@ export function applyRemind({ moduleId, remind = {}, moduleReminders, reminders,
     // Kapatınca legacy tür (74xx) de kapanır; saati korunur (yeniden açınca aynı saat). Kapalıysa değişiklik yok (null).
     nextRem = { ...r, types: { ...r.types, [remind.legacy]: { ...r.types[remind.legacy], on: false } } }
   }
-  const entry = on
-    ? { on: true, mode: mode === 'manual' ? 'manual' : 'auto', times: own, autoAt: mode === 'manual' ? prev.autoAt : iso, setAt: iso }
-    : { ...prev, on: false, setAt: iso }
+  const resume = on && interval == null && !picked.length && prev.interval ? prev.interval : null
+  const iv = interval ?? resume
+  const entry = on && iv
+    ? { on: false, mode: 'manual', times: [], autoAt: prev.autoAt, setAt: iso, interval: { ...normalizeInterval(iv), on: true } }
+    : on
+      ? { on: true, mode: mode === 'manual' ? 'manual' : 'auto', times: own, autoAt: mode === 'manual' ? prev.autoAt : iso, setAt: iso }
+      : { ...prev, on: false, setAt: iso, ...(prev.interval ? { interval: { ...prev.interval, on: false } } : {}) }
   return { moduleReminders: { ...all, [moduleId]: entry }, reminders: nextRem }
 }
 

@@ -11,7 +11,8 @@ scratchpad'e kopyala ve `Workflow({scriptPath})` ile çalıştır.
 - `maket-kapisi.js`: maket görüntüleriyle 5 sn kapısı.
 
 Kurallar (IS_AKISI_KURALLARI.md ile birlikte):
-- En çok 2 tur; geçmezse yöntem değişir ya da sahibe sorulur.
+- En çok 2 tur; sonra iki sürümden 5 sn ve mükemmellik ölçütüne göre en iyisi seçilir. Üçüncü tur ve yeni yöntem
+  yok; seçilen sürüm geçmediyse sahibe sorulur (IS_AKISI_KURALLARI.md "Tur sınırı", sahip 2026-10-03).
 - Her turdan önce yargıç açıklaması o turun tasarım notundan (TASARIM.md) yeniden yazılır. Eski açıklama yanlış
   sonuç verir (2026-10-02 hatası: "göz saati" kalkmıştı, açıklama hâlâ anlatıyordu).
 - Metin listesi kapıya girmeden önce ilgili PLAN maddesiyle satır satır karşılaştırılır (2026-10-02 hatası: G2/G3

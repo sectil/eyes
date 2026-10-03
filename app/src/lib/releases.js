@@ -6,6 +6,89 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Dik Dur D1 (dik-dur/PLAN.v2.md; sahip onayı 2026-10-03; onay yetkisi Claude'da, PLAN §10). Metin kapısı: m1 5/5,
+    // m2 4/5; kamera maddesi tur 1'de 2/5 (gün boyu izliyor gibi okundu), tur 2'de 5/5. Hava işleri yazılmadı (yalnız test).
+    id: '2026-10-03-5',
+    title: '3 Ekim, beşinci güncelleme',
+    items: [
+      { kind: 'new', text: 'Yeni egzersiz: Dik Dur. Ana sayfada; boyunu uzat, çeneni içeri çek, omuzlarını geri ve aşağı al. Kısa tur 2 dakika.' },
+      { kind: 'new', text: "Dik Dur hatırlatması belirli saatlerde ya da belli aralıklarla, örneğin iki saatte bir, gelebilir. Profil → Bildirimler'den kurarsın." },
+      { kind: 'new', text: "Dik Dur'da kamera isteğe bağlı (Face ID'li iPhone'larda): yalnız egzersiz sırasında açılır ve dik duruşunda ne kadar kaldığını söyler. Görüntü telefonundan çıkmaz." },
+    ],
+  },
+  {
+    // B1a D14 (2026-10-03): Bildirimler yalnız kurulanlar + "Hatırlatma ekle"; modüle göre öneri saatleri ve "Nef seçsin"
+    // cümlesi. Metin kapısı: madde 1 tur 1'de 5/5; madde 2 tur 1'de 1/5, tur 2'de 4/5. Sahip onayı 2026-10-03.
+    // Hava işleri (D2 düğmesi, "Şimdi" sütunu) yazılmadı: hava sayfası yalnız test derlemesinde açık (SKY_UI).
+    id: '2026-10-03-4',
+    title: '3 Ekim, dördüncü güncelleme',
+    items: [
+      { kind: 'change', text: 'Profil → Bildirimler artık yalnız kurduğun hatırlatmaları gösterir; ötekileri altta "Hatırlatma ekle"den kurarsın.' },
+      { kind: 'change', text: '"Nef seçsin" ile kurulan hatırlatmanın ilk saati artık egzersize göre önerilir: göz kırpma 10.30, yoga 21.30 gibi. O egzersizi beş ayrı gün yaptıktan sonra Nef saati sana göre ayarlar; saati her zaman kendin de değiştirebilirsin.' },
+    ],
+  },
+  {
+    // Sahibin cihaz geri bildirimi (2026-10-03): göz kırpma döngüsü kısaldı (15 tekrar kalır), Yakala Yaz ilk tur 10,
+    // Ana sayfada su sayacı. Metin kapısı: göz kırpma ve Yakala Yaz tur 1'de 5/5 ve 4/5; su tur 2'de 5/5
+    id: '2026-10-03-3',
+    title: '3 Ekim, üçüncü güncelleme',
+    items: [
+      { kind: 'new', text: 'Ana sayfanın üstüne su sayacı eklendi: bugün kaç bardak içtiğini görürsün, dokununca bir bardak eklenir.' },
+      { kind: 'change', text: 'Göz kırpma egzersizi kısaldı: her tekrar artık kapat, sık, aç; 15 tekrar yaklaşık 1,5 dakika sürüyor.' },
+      { kind: 'change', text: "Yakala Yaz'ın ilk turu artık 10 deneme; sonraki günler 20." },
+    ],
+  },
+  {
+    // Yakala Yaz ilk cihaz geri bildirimi (kelime-hafiza/PLAN.md §10.1). Metin kapısı tur 1: düzeltme 5/5, değişiklik
+    // 0/5 ve 3/5; tur 2: değişiklik 5/5. Sahip yetkisi "sen onayla" (Yakala Yaz, 2026-10-02)
+    id: '2026-10-03-2',
+    title: '3 Ekim, ikinci güncelleme',
+    items: [
+      { kind: 'fix', text: "Yakala Yaz'da söylediğin iki kelime artık alana eksiksiz yazılıyor." },
+      { kind: 'change', text: "Yakala Yaz'da yazı alanının yanında artık Gönder düğmesi var." },
+    ],
+  },
+  {
+    // Ana sayfa kısayol halkaları (sahibin isteği 2026-10-03; halkalar/PLAN.md). Metin kapısı tur 1: iki taslak 0/5 ve
+    // 1/5; tur 2: bu metin 5/5 (halkalar/kapi/metin-kapisi-tur2.json). Sahip onayı 2026-10-03
+    id: '2026-10-03-1',
+    title: '3 Ekim, birinci güncelleme',
+    items: [
+      { kind: 'new', text: 'Ana sayfaya kısayollar geldi: sesli yoga, müzik, nefes ve göz egzersizlerinin tam seti tek dokunuşla açılıyor. Bugün yaptıklarının köşesinde tik görürsün.' },
+    ],
+  },
+  {
+    // Oku ve Anla: giriş adımları, ekran cümleleri, 120 metnin Türkçesi ve ana fikir soruları. Sahip yetkisi "sen onayla"
+    // (2026-10-02). Metin kapısı tur 1 (tek değerlendirici, beş okur gibi): A 3/5, B 3/5; tur 2 (beş ayrı okur):
+    // A 5/5, B 4/5; B'ye beşinci okurun "baştan sona" önerisi işlendi (okuma-anlama/kapi/ekran-yenileme-2026-10-02.md)
+    id: '2026-10-02-5',
+    title: '2 Ekim, beşinci güncelleme',
+    items: [
+      { kind: 'change', text: 'Oku ve Anla\'yı açınca ne yapacağın artık adım adım yazıyor: metni oku, "Bitirdim"e bas, dört soruyu cevapla.' },
+      { kind: 'fix', text: 'Oku ve Anla\'daki bilim metinlerinin ve soruların Türkçesi baştan sona elden geçirildi; çeviri kokan, anlamı kaymış cümleler düzeltildi.' },
+    ],
+  },
+  {
+    // Yakala Yaz (kelime-hafiza). Metin kapısı tur 1–2 (kelime-hafiza/kapi/kod-y5.md): n4 5/5, s2 4/5; sahip yetkisi
+    // "sen onayla" (2026-10-02)
+    id: '2026-10-02-4',
+    title: '2 Ekim, dördüncü güncelleme',
+    items: [
+      { kind: 'new', text: 'Yakala Yaz geldi: iki kelime bir an görünür, aklında tutup yazarsın. Doğru yazdıkça kelimeler daha kısa süre görünür, yanlışta daha uzun.' },
+      { kind: 'new', text: 'Destekleyen telefonlarda kelimeleri sesle de söyleyebilirsin. Ses telefonunda yazıya çevrilir, hiçbir yere gönderilmez.' },
+    ],
+  },
+  {
+    // Oku ve Anla sonsuz yolda, okuma testi Pratikler'de. Metin sahip onaylı (2026-10-02; okuma-anlama/kapi/metin-tur1.md
+    // S1b 4/5, S2a 5/5). VARSAYIM: sahip "onay" dedi, a/b seçmedi; ilk aday (S2a) kullanıldı.
+    id: '2026-10-02-3',
+    title: '2 Ekim, üçüncü güncelleme',
+    items: [
+      { kind: 'new', text: 'Oku ve Anla geldi: kısa bir bilim bulgusu oku, dört soruyu cevapla. Hızın yalnız metni anladığında sayılır.' },
+      { kind: 'change', text: "Okuma testi artık günün yolunda değil; istediğinde Pratikler'den açabilirsin. Yoldaki yerini Oku ve Anla aldı." },
+    ],
+  },
+  {
     // Fark Ettin mi? F1–F3: sahne motoru, Ne değişti?, yeni ekranlar. Metin sahip onaylı (2026-10-02; kapı fark-surum*).
     id: '2026-10-02-2',
     title: '2 Ekim, ikinci güncelleme',

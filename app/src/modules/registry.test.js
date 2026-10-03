@@ -6,7 +6,7 @@ import { VIEWS } from './views.js'
 describe('modül soketi: gerçek modüller', () => {
   it('hepsi geçerli, sorun yok', () => {
     expect(registry.problems).toEqual([])
-    expect(registry.modules.map((m) => m.id).sort()).toEqual(['alarm', 'awareness', 'blink', 'breath', 'breath-count', 'daily', 'dalga', 'fark-ettin', 'gokyuzu', 'mola', 'notice', 'quick-look', 'reading', 'routine', 'snake', 'tek-bakis', 'track', 'water', 'weekly', 'who5', 'yoga', 'yon'])
+    expect(registry.modules.map((m) => m.id).sort()).toEqual(['alarm', 'awareness', 'blink', 'breath', 'breath-count', 'daily', 'dalga', 'dik-dur', 'fark-ettin', 'gokyuzu', 'mola', 'notice', 'okuma-anlama', 'quick-look', 'reading', 'routine', 'snake', 'tek-bakis', 'track', 'water', 'weekly', 'who5', 'yakala-yaz', 'yoga', 'yon'])
   })
   it('her modülün ekranı (view) var ve ekranı çiziyor', () => {
     for (const m of registry.modules) {
@@ -30,7 +30,7 @@ describe('modül soketi: gerçek modüller', () => {
     expect(registry.forSession({ type: 'game', game: 'yok' })).toBeNull()
     expect(registry.resetKeys()).toEqual(expect.arrayContaining(['gozolcum:snake-best', 'gozolcum:track-best', 'gozolcum:habit-log', 'gozolcum:notify-log', 'gozolcum:notify-seed', 'gozolcum:focus']))
     // mola ve quick-look aynı sırada (5): eşitlikte klasör sırası (import.meta.glob), mola önde. Su Ana sayfada yok (hatırlatmadan açılır)
-    expect(registry.inSection('practice').map((m) => m.id)).toEqual(['mola', 'quick-look', 'fark-ettin', 'track', 'tek-bakis', 'snake', 'breath', 'dalga', 'gokyuzu', 'yon', 'notice'])
+    expect(registry.inSection('practice').map((m) => m.id)).toEqual(['mola', 'quick-look', 'fark-ettin', 'track', 'okuma-anlama', 'tek-bakis', 'yakala-yaz', 'snake', 'breath', 'dalga', 'gokyuzu', 'yon', 'notice', 'reading'])
   })
 })
 
@@ -96,6 +96,8 @@ describe('modül soketi: tak / çıkar', () => {
     const metSample = {
       'fark-ettin': { type: 'street', date: '2026-01-01', noticed: 3, asked: 4 },
       'tek-bakis': { type: 'span', date: '2026-01-01', span: 5 },
+      'okuma-anlama': { type: 'okuma-anlama', date: '2026-01-01', textId: 'oa001', wpm: 210, correct: 4, valid: true, fontScale: 1 },
+      'yakala-yaz': { type: 'yakala-yaz', date: '2026-01-01', thresholdMs: 183, thresholdStep: 10, trials: [] },
       'quick-look': { type: 'quick-look', date: '2026-01-01', threshold: 120 },
       notice: { type: 'notice', date: '2026-01-01', count: 2 },
       'breath-count': { type: 'breath-count', date: '2026-01-01', accuracy: 90 },
@@ -143,10 +145,12 @@ describe('modül soketi: remind', () => {
 
   // B1a ikinci tur (sahip kararı 2026-09-30, metin-B1a-onay.md): yalnız kaynağı doğrulanmış dört modül remind alır
   // Kanıt kapısı 2 (bildirim-hava-yuruyus/kanit-2-onay.md): tek-bakis, quick-look, dalga eklendi
-  it('gerçek modüllerde remind yalnız blink, dalga, gokyuzu, quick-look, routine, tek-bakis, yoga; sorun yok', () => {
-    const seven = ['blink', 'dalga', 'gokyuzu', 'quick-look', 'routine', 'tek-bakis', 'yoga']
-    expect(registry.modules.filter((m) => m.remind != null).map((m) => m.id).sort()).toEqual(seven)
-    expect(registry.reminders().map((x) => x.module).sort()).toEqual(seven)
+  // Oku ve Anla (sahip onayı 2026-10-02, okuma-anlama/METINLER.md §5; kaynak rayner2016)
+  // Yakala Yaz (sahip yetkisi 2026-10-02, kelime-hafiza/METINLER.md; kaynak rubin1992)
+  it('gerçek modüllerde remind yalnız blink, dalga, gokyuzu, okuma-anlama, quick-look, routine, tek-bakis, yakala-yaz, yoga; sorun yok', () => {
+    const withRemind = ['blink', 'dalga', 'dik-dur', 'gokyuzu', 'okuma-anlama', 'quick-look', 'routine', 'tek-bakis', 'yakala-yaz', 'yoga']
+    expect(registry.modules.filter((m) => m.remind != null).map((m) => m.id).sort()).toEqual(withRemind)
+    expect(registry.reminders().map((x) => x.module).sort()).toEqual(withRemind)
     expect(registry.remindProblems).toEqual([])
   })
   it('geçerli remind: varsayılanlar dolar, pencere türden gelir', () => {
@@ -267,7 +271,7 @@ describe('modül soketi: remind (B1a manifestleri)', () => {
     for (const id of ['snake', 'track', 'fark-ettin', 'notice', 'yon']) {
       expect(byId(id)?.remind, id).toBeUndefined()
     }
-    expect(registry.reminders().map((x) => x.module).sort()).toEqual(['blink', 'dalga', 'gokyuzu', 'quick-look', 'routine', 'tek-bakis', 'yoga'])
+    expect(registry.reminders().map((x) => x.module).sort()).toEqual(['blink', 'dalga', 'dik-dur', 'gokyuzu', 'okuma-anlama', 'quick-look', 'routine', 'tek-bakis', 'yakala-yaz', 'yoga'])
     expect(byId('yoga').remind.science).not.toContain('radin2025')
   })
 })

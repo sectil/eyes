@@ -158,6 +158,19 @@ Her cümle 5 kişilik kapıda en az 4/5 aldı ve ben de okudum. Örnekler gerçe
 
 Toplam 112 cümle. Ayrıca kart etiketi: "Nef".
 
+## Oku ve Anla · modüle özel (sahip onayı 2026-10-02, "Onay"; okuma-anlama/METINLER.md §5, ARA_RAPOR_1.md §11)
+5 kişilik metin kapısından geçmedi; sahip doğrudan onayladı.
+2026-10-02 sonra: sahip ekran yazılarının Türkçesini düzeltmeyi istedi, onayı bana bıraktı ("sen onayla"). Birinci ve
+üçüncü cümle değişti: ekranla aynı söz "kaydedilir", "bulgu" yerine girişteki "kısa bir bilim metni". Eskileri:
+"İlk okuman tamam. Hızın ancak anladığında sayılır; acele etme." · "Bir süredir okumadın. Bugün kısa bir bulgu seni
+bekliyor." Kapı kaydı: okuma-anlama/kapi/ekran-yenileme-2026-10-02.md.
+- İlk okuman tamam. Hızın, metni anladığında kaydedilir; acele etme.
+- Okuma hızın başlangıcından iyi, anlaman da yerinde.
+- Bir süredir okumadın. Bugün seni kısa bir bilim metni bekliyor.
+
+## Yakala Yaz · modüle özel (sahip onayı 2026-10-02, "onay"; kelime-hafiza/METINLER.md N1)
+- İlk Yakala Yaz turunda iki kelimeyi 183 ms'de yakaladın; başlangıcın bu.
+
 ## Nef kartı düğmeleri (sahip onayı 2026-10-02, "Onaylıyorum"; kapı 5/5)
 - Puan kartı, kartın zaman dilimiyle aynı dilimde: "Bu akşam da Dalga sesi · 8 dk" (dilim + "da/de", modül, süre)
 - Puan kartı, başka dilimde: "Bugün de Dalga sesi · 8 dk"

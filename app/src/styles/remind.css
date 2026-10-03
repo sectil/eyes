@@ -117,6 +117,13 @@
 .nt-q-range { display: block; margin-top: 8px; font: 600 2.3rem/1 var(--font-display); letter-spacing: -0.03em; color: var(--qh-amber); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .nt-q-s { display: block; margin-top: 8px; font-size: 0.84rem; line-height: 1.35; color: var(--ink-2); }
 .nt-quiet .nt-chev { grid-column: 2; grid-row: 1 / span 3; }
+/* Hatırlatma ekle (D14, sahip 2026-10-03): kurulmamışlar saatsiz haplar; listeden ayrı dursun diye zemin yok, kenar ince */
+.nt-empty { margin: 0; padding: 14px 16px; border-radius: 18px; background: var(--surface); box-shadow: 0 0 0 1px var(--border); color: var(--ink-2); font-size: 0.92rem; }
+.nt-add { display: flex; flex-wrap: wrap; gap: 8px; }
+.nt-chip { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 14px 0 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--ink); font: 600 0.9rem/1.2 var(--font-body); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.nt-chip svg { flex: none; color: var(--ink-2); }
+.nt-chip .nt-plus { color: var(--accent); }
+.nt-chip:active { background: var(--surface-2); }
 .nt-grp-h { margin: 28px 0 9px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.02em; line-height: 1; color: var(--ink-3); white-space: nowrap; }
 .qh-grp-h { margin: 18px 4px 8px; font-size: 0.85rem; font-weight: 600; color: var(--ink-3); }
 /* Satırlar tek kartta: simge | tek satır başlık ve alt yazı | anahtar. Satırlar eşit yükseklikte. */
@@ -201,3 +208,19 @@
 .qh-ri { flex: none; width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--surface-2); color: var(--ink-2); }
 .qh-lr b { flex: 1; font-weight: 500; }
 .qh-lr em { font-style: normal; color: var(--qh-amber); font-variant-numeric: tabular-nums; }
+
+/* Dik Dur aralıklı kip (RemindSheet; metin-D1-onay.md §I) */
+.rs-iv { display: grid; gap: 14px; margin-top: 16px; }
+.rs-seg.rs-seg-sm { margin-top: 0; }
+.rs-ivt { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rs-ivl { display: grid; gap: 6px; min-width: 0; }
+.rs-ivl span, .rs-ivh { font-size: 0.85rem; font-weight: 600; color: var(--ink-2); }
+.rs-ivl .rs-input { width: 100%; min-width: 0; }
+.rs-days { display: grid; gap: 8px; }
+.rs-dchips { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.rs-day { min-height: 44px; padding: 0; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--ink-3); font: 600 0.9rem var(--font-body); cursor: pointer; }
+.rs-day.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.rs-iv .rs-note { margin-top: 0; }
+.rs-note.rs-err { color: var(--warn, #b4431c); }
+.rs-eqseg .rs-seg button { flex: 1 1 0; } /* Dik Dur: alt alta iki seçici aynı yerden bölünsün (5 sn kapısı) */
+.nt-s.nt-wrap { white-space: normal; text-wrap: pretty; } /* Dik Dur aralık satırı (5 sn kapısı tur 2: kesiliyordu) */

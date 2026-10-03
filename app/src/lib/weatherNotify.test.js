@@ -8,7 +8,7 @@ vi.mock('./native.js', () => native)
 
 import {
   planMorningWeather, composeMorning, templateProblems, normalizeMorning, hourTable, cellOf, takeLocalRefresh,
-  WEATHER_IDS, CELLS, CHANCE_CELLS, LOCAL_REFRESH_ENABLED, MORNING_TEMPLATES, CHANCE_TEXT_KEY, TITLE_MAX, BODY_MAX, bandOf,
+  WEATHER_IDS, CELLS, CHANCE_CELLS, LOCAL_REFRESH_ENABLED, MORNING_TEMPLATES, TITLE_MAX, BODY_MAX, bandOf,
 } from './weatherNotify.js'
 import { createApplier } from './notifyApply.js'
 import { dayKey } from './habitLog.js'
@@ -114,7 +114,7 @@ describe('metin: yer tutucu ve hücre', () => {
     expect(cellOf(false, 14)).toBe('dry.cool')
     const t = plan({ now: new Date(at(0, 7, 30)), cache: cache({ fetchedAt: at(0, 7, 30), rainHours: [[0, 21]] }) }).notifications[0]
     expect(t.title).toBe('Gaziemir 17° · en çok 26°')
-    expect(t.body).toBe('21.00–22.00 arası yağmur bekleniyor; hissedilen 17°. Şemsiyeyle hırkayı hatırlatayım.\nKaynak: Apple Weather')
+    expect(t.body).toBe('Bugün 21.00–22.00 arası yağmur bekleniyor, hissedilen 17°. Şemsiye ve hırka al.\nKaynak: Apple Weather')
   })
 
   it('tahminin yaşı: 1 saatten eskiyse metinde (dün akşam / bugün); tazeyse yok', () => {
@@ -226,23 +226,23 @@ describe('composeMorning', () => {
   })
 })
 
-// Sahip onayı (docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/sabah-havasi-onay.md, 2026-10-01 "uygula")
+// Sahip onayı: kurallar sabah-havasi-onay.md (2026-10-01 "uygula"); cümleler v2 sabah-havasi-v2-taslak.md (D11, 2026-10-03)
 describe('onaylı cümleler ve beş karar', () => {
-  const DOC = readFileSync(new URL('../../../docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/sabah-havasi-onay.md', import.meta.url), 'utf8')
-  const RAIN = { yağmur: 'rain', kuru: 'dry' }
+  const DOC = readFileSync(new URL('../../../docs/yol-haritasi/tasarim/bildirim-hava-yuruyus/sabah-havasi-v2-taslak.md', import.meta.url), 'utf8')
+  const RAIN = { yağmur: 'rain', olasılık: 'chance', kuru: 'dry' }
   const BAND = { soğuk: 'cold', serin: 'cool', ılık: 'mild', sıcak: 'warm', 'çok sıcak': 'hot' }
-  const ROWS = DOC.split('\n').map((l) => l.match(/^\| (yağmur|kuru) × ([^|]+?) \| (.+?) \| \d+ \|$/)).filter(Boolean)
-    .map(([, r, b, text]) => ({ cell: `${RAIN[r]}.${BAND[b]}`, text, feel: Number(text.match(/hissedilen (-?\d+)°/)[1]) }))
+  const ROWS = DOC.split('\n').map((l) => l.match(/^\| (yağmur|olasılık|kuru) × ([^|]+?) \| (.+?) \|$/)).filter(Boolean)
+    .map(([, r, b, text]) => ({ cell: `${RAIN[r]}.${BAND[b]}`, text, feel: Number(text.match(/hissedilen (-?\d+)°/)[1]), chance: Number(text.match(/%(\d+)/)?.[1] ?? NaN) }))
   const note = (cell, slots = {}, extra = {}) => ({
     cell, walkOk: true, extra: { date: key(0), ...extra },
     slots: { place: 'Gaziemir', temp: 17, high: 26, rainFrom: '21', rainTo: '22', age: null, ...slots },
   })
 
-  it('10 hücrenin gövdesi onay dosyasıyla harfi harfine; başlık ve son satır', () => {
-    expect(ROWS.map((r) => r.cell).sort()).toEqual([...CELLS].sort())
+  it('15 hücrenin gövdesi onay dosyasıyla harfi harfine; başlık ve son satır', () => {
+    expect(ROWS.map((r) => r.cell).sort()).toEqual([...CELLS, ...CHANCE_CELLS].sort())
     for (const r of ROWS) {
       expect(bandOf(r.feel)).toBe(r.cell.split('.')[1]) // dosyadaki örnek rakam kendi hücresinin bandında
-      const t = composeMorning(note(r.cell, { feel: r.feel }), MORNING_TEMPLATES)
+      const t = composeMorning(note(r.cell, { feel: r.feel, ...(r.cell.startsWith('chance.') ? { rainChance: r.chance, rainFrom: null, rainTo: null } : {}) }), MORNING_TEMPLATES)
       expect(t.title).toBe('Gaziemir 17° · en çok 26°')
       expect(t.body).toBe(`${r.text}\nKaynak: Apple Weather`)
     }
@@ -254,9 +254,9 @@ describe('onaylı cümleler ve beş karar', () => {
 
   it('tahmin 1 saatten eskiyse "Dün/Sabah HH.MM tahminine göre" öneki, Nef notu düşer', () => {
     const y = plan({ cache: cache({ fetchedAt: at(-1, 22, 40), rainHours: [[0, 21]] }) }).notifications[0]
-    expect(y.body).toBe('Dün 22.40 tahminine göre 21.00–22.00 arası yağmur bekleniyor; hissedilen 17°.\nKaynak: Apple Weather')
+    expect(y.body).toBe('Dün 22.40 tahminine göre bugün 21.00–22.00 arası yağmur bekleniyor, hissedilen 17°.\nKaynak: Apple Weather')
     const s = plan({ cache: cache({ feel: 3 }) }).notifications[0]
-    expect(s.body).toBe('Sabah 05.40 tahminine göre kuru bir gün bekleniyor; hissedilen 3°, soğuk.\nKaynak: Apple Weather')
+    expect(s.body).toBe('Sabah 05.40 tahminine göre yağmur beklenmiyor; hava soğuk, hissedilen 3°.\nKaynak: Apple Weather')
   })
 
   it('uzunluk en kötü değerlerle (eksi 12°, 45°; 12 harfli ad; yaş öneki): başlık ≤ 30, gövde ≤ 110, metin hep bağlanır', () => {
@@ -276,19 +276,32 @@ describe('onaylı cümleler ve beş karar', () => {
     expect(maxBody).toBeGreaterThan(100) // sınır gerçekten zorlandı
   })
 
-  it('karar 1: ≥ %60 yağmur; %30–59 "olasılık" (onaylı cümle yok → o gün kurulmaz); < %30 kuru', () => {
+  it('karar 1: ≥ %60 yağmur; %30–59 "olasılık" (v2 cümlesiyle gelir; sahip onayı 2026-10-03); < %30 kuru', () => {
     const c = (p) => plan({ cache: cache({ rainHours: [[0, 15]], chance: p }) })
     expect(c(0.6).notifications[0].cell).toBe('rain.cool')
     expect(c(0.29).notifications[0].cell).toBe('dry.cool')
     for (const p of [0.3, 0.4, 0.59]) {
-      const r = c(p)
-      expect(r.notifications.filter((n) => n.extra.date === key(0))).toEqual([])
-      expect(r.skipped).toContainEqual({ date: key(0), reason: 'noText', textKey: CHANCE_TEXT_KEY, cell: 'chance.cool' })
+      const today = c(p).notifications.filter((n) => n.extra.date === key(0))
+      expect(today).toHaveLength(1)
+      expect(today[0]).toMatchObject({ cell: 'chance.cool', slots: { rainChance: Math.round(p * 100), rainFrom: null } })
     }
+    const fresh = plan({ now: new Date(at(0, 7, 30)), cache: cache({ fetchedAt: at(0, 7, 30), rainHours: [[0, 15]], chance: 0.4 }) }).notifications[0]
+    expect(fresh.body).toBe('Bugün %40 yağmur ihtimali var, hissedilen 17°. Hırka ve şemsiye al.\nKaynak: Apple Weather')
     const raw = plan({ cache: cache({ rainHours: [[0, 15]], chance: 0.4 }), templates: null }).notifications[0]
-    expect(raw).toMatchObject({ textKey: 'sky.morning.olasilik', cell: 'chance.cool', slots: { rainChance: 40, rainFrom: null } })
+    expect(raw).toMatchObject({ textKey: 'weather.morning', cell: 'chance.cool', slots: { rainChance: 40, rainFrom: null } })
     expect(raw.title).toBeUndefined()
-    expect(MORNING_TEMPLATES.some((t) => CHANCE_CELLS.includes(t.cell))).toBe(false)
+  })
+
+  it('olasılık hücreleri en kötü değerlerle (%30 ve %59; eksi 12°, 45°; yaş öneki): gövde ≤ 110, metin hep bağlanır', () => {
+    const feels = { cold: [-12, 11], cool: [12, 17], mild: [18, 24], warm: [25, 29], hot: [30, 45] }
+    for (const cell of CHANCE_CELLS) {
+      for (const feel of feels[cell.split('.')[1]]) for (const rainChance of [30, 59])
+        for (const age of [null, { day: 'yesterday', at: '22.40' }, { day: 'today', at: '05.40' }]) {
+          const t = composeMorning(note(cell, { feel, rainChance, rainFrom: null, rainTo: null, age }), MORNING_TEMPLATES)
+          expect(t).not.toBeNull()
+          expect(t.body.length).toBeLessThanOrEqual(BODY_MAX)
+        }
+    }
   })
 
   it('karar 1: olasılık hücresi metinsiz kalsa bile notifyApply kurmaz', async () => {

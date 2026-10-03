@@ -1,0 +1,746 @@
+{
+  "surum": "taslak-03",
+  "not": "Her soruda doğru seçenek ilk sıradadır; uygulama şıkları her gösterimde karıştırır. 'ana' sorusu her turda sorulur, kalan 3 soru 5 ayrıntı sorusundan seçilir. Konu alanı: deniz, surungen, insan, memeli.",
+  "metinler": [
+    {
+      "id": "oa021",
+      "baslik": "Aynanın karşısındaki balık",
+      "etiket": "deniz",
+      "kaynak": "kohda2022",
+      "pmid": "35176032",
+      "doi": "10.1371/journal.pbio.3001529",
+      "yazar": "Kohda ve ark.",
+      "dergi": "PLoS Biology",
+      "yil": 2022,
+      "metin": "Bir hayvan aynada kendini tanıyabilir mi? Bunu anlamak için hayvanın vücuduna, ancak aynada görebileceği bir leke konur. Hayvan lekeyi silmeye çalışırsa kendini tanıdığı düşünülür. Temkinli yorumlara göre bu sınavı şimdiye dek inandırıcı biçimde yalnız büyük maymunlar geçti. Araştırmacılar aynı sınavı temizlikçi balık denen bir deniz balığıyla yeniden yaptı. Boğazına kahverengi leke konan 14 balığın hepsi, boğazını bir yere sürterek lekeyi silmeye çalıştı. Ama bunu yalnız karşılarında ayna varken yaptılar. Mavi ve yeşil lekeler ise buna yol açmadı. Aynı lekeyi başka bir balıkta gören balıklar da boğazlarını sürtmedi. Hiç ayna görmemiş balıklar ise boğazlarını, aynaya alışkın balıklardan daha seyrek sürttü. Araştırmacılara göre bu balıklar sınavı geçiyor, ama yalnız kahverengi leke gibi doğada karşılaşabilecekleri bir lekeyle sınanınca.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Temizlikçi balıkların ayna sınavını geçmesini",
+            "Balıkların başkasındaki lekeye tepki vermemesini",
+            "Bütün hayvanların aynada kendini tanıyabilmesini",
+            "Temizlikçi balıkların öteki balıkları temizlemesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Balıklar boğazlarına hangi renkte leke konunca onu silmeye çalıştı?",
+          "secenekler": [
+            "Kahverengi",
+            "Mavi",
+            "Yeşil",
+            "Parlak kırmızı"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Boğazına kahverengi leke konan 14 balıktan kaçı lekeyi silmeye çalıştı?",
+          "secenekler": [
+            "Hepsi",
+            "Yalnız biri",
+            "Yarısı",
+            "Hiçbiri"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Balıklar lekeyi ne zaman silmeye çalıştı?",
+          "secenekler": [
+            "Yalnız karşılarında ayna varken",
+            "Yalnız karanlıkta kaldıklarında",
+            "Yalnız yem verildikten hemen sonra",
+            "Her zaman, aynadan bağımsız olarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Hiç ayna görmemiş balıklar boğazlarını ne sıklıkta sürttü?",
+          "secenekler": [
+            "Aynaya alışkın balıklardan daha seyrek",
+            "Aynaya alışkın balıklardan daha sık",
+            "Aynaya alışkın balıklarla aynı sıklıkta",
+            "Aynaya alışkın balıkların iki katı sıklıkta"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Temkinli yorumlara göre bu sınavı şimdiye dek inandırıcı biçimde kimler geçti?",
+          "secenekler": [
+            "Yalnız büyük maymunlar",
+            "Yalnız yunuslar",
+            "Bütün balıklar",
+            "Yalnız kuşlar ve bazı küçük balıklar"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa022",
+      "baslik": "Denizin altında bir ortaklık",
+      "etiket": "deniz",
+      "kaynak": "bshary2006",
+      "pmid": "17147471",
+      "doi": "10.1371/journal.pbio.0040431",
+      "yazar": "Bshary ve ark.",
+      "dergi": "PLoS Biology",
+      "yil": 2006,
+      "metin": "Farklı türden iki hayvan birlikte ava çıkabilir mi? Kızıldeniz'de yapılan gözlemler, iki balığın şaşırtıcı bir ortaklığını ortaya koydu. Bunlardan biri orfoz ailesinden iri bir balık, öteki dev bir müren balığıydı. Bu iki balığın yan yana görülmesi rastlantı değildi. İri balık, mürene işaret vererek onu birlikte ava çağırıyor, sonra da avın saklandığı yere ona yol gösteriyordu. İri balık bu işaretleri kendi açlığına göre veriyordu. Ortaklıktan iki balık da kazançlı çıkıyordu. Araştırmacılara göre bunun nedeni, iki türün av becerilerinin birbirini tamamlamasıydı. Avı yakalayan balık onu hemen bütün olarak yutuyordu. Bu yüzden öteki balık avı ondan zorla alamıyordu. Ekibe göre farklı türden avcıların birlikte avlanmasının önündeki asıl engel, çoğu durumda birinin avı zorla kendine alabilmesidir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "İki farklı balık türünün birlikte avlanmasını",
+            "Ortaklıktan yalnız iri balığın kazanç sağlamasını",
+            "Bütün avcı balıkların hep birlikte avlanmasını",
+            "Müren balıklarının kayalarda yuva kurmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Gözlemler nerede yapıldı?",
+          "secenekler": [
+            "Kızıldeniz'de",
+            "Karadeniz'de",
+            "Akdeniz'de",
+            "Bir akvaryumda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İri balık hangi balık ailesindendi?",
+          "secenekler": [
+            "Orfoz ailesinden",
+            "Köpekbalığı ailesinden",
+            "Ton balığı ailesinden",
+            "Müren ailesinden"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İri balık işaretleri neye göre veriyordu?",
+          "secenekler": [
+            "Kendi açlığına göre",
+            "Suyun ne kadar soğuk olduğuna göre",
+            "Günün hangi saati olduğuna göre",
+            "Mürenin ne kadar büyük olduğuna göre"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Avı yakalayan balık onu ne yapıyordu?",
+          "secenekler": [
+            "Hemen bütün olarak yutuyordu",
+            "Ortağıyla ikiye bölüyordu",
+            "Bir kayanın altına saklıyordu",
+            "Yavrularına götürüyordu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılara göre ortaklığın kazançlı olmasının nedeni neydi?",
+          "secenekler": [
+            "İki türün av becerilerinin birbirini tamamlaması",
+            "İki balığın aynı yuvada yaşaması",
+            "Mürenin iri balıktan daha hızlı yüzmesi",
+            "İri balığın avı her zaman hiç dokunmadan mürene bırakması"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa023",
+      "baslik": "Ahtapotun fırlattıkları",
+      "etiket": "deniz",
+      "kaynak": "godfreysmith2022",
+      "pmid": "36350820",
+      "doi": "10.1371/journal.pone.0276482",
+      "yazar": "Godfrey-Smith ve ark.",
+      "dergi": "PLoS ONE",
+      "yil": 2022,
+      "metin": "Ahtapotlar bir şeyi hedefe doğru fırlatabilir mi? Avustralya'daki bir koyda yaşayan yabani ahtapotlar sık sık bir şeyler fırlatıyor. Kollarının arasına kabuk, çamur ya da yosun alıyor, sonra bunları bırakırken kollarının altındaki huni denen borudan güçlü bir su püskürtüyor. Böylece bunlar suda ileri savruluyor. Ahtapotlar başka ahtapotlarla karşılaştığında, attıkları şeyler sık sık karşılarındaki ahtapota çarpıyordu. Bu karşılaşmalarda yapılan atışlar ötekilerden daha güçlüydü ve daha çok çamurla yapılıyordu. Güçlü atışlarda ahtapotun vücudu da daha sık tek renkli ya da koyu oluyordu. Bazı atışlar kolların altından, her zamankinden farklı bir yöne doğru yapılıyordu; bu atışlar başka ahtapotlara daha sık çarpıyordu. İnsan dışında, kendi türünden birine bir şey fırlatan hayvanlar daha önce yalnız bazı sosyal memeliler arasında görülmüştü.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Yabani ahtapotların bir şeyler fırlatmasını",
+            "Bazı atışların kolların altından yapılmasını",
+            "Bütün deniz hayvanlarının bir şey fırlatmasını",
+            "Ahtapotların kabuklarla kendine sığınak yapmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ahtapotlar neleri fırlatıyor?",
+          "secenekler": [
+            "Kabuk, çamur ya da yosun",
+            "Taş, çakıl ya da balık kılçığı",
+            "Kemik, mercan ya da balık pulu",
+            "Odun, taş ya da deniz kestanesi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ahtapotlar fırlatmak için ne kullanıyor?",
+          "secenekler": [
+            "Huni denen borudan püskürttükleri güçlü suyu",
+            "Ağızlarından püskürttükleri mürekkebi",
+            "Suyun kendi akıntısını",
+            "Kayalara çarpan dalgaları"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Başka bir ahtapotla karşılaşınca yapılan atışlar nasıldı?",
+          "secenekler": [
+            "Daha güçlüydü ve daha çok çamurla yapılıyordu",
+            "Daha zayıftı ve daha çok yosunla yapılıyordu",
+            "Hep kabukla ve çok yavaş yapılıyordu",
+            "Hiçbir şeye çarpmadan dibe düşüyordu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Güçlü atışlarda ahtapotun vücudu nasıl oluyordu?",
+          "secenekler": [
+            "Daha sık tek renkli ya da koyu",
+            "Daha sık çizgili ve açık",
+            "Daha sık benekli ve parlak",
+            "Daha sık alacalı ve soluk"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İnsan dışında, kendi türünden birine bir şey fırlatan hayvanlar daha önce hangi grupta görülmüştü?",
+          "secenekler": [
+            "Yalnız bazı sosyal memelilerde",
+            "Yalnız bazı kuşlarda",
+            "Bütün balıklarda",
+            "Yalnız bazı kuşlarda ve sürüngenlerde"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa024",
+      "baslik": "Eve dönen ıstakoz",
+      "etiket": "deniz",
+      "kaynak": "boles2003",
+      "pmid": "12511953",
+      "doi": "10.1038/nature01226",
+      "yazar": "Boles ve Lohmann",
+      "dergi": "Nature",
+      "yil": 2003,
+      "metin": "Bir hayvanı hiç görmediği bir yere götürseniz evinin yönünü bulabilir mi? Bu beceriye gerçek yön bulma denir. Şimdiye dek bu yetenek yalnız birkaç omurgalıda gösterilmişti. İncelenen omurgasızlar ise yolu tanıdık işaretlere bakarak ya da pusula gibi bir yön tutarak buluyordu. Araştırmacılar gerçek yön bulmayı dikenli ıstakozlarla sınadı. Istakozlar yakalandıkları yerden 12 ile 37 kilometre uzaktaki, hiç bilmedikleri yerlere taşındı. Yolda bilinen hiçbir yön ipucunu alamadıkları hâlde yakalandıkları yere doğru yöneldiler. Ekip ardından ıstakozları, belli yerlerin manyetik alanını taklit eden düzeneklere koydu. Istakozlar, yakalandıkları yerin kuzeyindeki bir noktanın manyetik alanında güneye, güneyindeki bir noktanın alanında kuzeye yöneldi. Sonuç, ıstakozların Dünya'nın manyetik alanını bir tür harita gibi kullandığını düşündürüyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Dikenli ıstakozların bilmedikleri yerden yön bulmasını",
+            "Omurgasızların tanıdık işaretlerle yol bulmasını",
+            "Istakozların manyetik alandan hiç etkilenmemesini",
+            "Dikenli ıstakozların sürü hâlinde göç etmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Istakozlar ne kadar uzağa taşındı?",
+          "secenekler": [
+            "12 ile 37 kilometre",
+            "1 ile 3 kilometre",
+            "50 ile 80 kilometre",
+            "100 kilometreden fazla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Istakozlar taşınırken yolda yön ipuçları alabildi mi?",
+          "secenekler": [
+            "Bilinen hiçbir yön ipucunu alamadılar",
+            "Yalnız güneşin konumunu görebildiler",
+            "Yalnız suyun akıntısını hissedebildiler",
+            "Bilinen bütün yön ipuçlarını alabildiler"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yakalandıkları yerin kuzeyindeki bir noktanın manyetik alanı taklit edilince ıstakozlar ne yaptı?",
+          "secenekler": [
+            "Güneye yöneldi",
+            "Kuzeye yöneldi",
+            "Olduğu yerde kaldı",
+            "Batıya yöneldi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bu çalışmadan önce gerçek yön bulma hangi hayvanlarda gösterilmişti?",
+          "secenekler": [
+            "Yalnız birkaç omurgalıda",
+            "Bütün omurgasızlarda",
+            "Yalnız böceklerde",
+            "Yalnız örümceklerde"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sonuçlara göre ıstakozlar Dünya'nın manyetik alanını nasıl kullanıyor olabilir?",
+          "secenekler": [
+            "Bir tür harita gibi",
+            "Bir tür pusula gibi",
+            "Bir tür yol işareti gibi",
+            "Bir tür saat gibi"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa025",
+      "baslik": "Kaplumbağa nereye bakıyor?",
+      "etiket": "surungen",
+      "kaynak": "wilkinson2010",
+      "pmid": "20411292",
+      "doi": "10.1007/s10071-010-0320-2",
+      "yazar": "Wilkinson ve ark.",
+      "dergi": "Animal Cognition",
+      "yil": 2010,
+      "metin": "Başka birinin nereye baktığını görüp aynı yere bakmaya bakışı izleme denir. Bu davranış, hayvanların yiyecek ya da düşman gibi önemli şeyleri fark etmesini sağlayabilir. Bakışı izleme daha önce memelilerde ve kuşlarda gösterilmişti. Peki sürüngenler de bunu yapabilir mi? Araştırmacılar bunu kırmızı ayaklı kaplumbağalarla sınadı. Deneyde bir kaplumbağa yukarı bakıyordu. Onu izleyen kaplumbağalar da başlarını kaldırıp aynı yöne baktı. Ekip başka olasılıkları da sınadı. Yanlarında başka bir kaplumbağanın bulunması tek başına bu davranışı açıklamıyordu. Ortada başka kaplumbağa yokken yakılan bir ışık da aynı etkiyi yapmadı. Araştırmacılara göre bakışı izleme memelilerde, kuşlarda ve sürüngenlerde bulunabilir. Bu beceri, bu üç grubun yolları ayrılmadan önce ortaya çıkmış ya da genel bir öğrenme yeteneğinden doğmuş olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Kaplumbağaların başka bir kaplumbağanın bakışını izlemesini",
+            "Kaplumbağaların birbirinin bakışına hiç aldırmamasını",
+            "Bütün hayvanların başka hayvanların bakışını izlemesini",
+            "Kaplumbağaların güneşlenerek vücut sıcaklığını yükseltmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bakışı izleme daha önce hangi hayvanlarda gösterilmişti?",
+          "secenekler": [
+            "Memelilerde ve kuşlarda",
+            "Yalnız balıklarda",
+            "Yalnız böceklerde",
+            "Kurbağalarda ve yılanlarda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Deneyde hangi kaplumbağalar kullanıldı?",
+          "secenekler": [
+            "Kırmızı ayaklı kaplumbağalar",
+            "Deniz kaplumbağaları",
+            "Su kaplumbağaları",
+            "Dev kara kaplumbağaları ve su kaplumbağaları"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Deneyde, bakışı izlenen kaplumbağa nereye bakıyordu?",
+          "secenekler": [
+            "Yukarı",
+            "Yere",
+            "Arkasına",
+            "Yana"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ortada başka kaplumbağa yokken yakılan ışıkla yapılan deneme neyi gösterdi?",
+          "secenekler": [
+            "Işığın aynı etkiyi yapmadığını",
+            "Işığın kaplumbağaları korkuttuğunu",
+            "Işığın kaplumbağaları ışığa doğru yürüttüğünü",
+            "Işığın aynı etkiyi daha güçlü yaptığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bakışı izlemek hayvanlara ne sağlayabilir?",
+          "secenekler": [
+            "Yiyecek ya da düşman gibi önemli şeyleri fark etmeyi",
+            "Gruptaki en güçlü hayvanı bakışından tanımayı",
+            "Başkalarıyla göz göze gelmeyip kavgadan uzak durmayı",
+            "Karanlıkta yolunu daha kolay bulmayı"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa026",
+      "baslik": "Okyanusta doğuyu batıdan ayırmak",
+      "etiket": "surungen",
+      "kaynak": "putman2011",
+      "pmid": "21353561",
+      "doi": "10.1016/j.cub.2011.01.057",
+      "yazar": "Putman ve ark.",
+      "dergi": "Current Biology",
+      "yil": 2011,
+      "metin": "Uzun yolculuk yapan bir hayvan yolunu bulmak için iki şeyi bilmelidir: ne kadar kuzeyde ya da güneyde, ne kadar doğuda ya da batıda olduğunu. Birincisine enlem, ikincisine boylam denir. Bazı hayvanların enlemi manyetik ipuçlarıyla bulduğu biliniyordu. Ama hiçbir hayvanın boylamı nasıl algıladığı bilinmiyordu. Manyetik alan da bu iş için uygun görünmüyordu, çünkü genellikle doğu-batı yönünde, kuzey-güney yönünde olduğundan daha az değişir. Araştırmacılar Florida'da yumurtadan yeni çıkmış Caretta caretta türü deniz kaplumbağalarıyla çalıştı. Atlas Okyanusu'nun iki yakasındaki, aynı enlemde bulunan iki yerin manyetik alanını taklit ettiler. Yavrular bu iki alanda farklı yönlere yüzdü. İki yön de onları daire biçimindeki göç yolunda ilerletecekti. Böylece bir göçmen hayvanın boylamı manyetik alandan okuyabildiği ilk kez gösterildi.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Deniz kaplumbağası yavrularının boylamı manyetik alandan okumasını",
+            "Deniz kaplumbağalarının göç yolunun daire biçiminde olmasını",
+            "Manyetik alanın boylamı bulmaya hiç yaramadığının anlaşılmasını",
+            "Deniz kaplumbağası yavrularının kumsaldan denize ulaşmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Manyetik alanı taklit edilen iki yer hangi bakımdan aynıydı?",
+          "secenekler": [
+            "Aynı enlemdeydiler",
+            "Aynı boylamdaydılar",
+            "Aynı derinlikteydiler",
+            "Aynı sıcaklıktaydılar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Manyetik alan neden boylam için uygun görünmüyordu?",
+          "secenekler": [
+            "Doğu-batı yönünde, kuzey-güney yönünde olduğundan daha az değiştiği için",
+            "Kuzey-güney yönünde, doğu-batı yönünde olduğundan daha az değiştiği için",
+            "Okyanusun derinliğine göre değiştiği için",
+            "Gece ile gündüz arasında değiştiği için"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar kaplumbağa yavrularıyla nerede çalıştı?",
+          "secenekler": [
+            "Florida'da",
+            "Brezilya'da",
+            "Avustralya'da",
+            "Japonya'da"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yavrular iki farklı manyetik alanda ne yaptı?",
+          "secenekler": [
+            "Farklı yönlere yüzdü",
+            "Aynı yöne yüzdü",
+            "Hiç kıpırdamadı",
+            "Hep kıyıya geri döndü"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar hangi iki yerin manyetik alanını taklit etti?",
+          "secenekler": [
+            "Atlas Okyanusu'nun iki yakasındaki iki yer",
+            "Aynı kıyıda birbirine çok yakın iki kumsal",
+            "Biri kuzey kutbunda biri ekvatorda iki yer",
+            "Pasifik Okyanusu'nun ortasındaki iki küçük ada"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa027",
+      "baslik": "İzleyerek öğrenen kertenkele",
+      "etiket": "surungen",
+      "kaynak": "kis2014",
+      "pmid": "25199480",
+      "doi": "10.1007/s10071-014-0803-7",
+      "yazar": "Kis ve ark.",
+      "dergi": "Animal Cognition",
+      "yil": 2014,
+      "metin": "Başkasını izleyip aynı hareketi yaparak öğrenmeye taklit denir. Uzun süre bunun yalnız insana özgü olduğu düşünüldü. Sonra memelilerin ve kuşların da taklit edebildiği gösterildi, ama sürüngenlerin taklit edip edemediği bilinmiyordu. Bilim insanları bunu sakallı ejder denen bir kertenkeleyle sınadı. Bir gruptaki kertenkeleler, başka bir sakallı ejderin küçük bir kapağı bir yana doğru açışını izledi. Ardından onlar da kapağı aynı yana doğru açtı. Başka bir grup ise kapağın kimse dokunmadan kendi kendine açıldığını izledi. Bu gruptaki kertenkeleler kapağı açmayı başaramadı. Araştırmacılara göre bu öğrenme, dikkatin kapağa çekilmesi gibi basit yollarla açıklanamıyor. Demek ki en azından bazı sürüngenler de memelilerde ve kuşlarda görülene benzer bir beceriye sahip. Bu da taklit yoluyla öğrenmenin çok eski kökleri olabileceğini düşündürüyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bir kertenkelenin taklit yoluyla öğrenebilmesini",
+            "Taklidin uzun süre insana özgü sanılmasını",
+            "Bir kertenkelenin bir insanı izleyerek öğrenebilmesini",
+            "Bir kertenkelenin kendi kendine açılan kapaktan öğrenebilmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Deneyde hangi hayvan sınandı?",
+          "secenekler": [
+            "Sakallı ejder denen bir kertenkele",
+            "Bukalemun denen bir kertenkele",
+            "Geko denen bir kertenkele",
+            "İguana denen bir kertenkele"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İlk gruptaki kertenkeleler neyi izledi?",
+          "secenekler": [
+            "Başka bir kertenkelenin bir kapağı bir yana açışını",
+            "Bir insanın bir kapağı bir yana açışını",
+            "Bir kuşun bir kapağı gagasıyla açışını",
+            "Başka bir kertenkelenin kumda derin bir yuva kazışını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kapağın kendi kendine açıldığını izleyen kertenkeleler ne kadar başarılı oldu?",
+          "secenekler": [
+            "Kapağı açmayı başaramadılar",
+            "Kapağı daha hızlı açtılar",
+            "Kapağı ters yönde açtılar",
+            "Kapağı ilk denemede hemen açtılar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sürüngenlerden önce hangi hayvanların taklit edebildiği gösterilmişti?",
+          "secenekler": [
+            "Memelilerin ve kuşların",
+            "Balıkların ve kurbağaların",
+            "Böceklerin ve örümceklerin",
+            "Ahtapotların ve yengeçlerin"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bulgular taklit yoluyla öğrenme hakkında neyi düşündürüyor?",
+          "secenekler": [
+            "Çok eski kökleri olabileceğini",
+            "Yalnız insanlara özgü olduğunu",
+            "Çok yakın zamanda ortaya çıktığını",
+            "Yalnız kuşlarda geliştiğini"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa028",
+      "baslik": "Yan yana yürüyen adımlar",
+      "etiket": "insan",
+      "kaynak": "hajnal2022",
+      "pmid": "36576509",
+      "doi": "10.1007/s00221-022-06536-y",
+      "yazar": "Hajnal ve Durgin",
+      "dergi": "Experimental Brain Research",
+      "yil": 2022,
+      "metin": "İki kişi yan yana yürürken adımları kendiliğinden aynı tempoya girer mi? Önceki deneyler bunun sık olabileceğini düşündürüyordu. Peki sokakta, gündelik hayatta durum nasıl? Araştırmacılar bunu anlamak için yaya yollarında yürüyen insanları kameraya kaydetti. Kayıtlarda birlikte yürüyen 498 çift incelendi. Bu çiftlerin yalnız yaklaşık yüzde 6'sı yol boyunca adım adım aynı tempoda yürüyordu. Ekip, çiftlerdeki iki kişinin adım temposu arasındaki farkları da inceleyip bir model kurdu. Buna göre aynı hızda yürüyen iki kişinin adım temposu çoğu zaman farklıdır. Çünkü herkesin adım uzunluğu ile adım temposu arasında kendine özgü bir oranı vardır. Yine de birlikte yürüyenler, adımları tam denk gelmese bile, bu oranı birbirininkine doğru biraz yaklaştırıyor olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Birlikte yürüyenlerin adımlarının gündelik hayatta birbirine ne kadar uyduğunu",
+            "Yan yana yürüyenlerin adımlarının çoğu zaman kendiliğinden tam eşleştiğini",
+            "Birlikte yürüyen insanların yolda birbiriyle ne kadar ve nasıl konuştuğunu",
+            "Yaya yollarındaki kalabalığın insanların yürüyüş hızını nasıl düşürdüğünü"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılar yürüyüşleri nasıl kaydetti?",
+          "secenekler": [
+            "Yaya yollarında kameraya alarak",
+            "Anket doldurtarak",
+            "Koşu bandında ölçerek",
+            "Ayakkabılara aygıt takarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kayıtlarda kaç çift incelendi?",
+          "secenekler": [
+            "498",
+            "49",
+            "98",
+            "4980"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Çiftlerin yaklaşık yüzde kaçı yol boyunca aynı tempoda yürüyordu?",
+          "secenekler": [
+            "Yüzde 6",
+            "Yüzde 60",
+            "Yüzde 30",
+            "Yüzde 90"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekibin modeline göre aynı hızda yürüyen iki kişinin adım temposu nasıldır?",
+          "secenekler": [
+            "Çoğu zaman farklı",
+            "Her zaman tamamen aynı",
+            "Yalnız ayakkabıya göre değişir",
+            "Yaşları arttıkça hep aynılaşır"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Birlikte yürüyenler neyi birbirininkine doğru biraz yaklaştırıyor olabilir?",
+          "secenekler": [
+            "Adım uzunluğu ile adım temposu arasındaki oranı",
+            "Kol sallama biçimlerini",
+            "Baktıkları yönü",
+            "Ses tonlarını"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa029",
+      "baslik": "Burnunla iz sürmek",
+      "etiket": "insan",
+      "kaynak": "porter2006",
+      "pmid": "17173046",
+      "doi": "10.1038/nn1819",
+      "yazar": "Porter ve ark.",
+      "dergi": "Nature Neuroscience",
+      "yil": 2006,
+      "metin": "Koku izi sürmek denince akla çoğu zaman insanlar gelmez. Bir grup araştırmacı, insanların bir koku izini sürüp süremeyeceğini sınadı. Bir de şunu sordular: İki burun deliğinin aldığı kokuları karşılaştırmak bu işe yardım ediyor mu? Memelilerde bu sorunun cevabı henüz bilinmiyordu. Deneyler, insanların koku izi sürebildiğini gösterdi. Üstelik katılımcılar alıştırma yaptıkça daha iyi iz sürdü. Ekip, iki burun deliğinin aynı yeri koklamadığını da buldu. Delikler, aralarında yaklaşık 3,5 santimetre olan iki ayrı bölgeden koku alıyordu. En önemlisi, iki delikten gelen kokuların karşılaştırılması iz sürmeyi kolaylaştırıyordu. Araştırmacılara göre insanın koku alma duyusunun kötü bir ünü olmasının bir nedeni, yeteneğin zayıflığı değil, gündelik hayatta bu yeteneğe pek ihtiyaç duymamamız olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "İnsanların koku izi sürebilmesini ve bunu nasıl yaptığını",
+            "İnsanların koku duyusunun zayıf olmasını ve bunun nedenini",
+            "Köpeklerin insanlardan iyi iz sürmesini ve bunun nedenini",
+            "İnsanların kokuları hatırlamasını ve nasıl adlandırdığını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Katılımcılar alıştırma yaptıkça ne oldu?",
+          "secenekler": [
+            "Daha iyi iz sürdüler",
+            "Daha kötü iz sürdüler",
+            "İz sürmeyi bıraktılar",
+            "Hiçbir şey değişmedi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Burun deliklerinin koku aldığı iki bölge arasında yaklaşık ne kadar mesafe vardı?",
+          "secenekler": [
+            "3,5 santimetre",
+            "1 milimetre",
+            "10 santimetre",
+            "20 santimetreden fazla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İz sürmeyi ne kolaylaştırıyordu?",
+          "secenekler": [
+            "İki delikten gelen kokuların karşılaştırılması",
+            "Tek deliğin kapatılması",
+            "Gözlerin kapatılması",
+            "Ağızdan nefes alınması"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "İki burun deliği hakkında ne bulundu?",
+          "secenekler": [
+            "Ayrı bölgelerden koku alıyorlar",
+            "Tam olarak aynı yeri kokluyorlar",
+            "Yalnız biri koku alıyor",
+            "Sırayla çalışıp dinleniyorlar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılara göre insan koku duyusunun kötü ününün bir nedeni ne olabilir?",
+          "secenekler": [
+            "Bu yeteneğe pek ihtiyaç duymamamız",
+            "Burnumuzun çok küçük olması",
+            "Kokuların havada çabucak dağılması",
+            "Burun deliklerimizin birbirine çok yakın olması"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa030",
+      "baslik": "Sincabın gizli düzeni",
+      "etiket": "memeli",
+      "kaynak": "delgado2017",
+      "pmid": "28989788",
+      "doi": "10.1098/rsos.170958",
+      "yazar": "Delgado ve Jacobs",
+      "dergi": "Royal Society Open Science",
+      "yil": 2017,
+      "metin": "Bazı sincaplar yiyeceklerini tek bir yere değil, pek çok farklı noktaya gömer. Sonra bu yiyeceklerin yerini hatırlamaları ve onları başkalarına kaptırmamaları gerekir. Peki sincaplar gömdükleri yiyecekleri türüne göre grupluyor mu? Böyle bir gruplama hatırlamayı kolaylaştırabilirdi. Araştırmacılar doğada yaşayan 45 tilki sincabının her birine dört farklı türden 16 kuruyemiş verdi. Bazı sincaplar her kuruyemişi ayrı bir noktadan, bazıları hepsini aynı noktadan aldı. Ekip, kuruyemişlerin gömüldüğü yerleri uydu konum aygıtıyla haritaya geçirdi. Sincaplar yiyecekleri türüne göre ayrı bölgelere gömdü, ama yalnız hepsini tek bir noktadan aldıklarında. Böyle bir düzen, yiyeceğini dağınık gömen bir hayvanda ilk kez gösterildi. Bu da yiyeceği dağınık gömmenin ne kadar zihin gücü istediğini gösteriyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Sincapların gömdükleri yiyecekleri türüne göre gruplamasını",
+            "Sincapların bütün yiyeceklerini hep tek bir yere gömmesini",
+            "Sincapların kuruyemişlerin sert kabuğunu dişleriyle kırmasını",
+            "Sincapların kışlık yuvalarını ağaç kovuklarında kurmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Deneye kaç tilki sincabı katıldı?",
+          "secenekler": [
+            "45",
+            "4",
+            "16",
+            "100"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Her sincaba kaç kuruyemiş verildi?",
+          "secenekler": [
+            "16",
+            "4",
+            "45",
+            "8"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip gömülen yerleri neyle haritaya geçirdi?",
+          "secenekler": [
+            "Uydu konum aygıtıyla",
+            "Kâğıt kalemle",
+            "Gizli kameralarla",
+            "Köpeklerle"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sincaplar yiyecekleri türüne göre ne zaman grupladı?",
+          "secenekler": [
+            "Hepsini tek bir noktadan aldıklarında",
+            "Her birini ayrı bir noktadan aldıklarında",
+            "Yalnız yağmurlu günlerde",
+            "Yalnız başka sincaplar yanlarındayken"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sincaplar gömdükleri yiyeceklerle ilgili hangi iki işi başarmalıdır?",
+          "secenekler": [
+            "Yerlerini hatırlamak ve onları kaptırmamak",
+            "Her gün yerlerini değiştirmek ve saymak",
+            "Hepsini aynı gün bulmak ve yemek",
+            "Hepsini aynı gün yuvalarına taşımak ve orada yemek"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -78,6 +78,7 @@ import { registry } from './modules/registry.js'
 import { viewFor } from './modules/views.js'
 import IPHONE_SCREENS from './lib/iphoneScreens.json'
 import GazeCalibration from './screens/GazeCalibration.jsx'
+import OkuGozDeneme from './screens/OkuGozDeneme.jsx'
 import GazeTest from './screens/GazeTest.jsx'
 import { alarmCheck, consumeOpen, cancelAlarm, alarmDiag, ALARM_CHANGED } from './lib/alarmNative.js'
 import { loadAlarm, loadAlarmLog, addAlarmEvent } from './lib/alarmLog.js'
@@ -177,7 +178,7 @@ function useEyeClock(kind) {
 //     components/RemindSheet.jsx 5/5 geçti). AÇIK: modül hatırlatması yalnız Bildirimler'den kurulur. Hiçbir modül
 //     hatırlatması açık değilken plan bugünkü gibi kalır (eşdeğerlik: lib/notifyAll.equiv.test.js).
 const REMIND_ROW = false
-const NOTIFY_PAGE = false // uygulamadaki hâl 5 sn kapısında 1/5 (5sn-b1a-yeni.md son bölüm); sahip kararı: durdu
+const NOTIFY_PAGE = true // yeniden açık (sahip 2026-10-03, D14): yalnız kurulan hatırlatmalar + "Hatırlatma ekle"; önce 1/5'ti
 // B2 hava (PLAN.v1 §3.B; tasarım b2-tasarim/: R-katmanli, K-C, G-tur2). SKY_UI: bütün B2 arayüzü (rıza, il/ilçe, onay
 // rotaları) bu bayrağın arkasında; SkyPlugin.swift Mac'te derlenip cihazda doğrulanana kadar KAPALI. Akış: rıza
 // (weather) → iOS konum izni ("Kullanırken", yaklaşık varsayılan) → il ve en yakın ilçe kendiliğinden (sahip kararı
@@ -1328,6 +1329,8 @@ export default function App() {
       return <GazeTest onBack={() => go('info')} onCalibrate={() => go('gaze-cal')} />
     case 'gaze-cal':
       return <GazeCalibration onDone={() => go('gaze-test')} onCancel={() => go('info')} />
+    case 'oku-goz':
+      return <OkuGozDeneme sessions={sessions} trueDepth={native.trueDepth} onExit={() => go('info')} />
     default:
       break
   }
@@ -1343,6 +1346,7 @@ export default function App() {
         onGo={(s) => (s === 'schedule' ? openSchedule('info') : go(s))}
         onSkyTry={SKY_UI ? () => startSky('locate') : null}
         onAlarmDiag={SKY_UI ? () => alarmDiag() : null}
+        onReadGaze={SKY_UI && native.trueDepth ? () => go('oku-goz') : null}
         iosApp={isIOSApp()}
         trueDepth={native.trueDepth}
         calibration={settings.calibration}
@@ -1412,6 +1416,7 @@ export default function App() {
         onYogaMorning={refresh}
         // Hava satırı (B2 tpl-home): yalnız SKY_UI açıkken, weather rızası ve kayıtlı yer varken (yoksa Ana sayfada yer yok)
         sky={SKY_UI && hasConsent(settings.consents, 'weather') ? loadPlace() : null}
+        onHabit={() => { refresh(); replan() }}
       />
     )
   }

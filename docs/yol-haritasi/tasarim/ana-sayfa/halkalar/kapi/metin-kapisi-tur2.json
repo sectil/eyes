@@ -1,0 +1,32 @@
+{
+ "a3": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ },
+ "a4": {
+  "yes": 2,
+  "n": 5,
+  "why": [
+   "Üç kopuk parçayı virgülle art arda dizdiği için kulağa robot gibi geliyor; a3'teki \"Tam set, mola bitene kadar kilitli\" daha doğal.",
+   "Üç parça virgülle sıralanmış, edilgen 'yapılabilir' form diliyle konuşuyor, kulağa robot gibi geliyor; öneri: 'Tam set, mola bitene kadar kilitli'.",
+   "Edilgen 'yapılabilir' ve üç parçalı virgül dizisi durum raporu gibi, robotik duruyor; uygulama 'sen' diye hitap ediyor. Öneri: 'Tam set, kilitli. Mola bitince yapabilirsin.' ya da doğrudan a3."
+  ]
+ },
+ "r3": {
+  "yes": 0,
+  "n": 5,
+  "why": [
+   "Küçük harfli 'tam set' listede neyin tam seti olduğunu söylemiyor, okuyan 'ne tam seti?' diye takılır. Öneri: 'sesli yoga, müzik, nefes ve göz egzersizlerinin tam seti artık tek dokunuşla açılıyor.'",
+   "Küçük harfle yazılmış \"tam set\" sürüm notunu ilk okuyan için belirsiz kalıyor, neyin seti olduğu anlaşılmıyor; öneri: \"...nefes ve tüm göz egzersizleri (Tam set) artık tek dokunuşla açılıyor.\"",
+   "Küçük harfli 'tam set' yeni kullanıcıya bir şey anlatmıyor, ne olduğu belirsiz kalıyor; öneri: '...nefes ve göz egzersizlerinin tam seti artık tek dokunuşla açılıyor.'",
+   "Küçük harfle, açıklamasız yazılan 'tam set' listede belirsiz kalıyor, okuyan 'neyin tam seti?' diye duraksıyor. Öneri: '...nefes ve Tam set (tüm göz egzersizleri art arda) artık tek dokunuşla açılıyor. Bugün yaptıklarına tik düşer.'",
+   "Küçük harfle geçen \"tam set\" ilk okuyuşta ne olduğu belli olmayan bir terim olarak kalıyor; öneri: \"...nefes ve tüm göz egzersizleri (Tam set) artık tek dokunuşla açılıyor.\""
+  ]
+ },
+ "r4": {
+  "yes": 5,
+  "n": 5,
+  "why": []
+ }
+}

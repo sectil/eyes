@@ -18,7 +18,7 @@ export function verdictWord(v, { cap = false } = {}) {
 }
 
 // Birim → basamak (VARSAYIM: yüzeylerin bugünkü en sık kullanımı; logMAR 2, beş/on üzerinden puan 1, ms/%/adım 0)
-export const DIGITS = { logMAR: 2, ms: 0, '%': 0, harf: 1, '/5': 1, '/10': 1, '/100': 0, kez: 0, puan: 1, adım: 0, kırpma: 0 }
+export const DIGITS = { logMAR: 2, ms: 0, '%': 0, 'kelime/dk': 0, harf: 1, '/5': 1, '/10': 1, '/100': 0, kez: 0, puan: 1, adım: 0, kırpma: 0 }
 // Tam sayıya düşen değerde ",0" yazılmayan birimler ("4 → 6 harf"; "5,2 harf")
 const TRIM = new Set(['harf', 'puan', '/5', '/10'])
 export const digitsOf = (unit, digits) => (Number.isInteger(digits) ? digits : DIGITS[unit] ?? 1)

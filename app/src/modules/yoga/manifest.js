@@ -74,7 +74,7 @@ export default {
   // "Bana hatırlat" (bildirim PLAN.v1 §A.1 modül tablosu; metin lib/remindTexts.js, sahip onaylı metin-B1a-onay.md).
   // Kendi rotası, sakin pencere. Kaynaklar moszeik2025 (YG1, YG3) ve luu2024 (YG2); radin2025 yalnız meditasyon içeriği
   // (sources.js only), burada yok. moszeik2025 görünür bilim satırı taşımaz (karar 4). VARSAYIM: defaultTime yok.
-  remind: { route: 'yoga', window: 'calm', science: ['moszeik2025', 'luu2024'] },
+  remind: { route: 'yoga', window: 'calm', defaultTime: '21:30', science: ['moszeik2025', 'luu2024'] },
   // Pratikler kutucuğu yalnız iPhone uygulamasında (web'de ders oynatıcısı yok). Getter: her okunuşta yeniden bakılır.
   get home() {
     return isIOSApp() ? HOME : undefined

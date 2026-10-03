@@ -210,6 +210,12 @@ function metricChanges(ctx) {
     if (!m || EXCLUDED_METRICS.has(m.key) || EXCLUDED_DOMAINS.has(m.domain)) continue
     // Aşağı-iyi metrik için onaylı cümle yok (onaylı MC cümleleri "çıktı"): susar
     if (m.better !== 'up' || m.verdict !== 'better' || !isNum(m.start) || !isNum(m.current) || !(m.current > m.start)) continue
+    // Bağlı ölçü (manifest metric.nefWith): o ölçü 'değişim yok' ya da 'başlangıcından iyi' değilse susar. Oku ve Anla:
+    // anlama düşerken hız artışı övülmez (okuma-anlama/PLAN.md §5.2; Miyata 2012, Rayner 2016).
+    if (m.with) {
+      const w = (ctx.metrics ?? []).find((x) => x?.key === m.with)
+      if (w?.verdict !== 'same' && w?.verdict !== 'better') continue
+    }
     const facts = { module: m.module, metric: m.key, start: m.start, current: m.current }
     if (Number.isInteger(m.weeks)) facts.weeks = m.weeks
     out.push({ type: 'metricChange', cell: 'MC', facts, key: `metric:${m.key}:${m.start}:${m.current}`, priority: PRIORITY.metricChange, channels: ['card'] })

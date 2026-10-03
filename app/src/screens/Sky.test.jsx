@@ -198,6 +198,16 @@ describe('inceleme düzeltmeleri (şimdi, atıf, yeniden plan)', () => {
     expect(hourStrip(FORECAST.hours, later)[0]).toMatchObject({ label: 'Şimdi', temp: `${Math.round(row.tempC)}°` })
     expect(nowView(FORECAST, NOW)).toMatchObject({ temp: '23°', feels: '24°' }) // canlı: now aynı saatte
   })
+  it('canlı "now" o saatin tahmininden farklıysa şeridin "Şimdi" sütunu büyük sayıyla aynı', async () => {
+    mem.clear()
+    const forecast = { ...FORECAST, now: { ...FORECAST.now, tempC: 16 }, hours: HOURS.map((r) => (r.at === at(12) ? { ...r, tempC: 14 } : r)) }
+    const v = await mount({ deps: deps({ plugin: fakePlugin({ forecast }) }) })
+    const first = v.q((n) => n.getAttribute?.('role') === 'listitem')[0].textContent
+    expect(first).toContain('Şimdi')
+    expect(first).toContain('16°')
+    expect(first).not.toContain('14°')
+    expect(v.q((n) => n.className === 'wx-deg')[0].textContent).toBe('16°')
+  })
   it('atıf: yalnız bir işaret geçerliyse öteki temada metin işaret kalır', async () => {
     mem.clear()
     const plugin = { ...fakePlugin(), attribution: async () => ({ ...ATTR, combinedMarkDarkURL: 'http://x/d.png' }) }

@@ -173,6 +173,9 @@ export const cells = Object.freeze({
     { id: 'MC-11', text: '{modül:LOC} ilerleme var: {metrik} {başlangıç:ABL} {şimdi:DAT} çıktı.' },
     { id: 'MC-12', needs: ['twoWeeks'], text: 'İki haftadır {modül:LOC} {metrik} {şimdi}; başlangıçta {başlangıç:GEÇMİŞ}.' },
     { id: 'MC-15', text: '{modül:LOC} {metrik} artık {şimdi}; başlangıçta {başlangıç:GEÇMİŞ}.' },
+    // Oku ve Anla'ya özel (okuma-anlama/METINLER.md §5, sahip onayı 2026-10-02): yalnız hız ölçüsünde; an motoru anlama
+    // 'değişim yok' ya da 'başlangıcından iyi' değilse hız anını hiç kurmaz (metric.nefWith)
+    { id: 'MC-OA1', only: { metric: 'okuma-anlama-hiz' }, text: 'Okuma hızın başlangıcından iyi, anlaman da yerinde.' },
   ],
   // firstTime.A: bir modülde ilk gün
   FT: [
@@ -189,6 +192,10 @@ export const cells = Object.freeze({
     { id: 'FTB-4', needs: ['effect'], text: 'İlk {modül:POSS-ABL} sonra {ölçü:POSS} {önce:ABL} {sonra:DAT} çıktı.' },
     // Modüle özel ("kavradın" fiili yalnız Tek Bakışta için doğru)
     { id: 'FTB-8', needs: ['metric'], only: { metric: 'tek-bakis-span' }, text: 'İlk Tek Bakışta turunda {başlangıç} harf kavradın; başlangıcın bu.' },
+    // Oku ve Anla'ya özel (METINLER.md §5, sahip onayı 2026-10-02): ilk okumada sayı söylemez
+    { id: 'FTB-OA1', only: { module: 'okuma-anlama' }, text: 'İlk okuman tamam. Hızın, metni anladığında kaydedilir; acele etme.' },
+    // Yakala Yaz'a özel (kelime-hafiza/METINLER.md N1, sahip onayı 2026-10-02)
+    { id: 'FYY-1', needs: ['metric'], only: { metric: 'yakala-yaz-ms' }, text: "İlk Yakala Yaz turunda iki kelimeyi {başlangıç} ms'de yakaladın; başlangıcın bu." },
   ],
   // returnAfterGap: bir modüle uzun aradan dönüş
   RG: [
@@ -198,6 +205,7 @@ export const cells = Object.freeze({
     { id: 'RG-4', text: "{modül:ACC} yeniden açtın; önceki kayıtların Gelişim'de." },
     { id: 'RG-5', needs: ['effect'], text: 'En son {modül:ABL} sonra {ölçü} puanın {önce:ABL} {sonra:DAT} çıkmıştı.' },
     { id: 'RG-7', text: '{modül:DAT} yeniden hoş geldin; kayıtların yerinde.' },
+    { id: 'RG-OA1', only: { module: 'okuma-anlama' }, text: 'Bir süredir okumadın. Bugün seni kısa bir bilim metni bekliyor.' },
     { id: 'RG-8', text: '{modül} seni bekliyordu; kayıtların yerinde.' },
   ],
   // pathDone: bugünkü yol bitti, haftanın sayısı

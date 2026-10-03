@@ -199,6 +199,7 @@ export function nefContext(input = {}, { now = new Date(), rows = [], backLine =
   const recallIds = ids('recallEffect')
   const patternIds = ids('effectPattern')
   const metricIds = ids('metricChange')
+  const withOf = new Map(registry.metrics().filter((x) => typeof x.nefWith === 'string').map((x) => [x.key, x.nefWith]))
   const effects = registry.effects()
   const ctx = {
     now,
@@ -207,7 +208,7 @@ export function nefContext(input = {}, { now = new Date(), rows = [], backLine =
     acute: acuteEffects(sessions, { since: effectsSince(now), effects: effects.filter((e) => patternIds.has(e.module)) }),
     metrics: metricCards({ tests, sessions, metrics: registry.metrics().filter((x) => metricIds.has(x.module)), now })
       .filter((c) => c.v2 && isNum(c.v2.baseline) && isNum(c.v2.current))
-      .map((c) => ({ key: c.key, module: c.module, domain: c.domain, better: c.better, verdict: c.verdict, start: c.v2.baseline, current: c.v2.current })),
+      .map((c) => ({ key: c.key, module: c.module, domain: c.domain, better: c.better, verdict: c.verdict, start: c.v2.baseline, current: c.v2.current, with: withOf.get(c.key) ?? null })),
     firsts: firstsOf({ now, tests, sessions, habits, modules, bank, lexicon }),
     gaps: gapsOf({ now, tests, sessions, habits, modules }),
     who5Low: who5Low === true,

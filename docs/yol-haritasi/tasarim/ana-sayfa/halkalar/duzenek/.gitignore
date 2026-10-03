@@ -1,0 +1,5 @@
+node_modules
+.vite-cache
+vite.log
+tur*/
+*.png

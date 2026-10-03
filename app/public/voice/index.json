@@ -54,11 +54,20 @@
         "acuCloser",
         "acuFarther",
         "acuFace",
-        "acuPaused"
+        "acuPaused",
+        "ddUzat",
+        "ddCene",
+        "ddOmuz",
+        "ddUzatFix",
+        "ddCeneFix",
+        "ddCalNormal",
+        "ddCalTall",
+        "ddCalDone"
       ],
       "voiceName": "Neslihan",
       "model": "eleven_multilingual_v2",
-      "date": "2026-09-28"
+      "date": "2026-09-28",
+      "dikDurDate": "2026-10-03"
     },
     "male": {
       "phrases": [
@@ -114,11 +123,20 @@
         "acuCloser",
         "acuFarther",
         "acuFace",
-        "acuPaused"
+        "acuPaused",
+        "ddUzat",
+        "ddCene",
+        "ddOmuz",
+        "ddUzatFix",
+        "ddCeneFix",
+        "ddCalNormal",
+        "ddCalTall",
+        "ddCalDone"
       ],
       "voiceName": "Hakan",
       "model": "eleven_multilingual_v2",
-      "date": "2026-09-28"
+      "date": "2026-09-28",
+      "dikDurDate": "2026-10-03"
     }
   }
 }

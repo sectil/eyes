@@ -239,6 +239,11 @@
 .hh-chips .hh-fact.al-fact { width: auto; margin: 0; min-height: 0; padding: 6px 10px; border: 1px solid var(--border); background: var(--surface); border-radius: 999px; }
 .hh-chips .hh-fact.al-fact .al-fact-ar { margin-left: 0; }
 
+/* Su çipi (components/home/WaterChip.jsx): dokunulur hap; sağda küçük artı; eklenince alttan "Geri al" şeridi */
+.hh-chips .hh-fact.water { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.hh-chips .hh-fact.water .plus { color: var(--accent); margin-left: 2px; }
+.hh-chips .hh-fact.water b { font-variant-numeric: tabular-nums; }
+.hh-chips .hh-fact.water:active { background: var(--surface-2); }
 .hh-alt button { padding: 10px 12px; }
 @media (max-width: 360px) {
   .hh-facts.hh-chips { gap: 6px; }
@@ -621,3 +626,86 @@
   .wxc-tx .il { display: none; }
   .wxc-deg { font-size: 2rem; }
 }
+
+/* ---- Kısayol halkaları (components/home/HomeRings.jsx; sahibin isteği 2026-10-03) ----
+   Instagram'ın öne çıkanlar halkası gibi: ince nötr halka, araya zemin, içinde modülün tonuyla çok hafif boyalı disk ve
+   modülün çizimi; altında adı. Dört halka içeriğin iki kenarına yaslı (ilk dairenin solu selam ve haplarla, sonuncunun
+   sağı Başla kartıyla aynı çizgide); daha az halka (web'de Yoga yok; kartın modülü halkada tekrar etmez) aynı aralıkla
+   ortada. Aralarında çizgi yok, numara yok (gün şeridi: küçük, numaralı, çizgiyle bağlı daireler).
+   Disk zemini --surface-2: açık temada halka ile disk arasındaki zemin şeridi seçilsin (--surface'ta disk zeminle aynı
+   açıklıktaydı). Tonlar yoldaki bantların tonları (longpath.css .lp-band: yoga --ok, Dalga --iris-1, nefes --iris-2).
+   Tam set'in yolda bandı yok ve koyu temada --accent ile --iris-1 aynı renk: tonu nötr (--ink-2), çizimi --ink.
+   Yapıldıysa disk modülün tonuyla dolar (%22) ve sağ altta tik rozeti (gün şeridinin "bitti" dili); halka nötr kalır
+   (renkli kalın halka gün şeridinde "bugün" demek). Mola kilidinde koyu kilit rozeti (tikten önce gelir). Sürekli hareket
+   yok; basınca disk koyulaşır, hareket isteyen cihazda halka %96'ya iner. Renkler tokenlardan; mercek sarısı ve doygun
+   kırmızı yok. Boy: --hk-d dış çap, --hk-gap en küçük aralık, --hk-ic çizim, --hk-k çizimin optik ölçeği.
+   İlk 7 günde Home.jsx fitRings Başla kartı sığmazsa data-fit="sm" (küçük) ya da "off" (gizli) yazar. */
+/* Dikey ritim: satır "1. bölüm" yazısına haplardan daha yakın (onun başlığı gibi okunsun): hap → daire 16, etiketin
+   tabanı → "1. bölüm" yazısının büyük harf üstü 14 (sahnenin aralığı 12; üstte +4, altta −4) */
+.hk { --hk-d: 62px; --hk-gap: 10px; --hk-ic: 24px; width: 100%; margin: 4px 0 -4px; }
+.hk-row {
+  list-style: none; margin: 0; padding: 0; display: flex; justify-content: center;
+  column-gap: max(var(--hk-gap), calc((100% - 4 * var(--hk-d)) / 3));
+}
+.hk-row.n4 { justify-content: space-between; column-gap: var(--hk-gap); }
+.hk-row > li { flex: none; display: flex; }
+.hk-b {
+  --hk-tone: var(--accent); --hk-ink: var(--hk-tone); --hk-k: 1;
+  display: grid; justify-items: center; align-content: start; gap: 6px; min-width: var(--hk-d); padding: 0; border: 0;
+  border-radius: 14px; background: none; color: var(--ink); font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.hk-b.yoga { --hk-tone: var(--ok); --hk-k: 1.18; }
+.hk-b.dalga { --hk-tone: var(--iris-1); }
+.hk-b.breath { --hk-tone: var(--iris-2); }
+.hk-b.full { --hk-tone: var(--ink-2); --hk-ink: var(--ink); --hk-k: 0.88; }
+.hk-o {
+  position: relative; display: grid; place-items: center; width: var(--hk-d); height: var(--hk-d); border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ink-3) 42%, transparent);
+}
+.hk-d {
+  display: grid; place-items: center; width: calc(var(--hk-d) - 9px); height: calc(var(--hk-d) - 9px); border-radius: 50%;
+  background: color-mix(in srgb, var(--hk-tone) 8%, var(--surface-2)); color: var(--hk-ink);
+}
+.hk-d svg { display: block; width: calc(var(--hk-ic) * var(--hk-k)); height: calc(var(--hk-ic) * var(--hk-k)); }
+.hk-l { font: 600 0.8rem/1.15 var(--font-body); color: var(--ink-2); white-space: nowrap; }
+.hk-b.done .hk-d { background: color-mix(in srgb, var(--hk-tone) 22%, var(--surface-2)); }
+.hk-m {
+  position: absolute; right: -2px; bottom: -2px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+  box-shadow: 0 0 0 2px var(--bg);
+}
+.hk-m.ok { background: var(--accent-grad); color: var(--accent-ink); }
+.hk-m.lk { background: var(--ink-2); color: var(--bg); }
+/* Basma izi hareketsiz de var (hareketi azalt açıkken tek geri bildirim) */
+.hk-b:active .hk-d { background: color-mix(in srgb, var(--hk-tone) 18%, var(--surface-2)); }
+.hk-b.done:active .hk-d { background: color-mix(in srgb, var(--hk-tone) 32%, var(--surface-2)); }
+.hk-b:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: no-preference) {
+  .hk-o { transition: transform 120ms ease-out; }
+  .hk-b:active .hk-o { transform: scale(0.96); }
+}
+/* Klavye odağı sekme çubuğunun ardında kalmasın (WCAG 2.4.11): Ana sayfada kaydırma kabının alt payı çubuğun boyu (.hf
+   --tabbar-h 70) + 12 + güvenli alan; tarayıcı odaklanan öğeyi bu payın üstüne kaydırır */
+html:has(.hk) { scroll-padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px)); }
+/* 8. günden sonra yolun başında, "N. bölüm" hapının hemen üstünde: etiketin tabanı → hapın üstü 14 (ilk haftadaki gibi) */
+.hk.at-path { margin: 4px 0 4px; }
+/* Dar ya da kısa ekran (320 pt, ≤ 740 pt boy) */
+@media (max-width: 360px), (max-height: 740px) {
+  .hk { --hk-d: 56px; --hk-gap: 8px; --hk-ic: 22px; }
+  .hk-l { font-size: 0.78rem; }
+}
+/* Çok kısa ekran (320 × 568) */
+@media (max-height: 600px) {
+  .hk { --hk-d: 50px; --hk-ic: 20px; }
+  .hk-b { gap: 5px; }
+  .hk-l { font-size: 0.75rem; }
+}
+/* İlk 7 gün, Başla kartı sığmıyor: küçük; yine sığmıyorsa o çizimde gizli */
+.hk[data-fit='sm'] { --hk-d: 46px; --hk-gap: 8px; --hk-ic: 19px; }
+.hk[data-fit='sm'] .hk-b { gap: 4px; }
+.hk[data-fit='sm'] .hk-l { font-size: 0.75rem; }
+.hk[data-fit='sm'] .hk-m { width: 18px; height: 18px; }
+.hk[data-fit='off'] { display: none; }
+/* 320 pt'de haplarda çizim gizli; su çipinin artısı kalır (dokunulur olduğu belli olsun) */
+@media (max-width: 360px) { .hh-chips .hh-fact.water > svg.plus { display: block; } }
+/* Su çipinin "Geri al" şeridi üstte (altta 320 × 640'ta Başla kartını örtüyordu; 5 sn kapısı tur 1) */
+.al-toast.al-float.wc-top { top: calc(env(safe-area-inset-top, 0px) + 10px); bottom: auto; }

@@ -1,0 +1,746 @@
+{
+  "surum": "taslak-04",
+  "not": "Her soruda doğru seçenek ilk sıradadır; uygulama şıkları her gösterimde karıştırır. 'ana' sorusu her turda sorulur, kalan 3 soru 5 ayrıntı sorusundan seçilir. Konu alanı: bitki, mikro, insan, bocek.",
+  "metinler": [
+    {
+      "id": "oa031",
+      "baslik": "Kapanın içindeki hesap",
+      "etiket": "bitki",
+      "kaynak": "bohm2016",
+      "pmid": "26804557",
+      "doi": "10.1016/j.cub.2015.11.057",
+      "yazar": "Böhm ve ark.",
+      "dergi": "Current Biology",
+      "yil": 2016,
+      "metin": "Venüs sinekkapanı, besin bakımından fakir topraklarda yetiştiğinde böcek yakalayarak beslenmek zorunda kalan bir bitkidir. Bir böcek kapanın iç yüzündeki tüylere dokununca bitkide elektrik sinyalleri oluşur. İki sinyalden sonra kapan hızla kapanır ve böceği içine hapseder. Kurtulmaya çalışan böcek sonraki saatlerde tüylere tekrar tekrar dokunur. Bir ekip, bitkinin kapandaki şeyi besin olarak tanıması için tüylere kaç kez dokunulması gerektiğini araştırdı. İkinci dokunuştan sonra, dokunmayla çalışan bir hormon sistemi devreye girdi. Avı sindirecek maddeleri yapan genlerin çalışması için ise üçten fazla sinyal gerekti. Dokunuş sayısı arttıkça bu genler de daha çok çalıştı. Bitki, sindirilen avdaki sodyumu da bezleri yoluyla içine aldı. Kısacası avın çırpınırken tüylere kaç kez dokunduğu, bitkiye yakaladığı şeyin besin olduğunu bildiriyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Sinekkapanının dokunuş sayısına göre avı besin saymasını",
+            "Sinekkapanında bir hormon sisteminin devreye girmesini",
+            "Sinekkapanının dokunuş sayısı arttıkça avı serbest bırakmasını",
+            "Sinekkapanının böcekleri kokusuyla kendine çekmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Kapan kaç sinyalden sonra kapanır?",
+          "secenekler": [
+            "İki",
+            "Bir",
+            "Beş",
+            "On"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Avı sindirecek maddeleri yapan genlerin çalışması için kaç sinyal gerekti?",
+          "secenekler": [
+            "Üçten fazla",
+            "Yalnız bir",
+            "Tam iki",
+            "Tam üç"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bir böcek kapanın iç yüzündeki tüylere dokununca bitkide ne oluşur?",
+          "secenekler": [
+            "Elektrik sinyalleri",
+            "Ses sinyalleri",
+            "Koku sinyalleri",
+            "Işık sinyalleri"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bitki avdaki sodyumu nasıl içine aldı?",
+          "secenekler": [
+            "Bezleri yoluyla",
+            "Kökleri yoluyla",
+            "Çiçekleri yoluyla",
+            "Dikenleri yoluyla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sinekkapanı hangi topraklarda böcekle beslenmek zorunda kalır?",
+          "secenekler": [
+            "Besin bakımından fakir topraklarda",
+            "Çok sıcak çöl kumlarında",
+            "Sık ormanların gölgeli topraklarında",
+            "Tuzlu deniz kıyısı topraklarında"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa032",
+      "baslik": "Küstüm otu neyi hatırlar?",
+      "etiket": "bitki",
+      "kaynak": "gagliano2014",
+      "pmid": "24390479",
+      "doi": "10.1007/s00442-013-2873-7",
+      "yazar": "Gagliano ve ark.",
+      "dergi": "Oecologia",
+      "yil": 2014,
+      "metin": "Hayvanlar çevrelerinden bilgi edinir, bu bilgiyi akıllarında tutar ve gerektiğinde hatırlar. Bitkiler de çevrelerinden pek çok bilgi toplar. Ama öğrendiklerini hatırlayabildikleri şimdiye dek gösterilmemişti. Küstüm otu, rahatsız edilince kendini korumak için yapraklarını kapatan bir bitkidir. Aynı rahatsızlık tekrarlandıkça bu tepki giderek azalır. Buna alışma denir ve alışma basit bir öğrenme biçimi sayılır. Bir ekip, hayvanlarda öğrenmeyi incelerken kullanılan yöntemleri bu bitkiye uyguladı. Enerji bulmanın zor olduğu ortamlarda büyüyen bitkilerde alışma daha belirgindi ve daha uzun sürdü. Daha şaşırtıcısı, bitkiler daha elverişli bir ortamda bir ay boyunca hiç rahatsız edilmeden kaldıktan sonra da öğrendiklerini hatırlıyordu. Bu kalıcılık, birçok hayvanda görülen alışmanın kalıcılığına benziyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Küstüm otunun alışmayı uzun süre hatırlamasını",
+            "Küstüm otunun giderek daha güçlü tepki vermesini",
+            "Bitkilerin öğrendiklerini hemen unutmasını",
+            "Küstüm otunun kendisine dokunan hayvanları tek tek hatırlamasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Küstüm otu rahatsız edilince ne yapar?",
+          "secenekler": [
+            "Yapraklarını kapatır",
+            "Çiçeklerini hemen açar ve koku salar",
+            "Rengini değiştirir",
+            "Gövdesini uzatır"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Alışma nasıl bir öğrenme biçimi sayılır?",
+          "secenekler": [
+            "Basit bir öğrenme biçimi",
+            "Çok karmaşık bir öğrenme biçimi",
+            "Yalnız insana özgü bir öğrenme biçimi",
+            "Yalnız kuşlarda görülen bir öğrenme biçimi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Alışma hangi bitkilerde daha belirgindi?",
+          "secenekler": [
+            "Enerji bulmanın zor olduğu ortamlarda büyüyenlerde",
+            "En genç olanlarda",
+            "En yaşlı olanlarda",
+            "Bol suyla sulananlarda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bitkiler elverişli ortamda ne kadar kaldıktan sonra da öğrendiklerini hatırlıyordu?",
+          "secenekler": [
+            "Bir ay",
+            "Bir gün",
+            "Bir hafta",
+            "Bir yıl"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip hangi yöntemleri kullandı?",
+          "secenekler": [
+            "Hayvanlarda öğrenmeyi incelerken kullanılan yöntemleri",
+            "Yalnız bitkilerin boyunu ve yaprak sayısını ölçen yöntemleri",
+            "Toprağın içini inceleyen yöntemleri",
+            "Havadaki nemi ölçen yöntemleri"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa033",
+      "baslik": "Fide hangi yöne uzanır?",
+      "etiket": "bitki",
+      "kaynak": "runyon2006",
+      "pmid": "17008532",
+      "doi": "10.1126/science.1131371",
+      "yazar": "Runyon ve ark.",
+      "dergi": "Science",
+      "yil": 2006,
+      "metin": "Bitkilerin havaya saldığı uçucu maddelerin bitkiler arasındaki ilişkilerde ne kadar önemli olduğu çok tartışılıyor. Küsküt, besinini başka bitkilerden alan asalak bir bitkidir. Bir ekip, küsküt fidelerinin konak bitkiyi, yani üzerinde yaşayacakları bitkiyi nasıl bulduğunu araştırdı. Fideler yakındaki domates bitkilerine doğru uzandı. Başka hiçbir ipucu yokken, domatesten elde edilen uçucu maddelere de aynı biçimde yöneldiler. Fideler camgüzeline ve buğdaya doğru da uzandı. Ama domatesin ve buğdayın uçucu maddelerini birbirinden ayırt edip domatese yönelmeyi seçtiler. Domatesten ve buğdaydan alınan bazı maddeler tek başına da fideleri çekti. Buğdaydan alınan bir madde ise onları kendinden uzaklaştırdı. Bulgular, uçucu maddelerin bitki türleri arasındaki önemli ilişkilerde rol oynadığını gösteriyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Asalak küsküt fidelerinin konak bitkiyi havadaki maddelerle bulmasını",
+            "Asalak küsküt fidelerinin konak bitkiyi ışığa yönelerek bulmasını",
+            "Uçucu maddelerin bitkiler arasındaki ilişkilerde rol oynamamasını",
+            "Asalak küskütün tarlalarda ekinleri sararak hızla yayılmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Küsküt besinini nereden alır?",
+          "secenekler": [
+            "Başka bitkilerden",
+            "Yalnız güneşten ve topraktaki sudan",
+            "Böceklerden",
+            "Deniz suyundan"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Domates ile buğday arasında seçim yapan fideler ne yaptı?",
+          "secenekler": [
+            "Domatese yöneldiler",
+            "Buğdaya yöneldiler",
+            "İkisinden de uzaklaştılar",
+            "İkisine eşit biçimde yöneldiler"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Buğdaydan alınan bir madde fideleri nasıl etkiledi?",
+          "secenekler": [
+            "Onları kendinden uzaklaştırdı",
+            "Onları hızla büyüttü",
+            "Onlara çiçek açtırdı",
+            "Onları kuruttu"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metnin başına göre uçucu maddelerin bitkiler arasındaki önemi konusunda durum nedir?",
+          "secenekler": [
+            "Çok tartışılıyor",
+            "Kesin olarak biliniyor",
+            "Hiç araştırılmadı",
+            "Yalnız tarımda önemli sayılıyor"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Fideler domates ve buğdaydan başka hangi bitkiye doğru uzandı?",
+          "secenekler": [
+            "Camgüzeline",
+            "Ayçiçeğine",
+            "Papatyaya",
+            "Çam ağacına"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa034",
+      "baslik": "Bakteriler arasında bir dalga",
+      "etiket": "mikro",
+      "kaynak": "prindle2015",
+      "pmid": "26503040",
+      "doi": "10.1038/nature15709",
+      "yazar": "Prindle ve ark.",
+      "dergi": "Nature",
+      "yil": 2015,
+      "metin": "Hücre zarında, yüklü parçacıkların geçtiği iyon kanalı denen kapılar bulunur. Bakterilerdeki iyon kanallarını incelemek, sinir hücrelerinin nasıl sinyal ilettiğini anlamamıza yardım etti. Ama bu kanalların bakterilerin kendi yaşamında ne işe yaradığı bilinmiyordu. Bir ekip, bakterilerin bir arada yaşadığı, biyofilm denen topluluklara baktı. Kanalların topluluk içinde uzaklara elektrik sinyali taşıdığını buldular. Sinyal, potasyum dalgaları biçiminde yayılıyordu. Besin kullanımındaki bir değişiklik, hücrenin içindeki potasyumu dışarı salmasına yol açıyordu. Dışarı çıkan potasyum da komşu hücrelerin elektrik durumunu değiştiriyordu. Böylece yayılan dalga, topluluğun ortasındaki ve kenarındaki hücrelerin besin kullanımını birbirine uyduruyordu. Potasyum kanalı ortadan kaldırılınca bu dalga da kayboldu.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bakteri topluluklarında elektrik sinyalinin yayılmasını",
+            "Hücre zarında iyon kanalı denen kapıların bulunmasını",
+            "Bakterilerin birbirinden habersiz tek başına yaşamasını",
+            "Bakterilerin zamanla ilaçlara karşı direnç kazanmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bakterilerin bir arada yaşadığı topluluğa ne denir?",
+          "secenekler": [
+            "Biyofilm",
+            "Bakteri sürüsü",
+            "Mikrop kovanı",
+            "Yuva"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Sinyal hangi maddenin dalgaları biçiminde yayılıyordu?",
+          "secenekler": [
+            "Potasyum",
+            "Demir",
+            "Kalsiyum",
+            "Çözünmüş şeker"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Hücrenin potasyumu dışarı salmasına ne yol açıyordu?",
+          "secenekler": [
+            "Besin kullanımındaki bir değişiklik",
+            "Topluluğa vuran çok güçlü güneş ışığı",
+            "Yüksek ses",
+            "Soğuk hava"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Potasyum kanalı ortadan kaldırılınca ne oldu?",
+          "secenekler": [
+            "Dalga da kayboldu",
+            "Dalga iki kat hızlandı",
+            "Bakteriler renk değiştirdi",
+            "Topluluk ikiye bölündü"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bakterilerdeki iyon kanallarını incelemek neyi anlamaya yardım etti?",
+          "secenekler": [
+            "Sinir hücrelerinin nasıl sinyal ilettiğini",
+            "Bitkilerin nasıl su çektiğini",
+            "Kuşların nasıl göç ettiğini",
+            "Kemiklerin nasıl uzadığını"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa035",
+      "baslik": "Sıradakini bilen mikroplar",
+      "etiket": "mikro",
+      "kaynak": "mitchell2009",
+      "pmid": "19536156",
+      "doi": "10.1038/nature08112",
+      "yazar": "Mitchell ve ark.",
+      "dergi": "Nature",
+      "yil": 2009,
+      "metin": "Bazı mikropların yaşadığı ortamın koşulları gelişigüzel değişir, bazılarınınki ise önceden kestirilebilir. Kestirilebilir bir ortamda mikroplar sıradaki değişikliğe önceden hazırlanabilir. Bir ekip bu fikri bir bakteri ve bir mayayla sınadı. Bu mikroplar doğada bazı değişikliklerle genellikle belli bir sırayla karşılaşır. İlk değişikliği önceden yaşayan mikroplar, ikincisiyle daha iyi başa çıktı. Bir evrim deneyinde ise yalnız ilk değişikliği tekrar tekrar yaşayan bakteriler bu hazırlığı yitirdi. Genler incelenince, doğadaki sıranın genlerin çalışma düzenine işlendiği görüldü. Erken gelen değişiklik, ileride gerekecek genleri de önceden çalıştırıyordu. Geç gelen değişiklik ise yalnız onunla başa çıkmaya yarayan genleri çalıştırıyordu. Araştırmacılara göre bu hazırlık evrim boyunca tekrar tekrar seçilmiştir ve canlılarda yaygın olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Mikropların sıradaki değişikliğe önceden hazırlanmasını",
+            "Bazı mikropların ortamının gelişigüzel değişmesini",
+            "Mikropların sıradaki değişikliği önceden sezip ortamdan kaçmasını",
+            "Mikropların sıradaki değişikliği komşu mikroplardan öğrenmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip hangi mikroplarla çalıştı?",
+          "secenekler": [
+            "Bir bakteri ve bir mayayla",
+            "İki farklı mantarla",
+            "Yalnız bir virüs ve bir yosun türüyle",
+            "Üç farklı yosunla"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Genler incelenince ne görüldü?",
+          "secenekler": [
+            "Doğadaki sıranın genlerin çalışma düzenine işlendiği",
+            "Genlerin her seferinde rastgele bir sırayla çalıştığı",
+            "Genlerin çalışma sırasının her kuşakta değiştiği",
+            "Bakteriyle mayanın genlerinin aynı sırayla dizildiği"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Evrim deneyinde yalnız ilk değişikliği tekrar tekrar yaşayan bakterilere ne oldu?",
+          "secenekler": [
+            "Hazırlığı yitirdiler",
+            "Hazırlıkları iki katına çıktı",
+            "Mayaya dönüştüler",
+            "Daha hızlı çoğaldılar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Geç gelen değişiklik hangi genleri çalıştırıyordu?",
+          "secenekler": [
+            "Yalnız kendisiyle başa çıkmaya yarayan genleri",
+            "İleride gerekecek başka genleri de",
+            "Daha önce gelmiş değişikliğe yarayan genleri de",
+            "Hücreyi bölünmeye hazırlayan genleri"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılara göre bu hazırlık nasıl bir özellik olabilir?",
+          "secenekler": [
+            "Evrim boyunca tekrar tekrar seçilmiş ve yaygın",
+            "Yalnız laboratuvarda görülen ve çok seyrek",
+            "Yalnız mayalarda bulunan",
+            "Rastlantıyla bir kez ortaya çıkmış"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa036",
+      "baslik": "Gözlüklü böcek",
+      "etiket": "bocek",
+      "kaynak": "nityananda2016",
+      "pmid": "26740144",
+      "doi": "10.1038/srep18718",
+      "yazar": "Nityananda ve ark.",
+      "dergi": "Scientific Reports",
+      "yil": 2016,
+      "metin": "Üç boyutlu görme, derinliği algılamamızı sağlar. Bilim insanları algıyı incelerken bu yeteneği sık sık örnek olarak kullanır. Ne var ki bu yeteneğin nasıl işlediği hakkında bildiklerimizin neredeyse hepsi omurgalı hayvanlardan geliyor. Omurgasızlar arasında üç boyutlu görme yalnız peygamberdevesinde gösterilmişti. Ama uygun yöntem eksikliği, bu konudaki araştırmaları 30 yıldır durdurmuştu. Bir ekip, böcekler için minicik üç boyut gözlükleri yaptı. Gözlükler her göze ayrı bir görüntü gösteriyordu. Işığı dönme yönüne göre süzen gözlükler işe yaramadı, çünkü iki görüntü birbirine fazla karışıyordu. Renge göre süzen gözlükler ise peygamberdevesinde açıkça bir derinlik yanılsaması yarattı. Böylece peygamberdevesinin üç boyutlu gördüğü yeni bir yöntemle kesin olarak doğrulandı. Bu yöntem, böceklerde üç boyutlu görmeyi incelemenin yolunu açıyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Peygamberdevesinin üç boyutlu gördüğünün gözlükle doğrulanmasını",
+            "Bilim insanlarının üç boyutlu görmeyi örnek olarak kullanmasını",
+            "Gözlüklerin peygamberdevesinde hiçbir derinlik yanılsaması yaratmamasını",
+            "Peygamberdevesinin avını dikenli ön bacaklarıyla yakalamasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Üç boyutlu görme hakkında bildiklerimiz çoğunlukla hangi hayvanlardan geliyor?",
+          "secenekler": [
+            "Omurgalı hayvanlardan",
+            "Omurgasız hayvanlardan",
+            "Böceklerden ve örümceklerden",
+            "Deniz yıldızlarından ve yengeçlerden"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Uygun yöntem eksikliği araştırmaları kaç yıldır durdurmuştu?",
+          "secenekler": [
+            "30",
+            "3",
+            "100",
+            "1"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Işığı dönme yönüne göre süzen gözlükler neden işe yaramadı?",
+          "secenekler": [
+            "İki görüntü birbirine fazla karıştığı için",
+            "Böcek gözlüğü hemen çıkardığı için",
+            "Gözlükler çok ağır geldiği için",
+            "Görüntüler çok karanlık kaldığı için"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Hangi gözlükler peygamberdevesinde derinlik yanılsaması yarattı?",
+          "secenekler": [
+            "Renge göre süzen gözlükler",
+            "Işığı dönme yönüne göre süzenler",
+            "Hiç süzgeci olmayan gözlükler",
+            "Yalnız tek gözü kapatan gözlükler"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metne göre bu yeni yöntem neyin yolunu açıyor?",
+          "secenekler": [
+            "Böceklerde üç boyutlu görmeyi incelemenin",
+            "İnsanlar için daha ucuz üç boyut gözlükleri yapmanın",
+            "Böceklerin gece görüşünü güçlendirmenin",
+            "Peygamberdevelerini tarlalarda zararlılara karşı kullanmanın"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa037",
+      "baslik": "Karanlıkta aynı anda",
+      "etiket": "bocek",
+      "kaynak": "sarfati2021",
+      "pmid": "34233879",
+      "doi": "10.1126/sciadv.abg9259",
+      "yazar": "Sarfati ve ark.",
+      "dergi": "Science Advances",
+      "yil": 2021,
+      "metin": "Ateşböceklerinin hep birlikte yanıp sönmesi, hayvanlardaki toplu davranışın en büyüleyici örneklerinden biridir. Bu uyumun nasıl ortaya çıktığını anlamak için bir ekip, doğadaki sürülerde binlerce ateşböceğinin ışık gösterisini kaydetti. Böylece uyumun nerede ve nasıl başladığını ilk kez izleyebildiler. Ateşböceği sayısı azken ışıklar birbirinden bağımsız yanıp sönüyordu. Sürü kalabalıklaştığında ise ateşböcekleri, kısa aralarla tekrarlanan toplu parlamalar hâlinde aynı anda yanıp sönmeye başladı. Ekip kayıtlardan sürünün üç boyutlu bir modelini çıkardı. Her toplu parlamanın bir noktada başlayıp bayrak yarışı gibi sürüye yayıldığını gördü. Bulgular, ateşböceklerinin yakınlarındakileri görerek birbirine uyduğunu düşündürüyor. Hangi ateşböceğinin hangisini göreceğini ise arazinin ve bitkilerin görüşü kapatması belirliyor olabilir.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Ateşböceği sürülerinde birlikte yanıp sönmenin nasıl başladığını",
+            "Ekibin kayıtlardan sürünün üç boyutlu modelini çıkardığını",
+            "Bütün böceklerin karanlıkta birlikte nasıl ışık saçtığını",
+            "Ateşböceklerinin ışığı vücutlarının içinde nasıl ürettiğini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ateşböceği azken ışıklar nasıl yanıp sönüyordu?",
+          "secenekler": [
+            "Birbirinden bağımsız",
+            "Tam olarak aynı anda",
+            "Hep çok sönük",
+            "Hiç durmadan"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip ateşböceklerinin ışık gösterisini nerede kaydetti?",
+          "secenekler": [
+            "Doğadaki sürülerde",
+            "Laboratuvardaki cam kaplarda",
+            "Bir hayvanat bahçesinde",
+            "Karanlık bir deney odasında"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Toplu parlamalar sürüye nasıl yayıldı?",
+          "secenekler": [
+            "Bir noktada başlayıp bayrak yarışı gibi",
+            "Her yerde birden ve rastgele",
+            "Yalnız en yaşlı böcekten başlayarak",
+            "Hiç yayılmadan hep tek bir yerde kalarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Ekip kaç ateşböceğinin gösterisini kaydetti?",
+          "secenekler": [
+            "Binlerce",
+            "Yalnız birkaç",
+            "Tam on",
+            "Yalnız bir"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Hangi ateşböceğinin hangisini göreceğini ne belirliyor olabilir?",
+          "secenekler": [
+            "Arazinin ve bitkilerin görüşü kapatması",
+            "Ateşböceklerinin yaşı ve vücut büyüklüğü",
+            "Ayın gökyüzündeki konumu ve parlaklığı",
+            "Havanın o geceki sıcaklığı ve nemi"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa038",
+      "baslik": "Bebekler müzik duyunca",
+      "etiket": "insan",
+      "kaynak": "zentner2010",
+      "pmid": "20231438",
+      "doi": "10.1073/pnas.1000121107",
+      "yazar": "Zentner ve Eerola",
+      "dergi": "PNAS",
+      "yil": 2010,
+      "metin": "Müzik duyunca ayağımızla tempo tutar ya da dans ederiz. Hareketlerimizi duyduğumuz sesin ritmine uydurabilmek insana özgü bir yetenektir. Ama bu yeteneğin ilk belirtileri hakkında çok az şey biliniyor. Bir ekip, henüz konuşmayan bebeklerin müziğe ritimli hareketlerle karşılık verip vermediğini araştırdı. Çalışmada 5 ile 24 aylık 120 bebeğe müzik parçaları ve düzenli davul vuruşları gibi ritimli sesler dinletildi. Karşılaştırma için onlara bir yetişkine ve bir bebeğe seslenen konuşmalar da dinletildi. Bebekler müzik ve ritimli sesler duyduklarında, konuşma duyduklarından daha çok ritimli hareket yaptı. Tempo hızlanınca hareketleri de bir ölçüde hızlandı. Hareketlerini müziğe daha iyi uyduran bebekler daha çok sevinç gösterdi. Bulgular, bebeklerin müziğe ritimle hareket etmeye yatkın olduğunu düşündürüyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bebeklerin müziğe ritimli hareketle karşılık vermesini",
+            "Yetişkinlerin müzik duyunca ayakla tempo tutmasını",
+            "Ritim duygusunun yalnız müzik eğitimiyle kazanılmasını",
+            "Bebeklerin annelerinin sesini doğumdan önce tanımasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Çalışmadaki bebekler kaç aylıktı?",
+          "secenekler": [
+            "5 ile 24 aylık",
+            "1 ile 3 aylık",
+            "30 ile 48 aylık",
+            "60 ile 72 aylık"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Karşılaştırma için bebeklere ne dinletildi?",
+          "secenekler": [
+            "Bir yetişkine ve bir bebeğe seslenen konuşmalar",
+            "Ormandan kaydedilmiş kuş, rüzgâr ve yaprak sesleri",
+            "Hiçbir ses, yalnız sessizlik",
+            "Deniz dalgası sesleri"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Çalışmaya kaç bebek katıldı?",
+          "secenekler": [
+            "120",
+            "12",
+            "1200",
+            "20"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Tempo hızlanınca bebeklerin hareketleri nasıl değişti?",
+          "secenekler": [
+            "Bir ölçüde hızlandı",
+            "Tamamen durdu",
+            "Yavaşlayıp neredeyse durdu",
+            "Hiç değişmedi"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Hareketlerini müziğe daha iyi uyduran bebekler ne gösterdi?",
+          "secenekler": [
+            "Daha çok sevinç",
+            "Daha çok ağlama",
+            "Daha çok uykululuk",
+            "Daha çok şaşkınlık"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa039",
+      "baslik": "Nesnelerde görülen yüzler",
+      "etiket": "insan",
+      "kaynak": "wardle2022",
+      "pmid": "35074880",
+      "doi": "10.1073/pnas.2117413119",
+      "yazar": "Wardle ve ark.",
+      "dergi": "PNAS",
+      "yil": 2022,
+      "metin": "İnsan yüzlerini okumakta çok ustayızdır, ama bazen cansız nesnelerde olmayan yüzler görürüz. Gerçek yüzleri algılarken çalışan bazı süreçler, bu hayalî yüzlerde de devreye girer. Peki bu yüzlerde yalnız bir yüz mü görürüz, yoksa daha fazlasını mı? Araştırmacılar 3815 yetişkinle büyük ölçekli deneyler yaptı. Katılımcılar nesnelerdeki yüzlere kolayca bir duygu, bir yaş ve bir cinsiyet yakıştırdı. En çarpıcı bulgu, bu yüzlerin kadından çok erkek olarak görülmesiydi. Bu eğilim, nesnelerin zaten bir cinsiyeti çağrıştırmasıyla açıklanamadı. Resimlerdeki görsel özellikler de bu eğilimi açıklamadı. Araştırmacılara göre bu eğilim, yüz sayılacak şeyleri çok geniş tutan algı sistemimizden doğuyor. Bu sistem, yüze ancak zar zor benzeyen görüntüleri de yüz sayıyor ve onları daha çok erkek olarak algılıyor.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Cansız nesnelerdeki hayalî yüzlerin daha çok erkek sanılmasını",
+            "Hayalî yüz görme yanılgısının yalnız küçük çocuklara özgü olmasını",
+            "Yüz algılayan süreçlerin hayalî yüzlerde hiç çalışmamasını",
+            "İnsanların tanıdık yüzleri kalabalıkta hemen seçebilmesini"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Deneylere kaç yetişkin katıldı?",
+          "secenekler": [
+            "3815",
+            "38",
+            "381",
+            "38150"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Katılımcılar nesnelerdeki yüzlere neler yakıştırdı?",
+          "secenekler": [
+            "Bir duygu, bir yaş ve bir cinsiyet",
+            "Bir isim, bir meslek ve bir memleket",
+            "Bir ülke ve bir dil",
+            "Bir boy ve bir kilo"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metinde hayalî yüzlerin daha çok erkek görülmesi nasıl nitelendiriliyor?",
+          "secenekler": [
+            "En çarpıcı bulgu olarak",
+            "Beklenen bir sonuç olarak",
+            "Önemsiz bir ayrıntı olarak",
+            "Deneydeki bir hata olarak"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Araştırmacılara göre bu eğilim nereden doğuyor?",
+          "secenekler": [
+            "Yüz sayılacak şeyleri çok geniş tutan algı sistemimizden",
+            "Katılımcıların o günkü yorgunluğundan",
+            "Deneyde gösterilen resimlerin boyutlarından",
+            "Nesnelerin üretildiği fabrikalardan"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Algı sistemimiz hangi görüntüleri daha çok erkek olarak algılıyor?",
+          "secenekler": [
+            "Yüze ancak zar zor benzeyenleri",
+            "En net ve renkli olanları",
+            "En büyük boyutta olanları",
+            "Gülümseyen bir yüz ifadesi taşıyanları"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oa040",
+      "baslik": "Aynı saksıyı paylaşmak",
+      "etiket": "bitki",
+      "kaynak": "dudley2007",
+      "pmid": "17567552",
+      "doi": "10.1098/rsbl.2007.0232",
+      "yazar": "Dudley ve File",
+      "dergi": "Biology Letters",
+      "yil": 2007,
+      "metin": "Hayvanların toplu yaşamında akrabayı tanımak önemlidir. Bitkiler de çoğu zaman akrabalarıyla yarışır. Ama bitkilerin bu yarışta akrabalarını tanıdığını gösteren doğrudan bir kanıt henüz yoktu. Bir ekip, ömrünü bir yılda tamamlayan bir bitki türünü gruplar hâlinde saksılarda büyüttü. Kimi saksılarda birbirine yabancı bitkiler, kimilerinde kardeşler vardı. Ekip, bitkilerin büyümelerinin ne kadarını köklere ayırdığını ölçtü. Yabancılarla saksı paylaşan bitkiler köklere, kardeşleriyle paylaşanlardan daha büyük pay ayırdı. Bulgular, bitkilerin yarışırken akrabalarını ayırt edebildiğini gösteriyor. Bitkiler akrabalarını, kökleri birbirini etkilediğinde tanıyor olabilir. Daha fazla kökün toprak altındaki yarışta güç kazandırdığı düşünülüyor. Bu yüzden kardeşlerin köklere daha az pay ayırması, akrabaların birbirini kayırdığı fikriyle uyumlu.",
+      "sorular": [
+        {
+          "tur": "ana",
+          "soru": "Metin en çok neyi anlatıyor?",
+          "secenekler": [
+            "Bitkilerin yarışırken akrabalarını ayırt etmesini",
+            "Hayvanların toplu yaşamda akrabasını tanımasını",
+            "Bitkilerin akrabayı yabancıdan ayırt edememesini",
+            "Bitkilerin tohumlarını rüzgârla uzaklara dağıtmasını"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Çalışmadaki bitki türü ömrünü ne kadar sürede tamamlar?",
+          "secenekler": [
+            "Bir yılda",
+            "Bir haftada",
+            "On yılda",
+            "Yüz yılda"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Yabancılarla saksı paylaşan bitkiler köklere nasıl bir pay ayırdı?",
+          "secenekler": [
+            "Kardeşleriyle paylaşanlardan daha büyük",
+            "Kardeşleriyle paylaşanlardan daha küçük",
+            "Kardeşleriyle paylaşanlarla tam olarak aynı",
+            "Kardeşleriyle paylaşanların ancak yarısı kadar"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Metnin sonuna göre kardeşlerde görülen sonuç hangi fikirle uyumlu?",
+          "secenekler": [
+            "Akrabaların birbirini kayırdığı fikriyle",
+            "Akrabaların birbiriyle daha sert yarıştığı fikriyle",
+            "Bitkilerin yalnız ışık için yarıştığı fikriyle",
+            "Köklerin yalnız su bulmaya yaradığı fikriyle"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Bitkiler akrabalarını ne zaman tanıyor olabilir?",
+          "secenekler": [
+            "Kökleri birbirini etkilediğinde",
+            "Yaprakları rüzgârda birbirine değdiğinde",
+            "Çiçekleri aynı anda açtığında",
+            "Aynı ışığı paylaştıklarında"
+          ]
+        },
+        {
+          "tur": "ayrinti",
+          "soru": "Daha fazla kökün bitkiye ne kazandırdığı düşünülüyor?",
+          "secenekler": [
+            "Toprak altındaki yarışta güç",
+            "Daha parlak çiçekler",
+            "Daha uzun gövde",
+            "Daha çok tohum kabuğu"
+          ]
+        }
+      ]
+    }
+  ]
+}

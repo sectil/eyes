@@ -11,6 +11,8 @@ import '../styles/sky.css'
 // Sahip kararı (2026-10-01): il ve ilçe konumdan kendiliğinden seçilir; bu liste yalnız konum izni yokken ya da hava
 // sayfasındaki "Değiştir"den açılır (backLabel 'Hava': geri hava sayfasına).
 //   il: string|null (önceki seçimden) · approx: boolean · onPick({ il, ilce|null, approx }) · onBack · backLabel
+// TASLAK aday (5 sn kapısı): ilçesiz devam düğmesi
+export const ONLY_IL = (il) => `Yalnız ${il} ile devam et`
 export default function SkyPlace({ il: il0 = null, approx: approx0 = false, onPick, onBack, backLabel = 'Ana sayfa' }) {
   const [il, setIl] = useState(il0)
   const [approx, setApprox] = useState(Boolean(il0) && approx0)
@@ -38,17 +40,15 @@ export default function SkyPlace({ il: il0 = null, approx: approx0 = false, onPi
           <button type="button" className="sky-link" onClick={() => { setIl(null); setApprox(false); setQ('') }}>Değiştir</button>
         </div>
       )}
+      {/* D2 (sahip 2026-10-01: "il seçince onay düğmesi yok"): ilçesiz devam açık bir ana düğme; listedeki "Yalnız İzmir"
+          satırı onay gibi okunmuyordu. İlçe seçmek de tek dokunuşla tamamlar. Yazı TASLAK (kapı + sahip onayı). */}
+      {il && <button type="button" className="btn sky-ok" onClick={() => onPick({ il, ilce: null, approx })}>{ONLY_IL(il)}</button>}
       <p className="sky-keep"><Lock size={15} aria-hidden="true" /><span>Telefonda yalnız il ve ilçe adı kalır.</span></p>
       <label className="sky-search">
         <Search size={18} aria-hidden="true" />
         <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={il ? 'İlçe ara' : 'İl ara'} aria-label={il ? 'İlçe ara' : 'İl ara'} />
       </label>
       <div className="sky-list" role="list">
-        {il && !q && (
-          <button type="button" role="listitem" className="sky-li sky-li-only" onClick={() => onPick({ il, ilce: null, approx })}>
-            {`Yalnız ${il}`}<ChevronRight size={16} aria-hidden="true" />
-          </button>
-        )}
         {(il ? ilceler : iller).map((n) => (
           <button type="button" role="listitem" key={n} className="sky-li" onClick={() => (il ? onPick({ il, ilce: n, approx: false }) : pickIl(n))}>
             {n}<ChevronRight size={16} aria-hidden="true" />

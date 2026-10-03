@@ -191,7 +191,7 @@ export const V2_PARAMS = {
   'breath-count-accuracy': { familiar: 2, sdFloor: 5 },
   'notice-count': { rule: 'none' }, // §3.B.6: tavanlı ölçek, görev her gün değişiyor → değişim kuralı yok
 }
-const UNIT_SD_FLOOR = { '%': 5, '/5': 0.5, puan: 1, kez: 1, ms: 10, harf: 0.5 }
+const UNIT_SD_FLOOR = { '%': 5, '/5': 0.5, puan: 1, kez: 1, ms: 10, harf: 0.5, 'kelime/dk': 10 }
 
 const median = (a) => {
   const s = [...a].sort((x, y) => x - y)

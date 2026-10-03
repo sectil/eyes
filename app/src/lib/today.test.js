@@ -15,7 +15,7 @@ const MIN = 60000
 const NOW = new Date('2026-09-25T10:00:00')
 const TODAY = NOW.toISOString()
 const daysAgo = (n) => new Date(NOW.getTime() - n * 86400000).toISOString()
-const path = (tests = [], sessions = [], extra = {}) => buildPath(registry.live, { tests, sessions: [...SPAN3, ...STREET3, ...sessions], now: NOW, ...extra })
+const path = (tests = [], sessions = [], extra = {}) => buildPath(registry.live, { tests, sessions: [...SPAN3, ...STREET3, ...YAKALA3, ...sessions], now: NOW, ...extra })
 const keys = (p) => p.stops.map((s) => s.key)
 // Normal gün: haftalık test (üç göz) 2 gün, okuma 3 gün önce (yol planı §4, "Ali" kurgusal)
 const wk = (eyes, date) => eyes.map((eye) => ({ type: 'va-weekly', eye, date }))
@@ -26,26 +26,31 @@ const DAILY_DONE = ['R', 'L'].map((eye) => ({ type: 'va-daily', eye, date: TODAY
 const SPAN3 = [2, 3, 4].map((d) => ({ type: 'span', span: 8, left: 4, right: 4, durationMs: 100, accuracy: 0.8, seconds: 120, date: daysAgo(d) }))
 // Fark Ettin mi? de bu hafta 3 gün yapıldı → yolda yok
 const STREET3 = [2, 3, 4].map((d) => ({ type: 'street', noticed: 2, asked: 3, task: 1, level: 1, seconds: 60, date: daysAgo(d) }))
-// Karar 2026-09-29: E testi haftada bir; haftalık testin olmadığı günlerde yolda E testi yok
-const DAY = ['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'routine:kirpma', 'snake']
+// Yakala Yaz da bu hafta 3 gün yapıldı → yolda yok (kendi davranışı ayrı testte)
+const YAKALA3 = [2, 3, 4].map((d) => ({ type: 'yakala-yaz', thresholdMs: 183, thresholdStep: 10, trials: [], seconds: 120, date: daysAgo(d) }))
+// Karar 2026-09-29: E testi haftada bir; haftalık testin olmadığı günlerde yolda E testi yok.
+// Sahip kararı 2026-10-02: Oku ve Anla (bu hafta yapılmadı) okuma testinin eski yerinde, 2. bölümde (yol göz payı 0)
+const DAY = ['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'okuma-anlama', 'routine:kirpma', 'snake']
 
 describe('buildPath: şablon', () => {
-  it('normal gün (haftalık test bu hafta yapıldı): E testi yok; egzersizler gövde, Nefes iki bölüm arasında, Yılan sonda (13 dk)', () => {
+  it('normal gün (haftalık test bu hafta yapıldı): E testi yok; egzersizler gövde, Nefes iki bölüm arasında, Oku ve Anla 2. bölümde, Yılan sonda (15 dk)', () => {
     const p = path(NORMAL)
     expect(keys(p)).toEqual(DAY)
-    expect(p.stops.map((s) => s.block)).toEqual([1, 1, 1, 1, 0, 2, 2, 2])
-    expect(p.minutesLeft).toBe(13)
+    expect(p.stops.map((s) => s.block)).toEqual([1, 1, 1, 1, 0, 2, 2, 2, 2])
+    expect(p.minutesLeft).toBe(15)
     expect(p.blocks.map((b) => b.eyeMin)).toEqual([4, 4]) // bölüm payı ≤ bütçe − 1 dk (R2)
     expect(p.next.key).toBe('routine:isinma')
     expect(p.stops.some((s) => s.slot === 'test' || s.glyph === 'E')).toBe(false)
   })
 
-  // Hiç test yok, kayıtlar 4 gün önce başladı: okuma testi en çok bir gün kayar, E testiyle aynı gün gelir
-  it('ikisi de gecikmiş gün: Haftalık E testi + Okuma; 20 dk sınırı için Yılan düşer (R7); ölçümler yan yana değil (R1)', () => {
+  // Hiç test yok: Haftalık E testi gecikmiş. Sahip kararı 2026-10-02: okuma testi (eskiden 3 dk, ikinci ölçüm) yolda değil;
+  // yerinde 2 dk'lık Oku ve Anla. Yol tam 20 dk'da kalır, Yılan bu kez düşmez (R7 gerekmez); yan yana iki ölçüm yok (R1)
+  it('E testi gecikmiş gün: Haftalık E testi 1. bölümde, Oku ve Anla 2. bölümde; yol 20 dk, sınırı aşmaz; ölçümler yan yana değil (R1)', () => {
     const p = path()
-    expect(keys(p)).toEqual(['routine:isinma', 'weekly', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'reading', 'routine:kirpma'])
-    expect(p.minutesLeft).toBe(19)
+    expect(keys(p)).toEqual(['routine:isinma', 'weekly', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'okuma-anlama', 'routine:kirpma', 'snake'])
+    expect(p.minutesLeft).toBe(20)
     expect(p.minutesLeft).toBeLessThanOrEqual(PATH.capMin)
+    expect(p.stops.every((s, i) => i === 0 || !(s.kind === 'measure' && p.stops[i - 1].kind === 'measure'))).toBe(true)
   })
 
   it('abonelik yokken ilk test ilk durak (R6)', () => {
@@ -73,7 +78,7 @@ describe('buildPath: şablon', () => {
 
   it('Tek Bakışta haftada 3 gün: 2. bölümde 2 dk; o gün 2. bölüm payı için Yılan düşer', () => {
     const p = buildPath(registry.live, { tests: NORMAL, sessions: STREET3, now: NOW })
-    expect(keys(p)).toEqual(['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'routine:kirpma', 'tek-bakis'])
+    expect(keys(p)).toEqual(['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'okuma-anlama', 'routine:kirpma', 'tek-bakis'])
     expect(p.blocks[1].eyeMin).toBe(4)
     expect(keys(path(NORMAL))).not.toContain('tek-bakis') // bu hafta 3 gün yapılmış
     const flashOff = buildPath(registry.live, { tests: NORMAL, sessions: STREET3, now: NOW, profile: { seizure: 'unsure' } })
@@ -82,7 +87,7 @@ describe('buildPath: şablon', () => {
 
   it('Fark Ettin mi? haftada 3 gün: Nefes\'in hemen ardından; 2. bölüm payı için Yılan düşer', () => {
     const p = buildPath(registry.live, { tests: NORMAL, sessions: SPAN3, now: NOW })
-    expect(keys(p)).toEqual(['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'fark-ettin', 'routine:daire', 'routine:kirpma'])
+    expect(keys(p)).toEqual(['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'fark-ettin', 'routine:daire', 'okuma-anlama', 'routine:kirpma'])
     expect(p.blocks[1].eyeMin).toBe(4)
   })
 
@@ -120,6 +125,8 @@ describe('buildPath: tamamlama, sıradaki, kilit', () => {
       { type: 'game', game: 'track', score: 10, seconds: 40, date: TODAY },
       { type: 'game', game: 'snake', score: 10, seconds: 90, date: TODAY },
       { type: 'breath', seconds: 300, date: TODAY },
+      // Sahip kararı 2026-10-02: Oku ve Anla yolda; bugün bitirildi (yarıda kalan okuma tamam sayılmaz)
+      { type: 'okuma-anlama', wpm: 220, correct: 3, valid: true, seconds: 120, date: TODAY },
       { type: 'notice', count: 2, date: daysAgo(1) },
     ]
     const p = path([...NORMAL, ...DAILY_DONE], s)
@@ -293,7 +300,7 @@ describe('haftalık E testi: "tamam" = aynı gün sağ, sol ve iki göz (karar S
     expect(lastComplete(full, 'va-weekly')).toBe(full[2])
     expect(eyeDay(full, 'va-weekly', new Date('2026-09-24T23:59:59'))).toMatchObject({ complete: true })
     // hafta tamam: 25'inin yolunda haftalık yok, kısa E testi de yok (karar 2026-09-29)
-    const p = buildPath(registry.live, { tests: [...NORMAL.slice(3), ...full], sessions: [...SPAN3, ...STREET3], now: after })
+    const p = buildPath(registry.live, { tests: [...NORMAL.slice(3), ...full], sessions: [...SPAN3, ...STREET3, ...YAKALA3], now: after })
     expect(keys(p)).not.toContain('weekly')
     expect(keys(p)).not.toContain('daily')
     // aynı koşu 00:01'de yarıda kaldı (sağ 23:59, sol 00:01): 25'inde test baştan açılır, "Kalan" yok, göz atlanmaz
@@ -395,56 +402,118 @@ describe('kısa E testi (isteğe bağlı): Bugün\'ün yolunda yok (karar 2026-0
   })
 })
 
-// Karar 2026-09-29 (sahibi): okuma testi haftalık E testinden ayrılır ve takvim günüyle gelir (readingStatus)
-describe('okuma testi: haftalık E testinden ayrı gün, takvim günüyle', () => {
+// Karar 2026-09-29 (sahibi): okuma testi haftalık E testinden ayrılır ve takvim günüyle gelir (readingStatus).
+// Sahip kararı 2026-10-02: okuma testi sonsuz yoldan çıktı (modules/reading today() yok; Pratikler'de isteğe bağlı).
+// readingStatus saf işlev olarak lib/today.js'te kalır; aşağıda eski senaryoların her birinde okuma testi yolda yoktur.
+describe('okuma testi artık yolda yok; readingStatus saf işlev olarak takvim günüyle', () => {
   const bare = (tests = [], sessions = [], now = NOW) => keys(buildPath(registry.live, { tests, sessions, now }))
   const E = (date) => wk(['R', 'L', 'OU'], date)
   const R = (date) => ({ type: 'reading', date })
-  it('1. gün hiç kayıt yok: E testi yolda, okuma yarına kalır', () => {
+  it('1. gün hiç kayıt yok: E testi yolda, okuma testi yolda değil; readingStatus "yarına"', () => {
     expect(bare()).toContain('weekly')
     expect(bare()).not.toContain('reading')
     expect(readingStatus([], NOW)).toEqual({ state: 'later', due: true })
   })
-  it('1. gün E testi bitti: okuma yine yarına', () => {
+  it('1. gün E testi bitti: okuma testi yolda değil', () => {
     expect(bare(E(TODAY))).not.toContain('reading')
   })
-  it('2. gün: E testi dün bitti; okuma yolda, E testi yok', () => {
+  it('2. gün: E testi dün bitti; ne okuma testi ne E testi yolda', () => {
     const k = bare(E(daysAgo(1)))
-    expect(k).toContain('reading')
+    expect(k).not.toContain('reading')
     expect(k).not.toContain('weekly')
   })
-  it('aynı güne düşünce (ikisi de 7 gün önce): E testi yolda, okuma yarına', () => {
+  it('aynı güne düşünce (ikisi de 7 gün önce): E testi yolda, okuma testi değil; readingStatus "yarına"', () => {
     const k = bare([...E(daysAgo(7)), R(daysAgo(7))])
     expect(k).toContain('weekly')
     expect(k).not.toContain('reading')
     expect(readingStatus([...E(daysAgo(7)), R(daysAgo(7))], NOW).state).toBe('later')
   })
-  it('ertesi gün E testi bitmişse okuma yolda', () => {
+  it('ertesi gün E testi bitmiş, okuma 8 gün önce: okuma testi yolda değil', () => {
     const k = bare([...E(daysAgo(1)), R(daysAgo(8))])
-    expect(k).toContain('reading')
+    expect(k).not.toContain('reading')
     expect(k).not.toContain('weekly')
   })
-  it('en çok bir gün: E testi hâlâ yapılmadıysa okuma ertesi gün yine gelir', () => {
+  it('E testi ve okuma 8 gün önce: E testi yolda, okuma testi değil', () => {
     const k = bare([...E(daysAgo(8)), R(daysAgo(8))])
     expect(k).toContain('weekly')
-    expect(k).toContain('reading')
+    expect(k).not.toContain('reading')
   })
-  it('takvim günü: 7 gün önce 18.00\'de yapılan okuma bugün 10.00\'da yolda (saati beklemez)', () => {
+  it('takvim günü: 7 gün önce 18.00\'de yapılan okuma için readingStatus bugün 10.00\'da "zamanı geldi"; yolda yine yok', () => {
     const r = R(new Date('2026-09-18T18:00:00').toISOString())
     expect(isDue(r, NOW)).toBe(false) // eski saat kuralı
     expect(readingStatus([...E(daysAgo(3)), r], NOW)).toEqual({ state: 'due', due: true })
-    expect(bare([...E(daysAgo(3)), r])).toContain('reading')
+    expect(bare([...E(daysAgo(3)), r])).not.toContain('reading')
   })
-  it('6 gün önce yapıldıysa zamanı gelmedi; bugün yapıldıysa tamam', () => {
+  it('6 gün önce yapıldıysa zamanı gelmedi; bugün yapıldıysa tamam; bugün yapılmış okuma testi yola durak eklemez', () => {
     expect(readingStatus([R(daysAgo(6))], NOW)).toEqual({ state: 'idle', due: false })
     expect(readingStatus([...E(TODAY), R(TODAY)], NOW)).toEqual({ state: 'done', due: false })
     const stop = buildPath(registry.live, { tests: [...E(TODAY), R(TODAY)], sessions: [], now: NOW }).stops.find((x) => x.key === 'reading')
-    expect(stop?.done).toBe(true)
+    expect(stop).toBeUndefined()
   })
-  it('hiç okuma yok, pratik kayıtları dün başladı: E testi yolda olsa da okuma bugün gelir (en çok bir gün)', () => {
+  it('hiç okuma yok, pratik kayıtları dün başladı: E testi yolda, okuma testi değil', () => {
     const k = bare([], [{ type: 'breath', seconds: 300, date: daysAgo(1) }])
     expect(k).toContain('weekly')
-    expect(k).toContain('reading')
+    expect(k).not.toContain('reading')
+  })
+})
+
+// Sahip kararı 2026-10-02: yolda okuma testinin yerini Oku ve Anla aldı (modules/okuma-anlama). Son 7 günde 3 günden az
+// bitirildiyse 2 dk'lık pratik durağı (göz bütçesinden); ilerleme açıkken 3. günden (lib/ladders.js UNLOCK pathDay 2).
+// Bitirilmiş okuma = type 'okuma-anlama' ve sayısal correct; yarıda kalan (correct yok) yapılmış sayılmaz.
+describe('Oku ve Anla: sonsuz yolda haftada 3 gün (okuma testinin yerine)', () => {
+  const OA = registry.get('okuma-anlama')
+  const read = (date, correct = 3) => ({ type: 'okuma-anlama', wpm: 220, correct, valid: true, seconds: 120, date })
+  const has = (p) => keys(p).includes('okuma-anlama')
+  it('ilerleme kapalıyken 3 günden az bitirildiyse durak: 2 dk, okuma testinin eski yerinde (slot measure), yol göz payı 0, düşmez', () => {
+    expect(OA.gates.eyeBudget).toBe('eye') // modül kapısı: gerçek kullanım göz bütçesine sayılır
+    expect(OA.today({ tests: [], sessions: [], now: NOW })).toEqual({ title: 'Oku ve Anla', minutes: 2, eyeMin: 0, slot: 'measure', weekDays: 0, done: false })
+    expect(OA.today({ tests: [], sessions: [read(daysAgo(2)), read(daysAgo(1))], now: NOW })).toMatchObject({ weekDays: 2, done: false })
+  })
+  it('ilerleme kapalıyken yolda: okuma testinin eski senaryolarında Oku ve Anla 2. bölümde gelir; ölçüm sayılmaz, E testiyle yan yana değil', () => {
+    const E = (date) => wk(['R', 'L', 'OU'], date)
+    for (const [name, tests, sessions] of [
+      ['1. gün', [], []],
+      ['2. gün', E(daysAgo(1)), []],
+      ['E testi zamanı', [...E(daysAgo(8)), { type: 'reading', date: daysAgo(8) }], []],
+      ['normal gün', NORMAL, [...SPAN3, ...STREET3]],
+    ]) {
+      const p = buildPath(registry.live, { tests, sessions, now: NOW })
+      const i = p.stops.findIndex((s) => s.key === 'okuma-anlama')
+      expect(i, name).toBeGreaterThan(-1)
+      expect(p.stops[i], name).toMatchObject({ block: 2, eyeMin: 0, kind: 'practice' })
+      expect([p.stops[i - 1]?.key, p.stops[i + 1]?.key], name).not.toContain('weekly')
+      expect(p.minutesLeft, name).toBeLessThanOrEqual(PATH.capMin)
+    }
+  })
+  it('ilerleme açıkken 1. ve 2. gün yolda yok, 3. gün gelir (yeni); 3 gün bitirilince o hafta yolda yok', () => {
+    const rows = y1Simulate(10)
+    const day = (n) => rows.find((r) => r.n === n)
+    expect(has(day(1).withY)).toBe(false)
+    expect(has(day(2).withY)).toBe(false)
+    expect(OA.today(day(2).ctx)).toBeNull() // pathDay 1 < UNLOCK 2
+    expect(day(3).withY.stops.find((s) => s.key === 'okuma-anlama')).toMatchObject({ minutes: 2, eyeMin: 0, block: 2, done: false })
+    expect(day(3).fresh).toContain('okuma-anlama')
+    expect([3, 4, 5].map((n) => has(day(n).withY))).toEqual([true, true, true])
+    // 3., 4. ve 5. gün bitirildi: son 7 günde 3 gün → 6.–10. gün yolda yok
+    for (const n of [6, 7, 8, 9, 10]) {
+      expect(has(day(n).withY), `gün ${n}`).toBe(false)
+      expect(OA.today(day(n).ctx), `gün ${n}`).toBeNull()
+    }
+  })
+  it('bugün bitirildiyse haftanın 3. günü olsa da durak kalır ve tamam görünür; bitirilmeden 3 gün dolduysa yok', () => {
+    const three = [read(daysAgo(2)), read(daysAgo(1)), read(TODAY)]
+    expect(OA.today({ tests: [], sessions: three, now: NOW })).toMatchObject({ weekDays: 3, done: true })
+    const stop = buildPath(registry.live, { tests: NORMAL, sessions: [...SPAN3, ...STREET3, ...three], now: NOW }).stops.find((s) => s.key === 'okuma-anlama')
+    expect(stop?.done).toBe(true)
+    const before = [read(daysAgo(3)), read(daysAgo(2)), read(daysAgo(1))]
+    expect(OA.today({ tests: [], sessions: before, now: NOW })).toBeNull()
+    expect(keys(buildPath(registry.live, { tests: NORMAL, sessions: [...SPAN3, ...STREET3, ...before], now: NOW }))).not.toContain('okuma-anlama')
+  })
+  it('yarıda kalan okuma (correct: null) yapılmış sayılmaz: hafta dolmaz, bugün de tamam değil', () => {
+    const abandoned = [read(daysAgo(3), null), read(daysAgo(2), null), read(daysAgo(1), null), read(TODAY, null)]
+    expect(OA.today({ tests: [], sessions: abandoned, now: NOW })).toMatchObject({ weekDays: 0, done: false })
+    // bir tanesi bitirilmişse yalnız o sayılır
+    expect(OA.today({ tests: [], sessions: [...abandoned, read(daysAgo(2))], now: NOW })).toMatchObject({ weekDays: 1, done: false })
   })
 })
 
@@ -473,6 +542,8 @@ function y1Record(s, now, tests, sessions) {
   else if (s.id === 'fark-ettin') sessions.push({ type: 'street', noticed: 2, asked: 3, date, seconds: 60 })
   else if (s.id === 'tek-bakis') sessions.push({ type: 'span', span: 8, date, seconds: 60 })
   else if (s.id === 'notice') sessions.push({ type: 'notice', count: 2, date, seconds: 60 })
+  // Oku ve Anla bitirilmiş okuma: 4 sorudan 3'ü doğru (yarıda kalan okuma, correct yok, yapılmış sayılmaz)
+  else if (s.id === 'okuma-anlama') sessions.push({ type: 'okuma-anlama', wpm: 220, correct: 3, valid: true, date, seconds: 120 })
   else if (s.id === 'yoga') sessions.push({ type: 'yoga', lesson: s.stage.lesson, planned: s.minutes * 60, seconds: s.minutes * 60, reachedClosing: true, completed: true, date })
   else sessions.push({ type: s.id, date, seconds: 60 })
 }
@@ -508,27 +579,29 @@ describe('Sonsuz yol · ilerleme açık, yeni kullanıcı (§3.A.9: her gün 10.
     expect(r.yoga).toBeNull()
     expect(r.fresh).toEqual([])
   })
-  it('2. gün (11 dk): Sağ–sol, Nefes 2 dk, okuma testi, Yılan ve Bugünün görevi gelir; yenileri rozetli', () => {
+  // Sahip kararı 2026-10-02: okuma testi yolda değil (eskiden 2. gün 3 dk); Oku ve Anla 3. günden
+  it('2. gün (8 dk): Sağ–sol, Nefes 2 dk, Yılan ve Bugünün görevi gelir; yenileri rozetli', () => {
     const r = day(2)
-    expect(keys(r.withY)).toEqual(['routine:isinma', 'track', 'breath', 'reading', 'routine:kirpma', 'snake', 'notice'])
+    expect(keys(r.withY)).toEqual(['routine:isinma', 'track', 'breath', 'routine:kirpma', 'snake', 'notice'])
     expect(stopOf(r.withY, 'routine:isinma').title).toBe('Sağ–sol')
     expect(stopOf(r.withY, 'breath').minutes).toBe(2)
-    expect(y1Total(r.withY)).toBe(11)
-    expect(r.fresh).toEqual(['routine:isinma', 'breath', 'reading', 'snake', 'notice'])
+    expect(y1Total(r.withY)).toBe(8)
+    expect(r.fresh).toEqual(['routine:isinma', 'breath', 'snake', 'notice'])
   })
-  it('3. gün: "üçü birlikte" (Isınma), Nefes 3 dk, yoga', () => {
+  it('3. gün (14 dk): "üçü birlikte" (Isınma), Nefes 3 dk, Oku ve Anla (açıldığı gün, 2. bölümde), yoga', () => {
     const r = day(3)
     expect(stopOf(r.withY, 'routine:isinma').title).toBe('Isınma')
     expect(stopOf(r.withY, 'breath').minutes).toBe(3)
+    expect(stopOf(r.withY, 'okuma-anlama')).toMatchObject({ minutes: 2, block: 2 })
     expect(r.yoga).toMatchObject({ minutes: 3 })
-    expect(y1Total(r.withY)).toBe(12)
-    expect(r.fresh).toEqual(['routine:isinma', 'breath', 'yoga'])
+    expect(y1Total(r.withY)).toBe(14)
+    expect(r.fresh).toEqual(['routine:isinma', 'breath', 'okuma-anlama', 'yoga'])
   })
-  it('4. gün (13 dk): Yukarı–aşağı 2. bölümde; yoga son durak, Bugünün görevi\'nden önce', () => {
+  it('4. gün (15 dk): Yukarı–aşağı ve Oku ve Anla 2. bölümde; yoga son durak, Bugünün görevi\'nden önce', () => {
     const r = day(4)
-    expect(keys(r.withY)).toEqual(['routine:isinma', 'track', 'breath', 'routine:dikey', 'routine:kirpma', 'snake', 'yoga', 'notice'])
+    expect(keys(r.withY)).toEqual(['routine:isinma', 'track', 'breath', 'routine:dikey', 'okuma-anlama', 'routine:kirpma', 'snake', 'yoga', 'notice'])
     expect(stopOf(r.withY, 'routine:dikey')).toMatchObject({ title: 'Yukarı–aşağı', block: 2, minutes: 1 })
-    expect(y1Total(r.withY)).toBe(13)
+    expect(y1Total(r.withY)).toBe(15)
     expect(r.fresh).toEqual(['routine:dikey'])
   })
   it('5.–7. gün: Uzağa bakış (5.), Fark Ettin mi? (6., Yılan düşer), Yakın–uzak (7.)', () => {
@@ -537,7 +610,8 @@ describe('Sonsuz yol · ilerleme açık, yeni kullanıcı (§3.A.9: her gün 10.
     expect(keys(day(6).withY)).not.toContain('snake')
     expect(day(6).fresh).toEqual(['fark-ettin'])
     expect(day(7).fresh).toEqual(['routine:yakinuzak'])
-    expect([5, 6, 7].map((n) => y1Total(day(n).withY))).toEqual([14, 14, 15])
+    // 5. gün Oku ve Anla'nın bu haftaki 3. günü (+2 dk; Yılan yerinde)
+    expect([5, 6, 7].map((n) => y1Total(day(n).withY))).toEqual([16, 14, 15])
   })
   it('8. gün (17 dk): Haftalık E testi ve Tek Bakışta; nefeste "günün ritmi"; Yılan düşer, yoga yok (E testi günü)', () => {
     const r = day(8)
@@ -547,22 +621,25 @@ describe('Sonsuz yol · ilerleme açık, yeni kullanıcı (§3.A.9: her gün 10.
     expect(stopOf(r.withY, 'breath').stage).toMatchObject({ tier: 'B', minutes: 3 })
     expect(r.fresh).toEqual(['breath', 'tek-bakis'])
   })
-  it('9. gün (18 dk): Daire (Yukarı–aşağı ile gün aşırı), okuma testi, yoga; bugünkü beş gruplu yapıya ulaşıldı', () => {
+  // Sahip kararı 2026-10-02: okuma testi yolda değil (eskiden 9. gün 3 dk); Oku ve Anla bu hafta 3 gün yapıldı (3.–5.)
+  it('9. gün (15 dk): Daire (Yukarı–aşağı ile gün aşırı), yoga; bugünkü beş gruplu yapıya ulaşıldı', () => {
     const r = day(9)
-    expect(keys(r.noY)).toEqual(['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'reading', 'routine:kirpma', 'tek-bakis', 'notice'])
+    expect(keys(r.noY)).toEqual(['routine:isinma', 'routine:uzak', 'track', 'routine:yakinuzak', 'breath', 'routine:daire', 'routine:kirpma', 'tek-bakis', 'notice'])
     expect(r.yoga).toMatchObject({ minutes: 3, block: 2 })
-    expect(y1Total(r.withY)).toBe(18)
+    expect(y1Total(r.withY)).toBe(15)
     expect(r.fresh).toEqual(['routine:daire'])
     // 10.–45. gün: Daire ve Yukarı–aşağı gün aşırı (günde biri, art arda aynısı yok)
     const donus = rows.filter((x) => x.n >= 9).map((x) => keys(x.withY).filter((k) => k === 'routine:daire' || k === 'routine:dikey'))
     for (const d of donus) expect(d).toHaveLength(1)
     for (let i = 1; i < donus.length; i++) expect(donus[i][0], `gün ${i + 9}`).not.toBe(donus[i - 1][0])
   })
-  it('ilk 30 gün: ortalama 15,3, en kısa 8, en uzun 18; 20 dk\'yı aşan gün yok; yoga 24 günde; ilk 90 gün en çok 18', () => {
+  // Sahip kararı 2026-10-02: okuma testi (haftada bir 3 dk) yerine Oku ve Anla (haftada 3 gün 2 dk); en uzun gün E testi
+  // ile Oku ve Anla'nın birlikte geldiği gün (29.: 19 dk)
+  it('ilk 30 gün: ortalama 15,6, en kısa 8, en uzun 19; 20 dk\'yı aşan gün yok; yoga 24 günde; 45 günün hiçbiri 20 dk\'yı aşmaz', () => {
     const t30 = rows.slice(0, 30).map((r) => y1Total(r.withY))
     expect(Math.min(...t30)).toBe(8)
-    expect(Math.max(...t30)).toBe(18)
-    expect((t30.reduce((a, b) => a + b, 0) / 30).toFixed(1)).toBe('15.3')
+    expect(Math.max(...t30)).toBe(19)
+    expect((t30.reduce((a, b) => a + b, 0) / 30).toFixed(1)).toBe('15.6')
     expect(rows.slice(0, 30).filter((r) => r.yoga).length).toBe(24)
     for (const r of rows) expect(y1Total(r.withY), `gün ${r.n}`).toBeLessThanOrEqual(PATH.capMin)
   })
@@ -571,10 +648,12 @@ describe('Sonsuz yol · ilerleme açık, yeni kullanıcı (§3.A.9: her gün 10.
       for (const r of list) expect(y1NoYoga(r.withY), `gün ${r.n}`).toBe(y1NoYoga(r.noY))
     }
   })
-  it('29. gün uzun dönüş (13.–28. gün açılmadı): yumuşak gün, E testi ve okuma birlikte; Yılan ve yoga düşer; ertesi gün 15 dk', () => {
+  // Sahip kararı 2026-10-02: okuma testinin yerine Oku ve Anla (son 7 günde yapılmadı → yolda)
+  it('29. gün uzun dönüş (13.–28. gün açılmadı): yumuşak gün, E testi ve Oku ve Anla birlikte; Yılan ve yoga düşer; ertesi gün 17 dk', () => {
     const gap = y1Simulate(40, { skip: Array.from({ length: 16 }, (_, i) => 13 + i) })
     const r = day(29, gap)
-    expect(keys(r.withY)).toEqual(expect.arrayContaining(['weekly', 'reading', 'notice']))
+    expect(keys(r.withY)).toEqual(expect.arrayContaining(['weekly', 'okuma-anlama', 'notice']))
+    expect(keys(r.withY)).not.toContain('reading')
     expect(keys(r.withY)).not.toContain('snake')
     expect(r.yoga).toBeNull()
     expect(stopOf(r.withY, 'breath')).toMatchObject({ minutes: 2, stage: { soft: true } }) // bir basamak aşağı
@@ -584,7 +663,7 @@ describe('Sonsuz yol · ilerleme açık, yeni kullanıcı (§3.A.9: her gün 10.
     expect(r.fresh).toEqual([]) // yumuşak günde yeni basamak yok
     const next = day(30, gap)
     expect(stopOf(next.withY, 'breath')).toMatchObject({ minutes: 3, stage: { soft: false } })
-    expect(y1Total(next.withY)).toBe(15)
+    expect(y1Total(next.withY)).toBe(17) // Oku ve Anla bu haftanın 2. günü
     // sayı sıfırlanmaz: basamak kaldığı yerden
     expect(next.ctx.progression.mod.routine.D).toBe(13)
   })
@@ -614,6 +693,57 @@ describe('Sonsuz yol · ilerleme açık, yeni kullanıcı (§3.A.9: her gün 10.
     // 3. gün sabah (hiç göz çalışması yok) bant 5 dk: 1. bölümün 2 dk'sı eklenir
     expect(pathRestMinutes(st(0), day(3).withY, day(3).ctx.progression)).toBe(5)
     expect(pathRestMinutes(st(0), day(1).withY, day(1).ctx.progression)).toBe(1)
+  })
+})
+
+// Yakala Yaz (kelime-hafiza istemi §5, sahip yetkisi 2026-10-02): 10. günden, haftada 3 gün, 2 dk; Tek Bakışta ile aynı
+// gün yok; Tek Bakışta ile Fark Ettin mi?'nin week3 dönüşümü Yakala Yaz yokkenkiyle aynı
+function yySimulate(mods, days, { profile } = {}) {
+  const tests = []
+  const sessions = []
+  const out = []
+  for (let n = 1; n <= days; n++) {
+    const now = new Date(2026, 9, n, 10)
+    const base = { tests: [...tests], sessions: [...sessions], now, ...(profile ? { profile } : {}) }
+    const ctx = { ...base, progression: progressionCtx({ ...base, modules: mods }) }
+    const p = buildPath(mods, ctx)
+    out.push({ n, k: keys(p), p })
+    for (const s of p.stops) y1Record(s, now, tests, sessions)
+  }
+  return out
+}
+
+describe('Sonsuz yol · Yakala Yaz (90 gün, her gün 10.00, her durak)', () => {
+  const NO_YY = Y1_ALL.filter((m) => m.id !== 'yakala-yaz')
+  const rows = yySimulate(Y1_ALL, 90)
+  const base = yySimulate(NO_YY, 90)
+  const yyDays = rows.filter((r) => r.k.includes('yakala-yaz')).map((r) => r.n)
+  it('10. günden önce yok; sonra gelir', () => {
+    expect(yyDays.length).toBeGreaterThan(0)
+    expect(Math.min(...yyDays)).toBeGreaterThanOrEqual(10)
+    // her durağı yapan kişide Fark Ettin mi? günlerinde yol dolu, Yakala Yaz (dropRank 1.5) düşer: haftada 2 gün gelir
+    for (let n = 14; n + 6 <= 90; n++) expect(yyDays.some((d) => d >= n && d <= n + 6), `gün ${n}–${n + 6}`).toBe(true)
+  })
+  it('Tek Bakışta ile aynı gün hiç yok', () => {
+    for (const r of rows) expect(r.k.includes('yakala-yaz') && r.k.includes('tek-bakis'), `gün ${r.n}`).toBe(false)
+  })
+  it('herhangi 7 günde en çok 3 gün; durak 2 dk, gövdede', () => {
+    for (const r of rows) {
+      const week = yyDays.filter((d) => d <= r.n && d > r.n - 7)
+      expect(week.length, `gün ${r.n}`).toBeLessThanOrEqual(3)
+    }
+    const stop = rows.find((r) => r.n === yyDays[0]).p.stops.find((s) => s.key === 'yakala-yaz')
+    expect(stop).toMatchObject({ minutes: 2, slot: 'body', dropRank: 1.5 })
+  })
+  it('Tek Bakışta ve Fark Ettin mi? günleri Yakala Yaz yokkenkiyle aynı; ikisi de gelir', () => {
+    const pick = (list) => list.map((r) => r.k.filter((k) => k === 'tek-bakis' || k === 'fark-ettin').join(','))
+    expect(pick(rows)).toEqual(pick(base))
+    expect(rows.some((r) => r.k.includes('tek-bakis'))).toBe(true)
+    expect(rows.some((r) => r.k.includes('fark-ettin'))).toBe(true)
+  })
+  it('ışığa duyarlılık "emin değilim" ise yolda hiç yok (Harding 2005)', () => {
+    const off = yySimulate(Y1_ALL, 40, { profile: { seizure: 'unsure' } })
+    expect(off.some((r) => r.k.includes('yakala-yaz'))).toBe(false)
   })
 })
 

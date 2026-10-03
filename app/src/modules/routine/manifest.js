@@ -158,9 +158,9 @@ export default {
   home: { section: 'exercise', order: 10 },
   // "Bana hatırlat" (bildirim PLAN.v1 §A.1 modül tablosu; metin lib/remindTexts.js, sahip onaylı metin-B1a-onay.md).
   // Dokununca yol açılır (routine-… değil, Ana sayfa); Çalışma günleri (study) ayrı kalır, 60 dk kuralı planlayıcıda.
-  // Kaynak yalnız talens2022 (sahip kararı 2; geçici bell2023 bağı kullanılmaz). VARSAYIM: plan tablosunda defaultTime yok;
-  // veri yokken lib/moduleRemind.js FALLBACK_TIME (16.30).
-  remind: { route: 'home', window: 'move', science: ['talens2022'] },
+  // Kaynak yalnız talens2022 (sahip kararı 2; geçici bell2023 bağı kullanılmaz). Veri yokken saat 11.30 (sahip
+  // onayı 2026-10-03, docs/.../bildirim-hava-yuruyus/oneri-saatleri.md).
+  remind: { route: 'home', window: 'move', defaultTime: '11:30', science: ['talens2022'] },
   // Yolun gövdesi: kısa gruplar, her biri ayrı durak; bugün o grubun kaydı varsa tamam.
   //  - ctx.progression yok: bugünkü beş grup, her gün (değişmez).
   //  - ctx.progression var: bugünün basamağındaki gruplar (§3.A.6: 1. gün Göz kırpma, 2. gün Sağ–sol, 3. gün Isınma,

@@ -74,6 +74,15 @@ export const PHRASES = {
     acuFarther: 'Biraz uzaklaştır.',
     acuFace: 'Yüzünü kameraya göster.',
     acuPaused: 'Test durdu. Düzelince sürer.',
+    // Dik Dur (screens/DikDur.jsx; metinler lib/dikDur.js MOVES ve metin-D1-onay.md; üretim 2026-10-03)
+    ddUzat: 'Başının tepesinden bir ip seni yukarı çekiyor gibi boyunu uzat.',
+    ddCene: 'Çeneni hafifçe içeri çek, başını düz geriye kaydır; çift çene yapar gibi.',
+    ddOmuz: 'Omuzlarını zorlamadan geriye ve aşağı al.',
+    ddUzatFix: 'Biraz daha uzat.',
+    ddCeneFix: 'Başını eğme, düz geriye kaydır.',
+    ddCalNormal: 'Her zamanki gibi otur.',
+    ddCalTall: 'Şimdi dikleş: boyunu uzat, çeneni içeri çek.',
+    ddCalDone: 'Tamam, iki duruşunu da öğrendim.',
   },
 }
 export const PHRASE_IDS = Object.keys(PHRASES.tr)

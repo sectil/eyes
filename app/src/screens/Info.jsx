@@ -173,7 +173,7 @@ function FeedbackSettings({ iosApp }) {
   )
 }
 
-export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp = false, trueDepth = false, calibration = null, consents = null, onCoach, onSkyTry = null, onAlarmDiag = null }) {
+export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp = false, trueDepth = false, calibration = null, consents = null, onCoach, onSkyTry = null, onAlarmDiag = null, onReadGaze = null }) {
   const build = buildInfo()
   const [confirm, setConfirm] = useState(false)
   const [diag, setDiag] = useState(null)
@@ -232,6 +232,8 @@ export default function Info({ onGo, onReset, onExport, distanceSkipped, iosApp 
           <Row Icon={Sparkles} label="Yenilikler" sub={versionLine(build)} onClick={() => onGo('whatsnew')} />
           {/* Yalnız geliştirici derlemesinde (App.jsx SKY_UI): B2 hava akışının cihaz denemesi; kullanıcıya görünmez */}
           {onSkyTry && <Row Icon={Sparkles} label="Hava (deneme)" sub="Geliştirici derlemesi" onClick={onSkyTry} />}
+          {/* Yalnız test derlemesinde: okurken göz takibinin cihaz denemesi (sahip 2026-10-03; screens/OkuGozDeneme.jsx) */}
+          {onReadGaze && <Row Icon={Crosshair} label="Okurken göz (deneme)" sub="Geliştirici derlemesi" onClick={onReadGaze} />}
           {/* Yalnız test derlemesinde: alarmın telefondaki gerçek kaydı (D4 tanısı; lib/alarmNative.js alarmDiag) */}
           {onAlarmDiag && <Row Icon={Sparkles} label="Alarm ve bildirim (tanı)" sub={diag == null ? 'Geliştirici derlemesi' : 'Aşağıda · yenilemek için dokun'} onClick={async () => {
             setDiag('Okunuyor…')

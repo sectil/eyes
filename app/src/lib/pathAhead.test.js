@@ -101,7 +101,10 @@ describe('seenBefore ve firstNews', () => {
     expect([...out.entries()].every(([n, l]) => n <= 14 || l.every((s) => s.key === 'routine:normal'))).toBe(true)
     // açılma günü yolda olmayan durak da (Tek Bakışta, Daire) ilk geldiği gün yenidir (newKeys'e bakılmaz; D9 v2 tur 2)
     expect([...out.values()].flat().map((s) => s.key)).toEqual(expect.arrayContaining(['tek-bakis', 'routine:daire']))
-    expect(out.get(2).map((x) => x.key)).toEqual(expect.arrayContaining(['routine:isinma', 'reading', 'snake', 'notice']))
+    // Sahip kararı 2026-10-02: okuma testi yolda değil; yerini alan Oku ve Anla 3. günden (UNLOCK pathDay 2)
+    expect(out.get(2).map((x) => x.key)).toEqual(expect.arrayContaining(['routine:isinma', 'snake', 'notice']))
+    expect(out.get(2).map((x) => x.key)).not.toContain('reading')
+    expect(out.get(3).map((x) => x.key)).toContain('okuma-anlama')
     expect(out.get(2).map((x) => x.key)).not.toContain('breath') // 1. günde de yoldaydı
   })
 })
