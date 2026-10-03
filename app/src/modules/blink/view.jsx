@@ -4,7 +4,7 @@ import { isSameDay } from '../../lib/today.js'
 
 export default {
   icon: Eye,
-  sub: () => 'Ekran başında göz konforu · ~2,5 dk',
+  sub: () => 'Ekran başında göz konforu · ~1,5 dk',
   badge: (ctx) => {
     const n = ctx.sessions.filter((s) => s.type === 'blink' && isSameDay(s)).length
     return n > 0 ? `Bugün ${n}/3` : null

@@ -46,3 +46,17 @@ export function addHabit(type, now = new Date(), storage) {
 }
 
 export const habitsOn = (list, key) => (Array.isArray(list) ? list : []).filter((h) => h?.date === key)
+
+// Geri al (Ana sayfa su çipi, sahip 2026-10-03): az önce eklenen kaydı zamanından bulup siler; yeni listeyi döndürür
+export function removeHabit(type, at, storage) {
+  const list = loadHabits(storage)
+  const i = list.map((h) => h.type === type && h.at === at).lastIndexOf(true)
+  if (i < 0) return list
+  const next = [...list.slice(0, i), ...list.slice(i + 1)]
+  try {
+    store(storage)?.setItem(HABIT_KEY, JSON.stringify(next))
+  } catch {
+    // depolama yok/dolu
+  }
+  return next
+}

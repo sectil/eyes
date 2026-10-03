@@ -1416,6 +1416,7 @@ export default function App() {
         onYogaMorning={refresh}
         // Hava satırı (B2 tpl-home): yalnız SKY_UI açıkken, weather rızası ve kayıtlı yer varken (yoksa Ana sayfada yer yok)
         sky={SKY_UI && hasConsent(settings.consents, 'weather') ? loadPlace() : null}
+        onHabit={() => { refresh(); replan() }}
       />
     )
   }

@@ -5,6 +5,10 @@ import { fold, lowerTr, SESSION_TYPE, ROUND_TRIALS } from './yakalaYazWords.js'
 
 export { SESSION_TYPE, ROUND_TRIALS }
 export const MIN_TRIALS = 10 // bundan az denemede bırakılan tur yazılmaz
+// İlk tur kısa (sahip 2026-10-03: "ilk test için 20 adet çok fazla"; karar "İlk tur 10, sonra 20"): hiç Yakala Yaz
+// kaydı yoksa tur 10 deneme (ölçünün en azı), sonra ROUND_TRIALS
+export const FIRST_ROUND_TRIALS = MIN_TRIALS
+export const roundTrialsOf = (sessions = []) => (sessions.some((s) => isYakala(s)) ? ROUND_TRIALS : FIRST_ROUND_TRIALS)
 export const FIRST_STEP = 3
 export const WARMUP = 2 // yeni tur, son turun eşik basamağından bu kadar yavaş başlar
 export const GAP_DAYS = 14
@@ -94,8 +98,8 @@ export function thresholdOf(trials = []) {
 }
 
 // Kayıt (PLAN §4.2). typed yalnız yanlış denemede, yalnız geri bildirim için; Nef'e, sunucuya ve Gelişim'e gitmez.
-// 10'dan az geçerli denemede null (yazılmaz); 10–19'da partial: true.
-export function makeRecord({ trials = [], startStep = FIRST_STEP, hz = 60, seconds = 0, now = new Date() } = {}) {
+// 10'dan az geçerli denemede null (yazılmaz); turun deneme sayısından (roundTrials) azında partial: true.
+export function makeRecord({ trials = [], startStep = FIRST_STEP, hz = 60, seconds = 0, now = new Date(), roundTrials = ROUND_TRIALS } = {}) {
   const good = trials.filter((t) => !t.bad)
   if (good.length < MIN_TRIALS) return null
   const { thresholdMs, thresholdStep } = thresholdOf(trials)
@@ -108,7 +112,7 @@ export function makeRecord({ trials = [], startStep = FIRST_STEP, hz = 60, secon
       mode: t.mode === 'voice' ? 'voice' : 'key', ...(t.bad ? { bad: true } : {}), ...(!t.ok && !t.bad && t.typed ? { typed: String(t.typed).slice(0, 40) } : {}),
     })),
   }
-  if (good.length < ROUND_TRIALS) rec.partial = true
+  if (good.length < roundTrials) rec.partial = true
   return rec
 }
 

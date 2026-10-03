@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { MS, FRAMES, STEPS, msOf, nextStep, startStepOf, checkAnswer, markTyped, thresholdOf, makeRecord, isBadShow, seriesOf, FIRST_STEP } from './yakalaYaz.js'
+import { MS, FRAMES, STEPS, msOf, nextStep, startStepOf, checkAnswer, markTyped, thresholdOf, makeRecord, isBadShow, seriesOf, FIRST_STEP, roundTrialsOf, ROUND_TRIALS } from './yakalaYaz.js'
 
 describe('Yakala Yaz · hız merdiveni', () => {
   it('18 basamak: kare ve ms tablosu (PLAN §2)', () => {
@@ -88,5 +88,19 @@ describe('Yakala Yaz · merdiven benzetimi', () => {
       expect(ok / n, `T=${T}`).toBeGreaterThanOrEqual(0.7)
       expect(ok / n, `T=${T}`).toBeLessThanOrEqual(0.8)
     }
+  })
+})
+
+describe('tur uzunluğu (sahip 2026-10-03: ilk tur 10, sonra 20)', () => {
+  it('hiç kayıt yoksa 10, Yakala Yaz kaydı varsa 20; başka modülün kaydı sayılmaz', () => {
+    expect(roundTrialsOf([])).toBe(10)
+    expect(roundTrialsOf([{ type: 'breath', seconds: 60 }])).toBe(10)
+    expect(roundTrialsOf([{ type: 'yakala-yaz', thresholdStep: 5 }])).toBe(ROUND_TRIALS)
+    expect(ROUND_TRIALS).toBe(20)
+  })
+  it('10 denemelik ilk tur yarım sayılmaz; 20 denemelik turda 10 deneme yarım', () => {
+    const trials = Array.from({ length: 10 }, (_, i) => ({ w: ['a', 'b'], step: 3 + (i % 2), ms: 400, shownMs: 400, ok: i % 3 !== 0 }))
+    expect(makeRecord({ trials, roundTrials: 10 }).partial).toBeUndefined()
+    expect(makeRecord({ trials }).partial).toBe(true)
   })
 })

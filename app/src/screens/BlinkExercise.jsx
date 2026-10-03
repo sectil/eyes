@@ -149,7 +149,7 @@ export default function BlinkExercise({ onFinish, onBack, trueDepth = false, rem
           <SoundToggle className="ex-sound" />
         </div>
         <div className="ex-intro ex-blink-intro">
-          <span className="ex-step">Göz konforu · <b>~2,5 dk</b></span>
+          <span className="ex-step">Göz konforu · <b>~1,5 dk</b></span>
           <h1 className="ex-title">Göz kırpma egzersizi</h1>
           <p className="ex-para">Ekrana uzun bakarken kırpmalar seyrekleşir ve yarım kalır. Bu egzersiz tam kırpmayı hatırlatır; günde 3 kez önerilir.</p>
           <svg className="ex-hero" viewBox="0 20 260 220" aria-hidden="true"><EyeArt state="open" img={art.eye} clipId="ex-hero-clip" /></svg>

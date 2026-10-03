@@ -35,7 +35,8 @@ import SoundToggle from '../components/SoundToggle.jsx'
 // Görünüm components/ExerciseArt.jsx + styles/exercise.css; sesli komutlar ElevenLabs (lib/voiceCue.js).
 const DIR_WORD = { right: 'sağa', left: 'sola', up: 'yukarı', down: 'aşağı' }
 const DIR_VOICE = { right: 'exRight', left: 'exLeft', up: 'exUp', down: 'exDown' }
-const KIND_LABEL = { evidence: 'kanıtlı', comfort: 'göz konforu', relax: 'rahatlama', calm: 'nefes' }
+// "kanıtlı" yazılmaz (sahip 2026-10-03: "kanıtlı yazmana gerek yok"); göz kırpma kuru göz konforu için
+const KIND_LABEL = { evidence: 'göz konforu', comfort: 'göz konforu', relax: 'rahatlama', calm: 'nefes' }
 // Başlangıç listesindeki simge ve hedef
 const ARROW_ICON = { right: ArrowRight, left: ArrowLeft, up: ArrowUp, down: ArrowDown }
 const CIRCLE_ICON = { cw: RotateCw, ccw: RotateCcw }
@@ -459,7 +460,7 @@ export default function Routine({ set, todaySec, onFinish, onBack, trueDepth = f
             return (
               <li className="ex-mv" key={`${s.id}-${i}`}>
                 <span className="g"><Icon aria-hidden="true" /></span>
-                <span className="nm">{s.title}{s.kind === 'evidence' && <span className="ex-tag">kanıtlı</span>}</span>
+                <span className="nm">{s.title}</span>
                 <span className="v">{moveGoal(s, trueDepth)}</span>
               </li>
             )

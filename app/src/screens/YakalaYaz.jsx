@@ -6,7 +6,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { X, Mic, Square, Smartphone, Keyboard, Check, ArrowUp } from 'lucide-react'
 import { pickPairs } from '../lib/yakalaYazWords.js'
-import { MS, STEPS, msOf, nextStep, startStepOf, checkAnswer, markTyped, makeRecord, isBadShow, seriesOf, ROUND_TRIALS, DOT_MS, MASK_MS, FEEDBACK_MS, isYakala } from '../lib/yakalaYaz.js'
+import { MS, STEPS, msOf, nextStep, startStepOf, checkAnswer, markTyped, makeRecord, isBadShow, seriesOf, roundTrialsOf, DOT_MS, MASK_MS, FEEDBACK_MS, isYakala } from '../lib/yakalaYaz.js'
 import { metricStatusV2 } from '../lib/progress.js'
 import { changeText, verdictWord } from '../lib/changeText.js'
 import { haptic } from '../lib/native.js'
@@ -96,6 +96,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
   const now = useMemo(() => nowProp ?? new Date(), [nowProp])
   const start = useMemo(() => startStepOf(sessions, now), [sessions, now])
   const pairs = useMemo(() => pickPairs({ seed: 'yakala-yaz', sessions, now }), [sessions, now])
+  const [total] = useState(() => roundTrialsOf(sessions)) // ilk tur 10, sonra 20 (sahip 2026-10-03); kayıt eklenince değişmez
   const vp = useViewport()
   const vh = vp.h
   const pin = { position: 'fixed', top: vp.top, left: 0, right: 0, height: vp.h }
@@ -213,7 +214,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
     inputRef.current?.focus() // kullanıcı dokunuşunda: iOS klavyesi açılır ve tur boyunca açık kalır
   }
   const finish = (list) => {
-    const rec = makeRecord({ trials: list, startStep: start, hz: show.current.hz, seconds: (Date.now() - t0.current) / 1000, now: new Date() })
+    const rec = makeRecord({ trials: list, startStep: start, hz: show.current.hz, seconds: (Date.now() - t0.current) / 1000, now: new Date(), roundTrials: total })
     if (rec) onSave?.(rec)
     setRecord(rec)
     setPhase('sonuc')
@@ -254,7 +255,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
     later(() => {
       setStep(ns)
       setFb(null)
-      if (n >= ROUND_TRIALS) finish(trials.current)
+      if (n >= total) finish(trials.current)
       else { setPi((x) => x + 1); setSub('dot') }
     }, FEEDBACK_MS)
   }
@@ -263,7 +264,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
   if (phase === 'giris') {
     return (
       <main className="yy yy-giris" style={pin}>
-        <div className="yy-top"><button type="button" className="yy-x" onClick={onExit} aria-label="Kapat"><X size={16} strokeWidth={2.2} aria-hidden="true" /></button><span className="sp" /><span className="cnt">2 dk</span></div>
+        <div className="yy-top"><button type="button" className="yy-x" onClick={onExit} aria-label="Kapat"><X size={16} strokeWidth={2.2} aria-hidden="true" /></button><span className="sp" /><span className="cnt">{total < 20 ? '1 dk' : '2 dk'}</span></div>
         <div className="yy-ey">Yakala Yaz</div>
         <h1 className="yy-h1">İki kelime, <br />bir an.</h1>
         <p className="yy-lead">{micReady ? 'Ekranda iki kelime kısa süre görünür. Aklında tut, sonra yaz ya da söyle.' : 'Ekranda iki kelime kısa süre görünür. Aklında tut, sonra yaz.'}</p>
@@ -300,7 +301,7 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
       : [changeText({ from: v.baseline, to: v.current, unit: 'ms', better: 'down' }).text, verdict === 'worse' ? null : verdictWord(verdict)].filter(Boolean).join(' · ')
     return (
       <main className="yy res" style={{ minHeight: vh }}>
-        <div className="yy-top"><button type="button" className="yy-x" onClick={onExit} aria-label="Kapat"><X size={16} strokeWidth={2.2} aria-hidden="true" /></button><span className="sp" /><span className="cnt">{good20.length}/{ROUND_TRIALS}</span></div>
+        <div className="yy-top"><button type="button" className="yy-x" onClick={onExit} aria-label="Kapat"><X size={16} strokeWidth={2.2} aria-hidden="true" /></button><span className="sp" /><span className="cnt">{good20.length}/{total}</span></div>
         <div className="yy-resbody">
         <div className="yy-ey">Bugün</div>
         {/* Kavram en çok üç (madde 11): süre, Gelişim hükmü, doğru sayısı. Basamak burada yok: eşik iki basamak arasına
@@ -331,13 +332,13 @@ export default function YakalaYaz({ sessions = [], onSave, onExit, remindField =
   // Geri bildirimde rozet ve merdiven yeni basamağı gösterir (maket: dogru, yanlis)
   const shownStep = fb ? fb.newStep : step
   const showing = sub === 'dot' || sub === 'show' || sub === 'mask'
-  const trial = Math.min(ROUND_TRIALS, good + (sub === 'fb' ? 0 : 1))
+  const trial = Math.min(total, good + (sub === 'fb' ? 0 : 1))
   return (
     <main className="yy run" style={pin}>
       <div className="yy-top">
         <button type="button" className="yy-x" onClick={exit} aria-label="Kapat"><X size={16} strokeWidth={2.2} aria-hidden="true" /></button>
-        <div className="yy-bar"><b style={{ width: `${(trial / ROUND_TRIALS) * 100}%` }} /></div>
-        <span className="cnt">{trial}/{ROUND_TRIALS}</span>
+        <div className="yy-bar"><b style={{ width: `${(trial / total) * 100}%` }} /></div>
+        <span className="cnt">{trial}/{total}</span>
       </div>
       <div className={`yy-stage grow${fb ? (fb.ok ? ' win-ok' : ' win-no') : ''}`}>
         <div className="shead">

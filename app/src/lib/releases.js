@@ -6,6 +6,17 @@
 // id: ISO tarih + sıra; kind: 'new' | 'fix' | 'change'
 export const RELEASES = [
   {
+    // Sahibin cihaz geri bildirimi (2026-10-03): göz kırpma döngüsü kısaldı (15 tekrar kalır), Yakala Yaz ilk tur 10,
+    // Ana sayfada su sayacı. Metin kapısı: göz kırpma ve Yakala Yaz tur 1'de 5/5 ve 4/5; su tur 2'de 5/5
+    id: '2026-10-03-3',
+    title: '3 Ekim, üçüncü güncelleme',
+    items: [
+      { kind: 'new', text: 'Ana sayfanın üstüne su sayacı eklendi: bugün kaç bardak içtiğini görürsün, dokununca bir bardak eklenir.' },
+      { kind: 'change', text: 'Göz kırpma egzersizi kısaldı: her tekrar artık kapat, sık, aç; 15 tekrar yaklaşık 1,5 dakika sürüyor.' },
+      { kind: 'change', text: "Yakala Yaz'ın ilk turu artık 10 deneme; sonraki günler 20." },
+    ],
+  },
+  {
     // Yakala Yaz ilk cihaz geri bildirimi (kelime-hafiza/PLAN.md §10.1). Metin kapısı tur 1: düzeltme 5/5, değişiklik
     // 0/5 ve 3/5; tur 2: değişiklik 5/5. Sahip yetkisi "sen onayla" (Yakala Yaz, 2026-10-02)
     id: '2026-10-03-2',

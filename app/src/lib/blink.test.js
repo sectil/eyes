@@ -32,8 +32,9 @@ describe('createClosureCounter', () => {
 })
 
 describe('BLINK_CYCLE', () => {
-  it('bir döngü ~10 saniye (Kim 2020)', () => {
+  it('bir döngü kapat → sık → aç, 6 saniye (Wolffsohn 2025; sahip kararı 2026-10-03)', () => {
+    expect(BLINK_CYCLE.map((s) => s.id)).toEqual(['close', 'squeeze', 'open'])
     const total = BLINK_CYCLE.reduce((a, s) => a + s.ms, 0)
-    expect(total).toBe(10000)
+    expect(total).toBe(6000)
   })
 })

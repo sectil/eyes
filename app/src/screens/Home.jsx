@@ -25,6 +25,7 @@ import { leadCandidates, pickLead, pathDayOn, goFace, todayLead, firstStop, lead
 import LongPath from '../components/home/LongPath.jsx'
 import ChapterStrip from '../components/home/ChapterStrip.jsx'
 import SkyChip from '../components/home/SkyChip.jsx'
+import WaterChip from '../components/home/WaterChip.jsx'
 import HomeRings from '../components/home/HomeRings.jsx'
 import { projectDays, seenBefore, firstNews, chapterOf, chapterEnd } from '../lib/pathAhead.js'
 import { loadAlarm } from '../lib/alarmLog.js'
@@ -153,7 +154,7 @@ function FocusStrip({ focus, now, block = null, onStop }) {
 // İlk ekran kalabalıklaşmasın: kart yuvası tek (izin kartı → izin ayar yolu → deneme şeridi), rıza sayfası açıkken boş.
 // healthSheetKind: 'health' ya da eski metne izin vermiş kişiye 'healthUpdate' (lib/consent.js; cevap yine onHealthConsent).
 // onYogaMorning: yoga sabah kartı cevabı kayda yazılınca (App kayıtları yeniler).
-export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onStart: onStartProp, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, alarmStatus = null, alarmTest = false, onYogaMorning, sky = null, nef = null }) {
+export default function Home({ tests, sessions, settings, distanceTracked, trueDepth, eyeBudget = null, premium = true, member = false, askConsent = false, onConsent, health = null, askHealth = false, onHealthConsent, healthSheetKind = 'health', onStart: onStartProp, onAsk, onSaveProfile, reminderAsk = false, onReminders, focus = null, focusBlock = null, onStopFocus, trialNote = null, onTrialNote, alarmStatus = null, alarmTest = false, onYogaMorning, sky = null, nef = null, onHabit }) {
   const [permNote, setPermNote] = useState(false) // "Evet" dendi ama izin kapalı: ayar yolu (bir kez, bu ekranda)
   const now = new Date()
   // Ana sayfadan açılan her şey günün ilk dokunuşudur (günün cümlesi o ana kadar görünür; components/home/dayOpen.js)
@@ -562,6 +563,8 @@ export default function Home({ tests, sessions, settings, distanceTracked, trueD
                 {health.hasData ? <><b>{fmtSteps(health.today?.steps)}</b>adım bugün</> : <><b>—</b>adım · veri yok</>}
               </div>
             )}
+            {/* Su: bugünkü bardak sayısı, dokununca bir bardak (sahip 2026-10-03) */}
+            <WaterChip now={now} onChange={onHabit} />
             {alarmStatus && <AlarmLine status={alarmStatus} onStart={onStart} now={now} />}
           </div>
         )}
